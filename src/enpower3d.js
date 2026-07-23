@@ -16,6 +16,80 @@ const LIGHT_BACKGROUND = 16776954;
 const DARK_BACKGROUND = 1315860;
 const LIGHT_STROKE = 9868950;
 const DARK_STROKE = 12829635;
+const DARK_FILL = 0x2b332f;
+const DARK_GROUND = 0x1b201d;
+
+const stagePalettes = {
+  solar: {
+    background: 0xfff8e8,
+    ground: 0xf3ecdf,
+    fill: 0xf1c75b,
+    stroke: 0x59605b,
+    accent: 0xf0a51a,
+    fills: [
+      ["White", 0x8bbc3f],
+    ],
+  },
+  wind: {
+    background: 0xedf8f7,
+    ground: 0xe4efed,
+    fill: 0x78c8d4,
+    stroke: 0x4f5d5f,
+    accent: 0x1697b1,
+    fills: [
+      ["Rotating_", 0x55b8c8],
+      ["Pole_", 0x8fd2d8],
+    ],
+  },
+  towers: {
+    background: 0xf2f5f2,
+    ground: 0xe5ebe7,
+    fill: 0xaebdb6,
+    stroke: 0x4d5752,
+    accent: 0x698f80,
+  },
+  central: {
+    background: 0xf3f8eb,
+    ground: 0xe6eee0,
+    fill: 0xa3cf72,
+    stroke: 0x49564a,
+    accent: 0x72ae43,
+    fills: [
+      ["Building_", 0x9fce6c],
+      ["Tower_", 0xaabbb3],
+      ["Small_Towers_", 0x91aaa0],
+    ],
+  },
+  factory: {
+    background: 0xeff7f1,
+    ground: 0xe1ece4,
+    fill: 0x63b47d,
+    stroke: 0x43534a,
+    accent: 0x299b59,
+    fills: [
+      ["Building_", 0x66b981],
+      ["Tower_", 0xa9bbb2],
+    ],
+  },
+  overview: {
+    background: 0xf2f7f2,
+    ground: 0xe5ede6,
+    fill: 0xc7d6ca,
+    stroke: 0x4b5650,
+    accent: 0x63b34d,
+    window: 0x86aaa0,
+    fills: [
+      ["Solar_", 0xf1c75b],
+      ["Rotating_", 0x55b8c8],
+      ["Pole_", 0x8fd2d8],
+      ["Central_", 0x9fce6c],
+      ["Factory_", 0x63b47d],
+      ["Household_", 0xd3e1d5],
+      ["Tower_", 0xaebdb6],
+      ["Poles_", 0xaebdb6],
+    ],
+  },
+};
 
 const textureFiles = {
   displacement: "/_next/static/media/displacement-1.656d49d1.jpg",
@@ -43,7 +117,7 @@ const stageSettings = {
     cameraRotation: [-0.1, 0, 0],
     near: 1.2,
     far: 950,
-    group: [0, 0, -100],
+    group: [0, -5, -100],
     groupRotation: [0, -0.2, 0],
     blackSide: THREE.FrontSide,
   },
@@ -184,7 +258,7 @@ function wireMaterial(color, alphaMap) {
 function applyModelMaterials(stage, model) {
   model.traverse((object) => {
     if (!object.isMesh && !object.isPoints) return;
-    if (object.name.includes("White")) object.material = stage.whiteMaterial;
+    if (object.name.includes("White")) object.material = stage.fillMaterialFor(object.name);
     if (object.name.includes("Stroke")) object.material = stage.blackMaterial;
     if (object.name.includes("Rotating")) stage.rotationObjects.push(object);
   });
@@ -223,10 +297,11 @@ class RenderStage {
     this.owner = owner;
     this.key = key;
     this.settings = stageSettings[key];
+    this.palette = stagePalettes[key];
     this.timelineOffset = (this.settings.sourceIndex - displayIndex) * SCROLL_SEGMENT;
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(LIGHT_BACKGROUND);
-    this.scene.fog = new THREE.Fog(LIGHT_BACKGROUND, ...this.settings.fog);
+    this.scene.background = new THREE.Color(this.palette.background);
+    this.scene.fog = new THREE.Fog(this.palette.background, ...this.settings.fog);
     this.camera = new THREE.PerspectiveCamera(
       25,
       owner.vw / owner.vh,
@@ -243,14 +318,15 @@ class RenderStage {
     this.resizeRatio = { x: 0, z: 0, rotationY: 0 };
     this.rotationObjects = [];
     this.simplex = createNoise2D();
-    this.whiteMaterial = new THREE.MeshBasicMaterial({
-      color: LIGHT_BACKGROUND,
-      side: THREE.DoubleSide,
-    });
-    this.blackMaterial = new THREE.MeshBasicMaterial({
-      color: LIGHT_STROKE,
-      side: this.settings.blackSide ?? THREE.DoubleSide,
-    });
+    this.paletteMaterials = [];
+    this.fillMaterialCache = new Map();
+    this.whiteMaterial = this.registerPaletteMaterial(this.palette.fill, DARK_FILL);
+    this.groundMaterial = this.registerPaletteMaterial(this.palette.ground, DARK_GROUND);
+    this.blackMaterial = this.registerPaletteMaterial(
+      this.palette.stroke,
+      DARK_STROKE,
+      this.settings.blackSide ?? THREE.DoubleSide,
+    );
     this.pivot = new THREE.Object3D();
     this.globalGroup = new THREE.Group();
     this.resizeGroup = new THREE.Group();
@@ -265,6 +341,23 @@ class RenderStage {
     this.globalGroup.add(model);
     this.setDark(false);
     this.resize(owner.vw, owner.vh, owner.pixelRatio);
+  }
+
+  registerPaletteMaterial(lightColor, darkColor, side = THREE.DoubleSide) {
+    const material = new THREE.MeshBasicMaterial({ color: lightColor, side });
+    this.paletteMaterials.push({ material, lightColor, darkColor });
+    return material;
+  }
+
+  fillMaterialFor(name) {
+    if (/^(Ground|Floor)_White/.test(name)) return this.groundMaterial;
+    const override = this.palette.fills?.find(([prefix]) => name.startsWith(prefix));
+    if (!override) return this.whiteMaterial;
+    const color = override[1];
+    if (!this.fillMaterialCache.has(color)) {
+      this.fillMaterialCache.set(color, this.registerPaletteMaterial(color, DARK_FILL));
+    }
+    return this.fillMaterialCache.get(color);
   }
 
   object(name) {
@@ -595,7 +688,7 @@ class RenderStage {
   }
 
   setupOverview(textures) {
-    this.windowMaterial = new THREE.MeshBasicMaterial({ color: LIGHT_BACKGROUND, side: THREE.DoubleSide });
+    this.windowMaterial = this.registerPaletteMaterial(this.palette.window, 0x9bb8aa);
     this.staticWireMaterial = new THREE.MeshBasicMaterial({ color: 12369084, side: THREE.DoubleSide });
     const sharedAlpha = repeatingTexture(textures.alpha2);
     const poleAlpha = repeatingTexture(textures.alpha2, 2, 2);
@@ -603,7 +696,12 @@ class RenderStage {
     this.wireMaterial2 = wireMaterial(16763729, sharedAlpha);
     this.wireMaterial4 = wireMaterial(5886558, poleAlpha);
     this.object("Household_Windows").material = this.windowMaterial;
-    for (const name of ["Hydro_wire_1_Stroke", "Hydro_wire_1_Stroke_Copy"]) {
+    for (const name of [
+      "Hydro_Stroke",
+      "Hydro_White",
+      "Hydro_wire_1_Stroke",
+      "Hydro_wire_1_Stroke_Copy",
+    ]) {
       this.object(name).removeFromParent();
     }
     for (const name of [
@@ -753,7 +851,6 @@ class RenderStage {
     this.globalGroup.rotation.x = this.mouse.y;
     this.globalGroup.rotation.y = this.mouse.x;
     this.camera.position.z = 45 + 80 * index - scrollY / 60;
-    this.applyColorFade(index);
     this.scene.fog.far = 250 - 60 * index - scrollY / 80;
     this.scene.fog.near = 200 - 60 * index - scrollY / 80;
     this.wireMaterial.alphaMap.offset.y = -(setup.elapsed / 1.25);
@@ -776,7 +873,6 @@ class RenderStage {
     this.globalGroup.rotation.y = -0.4 + this.mouse.x / 2;
     this.camera.position.y = -30 + 10 * index + scrollY / 500;
     this.resizeGroup.position.z = -(10 * this.resizeRatio.z);
-    this.applyColorFade(index);
     this.wireMaterial1.alphaMap.offset.y = -0.14 - setup.elapsed / 2;
     this.wireMaterial2.alphaMap.offset.y = -setup.elapsed / 2;
     this.wireMaterial3.alphaMap.offset.y = 0.08 - setup.elapsed / 2;
@@ -789,7 +885,6 @@ class RenderStage {
     this.globalGroup.rotation.y = -0.5 + this.resizeRatio.rotationY + this.mouse.x;
     this.globalGroup.position.z = -140 + 19.375 * index + scrollY / 440;
     this.resizeGroup.position.set(this.resizeRatio.x, 0, -(30 * this.resizeRatio.z));
-    this.applyColorFade(index);
     this.wireMaterial1.alphaMap.offset.y = setup.elapsed / 2;
     this.wireMaterial4.alphaMap.offset.y = -1.25 * setup.elapsed;
   }
@@ -801,7 +896,6 @@ class RenderStage {
     this.globalGroup.rotation.y = 2.6 + 1.2 * index + scrollY / 10000 + this.mouse.x / 1.5;
     this.resizeGroup.position.x = 40 * this.resizeRatio.z;
     this.resizeGroup.position.z = -(40 * this.resizeRatio.z);
-    this.applyColorFade(index);
     this.wireMaterial.alphaMap.offset.y = 1.25 * setup.elapsed;
     if (!setup.highQuality) return;
     for (let offset = 0; offset < this.positionsLength; offset += 3) {
@@ -846,22 +940,10 @@ class RenderStage {
     this.camera.position.z = this.scroll.z;
     this.camera.rotation.x = this.scroll.x;
     this.resizeGroup.position.z = -(20 * this.resizeRatio.z);
-    this.applyColorFade(index);
     this.scene.fog.near = 70 - 200.4 * index + scrollY / 20;
     this.scene.fog.far = 200 - 200.4 * index + scrollY / 20;
     this.wireMaterial1.alphaMap.offset.y = -(setup.elapsed / 2);
     this.wireMaterial4.alphaMap.offset.y = -1.25 * setup.elapsed;
-  }
-
-  applyColorFade(index) {
-    const scrollY = this.owner.scrollY + this.timelineOffset;
-    const value = Math.min(1, 1 - 0.6423 * index + scrollY / 6240);
-    this.scene.background.setRGB(
-      this.startColor.r * value,
-      this.startColor.g * value,
-      this.startColor.b * value,
-    );
-    this.scene.fog.color.copy(this.scene.background);
   }
 
   render() {
@@ -873,10 +955,13 @@ class RenderStage {
   }
 
   setDark(dark) {
-    const background = dark ? DARK_BACKGROUND : LIGHT_BACKGROUND;
-    const stroke = dark ? DARK_STROKE : LIGHT_STROKE;
-    this.whiteMaterial.color.set(background);
-    this.blackMaterial.color.set(stroke);
+    const background = dark ? DARK_BACKGROUND : this.palette.background;
+    for (const { material, lightColor, darkColor } of this.paletteMaterials) {
+      material.color.set(dark ? darkColor : lightColor);
+    }
+    if (this.staticWireMaterial) {
+      this.staticWireMaterial.color.set(dark ? DARK_STROKE : this.palette.stroke);
+    }
     this.scene.background = new THREE.Color(background);
     this.scene.fog = new THREE.Fog(background, ...this.settings.fog);
     if (this.key === "solar") {
@@ -887,7 +972,6 @@ class RenderStage {
       this.cloudMaterial.opacity = dark ? 0.03 : 0.2;
     }
     if (this.key === "factory") this.particleMaterial.opacity = dark ? 0.03 : 0.2;
-    this.startColor = this.scene.background.clone();
   }
 
   setQuality(highQuality) {
@@ -959,6 +1043,9 @@ uniform sampler2D texture1;
 uniform sampler2D texture2;
 uniform sampler2D displacement;
 uniform vec4 resolution;
+uniform vec3 accentFrom;
+uniform vec3 accentTo;
+uniform float transitionIndex;
 varying vec2 vUv;
 
 vec2 mirrored(vec2 value) {
@@ -966,14 +1053,181 @@ vec2 mirrored(vec2 value) {
   return mix(mirroredValue, 2.0 - mirroredValue, step(1.0, mirroredValue));
 }
 
+float hash21(vec2 value) {
+  value = fract(value * vec2(123.34, 456.21));
+  value += dot(value, value + 45.32);
+  return fract(value.x * value.y);
+}
+
 void main() {
   vec2 newUV = (vUv - vec2(0.5)) * resolution.zw + vec2(0.5);
-  vec4 noise = texture2D(displacement, mirrored(newUV + time * 0.04));
-  float transitionProgress = progress * 0.8 - 0.05 + noise.g * 0.06;
-  float interpolation = pow(abs(smoothstep(0.0, 0.1, (transitionProgress * 12.0 - vUv.x * 1.5) + 0.02)), 10.0);
-  vec4 firstTexture = texture2D(texture1, (newUV - 0.5) * (1.0 - interpolation) + 0.5);
-  vec4 secondTexture = texture2D(texture2, (newUV - 0.5) * interpolation + 0.5);
-  gl_FragColor = mix(firstTexture, secondTexture, interpolation);
+  float transitionProgress = smoothstep(0.0, 1.0, clamp(progress / 0.245, 0.0, 1.0));
+  float envelope = sin(transitionProgress * 3.14159265);
+  float aspect = resolution.x / max(resolution.y, 1.0);
+  vec2 noiseUV = mirrored(newUV * 1.15 + vec2(time * 0.025, -time * 0.018));
+  vec4 noise = texture2D(displacement, noiseUV);
+  float interpolation = 0.0;
+  vec2 firstUV = newUV;
+  vec2 secondUV = newUV;
+  float fromStrength = 0.0;
+  float toStrength = 0.0;
+  float highlightStrength = 0.0;
+
+  if (transitionIndex < 0.5) {
+    // Solar to wind: expanding energy portal.
+    vec2 center = vec2(0.46, 0.5);
+    vec2 radial = newUV - center;
+    radial.x *= aspect;
+    float distanceToCenter = length(radial);
+    float angle = atan(radial.y, radial.x);
+    vec2 farCorner = vec2(
+      max(center.x, 1.0 - center.x) * aspect,
+      max(center.y, 1.0 - center.y)
+    );
+    float maxRadius = length(farCorner) + 0.12;
+    float radius = mix(-0.12, maxRadius + 0.12, transitionProgress);
+    float organicEdge = (noise.r - 0.5) * 0.04;
+    organicEdge += sin(angle * 3.0 + time * 0.8 + noise.g * 4.0) * 0.008;
+    float warpedDistance = distanceToCenter + organicEdge * envelope;
+    float edgeSoftness = mix(0.012, 0.022, envelope);
+    interpolation = 1.0 - smoothstep(
+      radius - edgeSoftness,
+      radius + edgeSoftness,
+      warpedDistance
+    );
+    float distanceToRing = abs(warpedDistance - radius);
+    float halo = (1.0 - smoothstep(0.012, 0.065, distanceToRing)) * envelope;
+    float core = (1.0 - smoothstep(0.0, 0.012, distanceToRing)) * envelope;
+    vec2 radialDirection = radial / max(distanceToCenter, 0.001);
+    radialDirection.x /= aspect;
+    vec2 refraction = radialDirection * (noise.gb - 0.5) * 0.012 * halo;
+    firstUV += refraction;
+    secondUV -= refraction;
+    float sparks = pow(
+      0.5 + 0.5 * sin(angle * 28.0 + time * 4.0 + noise.b * 8.0),
+      12.0
+    );
+    float wakeDistance = radius - warpedDistance;
+    float wake = smoothstep(0.0, 0.02, wakeDistance)
+      * (1.0 - smoothstep(0.04, 0.24, wakeDistance));
+    float ripple = 0.5 + 0.5 * sin(wakeDistance * 90.0 - time * 3.5);
+    toStrength = halo * (0.14 + sparks * 0.08) + wake * ripple * 0.06 * envelope;
+    fromStrength = core * (0.5 + sparks * 0.18);
+    highlightStrength = core * sparks * 0.24;
+  } else if (transitionIndex < 1.5) {
+    // Wind to towers: layered wind ribbons sweep horizontally.
+    float wave = sin(newUV.y * 17.0 + time * 1.7) * 0.028;
+    wave += sin(newUV.y * 41.0 - time * 2.3) * 0.01;
+    float flowCoordinate = newUV.x + wave * envelope;
+    flowCoordinate += (noise.g - 0.5) * 0.055 * envelope;
+    float front = mix(-0.12, 1.12, transitionProgress);
+    interpolation = 1.0 - smoothstep(front - 0.024, front + 0.024, flowCoordinate);
+    float distanceToFront = abs(flowCoordinate - front);
+    float halo = (1.0 - smoothstep(0.01, 0.075, distanceToFront)) * envelope;
+    float core = (1.0 - smoothstep(0.0, 0.01, distanceToFront)) * envelope;
+    vec2 flowOffset = vec2(noise.g - 0.5, sin(newUV.y * 30.0 + time * 2.0));
+    flowOffset *= 0.012 * halo;
+    firstUV += flowOffset;
+    secondUV -= flowOffset;
+    float wakeDistance = front - flowCoordinate;
+    float trail = smoothstep(0.0, 0.025, wakeDistance)
+      * (1.0 - smoothstep(0.08, 0.3, wakeDistance));
+    float streaks = pow(
+      0.5 + 0.5 * sin(newUV.y * 82.0 - time * 7.0 + noise.r * 10.0),
+      14.0
+    );
+    toStrength = halo * 0.2 + trail * streaks * 0.08 * envelope;
+    fromStrength = core * 0.42;
+    highlightStrength = core * streaks * 0.28;
+  } else if (transitionIndex < 2.5) {
+    // Towers to central: an electric grid charges from bottom to top.
+    float scanCoordinate = newUV.y + (noise.r - 0.5) * 0.06 * envelope;
+    scanCoordinate += sin(newUV.x * 30.0 + time * 2.0) * 0.008 * envelope;
+    float front = mix(-0.12, 1.12, transitionProgress);
+    interpolation = 1.0 - smoothstep(front - 0.018, front + 0.018, scanCoordinate);
+    float distanceToFront = abs(scanCoordinate - front);
+    float halo = (1.0 - smoothstep(0.008, 0.07, distanceToFront)) * envelope;
+    float core = (1.0 - smoothstep(0.0, 0.008, distanceToFront)) * envelope;
+    vec2 gridPosition = newUV * vec2(18.0 * aspect, 12.0);
+    vec2 cellDistance = abs(fract(gridPosition) - 0.5);
+    float gridLine = smoothstep(0.43, 0.49, max(cellDistance.x, cellDistance.y));
+    float pulse = pow(
+      0.5 + 0.5 * sin(newUV.x * 110.0 - time * 8.0 + noise.b * 6.0),
+      12.0
+    );
+    vec2 scanOffset = vec2(0.0, (noise.g - 0.5) * 0.014 * halo);
+    firstUV += scanOffset;
+    secondUV -= scanOffset;
+    toStrength = halo * (0.15 + gridLine * 0.1);
+    fromStrength = core * 0.48;
+    highlightStrength = core * 0.2 + halo * gridLine * pulse * 0.2;
+  } else if (transitionIndex < 3.5) {
+    // Central to factory: staggered digital mosaic dissolve.
+    vec2 gridSize = vec2(18.0 * aspect, 12.0);
+    vec2 gridPosition = newUV * gridSize;
+    vec2 cell = floor(gridPosition);
+    float order = hash21(cell);
+    float threshold = mix(-0.12, 1.12, transitionProgress);
+    interpolation = smoothstep(order - 0.075, order + 0.075, threshold);
+    float switchBand = (1.0 - smoothstep(0.025, 0.16, abs(order - threshold))) * envelope;
+    vec2 pixelUV = (cell + 0.5) / gridSize;
+    firstUV = mix(newUV, pixelUV, switchBand * 0.78);
+    secondUV = mix(newUV, pixelUV, switchBand * 0.78);
+    vec2 cellUV = fract(gridPosition);
+    float borderDistance = min(
+      min(cellUV.x, 1.0 - cellUV.x),
+      min(cellUV.y, 1.0 - cellUV.y)
+    );
+    float cellBorder = 1.0 - smoothstep(0.0, 0.08, borderDistance);
+    float flicker = 0.5 + 0.5 * sin(time * 7.0 + order * 31.0);
+    fromStrength = switchBand * (1.0 - interpolation) * 0.14;
+    toStrength = switchBand * interpolation * 0.16;
+    highlightStrength = switchBand * cellBorder * (0.12 + flicker * 0.18);
+  } else if (transitionIndex < 4.5) {
+    // Factory to overview: alternating energy shutters.
+    float bands = 10.0;
+    float bandIndex = floor(newUV.y * bands);
+    float parity = mod(bandIndex, 2.0);
+    float directedX = mix(newUV.x, 1.0 - newUV.x, parity);
+    float delay = hash21(vec2(bandIndex, 7.31)) * 0.16;
+    float bandProgress = clamp(
+      (transitionProgress - delay) / max(1.0 - delay, 0.001),
+      0.0,
+      1.0
+    );
+    bandProgress = smoothstep(0.0, 1.0, bandProgress);
+    float front = mix(-0.08, 1.08, bandProgress);
+    interpolation = 1.0 - smoothstep(front - 0.022, front + 0.022, directedX);
+    float distanceToFront = abs(directedX - front);
+    float halo = (1.0 - smoothstep(0.008, 0.06, distanceToFront)) * envelope;
+    float core = (1.0 - smoothstep(0.0, 0.008, distanceToFront)) * envelope;
+    float directionSign = mix(1.0, -1.0, parity);
+    vec2 shutterOffset = vec2(directionSign * (noise.r - 0.5) * 0.014 * halo, 0.0);
+    firstUV += shutterOffset;
+    secondUV -= shutterOffset;
+    float sliceUV = fract(newUV.y * bands);
+    float sliceBorder = 1.0 - smoothstep(
+      0.0,
+      0.07,
+      min(sliceUV, 1.0 - sliceUV)
+    );
+    float pulse = 0.5 + 0.5 * sin(time * 6.0 + bandIndex * 1.7);
+    toStrength = halo * 0.2;
+    fromStrength = core * 0.4;
+    highlightStrength = core * (0.14 + pulse * 0.14) + halo * sliceBorder * 0.08;
+  }
+
+  vec4 firstTexture = texture2D(texture1, clamp(firstUV, vec2(0.0), vec2(1.0)));
+  vec4 secondTexture = texture2D(texture2, clamp(secondUV, vec2(0.0), vec2(1.0)));
+  vec4 color = mix(firstTexture, secondTexture, interpolation);
+  color.rgb = mix(color.rgb, accentTo, clamp(toStrength, 0.0, 0.32));
+  color.rgb = mix(color.rgb, accentFrom, clamp(fromStrength, 0.0, 0.72));
+  color.rgb = mix(
+    color.rgb,
+    vec3(1.0, 0.98, 0.76),
+    clamp(highlightStrength, 0.0, 0.36)
+  );
+  gl_FragColor = color;
 }
 `;
 
@@ -1089,6 +1343,9 @@ export class EnpowerExperience {
         texture2: { value: this.stages[1].fbo.texture },
         displacement: { value: this.textures.displacement },
         resolution: { value: new THREE.Vector4(this.vw, this.vh, 1, 1) },
+        accentFrom: { value: new THREE.Color(this.stages[0].palette.accent) },
+        accentTo: { value: new THREE.Color(this.stages[1].palette.accent) },
+        transitionIndex: { value: 0 },
       },
       vertexShader: transitionVertexShader,
       fragmentShader: transitionFragmentShader,
@@ -1119,6 +1376,10 @@ export class EnpowerExperience {
     const secondStage = this.stages[this.currentIndex + 1] ?? firstStage;
     this.transitionMaterial.uniforms.texture1.value = firstStage.fbo.texture;
     this.transitionMaterial.uniforms.texture2.value = secondStage.fbo.texture;
+    this.transitionMaterial.uniforms.time.value = this.elapsed;
+    this.transitionMaterial.uniforms.transitionIndex.value = this.currentIndex;
+    this.transitionMaterial.uniforms.accentFrom.value.set(firstStage.palette.accent);
+    this.transitionMaterial.uniforms.accentTo.value.set(secondStage.palette.accent);
     this.transitionMaterial.uniforms.progress.value =
       this.currentIndex < SCENE_COUNT - 1 ? (this.scrollY / 16500) % 0.245 : 0;
     for (let index = 0; index < this.stages.length; index += 1) {

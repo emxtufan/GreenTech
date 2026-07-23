@@ -1,0 +1,59 @@
+.scroll-stack-scroller {
+  position: relative;
+  width: 100%;
+}
+
+.scroll-stack-inner {
+  position: relative;
+  width: 100%;
+  padding: 18vh 0 0;
+}
+
+.scroll-stack-card {
+  position: sticky;
+  min-height: 320px;
+  padding: 34px;
+  overflow: hidden;
+  border: 1px solid rgb(143 201 255 / 24%);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgb(0 194 81 / 14%), transparent 46%),
+    linear-gradient(180deg, #10171c, #090c0f);
+  color: #f5f7ef;
+  box-shadow: 0 28px 70px rgb(0 0 0 / 34%);
+  transform-origin: top center;
+}
+
+.scroll-stack-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: #8bbc3f;
+}
+
+.scroll-stack-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.scroll-stack-gap {
+  width: 100%;
+  pointer-events: none;
+}
+
+.scroll-stack-end {
+  height: 0;
+}
+
+@media screen and (max-width: 700px) {
+  .scroll-stack-inner {
+    padding: 7vh 0 0;
+  }
+
+  .scroll-stack-card {
+    min-height: 285px;
+    padding: 24px 20px;
+  }
+
+}

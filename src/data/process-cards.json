@@ -1,0 +1,29 @@
+[
+  {
+    "id": "project-planning",
+    "order": 1,
+    "enabled": true,
+    "number": "01",
+    "title": "Project Planning",
+    "description": "Site analysis, electrical planning, mechanical coordination and documentation prepared before installation begins.",
+    "theme": "design"
+  },
+  {
+    "id": "installation-commissioning",
+    "order": 2,
+    "enabled": true,
+    "number": "02",
+    "title": "Installation & Commissioning",
+    "description": "Organized teams handle structure assembly, cabling, panel installation, testing and handover with clear quality control.",
+    "theme": "build"
+  },
+  {
+    "id": "maintenance-monitoring",
+    "order": 3,
+    "enabled": true,
+    "number": "03",
+    "title": "Maintenance & Monitoring",
+    "description": "Preventive checks, corrective works and technical reporting keep photovoltaic systems performing after the first day of operation.",
+    "theme": "care"
+  }
+]

@@ -1,11 +1,21 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
+import { BadgeCheck, BadgeDollarSign, SolarPanel, Zap } from "lucide-react";
+import { SiNextdotjs, SiReact, SiTailwindcss, SiTypescript } from "react-icons/si";
 import {
   EnpowerExperience,
   SCENE_COUNT,
   SCROLL_HEIGHT,
   SCROLL_SEGMENT,
 } from "./enpower3d.js";
+import LogoLoop from "./LogoLoop.jsx";
+import ScrollStack, { ScrollStackItem } from "./ScrollStack.jsx";
+import HorizontalParallaxGallery from "./HorizontalParallaxGallery.jsx";
+import ScrollWindTurbine from "./ScrollWindTurbine.jsx";
+import ScrollSolarAssembly from "./ScrollSolarAssembly.jsx";
+import ProjectDetailPage from "./ProjectDetailPage.jsx";
+import horizontalGalleryData from "./data/horizontal-gallery.json";
+import processCardsData from "./data/process-cards.json";
 import "./styles.css";
 
 const sections = [
@@ -65,6 +75,42 @@ const sections = [
 
 const graphSections = new Set([0, 1, 4, 5]);
 
+const impactStats = [
+  { value: "700 MW+", label: "Total Installed Power", Icon: Zap },
+  { value: "1.3M+", label: "Solar Panels Installed", Icon: SolarPanel },
+  { value: "550+", label: "Specialized Professionals", Icon: BadgeCheck },
+  { value: "\u20AC 12.5M", label: "Total Invoiced", Icon: BadgeDollarSign },
+];
+
+const clientLogos = [
+  { node: <SiReact />, title: "React", href: "https://react.dev" },
+  { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
+  {
+    node: <SiTypescript />,
+    title: "TypeScript",
+    href: "https://www.typescriptlang.org",
+  },
+  {
+    node: <SiTailwindcss />,
+    title: "Tailwind CSS",
+    href: "https://tailwindcss.com",
+  },
+];
+
+const processCardThemeClasses = {
+  design: "project-stack-card-design",
+  build: "project-stack-card-build",
+  care: "project-stack-card-care",
+};
+
+const processCards = processCardsData
+  .filter((card) => card.enabled !== false)
+  .sort((firstCard, secondCard) => firstCard.order - secondCard.order);
+
+const horizontalGalleryItems = horizontalGalleryData
+  .filter((item) => item.enabled !== false)
+  .sort((firstItem, secondItem) => firstItem.order - secondItem.order);
+
 function useEnpower3d({ dark, highQuality, setLoaded, setReady, setActive, setEntered }) {
   const mountRef = useRef(null);
   const experienceRef = useRef(null);
@@ -110,7 +156,7 @@ function useEnpower3d({ dark, highQuality, setLoaded, setReady, setActive, setEn
 function LogoMark() {
   return (
     <span className="loader-logo-mark">
-      <img src="/original/logo-alb.png.webp" alt="" />
+      <img src="/original/LOGO-BUN-Transparent.png.webp" alt="" />
     </span>
   );
 }
@@ -119,14 +165,61 @@ function NavigationLogo({ backToIntro }) {
   return (
     <button className="brand-logo" type="button" aria-label="Enpower Trading" onClick={backToIntro}>
       <span className="brand-logo-desktop"><img src="" alt="" /></span>
-      <span className="brand-logo-mobile"><img src="/original/logo-alb.png.webp" alt="" /></span>
+      <span className="brand-logo-mobile"><img src="/original/LOGO-BUN-Transparent.png.webp" alt="" /></span>
     </button>
   );
 }
 
-function Navigation({ highQuality, setHighQuality, dark, setDark, backToIntro }) {
+function useScrollAwareNavigation(enabled) {
+  const [visible, setVisible] = useState(true);
+  const lastScrollY = useRef(0);
+  const animationFrame = useRef(0);
+
+  useEffect(() => {
+    lastScrollY.current = Math.max(0, window.scrollY);
+
+    if (!enabled) {
+      setVisible(true);
+      return undefined;
+    }
+
+    const updateVisibility = () => {
+      animationFrame.current = 0;
+      const currentScrollY = Math.max(0, window.scrollY);
+      const distance = currentScrollY - lastScrollY.current;
+
+      if (currentScrollY <= 24) {
+        setVisible(true);
+        lastScrollY.current = currentScrollY;
+        return;
+      }
+
+      if (Math.abs(distance) >= 6) {
+        setVisible(distance < 0);
+        lastScrollY.current = currentScrollY;
+      }
+    };
+
+    const handleScroll = () => {
+      if (animationFrame.current) return;
+      animationFrame.current = window.requestAnimationFrame(updateVisibility);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.cancelAnimationFrame(animationFrame.current);
+    };
+  }, [enabled]);
+
+  return visible;
+}
+
+function Navigation({ highQuality, setHighQuality, dark, setDark, backToIntro, entered }) {
+  const visible = useScrollAwareNavigation(entered);
+
   return (
-    <header className="nav" id="menuWrapper">
+    <header className={`nav ${visible ? "" : "nav-scroll-hidden"}`} id="menuWrapper">
       <NavigationLogo backToIntro={backToIntro} />
       <div className="nav-actions">
        
@@ -196,6 +289,228 @@ function Intro({ entered, ready, enter }) {
   );
 }
 
+function FinalSection({ entered }) {
+  const sectionRef = useRef(null);
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const video = videoRef.current;
+    if (!section || !video) return undefined;
+
+    let sectionReachedTop = false;
+    let animationFrame = 0;
+
+    const resetVideo = () => {
+      video.pause();
+      if (video.readyState > 0) video.currentTime = 0;
+    };
+
+    const playFromStart = () => {
+      if (video.readyState > 0) video.currentTime = 0;
+      const playPromise = video.play();
+      playPromise?.catch(() => {});
+    };
+
+    const updatePlayback = () => {
+      animationFrame = 0;
+      const bounds = section.getBoundingClientRect();
+      const shouldPlay = entered && bounds.top <= 1 && bounds.bottom > 0;
+      if (shouldPlay === sectionReachedTop) return;
+
+      sectionReachedTop = shouldPlay;
+      if (shouldPlay) playFromStart();
+      else resetVideo();
+    };
+
+    const scheduleUpdate = () => {
+      if (animationFrame) return;
+      animationFrame = window.requestAnimationFrame(updatePlayback);
+    };
+
+    const handleLoadedMetadata = () => {
+      if (sectionReachedTop) playFromStart();
+    };
+
+    resetVideo();
+    updatePlayback();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    video.addEventListener("loadedmetadata", handleLoadedMetadata);
+
+    return () => {
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      video.removeEventListener("loadedmetadata", handleLoadedMetadata);
+      window.cancelAnimationFrame(animationFrame);
+      resetVideo();
+    };
+  }, [entered]);
+
+  return (
+    <section
+      ref={sectionRef}
+      className={`final-section ${entered ? "visible" : ""}`}
+      aria-labelledby="final-section-title"
+      data-wind-stage="company"
+    >
+      <div className="final-section-inner">
+        <header className="final-section-intro">
+          <h1 id="final-section-title">GreenTech Professionals SRL</h1>
+          <p>
+            GreenTech Professionals is an electrical and construction company with
+            experience in electrical and mechanical works in the photovoltaic field.
+          </p>
+        </header>
+
+        <div className="impact-network">
+          <div className="impact-stats">
+            {impactStats.map(({ value, label, Icon }) => (
+              <article className="impact-stat" key={label}>
+                <span className="impact-stat-icon" aria-hidden="true">
+                  <Icon size={30} strokeWidth={1.45} />
+                </span>
+                <strong>{value}</strong>
+                <span className="impact-stat-label">{label}</span>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <section className="company-video" aria-labelledby="company-video-title">
+          <div className="company-video-frame">
+            <video
+              ref={videoRef}
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-label="GreenTech Professionals video"
+            >
+              <source src="/video.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </section>
+
+        <section className="clients-showcase" aria-labelledby="clients-title">
+          <h2 id="clients-title">Our Clients</h2>
+           <p>
+            GreenTech Professionals is an electrical and construction company with
+            experience in electrical and mechanical works in the photovoltaic field.
+          </p>
+          <div className="clients-loop">
+            <LogoLoop
+              logos={clientLogos}
+              speed={70}
+              direction="left"
+              logoHeight={42}
+              gap={72}
+              hoverSpeed={0}
+              scaleOnHover
+              fadeOut
+              fadeOutColor="#000000"
+              ariaLabel="Our clients"
+            />
+          </div>
+        </section>
+      </div>
+    </section>
+  );
+}
+
+function StackSection({ entered }) {
+  const introRef = useRef(null);
+  const releaseStartRef = useRef(null);
+  const releaseFrameRef = useRef(0);
+
+  const handleStackComplete = useCallback(({ scrollStart }) => {
+    releaseStartRef.current = scrollStart;
+  }, []);
+
+  useEffect(() => {
+    const intro = introRef.current;
+    if (!intro) return undefined;
+
+    if (!entered) {
+      releaseStartRef.current = null;
+      intro.style.transform = "";
+      return undefined;
+    }
+
+    const updateIntroRelease = () => {
+      releaseFrameRef.current = 0;
+      const releaseStart = releaseStartRef.current;
+      if (releaseStart === null) {
+        intro.style.transform = "";
+        return;
+      }
+
+      const releaseDistance = Math.max(0, window.scrollY - releaseStart);
+      const maxReleaseDistance = intro.offsetHeight + 100;
+      const translateY = Math.min(releaseDistance, maxReleaseDistance);
+      intro.style.transform = translateY > 0 ? `translate3d(0, ${-translateY}px, 0)` : "";
+    };
+
+    const scheduleIntroRelease = () => {
+      if (releaseFrameRef.current) return;
+      releaseFrameRef.current = window.requestAnimationFrame(updateIntroRelease);
+    };
+
+    window.addEventListener("scroll", scheduleIntroRelease, { passive: true });
+    window.addEventListener("resize", scheduleIntroRelease);
+
+    return () => {
+      window.removeEventListener("scroll", scheduleIntroRelease);
+      window.removeEventListener("resize", scheduleIntroRelease);
+      window.cancelAnimationFrame(releaseFrameRef.current);
+      intro.style.transform = "";
+    };
+  }, [entered]);
+
+  return (
+    <section
+      className={`process-section ${entered ? "visible" : ""}`}
+      aria-labelledby="process-section-title"
+      data-wind-stage="process"
+    >
+      <div className="process-section-inner">
+        <header className="process-section-intro" ref={introRef}>
+          <span>Process</span>
+          <h2 id="process-section-title">Our Work Process</h2>
+          <p>
+            A compact view of how GreenTech Professionals moves a photovoltaic
+            project from technical decisions to reliable field execution.
+          </p>
+        </header>
+
+        <ScrollStack
+          className="project-scroll-stack"
+          stackPosition="36%"
+          scaleEndPosition="23%"
+          onStackComplete={handleStackComplete}
+        >
+          {processCards.map((card) => {
+            const themeClass =
+              processCardThemeClasses[card.theme] ?? processCardThemeClasses.design;
+
+            return (
+              <ScrollStackItem
+                key={card.id}
+                itemClassName={`project-stack-card ${themeClass}`}
+              >
+                <span className="project-stack-number">{card.number}</span>
+                <h3>{card.title}</h3>
+                <p>{card.description}</p>
+              </ScrollStackItem>
+            );
+          })}
+        </ScrollStack>
+        <div className="process-section-release-space" aria-hidden="true" />
+      </div>
+    </section>
+  );
+}
+
 function Preloader({ loaded, ready }) {
   return (
     <div className={`preloader ${ready ? "done" : ""}`} id="preloaderWrapper">
@@ -207,7 +522,7 @@ function Preloader({ loaded, ready }) {
   );
 }
 
-function App() {
+function App({ onOpenProject, projectOpen }) {
   const [loaded, setLoaded] = useState(0);
   const [ready, setReady] = useState(false);
   const [entered, setEntered] = useState(false);
@@ -236,7 +551,12 @@ function App() {
   }, [experienceRef]);
 
   return (
-    <main className={`page ${entered ? "entered" : ""}`} id="home">
+    <main
+      className={`page ${entered ? "entered" : ""}`}
+      id="home"
+      inert={projectOpen}
+      aria-hidden={projectOpen ? "true" : undefined}
+    >
       <div className="scroll-space" style={{ height: entered ? `calc(${SCROLL_HEIGHT}px + 100vh)` : "100vh" }} />
       <div className={`scene ${ready ? "ready" : ""}`} id="scene3d">
         <div className="canvas-wrapper" ref={mountRef} />
@@ -247,12 +567,98 @@ function App() {
         dark={dark}
         setDark={setDark}
         backToIntro={backToIntro}
+        entered={entered}
       />
       <Card active={active} entered={entered} />
       <Intro entered={entered} ready={ready} enter={enter} />
       <Preloader loaded={loaded} ready={ready} />
+      <div className="post-experience-sections">
+        <ScrollWindTurbine active={entered} />
+        <FinalSection entered={entered} />
+        <StackSection entered={entered} />
+        <HorizontalParallaxGallery
+          entered={entered}
+          items={horizontalGalleryItems}
+          onProjectOpen={onOpenProject}
+        />
+        <ScrollSolarAssembly active={entered} />
+      </div>
     </main>
   );
 }
 
-createRoot(document.getElementById("root")).render(<App />);
+function getProjectIdFromUrl() {
+  return new URLSearchParams(window.location.search).get("project");
+}
+
+function getProjectUrl(projectId) {
+  const url = new URL(window.location.href);
+  url.search = "";
+  url.searchParams.set("project", projectId);
+  return `${url.pathname}${url.search}${url.hash}`;
+}
+
+function Root() {
+  const [projectId, setProjectId] = useState(getProjectIdFromUrl);
+
+  useEffect(() => {
+    const handlePopState = () => setProjectId(getProjectIdFromUrl());
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  const openProject = useCallback((nextProjectId) => {
+    window.history.pushState(
+      { projectOverlay: true },
+      "",
+      getProjectUrl(nextProjectId),
+    );
+    setProjectId(nextProjectId);
+  }, []);
+
+  const changeProject = useCallback((nextProjectId) => {
+    window.history.replaceState(
+      { ...window.history.state, projectOverlay: true },
+      "",
+      getProjectUrl(nextProjectId),
+    );
+    setProjectId(nextProjectId);
+  }, []);
+
+  const closeProject = useCallback(() => {
+    if (window.history.state?.projectOverlay) {
+      window.history.back();
+      return;
+    }
+
+    const url = new URL(window.location.href);
+    url.searchParams.delete("project");
+    window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+    setProjectId(null);
+  }, []);
+
+  const projectIndex = horizontalGalleryItems.findIndex((item) => item.id === projectId);
+  const project = projectIndex >= 0 ? horizontalGalleryItems[projectIndex] : null;
+  const nextProject = project
+    ? horizontalGalleryItems[(projectIndex + 1) % horizontalGalleryItems.length]
+    : null;
+
+  return (
+    <>
+      <App
+        onOpenProject={openProject}
+        projectOpen={Boolean(project)}
+      />
+      {project && (
+        <ProjectDetailPage
+          project={project}
+          nextProject={nextProject}
+          onClose={closeProject}
+          onProjectOpen={changeProject}
+        />
+      )}
+    </>
+  );
+}
+
+createRoot(document.getElementById("root")).render(<Root />);

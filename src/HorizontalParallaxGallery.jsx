@@ -1,0 +1,229 @@
+import React, { useLayoutEffect, useRef } from "react";
+import { ArrowUpRight } from "lucide-react";
+import "./HorizontalParallaxGallery.css";
+
+const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+function HorizontalParallaxGallery({ entered, items, onProjectOpen }) {
+  const sectionRef = useRef(null);
+  const wrapperRef = useRef(null);
+  const trackRef = useRef(null);
+
+  useLayoutEffect(() => {
+    if (!entered) return undefined;
+
+    const section = sectionRef.current;
+    const wrapper = wrapperRef.current;
+    const track = trackRef.current;
+    if (!section || !wrapper || !track) return undefined;
+
+    const scroll = {
+      current: 0,
+      target: 0,
+      ease: 0.07,
+      limit: 0,
+      sectionTop: 0,
+      travel: 1,
+    };
+
+    let cardMetrics = [];
+    let frame = 0;
+    let measureFrame = 0;
+    let disposed = false;
+
+    const setTargetFromPageScroll = () => {
+      const progress = clamp(
+        (window.scrollY - scroll.sectionTop) / scroll.travel,
+        0,
+        1,
+      );
+      scroll.target = progress * scroll.limit;
+    };
+
+    const measure = () => {
+      measureFrame = 0;
+      if (disposed) return;
+
+      scroll.limit = Math.max(0, track.scrollWidth - wrapper.clientWidth);
+      section.style.height = `${window.innerHeight + scroll.limit}px`;
+      scroll.sectionTop = section.getBoundingClientRect().top + window.scrollY;
+      scroll.travel = Math.max(1, section.offsetHeight - window.innerHeight);
+
+      cardMetrics = Array.from(track.querySelectorAll(".horizontal-gallery-card")).map(
+        (card) => ({
+          card,
+          center: card.offsetLeft + card.offsetWidth * 0.5,
+          width: card.offsetWidth,
+          image: card.querySelector(".horizontal-gallery-image"),
+          category: card.querySelector(".horizontal-gallery-caption > span"),
+          title: card.querySelector(".horizontal-gallery-caption h3"),
+          link: card.querySelector(".horizontal-gallery-link"),
+          index: card.querySelector(".horizontal-gallery-caption b"),
+        }),
+      );
+
+      setTargetFromPageScroll();
+      scroll.current = clamp(scroll.current, 0, scroll.limit);
+    };
+
+    const scheduleMeasure = () => {
+      if (measureFrame) return;
+      measureFrame = window.requestAnimationFrame(measure);
+    };
+
+    const render = () => {
+      setTargetFromPageScroll();
+      scroll.current += (scroll.target - scroll.current) * scroll.ease;
+
+      if (Math.abs(scroll.target - scroll.current) < 0.01) {
+        scroll.current = scroll.target;
+      }
+
+      track.style.transform = `translate3d(${-scroll.current}px, 0, 0)`;
+
+      const wrapperLeft = wrapper.getBoundingClientRect().left;
+      const viewportCenter = window.innerWidth * 0.5;
+
+      cardMetrics.forEach(({
+        card,
+        center,
+        width,
+        image,
+        category,
+        title,
+        link,
+        index,
+      }) => {
+        if (!image) return;
+
+        const elementCenter = wrapperLeft + center - scroll.current;
+        const elementLeft = elementCenter - width * 0.5;
+        const position = clamp(
+          (elementCenter - viewportCenter) / viewportCenter,
+          -1,
+          1,
+        );
+        const shift = -position * 10;
+        const captionOffset = clamp(wrapperLeft - elementLeft, 0, width - 120);
+        image.style.transform = `translate3d(${shift}%, 0, 0)`;
+        card.style.setProperty("--caption-offset", `${captionOffset}px`);
+
+        if (!category || !title || !link || !index) return;
+
+        const copyRight = Math.max(
+          category.offsetLeft + category.offsetWidth,
+          title.offsetLeft + title.offsetWidth,
+        );
+        const linkRight = link.offsetLeft + link.offsetWidth;
+        const indexLeft = index.offsetLeft;
+        const copyGap = indexLeft - copyRight;
+        const linkGap = indexLeft - linkRight;
+        const copyIsHidden = card.classList.contains("caption-copy-hidden");
+        const indexIsCompact = card.classList.contains("caption-index-compact");
+
+        card.classList.toggle(
+          "caption-copy-hidden",
+          copyIsHidden ? copyGap < 44 : copyGap < 28,
+        );
+        card.classList.toggle(
+          "caption-index-compact",
+          indexIsCompact ? linkGap < 34 : linkGap < 18,
+        );
+      });
+
+      frame = window.requestAnimationFrame(render);
+    };
+
+    measure();
+
+    const resizeObserver = new ResizeObserver(scheduleMeasure);
+    resizeObserver.observe(wrapper);
+    resizeObserver.observe(track);
+    window.addEventListener("resize", scheduleMeasure);
+    document.fonts?.ready.then(scheduleMeasure);
+    frame = window.requestAnimationFrame(render);
+
+    return () => {
+      disposed = true;
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", scheduleMeasure);
+      window.cancelAnimationFrame(frame);
+      window.cancelAnimationFrame(measureFrame);
+      section.style.height = "";
+      track.style.transform = "";
+      cardMetrics.forEach(({ card, image }) => {
+        if (image) image.style.transform = "";
+        card.style.removeProperty("--caption-offset");
+        card.classList.remove("caption-copy-hidden", "caption-index-compact");
+      });
+    };
+  }, [entered, items]);
+
+  const handleProjectLink = (event, projectId) => {
+    if (
+      !onProjectOpen ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    onProjectOpen(projectId);
+  };
+
+  return (
+    <section
+      ref={sectionRef}
+      className={`horizontal-gallery-section ${entered ? "visible" : ""}`}
+      aria-labelledby="horizontal-gallery-title"
+      data-wind-stage="projects"
+    >
+      <div className="horizontal-gallery-sticky">
+        <header className="horizontal-gallery-heading">
+          <span>Portfolio</span>
+          <h2 id="horizontal-gallery-title">Projects in Motion</h2>
+          <p>
+            A compact view of how GreenTech Professionals moves a photovoltaic
+            project from technical decisions to reliable field execution.
+          </p>
+        </header>
+
+        <div className="horizontal-gallery-wrapper" ref={wrapperRef}>
+          <div className="horizontal-gallery-track" ref={trackRef}>
+            {items.map((item, index) => (
+              <figure className="horizontal-gallery-card" key={item.id}>
+                <img
+                  className="horizontal-gallery-image"
+                  src={item.image}
+                  alt={item.alt}
+                  loading={index < 2 ? "eager" : "lazy"}
+                  draggable="false"
+                />
+                <figcaption className="horizontal-gallery-caption">
+                  <span>{item.category}</span>
+                  <h3>{item.title}</h3>
+                  <a
+                    className="horizontal-gallery-link"
+                    href={`?project=${encodeURIComponent(item.id)}`}
+                    aria-label={`View project: ${item.title}`}
+                    onClick={(event) => handleProjectLink(event, item.id)}
+                  >
+                    <span>View project</span>
+                    <ArrowUpRight size={15} strokeWidth={1.8} aria-hidden="true" />
+                  </a>
+                  <b aria-hidden="true">{String(index + 1).padStart(2, "0")}</b>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default HorizontalParallaxGallery;
