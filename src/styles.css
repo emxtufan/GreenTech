@@ -6,10 +6,29 @@
   --grey1: #969696;
   --grey2: #e0dbd3;
   --red: #ea2a10;
+  --hero-surface: #fff8e8;
+  --browser-chrome-surface: #000000;
+  --experience-viewport-height: 100vh;
+  --visual-viewport-height: 100vh;
+  --browser-controls-inset: 0px;
   color: var(--text);
-  background: var(--background);
+  background: var(--browser-chrome-surface);
+  color-scheme: dark;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1vw;
+}
+
+@supports (height: 100dvh) {
+  :root {
+    --visual-viewport-height: 100dvh;
+  }
+}
+
+@supports (height: 100lvh) {
+  :root {
+    --experience-viewport-height: 100lvh;
+    --browser-controls-inset: max(0px, calc(100lvh - 100dvh));
+  }
 }
 
 html[data-mode="dark"] {
@@ -28,7 +47,6 @@ html {
   position: relative;
   width: 100%;
   min-height: 100%;
-  max-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
   -webkit-text-size-adjust: none;
@@ -37,15 +55,26 @@ html {
 body {
   width: 100vw;
   min-height: 100%;
+  min-height: var(--experience-viewport-height);
   max-width: 100vw;
   margin: 0;
   overflow-x: hidden;
   color: var(--text);
-  background: var(--background);
+  background: var(--browser-chrome-surface);
   font-family: Arial, Helvetica, sans-serif;
   font-size: calc(14 / var(--gfs) * 1rem);
   line-height: 1;
   font-weight: 400;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  background: #000000;
+  pointer-events: none;
+  z-index: 2147483647;
 }
 
 button {
@@ -64,22 +93,38 @@ button:disabled {
 }
 
 .page,
+.experience-scroll,
 .scroll-space {
   position: relative;
   width: 100%;
 }
 
+.experience-scroll {
+  background: var(--hero-surface);
+}
+
 .scene {
-  position: fixed;
-  inset: 0;
+  position: sticky;
+  top: 0;
   width: 100%;
-  height: 100vh;
+  height: var(--experience-viewport-height);
+  background: var(--hero-surface);
   opacity: 0;
-  z-index: 0;
+  z-index: 1;
+}
+
+.scroll-space {
+  pointer-events: none;
 }
 
 .scene.ready {
   opacity: 1;
+}
+
+.scene.ready.experience-rendering-paused {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .canvas-wrapper {
@@ -88,10 +133,11 @@ button:disabled {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  background: var(--hero-surface);
 }
 
 .canvas-wrapper > canvas {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   display: block;
@@ -99,7 +145,7 @@ button:disabled {
 
 .nav {
   position: fixed;
-  top: calc(20 / var(--gfs) * 1rem);
+  top: calc(env(safe-area-inset-top, 0px) + 20 / var(--gfs) * 1rem);
   left: calc(34 / var(--gfs) * 1rem);
   display: flex;
   align-items: center;
@@ -221,11 +267,11 @@ button:disabled {
 }
 
 .cards {
-  position: fixed;
+  position: absolute;
   right: calc(34 / var(--gfs) * 1rem);
-  bottom: 0;
+  bottom: var(--browser-controls-inset);
   width: calc(502 / var(--gfs) * 1rem);
-  max-height: calc(100vh - 130 / var(--gfs) * 1rem);
+  max-height: calc(var(--visual-viewport-height) - 130 / var(--gfs) * 1rem);
   padding: 0 calc(16 / var(--gfs) * 1rem);
   overflow: hidden;
   border: calc(1 / var(--gfs) * 1rem) solid var(--grey2);
@@ -438,6 +484,18 @@ button:disabled {
   isolation: isolate;
 }
 
+html.ios-native-scroll,
+html.ios-native-scroll body {
+  background-color: var(--browser-chrome-surface);
+  overscroll-behavior-y: none;
+  scroll-snap-type: y proximity;
+}
+
+html.ios-native-scroll .post-experience-sections {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
 .final-section {
   --final-background: #000000;
   --final-text: #f5f7ef;
@@ -447,8 +505,7 @@ button:disabled {
   z-index: 12;
   display: none;
   width: 100%;
-  min-height: 100vh;
-  min-height: 100svh;
+  min-height: var(--experience-viewport-height);
   overflow: hidden;
   background: transparent;
   color: var(--final-text);
@@ -910,7 +967,7 @@ button:disabled {
   }
 
   .nav {
-    top: calc(20 / var(--gfs) * 1rem);
+    top: calc(env(safe-area-inset-top, 0px) + 20 / var(--gfs) * 1rem);
     left: calc(20 / var(--gfs) * 1rem);
     width: calc(335 / var(--gfs) * 1rem);
     height: calc(40 / var(--gfs) * 1rem);
@@ -951,12 +1008,19 @@ button:disabled {
   }
 
   .cards {
+    --card-bottom-inset: max(
+      var(--browser-controls-inset),
+      env(safe-area-inset-bottom, 0px)
+    );
     right: 0;
     left: 0;
     bottom: 0;
     width: 100%;
     max-height: none;
-    padding: 0 calc(20 / var(--gfs) * 1rem);
+    padding:
+      0
+      calc(20 / var(--gfs) * 1rem)
+      var(--card-bottom-inset);
     border: 0;
     border-top: 1px solid var(--text);
     border-radius: 0;
@@ -983,8 +1047,10 @@ button:disabled {
   }
 
   .cards.expanded {
-    max-height: 100vh;
+    max-height: var(--experience-viewport-height);
     overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
   }
 
   .cards.expanded .card-info {
@@ -1000,8 +1066,11 @@ button:disabled {
   }
 
   .card-toggle {
+    position: relative;
+    z-index: 1;
     height: calc(40 / var(--gfs) * 1rem);
     border-top: 1px solid var(--grey2);
+    touch-action: manipulation;
   }
 
   .intro-content {

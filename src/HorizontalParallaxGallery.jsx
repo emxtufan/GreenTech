@@ -30,6 +30,7 @@ function HorizontalParallaxGallery({ entered, items, onProjectOpen }) {
     let frame = 0;
     let measureFrame = 0;
     let disposed = false;
+    let inRenderRange = false;
 
     const setTargetFromPageScroll = () => {
       const progress = clamp(
@@ -44,10 +45,11 @@ function HorizontalParallaxGallery({ entered, items, onProjectOpen }) {
       measureFrame = 0;
       if (disposed) return;
 
+      const viewportHeight = Math.max(1, wrapper.clientHeight || window.innerHeight);
       scroll.limit = Math.max(0, track.scrollWidth - wrapper.clientWidth);
-      section.style.height = `${window.innerHeight + scroll.limit}px`;
+      section.style.height = `${viewportHeight + scroll.limit}px`;
       scroll.sectionTop = section.getBoundingClientRect().top + window.scrollY;
-      scroll.travel = Math.max(1, section.offsetHeight - window.innerHeight);
+      scroll.travel = Math.max(1, section.offsetHeight - viewportHeight);
 
       cardMetrics = Array.from(track.querySelectorAll(".horizontal-gallery-card")).map(
         (card) => ({
@@ -72,6 +74,9 @@ function HorizontalParallaxGallery({ entered, items, onProjectOpen }) {
     };
 
     const render = () => {
+      frame = 0;
+      if (!inRenderRange || disposed) return;
+
       setTargetFromPageScroll();
       scroll.current += (scroll.target - scroll.current) * scroll.ease;
 
@@ -139,12 +144,25 @@ function HorizontalParallaxGallery({ entered, items, onProjectOpen }) {
     const resizeObserver = new ResizeObserver(scheduleMeasure);
     resizeObserver.observe(wrapper);
     resizeObserver.observe(track);
+    const renderObserver = new IntersectionObserver(
+      (entries) => {
+        inRenderRange = entries.some((entry) => entry.isIntersecting);
+        if (inRenderRange && !frame) {
+          frame = window.requestAnimationFrame(render);
+        } else if (!inRenderRange) {
+          window.cancelAnimationFrame(frame);
+          frame = 0;
+        }
+      },
+      { rootMargin: "50% 0px" },
+    );
+    renderObserver.observe(section);
     window.addEventListener("resize", scheduleMeasure);
     document.fonts?.ready.then(scheduleMeasure);
-    frame = window.requestAnimationFrame(render);
 
     return () => {
       disposed = true;
+      renderObserver.disconnect();
       resizeObserver.disconnect();
       window.removeEventListener("resize", scheduleMeasure);
       window.cancelAnimationFrame(frame);

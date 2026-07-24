@@ -50,6 +50,7 @@ function ProjectDetailPage({ project, nextProject, onClose, onProjectOpen }) {
       className="project-detail-page"
       ref={pageRef}
       aria-labelledby="project-detail-title"
+      data-lenis-prevent
     >
       <header className="project-detail-nav">
         <button

@@ -2,15 +2,18 @@ import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import ScrollVelocity from "./ScrollVelocity.jsx";
+import ServiceSectionOverlay from "./ServiceSectionOverlay.jsx";
 import "./ScrollSolarAssembly.css";
 
 const MODEL_URL = "/3d/futuristic_solar_power_module%20(1).glb";
+const MODEL_REST_LIFT = 0.11;
+const MODEL_REST_LIFT_MOBILE = 0.08;
 const ASSEMBLY_CLIP_START = 4.32;
 const ASSEMBLY_CLIP_END = 9.2;
 const ENTRANCE_COMPLETE_AT = 0.14;
 const ASSEMBLY_COMPLETE_AT = 0.82;
 const FRONTAL_TILT = THREE.MathUtils.degToRad(0);
+const ANIMATED_BOUNDS_SAMPLES = 5;
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const lerp = (start, end, progress) => start + (end - start) * progress;
@@ -73,6 +76,7 @@ function ScrollSolarAssembly({ active }) {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
     camera.position.set(0, 0, 8.5);
+    const mobileQuality = window.innerWidth <= 700;
 
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
@@ -85,6 +89,7 @@ function ScrollSolarAssembly({ active }) {
     renderer.toneMappingExposure = 1.18;
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.shadowMap.autoUpdate = !mobileQuality;
     renderer.domElement.className = "solar-assembly-canvas";
     renderer.domElement.setAttribute("aria-hidden", "true");
     mount.appendChild(renderer.domElement);
@@ -99,7 +104,8 @@ function ScrollSolarAssembly({ active }) {
     const keyLight = new THREE.DirectionalLight(0xffffff, 3.1);
     keyLight.position.set(5, 7, 8);
     keyLight.castShadow = true;
-    keyLight.shadow.mapSize.set(1024, 1024);
+    const shadowMapSize = mobileQuality ? 512 : 1024;
+    keyLight.shadow.mapSize.set(shadowMapSize, shadowMapSize);
     keyLight.shadow.camera.near = 0.1;
     keyLight.shadow.camera.far = 30;
     keyLight.shadow.camera.left = -10;
@@ -127,6 +133,7 @@ function ScrollSolarAssembly({ active }) {
       opacity: 0,
       entranceProgress: 0,
       entranceOffsetY: 0,
+      restOffsetY: 0,
       assemblyProgress: 0,
       normalizedWidth: 1,
       normalizedHeight: 1,
@@ -141,6 +148,25 @@ function ScrollSolarAssembly({ active }) {
     let measureFrame = 0;
     let disposed = false;
     let loadStarted = false;
+    let preparationTask = 0;
+    let sectionInRange = false;
+    let shadowFrame = 0;
+
+    const scheduleIdleTask = (callback) => {
+      if (typeof window.requestIdleCallback === "function") {
+        return window.requestIdleCallback(callback, { timeout: 750 });
+      }
+      return window.setTimeout(callback, 16);
+    };
+
+    const cancelIdleTask = (task) => {
+      if (!task) return;
+      if (typeof window.cancelIdleCallback === "function") {
+        window.cancelIdleCallback(task);
+      } else {
+        window.clearTimeout(task);
+      }
+    };
 
     const updateModelLayout = () => {
       if (!modelRoot) return;
@@ -151,7 +177,7 @@ function ScrollSolarAssembly({ active }) {
       const horizontalView = verticalView * camera.aspect;
       const mobile = window.innerWidth <= 700;
       const availableWidth = horizontalView * (mobile ? 0.68 : 0.52);
-      const availableHeight = verticalView * (mobile ? 0.58 : 0.64);
+      const availableHeight = verticalView * (mobile ? 0.42 : 0.44);
       const modelScale = Math.min(
         availableWidth / Math.max(0.001, state.normalizedWidth),
         availableHeight / Math.max(0.001, state.normalizedHeight),
@@ -159,6 +185,9 @@ function ScrollSolarAssembly({ active }) {
 
       modelRoot.scale.setScalar(modelScale);
       state.entranceOffsetY = verticalView * (mobile ? 0.32 : 0.3);
+      // Sit above centre so the service copy owns the lower third.
+      state.restOffsetY =
+        verticalView * (mobile ? MODEL_REST_LIFT_MOBILE : MODEL_REST_LIFT);
       pivot.position.x = 0;
       pivot.position.z = 0;
     };
@@ -188,8 +217,13 @@ function ScrollSolarAssembly({ active }) {
     };
 
     const render = () => {
+      if (!sectionInRange || disposed) {
+        frame = 0;
+        return;
+      }
+
       const bounds = section.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
+      const viewportHeight = Math.max(1, mount.clientHeight || window.innerHeight);
       const scrollTravel = Math.max(1, bounds.height - viewportHeight);
       const rawProgress = -bounds.top / scrollTravel;
       const targetEntrance = reducedMotion.matches
@@ -233,7 +267,7 @@ function ScrollSolarAssembly({ active }) {
       mount.style.opacity = state.opacity.toFixed(3);
       pivot.position.y = lerp(
         state.entranceOffsetY,
-        0,
+        state.restOffsetY,
         state.entranceProgress,
       );
 
@@ -242,7 +276,13 @@ function ScrollSolarAssembly({ active }) {
         mixer.setTime(lerp(animationStart, animationEnd, progress));
       }
 
-      if (state.opacity > 0.002) renderer.render(scene, camera);
+      if (state.opacity > 0.002) {
+        if (mobileQuality) {
+          shadowFrame = (shadowFrame + 1) % 2;
+          if (shadowFrame === 0) renderer.shadowMap.needsUpdate = true;
+        }
+        renderer.render(scene, camera);
+      }
       frame = window.requestAnimationFrame(render);
     };
 
@@ -311,27 +351,52 @@ function ScrollSolarAssembly({ active }) {
           }
 
           const animatedBounds = new THREE.Box3();
-          const sampleCount = mixer ? 12 : 1;
-          for (let index = 0; index <= sampleCount; index += 1) {
-            const progress = index / sampleCount;
+          const sampleCount = mixer ? ANIMATED_BOUNDS_SAMPLES : 0;
+          let sampleIndex = 0;
+
+          const finishModelPreparation = () => {
+            const size = animatedBounds.getSize(new THREE.Vector3());
+            const center = animatedBounds.getCenter(new THREE.Vector3());
+            const sourceScale = 1 / Math.max(0.001, size.x, size.y, size.z);
+            sourceModel.scale.setScalar(sourceScale);
+            sourceModel.position.copy(center).multiplyScalar(-sourceScale);
+
+            modelRoot = new THREE.Group();
+            modelRoot.add(sourceModel);
+            pivot.add(modelRoot);
+
+            state.normalizedWidth = Math.max(0.001, size.x * sourceScale);
+            state.normalizedHeight = Math.max(0.001, size.z * sourceScale);
+            mixer?.setTime(animationStart);
+            updateModelLayout();
+
+            preparationTask = scheduleIdleTask(() => {
+              preparationTask = 0;
+              if (disposed || !modelRoot) return;
+              renderer.shadowMap.needsUpdate = true;
+              renderer.compile(scene, camera);
+              renderer.render(scene, camera);
+            });
+          };
+
+          const sampleAnimatedBounds = () => {
+            preparationTask = 0;
+            if (disposed) return;
+
+            const progress = sampleCount > 0 ? sampleIndex / sampleCount : 0;
             mixer?.setTime(lerp(animationStart, animationEnd, progress));
             expandByAnimatedModel(animatedBounds, sourceModel);
-          }
+            sampleIndex += 1;
 
-          const size = animatedBounds.getSize(new THREE.Vector3());
-          const center = animatedBounds.getCenter(new THREE.Vector3());
-          const sourceScale = 1 / Math.max(0.001, size.x, size.y, size.z);
-          sourceModel.scale.setScalar(sourceScale);
-          sourceModel.position.copy(center).multiplyScalar(-sourceScale);
+            if (sampleIndex <= sampleCount) {
+              preparationTask = scheduleIdleTask(sampleAnimatedBounds);
+              return;
+            }
 
-          modelRoot = new THREE.Group();
-          modelRoot.add(sourceModel);
-          pivot.add(modelRoot);
+            finishModelPreparation();
+          };
 
-          state.normalizedWidth = Math.max(0.001, size.x * sourceScale);
-          state.normalizedHeight = Math.max(0.001, size.z * sourceScale);
-          mixer?.setTime(animationStart);
-          updateModelLayout();
+          preparationTask = scheduleIdleTask(sampleAnimatedBounds);
         },
         undefined,
         () => {
@@ -340,31 +405,37 @@ function ScrollSolarAssembly({ active }) {
       );
     };
 
-    const preloadObserver = new IntersectionObserver(
+    const renderObserver = new IntersectionObserver(
       (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          loadModel();
-          preloadObserver.disconnect();
+        sectionInRange = entries.some((entry) => entry.isIntersecting);
+        if (sectionInRange && !frame) {
+          frame = window.requestAnimationFrame(render);
+        } else if (!sectionInRange) {
+          window.cancelAnimationFrame(frame);
+          frame = 0;
+          state.opacity = 0;
+          mount.style.opacity = "0";
         }
       },
-      { rootMargin: "120% 0px" },
+      { rootMargin: "100% 0px" },
     );
-    preloadObserver.observe(section);
+    renderObserver.observe(section);
+    loadModel();
 
     const resizeObserver = new ResizeObserver(scheduleMeasure);
     resizeObserver.observe(section);
     resizeObserver.observe(mount);
     window.addEventListener("resize", scheduleMeasure);
     measure();
-    frame = window.requestAnimationFrame(render);
 
     return () => {
       disposed = true;
-      preloadObserver.disconnect();
+      renderObserver.disconnect();
       resizeObserver.disconnect();
       window.removeEventListener("resize", scheduleMeasure);
       window.cancelAnimationFrame(frame);
       window.cancelAnimationFrame(measureFrame);
+      cancelIdleTask(preparationTask);
       mixer?.stopAllAction();
       disposeModel(sourceModel);
       scene.environment = null;
@@ -383,7 +454,7 @@ function ScrollSolarAssembly({ active }) {
     <section
       ref={sectionRef}
       className={`solar-assembly-section ${active ? "visible" : ""}`}
-      aria-label="Futuristic solar power module"
+      aria-labelledby="service-solar-title"
     >
       <div className="solar-assembly-sticky">
         <div
@@ -391,36 +462,12 @@ function ScrollSolarAssembly({ active }) {
           className="solar-assembly-canvas-mount"
           aria-hidden="true"
         />
-        <div
-          className="solar-assembly-velocity solar-assembly-velocity-top"
-          aria-hidden="true"
-        >
-          <ScrollVelocity
-            texts={["GREENTECH PROFESSIONALS"]}
-            velocity={100}
-            className="solar-scroll-text"
-            numCopies={6}
-            damping={50}
-            stiffness={400}
-            parallaxClassName="solar-velocity-parallax"
-            scrollerClassName="solar-velocity-scroller"
-          />
-        </div>
-        <div
-          className="solar-assembly-velocity solar-assembly-velocity-bottom"
-          aria-hidden="true"
-        >
-          <ScrollVelocity
-            texts={["SOLAR POWER MODULE"]}
-            velocity={-100}
-            className="solar-scroll-text"
-            numCopies={6}
-            damping={50}
-            stiffness={400}
-            parallaxClassName="solar-velocity-parallax"
-            scrollerClassName="solar-velocity-scroller"
-          />
-        </div>
+        <ServiceSectionOverlay
+          index="01 / Service"
+          titleId="service-solar-title"
+          title="Construction of Photovoltaic Parks"
+          description="Utility-scale solar delivered end to end — feasibility and design, mounting structures, cabling and inverters, through to commissioning and grid connection."
+        />
       </div>
     </section>
   );

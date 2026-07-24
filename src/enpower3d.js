@@ -18,6 +18,41 @@ const LIGHT_STROKE = 9868950;
 const DARK_STROKE = 12829635;
 const DARK_FILL = 0x2b332f;
 const DARK_GROUND = 0x1b201d;
+const BASE_CAMERA_FOV = 25;
+const PHONE_REFERENCE_ASPECT = 0.28;
+const PHONE_MODEL_SCALE = 1;
+const PHONE_MSAA_SAMPLES = 2;
+const MOBILE_SOLAR_CLOUD_OPACITY = 0.12;
+const MOBILE_SOLAR_INTRO_CLOUD_OPACITY = 0.235;
+
+function getSolarCloudOpacity(dark, width, height, intro = false) {
+  if (dark) return intro ? 0.03 : 0.02;
+  if (Math.min(width, height) <= 600) {
+    return intro ? MOBILE_SOLAR_INTRO_CLOUD_OPACITY : MOBILE_SOLAR_CLOUD_OPACITY;
+  }
+  return 0.26;
+}
+
+function getExperiencePixelRatio(highQuality) {
+  const devicePixelRatio = Math.max(1, window.devicePixelRatio || 1);
+  if (!highQuality) return devicePixelRatio > 1 ? 1 : 0.5;
+  const phoneScreen = Math.min(window.innerWidth, window.innerHeight) <= 600;
+  return Math.min(devicePixelRatio, phoneScreen ? 3 : 2);
+}
+
+function getResponsiveCameraFov(width, height) {
+  const aspect = width / Math.max(1, height);
+  const phoneLayout = Math.min(width, height) <= 600;
+  if (!phoneLayout || aspect >= PHONE_REFERENCE_ASPECT) return BASE_CAMERA_FOV;
+
+  const referenceHalfWidth =
+    Math.tan(THREE.MathUtils.degToRad(BASE_CAMERA_FOV * 0.5)) *
+    PHONE_REFERENCE_ASPECT;
+  const fov = THREE.MathUtils.radToDeg(
+    2 * Math.atan(referenceHalfWidth / aspect),
+  );
+  return Math.min(10, fov);
+}
 
 const stagePalettes = {
   solar: {
@@ -250,6 +285,7 @@ function wireMaterial(color, alphaMap) {
   return new THREE.MeshBasicMaterial({
     color,
     alphaMap,
+    alphaToCoverage: true,
     transparent: true,
     side: THREE.DoubleSide,
   });
@@ -303,7 +339,7 @@ class RenderStage {
     this.scene.background = new THREE.Color(this.palette.background);
     this.scene.fog = new THREE.Fog(this.palette.background, ...this.settings.fog);
     this.camera = new THREE.PerspectiveCamera(
-      25,
+      BASE_CAMERA_FOV,
       owner.vw / owner.vh,
       this.settings.near,
       this.settings.far,
@@ -379,7 +415,7 @@ class RenderStage {
     const alphaMap = repeatingTexture(textures.alpha2);
     this.wireMaterial = wireMaterial(16763729, alphaMap);
     this.object("Wire_1_Stroke_Copy").material = this.wireMaterial;
-
+    this.object("Wire_1_Stroke_Copy").visible = false;
     const lightMap = repeatingTexture(textures.light);
     const lightAlpha = repeatingTexture(textures.alpha);
     this.lightMaterial1 = new THREE.MeshBasicMaterial({
@@ -492,7 +528,10 @@ class RenderStage {
     this.wheel = { y: 0 };
     this.mobileDragY = 0;
     this.mobileDrag = { y: 0 };
-    this.cloudOpacity = { base: 0.26 };
+    this.cloudOpacity = {
+      base: getSolarCloudOpacity(false, this.owner.vw, this.owner.vhSaved),
+      intro: getSolarCloudOpacity(false, this.owner.vw, this.owner.vhSaved, true),
+    };
   }
 
   setupWind(textures) {
@@ -723,7 +762,7 @@ class RenderStage {
     gsap.to(this.globalGroup.position, { duration: 2.4, z: -10, delay: 0.3, ease: "power3.inOut" });
     gsap.to(this.cloudMaterial, {
       duration: 2.4,
-      opacity: this.cloudOpacity.base,
+      opacity: this.cloudOpacity.intro,
       delay: 0.2,
       ease: "power3.inOut",
     });
@@ -731,6 +770,11 @@ class RenderStage {
 
   enterExperience() {
     if (this.key !== "solar") return;
+    gsap.to(this.cloudMaterial, {
+      duration: 1.6,
+      opacity: this.cloudOpacity.base,
+      ease: "power2.inOut",
+    });
     gsap.to(this.wheelY, { duration: 2, val: -10000, ease: "sine.inOut" });
     gsap.to(this.introTransition, {
       duration: 2,
@@ -755,6 +799,11 @@ class RenderStage {
 
   backToIntro() {
     if (this.key !== "solar") return;
+    gsap.to(this.cloudMaterial, {
+      duration: 1.2,
+      opacity: this.cloudOpacity.intro,
+      ease: "power2.inOut",
+    });
     gsap.to(this.wheelY, { duration: 1.4, val: 0, ease: "power2.inOut" });
     gsap.to(this.introTransition, {
       duration: 0.6,
@@ -965,8 +1014,20 @@ class RenderStage {
     this.scene.background = new THREE.Color(background);
     this.scene.fog = new THREE.Fog(background, ...this.settings.fog);
     if (this.key === "solar") {
-      this.cloudOpacity.base = dark ? 0.02 : 0.26;
-      this.cloudMaterial.opacity = this.cloudOpacity.base;
+      this.cloudOpacity.base = getSolarCloudOpacity(
+        dark,
+        this.owner.vw,
+        this.owner.vhSaved,
+      );
+      this.cloudOpacity.intro = getSolarCloudOpacity(
+        dark,
+        this.owner.vw,
+        this.owner.vhSaved,
+        true,
+      );
+      this.cloudMaterial.opacity = this.owner.entered
+        ? this.cloudOpacity.base
+        : this.cloudOpacity.intro;
     }
     if (["wind", "towers", "central", "factory"].includes(this.key)) {
       this.cloudMaterial.opacity = dark ? 0.03 : 0.2;
@@ -993,9 +1054,22 @@ class RenderStage {
     }
   }
 
-  resize(width, height, pixelRatio) {
-    this.fbo.setSize(width * pixelRatio, height * pixelRatio);
+  resize(width, height, pixelRatio, fullResolution = true) {
+    const renderWidth = fullResolution ? Math.ceil(width * pixelRatio) : 1;
+    const renderHeight = fullResolution ? Math.ceil(height * pixelRatio) : 1;
     const aspect = width / height;
+    const phonePortrait = Math.min(width, height) <= 600 && aspect < 1;
+    const maxSamples = this.owner.renderer.capabilities.maxSamples ?? 0;
+    const targetSamples =
+      phonePortrait && fullResolution && this.owner.renderer.capabilities.isWebGL2
+        ? Math.min(PHONE_MSAA_SAMPLES, maxSamples)
+        : 0;
+    if (this.fbo.samples !== targetSamples) {
+      this.fbo.samples = targetSamples;
+      this.fbo.dispose();
+    }
+    this.fbo.setSize(renderWidth, renderHeight);
+    this.resizeGroup.scale.setScalar(phonePortrait ? PHONE_MODEL_SCALE : 1);
     if (this.key === "factory") {
       this.resizeRatio.z = aspect < 1 ? 1 - aspect : 0;
     } else if (this.key === "central") {
@@ -1014,6 +1088,7 @@ class RenderStage {
     if (this.particleShaderMaterial) {
       this.particleShaderMaterial.uniforms.resolution.value.set(width, height, 1, 1);
     }
+    this.camera.fov = getResponsiveCameraFov(width, height);
     this.camera.aspect = aspect;
     this.camera.updateProjectionMatrix();
   }
@@ -1244,10 +1319,11 @@ export class EnpowerExperience {
     this.entered = false;
     this.destroyed = false;
     this.ready = false;
-    this.vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-    this.vhSaved = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+    this.renderingPaused = false;
+    this.vw = Math.max(1, this.container.clientWidth || window.innerWidth || 0);
+    this.vhSaved = Math.max(1, this.container.clientHeight || window.innerHeight || 0);
     this.vh = this.vw / this.vhSaved > 2 ? this.vw / 2 : this.vhSaved;
-    this.pixelRatio = this.highQuality ? (window.devicePixelRatio > 1 ? 2 : 1) : (window.devicePixelRatio > 1 ? 1 : 0.5);
+    this.pixelRatio = getExperiencePixelRatio(this.highQuality);
     this.renderer = new THREE.WebGLRenderer({ antialias: false });
     this.renderer.shadowMap.enabled = false;
     this.renderer.sortObjects = true;
@@ -1270,10 +1346,16 @@ export class EnpowerExperience {
     this.fpsStart = performance.now();
     this.fpsChecks = 0;
     this.mouseClient = { x: this.vw / 2, y: this.vh / 2 };
-    this.boundResize = this.resize.bind(this);
+    this.resizeFrame = 0;
+    this.boundResize = this.scheduleResize.bind(this);
     this.boundPointerMove = this.pointerMove.bind(this);
+    this.boundLoop = this.loop.bind(this);
     window.addEventListener("resize", this.boundResize);
     window.addEventListener("pointermove", this.boundPointerMove);
+    this.resizeObserver = typeof ResizeObserver === "undefined"
+      ? null
+      : new ResizeObserver(this.boundResize);
+    this.resizeObserver?.observe(this.container);
     this.initialize();
   }
 
@@ -1301,6 +1383,14 @@ export class EnpowerExperience {
       );
       const [loadedTextures, loadedModels] = await Promise.all([texturePromise, modelPromise]);
       if (this.destroyed) return;
+      const maxAnisotropy = Math.min(8, this.renderer.capabilities.getMaxAnisotropy());
+      for (const [key, texture] of loadedTextures) {
+        if (key !== "alpha" && key !== "alpha2") continue;
+        texture.anisotropy = maxAnisotropy;
+        texture.magFilter = THREE.LinearFilter;
+        texture.minFilter = THREE.LinearMipmapLinearFilter;
+        texture.needsUpdate = true;
+      }
       this.textures = Object.fromEntries(loadedTextures);
       this.models = Object.fromEntries(loadedModels);
       this.stages = modelEntries.map(
@@ -1311,12 +1401,14 @@ export class EnpowerExperience {
         stage.setQuality(this.highQuality);
       });
       this.createTransitionScene();
-      this.resize();
+      this.resize(true);
       this.stages[0].finishIntro();
       this.ready = true;
       this.onProgress(100);
       this.onReady();
-      this.raf = requestAnimationFrame(this.loop.bind(this));
+      if (!this.renderingPaused) {
+        this.raf = requestAnimationFrame(this.boundLoop);
+      }
     } catch (error) {
       console.error("Unable to initialize the Enpower 3D experience", error);
       this.onProgress(100);
@@ -1363,13 +1455,14 @@ export class EnpowerExperience {
   }
 
   loop() {
-    if (this.destroyed || !this.ready) return;
+    if (this.destroyed || !this.ready || this.renderingPaused) return;
     this.delta = this.clock.getDelta();
     this.elapsed += this.delta;
     this.scrollY = this.easingBase * (window.scrollY - this.scrollY) + this.scrollY;
     const nextIndex = clamp(0, SCENE_COUNT - 1, Math.floor(this.scrollY / 16500 / 0.245));
     if (nextIndex !== this.currentIndex) {
       this.currentIndex = nextIndex;
+      this.resizeStages();
       this.onActiveChange(nextIndex);
     }
     const firstStage = this.stages[this.currentIndex];
@@ -1382,8 +1475,7 @@ export class EnpowerExperience {
     this.transitionMaterial.uniforms.accentTo.value.set(secondStage.palette.accent);
     this.transitionMaterial.uniforms.progress.value =
       this.currentIndex < SCENE_COUNT - 1 ? (this.scrollY / 16500) % 0.245 : 0;
-    for (let index = 0; index < this.stages.length; index += 1) {
-      if (Math.abs(index - this.currentIndex) >= 2) continue;
+    for (let index = this.currentIndex; index <= Math.min(this.currentIndex + 1, SCENE_COUNT - 1); index += 1) {
       this.stages[index].render();
       this.stages[index].update();
     }
@@ -1391,7 +1483,23 @@ export class EnpowerExperience {
     this.renderer.clear();
     this.composer.render();
     this.calculateEasing();
-    this.raf = requestAnimationFrame(this.loop.bind(this));
+    this.raf = requestAnimationFrame(this.boundLoop);
+  }
+
+  setRenderingPaused(paused) {
+    const nextPaused = Boolean(paused);
+    if (nextPaused === this.renderingPaused || this.destroyed) return;
+
+    this.renderingPaused = nextPaused;
+    if (nextPaused) {
+      cancelAnimationFrame(this.raf);
+      this.raf = 0;
+      return;
+    }
+
+    if (!this.ready) return;
+    this.clock.start();
+    this.raf = requestAnimationFrame(this.boundLoop);
   }
 
   calculateEasing() {
@@ -1408,6 +1516,7 @@ export class EnpowerExperience {
   }
 
   pointerMove(event) {
+    if (this.renderingPaused) return;
     this.mouseClient.x = event.clientX;
     this.mouseClient.y = event.clientY;
     if (!this.stages) return;
@@ -1457,9 +1566,6 @@ export class EnpowerExperience {
 
   setQuality(highQuality) {
     this.highQuality = highQuality;
-    this.pixelRatio = highQuality
-      ? window.devicePixelRatio > 1 ? 2 : 1
-      : (window.devicePixelRatio > 1 ? 2 : 1) / 2;
     if (this.transitionMaterial) {
       this.transitionMaterial.uniforms.displacement.value = highQuality ? this.textures.displacement : null;
     }
@@ -1467,10 +1573,42 @@ export class EnpowerExperience {
     this.resize();
   }
 
-  resize() {
-    this.vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-    this.vhSaved = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
-    this.vh = this.vw / this.vhSaved > 2 ? this.vw / 2 : this.vhSaved;
+  resizeStages() {
+    this.stages?.forEach((stage, index) => {
+      const fullResolution = index === this.currentIndex || index === this.currentIndex + 1;
+      stage.resize(this.vw, this.vh, this.pixelRatio, fullResolution);
+    });
+  }
+
+  scheduleResize() {
+    if (this.destroyed || this.resizeFrame) return;
+    this.resizeFrame = requestAnimationFrame(() => {
+      this.resizeFrame = 0;
+      this.resize();
+    });
+  }
+
+  resize(force = false) {
+    const nextPixelRatio = getExperiencePixelRatio(this.highQuality);
+    const nextWidth = Math.max(1, this.container.clientWidth || window.innerWidth || 0);
+    const nextSavedHeight = Math.max(1, this.container.clientHeight || window.innerHeight || 0);
+    const nextHeight = nextWidth / nextSavedHeight > 2 ? nextWidth / 2 : nextSavedHeight;
+
+    if (
+      !force
+      && nextPixelRatio === this.pixelRatio
+      && nextWidth === this.vw
+      && nextSavedHeight === this.vhSaved
+      && nextHeight === this.vh
+    ) {
+      return;
+    }
+
+    const previousPixelRatio = this.pixelRatio;
+    this.pixelRatio = nextPixelRatio;
+    this.vw = nextWidth;
+    this.vhSaved = nextSavedHeight;
+    this.vh = nextHeight;
     this.renderer.setPixelRatio(this.pixelRatio);
     this.renderer.setSize(this.vw, this.vh);
     this.renderer.domElement.style.top = this.vw / this.vhSaved > 2 ? "50%" : "0";
@@ -1484,19 +1622,24 @@ export class EnpowerExperience {
     this.transitionPlane.geometry.dispose();
     this.transitionPlane.geometry = new THREE.PlaneGeometry(this.vw, this.vh, 1, 1);
     this.transitionMaterial.uniforms.resolution.value.set(this.vw, this.vh, 1, 1);
+    if (previousPixelRatio !== this.pixelRatio) {
+      this.composer.setPixelRatio(this.pixelRatio);
+    }
     this.fxaaPass.material.uniforms.resolution.value.set(
       1 / (this.vw * this.pixelRatio),
       1 / (this.vh * this.pixelRatio),
     );
     this.composer.setSize(this.vw, this.vh);
-    this.stages.forEach((stage) => stage.resize(this.vw, this.vh, this.pixelRatio));
+    this.resizeStages();
   }
 
   dispose() {
     this.destroyed = true;
     cancelAnimationFrame(this.raf);
+    cancelAnimationFrame(this.resizeFrame);
     window.removeEventListener("resize", this.boundResize);
     window.removeEventListener("pointermove", this.boundPointerMove);
+    this.resizeObserver?.disconnect();
     gsap.killTweensOf(this.stages?.[0]?.camera.position);
     gsap.killTweensOf(this.stages?.[0]?.globalGroup.position);
     this.stages?.forEach((stage) => stage.dispose());

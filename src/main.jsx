@@ -13,10 +13,15 @@ import ScrollStack, { ScrollStackItem } from "./ScrollStack.jsx";
 import HorizontalParallaxGallery from "./HorizontalParallaxGallery.jsx";
 import ScrollWindTurbine from "./ScrollWindTurbine.jsx";
 import ScrollSolarAssembly from "./ScrollSolarAssembly.jsx";
+import ScrollElectricalInspection from "./ScrollElectricalInspection.jsx";
+import ScrollConstructionServices from "./ScrollConstructionServices.jsx";
+import ScrollDataCenterBuild from "./ScrollDataCenterBuild.jsx";
+import SolarContactSection from "./SolarContactSection.jsx";
 import ProjectDetailPage from "./ProjectDetailPage.jsx";
+import useExperienceScrollController from "./useExperienceScrollController.js";
 import horizontalGalleryData from "./data/horizontal-gallery.json";
 import processCardsData from "./data/process-cards.json";
-import "./styles.css";
+import "./styles.css?=1";
 
 const sections = [
   {
@@ -110,6 +115,15 @@ const processCards = processCardsData
 const horizontalGalleryItems = horizontalGalleryData
   .filter((item) => item.enabled !== false)
   .sort((firstItem, secondItem) => firstItem.order - secondItem.order);
+
+const heroSurfaces = [
+  "#fff8e8",
+  "#edf8f7",
+  "#f2f5f2",
+  "#f3f8eb",
+  "#eff7f1",
+  "#f2f7f2",
+];
 
 function useEnpower3d({ dark, highQuality, setLoaded, setReady, setActive, setEntered }) {
   const mountRef = useRef(null);
@@ -236,16 +250,25 @@ function Navigation({ highQuality, setHighQuality, dark, setDark, backToIntro, e
 function Card({ active, entered }) {
   const section = sections[active] ?? sections[0];
   const hasGraph = graphSections.has(section.sourceIndex);
-  const [expanded, setExpanded] = useState(false);
+  const [expandedSectionKey, setExpandedSectionKey] = useState(null);
+  const expanded = expandedSectionKey === section.key;
 
   useEffect(() => {
-    setExpanded(false);
-  }, [active]);
+    if (!entered) setExpandedSectionKey(null);
+  }, [entered]);
+
+  const toggleExpanded = (event) => {
+    event.stopPropagation();
+    setExpandedSectionKey((currentKey) => (
+      currentKey === section.key ? null : section.key
+    ));
+  };
 
   return (
     <aside
       className={`cards ${entered ? "visible" : ""} ${expanded ? "expanded" : ""}`}
       id={`card_content_${active}`}
+      data-lenis-prevent
     >
       <header className="card-header">
         <h2>{section.title}</h2>
@@ -264,7 +287,7 @@ function Card({ active, entered }) {
         type="button"
         aria-label={expanded ? "Hide info" : "Show info"}
         aria-expanded={expanded}
-        onClick={() => setExpanded((value) => !value)}
+        onClick={toggleExpanded}
       >
         <span aria-hidden="true" />
       </button>
@@ -529,6 +552,8 @@ function App({ onOpenProject, projectOpen }) {
   const [active, setActive] = useState(0);
   const [dark, setDark] = useState(false);
   const [highQuality, setHighQuality] = useState(true);
+  const sceneRef = useRef(null);
+  const postExperienceRef = useRef(null);
   const { mountRef, experienceRef } = useEnpower3d({
     dark,
     highQuality,
@@ -542,13 +567,28 @@ function App({ onOpenProject, projectOpen }) {
     document.documentElement.dataset.mode = dark ? "dark" : "light";
   }, [dark]);
 
+  useEffect(() => {
+    const root = document.documentElement;
+    const heroSurface = dark ? "#141414" : heroSurfaces[active] ?? heroSurfaces[0];
+    root.style.setProperty("--hero-surface", heroSurface);
+  }, [active, dark]);
+
+  const prepareForHeroNavigation = useExperienceScrollController({
+    entered,
+    projectOpen,
+    sceneRef,
+    postExperienceRef,
+    experienceRef,
+  });
+
   const enter = useCallback(() => {
     experienceRef.current?.enter();
   }, [experienceRef]);
 
   const backToIntro = useCallback(() => {
+    prepareForHeroNavigation();
     experienceRef.current?.returnToIntro();
-  }, [experienceRef]);
+  }, [experienceRef, prepareForHeroNavigation]);
 
   return (
     <main
@@ -557,9 +597,19 @@ function App({ onOpenProject, projectOpen }) {
       inert={projectOpen}
       aria-hidden={projectOpen ? "true" : undefined}
     >
-      <div className="scroll-space" style={{ height: entered ? `calc(${SCROLL_HEIGHT}px + 100vh)` : "100vh" }} />
-      <div className={`scene ${ready ? "ready" : ""}`} id="scene3d">
-        <div className="canvas-wrapper" ref={mountRef} />
+      <div className="experience-scroll">
+        <div
+          ref={sceneRef}
+          className={`scene ${ready ? "ready" : ""}`}
+          id="scene3d"
+        >
+          <div className="canvas-wrapper" ref={mountRef} />
+          <Card active={active} entered={entered} />
+        </div>
+        <div
+          className="scroll-space"
+          style={{ height: entered ? `${SCROLL_HEIGHT}px` : 0 }}
+        />
       </div>
       <Navigation
         highQuality={highQuality}
@@ -569,10 +619,9 @@ function App({ onOpenProject, projectOpen }) {
         backToIntro={backToIntro}
         entered={entered}
       />
-      <Card active={active} entered={entered} />
       <Intro entered={entered} ready={ready} enter={enter} />
       <Preloader loaded={loaded} ready={ready} />
-      <div className="post-experience-sections">
+      <div ref={postExperienceRef} className="post-experience-sections">
         <ScrollWindTurbine active={entered} />
         <FinalSection entered={entered} />
         <StackSection entered={entered} />
@@ -582,6 +631,10 @@ function App({ onOpenProject, projectOpen }) {
           onProjectOpen={onOpenProject}
         />
         <ScrollSolarAssembly active={entered} />
+        <ScrollElectricalInspection active={entered} />
+        <ScrollConstructionServices active={entered} />
+        <ScrollDataCenterBuild active={entered} />
+        <SolarContactSection active={entered} />
       </div>
     </main>
   );

@@ -6,8 +6,7 @@
   z-index: 12;
   display: none;
   width: 100%;
-  min-height: 100vh;
-  min-height: 100svh;
+  min-height: var(--experience-viewport-height, 100dvh);
   background: transparent;
   color: var(--gallery-text);
   isolation: isolate;
@@ -23,8 +22,7 @@
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
   width: 100%;
-  height: 100vh;
-  height: 100svh;
+  height: var(--experience-viewport-height, 100dvh);
   padding: clamp(78px, 10vh, 106px) 0 28px;
   overflow: hidden;
 }

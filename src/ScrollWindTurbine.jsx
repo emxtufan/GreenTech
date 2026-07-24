@@ -134,8 +134,8 @@ function ScrollWindTurbine({ active }) {
       measureFrame = 0;
       if (disposed) return;
 
-      const width = window.innerWidth;
-      const height = window.innerHeight;
+      const width = Math.max(1, renderer.domElement.clientWidth || window.innerWidth);
+      const height = Math.max(1, renderer.domElement.clientHeight || window.innerHeight);
       const pixelRatio = Math.min(window.devicePixelRatio || 1, width <= 700 ? 1.4 : 1.75);
 
       renderer.setPixelRatio(pixelRatio);
@@ -174,7 +174,7 @@ function ScrollWindTurbine({ active }) {
         };
       }
 
-      const viewportHeight = window.innerHeight;
+      const viewportHeight = Math.max(1, renderer.domElement.clientHeight || window.innerHeight);
       const viewportCenter = window.scrollY + viewportHeight * 0.5;
       const firstStage = stageMetrics[0];
       const lastStage = stageMetrics[stageMetrics.length - 1];

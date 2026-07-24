@@ -1,0 +1,132 @@
+.service-overlay-marquee {
+  position: absolute;
+  top: clamp(70px, 11vh, 128px);
+  right: 0;
+  left: 0;
+  z-index: 3;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.service-overlay-parallax {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.service-overlay-scroller {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+/* Outlined type reads as texture, so the solid title below stays the content. */
+.service-overlay-marquee-text {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  padding-right: clamp(26px, 3.4vw, 58px);
+  color: transparent;
+  font-family: "Fira Sans", Arial, Helvetica, sans-serif;
+  font-size: clamp(38px, 6vw, 92px);
+  line-height: 0.92;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  -webkit-text-stroke: 1px rgb(245 247 239 / 34%);
+}
+
+.service-overlay-marquee-text::after {
+  content: "";
+  width: 0.34em;
+  height: 0.09em;
+  margin-left: clamp(26px, 3.4vw, 58px);
+  background: #8bbc3f;
+  -webkit-text-stroke: 0;
+}
+
+.service-overlay-copy {
+  position: absolute;
+  right: 0;
+  bottom: clamp(48px, 7vh, 92px);
+  left: 0;
+  z-index: 4;
+  padding: 0 34px;
+  pointer-events: none;
+}
+
+.service-overlay-copy-inner {
+  width: min(100%, 1600px);
+  margin: 0 auto;
+}
+
+.service-overlay-index {
+  display: block;
+  margin-bottom: 14px;
+  color: #8bbc3f;
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.service-overlay-title {
+  max-width: 16ch;
+  margin: 0;
+  color: #f5f7ef;
+  font-family: "Fira Sans", Arial, Helvetica, sans-serif;
+  font-size: clamp(36px, 4.4vw, 66px);
+  line-height: 0.96;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+.service-overlay-description {
+  max-width: 46ch;
+  margin: 18px 0 0;
+  color: #bbc3bd;
+  font-size: clamp(14px, 1.1vw, 17px);
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+@media screen and (max-width: 700px) {
+  .service-overlay-marquee {
+    top: clamp(66px, 10vh, 96px);
+  }
+
+  .service-overlay-marquee-text {
+    padding-right: 22px;
+    font-size: clamp(30px, 9.5vw, 44px);
+    -webkit-text-stroke-width: 0.8px;
+  }
+
+  .service-overlay-marquee-text::after {
+    margin-left: 22px;
+  }
+
+  .service-overlay-copy {
+    bottom: clamp(38px, 6vh, 64px);
+    padding: 0 18px;
+  }
+
+  .service-overlay-index {
+    margin-bottom: 11px;
+    font-size: 11px;
+  }
+
+  .service-overlay-title {
+    max-width: 14ch;
+    font-size: clamp(30px, 8.4vw, 42px);
+  }
+
+  .service-overlay-description {
+    max-width: 100%;
+    margin-top: 13px;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+}

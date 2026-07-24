@@ -1,0 +1,61 @@
+.data-center-section {
+  --data-center-entry-fade: clamp(130px, 20vh, 240px);
+  position: relative;
+  z-index: 12;
+  display: none;
+  width: 100%;
+  height: 240vh;
+  height: 240svh;
+  background: #000000;
+}
+
+.data-center-section::before {
+  content: "";
+  position: absolute;
+  top: calc(var(--data-center-entry-fade) * -1);
+  right: 0;
+  left: 0;
+  z-index: 2;
+  height: calc(var(--data-center-entry-fade) + 2px);
+  background: linear-gradient(to bottom, rgb(0 0 0 / 0%), #000000 100%);
+  pointer-events: none;
+}
+
+.data-center-section.visible {
+  display: block;
+}
+
+.data-center-sticky {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: var(--experience-viewport-height, 100dvh);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.data-center-canvas-mount {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity;
+}
+
+.data-center-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.data-center-canvas-mount.load-error {
+  display: none;
+}
+
+@media screen and (max-width: 700px) {
+  .data-center-section {
+    height: 220vh;
+    height: 220svh;
+  }
+}
