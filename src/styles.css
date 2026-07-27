@@ -488,12 +488,6 @@ html.ios-native-scroll,
 html.ios-native-scroll body {
   background-color: var(--browser-chrome-surface);
   overscroll-behavior-y: none;
-  scroll-snap-type: y proximity;
-}
-
-html.ios-native-scroll .post-experience-sections {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 .final-section {
@@ -591,6 +585,14 @@ html.ios-native-scroll .post-experience-sections {
   letter-spacing: 0;
 }
 
+.clients-showcase > p {
+  max-width: 620px;
+  margin: 15px 0 0;
+  color: var(--final-muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
 .clients-loop {
   display: flex;
   height: 104px;
@@ -603,6 +605,24 @@ html.ios-native-scroll .post-experience-sections {
 
 .clients-loop .logoloop__item:hover {
   color: var(--flow-blue);
+}
+
+.clients-loop .logoloop__link {
+  min-width: 112px;
+  padding: 9px 15px;
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 4px;
+  background: #f5f7f4;
+}
+
+.clients-loop .logoloop__item img {
+  width: auto;
+  max-width: 150px;
+  object-fit: contain;
+}
+
+.clients-loop .logoloop__item img[alt="Bester"] {
+  transform: scale(1.35);
 }
 
 .impact-network {
@@ -1122,8 +1142,17 @@ html.ios-native-scroll .post-experience-sections {
   }
 
   .clients-loop .logoloop {
-    --logoloop-gap: 46px !important;
-    --logoloop-logoHeight: 34px !important;
+    --logoloop-gap: 18px !important;
+    --logoloop-logoHeight: 46px !important;
+  }
+
+  .clients-loop .logoloop__link {
+    min-width: 96px;
+    padding: 8px 12px;
+  }
+
+  .clients-loop .logoloop__item img {
+    max-width: 126px;
   }
 
   .impact-network {

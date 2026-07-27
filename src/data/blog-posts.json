@@ -1,0 +1,129 @@
+[
+  {
+    "id": "inside-butimanu-300mw",
+    "order": 1,
+    "enabled": true,
+    "featured": true,
+    "category": "Project update",
+    "date": "2025-08-28",
+    "dateLabel": "28 August 2025",
+    "readTime": "3 min read",
+    "title": "Inside the 300 MW Butimanu development",
+    "excerpt": "A closer look at the people, planning and field coordination behind one of Romania's largest photovoltaic developments.",
+    "image": "/projects/butimanu/butimanu-02.jpg",
+    "alt": "Field operations at the Butimanu photovoltaic development",
+    "intro": "GreenTech Professionals is contributing electrical and mechanical installation capability to the 300 MW photovoltaic development in Butimanu, Romania.",
+    "sections": [
+      {
+        "title": "Scale requires coordination",
+        "paragraphs": [
+          "A project of this size brings together technical decisions, site logistics and a large field workforce. More than 200 skilled professionals were reported on site, supported by a dedicated management team.",
+          "Daily coordination keeps electrical and mechanical activities aligned while work advances across a large and active construction area."
+        ]
+      },
+      {
+        "title": "Delivery in the field",
+        "paragraphs": [
+          "The execution scope combines photovoltaic assembly, cable routing and electrical installation. Each stage depends on clear sequencing, consistent checks and communication between teams.",
+          "Butimanu also reflects GreenTech Professionals' continued growth in the Romanian renewable energy market."
+        ]
+      }
+    ],
+    "highlights": [
+      { "value": "300 MW", "label": "Photovoltaic park capacity" },
+      { "value": "200+", "label": "Skilled professionals reported on site" },
+      { "value": "Romania", "label": "Project market" }
+    ],
+    "relatedProjectId": "butimanu-romania",
+    "primaryAction": {
+      "type": "project",
+      "label": "View the Butimanu project"
+    },
+    "sourceUrl": "https://greentechpro.ro/"
+  },
+  {
+    "id": "careers-build-what-comes-next",
+    "order": 2,
+    "enabled": true,
+    "featured": false,
+    "category": "Careers",
+    "date": null,
+    "dateLabel": "Applications open",
+    "readTime": "2 min read",
+    "title": "Build what comes next with GreenTech PRO",
+    "excerpt": "Discover the company, the field environment and the official route for submitting an application.",
+    "image": "/projects/bologna/bologna-01.webp",
+    "alt": "GreenTech Professionals field team at a photovoltaic project",
+    "intro": "GreenTech Professionals continues to grow and welcomes applications from people who want to contribute to the next generation of energy infrastructure.",
+    "sections": [
+      {
+        "title": "Work with teams close to delivery",
+        "paragraphs": [
+          "Our work brings technical and field teams together across photovoltaic, electrical, mechanical and construction projects in European markets.",
+          "The careers process is designed to collect your preferred role, experience, contact details and supporting CV or references."
+        ]
+      },
+      {
+        "title": "How to apply",
+        "paragraphs": [
+          "Use the official careers form to review the available options and submit your application directly to GreenTech Professionals.",
+          "Open opportunities may change as projects and operational requirements evolve, so the careers page remains the authoritative source."
+        ]
+      }
+    ],
+    "highlights": [
+      { "value": "Field", "label": "Project-based environment" },
+      { "value": "Europe", "label": "International delivery footprint" },
+      { "value": "Online", "label": "Official application route" }
+    ],
+    "relatedProjectId": null,
+    "primaryAction": {
+      "type": "external",
+      "label": "Explore careers",
+      "href": "https://greentechpro.ro/career/"
+    },
+    "sourceUrl": "https://greentechpro.ro/career/"
+  },
+  {
+    "id": "politehnica-visits-butimanu",
+    "order": 3,
+    "enabled": true,
+    "featured": false,
+    "category": "People & education",
+    "date": "2025-07-01",
+    "dateLabel": "1 July 2025",
+    "readTime": "2 min read",
+    "title": "Politehnica students visit the Butimanu site",
+    "excerpt": "A technical site visit connected the next generation of engineers with active photovoltaic construction.",
+    "image": "/projects/butimanu/butimanu-03.jpg",
+    "alt": "GreenTech Professionals team activity at the Butimanu site",
+    "intro": "Students from Politehnica University visited the Butimanu solar park for a practical view of photovoltaic construction and field delivery.",
+    "sections": [
+      {
+        "title": "Learning on active infrastructure",
+        "paragraphs": [
+          "The visit offered direct exposure to the scale, sequencing and technical coordination involved in a major photovoltaic development.",
+          "Site-based learning helps connect engineering principles with the decisions and constraints teams manage during execution."
+        ]
+      },
+      {
+        "title": "Knowledge shared by field teams",
+        "paragraphs": [
+          "Technical specialists and installation teams guided the visit and shared practical context from the project.",
+          "The initiative reflects an ongoing interest in technical education and in the people who will shape future energy infrastructure."
+        ]
+      }
+    ],
+    "highlights": [
+      { "value": "Site visit", "label": "Practical technical learning" },
+      { "value": "Butimanu", "label": "Photovoltaic development" },
+      { "value": "Education", "label": "Future engineering talent" }
+    ],
+    "relatedProjectId": "butimanu-romania",
+    "primaryAction": {
+      "type": "project",
+      "label": "Explore the project"
+    },
+    "sourceUrl": "https://greentechpro.ro/"
+  }
+]

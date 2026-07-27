@@ -4,10 +4,19 @@ import "./HorizontalParallaxGallery.css";
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
-function HorizontalParallaxGallery({ entered, items, onProjectOpen }) {
+function HorizontalParallaxGallery({
+  entered,
+  items,
+  onProjectOpen,
+  onShowAllProjects,
+}) {
   const sectionRef = useRef(null);
   const wrapperRef = useRef(null);
   const trackRef = useRef(null);
+  const featuredItems = items.slice(0, 5);
+  const archiveImage =
+    items[featuredItems.length]?.image
+    ?? featuredItems[featuredItems.length - 1]?.image;
 
   useLayoutEffect(() => {
     if (!entered) return undefined;
@@ -193,6 +202,22 @@ function HorizontalParallaxGallery({ entered, items, onProjectOpen }) {
     onProjectOpen(projectId);
   };
 
+  const handleArchiveLink = (event) => {
+    if (
+      !onShowAllProjects ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    onShowAllProjects();
+  };
+
   return (
     <section
       ref={sectionRef}
@@ -212,7 +237,7 @@ function HorizontalParallaxGallery({ entered, items, onProjectOpen }) {
 
         <div className="horizontal-gallery-wrapper" ref={wrapperRef}>
           <div className="horizontal-gallery-track" ref={trackRef}>
-            {items.map((item, index) => (
+            {featuredItems.map((item, index) => (
               <figure className="horizontal-gallery-card" key={item.id}>
                 <img
                   className="horizontal-gallery-image"
@@ -237,6 +262,36 @@ function HorizontalParallaxGallery({ entered, items, onProjectOpen }) {
                 </figcaption>
               </figure>
             ))}
+
+            <figure className="horizontal-gallery-card horizontal-gallery-all-card">
+              {archiveImage && (
+                <img
+                  className="horizontal-gallery-image"
+                  src={archiveImage}
+                  alt=""
+                  loading="lazy"
+                  draggable="false"
+                  aria-hidden="true"
+                />
+              )}
+              <figcaption className="horizontal-gallery-all-content">
+                <span>Complete portfolio</span>
+                <h3>Show all projects</h3>
+                <p>
+                  Explore every active and completed GreenTech Professionals
+                  project in one place.
+                </p>
+                <a
+                  href="?projects=all"
+                  onClick={handleArchiveLink}
+                  aria-label="Show all GreenTech Professionals projects"
+                >
+                  <span>View portfolio</span>
+                  <ArrowUpRight size={17} strokeWidth={1.8} aria-hidden="true" />
+                </a>
+                <b aria-hidden="true">{String(items.length).padStart(2, "0")}</b>
+              </figcaption>
+            </figure>
           </div>
         </div>
       </div>

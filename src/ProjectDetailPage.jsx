@@ -28,12 +28,10 @@ function ProjectDetailPage({ project, nextProject, onClose, onProjectOpen }) {
     };
 
     document.title = `${project.title} | GreenTech Professionals`;
-    document.body.classList.add("project-route-open");
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
       document.title = previousTitle;
-      document.body.classList.remove("project-route-open");
       window.removeEventListener("keydown", handleKeyDown);
       window.cancelAnimationFrame(focusFrame);
     };

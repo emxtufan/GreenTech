@@ -9,11 +9,9 @@ const MODEL_URL = "/3d/construction.glb";
 const MODEL_REST_LIFT = 0.13;
 const MODEL_REST_LIFT_MOBILE = 0.06;
 const ENTRANCE_COMPLETE_AT = 0.14;
-const SPIN_COMPLETE_AT = 0.82;
-const SPIN_TURNS = 1.15;
-// Scroll owns the rotation, matching the assembly section: the model holds
-// still when the page does. Raise this to add autonomous drift back.
-const IDLE_SPIN = 0;
+const ZOOM_COMPLETE_AT = 0.82;
+const ZOOM_SCALE = 1.6;
+const MODEL_Y_ROTATION = Math.PI;
 const FRONTAL_TILT = THREE.MathUtils.degToRad(10);
 
 // The rig is inherited from the solar section, which carries a dark textured
@@ -22,6 +20,7 @@ const FRONTAL_TILT = THREE.MathUtils.degToRad(10);
 const LIGHT_SCALE = 0.5;
 const TONE_EXPOSURE = 0.95;
 const ENV_MAP_INTENSITY = 0.55;
+const MODEL_COLOR_LEVEL = 0.32;
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const lerp = (start, end, progress) => start + (end - start) * progress;
@@ -112,7 +111,7 @@ function ScrollConstructionServices({ active }) {
     frontLight.position.set(0, 1.5, 10);
     scene.add(frontLight);
 
-    // A site scene reads best looked down on, so the turntable axis leans back.
+    // A site scene reads best looked down on, so the fixed model axis leans back.
     const pivot = new THREE.Group();
     pivot.rotation.x = FRONTAL_TILT;
     scene.add(pivot);
@@ -123,15 +122,14 @@ function ScrollConstructionServices({ active }) {
       entranceProgress: 0,
       entranceOffsetY: 0,
       restOffsetY: 0,
-      spinProgress: 0,
+      zoomProgress: 0,
+      baseScale: 1,
       normalizedWidth: 1,
       normalizedHeight: 1,
     };
 
     let modelRoot = null;
     let sourceModel = null;
-    let idleRotation = 0;
-    let lastFrameTime = 0;
     let frame = 0;
     let measureFrame = 0;
     let disposed = false;
@@ -171,7 +169,10 @@ function ScrollConstructionServices({ active }) {
         availableHeight / Math.max(0.001, state.normalizedHeight),
       );
 
-      modelRoot.scale.setScalar(modelScale);
+      state.baseScale = modelScale;
+      modelRoot.scale.setScalar(
+        state.baseScale * lerp(1, ZOOM_SCALE, state.zoomProgress),
+      );
       state.entranceOffsetY = verticalView * (mobile ? 0.32 : 0.3);
       // Sit above centre so the service copy owns the lower third.
       state.restOffsetY =
@@ -204,17 +205,11 @@ function ScrollConstructionServices({ active }) {
       measureFrame = window.requestAnimationFrame(measure);
     };
 
-    const render = (time) => {
+    const render = () => {
       if (!sectionInRange || disposed) {
         frame = 0;
-        lastFrameTime = 0;
         return;
       }
-
-      const delta = lastFrameTime
-        ? Math.min(0.05, (time - lastFrameTime) / 1000)
-        : 0;
-      lastFrameTime = time;
 
       const bounds = section.getBoundingClientRect();
       const viewportHeight = Math.max(1, mount.clientHeight || window.innerHeight);
@@ -223,10 +218,12 @@ function ScrollConstructionServices({ active }) {
       const targetEntrance = reducedMotion.matches
         ? 1
         : smoothstep(rawProgress / ENTRANCE_COMPLETE_AT);
-      const targetProgress = smoothstep(
-        (rawProgress - ENTRANCE_COMPLETE_AT) /
-          (SPIN_COMPLETE_AT - ENTRANCE_COMPLETE_AT),
-      );
+      const targetZoom = reducedMotion.matches
+        ? 0
+        : smoothstep(
+            (rawProgress - ENTRANCE_COMPLETE_AT) /
+              (ZOOM_COMPLETE_AT - ENTRANCE_COMPLETE_AT),
+          );
       const entryVisibility = smoothstep(
         (viewportHeight - bounds.top) / Math.max(1, viewportHeight * 0.65),
       );
@@ -245,7 +242,7 @@ function ScrollConstructionServices({ active }) {
       state.opacity += (targetOpacity - state.opacity) * ease;
       state.entranceProgress +=
         (targetEntrance - state.entranceProgress) * ease;
-      state.spinProgress += (targetProgress - state.spinProgress) * ease;
+      state.zoomProgress += (targetZoom - state.zoomProgress) * ease;
 
       if (Math.abs(targetOpacity - state.opacity) < 0.001) {
         state.opacity = targetOpacity;
@@ -253,8 +250,8 @@ function ScrollConstructionServices({ active }) {
       if (Math.abs(targetEntrance - state.entranceProgress) < 0.0005) {
         state.entranceProgress = targetEntrance;
       }
-      if (Math.abs(targetProgress - state.spinProgress) < 0.0005) {
-        state.spinProgress = targetProgress;
+      if (Math.abs(targetZoom - state.zoomProgress) < 0.0005) {
+        state.zoomProgress = targetZoom;
       }
 
       mount.style.opacity = state.opacity.toFixed(3);
@@ -264,10 +261,11 @@ function ScrollConstructionServices({ active }) {
         state.entranceProgress,
       );
 
-      if (!reducedMotion.matches) idleRotation += delta * IDLE_SPIN;
       if (modelRoot) {
-        modelRoot.rotation.y =
-          idleRotation + state.spinProgress * SPIN_TURNS * Math.PI * 2;
+        modelRoot.rotation.y = MODEL_Y_ROTATION;
+        modelRoot.scale.setScalar(
+          state.baseScale * lerp(1, ZOOM_SCALE, state.zoomProgress),
+        );
       }
 
       if (state.opacity > 0.002) {
@@ -294,6 +292,7 @@ function ScrollConstructionServices({ active }) {
           }
 
           sourceModel = gltf.scene;
+          const preparedMaterials = new Set();
           sourceModel.traverse((object) => {
             if (!object.isMesh) return;
             object.frustumCulled = false;
@@ -304,6 +303,15 @@ function ScrollConstructionServices({ active }) {
               ? object.material
               : [object.material];
             materials.filter(Boolean).forEach((material) => {
+              if (preparedMaterials.has(material)) return;
+              preparedMaterials.add(material);
+
+              if (material.color?.isColor) {
+                material.color.multiplyScalar(MODEL_COLOR_LEVEL);
+              }
+              if (material.emissive?.isColor) {
+                material.emissive.multiplyScalar(MODEL_COLOR_LEVEL);
+              }
               if ("envMapIntensity" in material) {
                 material.envMapIntensity = ENV_MAP_INTENSITY;
               }
@@ -322,15 +330,13 @@ function ScrollConstructionServices({ active }) {
           modelRoot.add(sourceModel);
           pivot.add(modelRoot);
 
-          // The turntable sweeps the footprint diagonal, so reserve that width
-          // instead of the resting one or the site clips its corners at 45°.
+          // Preserve the original diagonal framing as room for the scroll zoom.
           state.normalizedWidth = Math.max(
             0.001,
             Math.hypot(size.x, size.z) * sourceScale,
           );
-          // Leaning the pivot projects depth into screen height, and rotation
-          // swings the longer footprint axis toward the camera, so budget for
-          // the worst case rather than the model's own height.
+          // Leaning the pivot projects depth into screen height, so budget for
+          // depth as well as the model's own height.
           const sweptDepth = Math.max(size.x, size.z);
           state.normalizedHeight = Math.max(
             0.001,
@@ -362,7 +368,6 @@ function ScrollConstructionServices({ active }) {
         } else if (!sectionInRange) {
           window.cancelAnimationFrame(frame);
           frame = 0;
-          lastFrameTime = 0;
           state.opacity = 0;
           mount.style.opacity = "0";
         }

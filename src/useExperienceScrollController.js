@@ -1,26 +1,27 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
 
-const SNAP_CAPTURE_MIN = 72;
-const SNAP_CAPTURE_MAX = 144;
-const SNAP_CAPTURE_RATIO = 0.12;
-const SNAP_TOP_TOLERANCE = 1.5;
-const SNAP_RESET_DISTANCE = 8;
-const SNAP_INPUT_QUIET_MS = 110;
+const POST_TOP_TOLERANCE = 1.5;
+const POST_RESET_DISTANCE = 8;
+const MOBILE_LANDING_QUIET_MS = 100;
+const LENIS_DURATION = 0.92;
+const LENIS_TOUCH_INERTIA_EXPONENT = 1.7;
+const MOBILE_PROJECT_SCROLL_FACTOR = 0.58;
+const MOBILE_PROJECT_SCROLL_DURATION = 1.16;
+const MOBILE_PROJECT_TOUCH_INERTIA_EXPONENT = 1.32;
 
 const smoothEaseOut = (progress) => 1 - (1 - progress) ** 3;
-
-function getSnapCaptureDistance() {
-  return Math.min(
-    SNAP_CAPTURE_MAX,
-    Math.max(SNAP_CAPTURE_MIN, window.innerHeight * SNAP_CAPTURE_RATIO),
-  );
-}
 
 function isLenisPreventedEvent(event) {
   return event.composedPath().some(
     (node) => node instanceof HTMLElement && node.hasAttribute("data-lenis-prevent"),
+  );
+}
+
+function isFinalSectionEvent(event) {
+  return event.composedPath().some(
+    (node) => node instanceof HTMLElement && node.classList.contains("final-section"),
   );
 }
 
@@ -49,20 +50,26 @@ export default function useExperienceScrollController({
     if (!entered || !scene || !postExperience) return undefined;
 
     const root = document.documentElement;
-    const nativeIOSScroll = isIOSDevice();
+    const projectGallery = postExperience.querySelector(".horizontal-gallery-section");
+    const iosDevice = isIOSDevice();
+    const coarsePointer = window.matchMedia("(pointer: coarse)");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const previousScrollRestoration = window.history.scrollRestoration;
     let animationFrame = 0;
-    let snapFrame = 0;
-    let releaseTimer = 0;
+    let landingTimer = 0;
+    let routeResumeFrame = 0;
+    let routeSettleFrame = 0;
+    let landingTouchActive = false;
     let renderingPaused = false;
-    let disposed = false;
-    let previousScrollY = window.scrollY;
-    let phase = postExperience.getBoundingClientRect().top <= SNAP_TOP_TOLERANCE
+    let routeAnchor = null;
+    let routeScrollY = null;
+    let phase = postExperience.getBoundingClientRect().top <= POST_TOP_TOLERANCE
       ? "post"
       : "hero";
     let lenis;
 
-    root.classList.toggle("ios-native-scroll", nativeIOSScroll);
+    root.classList.toggle("ios-native-scroll", iosDevice);
+    window.history.scrollRestoration = "manual";
 
     const setPhase = (nextPhase) => {
       phase = nextPhase;
@@ -76,118 +83,135 @@ export default function useExperienceScrollController({
       experienceRef.current?.setRenderingPaused(paused);
     };
 
-    const clearReleaseTimer = () => {
-      window.clearTimeout(releaseTimer);
-      releaseTimer = 0;
+    const clearLandingTimer = () => {
+      window.clearTimeout(landingTimer);
+      landingTimer = 0;
     };
 
-    const releaseAfterCurrentGesture = () => {
-      clearReleaseTimer();
-      releaseTimer = window.setTimeout(() => {
-        if (disposed || phase !== "settling") return;
-        setPhase("post");
-      }, SNAP_INPUT_QUIET_MS);
+    const releaseLanding = (nextPhase = "post") => {
+      clearLandingTimer();
+      landingTouchActive = false;
+      lenis.reset();
+      setPhase(nextPhase);
     };
 
-    const finishSnap = () => {
-      if (disposed) return;
-      setRenderingPaused(true);
-      setPhase("settling");
-      releaseAfterCurrentGesture();
+    const scheduleLandingRelease = () => {
+      clearLandingTimer();
+      if (landingTouchActive) return;
+
+      landingTimer = window.setTimeout(() => {
+        if (phase === "landing") releaseLanding();
+      }, MOBILE_LANDING_QUIET_MS);
     };
 
-    const alignPostImmediately = (source, onComplete) => {
-      lenis.scrollTo(postExperience, {
-        immediate: true,
-        force: true,
-        userData: { source },
-        onComplete,
-      });
-    };
-
-    const performSnap = (forceImmediate = false) => {
-      snapFrame = 0;
-      if (disposed || phase !== "hero") return;
-
+    const landAtPostBoundary = (sourceEvent) => {
       const bounds = postExperience.getBoundingClientRect();
-      setPhase("snapping");
-      const distance = Math.abs(bounds.top);
-      const duration = Math.min(0.72, Math.max(0.42, distance / 900));
-      const immediate = forceImmediate || bounds.top < -SNAP_TOP_TOLERANCE;
-
-      lenis.scrollTo(postExperience, {
-        duration,
-        easing: smoothEaseOut,
-        immediate: reducedMotion.matches || immediate,
-        force: true,
-        lock: !reducedMotion.matches && !immediate,
-        userData: { source: "post-experience-snap" },
-        onComplete: finishSnap,
-      });
+      const boundaryScrollY = window.scrollY + bounds.top;
+      clearLandingTimer();
+      landingTouchActive = Boolean(
+        sourceEvent?.type.startsWith("touch") && sourceEvent.type !== "touchend",
+      );
+      setPhase("landing");
+      lenis.reset();
+      window.scrollTo({ top: boundaryScrollY, left: 0, behavior: "auto" });
+      if (!landingTouchActive) scheduleLandingRelease();
     };
 
-    const requestSnap = () => {
-      if (snapFrame || phase !== "hero") return;
-      snapFrame = window.requestAnimationFrame(() => performSnap());
+    const shouldGuardMobileLanding = () => (
+      window.innerWidth <= 700 || coarsePointer.matches
+    );
+
+    const isMobileProjectGalleryInRange = (deltaY = 0) => {
+      if (window.innerWidth > 700 || !projectGallery) return false;
+
+      const bounds = projectGallery.getBoundingClientRect();
+      const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
+      const projectedTop = bounds.top - deltaY;
+      const projectedBottom = bounds.bottom - deltaY;
+
+      return (
+        (bounds.top < viewportHeight && bounds.bottom > 0)
+        || (projectedTop < viewportHeight && projectedBottom > 0)
+      );
+    };
+
+    const applyMobileProjectScrollProfile = (scrollEvent) => {
+      const active = isMobileProjectGalleryInRange(scrollEvent.deltaY);
+
+      lenis.options.duration = active
+        ? MOBILE_PROJECT_SCROLL_DURATION
+        : LENIS_DURATION;
+      lenis.options.touchInertiaExponent = active
+        ? MOBILE_PROJECT_TOUCH_INERTIA_EXPONENT
+        : LENIS_TOUCH_INERTIA_EXPONENT;
+
+      if (!active) return;
+
+      scrollEvent.deltaX *= MOBILE_PROJECT_SCROLL_FACTOR;
+      scrollEvent.deltaY *= MOBILE_PROJECT_SCROLL_FACTOR;
     };
 
     const handleVirtualScroll = (scrollEvent) => {
       const { event } = scrollEvent;
-
-      if (isLenisPreventedEvent(event)) return true;
 
       if (phase === "returning") {
         if (event.cancelable) event.preventDefault();
         return false;
       }
 
-      // Safari owns touch inertia and viewport snapping on iOS.
-      if (nativeIOSScroll) return false;
+      if (phase === "landing") {
+        if (event.type === "touchend") {
+          releaseLanding();
+          return false;
+        }
 
-      if (phase === "snapping" || phase === "settling") {
+        if (scrollEvent.deltaY < 0) {
+          releaseLanding("hero");
+          return false;
+        }
+
+        if (event.type.startsWith("touch")) landingTouchActive = true;
         if (event.cancelable) event.preventDefault();
-        if (phase === "settling") releaseAfterCurrentGesture();
+        if (!landingTouchActive) scheduleLandingRelease();
         return false;
       }
 
       const bounds = postExperience.getBoundingClientRect();
       const scrollingDown = scrollEvent.deltaY > 0;
 
+      // The GLB hero follows the browser's native position. Lenis starts only
+      // after the next content has crossed the viewport naturally.
       if (phase === "hero") {
         const projectedTop = bounds.top - Math.max(0, scrollEvent.deltaY);
-        if (scrollingDown && projectedTop <= getSnapCaptureDistance()) {
+        if (
+          shouldGuardMobileLanding()
+          && scrollingDown
+          && projectedTop <= POST_TOP_TOLERANCE
+        ) {
           if (event.cancelable) event.preventDefault();
-          requestSnap();
+          landAtPostBoundary(event);
         }
-
-        // Hero transitions intentionally follow the browser's native scroll position.
         return false;
       }
 
-      if (scrollEvent.deltaY < 0) {
-        const postTop = window.scrollY + bounds.top;
-        const distanceToBoundary = postTop - lenis.targetScroll;
+      applyMobileProjectScrollProfile(scrollEvent);
 
-        if (distanceToBoundary >= -SNAP_TOP_TOLERANCE) {
-          setPhase("hero");
-          return false;
-        }
+      if (isFinalSectionEvent(event)) return false;
+      if (isLenisPreventedEvent(event)) return true;
 
-        // Keep Lenis from carrying wheel inertia into the GLB-controlled hero.
-        scrollEvent.deltaY = Math.max(scrollEvent.deltaY, distanceToBoundary);
-      }
-
-      return bounds.top < -SNAP_TOP_TOLERANCE || scrollingDown;
+      return bounds.top < -POST_TOP_TOLERANCE || scrollingDown;
     };
 
     lenis = new Lenis({
       autoRaf: true,
-      duration: 0.92,
+      duration: LENIS_DURATION,
       easing: smoothEaseOut,
-      smoothWheel: !reducedMotion.matches && !nativeIOSScroll,
-      syncTouch: false,
+      smoothWheel: !reducedMotion.matches,
+      syncTouch: !reducedMotion.matches,
+      syncTouchLerp: 0.075,
+      touchInertiaExponent: LENIS_TOUCH_INERTIA_EXPONENT,
       wheelMultiplier: 0.85,
-      touchMultiplier: 1,
+      touchMultiplier: 0.92,
       overscroll: true,
       virtualScroll: handleVirtualScroll,
     });
@@ -195,35 +219,32 @@ export default function useExperienceScrollController({
     const updateScrollState = () => {
       animationFrame = 0;
       const bounds = postExperience.getBoundingClientRect();
-      const currentScrollY = window.scrollY;
-      const scrollingDown = currentScrollY > previousScrollY + 0.5;
-      previousScrollY = currentScrollY;
+      setRenderingPaused(bounds.top <= POST_TOP_TOLERANCE);
 
-      setRenderingPaused(bounds.top <= SNAP_TOP_TOLERANCE);
+      if (phase === "returning") return;
 
-      if (nativeIOSScroll) {
-        if (phase === "hero" && bounds.top <= SNAP_TOP_TOLERANCE) {
+      if (phase === "landing") {
+        if (Math.abs(bounds.top) > POST_TOP_TOLERANCE) {
+          const boundaryScrollY = window.scrollY + bounds.top;
+          window.scrollTo({ top: boundaryScrollY, left: 0, behavior: "auto" });
+        }
+        if (!landingTouchActive) scheduleLandingRelease();
+        return;
+      }
+
+      if (phase === "hero" && bounds.top <= POST_TOP_TOLERANCE) {
+        if (shouldGuardMobileLanding()) {
+          landAtPostBoundary();
+        } else {
           setPhase("post");
-        } else if (phase === "post" && bounds.top > SNAP_RESET_DISTANCE) {
-          setPhase("hero");
+          lenis.resize();
         }
         return;
       }
 
-      if (phase === "settling" && Math.abs(bounds.top) > SNAP_TOP_TOLERANCE) {
-        alignPostImmediately("post-experience-settle");
-      }
-
-      if (phase === "post" && bounds.top > SNAP_RESET_DISTANCE) {
+      if (phase === "post" && bounds.top > POST_RESET_DISTANCE) {
         setPhase("hero");
-      }
-
-      if (
-        phase === "hero"
-        && scrollingDown
-        && bounds.top <= getSnapCaptureDistance()
-      ) {
-        performSnap(bounds.top < -SNAP_TOP_TOLERANCE);
+        lenis.reset();
       }
     };
 
@@ -232,73 +253,135 @@ export default function useExperienceScrollController({
       animationFrame = window.requestAnimationFrame(updateScrollState);
     };
 
-    const handleScroll = () => {
-      const bounds = postExperience.getBoundingClientRect();
+    const cancelRouteResume = () => {
+      window.cancelAnimationFrame(routeResumeFrame);
+      window.cancelAnimationFrame(routeSettleFrame);
+      routeResumeFrame = 0;
+      routeSettleFrame = 0;
+    };
 
-      if (nativeIOSScroll) {
-        scheduleUpdate();
-        return;
-      }
+    const getRouteViewportHeight = () => (
+      window.visualViewport?.height ?? window.innerHeight
+    );
 
-      if (phase === "snapping" && bounds.top < -SNAP_TOP_TOLERANCE) {
-        alignPostImmediately("post-experience-overshoot", finishSnap);
-        return;
-      }
+    const captureRouteAnchor = () => {
+      const viewportHeight = getRouteViewportHeight();
+      const referenceRatio = 0.5;
+      const referenceY = viewportHeight * referenceRatio;
+      const candidates = Array.from(postExperience.children)
+        .map((element) => ({
+          element,
+          bounds: element.getBoundingClientRect(),
+          position: window.getComputedStyle(element).position,
+        }))
+        .filter(({ bounds, position }) => (
+          bounds.height > 1
+          && position !== "fixed"
+          && position !== "absolute"
+        ));
 
-      if (phase === "settling" && Math.abs(bounds.top) > SNAP_TOP_TOLERANCE) {
-        alignPostImmediately("post-experience-settle");
-        releaseAfterCurrentGesture();
-        return;
-      }
+      const current = candidates.find(({ bounds }) => (
+        bounds.top <= referenceY && bounds.bottom > referenceY
+      ));
+      if (!current) return null;
 
-      const scrollingDown = window.scrollY > previousScrollY + 0.5;
-      if (phase === "hero" && scrollingDown && bounds.top < -SNAP_TOP_TOLERANCE) {
-        performSnap(true);
-        return;
-      }
+      return {
+        element: current.element,
+        progress: Math.min(
+          1,
+          Math.max(0, (referenceY - current.bounds.top) / current.bounds.height),
+        ),
+        referenceRatio,
+      };
+    };
 
+    const getRouteRestoreY = () => {
+      if (!routeAnchor?.element.isConnected) return routeScrollY;
+
+      const bounds = routeAnchor.element.getBoundingClientRect();
+      if (bounds.height <= 1) return routeScrollY;
+
+      const referenceY = getRouteViewportHeight() * routeAnchor.referenceRatio;
+      return (
+        window.scrollY
+        + bounds.top
+        + bounds.height * routeAnchor.progress
+        - referenceY
+      );
+    };
+
+    const restoreRouteScroll = () => {
+      if (routeScrollY === null) return;
+
+      const restoreY = getRouteRestoreY() ?? routeScrollY;
+      const scrollLimit = Math.max(
+        0,
+        document.documentElement.scrollHeight - window.innerHeight,
+      );
+      window.scrollTo({
+        top: Math.min(Math.max(0, restoreY), scrollLimit),
+        left: 0,
+        behavior: "auto",
+      });
+      lenis.resize();
+      lenis.reset();
       scheduleUpdate();
     };
 
     controllerRef.current = {
       prepareForHeroNavigation() {
-        clearReleaseTimer();
-        window.cancelAnimationFrame(snapFrame);
-        snapFrame = 0;
+        clearLandingTimer();
+        landingTouchActive = false;
         setPhase("returning");
-        if (!nativeIOSScroll) lenis.stop();
+        lenis.stop();
       },
       setSuspended(suspended) {
-        if (nativeIOSScroll) return;
-
         if (suspended) {
-          lenis.stop();
+          cancelRouteResume();
+          if (routeScrollY === null) {
+            routeScrollY = window.scrollY;
+            routeAnchor = captureRouteAnchor();
+          }
+          lenis.reset();
           return;
         }
 
         if (phase === "returning") return;
+
         lenis.start();
-        lenis.resize();
-        previousScrollY = window.scrollY;
-        scheduleUpdate();
+        restoreRouteScroll();
+
+        // Fixed route overlays can change the visual viewport and scrollbar.
+        // Measure once after they unmount, then restore again before input resumes.
+        routeResumeFrame = window.requestAnimationFrame(() => {
+          window.dispatchEvent(new Event("resize"));
+          restoreRouteScroll();
+          routeSettleFrame = window.requestAnimationFrame(() => {
+            restoreRouteScroll();
+            routeAnchor = null;
+            routeScrollY = null;
+            routeSettleFrame = 0;
+          });
+          routeResumeFrame = 0;
+        });
       },
     };
 
     setPhase(phase);
     updateScrollState();
-    if (suspendedRef.current) lenis.stop();
+    if (suspendedRef.current) controllerRef.current.setSuspended(true);
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
     window.addEventListener("resize", scheduleUpdate);
 
     return () => {
-      disposed = true;
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", scheduleUpdate);
       window.removeEventListener("resize", scheduleUpdate);
       window.cancelAnimationFrame(animationFrame);
-      window.cancelAnimationFrame(snapFrame);
-      clearReleaseTimer();
+      cancelRouteResume();
+      clearLandingTimer();
       lenis.destroy();
+      window.history.scrollRestoration = previousScrollRestoration;
       root.classList.remove("ios-native-scroll");
       delete postExperience.dataset.scrollPhase;
       scene.classList.remove("experience-rendering-paused");
@@ -307,7 +390,7 @@ export default function useExperienceScrollController({
     };
   }, [entered, experienceRef, postExperienceRef, sceneRef]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     controllerRef.current?.setSuspended(projectOpen);
   }, [projectOpen]);
 

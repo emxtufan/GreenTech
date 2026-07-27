@@ -1,24 +1,34 @@
-import React, { useEffect, useRef } from "react";
-import { ArrowUpRight } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { ArrowUpRight, Send } from "lucide-react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import "./SolarContactSection.css";
 
 const MODEL_URL = "/3d/space_sun.glb";
+const OFFICE_EMAIL = "office@greentechpro.ro";
 const MAP_URL = "https://maps.app.goo.gl/4B6ZvpVcABLVJL5DA";
 const LINKEDIN_URL = "https://ro.linkedin.com/company/greentech-professionals";
 const FACEBOOK_URL = "https://www.facebook.com/greentechprofessionals";
+const SERVICES_URL = "https://greentechpro.ro/services/";
+const CAREERS_URL = "https://greentechpro.ro/career/";
+const FAQ_URL = "https://greentechpro.ro/faqs/";
+const PRESENTATION_RO_URL = "https://greentechpro.ro/prezentare-ro/";
+const PRESENTATION_EN_URL = "https://greentechpro.ro/prezentare-en/";
+const PRIVACY_URL = "https://greentechpro.ro/privacy-policy/";
+const TERMS_URL = "https://greentechpro.ro/terms-conditions/";
 const MODEL_SOURCE_URL =
   "https://sketchfab.com/3d-models/space-sun-9dc16d37e8224fe9923f68de0149fcab";
 
 const RADAR_RING_PERIOD = 2.45;
-const RADAR_RING_SPREAD = 1.05;
+const RADAR_RING_RADIUS = 0.505;
+const RADAR_RING_SPREAD = 0.4;
 
 const SUN_IDLE_SPIN = 0.055;
 const SUN_SCROLL_SPIN_BOOST = 0.95;
 const SUN_SCROLL_REFERENCE_SPEED = 900;
 const SUN_SPIN_ATTACK = 9;
 const SUN_SPIN_RELEASE = 1.6;
+const SUN_DESKTOP_SCALE = 0.7;
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
@@ -131,9 +141,43 @@ function createCoronaMaterial({ color = 0xff8a24, rimPower = 4.8 } = {}) {
   });
 }
 
-function SolarContactSection({ active }) {
+function SolarContactSection({ active, onShowAllProjects }) {
   const sectionRef = useRef(null);
   const mountRef = useRef(null);
+  const [formPrepared, setFormPrepared] = useState(false);
+
+  const handleContactSubmit = (event) => {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    if (!form.reportValidity()) return;
+
+    const data = new FormData(form);
+    const firstName = String(data.get("firstName") ?? "").trim();
+    const lastName = String(data.get("lastName") ?? "").trim();
+    const phone = String(data.get("phone") ?? "").trim();
+    const message = String(data.get("message") ?? "").trim();
+    const subject = encodeURIComponent(
+      `Project inquiry - ${firstName} ${lastName}`,
+    );
+    const body = encodeURIComponent(
+      [
+        "Hello GreenTech Professionals,",
+        "",
+        `First name: ${firstName}`,
+        `Last name: ${lastName}`,
+        `Phone: ${phone}`,
+        "",
+        "Project details:",
+        message,
+        "",
+        "GDPR consent: Accepted",
+      ].join("\n"),
+    );
+
+    setFormPrepared(true);
+    window.location.href = `mailto:${OFFICE_EMAIL}?subject=${subject}&body=${body}`;
+  };
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -183,8 +227,8 @@ function SolarContactSection({ active }) {
         2 * Math.tan(THREE.MathUtils.degToRad(camera.fov * 0.5)) * distance;
       const horizontalView = verticalView * camera.aspect;
       const diameter = mobile
-        ? Math.min(horizontalView * 1.08, verticalView * 0.54)
-        : Math.min(horizontalView * 0.58, verticalView * 0.78);
+        ? Math.min(horizontalView * 0.68, verticalView * 0.34)
+        : Math.min(horizontalView * 0.58, verticalView * 0.78) * SUN_DESKTOP_SCALE;
 
       sunGroup.scale.setScalar(diameter);
       sunGroup.position.set(
@@ -297,13 +341,13 @@ function SolarContactSection({ active }) {
       sunGroup.visible = false;
       scene.add(sunGroup);
 
-      radarGeometry = new THREE.SphereGeometry(0.54, 56, 36);
+      radarGeometry = new THREE.SphereGeometry(RADAR_RING_RADIUS, 48, 30);
 
       coronaShell = new THREE.Mesh(radarGeometry, createCoronaMaterial());
       coronaShell.renderOrder = -12;
       sunGroup.add(coronaShell);
 
-      const ringCount = (mount.clientWidth || window.innerWidth) <= 700 ? 4 : 6;
+      const ringCount = (mount.clientWidth || window.innerWidth) <= 700 ? 7 : 10;
       for (let index = 0; index < ringCount; index += 1) {
         const shell = new THREE.Mesh(
           radarGeometry,
@@ -457,7 +501,6 @@ function SolarContactSection({ active }) {
         ref={mountRef}
         aria-hidden="true"
       />
-      <div className="solar-contact-shade" aria-hidden="true" />
 
       <div className="solar-contact-inner">
         <header className="solar-contact-intro">
@@ -471,8 +514,94 @@ function SolarContactSection({ active }) {
 
         <div className="solar-contact-visual-space" aria-hidden="true" />
 
+        <form className="solar-contact-form" onSubmit={handleContactSubmit}>
+          <div className="solar-contact-form-heading">
+            <span>Project inquiry</span>
+            <h3>Let's discuss your project.</h3>
+            <p>Share the essentials and our team will get back to you.</p>
+          </div>
+
+          <div className="solar-contact-form-fields">
+            <div className="solar-contact-field">
+              <label htmlFor="contact-first-name">First name</label>
+              <input
+                id="contact-first-name"
+                name="firstName"
+                type="text"
+                autoComplete="given-name"
+                required
+              />
+            </div>
+
+            <div className="solar-contact-field">
+              <label htmlFor="contact-last-name">Last name</label>
+              <input
+                id="contact-last-name"
+                name="lastName"
+                type="text"
+                autoComplete="family-name"
+                required
+              />
+            </div>
+
+            <div className="solar-contact-field solar-contact-field-phone">
+              <label htmlFor="contact-phone">Phone number</label>
+              <input
+                id="contact-phone"
+                name="phone"
+                type="tel"
+                inputMode="tel"
+                autoComplete="tel"
+                pattern="[0-9+() .-]{7,24}"
+                minLength={7}
+                maxLength={24}
+                required
+              />
+            </div>
+
+            <div className="solar-contact-field solar-contact-field-message">
+              <label htmlFor="contact-message">Message</label>
+              <textarea
+                id="contact-message"
+                name="message"
+                rows={4}
+                maxLength={1200}
+                required
+              />
+            </div>
+
+            <div className="solar-contact-form-actions">
+              <label className="solar-contact-consent">
+                <input name="gdprConsent" type="checkbox" required />
+                <span className="solar-contact-consent-box" aria-hidden="true" />
+                <span>
+                  I agree to the processing of my personal data so GreenTech
+                  Professionals can respond to this inquiry, as described in the{" "}
+                  <a href={PRIVACY_URL} target="_blank" rel="noreferrer">
+                    privacy policy
+                  </a>
+                  .
+                </span>
+              </label>
+
+              <button className="solar-contact-submit" type="submit">
+                <span>Send request</span>
+                <Send size={18} strokeWidth={1.8} aria-hidden="true" />
+              </button>
+            </div>
+
+            <p
+              className={`solar-contact-form-status ${formPrepared ? "visible" : ""}`}
+              role="status"
+              aria-live="polite"
+            >
+              Your request is ready in your email application.
+            </p>
+          </div>
+        </form>
+
         <div className="solar-contact-links">
-          <a className="solar-contact-link" href="mailto:office@greentechpro.ro">
+          <a className="solar-contact-link" href={`mailto:${OFFICE_EMAIL}`}>
             <span>Email us</span>
             <strong>office@greentechpro.ro</strong>
             <i aria-hidden="true">
@@ -497,20 +626,74 @@ function SolarContactSection({ active }) {
         </div>
 
         <footer className="solar-contact-footer">
-          <img
-            src="/original/logo-alb.png.webp"
-            alt="GreenTech Professionals"
-          />
-          <nav aria-label="Social links">
-            <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">
-              LinkedIn
-            </a>
-            <a href={FACEBOOK_URL} target="_blank" rel="noreferrer">
-              Facebook
-            </a>
-          </nav>
-          <div className="solar-contact-legal">
-            <span>© {new Date().getFullYear()} GreenTech Professionals SRL</span>
+          <div className="solar-contact-footer-main">
+            <div className="solar-contact-footer-brand">
+              <img
+                src="/original/logo-alb.png.webp"
+                alt="GreenTech Professionals"
+              />
+              <p>
+                Electrical, mechanical and construction capability for renewable
+                energy projects across Europe.
+              </p>
+            </div>
+
+            <div className="solar-contact-footer-groups">
+              <section>
+                <h3>Explore</h3>
+                <nav aria-label="Explore GreenTech Professionals">
+                  <button type="button" onClick={onShowAllProjects}>
+                    All projects
+                  </button>
+                  <a href="#journal">Journal</a>
+                  <a href={SERVICES_URL} target="_blank" rel="noreferrer">
+                    Services
+                  </a>
+                  <a href={CAREERS_URL} target="_blank" rel="noreferrer">
+                    Careers
+                  </a>
+                </nav>
+              </section>
+
+              <section>
+                <h3>Company</h3>
+                <nav aria-label="Company resources">
+                  <a href={FAQ_URL} target="_blank" rel="noreferrer">
+                    FAQs &amp; credentials
+                  </a>
+                  <a href={PRESENTATION_RO_URL} target="_blank" rel="noreferrer">
+                    Presentation RO
+                  </a>
+                  <a href={PRESENTATION_EN_URL} target="_blank" rel="noreferrer">
+                    Presentation EN
+                  </a>
+                </nav>
+              </section>
+
+              <section>
+                <h3>Legal</h3>
+                <nav aria-label="Legal links">
+                  <a href={PRIVACY_URL} target="_blank" rel="noreferrer">
+                    Privacy policy
+                  </a>
+                  <a href={TERMS_URL} target="_blank" rel="noreferrer">
+                    Terms &amp; conditions
+                  </a>
+                </nav>
+              </section>
+            </div>
+          </div>
+
+          <div className="solar-contact-footer-bottom">
+            <span>&copy; {new Date().getFullYear()} GreenTech Professionals SRL</span>
+            <nav aria-label="Social links">
+              <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">
+                LinkedIn
+              </a>
+              <a href={FACEBOOK_URL} target="_blank" rel="noreferrer">
+                Facebook
+              </a>
+            </nav>
             <a href={MODEL_SOURCE_URL} target="_blank" rel="noreferrer">
               Sun model: Wr_titan, CC BY 4.0
             </a>

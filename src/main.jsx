@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { BadgeCheck, BadgeDollarSign, SolarPanel, Zap } from "lucide-react";
-import { SiNextdotjs, SiReact, SiTailwindcss, SiTypescript } from "react-icons/si";
 import {
   EnpowerExperience,
   SCENE_COUNT,
@@ -17,11 +16,15 @@ import ScrollElectricalInspection from "./ScrollElectricalInspection.jsx";
 import ScrollConstructionServices from "./ScrollConstructionServices.jsx";
 import ScrollDataCenterBuild from "./ScrollDataCenterBuild.jsx";
 import SolarContactSection from "./SolarContactSection.jsx";
+import CompanyProofSection from "./CompanyProofSection.jsx";
+import BlogSection, { blogPosts } from "./BlogSection.jsx";
+import BlogPostPage from "./BlogPostPage.jsx";
 import ProjectDetailPage from "./ProjectDetailPage.jsx";
+import AllProjectsPage from "./AllProjectsPage.jsx";
 import useExperienceScrollController from "./useExperienceScrollController.js";
 import horizontalGalleryData from "./data/horizontal-gallery.json";
 import processCardsData from "./data/process-cards.json";
-import "./styles.css?=1";
+import "./styles.css?=12";
 
 const sections = [
   {
@@ -88,17 +91,47 @@ const impactStats = [
 ];
 
 const clientLogos = [
-  { node: <SiReact />, title: "React", href: "https://react.dev" },
-  { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
   {
-    node: <SiTypescript />,
-    title: "TypeScript",
-    href: "https://www.typescriptlang.org",
+    src: "/clients/aj-brand.png",
+    alt: "AJ Brand",
+    title: "AJ Brand",
+    href: "https://ajbrand.energy/",
   },
   {
-    node: <SiTailwindcss />,
-    title: "Tailwind CSS",
-    href: "https://tailwindcss.com",
+    src: "/clients/bester.png",
+    alt: "Bester",
+    title: "Bester",
+    href: "https://bester.energy/",
+  },
+  {
+    src: "/clients/caf.png",
+    alt: "CAF",
+    title: "CAF",
+    href: "https://www.cafmobility.com/soluciones/sistemas-integrales/",
+  },
+  {
+    src: "/clients/circet.png",
+    alt: "Circet",
+    title: "Circet",
+    href: "https://www.circet.com/",
+  },
+  {
+    src: "/clients/lantania.jpg",
+    alt: "Lantania",
+    title: "Lantania",
+    href: "https://www.lantania.com/en/sustainability/",
+  },
+  {
+    src: "/clients/psi-global.png",
+    alt: "PSI Global Recruitment",
+    title: "PSI Global Recruitment",
+    href: "https://www.psiglobalrecruitment.com/",
+  },
+  {
+    src: "/clients/solarig.png",
+    alt: "Solarig",
+    title: "Solarig",
+    href: "https://solarig.com/en/home-en/",
   },
 ];
 
@@ -417,18 +450,17 @@ function FinalSection({ entered }) {
 
         <section className="clients-showcase" aria-labelledby="clients-title">
           <h2 id="clients-title">Our Clients</h2>
-           <p>
-            GreenTech Professionals is an electrical and construction company with
-            experience in electrical and mechanical works in the photovoltaic field.
+          <p>
+            Selected client relationships across energy, mobility and infrastructure.
           </p>
           <div className="clients-loop">
             <LogoLoop
               logos={clientLogos}
-              speed={70}
+              speed={54}
               direction="left"
-              logoHeight={42}
-              gap={72}
-              hoverSpeed={0}
+              logoHeight={58}
+              gap={28}
+              hoverSpeed={12}
               scaleOnHover
               fadeOut
               fadeOutColor="#000000"
@@ -545,7 +577,7 @@ function Preloader({ loaded, ready }) {
   );
 }
 
-function App({ onOpenProject, projectOpen }) {
+function App({ onOpenProject, onShowAllProjects, onOpenPost, routeOpen }) {
   const [loaded, setLoaded] = useState(0);
   const [ready, setReady] = useState(false);
   const [entered, setEntered] = useState(false);
@@ -575,7 +607,7 @@ function App({ onOpenProject, projectOpen }) {
 
   const prepareForHeroNavigation = useExperienceScrollController({
     entered,
-    projectOpen,
+    projectOpen: routeOpen,
     sceneRef,
     postExperienceRef,
     experienceRef,
@@ -594,8 +626,8 @@ function App({ onOpenProject, projectOpen }) {
     <main
       className={`page ${entered ? "entered" : ""}`}
       id="home"
-      inert={projectOpen}
-      aria-hidden={projectOpen ? "true" : undefined}
+      inert={routeOpen}
+      aria-hidden={routeOpen ? "true" : undefined}
     >
       <div className="experience-scroll">
         <div
@@ -629,19 +661,37 @@ function App({ onOpenProject, projectOpen }) {
           entered={entered}
           items={horizontalGalleryItems}
           onProjectOpen={onOpenProject}
+          onShowAllProjects={onShowAllProjects}
         />
+        <CompanyProofSection active={entered} />
         <ScrollSolarAssembly active={entered} />
         <ScrollElectricalInspection active={entered} />
         <ScrollConstructionServices active={entered} />
         <ScrollDataCenterBuild active={entered} />
-        <SolarContactSection active={entered} />
+        <BlogSection
+          active={entered}
+          onPostOpen={onOpenPost}
+        />
+        <SolarContactSection
+          active={entered}
+          onShowAllProjects={onShowAllProjects}
+        />
       </div>
     </main>
   );
 }
 
-function getProjectIdFromUrl() {
-  return new URLSearchParams(window.location.search).get("project");
+function getSiteRouteFromUrl() {
+  const searchParams = new URLSearchParams(window.location.search);
+  const postId = searchParams.get("post");
+  const projectId = postId ? null : searchParams.get("project");
+
+  return {
+    projectId,
+    postId,
+    projectsIndexOpen:
+      !projectId && !postId && searchParams.get("projects") === "all",
+  };
 }
 
 function getProjectUrl(projectId) {
@@ -651,11 +701,26 @@ function getProjectUrl(projectId) {
   return `${url.pathname}${url.search}${url.hash}`;
 }
 
+function getProjectsIndexUrl() {
+  const url = new URL(window.location.href);
+  url.search = "";
+  url.searchParams.set("projects", "all");
+  return `${url.pathname}${url.search}${url.hash}`;
+}
+
+function getBlogPostUrl(postId) {
+  const url = new URL(window.location.href);
+  url.search = "";
+  url.searchParams.set("post", postId);
+  return `${url.pathname}${url.search}${url.hash}`;
+}
+
 function Root() {
-  const [projectId, setProjectId] = useState(getProjectIdFromUrl);
+  const [routeState, setRouteState] = useState(getSiteRouteFromUrl);
+  const { projectId, postId, projectsIndexOpen } = routeState;
 
   useEffect(() => {
-    const handlePopState = () => setProjectId(getProjectIdFromUrl());
+    const handlePopState = () => setRouteState(getSiteRouteFromUrl());
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
@@ -666,7 +731,11 @@ function Root() {
       "",
       getProjectUrl(nextProjectId),
     );
-    setProjectId(nextProjectId);
+    setRouteState({
+      projectId: nextProjectId,
+      postId: null,
+      projectsIndexOpen: false,
+    });
   }, []);
 
   const changeProject = useCallback((nextProjectId) => {
@@ -675,7 +744,33 @@ function Root() {
       "",
       getProjectUrl(nextProjectId),
     );
-    setProjectId(nextProjectId);
+    setRouteState({
+      projectId: nextProjectId,
+      postId: null,
+      projectsIndexOpen: false,
+    });
+  }, []);
+
+  const openProjectsIndex = useCallback(() => {
+    window.history.pushState(
+      { projectsIndex: true },
+      "",
+      getProjectsIndexUrl(),
+    );
+    setRouteState({ projectId: null, postId: null, projectsIndexOpen: true });
+  }, []);
+
+  const openBlogPost = useCallback((nextPostId) => {
+    window.history.pushState(
+      { blogPostOverlay: true },
+      "",
+      getBlogPostUrl(nextPostId),
+    );
+    setRouteState({
+      projectId: null,
+      postId: nextPostId,
+      projectsIndexOpen: false,
+    });
   }, []);
 
   const closeProject = useCallback(() => {
@@ -687,7 +782,31 @@ function Root() {
     const url = new URL(window.location.href);
     url.searchParams.delete("project");
     window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
-    setProjectId(null);
+    setRouteState({ projectId: null, postId: null, projectsIndexOpen: false });
+  }, []);
+
+  const closeProjectsIndex = useCallback(() => {
+    if (window.history.state?.projectsIndex) {
+      window.history.back();
+      return;
+    }
+
+    const url = new URL(window.location.href);
+    url.searchParams.delete("projects");
+    window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+    setRouteState({ projectId: null, postId: null, projectsIndexOpen: false });
+  }, []);
+
+  const closeBlogPost = useCallback(() => {
+    if (window.history.state?.blogPostOverlay) {
+      window.history.back();
+      return;
+    }
+
+    const url = new URL(window.location.href);
+    url.searchParams.delete("post");
+    window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+    setRouteState({ projectId: null, postId: null, projectsIndexOpen: false });
   }, []);
 
   const projectIndex = horizontalGalleryItems.findIndex((item) => item.id === projectId);
@@ -695,18 +814,35 @@ function Root() {
   const nextProject = project
     ? horizontalGalleryItems[(projectIndex + 1) % horizontalGalleryItems.length]
     : null;
+  const blogPost = blogPosts.find((post) => post.id === postId) ?? null;
 
   return (
     <>
       <App
         onOpenProject={openProject}
-        projectOpen={Boolean(project)}
+        onShowAllProjects={openProjectsIndex}
+        onOpenPost={openBlogPost}
+        routeOpen={Boolean(project) || Boolean(blogPost) || projectsIndexOpen}
       />
+      {projectsIndexOpen && (
+        <AllProjectsPage
+          projects={horizontalGalleryItems}
+          onClose={closeProjectsIndex}
+          onProjectOpen={openProject}
+        />
+      )}
       {project && (
         <ProjectDetailPage
           project={project}
           nextProject={nextProject}
           onClose={closeProject}
+          onProjectOpen={changeProject}
+        />
+      )}
+      {blogPost && (
+        <BlogPostPage
+          post={blogPost}
+          onClose={closeBlogPost}
           onProjectOpen={changeProject}
         />
       )}
