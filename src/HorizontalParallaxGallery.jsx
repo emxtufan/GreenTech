@@ -1,5 +1,6 @@
 import React, { useLayoutEffect, useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
+import useSection from "./hooks/useSection.js";
 import "./HorizontalParallaxGallery.css";
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
@@ -10,6 +11,7 @@ function HorizontalParallaxGallery({
   onProjectOpen,
   onShowAllProjects,
 }) {
+  const text = useSection("projects");
   const sectionRef = useRef(null);
   const wrapperRef = useRef(null);
   const trackRef = useRef(null);
@@ -227,11 +229,13 @@ function HorizontalParallaxGallery({
     >
       <div className="horizontal-gallery-sticky">
         <header className="horizontal-gallery-heading">
-          <span>Portfolio</span>
-          <h2 id="horizontal-gallery-title">Projects in Motion</h2>
+          <span>{text("eyebrow", "Portfolio")}</span>
+          <h2 id="horizontal-gallery-title">{text("title", "Projects in Motion")}</h2>
           <p>
-            A compact view of how GreenTech Professionals moves a photovoltaic
-            project from technical decisions to reliable field execution.
+            {text(
+              "description",
+              "A compact view of how GreenTech Professionals moves a photovoltaic project from technical decisions to reliable field execution.",
+            )}
           </p>
         </header>
 

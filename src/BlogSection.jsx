@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, CalendarDays, Clock3 } from "lucide-react";
-import blogPostsData from "./data/blog-posts.json";
+import { selectBlogPosts } from "./lib/siteContent.js";
+import useSection from "./hooks/useSection.js";
 import "./BlogSection.css";
 
-export const blogPosts = blogPostsData
-  .filter((post) => post.enabled !== false)
-  .sort((firstPost, secondPost) => firstPost.order - secondPost.order);
+// Baseline list for first paint; the live document arrives via useSiteContent.
+export const blogPosts = selectBlogPosts();
 
 function PostMeta({ post }) {
   return (
@@ -28,6 +28,7 @@ function PostMeta({ post }) {
 }
 
 function BlogSection({ active, onPostOpen }) {
+  const text = useSection("blog");
   const sectionRef = useRef(null);
   const [inView, setInView] = useState(false);
   const featuredPost = useMemo(
@@ -65,12 +66,16 @@ function BlogSection({ active, onPostOpen }) {
     >
       <div className="blog-section-inner">
         <header className="blog-section-header blog-reveal">
-          <span>The GreenTech Journal</span>
+          <span>{text("eyebrow", "The GreenTech Journal")}</span>
           <div>
-            <h2 id="blog-section-title">Field notes, team news and opportunities.</h2>
+            <h2 id="blog-section-title">
+              {text("title", "Field notes, team news and opportunities.")}
+            </h2>
             <p>
-              Project updates, technical stories, company news and careers in one
-              dedicated editorial space.
+              {text(
+                "description",
+                "Project updates, technical stories, company news and careers in one dedicated editorial space.",
+              )}
             </p>
           </div>
         </header>

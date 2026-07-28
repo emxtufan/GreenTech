@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import ServiceSectionOverlay from "./ServiceSectionOverlay.jsx";
+import useSection from "./hooks/useSection.js";
 import "./ScrollSolarAssembly.css";
 
 const MODEL_URL = "/3d/futuristic_solar_power_module%20(1).glb";
@@ -65,6 +66,7 @@ function expandByAnimatedModel(targetBox, root) {
 }
 
 function ScrollSolarAssembly({ active }) {
+  const text = useSection("photovoltaic-service");
   const sectionRef = useRef(null);
   const mountRef = useRef(null);
 
@@ -463,10 +465,10 @@ function ScrollSolarAssembly({ active }) {
           aria-hidden="true"
         />
         <ServiceSectionOverlay
-          index="01 / Service"
+          index={text("eyebrow", "01 / Service")}
           titleId="service-solar-title"
-          title="Construction of Photovoltaic Parks"
-          description="Utility-scale solar delivered end to end — feasibility and design, mounting structures, cabling and inverters, through to commissioning and grid connection."
+          title={text("title", "Construction of Photovoltaic Parks")}
+          description={text("description", "Utility-scale solar delivered end to end — feasibility and design, mounting structures, cabling and inverters, through to commissioning and grid connection.")}
         />
       </div>
     </section>

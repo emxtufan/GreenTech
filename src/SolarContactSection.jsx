@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Send } from "lucide-react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import useSection from "./hooks/useSection.js";
 import "./SolarContactSection.css";
 
 const MODEL_URL = "/3d/space_sun.glb";
@@ -142,6 +143,7 @@ function createCoronaMaterial({ color = 0xff8a24, rimPower = 4.8 } = {}) {
 }
 
 function SolarContactSection({ active, onShowAllProjects }) {
+  const text = useSection("contact");
   const sectionRef = useRef(null);
   const mountRef = useRef(null);
   const [formPrepared, setFormPrepared] = useState(false);
@@ -504,11 +506,15 @@ function SolarContactSection({ active, onShowAllProjects }) {
 
       <div className="solar-contact-inner">
         <header className="solar-contact-intro">
-          <span>Contact / Solar energy</span>
-          <h2 id="solar-contact-title">Your next solar project starts here.</h2>
+          <span>{text("eyebrow", "Contact / Solar energy")}</span>
+          <h2 id="solar-contact-title">
+            {text("title", "Your next solar project starts here.")}
+          </h2>
           <p>
-            Tell us where you are building and what needs to be delivered. Our team
-            is ready to discuss the next step.
+            {text(
+              "description",
+              "Tell us where you are building and what needs to be delivered. Our team is ready to discuss the next step.",
+            )}
           </p>
         </header>
 

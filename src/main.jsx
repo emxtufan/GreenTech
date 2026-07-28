@@ -23,118 +23,22 @@ import ProjectDetailPage from "./ProjectDetailPage.jsx";
 import AllProjectsPage from "./AllProjectsPage.jsx";
 import useExperienceScrollController from "./useExperienceScrollController.js";
 import { TOUCH_VISUAL_EASE, usesNativeTouchScroll } from "./scrollMotion.js";
-import horizontalGalleryData from "./data/horizontal-gallery.json";
-import processCardsData from "./data/process-cards.json";
+import {
+  selectClientLogos,
+  selectGalleryItems,
+  selectHeroCards,
+  selectImpactStats,
+  selectProcessCards,
+} from "./lib/siteContent.js";
+import useSiteContent from "./hooks/useSiteContent.js";
+import useSection from "./hooks/useSection.js";
 import "./styles.css?=12";
 
-const sections = [
-  {
-    key: "solar",
-    sourceIndex: 0,
-    title: "Construction of Photovoltaic Parks",
-    paragraphs: [
-      "Solar is an abundant and cheap source of energy in South Africa. For customers with existing on-site solar panels, the addition of wheeled solar can boost renewable energy penetration by up to 50%, without the need for capital expenditure.",
-    ],
-  },
-  {
-    key: "wind",
-    sourceIndex: 1,
-    title: "Construction of Wind Parks",
-    paragraphs: [
-      "Wind power, an intermittent resource with high potential in South Africa, generates power primarily during the mornings and evenings, perfectly complementing solar. A blend of off-site solar and wind energy can potentially elevate renewable energy penetration by an additional 15-20%.",
-    ],
-  },
-  {
-    key: "transmission",
-    sourceIndex: 3,
-    title: "Solar PV Systems",
-    paragraphs: [
-      "Enpower Trading leverages the Eskom and Municipal networks to provide customers with a choice of energy source.",
-      "As the market evolves, Enpower Trading will collaborate with municipalities, regulators and other bodies to ensure municipalities remain revenue surplus neutral, and that we collectively work toward the goals of South Africa's Just Energy Transition: decarbonisation, affordability and security of supply.",
-    ],
-  },
-  {
-    key: "aggregation",
-    sourceIndex: 4,
-    title: "Data Center Construction",
-    paragraphs: [
-      "South African customers have limited access to Renewable Energy (RE) and can only supply a small percentage of their total energy needs through on-site generation. On-site generation requires high capital expenditure, and can only power one location.",
-      "Enpower Trading offers customers access to a wide range of energy sources that collectively provide up to 100% renewable energy penetration rate, across multiple sites, reducing reliance on non-renewable energy ('brown power').",
-      "Customers now have the ability to choose the source of their energy.",
-    ],
-  },
-  {
-    key: "customer",
-    sourceIndex: 5,
-    title: "Maintenance",
-    paragraphs: [
-      "Maximize your savings with our competitive tariffs and journey towards a net-zero future with the guidance of our Team. Enjoy the freedom of no longer being reliant on a single utility and benefit from fixed escalations, flexible contract periods (5, 10, or 20 years) as well as Renewable Energy Certificates (RECs) which assist you on your journey to net-zero.",
-    ],
-    footnote: "Between 2007 and 2022 the Eskom Tariff increased by 653%.",
-  },
-  {
-    key: "future",
-    sourceIndex: 6,
-    title: "Construction Services, Inspections & Testing",
-    paragraphs: [
-      "The evolved future trading market will transform the way in which we purchase and consume energy. The future liberalized market will see the unbundling of the previous vertically integrated national utility, allowing for a more competitive energy market and greener future.",
-    ],
-  },
-];
+// Icons cannot live in JSON, so content stores a name and this map resolves it.
+const impactStatIcons = { Zap, SolarPanel, BadgeCheck, BadgeDollarSign };
 
+// Which hero cards render the graph treatment — a UI behaviour, not content.
 const graphSections = new Set([0, 1, 4, 5]);
-
-const impactStats = [
-  { value: "700 MW+", label: "Total Installed Power", Icon: Zap },
-  { value: "1.3M+", label: "Solar Panels Installed", Icon: SolarPanel },
-  { value: "550+", label: "Specialized Professionals", Icon: BadgeCheck },
-  { value: "\u20AC 12.5M", label: "Total Invoiced", Icon: BadgeDollarSign },
-];
-
-const clientLogos = [
-  {
-    src: "/clients/aj-brand.png",
-    alt: "AJ Brand",
-    title: "AJ Brand",
-    href: "https://ajbrand.energy/",
-  },
-  {
-    src: "/clients/bester.png",
-    alt: "Bester",
-    title: "Bester",
-    href: "https://bester.energy/",
-  },
-  {
-    src: "/clients/caf.png",
-    alt: "CAF",
-    title: "CAF",
-    href: "https://www.cafmobility.com/soluciones/sistemas-integrales/",
-  },
-  {
-    src: "/clients/circet.png",
-    alt: "Circet",
-    title: "Circet",
-    href: "https://www.circet.com/",
-  },
-  {
-    src: "/clients/lantania.jpg",
-    alt: "Lantania",
-    title: "Lantania",
-    href: "https://www.lantania.com/en/sustainability/",
-  },
-  {
-    src: "/clients/psi-global.png",
-    alt: "PSI Global Recruitment",
-    title: "PSI Global Recruitment",
-    href: "https://www.psiglobalrecruitment.com/",
-  },
-  {
-    src: "/clients/solarig.png",
-    alt: "Solarig",
-    title: "Solarig",
-    href: "https://solarig.com/en/home-en/",
-  },
-];
 
 const processCardThemeClasses = {
   design: "project-stack-card-design",
@@ -142,13 +46,10 @@ const processCardThemeClasses = {
   care: "project-stack-card-care",
 };
 
-const processCards = processCardsData
-  .filter((card) => card.enabled !== false)
-  .sort((firstCard, secondCard) => firstCard.order - secondCard.order);
+// Baselines for first paint; live values come from useSiteContent below.
+const processCards = selectProcessCards();
 
-const horizontalGalleryItems = horizontalGalleryData
-  .filter((item) => item.enabled !== false)
-  .sort((firstItem, secondItem) => firstItem.order - secondItem.order);
+const horizontalGalleryItems = selectGalleryItems();
 
 const heroSurfaces = [
   "#fff8e8",
@@ -282,19 +183,28 @@ function Navigation({ highQuality, setHighQuality, dark, setDark, backToIntro, e
 }
 
 function Card({ active, entered }) {
+  const sections = selectHeroCards(useSiteContent());
   const section = sections[active] ?? sections[0];
-  const hasGraph = graphSections.has(section.sourceIndex);
   const [expandedSectionKey, setExpandedSectionKey] = useState(null);
-  const expanded = expandedSectionKey === section.key;
 
   useEffect(() => {
     if (!entered) setExpandedSectionKey(null);
   }, [entered]);
 
+  if (!section) return null;
+
+  const hasGraph = graphSections.has(section.sourceIndex);
+  const expanded = expandedSectionKey === section.id;
+  // Body copy is one field in the admin; blank lines separate paragraphs.
+  const paragraphs = String(section.body ?? "")
+    .split(/\n{2,}/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
+
   const toggleExpanded = (event) => {
     event.stopPropagation();
     setExpandedSectionKey((currentKey) => (
-      currentKey === section.key ? null : section.key
+      currentKey === section.id ? null : section.id
     ));
   };
 
@@ -309,7 +219,7 @@ function Card({ active, entered }) {
         <span className="card-range">[{active + 1}]</span>
       </header>
       <div className="card-info">
-        {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        {paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         {section.footnote && <p className="card-footnote">{section.footnote}</p>}
         
         {active === sections.length - 1 && (
@@ -330,16 +240,23 @@ function Card({ active, entered }) {
 }
 
 function Intro({ entered, ready, enter }) {
+  const text = useSection("intro-hero");
+
   return (
     <section className={`intro ${entered ? "hidden" : ""}`} id="introUi">
       <div className="intro-content">
-        <h1 className="intro-title">Welcome to GreenTech Professionals</h1>
+        <h1 className="intro-title">
+          {text("title", "Welcome to GreenTech Professionals")}
+        </h1>
         <p className="intro-copy">
-          Electrical, mechanical and photovoltaic solutions built for a cleaner, more efficient future.
+          {text(
+            "description",
+            "Electrical, mechanical and photovoltaic solutions built for a cleaner, more efficient future.",
+          )}
         </p>
       </div>
       <button className="intro-cta" type="button" onClick={enter} disabled={!ready}>
-        <span>Click to explore</span>
+        <span>{text("action", "Click to explore")}</span>
         <span className="intro-cta-arrow" aria-hidden="true">{"\u2192"}</span>
       </button>
     </section>
@@ -347,6 +264,14 @@ function Intro({ entered, ready, enter }) {
 }
 
 function FinalSection({ entered }) {
+  const content = useSiteContent();
+  const clientsText = useSection("clients");
+  const impactStats = selectImpactStats(content);
+  // LogoLoop expects `src`; the content file stores images under `image`.
+  const clientLogos = selectClientLogos(content).map((logo) => ({
+    ...logo,
+    src: logo.image ?? logo.src,
+  }));
   const sectionRef = useRef(null);
   const videoRef = useRef(null);
 
@@ -422,15 +347,19 @@ function FinalSection({ entered }) {
 
         <div className="impact-network">
           <div className="impact-stats">
-            {impactStats.map(({ value, label, Icon }) => (
-              <article className="impact-stat" key={label}>
-                <span className="impact-stat-icon" aria-hidden="true">
-                  <Icon size={30} strokeWidth={1.45} />
-                </span>
-                <strong>{value}</strong>
-                <span className="impact-stat-label">{label}</span>
-              </article>
-            ))}
+            {impactStats.map(({ id, value, label, icon }) => {
+              const Icon = impactStatIcons[icon] ?? Zap;
+
+              return (
+                <article className="impact-stat" key={id ?? label}>
+                  <span className="impact-stat-icon" aria-hidden="true">
+                    <Icon size={30} strokeWidth={1.45} />
+                  </span>
+                  <strong>{value}</strong>
+                  <span className="impact-stat-label">{label}</span>
+                </article>
+              );
+            })}
           </div>
         </div>
 
@@ -450,9 +379,12 @@ function FinalSection({ entered }) {
         </section>
 
         <section className="clients-showcase" aria-labelledby="clients-title">
-          <h2 id="clients-title">Our Clients</h2>
+          <h2 id="clients-title">{clientsText("title", "Our Clients")}</h2>
           <p>
-            Selected client relationships across energy, mobility and infrastructure.
+            {clientsText(
+              "description",
+              "Selected client relationships across energy, mobility and infrastructure.",
+            )}
           </p>
           <div className="clients-loop">
             <LogoLoop
@@ -475,6 +407,8 @@ function FinalSection({ entered }) {
 }
 
 function StackSection({ entered }) {
+  const cards = selectProcessCards(useSiteContent());
+  const processText = useSection("work-process");
   const introRef = useRef(null);
   const releaseStartRef = useRef(null);
   const releaseFrameRef = useRef(0);
@@ -552,11 +486,13 @@ function StackSection({ entered }) {
     >
       <div className="process-section-inner">
         <header className="process-section-intro" ref={introRef}>
-          <span>Process</span>
-          <h2 id="process-section-title">Our Work Process</h2>
+          <span>{processText("eyebrow", "Process")}</span>
+          <h2 id="process-section-title">{processText("title", "Our Work Process")}</h2>
           <p>
-            A compact view of how GreenTech Professionals moves a photovoltaic
-            project from technical decisions to reliable field execution.
+            {processText(
+              "description",
+              "A compact view of how GreenTech Professionals moves a photovoltaic project from technical decisions to reliable field execution.",
+            )}
           </p>
         </header>
 
@@ -566,7 +502,7 @@ function StackSection({ entered }) {
           scaleEndPosition="23%"
           onStackComplete={handleStackComplete}
         >
-          {processCards.map((card) => {
+          {cards.map((card) => {
             const themeClass =
               processCardThemeClasses[card.theme] ?? processCardThemeClasses.design;
 
@@ -600,6 +536,7 @@ function Preloader({ loaded, ready }) {
 }
 
 function App({ onOpenProject, onShowAllProjects, onOpenPost, routeOpen }) {
+  const galleryItems = selectGalleryItems(useSiteContent());
   const [loaded, setLoaded] = useState(0);
   const [ready, setReady] = useState(false);
   const [entered, setEntered] = useState(false);
@@ -681,7 +618,7 @@ function App({ onOpenProject, onShowAllProjects, onOpenPost, routeOpen }) {
         <StackSection entered={entered} />
         <HorizontalParallaxGallery
           entered={entered}
-          items={horizontalGalleryItems}
+          items={galleryItems}
           onProjectOpen={onOpenProject}
           onShowAllProjects={onShowAllProjects}
         />

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "specialist-qualified-field-teams",
+    "order": 1,
+    "enabled": true,
+    "text": "Specialist-qualified field teams"
+  },
+  {
+    "id": "electrical-inspections-and-pram-testing-",
+    "order": 2,
+    "enabled": true,
+    "text": "Electrical inspections and PRAM testing capability"
+  },
+  {
+    "id": "planned-execution-handover-and-maintenan",
+    "order": 3,
+    "enabled": true,
+    "text": "Planned execution, handover and maintenance"
+  }
+]

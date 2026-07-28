@@ -1,0 +1,65 @@
+[
+  {
+    "id": "aj-brand",
+    "order": 1,
+    "enabled": true,
+    "image": "/clients/aj-brand.png",
+    "alt": "AJ Brand",
+    "title": "AJ Brand",
+    "href": "https://ajbrand.energy/"
+  },
+  {
+    "id": "bester",
+    "order": 2,
+    "enabled": true,
+    "image": "/clients/bester.png",
+    "alt": "Bester",
+    "title": "Bester",
+    "href": "https://bester.energy/"
+  },
+  {
+    "id": "caf",
+    "order": 3,
+    "enabled": true,
+    "image": "/clients/caf.png",
+    "alt": "CAF",
+    "title": "CAF",
+    "href": "https://www.cafmobility.com/soluciones/sistemas-integrales/"
+  },
+  {
+    "id": "circet",
+    "order": 4,
+    "enabled": true,
+    "image": "/clients/circet.png",
+    "alt": "Circet",
+    "title": "Circet",
+    "href": "https://www.circet.com/"
+  },
+  {
+    "id": "lantania",
+    "order": 5,
+    "enabled": true,
+    "image": "/clients/lantania.jpg",
+    "alt": "Lantania",
+    "title": "Lantania",
+    "href": "https://www.lantania.com/en/sustainability/"
+  },
+  {
+    "id": "psi-global-recruitment",
+    "order": 6,
+    "enabled": true,
+    "image": "/clients/psi-global.png",
+    "alt": "PSI Global Recruitment",
+    "title": "PSI Global Recruitment",
+    "href": "https://www.psiglobalrecruitment.com/"
+  },
+  {
+    "id": "solarig",
+    "order": 7,
+    "enabled": true,
+    "image": "/clients/solarig.png",
+    "alt": "Solarig",
+    "title": "Solarig",
+    "href": "https://solarig.com/en/home-en/"
+  }
+]

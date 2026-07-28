@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import ServiceSectionOverlay from "./ServiceSectionOverlay.jsx";
+import useSection from "./hooks/useSection.js";
 import "./ScrollDataCenterBuild.css";
 
 const MODEL_URL = "/3d/data_center_workspace_2.glb";
@@ -55,6 +56,7 @@ function disposeModel(root) {
 }
 
 function ScrollDataCenterBuild({ active }) {
+  const text = useSection("data-center-service");
   const sectionRef = useRef(null);
   const mountRef = useRef(null);
 
@@ -413,10 +415,10 @@ function ScrollDataCenterBuild({ active }) {
           aria-hidden="true"
         />
         <ServiceSectionOverlay
-          index="04 / Service"
+          index={text("eyebrow", "04 / Service")}
           titleId="service-data-center-title"
-          title="Data Center Construction"
-          description="Turnkey data center builds — white space fit-out, power distribution and redundancy, cooling and containment, commissioned and documented to spec."
+          title={text("title", "Data Center Construction")}
+          description={text("description", "Turnkey data center builds — white space fit-out, power distribution and redundancy, cooling and containment, commissioned and documented to spec.")}
         />
       </div>
     </section>

@@ -5,11 +5,12 @@
   "type": "module",
   "scripts": {
     "prebuild": "node scripts/extract-original-assets.mjs",
-    "dev": "node server.js",
+    "dev": "node --env-file-if-exists=.env server.js",
     "dev:vite": "vite --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "start": "node server.js --production"
+    "start": "node --env-file-if-exists=.env server.js --production",
+    "migrate:content": "node scripts/migrate-content.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",

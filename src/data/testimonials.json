@@ -1,0 +1,41 @@
+[
+  {
+    "order": 1,
+    "enabled": true,
+    "id": "official-ma",
+    "author": "M. A.",
+    "role": "Customer testimonial",
+    "quote": "We are very satisfied with the professionalism of the GreenTech Professionals team. We warmly recommend them to anyone who has a photovoltaic megaproject to complete, as they are reliable partners.",
+    "image": "/projects/butimanu/butimanu-02.jpg",
+    "imagePosition": "31% 42%",
+    "rating": 5,
+    "verified": true,
+    "source": "https://greentechpro.ro/about-us/"
+  },
+  {
+    "order": 2,
+    "enabled": true,
+    "id": "official-ac",
+    "author": "A. C.",
+    "role": "Customer testimonial",
+    "quote": "Respecting the deadlines and the quality of the works are the most important assets when you collaborate with a photovoltaic services company. I recommend GreenTech Professionals SRL!",
+    "image": "/projects/butimanu/butimanu-03.jpg",
+    "imagePosition": "43% 36%",
+    "rating": 5,
+    "verified": true,
+    "source": "https://greentechpro.ro/about-us/"
+  },
+  {
+    "order": 3,
+    "enabled": true,
+    "id": "official-sg",
+    "author": "S. G.",
+    "role": "Customer testimonial",
+    "quote": "The GreenTech Professionals company really impresses you! Thank you for the partnership and for the quality services performed in our photovoltaic park.",
+    "image": "/gallery/solar-installation.webp",
+    "imagePosition": "75% 24%",
+    "rating": 5,
+    "verified": true,
+    "source": "https://greentechpro.ro/about-us/"
+  }
+]

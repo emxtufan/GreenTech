@@ -3,9 +3,11 @@ import { access, readFile } from "node:fs/promises";
 import { createServer } from "node:http";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import { createApiRouter } from "./server/routes.js";
 
 const ROOT_DIR = fileURLToPath(new URL(".", import.meta.url));
 const DIST_DIR = path.join(ROOT_DIR, "dist");
+const UPLOADS_DIR = path.join(ROOT_DIR, "public", "uploads");
 const HOST = process.env.HOST || "0.0.0.0";
 const PORT = Number.parseInt(process.env.PORT || "3000", 10);
 const production = process.argv.includes("--production")
@@ -19,6 +21,22 @@ const app = express();
 let vite = null;
 
 app.disable("x-powered-by");
+
+app.use("/api", createApiRouter());
+
+// Served from public/ in both modes: images uploaded after a production build
+// exist on disk but not inside dist/, so this must not fall through to static.
+app.use(
+  "/uploads",
+  express.static(UPLOADS_DIR, {
+    index: false,
+    // Uploaded filenames carry a random suffix, so a given URL is immutable.
+    maxAge: production ? "30d" : 0,
+    setHeaders: (response) => {
+      response.setHeader("X-Content-Type-Options", "nosniff");
+    },
+  }),
+);
 
 if (production) {
   await access(path.join(DIST_DIR, "index.html")).catch(() => {

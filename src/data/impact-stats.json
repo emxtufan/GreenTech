@@ -1,0 +1,34 @@
+[
+  {
+    "id": "total-installed-power",
+    "order": 1,
+    "enabled": true,
+    "value": "700 MW+",
+    "label": "Total Installed Power",
+    "icon": "Zap"
+  },
+  {
+    "id": "solar-panels-installed",
+    "order": 2,
+    "enabled": true,
+    "value": "1.3M+",
+    "label": "Solar Panels Installed",
+    "icon": "SolarPanel"
+  },
+  {
+    "id": "specialized-professionals",
+    "order": 3,
+    "enabled": true,
+    "value": "550+",
+    "label": "Specialized Professionals",
+    "icon": "BadgeCheck"
+  },
+  {
+    "id": "total-invoiced",
+    "order": 4,
+    "enabled": true,
+    "value": "€ 12.5M",
+    "label": "Total Invoiced",
+    "icon": "BadgeDollarSign"
+  }
+]

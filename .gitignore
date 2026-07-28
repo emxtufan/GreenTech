@@ -68,3 +68,7 @@ Desktop.ini
 /v4513226cdae34746b4dedf0b4dfa099e1781791509496.js
 /webpack-0120bad343e67c08.js
 /f.txt
+
+# Content backups. site-content.json itself IS tracked — it is the live content.
+data/site-content.backup.json
+data/site-content.2*.json

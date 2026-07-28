@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import ServiceSectionOverlay from "./ServiceSectionOverlay.jsx";
+import useSection from "./hooks/useSection.js";
 import "./ScrollConstructionServices.css";
 
 const MODEL_URL = "/3d/construction.glb";
@@ -52,6 +53,7 @@ function disposeModel(root) {
 }
 
 function ScrollConstructionServices({ active }) {
+  const text = useSection("construction-service");
   const sectionRef = useRef(null);
   const mountRef = useRef(null);
 
@@ -417,10 +419,10 @@ function ScrollConstructionServices({ active }) {
           aria-hidden="true"
         />
         <ServiceSectionOverlay
-          index="03 / Service"
+          index={text("eyebrow", "03 / Service")}
           titleId="service-construction-title"
-          title="Construction Services"
-          description="Civil and structural works for energy sites — access roads, foundations, mounting structures and technical buildings, coordinated from groundbreaking to handover."
+          title={text("title", "Construction Services")}
+          description={text("description", "Civil and structural works for energy sites — access roads, foundations, mounting structures and technical buildings, coordinated from groundbreaking to handover.")}
         />
       </div>
     </section>

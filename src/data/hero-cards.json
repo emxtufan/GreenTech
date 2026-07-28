@@ -1,0 +1,56 @@
+[
+  {
+    "id": "solar",
+    "order": 1,
+    "enabled": true,
+    "title": "Construction of Photovoltaic Parks",
+    "sourceIndex": 0,
+    "body": "Solar is an abundant and cheap source of energy in South Africa. For customers with existing on-site solar panels, the addition of wheeled solar can boost renewable energy penetration by up to 50%, without the need for capital expenditure.",
+    "footnote": ""
+  },
+  {
+    "id": "wind",
+    "order": 2,
+    "enabled": true,
+    "title": "Construction of Wind Parks",
+    "sourceIndex": 1,
+    "body": "Wind power, an intermittent resource with high potential in South Africa, generates power primarily during the mornings and evenings, perfectly complementing solar. A blend of off-site solar and wind energy can potentially elevate renewable energy penetration by an additional 15-20%.",
+    "footnote": ""
+  },
+  {
+    "id": "transmission",
+    "order": 3,
+    "enabled": true,
+    "title": "Solar PV Systems",
+    "sourceIndex": 3,
+    "body": "Enpower Trading leverages the Eskom and Municipal networks to provide customers with a choice of energy source.\n\nAs the market evolves, Enpower Trading will collaborate with municipalities, regulators and other bodies to ensure municipalities remain revenue surplus neutral, and that we collectively work toward the goals of South Africa's Just Energy Transition: decarbonisation, affordability and security of supply.",
+    "footnote": ""
+  },
+  {
+    "id": "aggregation",
+    "order": 4,
+    "enabled": true,
+    "title": "Data Center Construction",
+    "sourceIndex": 4,
+    "body": "South African customers have limited access to Renewable Energy (RE) and can only supply a small percentage of their total energy needs through on-site generation. On-site generation requires high capital expenditure, and can only power one location.\n\nEnpower Trading offers customers access to a wide range of energy sources that collectively provide up to 100% renewable energy penetration rate, across multiple sites, reducing reliance on non-renewable energy ('brown power').\n\nCustomers now have the ability to choose the source of their energy.",
+    "footnote": ""
+  },
+  {
+    "id": "customer",
+    "order": 5,
+    "enabled": true,
+    "title": "Maintenance",
+    "sourceIndex": 5,
+    "body": "Maximize your savings with our competitive tariffs and journey towards a net-zero future with the guidance of our Team. Enjoy the freedom of no longer being reliant on a single utility and benefit from fixed escalations, flexible contract periods (5, 10, or 20 years) as well as Renewable Energy Certificates (RECs) which assist you on your journey to net-zero.",
+    "footnote": "Between 2007 and 2022 the Eskom Tariff increased by 653%."
+  },
+  {
+    "id": "future",
+    "order": 6,
+    "enabled": true,
+    "title": "Construction Services, Inspections & Testing",
+    "sourceIndex": 6,
+    "body": "The evolved future trading market will transform the way in which we purchase and consume energy. The future liberalized market will see the unbundling of the previous vertically integrated national utility, allowing for a more competitive energy market and greener future.",
+    "footnote": ""
+  }
+]

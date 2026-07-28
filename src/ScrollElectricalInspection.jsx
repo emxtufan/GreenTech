@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import ServiceSectionOverlay from "./ServiceSectionOverlay.jsx";
+import useSection from "./hooks/useSection.js";
 import "./ScrollElectricalInspection.css";
 
 const MODEL_URL = "/3d/factory__electrical__box_12_mb.glb";
@@ -52,6 +53,7 @@ function disposeModel(root) {
 }
 
 function ScrollElectricalInspection({ active }) {
+  const text = useSection("electrical-service");
   const sectionRef = useRef(null);
   const mountRef = useRef(null);
 
@@ -412,10 +414,10 @@ function ScrollElectricalInspection({ active }) {
           aria-hidden="true"
         />
         <ServiceSectionOverlay
-          index="02 / Service"
+          index={text("eyebrow", "02 / Service")}
           titleId="service-electrical-title"
-          title="Electrical Inspections & Testing"
-          description="Acceptance and periodic testing for panels, switchgear and distribution networks — insulation and earthing measurements, thermography, and full documentation."
+          title={text("title", "Electrical Inspections & Testing")}
+          description={text("description", "Acceptance and periodic testing for panels, switchgear and distribution networks — insulation and earthing measurements, thermography, and full documentation.")}
         />
       </div>
     </section>
