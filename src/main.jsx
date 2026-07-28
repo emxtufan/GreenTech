@@ -22,6 +22,7 @@ import BlogPostPage from "./BlogPostPage.jsx";
 import ProjectDetailPage from "./ProjectDetailPage.jsx";
 import AllProjectsPage from "./AllProjectsPage.jsx";
 import useExperienceScrollController from "./useExperienceScrollController.js";
+import { TOUCH_VISUAL_EASE, usesNativeTouchScroll } from "./scrollMotion.js";
 import horizontalGalleryData from "./data/horizontal-gallery.json";
 import processCardsData from "./data/process-cards.json";
 import "./styles.css?=12";
@@ -477,6 +478,7 @@ function StackSection({ entered }) {
   const introRef = useRef(null);
   const releaseStartRef = useRef(null);
   const releaseFrameRef = useRef(0);
+  const releaseVisualRef = useRef(0);
 
   const handleStackComplete = useCallback(({ scrollStart }) => {
     releaseStartRef.current = scrollStart;
@@ -488,22 +490,41 @@ function StackSection({ entered }) {
 
     if (!entered) {
       releaseStartRef.current = null;
+      releaseVisualRef.current = 0;
       intro.style.transform = "";
       return undefined;
     }
+
+    const smoothVisuals = usesNativeTouchScroll();
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     const updateIntroRelease = () => {
       releaseFrameRef.current = 0;
       const releaseStart = releaseStartRef.current;
       if (releaseStart === null) {
+        releaseVisualRef.current = 0;
         intro.style.transform = "";
         return;
       }
 
       const releaseDistance = Math.max(0, window.scrollY - releaseStart);
       const maxReleaseDistance = intro.offsetHeight + 100;
-      const translateY = Math.min(releaseDistance, maxReleaseDistance);
+      const targetTranslateY = Math.min(releaseDistance, maxReleaseDistance);
+      const ease = smoothVisuals && !reducedMotion.matches
+        ? TOUCH_VISUAL_EASE
+        : 1;
+      const nextTranslateY = releaseVisualRef.current
+        + (targetTranslateY - releaseVisualRef.current) * ease;
+      const translateY = Math.abs(targetTranslateY - nextTranslateY) < 0.1
+        ? targetTranslateY
+        : nextTranslateY;
+
+      releaseVisualRef.current = translateY;
       intro.style.transform = translateY > 0 ? `translate3d(0, ${-translateY}px, 0)` : "";
+
+      if (translateY !== targetTranslateY) {
+        releaseFrameRef.current = window.requestAnimationFrame(updateIntroRelease);
+      }
     };
 
     const scheduleIntroRelease = () => {
@@ -518,6 +539,7 @@ function StackSection({ entered }) {
       window.removeEventListener("scroll", scheduleIntroRelease);
       window.removeEventListener("resize", scheduleIntroRelease);
       window.cancelAnimationFrame(releaseFrameRef.current);
+      releaseVisualRef.current = 0;
       intro.style.transform = "";
     };
   }, [entered]);

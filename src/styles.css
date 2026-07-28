@@ -484,12 +484,6 @@ button:disabled {
   isolation: isolate;
 }
 
-html.ios-native-scroll,
-html.ios-native-scroll body {
-  background-color: var(--browser-chrome-surface);
-  overscroll-behavior-y: none;
-}
-
 .final-section {
   --final-background: #000000;
   --final-text: #f5f7ef;

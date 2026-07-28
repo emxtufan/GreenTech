@@ -1,4 +1,5 @@
 import React, { useCallback, useLayoutEffect, useRef } from "react";
+import { TOUCH_VISUAL_EASE, usesNativeTouchScroll } from "./scrollMotion.js";
 import "./ScrollStack.css";
 
 export function ScrollStackItem({ children, itemClassName = "", stackOffset }) {
@@ -29,6 +30,7 @@ export default function ScrollStack({
   const cardsRef = useRef([]);
   const animationFrameRef = useRef(0);
   const stackCompletedRef = useRef(false);
+  const visualScrollRef = useRef(0);
 
   const parsePosition = useCallback((value, viewportHeight) => {
     if (typeof value === "string" && value.includes("%")) {
@@ -38,17 +40,17 @@ export default function ScrollStack({
     return Number.parseFloat(value) || 0;
   }, []);
 
-  const updateCards = useCallback(() => {
+  const updateCards = useCallback((scrollTop = window.scrollY) => {
     const root = scrollerRef.current;
     const cards = cardsRef.current;
     const inner = root?.querySelector(".scroll-stack-inner");
     if (!root || !inner || !cards.length || root.offsetParent === null) return;
 
     const viewportHeight = window.innerHeight;
-    const scrollTop = window.scrollY;
+    const actualScrollTop = window.scrollY;
     const stackPositionPx = parsePosition(stackPosition, viewportHeight);
     const scaleEndPositionPx = parsePosition(scaleEndPosition, viewportHeight);
-    const rootTop = root.getBoundingClientRect().top + scrollTop;
+    const rootTop = root.getBoundingClientRect().top + actualScrollTop;
     const innerStyles = window.getComputedStyle(inner);
     const innerTop = inner.offsetTop + (Number.parseFloat(innerStyles.paddingTop) || 0);
     let naturalOffset = innerTop;
@@ -116,6 +118,9 @@ export default function ScrollStack({
 
     const cards = Array.from(root.querySelectorAll(".scroll-stack-card"));
     cardsRef.current = cards;
+    visualScrollRef.current = window.scrollY;
+    const smoothVisuals = usesNativeTouchScroll();
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     cards.forEach((card) => {
       card.style.marginBottom = "0px";
@@ -124,29 +129,53 @@ export default function ScrollStack({
       card.style.backfaceVisibility = "hidden";
     });
 
+    const updateVisuals = () => {
+      animationFrameRef.current = 0;
+      const targetScroll = window.scrollY;
+      const currentScroll = visualScrollRef.current;
+      const distance = targetScroll - currentScroll;
+      const largePositionJump = Math.abs(distance) > window.innerHeight * 0.75;
+      const ease = smoothVisuals && !reducedMotion.matches && !largePositionJump
+        ? TOUCH_VISUAL_EASE
+        : 1;
+      const nextScroll = currentScroll + distance * ease;
+
+      visualScrollRef.current = Math.abs(targetScroll - nextScroll) < 0.1
+        ? targetScroll
+        : nextScroll;
+      updateCards(visualScrollRef.current);
+
+      if (visualScrollRef.current !== targetScroll) {
+        animationFrameRef.current = window.requestAnimationFrame(updateVisuals);
+      }
+    };
+
     const scheduleUpdate = () => {
       if (animationFrameRef.current) return;
-      animationFrameRef.current = window.requestAnimationFrame(() => {
-        animationFrameRef.current = 0;
-        updateCards();
-      });
+      animationFrameRef.current = window.requestAnimationFrame(updateVisuals);
+    };
+
+    const handleResize = () => {
+      visualScrollRef.current = window.scrollY;
+      scheduleUpdate();
     };
 
     const resizeObserver = new ResizeObserver(scheduleUpdate);
     resizeObserver.observe(root);
     cards.forEach((card) => resizeObserver.observe(card));
 
-    updateCards();
+    updateCards(visualScrollRef.current);
     window.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("resize", scheduleUpdate);
+    window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("scroll", scheduleUpdate);
-      window.removeEventListener("resize", scheduleUpdate);
+      window.removeEventListener("resize", handleResize);
       window.cancelAnimationFrame(animationFrameRef.current);
       resizeObserver.disconnect();
       cardsRef.current = [];
       stackCompletedRef.current = false;
+      visualScrollRef.current = 0;
     };
   }, [itemDistance, updateCards]);
 

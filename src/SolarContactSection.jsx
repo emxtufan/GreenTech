@@ -467,7 +467,7 @@ function SolarContactSection({ active, onShowAllProjects }) {
     );
 
     loadObserver.observe(section);
-    visibilityObserver.observe(section);
+    visibilityObserver.observe(mount);
 
     return () => {
       disposed = true;
