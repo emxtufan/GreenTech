@@ -483,7 +483,7 @@ button:disabled {
   background: #000000;
   isolation: isolate;
 }
-
+ 
 .final-section {
   --final-background: #000000;
   --final-text: #f5f7ef;
