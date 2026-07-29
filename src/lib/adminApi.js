@@ -29,7 +29,7 @@ export const logout = () =>
   fetch("/api/admin/logout", { method: "POST" }).then(json);
 
 export const getContent = () =>
-  fetch("/api/content", { headers: { Accept: "application/json" } }).then(json);
+  fetch("/api/admin/content", { headers: { Accept: "application/json" } }).then(json);
 
 export const saveContent = (content) =>
   fetch("/api/admin/content", {
@@ -38,11 +38,48 @@ export const saveContent = (content) =>
     body: JSON.stringify(content),
   }).then(json);
 
+export const geocodeLocation = ({ query, countryCode }) =>
+  fetch("/api/admin/geocode", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ query, countryCode }),
+  }).then(json);
+
+export const getCustomerReviews = () =>
+  fetch("/api/admin/reviews", { headers: { Accept: "application/json" } }).then(json);
+
+export const updateCustomerReviewStatus = (id, status) =>
+  fetch(`/api/admin/reviews/${encodeURIComponent(id)}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ status }),
+  }).then(json);
+
+export const deleteCustomerReview = (id) =>
+  fetch(`/api/admin/reviews/${encodeURIComponent(id)}`, {
+    method: "DELETE",
+  }).then(json);
+
+export const getProjectInquiries = () =>
+  fetch("/api/admin/inquiries", { headers: { Accept: "application/json" } }).then(json);
+
+export const updateProjectInquiryStatus = (id, status) =>
+  fetch(`/api/admin/inquiries/${encodeURIComponent(id)}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ status }),
+  }).then(json);
+
+export const deleteProjectInquiry = (id) =>
+  fetch(`/api/admin/inquiries/${encodeURIComponent(id)}`, {
+    method: "DELETE",
+  }).then(json);
+
 /**
  * Posts the File as a raw body. Returns `{ url }` — the only thing that is ever
  * written into the content document.
  */
-export const uploadImage = (file, category = "misc") => {
+export const uploadAsset = (file, category = "misc") => {
   const query = new URLSearchParams({ filename: file.name, category });
 
   return fetch(`/api/admin/upload?${query}`, {
@@ -51,3 +88,5 @@ export const uploadImage = (file, category = "misc") => {
     body: file,
   }).then(json);
 };
+
+export const uploadImage = uploadAsset;

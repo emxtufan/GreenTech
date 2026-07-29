@@ -409,6 +409,7 @@ function ScrollConstructionServices({ active }) {
   return (
     <section
       ref={sectionRef}
+      id="service-construction"
       className={`construction-services-section ${active ? "visible" : ""}`}
       aria-labelledby="service-construction-title"
     >

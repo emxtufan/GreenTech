@@ -12,8 +12,11 @@ export const CONTENT_GROUPS = [
   "impactStats",
   "clientLogos",
   "credentials",
+  "footprintCountries",
   "qualityPoints",
   "testimonials",
+  "faqs",
+  "footer",
   "blog",
 ];
 
@@ -45,10 +48,14 @@ const isPlainObject = (value) =>
  * never reach the JSON file.
  */
 export function validateImagePath(value, label, issues) {
+  validateAssetPath(value, label, issues, "image");
+}
+
+function validateAssetPath(value, label, issues, assetName) {
   if (value === undefined || value === null || value === "") return;
 
   if (typeof value !== "string") {
-    issues.push(`${label}: image must be a string`);
+    issues.push(`${label}: ${assetName} URL must be a string`);
     return;
   }
 
@@ -62,6 +69,62 @@ export function validateImagePath(value, label, issues) {
   if (!value.startsWith("/") && !/^https?:\/\//i.test(value)) {
     issues.push(`${label}: must start with "/" or be an http(s) URL ("${value}")`);
   }
+}
+
+export function validateVideoPath(value, label, issues) {
+  validateAssetPath(value, label, issues, "video");
+}
+
+function validateActionUrl(value, label, issues) {
+  if (value === undefined || value === null || value === "") return;
+
+  if (typeof value !== "string") {
+    issues.push(`${label}: action URL must be a string`);
+    return;
+  }
+
+  const url = value.trim();
+  if (url.startsWith("/") && !url.startsWith("//")) return;
+  if (url.startsWith("#") || url.startsWith("?")) return;
+
+  try {
+    const parsed = new URL(url);
+    if (["http:", "https:", "mailto:", "tel:"].includes(parsed.protocol)) return;
+  } catch {
+    // Fall through to the common validation message below.
+  }
+
+  issues.push(
+    `${label}: use a site path beginning with "/", "#" or "?", or a valid http(s), mailto or tel URL`,
+  );
+}
+
+function validateSectionAction(section, label, issues) {
+  const modes = new Set(["builtin", "link", "modal"]);
+  if (section.actionMode !== undefined && !modes.has(section.actionMode)) {
+    issues.push(`${label}.actionMode: must be "builtin", "link" or "modal"`);
+  }
+
+  validateActionUrl(section.actionUrl, `${label}.actionUrl`, issues);
+
+  if (section.actionModal === undefined) return;
+  if (!isPlainObject(section.actionModal)) {
+    issues.push(`${label}.actionModal: expected an object`);
+    return;
+  }
+
+  for (const key of ["eyebrow", "title", "description", "ctaLabel", "ctaUrl"]) {
+    const value = section.actionModal[key];
+    if (value !== undefined && typeof value !== "string") {
+      issues.push(`${label}.actionModal.${key}: must be a string`);
+    }
+  }
+
+  validateActionUrl(
+    section.actionModal.ctaUrl,
+    `${label}.actionModal.ctaUrl`,
+    issues,
+  );
 }
 
 function validateItems(items, label, issues, validateItem) {
@@ -100,6 +163,17 @@ function validateItems(items, label, issues, validateItem) {
   });
 }
 
+function validateCoordinate(value, label, minimum, maximum, issues) {
+  if (typeof value !== "number" || !Number.isFinite(value)) {
+    issues.push(`${label}: must be a number`);
+    return;
+  }
+
+  if (value < minimum || value > maximum) {
+    issues.push(`${label}: must be between ${minimum} and ${maximum}`);
+  }
+}
+
 export function validateContent(content) {
   const issues = [];
 
@@ -115,6 +189,12 @@ export function validateContent(content) {
     if (item.visible !== undefined && typeof item.visible !== "boolean") {
       issues.push(`${label}: "visible" must be a boolean`);
     }
+
+    if (item.id === "company-video") {
+      validateVideoPath(item.videoUrl, `${label}.videoUrl`, issues);
+    }
+
+    validateSectionAction(item, label, issues);
   });
 
   validateItems(content.processCards?.items, "processCards.items", issues);
@@ -133,7 +213,88 @@ export function validateContent(content) {
 
   validateItems(content.credentials?.items, "credentials.items", issues);
 
+  const footprintCodes = new Set();
+  validateItems(
+    content.footprintCountries?.items,
+    "footprintCountries.items",
+    issues,
+    (country, label) => {
+      if (country.enabled === false) return;
+
+      if (typeof country.name !== "string" || country.name.trim() === "") {
+        issues.push(`${label}.name: must be a non-empty string`);
+      }
+
+      const code = typeof country.code === "string" ? country.code.trim().toUpperCase() : "";
+      if (!/^[A-Z]{2}$/.test(code)) {
+        issues.push(`${label}.code: must be a two-letter ISO country code`);
+      } else if (footprintCodes.has(code)) {
+        issues.push(`${label}.code: duplicate country code "${code}"`);
+      } else {
+        footprintCodes.add(code);
+      }
+
+      if (
+        country.iso3 !== undefined
+        && country.iso3 !== ""
+        && !/^[A-Z]{3}$/.test(String(country.iso3).trim().toUpperCase())
+      ) {
+        issues.push(`${label}.iso3: must be a three-letter ISO country code`);
+      }
+
+      if (
+        country.atlasId !== undefined
+        && country.atlasId !== ""
+        && !/^\d{1,3}$/.test(String(country.atlasId))
+      ) {
+        issues.push(`${label}.atlasId: must be a numeric ISO country ID`);
+      }
+
+      if (!Array.isArray(country.cities) || country.cities.length === 0) {
+        issues.push(`${label}.cities: add at least one project location`);
+        return;
+      }
+
+      validateItems(country.cities, `${label}.cities`, issues, (city, cityLabel) => {
+        if (typeof city.name !== "string" || city.name.trim() === "") {
+          issues.push(`${cityLabel}.name: must be a non-empty string`);
+        }
+        validateCoordinate(city.longitude, `${cityLabel}.longitude`, -180, 180, issues);
+        validateCoordinate(city.latitude, `${cityLabel}.latitude`, -90, 90, issues);
+      });
+    },
+  );
+
   validateItems(content.qualityPoints?.items, "qualityPoints.items", issues);
+
+  validateItems(content.faqs?.items, "faqs.items", issues, (item, label) => {
+    if (typeof item.question !== "string" || item.question.trim() === "") {
+      issues.push(`${label}: "question" must be a non-empty string`);
+    }
+    if (typeof item.answer !== "string" || item.answer.trim() === "") {
+      issues.push(`${label}: "answer" must be a non-empty string`);
+    }
+  });
+
+  validateItems(content.footer?.links, "footer.links", issues, (item, label) => {
+    const href = typeof item.href === "string" ? item.href.trim() : "";
+    if (href === "") {
+      issues.push(`${label}: "href" must be a non-empty string`);
+    } else if (
+      !href.startsWith("#")
+      && !href.startsWith("/")
+      && !/^modal:(privacy|terms)$/.test(href)
+      && !/^https?:\/\//i.test(href)
+      && !/^(mailto|tel):/i.test(href)
+    ) {
+      issues.push(
+        `${label}.href: use #anchor, /path, modal:privacy, modal:terms, or an http(s), mailto or tel URL`,
+      );
+    }
+    if (typeof item.group !== "string" || item.group.trim() === "") {
+      issues.push(`${label}: "group" must be a non-empty string`);
+    }
+  });
 
   validateItems(content.testimonials?.items, "testimonials.items", issues, (item, label) => {
     validateImagePath(item.image, `${label}.image`, issues);
@@ -201,8 +362,11 @@ export function withDefaults(content) {
     impactStats: { items: [], ...(source.impactStats || {}) },
     clientLogos: { items: [], ...(source.clientLogos || {}) },
     credentials: { items: [], ...(source.credentials || {}) },
+    footprintCountries: { items: [], ...(source.footprintCountries || {}) },
     qualityPoints: { items: [], ...(source.qualityPoints || {}) },
     testimonials: { items: [], ...(source.testimonials || {}) },
+    faqs: { items: [], ...(source.faqs || {}) },
+    footer: { links: [], ...(source.footer || {}) },
     blog: { posts: [], ...(source.blog || {}) },
   };
 }

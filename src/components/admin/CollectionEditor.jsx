@@ -1,15 +1,66 @@
 import React, { useRef, useState } from "react";
-import { ChevronDown, ChevronUp, ImageUp, Plus, Trash2, X } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronUp,
+  ImageUp,
+  Loader2,
+  MapPin,
+  Pin,
+  Plus,
+  Trash2,
+  X,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
-import { uploadImage } from "@/lib/adminApi.js";
+import { geocodeLocation, uploadImage } from "@/lib/adminApi.js";
+import { findIsoCountryByName, ISO_COUNTRIES } from "@/lib/isoCountries.js";
 
 const newId = () =>
   (crypto.randomUUID?.() ?? `item-${Date.now()}-${Math.random().toString(16).slice(2)}`);
+
+const numberInputValue = (event) =>
+  (event.target.value === "" ? "" : Number(event.target.value));
+
+const copyDefaultValue = (value) => {
+  if (Array.isArray(value)) return value.map(copyDefaultValue);
+  if (value && typeof value === "object") {
+    return Object.fromEntries(
+      Object.entries(value).map(([key, nested]) => [key, copyDefaultValue(nested)]),
+    );
+  }
+  return value;
+};
+
+const initialFieldValue = (field) => {
+  if (Object.prototype.hasOwnProperty.call(field, "defaultValue")) {
+    return copyDefaultValue(field.defaultValue);
+  }
+  if (field.type === "nested" || field.type === "string-list") return [];
+  if (field.type === "boolean") return false;
+  return "";
+};
+
+function SelectField({ id, value, options = [], onChange }) {
+  return (
+    <select
+      id={id}
+      className="admin-native-select"
+      value={value ?? ""}
+      onChange={(event) => onChange(event.target.value)}
+    >
+      {!options.some((option) => option.value === "") && value === "" && (
+        <option value="" disabled>Choose an option</option>
+      )}
+      {options.map((option) => (
+        <option value={option.value} key={option.value}>{option.label}</option>
+      ))}
+    </select>
+  );
+}
 
 function ImageField({ value, category, onChange, onNotify }) {
   const inputRef = useRef(null);
@@ -74,15 +125,77 @@ function ImageField({ value, category, onChange, onNotify }) {
   );
 }
 
+function CountryField({ id, value, item, onItemChange }) {
+  const listId = `${id}-countries`;
+  const selectedCountry = findIsoCountryByName(value);
+
+  const updateCountry = (nextValue) => {
+    const country = findIsoCountryByName(nextValue);
+
+    if (!country) {
+      onItemChange({
+        ...item,
+        name: nextValue,
+        code: "",
+        iso3: "",
+        atlasId: "",
+      });
+      return;
+    }
+
+    onItemChange({
+      ...item,
+      name: country.name,
+      code: country.alpha2,
+      iso3: country.alpha3,
+      atlasId: country.numeric,
+    });
+  };
+
+  return (
+    <div className="admin-country-field">
+      <Input
+        id={id}
+        list={listId}
+        value={value}
+        placeholder="Start typing a country"
+        autoComplete="off"
+        onChange={(event) => updateCountry(event.target.value)}
+      />
+      <datalist id={listId}>
+        {ISO_COUNTRIES.map((country) => (
+          <option
+            key={country.alpha2}
+            value={country.name}
+            label={`${country.alpha2} / ${country.alpha3} / ${country.numeric}`}
+          />
+        ))}
+      </datalist>
+      {selectedCountry && (
+        <div className="admin-country-codes" aria-live="polite">
+          <span>ISO-2 <b>{selectedCountry.alpha2}</b></span>
+          <span>ISO-3 <b>{selectedCountry.alpha3}</b></span>
+          <span>Numeric <b>{selectedCountry.numeric}</b></span>
+        </div>
+      )}
+    </div>
+  );
+}
+
 /**
  * A repeatable list living inside a single item — a project's technical scope
  * or its photo gallery. Same add / remove / reorder contract as the outer
  * editor, kept deliberately lighter because these lists are short.
  */
-function NestedList({ field, rows, category, onChange, onNotify }) {
+function NestedList({ field, rows, category, parentItem, onChange, onNotify }) {
   const items = Array.isArray(rows) ? rows : [];
+  const itemsRef = useRef(items);
   const bulkRef = useRef(null);
   const [progress, setProgress] = useState(null);
+  const [geocodingId, setGeocodingId] = useState(null);
+  const [resolvedLocations, setResolvedLocations] = useState({});
+
+  itemsRef.current = items;
 
   // Only lists whose rows carry an image can take a batch of files.
   const imageKey = field.fields.find((nested) => nested.type === "image")?.key;
@@ -139,8 +252,67 @@ function NestedList({ field, rows, category, onChange, onNotify }) {
 
   const add = () => {
     const row = { id: newId() };
-    for (const nested of field.fields) row[nested.key] = "";
+    for (const nested of field.fields) row[nested.key] = initialFieldValue(nested);
     onChange([...items, row]);
+  };
+
+  const findCoordinates = async (row, index) => {
+    const config = field.geocode;
+    const rowId = String(row.id ?? index);
+    const query = String(row[config.queryKey] ?? "").trim();
+    const countryCode = String(parentItem?.code ?? "").trim().toUpperCase();
+
+    if (!query || !/^[A-Z]{2}$/.test(countryCode)) {
+      onNotify?.({
+        tone: "error",
+        message: query
+          ? "Choose the country before searching for coordinates."
+          : "Enter a location name before searching for coordinates.",
+      });
+      return;
+    }
+
+    setGeocodingId(rowId);
+
+    try {
+      const { result, cached } = await geocodeLocation({ query, countryCode });
+      const [longitude, latitude] = Array.isArray(result.coordinates)
+        ? result.coordinates.map(Number)
+        : [Number(result.longitude), Number(result.latitude)];
+
+      if (!Number.isFinite(longitude) || !Number.isFinite(latitude)) {
+        throw new Error("The location service returned invalid coordinates.");
+      }
+
+      const latestItems = itemsRef.current;
+      const rowIndex = latestItems.findIndex((item, position) =>
+        String(item.id ?? position) === rowId);
+
+      if (rowIndex !== -1) {
+        onChange(latestItems.map((item, position) => (
+          position === rowIndex
+            ? {
+                ...item,
+                [config.longitudeKey]: longitude,
+                [config.latitudeKey]: latitude,
+              }
+            : item
+        )));
+      }
+
+      setResolvedLocations((current) => ({
+        ...current,
+        [rowId]: `${result.displayName} - Lat ${latitude}, Long ${longitude}`,
+      }));
+      onNotify?.({
+        tone: "success",
+        message: `Coordinates found for ${query}${cached ? " (cached)" : ""}.`,
+      });
+    } catch (error) {
+      onNotify?.({ tone: "error", message: error.message });
+    } finally {
+      setGeocodingId(null);
+    }
   };
 
   return (
@@ -176,6 +348,18 @@ function NestedList({ field, rows, category, onChange, onNotify }) {
                   onNotify={onNotify}
                   onChange={(next) => replace(index, { ...row, [nested.key]: next })}
                 />
+              ) : nested.type === "number" ? (
+                <Input
+                  id={`${row.id ?? index}-${nested.key}`}
+                  type="number"
+                  min={nested.min}
+                  max={nested.max}
+                  step={nested.step ?? "any"}
+                  value={row[nested.key] ?? ""}
+                  placeholder={nested.placeholder}
+                  onChange={(event) =>
+                    replace(index, { ...row, [nested.key]: numberInputValue(event) })}
+                />
               ) : nested.type === "textarea" ? (
                 <Textarea
                   id={`${row.id ?? index}-${nested.key}`}
@@ -184,16 +368,73 @@ function NestedList({ field, rows, category, onChange, onNotify }) {
                   onChange={(event) =>
                     replace(index, { ...row, [nested.key]: event.target.value })}
                 />
+              ) : nested.type === "string-list" ? (
+                <Textarea
+                  id={`${row.id ?? index}-${nested.key}`}
+                  rows={nested.rows ?? 5}
+                  value={Array.isArray(row[nested.key])
+                    ? row[nested.key].join("\n\n")
+                    : row[nested.key] ?? ""}
+                  onChange={(event) => replace(index, {
+                    ...row,
+                    [nested.key]: event.target.value.split("\n\n"),
+                  })}
+                />
+              ) : nested.type === "select" ? (
+                <SelectField
+                  id={`${row.id ?? index}-${nested.key}`}
+                  value={row[nested.key] ?? ""}
+                  options={nested.options}
+                  onChange={(next) => replace(index, { ...row, [nested.key]: next })}
+                />
               ) : (
                 <Input
                   id={`${row.id ?? index}-${nested.key}`}
                   value={row[nested.key] ?? ""}
+                  placeholder={nested.placeholder}
                   onChange={(event) =>
                     replace(index, { ...row, [nested.key]: event.target.value })}
                 />
               )}
+              {nested.hint && <small className="admin-field-hint">{nested.hint}</small>}
             </div>
           ))}
+
+          {field.geocode && (
+            <div className="admin-geocode-row">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                disabled={geocodingId !== null}
+                onClick={() => findCoordinates(row, index)}
+              >
+                {geocodingId === String(row.id ?? index) ? (
+                  <Loader2 className="admin-spin" aria-hidden="true" />
+                ) : (
+                  <MapPin aria-hidden="true" />
+                )}
+                {geocodingId === String(row.id ?? index) ? "Searching..." : "Find coordinates"}
+              </Button>
+
+              <div className="admin-geocode-result" aria-live="polite">
+                {resolvedLocations[String(row.id ?? index)] ? (
+                  <strong title={resolvedLocations[String(row.id ?? index)]}>
+                    {resolvedLocations[String(row.id ?? index)]}
+                  </strong>
+                ) : (
+                  <span>Search is restricted to {parentItem?.name || "the selected country"}.</span>
+                )}
+                <a
+                  href="https://www.openstreetmap.org/copyright"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  &copy; OpenStreetMap contributors
+                </a>
+              </div>
+            </div>
+          )}
         </div>
       ))}
 
@@ -205,7 +446,15 @@ function NestedList({ field, rows, category, onChange, onNotify }) {
   );
 }
 
-function ItemFields({ item, fields, category, onChange, onNotify }) {
+function ItemFields({
+  item,
+  fields,
+  category,
+  optionSources,
+  onChange,
+  onItemChange,
+  onNotify,
+}) {
   return (
     <div className="admin-field-grid">
       {fields.map((field) => {
@@ -230,8 +479,18 @@ function ItemFields({ item, fields, category, onChange, onNotify }) {
                 field={field}
                 rows={item[field.key]}
                 category={category}
+                parentItem={item}
                 onNotify={onNotify}
                 onChange={(next) => onChange(field.key, next)}
+              />
+            )}
+
+            {field.type === "country" && (
+              <CountryField
+                id={id}
+                value={value}
+                item={item}
+                onItemChange={onItemChange}
               />
             )}
 
@@ -244,14 +503,61 @@ function ItemFields({ item, fields, category, onChange, onNotify }) {
               />
             )}
 
+            {field.type === "number" && (
+              <Input
+                id={id}
+                type="number"
+                min={field.min}
+                max={field.max}
+                step={field.step ?? "any"}
+                value={value}
+                placeholder={field.placeholder}
+                onChange={(event) => onChange(field.key, numberInputValue(event))}
+              />
+            )}
+
+            {field.type === "date" && (
+              <Input
+                id={id}
+                type="date"
+                value={value}
+                onChange={(event) => onChange(field.key, event.target.value)}
+              />
+            )}
+
+            {field.type === "select" && (
+              <SelectField
+                id={id}
+                value={value}
+                options={field.options ?? optionSources?.[field.optionsSource]}
+                onChange={(next) => onChange(field.key, next)}
+              />
+            )}
+
+            {field.type === "boolean" && (
+              <div className="admin-boolean-control">
+                <span>{value ? "Yes" : "No"}</span>
+                <Switch
+                  checked={Boolean(value)}
+                  aria-label={field.label}
+                  onCheckedChange={(next) => onChange(field.key, next)}
+                />
+              </div>
+            )}
+
             {(field.type === "text" || field.type === undefined) && (
               <Input
                 id={id}
                 value={value}
                 placeholder={field.placeholder}
-                onChange={(event) => onChange(field.key, event.target.value)}
+                maxLength={field.maxLength}
+                onChange={(event) => onChange(
+                  field.key,
+                  field.uppercase ? event.target.value.toUpperCase() : event.target.value,
+                )}
               />
             )}
+            {field.hint && <small className="admin-field-hint">{field.hint}</small>}
           </div>
         );
       })}
@@ -263,8 +569,15 @@ function ItemFields({ item, fields, category, onChange, onNotify }) {
  * One implementation of add / edit / delete / reorder for every repeatable
  * collection. Each collection supplies a field list rather than its own CRUD.
  */
-export default function CollectionEditor({ collection, items, onItemsChange, onNotify }) {
+export default function CollectionEditor({
+  collection,
+  items,
+  optionSources,
+  onItemsChange,
+  onNotify,
+}) {
   const [openId, setOpenId] = useState(null);
+  const supportsPinning = collection.fields.some((field) => field.key === "pinned");
 
   const replace = (index, next) =>
     onItemsChange(items.map((item, position) => (position === index ? next : item)));
@@ -285,7 +598,7 @@ export default function CollectionEditor({ collection, items, onItemsChange, onN
   const add = () => {
     const item = { id: newId(), order: items.length + 1, enabled: true };
     for (const field of collection.fields) {
-      item[field.key] = field.type === "nested" ? [] : "";
+      item[field.key] = initialFieldValue(field);
     }
     onItemsChange([...items, item]);
     setOpenId(item.id);
@@ -337,6 +650,23 @@ export default function CollectionEditor({ collection, items, onItemsChange, onN
                 </button>
 
                 <div className="admin-collection-actions">
+                  {supportsPinning && (
+                    <Button
+                      type="button"
+                      variant={item.pinned ? "secondary" : "ghost"}
+                      size="sm"
+                      className={`admin-collection-pin${item.pinned ? " is-pinned" : ""}`}
+                      aria-label={item.pinned
+                        ? `Unpin ${item[collection.titleField] || "item"}`
+                        : `Pin ${item[collection.titleField] || "item"} on homepage`}
+                      aria-pressed={Boolean(item.pinned)}
+                      title={item.pinned ? "Remove homepage pin" : "Pin on homepage"}
+                      onClick={() => updateField(index, "pinned", !item.pinned)}
+                    >
+                      <Pin aria-hidden="true" />
+                      <span>{item.pinned ? "Pinned" : "Pin"}</span>
+                    </Button>
+                  )}
                   <Button type="button" variant="ghost" size="icon"
                     aria-label={`Move ${item[collection.titleField] || "item"} up`}
                     disabled={index === 0} onClick={() => move(index, -1)}>
@@ -373,8 +703,10 @@ export default function CollectionEditor({ collection, items, onItemsChange, onN
                     item={item}
                     fields={collection.fields}
                     category={collection.uploadCategory}
+                    optionSources={optionSources}
                     onNotify={onNotify}
                     onChange={(key, value) => updateField(index, key, value)}
+                    onItemChange={(nextItem) => replace(index, nextItem)}
                   />
                 </div>
               )}

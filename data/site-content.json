@@ -6,9 +6,10 @@
       "group": "Experience",
       "name": "Intro & 3D Hero",
       "eyebrow": "Introduction",
-      "title": "Welcome to GreenTech Professionals",
-      "description": "Electrical, mechanical and photovoltaic solutions built for a cleaner, more efficient future.",
-      "action": "Click to explore",
+      "title": "Welcome to GreenTech Professionalsdqwdqwd",
+      "description": "Electrical, mechanical and photovoltaic solutions built for a cleaner, more efficient future.dwqdqwdqw",
+      "action": "Click to exploredqwdqwdqwdqwdwqdqwd",
+      "actionMode": "builtin",
       "format": "Interactive 3D experience",
       "summary": "6 GLB scenes",
       "source": "src/main.jsx + src/enpower3d.js",
@@ -18,9 +19,9 @@
       "id": "company-overview",
       "group": "Company",
       "name": "Company Overview",
-      "eyebrow": "Company",
-      "title": "GreenTech Professionals SRL",
-      "description": "GreenTech Professionals is an electrical and construction company with experience in electrical and mechanical works in the photovoltaic field.",
+      "eyebrow": "Companydwqdqwdqwqw",
+      "title": "GreenTech Professionals SRLAAAAA",
+      "description": "GreenTech Professionals is an electrical and construction company with experience in electrical and mechanical works in the photovoltaic field.dwqdqwdqwd",
       "action": "",
       "format": "Text and statistics",
       "summary": "4 impact metrics",
@@ -31,13 +32,14 @@
       "id": "company-video",
       "group": "Company",
       "name": "Company Video",
-      "eyebrow": "Company film",
-      "title": "Work delivered in the field",
-      "description": "Looping company video that starts when the section reaches the top of the viewport.",
+      "eyebrow": "",
+      "title": "",
+      "description": "",
       "action": "",
       "format": "MP4 video",
       "summary": "video.mp4",
       "source": "public/video.mp4",
+      "videoUrl": "/video.mp4",
       "visible": true
     },
     {
@@ -74,6 +76,7 @@
       "title": "Projects in Motion",
       "description": "Selected photovoltaic projects presented in a horizontal parallax gallery.",
       "action": "View project",
+      "actionMode": "builtin",
       "format": "Horizontal gallery",
       "summary": "5 projects + archive",
       "source": "src/data/horizontal-gallery.json",
@@ -87,6 +90,8 @@
       "title": "Built for accountable field delivery.",
       "description": "Technical capability, qualified teams and a growing European footprint behind every stage of execution.",
       "action": "Review credentials",
+      "actionMode": "link",
+      "actionUrl": "",
       "format": "Credentials grid",
       "summary": "3 credentials",
       "source": "src/CompanyProofSection.jsx",
@@ -96,9 +101,9 @@
       "id": "footprint-map",
       "group": "Company",
       "name": "European Footprint",
-      "eyebrow": "European footprint",
-      "title": "Teams close to the work.",
-      "description": "Published projects and field updates connect GreenTech Professionals across Romania, Italy and Spain.",
+      "eyebrow": "European footprintdqwdqwdqwdqwd",
+      "title": "Teams close to the work.dwqdqw",
+      "description": "Published projects and field updates connect GreenTech Professionals across Romania, Italy and Spain.dwqdqwd",
       "action": "",
       "format": "Interactive map",
       "summary": "3 countries",
@@ -109,10 +114,12 @@
       "id": "quality",
       "group": "Company",
       "name": "Safety & Quality",
-      "eyebrow": "Safety & quality",
-      "title": "Control from planning to handover.",
-      "description": "Reliable delivery depends on disciplined field execution, qualified personnel and checks that continue beyond installation.",
-      "action": "Explore our capabilities",
+      "eyebrow": "Safety & qualityddqwdqwdqw",
+      "title": "Control from planning to handover.dqwdqw",
+      "description": "Reliable delivery depends on disciplined field execution, qualified personnel and checks that continue beyond installation.dwqdwqddwqdwqdqw",
+      "action": "Explore our capabilitiesdqwdwqdqw",
+      "actionMode": "modal",
+      "actionUrl": "https://greentechpro.ro/services/",
       "format": "Image and checklist",
       "summary": "4 quality points",
       "source": "src/CompanyProofSection.jsx",
@@ -126,6 +133,7 @@
       "title": "What clients say about our work",
       "description": "Verified customer feedback displayed in an automatic carousel with review submission.",
       "action": "Create a review",
+      "actionMode": "builtin",
       "format": "Review carousel",
       "summary": "Carousel + form",
       "source": "src/CompanyProofSection.jsx",
@@ -191,9 +199,23 @@
       "title": "Field notes, team news and opportunities.",
       "description": "Project updates, technical stories, company news and open roles from GreenTech Professionals.",
       "action": "Read story",
+      "actionMode": "builtin",
       "format": "Article feed",
       "summary": "JSON articles",
       "source": "src/data/blog-posts.json",
+      "visible": true
+    },
+    {
+      "id": "faqs",
+      "group": "Content",
+      "name": "FAQs",
+      "eyebrow": "FAQs",
+      "title": "Questions we hear before a project starts.",
+      "description": "Scope, coverage and certification — the details clients ask about most often.",
+      "action": "",
+      "format": "Accordion",
+      "summary": "6 questions",
+      "source": "src/FaqSection.jsx",
       "visible": true
     },
     {
@@ -204,6 +226,7 @@
       "title": "Your next solar project starts here.",
       "description": "Tell us where you are building and what needs to be delivered. Our team is ready to discuss the next step.",
       "action": "Send request",
+      "actionMode": "builtin",
       "format": "Form and solar GLB",
       "summary": "Contact form + GDPR",
       "source": "src/SolarContactSection.jsx",
@@ -223,6 +246,97 @@
       "visible": true
     }
   ],
+  "footprintCountries": {
+    "items": [
+      {
+        "id": "romania",
+        "order": 1,
+        "enabled": true,
+        "name": "Romania",
+        "code": "RO",
+        "iso3": "ROU",
+        "atlasId": "642",
+        "cities": [
+          {
+            "id": "butimanu",
+            "name": "Butimanu",
+            "longitude": 25.897,
+            "latitude": 44.683
+          },
+          {
+            "id": "giurgiu",
+            "name": "Giurgiu",
+            "longitude": 25.9699,
+            "latitude": 43.9037
+          },
+          {
+            "id": "craiova",
+            "name": "Craiova",
+            "longitude": 23.7949,
+            "latitude": 44.3302
+          }
+        ]
+      },
+      {
+        "id": "italy",
+        "order": 2,
+        "enabled": true,
+        "name": "Italy",
+        "code": "IT",
+        "iso3": "ITA",
+        "atlasId": "380",
+        "cities": [
+          {
+            "id": "piombino",
+            "name": "Piombino",
+            "longitude": 10.5259,
+            "latitude": 42.9256
+          },
+          {
+            "id": "bologna",
+            "name": "Bologna",
+            "longitude": 11.3426,
+            "latitude": 44.4949
+          },
+          {
+            "id": "cagliari",
+            "name": "Cagliari",
+            "longitude": 9.1217,
+            "latitude": 39.2238
+          }
+        ]
+      },
+      {
+        "id": "spain",
+        "order": 3,
+        "enabled": true,
+        "name": "Spain",
+        "code": "ES",
+        "iso3": "ESP",
+        "atlasId": "724",
+        "cities": [
+          {
+            "id": "palencia",
+            "name": "Palencia",
+            "longitude": -4.5288,
+            "latitude": 42.0096
+          },
+          {
+            "id": "guillena",
+            "name": "Guillena",
+            "longitude": -6.056,
+            "latitude": 37.542
+          },
+          {
+            "id": "sevilla",
+            "name": "Sevilla",
+            "longitude": -5.9845,
+            "latitude": 37.3891
+          }
+        ]
+      }
+    ]
+  },
   "processCards": {
     "items": [
       {
@@ -251,6 +365,15 @@
         "title": "Maintenance & Monitoring",
         "description": "Preventive checks, corrective works and technical reporting keep photovoltaic systems performing after the first day of operation.",
         "theme": "care"
+      },
+      {
+        "id": "cca08e86-b368-4c2c-aea6-219ea2d731c1",
+        "order": 4,
+        "enabled": true,
+        "number": "TEST",
+        "title": "TEST",
+        "description": "TEST",
+        "theme": ""
       }
     ]
   },
@@ -578,54 +701,54 @@
         "id": "solar",
         "order": 1,
         "enabled": true,
-        "title": "Construction of Photovoltaic Parks",
+        "title": "Construction of Photovoltaic Parksdqwdqw",
         "sourceIndex": 0,
-        "body": "Solar is an abundant and cheap source of energy in South Africa. For customers with existing on-site solar panels, the addition of wheeled solar can boost renewable energy penetration by up to 50%, without the need for capital expenditure.",
+        "body": "Solar is an abundant and cheap source of energy in South Africa. For customers with existing on-site solar panels, the addition of wheeled solar can boost renewable energy penetration by up to 50%, without the need for capital expenditure.dqwdwqdwqdqwdqw",
         "footnote": ""
       },
       {
         "id": "wind",
         "order": 2,
         "enabled": true,
-        "title": "Construction of Wind Parks",
+        "title": "Construction of Wind Parksdwqdqwdwqdqw",
         "sourceIndex": 1,
-        "body": "Wind power, an intermittent resource with high potential in South Africa, generates power primarily during the mornings and evenings, perfectly complementing solar. A blend of off-site solar and wind energy can potentially elevate renewable energy penetration by an additional 15-20%.",
+        "body": "Wind power, an intermittent resource with high potential in South Africa, generates power primarily during the mornings and evenings, perfectly complementing solar. A blend of off-site solar and wind energy can potentially elevate renewable energy penetration by an additional 15-20%.dwqdqwdqwd",
         "footnote": ""
       },
       {
         "id": "transmission",
         "order": 3,
         "enabled": true,
-        "title": "Solar PV Systems",
+        "title": "Solar PV Systemsdqwdwqdwqdqw",
         "sourceIndex": 3,
-        "body": "Enpower Trading leverages the Eskom and Municipal networks to provide customers with a choice of energy source.\n\nAs the market evolves, Enpower Trading will collaborate with municipalities, regulators and other bodies to ensure municipalities remain revenue surplus neutral, and that we collectively work toward the goals of South Africa's Just Energy Transition: decarbonisation, affordability and security of supply.",
+        "body": "Enpower Trading leverages the Eskom and Municipal networks to provide customers with a choice of energy source.\n\nAs the market evolves, Enpower Trading will collaborate with municipalities, regulators and other bodies to ensure municipalities remain revenue surplus neutral, and that we collectively work toward the goals of South Africa's Just Energy Transition: decarbonisation, affordability and security of supply.dwqdwqdqw",
         "footnote": ""
       },
       {
         "id": "aggregation",
         "order": 4,
         "enabled": true,
-        "title": "Data Center Construction",
+        "title": "Data Center Constructiondqwdqwdqwdq",
         "sourceIndex": 4,
-        "body": "South African customers have limited access to Renewable Energy (RE) and can only supply a small percentage of their total energy needs through on-site generation. On-site generation requires high capital expenditure, and can only power one location.\n\nEnpower Trading offers customers access to a wide range of energy sources that collectively provide up to 100% renewable energy penetration rate, across multiple sites, reducing reliance on non-renewable energy ('brown power').\n\nCustomers now have the ability to choose the source of their energy.",
+        "body": "South African customers have limited access to Renewable Energy (RE) and can only supply a small percentage of their total energy needs through on-site generation. On-site generation requires high capital expenditure, and can only power one location.\n\nEnpower Trading offers customers access to a wide range of energy sources that collectively provide up to 100% renewable energy penetration rate, across multiple sites, reducing reliance on non-renewable energy ('brown power').\n\nCustomers now have the ability to choose the source of their energy.dqwdqwdqw",
         "footnote": ""
       },
       {
         "id": "customer",
         "order": 5,
         "enabled": true,
-        "title": "Maintenance",
+        "title": "Maintenancedqwdqwdqw",
         "sourceIndex": 5,
         "body": "Maximize your savings with our competitive tariffs and journey towards a net-zero future with the guidance of our Team. Enjoy the freedom of no longer being reliant on a single utility and benefit from fixed escalations, flexible contract periods (5, 10, or 20 years) as well as Renewable Energy Certificates (RECs) which assist you on your journey to net-zero.",
-        "footnote": "Between 2007 and 2022 the Eskom Tariff increased by 653%."
+        "footnote": "Between 2007 and 2022 the Eskom Tariff increased by 653%.dqwdqwdqw"
       },
       {
         "id": "future",
         "order": 6,
         "enabled": true,
-        "title": "Construction Services, Inspections & Testing",
+        "title": "Construction Services, Inspections & Testingdqwdqwdqwd",
         "sourceIndex": 6,
-        "body": "The evolved future trading market will transform the way in which we purchase and consume energy. The future liberalized market will see the unbundling of the previous vertically integrated national utility, allowing for a more competitive energy market and greener future.",
+        "body": "The evolved future trading market will transform the way in which we purchase and consume energy. The future liberalized market will see the unbundling of the previous vertically integrated national utility, allowing for a more competitive energy market and greener future.dqwdqwdqwdqwd",
         "footnote": ""
       }
     ]
@@ -792,6 +915,12 @@
         "order": 3,
         "enabled": true,
         "text": "Planned execution, handover and maintenance"
+      },
+      {
+        "id": "a0ae6151-770b-4b69-bae5-5bd871b5229c",
+        "order": 4,
+        "enabled": true,
+        "text": "SaFFFF"
       }
     ]
   },
@@ -891,7 +1020,8 @@
           "type": "project",
           "label": "View the Butimanu project"
         },
-        "sourceUrl": "https://greentechpro.ro/"
+        "sourceUrl": "https://greentechpro.ro/",
+        "pinned": true
       },
       {
         "slug": "careers-build-what-comes-next",
@@ -900,6 +1030,8 @@
         "order": 2,
         "enabled": true,
         "featured": false,
+        "pinned": false,
+        "pinLabel": "We're hiring",
         "category": "Careers",
         "date": null,
         "dateLabel": "Applications open",
@@ -1004,17 +1136,239 @@
         "id": "f12dba9b-e547-47d5-9905-b1b78b2d1fea",
         "order": 4,
         "enabled": true,
-        "title": "Instaled Data 222vw",
-        "slug": "instaled-data-22-2",
-        "category": "InstaledData",
-        "dateLabel": "3martie2030",
-        "readTime": "Today",
-        "image": "",
-        "alt": "test coveralt text ",
-        "excerpt": "test excerpt text ",
-        "intro": "test intro"
+        "featured": false,
+        "status": "published",
+        "title": "Test article: From planning to field delivery",
+        "slug": "test-planning-to-field-delivery",
+        "category": "Field journal",
+        "date": "2026-07-29",
+        "dateLabel": "29 July 2026",
+        "readTime": "3 min read",
+        "image": "/projects/butimanu/butimanu-02.jpg",
+        "alt": "Photovoltaic construction work at the Butimanu project",
+        "excerpt": "A complete Field Journal example showing how a project story is structured from introduction to technical highlights.",
+        "intro": "This published test entry demonstrates the complete article format available for GreenTech Professionals field stories, company updates and technical news.",
+        "sections": [
+          {
+            "title": "Planning before mobilisation",
+            "paragraphs": [
+              "Every reliable field operation begins with a clear execution plan, defined responsibilities and an agreed sequence of work.",
+              "This first chapter shows how longer editorial content is divided into readable paragraphs on both desktop and mobile."
+            ]
+          },
+          {
+            "title": "Progress documented in the field",
+            "paragraphs": [
+              "Project updates can combine site context, technical milestones and the contribution of the teams involved in delivery.",
+              "Additional chapters can be added whenever a story needs more detail, while the highlights below keep the essential information easy to scan."
+            ]
+          }
+        ],
+        "highlights": [
+          {
+            "value": "2 stages",
+            "label": "Example article chapters"
+          },
+          {
+            "value": "3 points",
+            "label": "Key information highlights"
+          },
+          {
+            "value": "Full format",
+            "label": "Desktop and mobile article layout"
+          }
+        ],
+        "relatedProjectId": "01cf8ad1-62e3-4e4a-9ed1-fe0a68b22931",
+        "primaryAction": {
+          "type": "project",
+          "label": "View the Butimanu project"
+        },
+        "sourceUrl": "https://greentechpro.ro/",
+        "pinned": true
       }
     ]
   },
-  "updatedAt": "2026-07-28T11:00:15.197Z"
+  "updatedAt": "2026-07-29T11:47:57.185Z",
+  "footer": {
+    "links": [
+      {
+        "id": "explore-projects",
+        "order": 1,
+        "enabled": true,
+        "group": "Explore",
+        "label": "All projects",
+        "href": "#projects"
+      },
+      {
+        "id": "explore-journal",
+        "order": 2,
+        "enabled": true,
+        "group": "Explore",
+        "label": "Journal",
+        "href": "#journal"
+      },
+      {
+        "id": "explore-process",
+        "order": 3,
+        "enabled": true,
+        "group": "Explore",
+        "label": "Work process",
+        "href": "#process"
+      },
+      {
+        "id": "explore-contact",
+        "order": 4,
+        "enabled": true,
+        "group": "Explore",
+        "label": "Contact",
+        "href": "#contact"
+      },
+      {
+        "id": "services-photovoltaic",
+        "order": 5,
+        "enabled": true,
+        "group": "Services",
+        "label": "Photovoltaic parks",
+        "href": "#service-photovoltaic"
+      },
+      {
+        "id": "services-electrical",
+        "order": 6,
+        "enabled": true,
+        "group": "Services",
+        "label": "Electrical inspections",
+        "href": "#service-electrical"
+      },
+      {
+        "id": "services-construction",
+        "order": 7,
+        "enabled": true,
+        "group": "Services",
+        "label": "Construction services",
+        "href": "#service-construction"
+      },
+      {
+        "id": "services-data-center",
+        "order": 8,
+        "enabled": true,
+        "group": "Services",
+        "label": "Data center construction",
+        "href": "#service-data-center"
+      },
+      {
+        "id": "company-about",
+        "order": 9,
+        "enabled": true,
+        "group": "Company",
+        "label": "About us",
+        "href": "#company"
+      },
+      {
+        "id": "company-credentials",
+        "order": 10,
+        "enabled": true,
+        "group": "Company",
+        "label": "Credentials",
+        "href": "#credentials"
+      },
+      {
+        "id": "company-reviews",
+        "order": 11,
+        "enabled": true,
+        "group": "Company",
+        "label": "Customer reviews",
+        "href": "#reviews"
+      },
+      {
+        "id": "legal-privacy",
+        "order": 12,
+        "enabled": true,
+        "group": "Legal",
+        "label": "Privacy policy",
+        "href": "modal:privacy"
+      },
+      {
+        "id": "legal-terms",
+        "order": 13,
+        "enabled": true,
+        "group": "Legal",
+        "label": "Terms & conditions",
+        "href": "modal:terms"
+      },
+      {
+        "id": "social-linkedin",
+        "order": 14,
+        "enabled": true,
+        "group": "Social",
+        "label": "LinkedIn",
+        "href": "https://ro.linkedin.com/company/greentech-professionals"
+      },
+      {
+        "id": "social-facebook",
+        "order": 15,
+        "enabled": true,
+        "group": "Social",
+        "label": "Facebook",
+        "href": "https://www.facebook.com/greentechprofessionals"
+      }
+    ],
+    "tagline": "Electrical, mechanical and construction capability for renewable energy projects across Europe.",
+    "email": "office@greentechpro.ro",
+    "phone": "",
+    "address": "194 Floreasca Way, District 1, Bucharest",
+    "mapUrl": "https://maps.app.goo.gl/4B6ZvpVcABLVJL5DA",
+    "copyright": "GreenTech Professionals SRL",
+    "creditLabel": "Sun model: Wr_titan, CC BY 4.0",
+    "creditUrl": "https://sketchfab.com/3d-models/space-sun-9dc16d37e8224fe9923f68de0149fcab",
+    "privacyTitle": "Privacy policy",
+    "privacyBody": "Greentech Professionals SRL – Privacy Policy Last updated: June 2026\n\n1. Who We Are\n\nThis Privacy Policy describes how Greentech Professionals SRL collects, uses, and protects your personal data when you visit greentechpro.ro or interact with us through this website.\n\nData Controller: Greentech Professionals SRL, 194 Floreasca Way, District 1, 014472, Bucharest, Romania. Email: office@greentechpro.ro. Phone: +40 727 332 213.\n\nWe process personal data in compliance with the General Data Protection Regulation (EU) 2016/679 (GDPR) and applicable Romanian legislation.\n\n2. What Data We Collect\n\nWe only collect personal data that you voluntarily provide through our Careers page application form. This includes: full name, email address, phone number, desired position, professional experience, and any CV or reference documents you upload.\n\nIf you contact us directly at office@greentechpro.ro, we process only the information included in your email. We do not use tracking pixels, analytics tools, or any automated data collection on this website.\n\n3. How We Use Your Data\n\nData submitted through the Careers form is used exclusively to evaluate your candidacy for open or future positions, to contact you regarding your application, and for internal recruitment recordkeeping. We will not use your data for marketing or any other purpose without your explicit consent.\n\n4. Legal Basis for Processing\n\nWe process your data based on your explicit consent (Art. 6(1)(a) GDPR), given when you tick the GDPR checkbox on the application form. You may withdraw consent at any time by contacting us at office@greentechpro.ro. Withdrawal does not affect the lawfulness of processing carried out before withdrawal.\n\n5. How Long We Keep Your Data\n\nApplication data is retained for a maximum of 12 months from submission. After this period, it is permanently deleted unless you have been hired, in which case your data is retained as part of your employment file under applicable labor law. You may request deletion at any time.\n\n6. Who We Share Data With\n\nWe do not sell or share your data with third parties for commercial purposes. Your data may be accessed by internal HR and management staff involved in recruitment, and by our website hosting provider acting as a data processor within the European Economic Area. We do not transfer data outside the EEA.\n\n7. Your Rights\n\nUnder the GDPR you have the right to access, correct, delete, restrict, or port your personal data, and to object to its processing. To exercise any of these rights, contact us at office@greentechpro.ro. We will respond within 30 days.\n\nYou may also lodge a complaint with ANSPDCP (www.dataprotection.ro), the Romanian data protection supervisory authority, B-dul G-ral. Gheorghe Magheru 28-30, Sector 1, Bucharest.\n\n8. Security\n\nWe apply appropriate technical and organizational measures to protect your data against unauthorized access, loss, or disclosure. All data transmissions on this website are encrypted via HTTPS.\n\n9. Cookies\n\nThis website uses only essential technical cookies necessary for its proper functioning. We do not use tracking, advertising, or analytics cookies. Essential cookies do not require consent under applicable EU law.\n\n10. Changes to This Policy\n\nWe may update this policy periodically. The date of the last revision is displayed at the top of this page. Continued use of the website after any changes constitutes acceptance of the updated policy.",
+    "termsTitle": "Terms & conditions",
+    "termsBody": "Greentech Professionals SRL – Terms and Conditions Last updated: June 2026\n\n1. General\n\nThese Terms and Conditions govern your use of the greentechpro.ro website, operated by Greentech Professionals SRL, 194 Floreasca Way, District 1, 014472, Bucharest, Romania (company registration no. RO46635117 – J40/15653/2022). By accessing this website, you agree to these terms.\n\n2. Website Purpose\n\nThis website is a presentation platform providing information about Greentech Professionals SRL, its services, projects, and career opportunities. It does not constitute an offer to sell, a contract, or a binding commercial proposal.\n\n3. Intellectual Property\n\nAll content on this website, including text, images, logos, graphics, and documents, is the property of Greentech Professionals SRL or its content suppliers and is protected by applicable copyright and intellectual property law. You may not reproduce, distribute, or use any content without our prior written consent.\n\n4. Career Applications\n\nBy submitting an application through our Careers page, you confirm that all information provided is accurate and complete. Submission of an application does not create any employment obligation on either party. We reserve the right to reject any application at our sole discretion.\n\n5. Limitation of Liability\n\nThe information on this website is provided for general informational purposes only. Greentech Professionals SRL makes no warranties regarding the accuracy, completeness, or suitability of any information on the site. We are not liable for any direct or indirect damages arising from the use of this website or reliance on its content.\n\n6. External Links\n\nThis website may contain links to third-party websites. These links are provided for convenience only. Greentech Professionals SRL has no control over and accepts no responsibility for the content or practices of any linked websites.\n\n7. Governing Law\n\nThese Terms and Conditions are governed by Romanian law. Any disputes arising from the use of this website shall be subject to the exclusive jurisdiction of the competent courts in Bucharest, Romania.\n\n8. Changes to These Terms\n\nWe reserve the right to update these Terms and Conditions at any time. The date of the last revision is displayed at the top of this page. Continued use of the website constitutes acceptance of the updated terms.\n\n9. Contact\n\nFor any questions regarding these Terms and Conditions: office@greentechpro.ro, +40 727 332 213."
+  },
+  "faqs": {
+    "items": [
+      {
+        "id": "faq-services",
+        "order": 1,
+        "enabled": true,
+        "question": "What kind of projects do you take on?",
+        "answer": "We deliver electrical, mechanical and civil works for utility-scale energy sites: photovoltaic parks, electrical inspections and testing, construction services and data centre builds.\n\nProjects range from single-site installations to multi-megawatt parks across Romania, Italy and Spain."
+      },
+      {
+        "id": "faq-coverage",
+        "order": 2,
+        "enabled": true,
+        "question": "Which countries do you work in?",
+        "answer": "We have active field teams in Romania, Italy and Spain, and we mobilise across the European Union for larger contracts."
+      },
+      {
+        "id": "faq-scope",
+        "order": 3,
+        "enabled": true,
+        "question": "Do you handle a project end to end?",
+        "answer": "Yes. We cover feasibility and design, mounting structures, cabling and inverters, commissioning and grid connection, then continue with periodic testing and maintenance after handover."
+      },
+      {
+        "id": "faq-certifications",
+        "order": 4,
+        "enabled": true,
+        "question": "What certifications do you hold?",
+        "answer": "We hold ISO quality certifications and ANRE certification for work in the energy field. Full credentials are available on request."
+      },
+      {
+        "id": "faq-timeline",
+        "order": 5,
+        "enabled": true,
+        "question": "How quickly can you mobilise a team?",
+        "answer": "Mobilisation depends on scope and season. For most inspection and testing work we can be on site within two weeks; large installation contracts are planned against the client's construction programme."
+      },
+      {
+        "id": "faq-quote",
+        "order": 6,
+        "enabled": true,
+        "question": "How do I request a quote?",
+        "answer": "Send us the project location, capacity and the scope you need through the form below. Our team replies with a technical proposal and an indicative timeline."
+      }
+    ]
+  }
 }

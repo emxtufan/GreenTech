@@ -1,0 +1,44 @@
+[
+  {
+    "id": "romania",
+    "order": 1,
+    "enabled": true,
+    "name": "Romania",
+    "code": "RO",
+    "iso3": "ROU",
+    "atlasId": "642",
+    "cities": [
+      { "id": "butimanu", "name": "Butimanu", "longitude": 25.897, "latitude": 44.683 },
+      { "id": "giurgiu", "name": "Giurgiu", "longitude": 25.9699, "latitude": 43.9037 },
+      { "id": "craiova", "name": "Craiova", "longitude": 23.7949, "latitude": 44.3302 }
+    ]
+  },
+  {
+    "id": "italy",
+    "order": 2,
+    "enabled": true,
+    "name": "Italy",
+    "code": "IT",
+    "iso3": "ITA",
+    "atlasId": "380",
+    "cities": [
+      { "id": "piombino", "name": "Piombino", "longitude": 10.5259, "latitude": 42.9256 },
+      { "id": "bologna", "name": "Bologna", "longitude": 11.3426, "latitude": 44.4949 },
+      { "id": "cagliari", "name": "Cagliari", "longitude": 9.1217, "latitude": 39.2238 }
+    ]
+  },
+  {
+    "id": "spain",
+    "order": 3,
+    "enabled": true,
+    "name": "Spain",
+    "code": "ES",
+    "iso3": "ESP",
+    "atlasId": "724",
+    "cities": [
+      { "id": "palencia", "name": "Palencia", "longitude": -4.5288, "latitude": 42.0096 },
+      { "id": "guillena", "name": "Guillena", "longitude": -6.056, "latitude": 37.542 },
+      { "id": "sevilla", "name": "Sevilla", "longitude": -5.9845, "latitude": 37.3891 }
+    ]
+  }
+]

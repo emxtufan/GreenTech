@@ -8,8 +8,8 @@ import useSiteContent from "./useSiteContent.js";
  *   const text = useSection("intro-hero");
  *   <h1>{text("title", "Welcome to GreenTech Professionals")}</h1>
  *
- * Returns a getter rather than the record so every call site has to name its
- * fallback — an empty admin field can then never blank out a heading.
+ * Fallback copy is used only when a field is absent. A field cleared in admin
+ * remains empty on the public site.
  */
 export default function useSection(id) {
   const section = selectSection(id, useSiteContent());

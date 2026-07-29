@@ -23,16 +23,16 @@ export const selectSections = (content = current) =>
   enabledInOrder(content?.sections).filter((section) => section.visible !== false);
 
 /**
- * Copy for one homepage section. Components pass their own markup as fallback,
- * so an empty admin field or a missing entry keeps the shipped wording rather
- * than rendering a blank heading.
+ * Copy for one homepage section. A saved empty string is intentional and stays
+ * empty; fallback copy is used only while a field is missing or malformed.
  */
 export const selectSection = (id, content = current) =>
   asArray(content?.sections).find((section) => section.id === id) ?? null;
 
 export const sectionText = (section, field, fallback = "") => {
   const value = section?.[field];
-  return typeof value === "string" && value.trim() !== "" ? value : fallback;
+  if (typeof value !== "string") return fallback;
+  return value.trim() === "" ? "" : value;
 };
 
 export const selectProcessCards = (content = current) =>
@@ -53,14 +53,48 @@ export const selectClientLogos = (content = current) =>
 export const selectCredentials = (content = current) =>
   enabledInOrder(content?.credentials?.items);
 
+export const selectFootprintCountries = (content = current) =>
+  enabledInOrder(content?.footprintCountries?.items);
+
 export const selectQualityPoints = (content = current) =>
   enabledInOrder(content?.qualityPoints?.items);
 
 export const selectTestimonials = (content = current) =>
   enabledInOrder(content?.testimonials?.items);
 
+const blogPostTimestamp = (post) => {
+  if (typeof post?.date !== "string" || !post.date.trim()) return Number.NEGATIVE_INFINITY;
+  const timestamp = Date.parse(post.date);
+  return Number.isFinite(timestamp) ? timestamp : Number.NEGATIVE_INFINITY;
+};
+
+export const selectFaqs = (content = current) =>
+  enabledInOrder(content?.faqs?.items);
+
+export const selectFooter = (content = current) => content?.footer ?? {};
+
+/** Footer links grouped by their `group` field, in declared order. */
+export const selectFooterGroups = (content = current) => {
+  const groups = new Map();
+
+  for (const link of enabledInOrder(content?.footer?.links)) {
+    const name = link.group?.trim() || "Links";
+    if (!groups.has(name)) groups.set(name, []);
+    groups.get(name).push(link);
+  }
+
+  return [...groups].map(([title, links]) => ({ title, links }));
+};
+
 export const selectBlogPosts = (content = current) =>
-  enabledInOrder(content?.blog?.posts).filter((post) => post.status !== "draft");
+  enabledInOrder(content?.blog?.posts)
+    .filter((post) => post.status !== "draft")
+    .sort((first, second) => (
+      Number(Boolean(second.pinned)) - Number(Boolean(first.pinned))
+      ||
+      blogPostTimestamp(second) - blogPostTimestamp(first)
+      || (first.order ?? 0) - (second.order ?? 0)
+    ));
 
 /** Synchronous access to the most recent content the app has seen. */
 export const getSiteContent = () => current;

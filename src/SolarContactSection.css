@@ -210,6 +210,16 @@
   grid-column: 1 / -1;
 }
 
+.solar-contact-honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 .solar-contact-form-actions {
   display: flex;
   align-items: center;
@@ -325,6 +335,16 @@
   outline-offset: 3px;
 }
 
+.solar-contact-submit:disabled {
+  opacity: 0.72;
+  cursor: wait;
+  transform: none;
+}
+
+.solar-contact-spin {
+  animation: solar-contact-spin 800ms linear infinite;
+}
+
 .solar-contact-form-status {
   min-height: 16px;
   margin: -12px 0 0;
@@ -337,6 +357,14 @@
 
 .solar-contact-form-status.visible {
   opacity: 1;
+}
+
+.solar-contact-form-status.is-error {
+  color: #ff968d;
+}
+
+@keyframes solar-contact-spin {
+  to { transform: rotate(360deg); }
 }
 
 .solar-contact-links {
@@ -440,7 +468,9 @@
 
 .solar-contact-footer-brand > img {
   display: block;
-  width: clamp(148px, 13vw, 210px);
+  width: 300px;
+  /* Narrow phones (320px viewport) have less than 300px of content width. */
+  max-width: 100%;
   height: auto;
   object-fit: contain;
 }
@@ -453,10 +483,45 @@
   line-height: 1.5;
 }
 
+.solar-contact-footer-contact {
+  display: flex;
+  margin-top: 26px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 11px;
+}
+
+.solar-contact-footer-contact a {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: #dfe5df;
+  font-size: 13px;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.solar-contact-footer-contact a:hover,
+.solar-contact-footer-contact a:focus-visible {
+  color: #8bbc3f;
+}
+
+.solar-contact-footer-contact svg {
+  flex: 0 0 auto;
+  color: #7f8982;
+  transition: color 180ms ease;
+}
+
+.solar-contact-footer-contact a:hover svg,
+.solar-contact-footer-contact a:focus-visible svg {
+  color: #8bbc3f;
+}
+
 .solar-contact-footer-groups {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 34px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 34px 28px;
 }
 
 .solar-contact-footer-groups section {
@@ -496,6 +561,25 @@
   text-decoration: none;
   cursor: pointer;
   transition: color 180ms ease;
+}
+
+.solar-contact-footer-groups a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.solar-contact-footer-groups a svg {
+  flex: 0 0 auto;
+  opacity: 0;
+  transform: translate(-2px, 2px);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.solar-contact-footer-groups a:hover svg,
+.solar-contact-footer-groups a:focus-visible svg {
+  opacity: 0.75;
+  transform: none;
 }
 
 .solar-contact-footer-groups a:hover,
@@ -689,7 +773,7 @@
   }
 
   .solar-contact-footer-brand > img {
-    width: 142px;
+    width: 300px;
   }
 
   .solar-contact-footer-brand p {
@@ -736,4 +820,21 @@
   .solar-contact-form-status {
     transition: none;
   }
+}
+
+/* Inline consent link that opens the privacy modal instead of navigating. */
+.solar-contact-consent-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.solar-contact-consent-link:hover,
+.solar-contact-consent-link:focus-visible {
+  color: #8bbc3f;
 }

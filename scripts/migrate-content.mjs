@@ -56,7 +56,7 @@ const readJson = async (name) => {
 
 const [
   sections, processCards, gallery, posts, heroCards, impactStats, clientLogos,
-  credentials, qualityPoints, testimonials,
+  credentials, footprintCountries, qualityPoints, testimonials, footerLinks, faqs,
 ] =
   await Promise.all([
     readJson("admin-sections.json"),
@@ -67,8 +67,11 @@ const [
     readJson("impact-stats.json"),
     readJson("client-logos.json"),
     readJson("credentials.json"),
+    readJson("footprint-countries.json"),
     readJson("quality-points.json"),
     readJson("testimonials.json"),
+    readJson("footer-links.json"),
+    readJson("faqs.json"),
   ]);
 
 const content = withDefaults({
@@ -79,8 +82,34 @@ const content = withDefaults({
   impactStats: { items: impactStats },
   clientLogos: { items: clientLogos },
   credentials: { items: credentials },
+  footprintCountries: { items: footprintCountries },
   qualityPoints: { items: qualityPoints },
   testimonials: { items: testimonials },
+  faqs: { items: faqs },
+  footer: {
+    tagline: "Electrical, mechanical and construction capability for renewable energy projects across Europe.",
+    email: "office@greentechpro.ro",
+    phone: "",
+    address: "194 Floreasca Way, District 1, Bucharest",
+    mapUrl: "https://maps.app.goo.gl/4B6ZvpVcABLVJL5DA",
+    copyright: "GreenTech Professionals SRL",
+    creditLabel: "Sun model: Wr_titan, CC BY 4.0",
+    creditUrl: "https://sketchfab.com/3d-models/space-sun-9dc16d37e8224fe9923f68de0149fcab",
+    // Blank lines become separate paragraphs in the legal modal.
+    privacyTitle: "Privacy policy",
+    privacyBody: [
+      "GreenTech Professionals SRL processes the personal data you submit through this website solely to answer your request and to deliver the services you ask for.",
+      "We collect only the details you provide in our contact and review forms: name, phone number, email address and the content of your message. This data is stored on our own infrastructure and is never sold or shared with third parties for marketing purposes.",
+      "You may request access to, correction of, or deletion of your personal data at any time by writing to office@greentechpro.ro.",
+    ].join("\n\n"),
+    termsTitle: "Terms & conditions",
+    termsBody: [
+      "This website and its content are published by GreenTech Professionals SRL for information purposes.",
+      "Project figures, capacities and photographs describe work already delivered and do not constitute a commercial offer. Any commercial engagement is governed by the signed contract between GreenTech Professionals SRL and the client.",
+      "All text, images and 3D assets on this site remain the property of their respective owners and may not be reproduced without written permission.",
+    ].join("\n\n"),
+    links: footerLinks,
+  },
   blog: {
     // `slug` defaults to the existing id so published blog URLs do not change.
     posts: posts.map((post) => ({ slug: post.id, status: "published", ...post })),
@@ -112,6 +141,9 @@ console.table({
   impactStats: content.impactStats.items.length,
   clientLogos: content.clientLogos.items.length,
   credentials: content.credentials.items.length,
+  footprintCountries: content.footprintCountries.items.length,
   qualityPoints: content.qualityPoints.items.length,
   testimonials: content.testimonials.items.length,
+  faqs: content.faqs.items.length,
+  footerLinks: content.footer.links.length,
 });

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   ArrowUpRight,
@@ -28,6 +28,7 @@ import {
   ServerCog,
   ShieldCheck,
   Sparkles,
+  Upload,
   UsersRound,
   Workflow,
   X,
@@ -58,12 +59,15 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import CollectionEditor from "@/components/admin/CollectionEditor.jsx";
+import InquiryInbox from "@/components/admin/InquiryInbox.jsx";
+import ReviewModeration from "@/components/admin/ReviewModeration.jsx";
 import {
   getSession,
   login as requestLogin,
   logout as requestLogout,
   getContent,
   saveContent,
+  uploadAsset,
 } from "@/lib/adminApi.js";
 import "./admin.css";
 
@@ -71,6 +75,52 @@ const GROUP_ORDER = ["Experience", "Company", "Services", "Content"];
 
 // Sidebar sections that also own a repeatable collection in the content file.
 const COLLECTIONS = {
+  faqs: {
+    key: "faqs",
+    path: ["faqs", "items"],
+    uploadCategory: "sections",
+    heading: "Questions",
+    description: "Accordion above the contact form. Separate answer paragraphs with a blank line.",
+    singular: "question",
+    titleField: "question",
+    fields: [
+      { key: "question", label: "Question" },
+      { key: "answer", label: "Answer", type: "textarea", rows: 7 },
+    ],
+  },
+  footer: {
+    key: "footer",
+    path: ["footer", "links"],
+    uploadCategory: "sections",
+    heading: "Footer links",
+    description:
+      'Grouped by the "Group" field — links sharing a group become one column. '
+      + 'Use "Social" for the bottom bar, #anchor for on-page sections, '
+      + 'and modal:privacy or modal:terms to open the legal dialogs.',
+    singular: "link",
+    titleField: "label",
+    metaHeading: "Footer information",
+    metaDescription: "Brand line, contact details and legal text in the footer.",
+    metaFields: [
+      { key: "tagline", label: "Tagline", type: "textarea", rows: 3 },
+      { key: "email", label: "Email" },
+      { key: "phone", label: "Phone", placeholder: "Leave empty to hide" },
+      { key: "address", label: "Address" },
+      { key: "mapUrl", label: "Map URL" },
+      { key: "copyright", label: "Copyright holder", placeholder: "GreenTech Professionals SRL" },
+      { key: "creditLabel", label: "Credit label", placeholder: "Leave empty to hide" },
+      { key: "creditUrl", label: "Credit URL" },
+      { key: "privacyTitle", label: "Privacy modal title" },
+      { key: "privacyBody", label: "Privacy modal text", type: "textarea", rows: 9 },
+      { key: "termsTitle", label: "Terms modal title" },
+      { key: "termsBody", label: "Terms modal text", type: "textarea", rows: 9 },
+    ],
+    fields: [
+      { key: "label", label: "Label" },
+      { key: "href", label: "URL", placeholder: "#contact or https://…" },
+      { key: "group", label: "Group", placeholder: "Explore | Services | Company | Legal | Social" },
+    ],
+  },
   projects: {
     key: "projects",
     path: ["horizontalGallery", "items"],
@@ -128,13 +178,76 @@ const COLLECTIONS = {
     fields: [
       { key: "title", label: "Title" },
       { key: "slug", label: "Slug", placeholder: "url-friendly-identifier" },
+      {
+        key: "status",
+        label: "Publication status",
+        type: "select",
+        defaultValue: "published",
+        options: [
+          { value: "published", label: "Published" },
+          { value: "draft", label: "Draft" },
+        ],
+      },
+      {
+        key: "pinned",
+        label: "Pin on homepage",
+        type: "boolean",
+        defaultValue: false,
+        hint: "Pinned announcements stay above articles sorted by publication date.",
+      },
+      {
+        key: "pinLabel",
+        label: "Pinned announcement label",
+        placeholder: "We're hiring",
+        hint: "Displayed as a badge only while this article is pinned.",
+      },
       { key: "category", label: "Category" },
+      {
+        key: "date",
+        label: "Publication date",
+        type: "date",
+        hint: "After pinned announcements, newest publication dates appear first.",
+      },
       { key: "dateLabel", label: "Date label" },
       { key: "readTime", label: "Read time" },
       { key: "image", label: "Cover image", type: "image" },
       { key: "alt", label: "Cover alt text" },
       { key: "excerpt", label: "Excerpt", type: "textarea" },
       { key: "intro", label: "Intro", type: "textarea", rows: 6 },
+      {
+        key: "sections",
+        label: "Article chapters",
+        type: "nested",
+        singular: "chapter",
+        fields: [
+          { key: "title", label: "Chapter title" },
+          {
+            key: "paragraphs",
+            label: "Paragraphs",
+            type: "string-list",
+            rows: 7,
+            hint: "Separate paragraphs with one blank line.",
+          },
+        ],
+      },
+      {
+        key: "highlights",
+        label: "Article highlights",
+        type: "nested",
+        singular: "highlight",
+        fields: [
+          { key: "value", label: "Value", placeholder: "300 MW" },
+          { key: "label", label: "Label", placeholder: "Installed capacity" },
+        ],
+      },
+      {
+        key: "relatedProjectId",
+        label: "Related project",
+        type: "select",
+        optionsSource: "projects",
+        hint: "The article automatically receives a button that opens this project.",
+      },
+      { key: "sourceUrl", label: "Source URL" },
     ],
   },
   "intro-hero": {
@@ -195,6 +308,82 @@ const COLLECTIONS = {
       { key: "icon", label: "Icon", placeholder: "Award | ShieldCheck | Users | Globe2" },
     ],
   },
+  "footprint-map": {
+    key: "footprint-map",
+    path: ["footprintCountries", "items"],
+    uploadCategory: "sections",
+    heading: "Countries and project locations",
+    description: "Countries generate the map buttons and highlighted shapes. The first location in the first country is the connection origin.",
+    singular: "country",
+    titleField: "name",
+    fields: [
+      {
+        key: "name",
+        label: "Country name",
+        type: "country",
+        hint: "Choose a suggestion to fill all ISO codes automatically.",
+      },
+      {
+        key: "code",
+        label: "ISO alpha-2",
+        placeholder: "RO",
+        maxLength: 2,
+        uppercase: true,
+        hint: "Two-letter ISO code shown on the map button.",
+      },
+      {
+        key: "iso3",
+        label: "ISO alpha-3",
+        placeholder: "ROU",
+        maxLength: 3,
+        uppercase: true,
+        hint: "Three-letter ISO code.",
+      },
+      {
+        key: "atlasId",
+        label: "ISO numeric / map ID",
+        placeholder: "642",
+        hint: "Numeric ISO code used to match the country shape on the map.",
+      },
+      {
+        key: "cities",
+        label: "Project locations",
+        type: "nested",
+        singular: "location",
+        geocode: {
+          queryKey: "name",
+          longitudeKey: "longitude",
+          latitudeKey: "latitude",
+        },
+        fields: [
+          {
+            key: "name",
+            label: "Location name",
+            placeholder: "Butimanu",
+            hint: "City, village or full project address.",
+          },
+          {
+            key: "longitude",
+            label: "Longitude",
+            type: "number",
+            min: -180,
+            max: 180,
+            step: "any",
+            placeholder: "25.897",
+          },
+          {
+            key: "latitude",
+            label: "Latitude",
+            type: "number",
+            min: -90,
+            max: 90,
+            step: "any",
+            placeholder: "44.683",
+          },
+        ],
+      },
+    ],
+  },
   quality: {
     key: "quality",
     path: ["qualityPoints", "items"],
@@ -209,8 +398,8 @@ const COLLECTIONS = {
     key: "reviews",
     path: ["testimonials", "items"],
     uploadCategory: "sections",
-    heading: "Testimonials",
-    description: "Customer reviews shown in the carousel.",
+    heading: "Official source testimonials",
+    description: "Source-backed testimonials maintained by the company. Browser reviews are moderated separately above.",
     singular: "testimonial",
     titleField: "author",
     fields: [
@@ -264,6 +453,7 @@ const sectionIcons = {
   "electrical-service": ClipboardCheck,
   "construction-service": HardHat,
   "data-center-service": ServerCog,
+  faqs: MessageSquareQuote,
   blog: Newspaper,
   contact: Mail,
   footer: PanelTop,
@@ -385,10 +575,104 @@ function SectionPreview({ section }) {
   );
 }
 
+function CompanyVideoEditor({ value, onChange, onNotify }) {
+  const inputRef = useRef(null);
+  const [busy, setBusy] = useState(false);
+  const videoUrl = value || "/video.mp4";
+
+  const pickVideo = async (event) => {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (!file) return;
+
+    setBusy(true);
+    try {
+      const { url } = await uploadAsset(file, "video");
+      onChange(url);
+      onNotify({
+        tone: "success",
+        message: `${file.name} uploaded. Publish changes to make the new video live.`,
+      });
+    } catch (error) {
+      onNotify({ tone: "error", message: error.message });
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <section className="admin-form-section" aria-labelledby="company-video-file-title">
+      <div className="admin-form-heading">
+        <div>
+          <h2 id="company-video-file-title">Company video file</h2>
+          <p>Upload the public video file and store only its URL in the content JSON.</p>
+        </div>
+        <Badge variant="secondary">MP4 / WebM</Badge>
+      </div>
+
+      <div className="admin-video-field" aria-busy={busy}>
+        <div className="admin-video-preview">
+          <video key={videoUrl} src={videoUrl} controls muted playsInline preload="metadata" />
+        </div>
+
+        <div className="admin-video-controls">
+          <div className="admin-field">
+            <Label htmlFor="company-video-url">Public video URL</Label>
+            <Input
+              id="company-video-url"
+              value={value ?? ""}
+              placeholder="/uploads/video/company-film.mp4"
+              onChange={(event) => onChange(event.target.value)}
+            />
+            <small>Only this URL is saved in data/site-content.json. Maximum file size: 128 MB.</small>
+          </div>
+
+          <div className="admin-video-buttons">
+            <Button
+              type="button"
+              variant="outline"
+              disabled={busy}
+              onClick={() => inputRef.current?.click()}
+            >
+              {busy ? <Loader2 className="admin-spin" aria-hidden="true" /> : <Upload aria-hidden="true" />}
+              {busy ? "Uploading..." : value ? "Replace video" : "Upload video"}
+            </Button>
+            {videoUrl !== "/video.mp4" && (
+              <Button type="button" variant="ghost" disabled={busy} onClick={() => onChange("/video.mp4")}>
+                <RotateCcw aria-hidden="true" />
+                Use original video
+              </Button>
+            )}
+          </div>
+
+          <input
+            ref={inputRef}
+            type="file"
+            accept="video/mp4,video/webm,.mp4,.webm"
+            hidden
+            onChange={pickVideo}
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function SectionEditor({
   section, index, dirty, onChange, onReset, onSave, saveState, children,
 }) {
   const saving = saveState === "saving";
+  const actionMode = ["builtin", "link", "modal"].includes(section.actionMode)
+    ? section.actionMode
+    : "builtin";
+  const actionModal = section.actionModal && typeof section.actionModal === "object"
+    ? section.actionModal
+    : {};
+  const modalField = (key, fallback = "") =>
+    (typeof actionModal[key] === "string" ? actionModal[key] : fallback);
+  const updateModalField = (key, value) =>
+    onChange("actionModal", { ...actionModal, [key]: value });
+
   return (
     <div className="admin-editor" key={section.id}>
       <header className="admin-editor-heading">
@@ -456,15 +740,108 @@ function SectionEditor({
                 />
                 <small>{section.description.length} characters</small>
               </div>
-              <div className="admin-field admin-field-wide">
+              <div className="admin-field">
                 <Label htmlFor={`${section.id}-action`}>Action label</Label>
                 <Input
                   id={`${section.id}-action`}
-                  value={section.action}
+                  value={section.action ?? ""}
                   placeholder="No action in this section"
                   onChange={(event) => onChange("action", event.target.value)}
                 />
               </div>
+              <div className="admin-field">
+                <Label>Action behavior</Label>
+                <div className="admin-action-modes" role="radiogroup" aria-label="Action behavior">
+                  {[
+                    ["builtin", "Built-in"],
+                    ["link", "URL"],
+                    ["modal", "Modal"],
+                  ].map(([value, label]) => (
+                    <button
+                      type="button"
+                      role="radio"
+                      aria-checked={actionMode === value}
+                      className={actionMode === value ? "is-active" : ""}
+                      key={value}
+                      onClick={() => onChange("actionMode", value)}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {actionMode === "link" && (
+                <div className="admin-field admin-field-wide">
+                  <Label htmlFor={`${section.id}-action-url`}>Action link</Label>
+                  <Input
+                    id={`${section.id}-action-url`}
+                    value={section.actionUrl ?? ""}
+                    placeholder="/services or https://example.com"
+                    inputMode="url"
+                    autoComplete="url"
+                    spellCheck={false}
+                    onChange={(event) => onChange("actionUrl", event.target.value)}
+                  />
+                </div>
+              )}
+
+              {actionMode === "builtin" && (
+                <p className="admin-action-note admin-field-wide">
+                  Uses this section's existing interaction, such as opening a project, review form or email request.
+                </p>
+              )}
+
+              {actionMode === "modal" && (
+                <div className="admin-action-modal-fields admin-field-wide">
+                  <div className="admin-field">
+                    <Label htmlFor={`${section.id}-modal-eyebrow`}>Modal eyebrow</Label>
+                    <Input
+                      id={`${section.id}-modal-eyebrow`}
+                      value={modalField("eyebrow", section.eyebrow ?? "")}
+                      onChange={(event) => updateModalField("eyebrow", event.target.value)}
+                    />
+                  </div>
+                  <div className="admin-field">
+                    <Label htmlFor={`${section.id}-modal-title`}>Modal heading</Label>
+                    <Input
+                      id={`${section.id}-modal-title`}
+                      value={modalField("title", section.title ?? "")}
+                      onChange={(event) => updateModalField("title", event.target.value)}
+                    />
+                  </div>
+                  <div className="admin-field admin-field-wide">
+                    <Label htmlFor={`${section.id}-modal-description`}>Modal description</Label>
+                    <Textarea
+                      id={`${section.id}-modal-description`}
+                      rows={6}
+                      value={modalField("description", section.description ?? "")}
+                      onChange={(event) => updateModalField("description", event.target.value)}
+                    />
+                  </div>
+                  <div className="admin-field">
+                    <Label htmlFor={`${section.id}-modal-cta-label`}>Modal CTA label</Label>
+                    <Input
+                      id={`${section.id}-modal-cta-label`}
+                      value={modalField("ctaLabel")}
+                      placeholder="Optional button"
+                      onChange={(event) => updateModalField("ctaLabel", event.target.value)}
+                    />
+                  </div>
+                  <div className="admin-field">
+                    <Label htmlFor={`${section.id}-modal-cta-url`}>Modal CTA link</Label>
+                    <Input
+                      id={`${section.id}-modal-cta-url`}
+                      value={modalField("ctaUrl")}
+                      placeholder="/contact or https://example.com"
+                      inputMode="url"
+                      autoComplete="url"
+                      spellCheck={false}
+                      onChange={(event) => updateModalField("ctaUrl", event.target.value)}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           </section>
 
@@ -567,9 +944,6 @@ function LoginScreen({ onAuthenticated }) {
     <div className="admin-login">
       <form className="admin-login-card" onSubmit={submit}>
         <img src="/original/logo-alb.png.webp" alt="GreenTech Professionals" />
-        <h1>Content admin</h1>
-        <p>Sign in to edit the website content.</p>
-
         <div className="admin-field">
           <Label htmlFor="admin-password">Password</Label>
           <Input
@@ -699,12 +1073,34 @@ function AdminApp() {
   const selectedIndex = sections.findIndex((section) => section.id === selectedId);
   const selectedSection = sections[selectedIndex] ?? sections[0];
   const collection = COLLECTIONS[selectedSection?.id];
+  const projectOptions = [
+    { value: "", label: "No related project" },
+    ...[...(content.horizontalGallery?.items ?? [])]
+      .filter((project) => typeof project?.id === "string" && project.id.trim())
+      .sort((first, second) => (first.order ?? 0) - (second.order ?? 0))
+      .map((project) => ({
+        value: project.id,
+        label: [
+          project.title || "Untitled project",
+          project.location,
+          project.enabled === false ? "hidden" : "",
+        ].filter(Boolean).join(" - "),
+      })),
+  ];
 
   const updateField = (field, value) => {
     setContent((currentContent) => ({
       ...currentContent,
       sections: currentContent.sections.map((section) =>
         (section.id === selectedSection.id ? { ...section, [field]: value } : section)),
+    }));
+    setSaveState("idle");
+  };
+
+  const updateMeta = (key, value) => {
+    setContent((currentContent) => ({
+      ...currentContent,
+      footer: { ...(currentContent.footer ?? {}), [key]: value },
     }));
     setSaveState("idle");
   };
@@ -789,12 +1185,72 @@ function AdminApp() {
           onSave={publish}
           saveState={saveState}
         >
+          {selectedSection?.id === "company-video" && (
+            <>
+              <Separator />
+              <CompanyVideoEditor
+                value={selectedSection.videoUrl ?? ""}
+                onChange={(value) => updateField("videoUrl", value)}
+                onNotify={setNotice}
+              />
+            </>
+          )}
+          {selectedSection?.id === "reviews" && (
+            <>
+              <Separator />
+              <ReviewModeration onNotify={setNotice} />
+            </>
+          )}
+          {selectedSection?.id === "contact" && (
+            <>
+              <Separator />
+              <InquiryInbox onNotify={setNotice} />
+            </>
+          )}
+          {collection?.metaFields && (
+            <>
+              <Separator />
+              <section className="admin-form-section" aria-labelledby="footer-meta-title">
+                <div className="admin-form-heading">
+                  <div>
+                    <h2 id="footer-meta-title">{collection.metaHeading}</h2>
+                    <p>{collection.metaDescription}</p>
+                  </div>
+                </div>
+
+                <div className="admin-field-grid">
+                  {collection.metaFields.map((field) => (
+                    <div className="admin-field admin-field-wide" key={field.key}>
+                      <Label htmlFor={`footer-${field.key}`}>{field.label}</Label>
+                      {field.type === "textarea" ? (
+                        <Textarea
+                          id={`footer-${field.key}`}
+                          rows={field.rows ?? 3}
+                          value={content.footer?.[field.key] ?? ""}
+                          onChange={(event) => updateMeta(field.key, event.target.value)}
+                        />
+                      ) : (
+                        <Input
+                          id={`footer-${field.key}`}
+                          value={content.footer?.[field.key] ?? ""}
+                          placeholder={field.placeholder}
+                          onChange={(event) => updateMeta(field.key, event.target.value)}
+                        />
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </section>
+            </>
+          )}
+
           {collection && (
             <>
               <Separator />
               <CollectionEditor
                 collection={collection}
                 items={readPath(content, collection.path)}
+                optionSources={{ projects: projectOptions }}
                 onItemsChange={updateCollection}
                 onNotify={setNotice}
               />

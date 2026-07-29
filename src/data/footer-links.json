@@ -1,0 +1,122 @@
+[
+  {
+    "id": "explore-projects",
+    "order": 1,
+    "enabled": true,
+    "group": "Explore",
+    "label": "All projects",
+    "href": "#projects"
+  },
+  {
+    "id": "explore-journal",
+    "order": 2,
+    "enabled": true,
+    "group": "Explore",
+    "label": "Journal",
+    "href": "#journal"
+  },
+  {
+    "id": "explore-process",
+    "order": 3,
+    "enabled": true,
+    "group": "Explore",
+    "label": "Work process",
+    "href": "#process"
+  },
+  {
+    "id": "explore-contact",
+    "order": 4,
+    "enabled": true,
+    "group": "Explore",
+    "label": "Contact",
+    "href": "#contact"
+  },
+  {
+    "id": "services-photovoltaic",
+    "order": 5,
+    "enabled": true,
+    "group": "Services",
+    "label": "Photovoltaic parks",
+    "href": "#service-photovoltaic"
+  },
+  {
+    "id": "services-electrical",
+    "order": 6,
+    "enabled": true,
+    "group": "Services",
+    "label": "Electrical inspections",
+    "href": "#service-electrical"
+  },
+  {
+    "id": "services-construction",
+    "order": 7,
+    "enabled": true,
+    "group": "Services",
+    "label": "Construction services",
+    "href": "#service-construction"
+  },
+  {
+    "id": "services-data-center",
+    "order": 8,
+    "enabled": true,
+    "group": "Services",
+    "label": "Data center construction",
+    "href": "#service-data-center"
+  },
+  {
+    "id": "company-about",
+    "order": 9,
+    "enabled": true,
+    "group": "Company",
+    "label": "About us",
+    "href": "#company"
+  },
+  {
+    "id": "company-credentials",
+    "order": 10,
+    "enabled": true,
+    "group": "Company",
+    "label": "Credentials",
+    "href": "#credentials"
+  },
+  {
+    "id": "company-reviews",
+    "order": 11,
+    "enabled": true,
+    "group": "Company",
+    "label": "Customer reviews",
+    "href": "#reviews"
+  },
+  {
+    "id": "legal-privacy",
+    "order": 12,
+    "enabled": true,
+    "group": "Legal",
+    "label": "Privacy policy",
+    "href": "modal:privacy"
+  },
+  {
+    "id": "legal-terms",
+    "order": 13,
+    "enabled": true,
+    "group": "Legal",
+    "label": "Terms & conditions",
+    "href": "modal:terms"
+  },
+  {
+    "id": "social-linkedin",
+    "order": 14,
+    "enabled": true,
+    "group": "Social",
+    "label": "LinkedIn",
+    "href": "https://ro.linkedin.com/company/greentech-professionals"
+  },
+  {
+    "id": "social-facebook",
+    "order": 15,
+    "enabled": true,
+    "group": "Social",
+    "label": "Facebook",
+    "href": "https://www.facebook.com/greentechprofessionals"
+  }
+]

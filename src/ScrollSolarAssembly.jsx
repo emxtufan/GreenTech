@@ -455,6 +455,7 @@ function ScrollSolarAssembly({ active }) {
   return (
     <section
       ref={sectionRef}
+      id="service-photovoltaic"
       className={`solar-assembly-section ${active ? "visible" : ""}`}
       aria-labelledby="service-solar-title"
     >

@@ -404,6 +404,7 @@ function ScrollElectricalInspection({ active }) {
   return (
     <section
       ref={sectionRef}
+      id="service-electrical"
       className={`electrical-inspection-section ${active ? "visible" : ""}`}
       aria-labelledby="service-electrical-title"
     >

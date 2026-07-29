@@ -15,16 +15,19 @@ import ScrollSolarAssembly from "./ScrollSolarAssembly.jsx";
 import ScrollElectricalInspection from "./ScrollElectricalInspection.jsx";
 import ScrollConstructionServices from "./ScrollConstructionServices.jsx";
 import ScrollDataCenterBuild from "./ScrollDataCenterBuild.jsx";
+import FaqSection from "./FaqSection.jsx";
 import SolarContactSection from "./SolarContactSection.jsx";
 import CompanyProofSection from "./CompanyProofSection.jsx";
-import BlogSection, { blogPosts } from "./BlogSection.jsx";
+import BlogSection from "./BlogSection.jsx";
 import BlogPostPage from "./BlogPostPage.jsx";
 import ProjectDetailPage from "./ProjectDetailPage.jsx";
 import AllProjectsPage from "./AllProjectsPage.jsx";
+import SectionActionModal, { useSectionAction } from "./SectionAction.jsx";
 import useExperienceScrollController from "./useExperienceScrollController.js";
 import { TOUCH_VISUAL_EASE, usesNativeTouchScroll } from "./scrollMotion.js";
 import {
   selectClientLogos,
+  selectBlogPosts,
   selectGalleryItems,
   selectHeroCards,
   selectImpactStats,
@@ -32,7 +35,8 @@ import {
 } from "./lib/siteContent.js";
 import useSiteContent from "./hooks/useSiteContent.js";
 import useSection from "./hooks/useSection.js";
-import "./styles.css?=12";
+import "./styles.css?=122222";
+import BlurText from "./BlurText";
 
 // Icons cannot live in JSON, so content stores a name and this map resolves it.
 const impactStatIcons = { Zap, SolarPanel, BadgeCheck, BadgeDollarSign };
@@ -48,8 +52,6 @@ const processCardThemeClasses = {
 
 // Baselines for first paint; live values come from useSiteContent below.
 const processCards = selectProcessCards();
-
-const horizontalGalleryItems = selectGalleryItems();
 
 const heroSurfaces = [
   "#fff8e8",
@@ -241,6 +243,10 @@ function Card({ active, entered }) {
 
 function Intro({ entered, ready, enter }) {
   const text = useSection("intro-hero");
+  const introAction = useSectionAction("intro-hero", {
+    label: "Click to explore",
+    mode: "builtin",
+  });
 
   return (
     <section className={`intro ${entered ? "hidden" : ""}`} id="introUi">
@@ -255,17 +261,37 @@ function Intro({ entered, ready, enter }) {
           )}
         </p>
       </div>
-      <button className="intro-cta" type="button" onClick={enter} disabled={!ready}>
-        <span>{text("action", "Click to explore")}</span>
-        <span className="intro-cta-arrow" aria-hidden="true">{"\u2192"}</span>
-      </button>
+      {introAction.visible && (
+        <button
+          className="intro-cta"
+          type="button"
+          onClick={(event) => introAction.activate(event, enter)}
+          disabled={introAction.mode === "builtin" && !ready}
+        >
+          <span>{introAction.label}</span>
+          <span className="intro-cta-arrow" aria-hidden="true">{"\u2192"}</span>
+        </button>
+      )}
+      <SectionActionModal {...introAction.modalProps} />
     </section>
   );
 }
 
 function FinalSection({ entered }) {
   const content = useSiteContent();
+  const companyText = useSection("company-overview");
+  const companyVideoText = useSection("company-video");
   const clientsText = useSection("clients");
+  const configuredCompanyVideoUrl = companyVideoText("videoUrl", "/video.mp4");
+  const companyVideoUrl = configuredCompanyVideoUrl.trim() || "/video.mp4";
+  const companyVideoEyebrow = companyVideoText("eyebrow", "Company film");
+  const companyVideoTitle = companyVideoText("title", "Work delivered in the field");
+  const companyVideoDescription = companyVideoText(
+    "description",
+    "Looping company video that starts when the section reaches the top of the viewport.",
+  );
+  const hasCompanyVideoHeading = Boolean(companyVideoEyebrow || companyVideoTitle);
+  const hasCompanyVideoCopy = Boolean(hasCompanyVideoHeading || companyVideoDescription);
   const impactStats = selectImpactStats(content);
   // LogoLoop expects `src`; the content file stores images under `image`.
   const clientLogos = selectClientLogos(content).map((logo) => ({
@@ -327,21 +353,26 @@ function FinalSection({ entered }) {
       window.cancelAnimationFrame(animationFrame);
       resetVideo();
     };
-  }, [entered]);
+  }, [companyVideoUrl, entered]);
 
   return (
     <section
       ref={sectionRef}
+      id="company"
       className={`final-section ${entered ? "visible" : ""}`}
       aria-labelledby="final-section-title"
       data-wind-stage="company"
     >
       <div className="final-section-inner">
         <header className="final-section-intro">
-          <h1 id="final-section-title">GreenTech Professionals SRL</h1>
+          <h1 id="final-section-title">
+            {companyText("title", "GreenTech Professionals SRL")}
+          </h1>
           <p>
-            GreenTech Professionals is an electrical and construction company with
-            experience in electrical and mechanical works in the photovoltaic field.
+            {companyText(
+              "description",
+              "GreenTech Professionals is an electrical and construction company with experience in electrical and mechanical works in the photovoltaic field.",
+            )}
           </p>
         </header>
 
@@ -363,19 +394,34 @@ function FinalSection({ entered }) {
           </div>
         </div>
 
-        <section className="company-video" aria-labelledby="company-video-title">
+        <section
+          className="company-video"
+          aria-labelledby={companyVideoTitle ? "company-video-title" : undefined}
+          aria-label={companyVideoTitle ? undefined : "Company video"}
+        >
           <div className="company-video-frame">
             <video
+              key={companyVideoUrl}
               ref={videoRef}
+              src={companyVideoUrl}
               muted
               loop
               playsInline
               preload="metadata"
-              aria-label="GreenTech Professionals video"
-            >
-              <source src="/video.mp4" type="video/mp4" />
-            </video>
+              aria-label={companyVideoTitle || "GreenTech Professionals company film"}
+            />
           </div>
+          {hasCompanyVideoCopy && (
+            <div className="company-video-copy">
+              {hasCompanyVideoHeading && (
+                <div className="company-video-heading">
+                  {companyVideoEyebrow && <span>{companyVideoEyebrow}</span>}
+                  {companyVideoTitle && <h2 id="company-video-title">{companyVideoTitle}</h2>}
+                </div>
+              )}
+              {companyVideoDescription && <p>{companyVideoDescription}</p>}
+            </div>
+          )}
         </section>
 
         <section className="clients-showcase" aria-labelledby="clients-title">
@@ -480,6 +526,7 @@ function StackSection({ entered }) {
 
   return (
     <section
+      id="process"
       className={`process-section ${entered ? "visible" : ""}`}
       aria-labelledby="process-section-title"
       data-wind-stage="process"
@@ -500,6 +547,7 @@ function StackSection({ entered }) {
           className="project-scroll-stack"
           stackPosition="36%"
           scaleEndPosition="23%"
+          rotationAmount={0}
           onStackComplete={handleStackComplete}
         >
           {cards.map((card) => {
@@ -631,6 +679,7 @@ function App({ onOpenProject, onShowAllProjects, onOpenPost, routeOpen }) {
           active={entered}
           onPostOpen={onOpenPost}
         />
+        <FaqSection active={entered} />
         <SolarContactSection
           active={entered}
           onShowAllProjects={onShowAllProjects}
@@ -675,6 +724,9 @@ function getBlogPostUrl(postId) {
 }
 
 function Root() {
+  const routeContent = useSiteContent();
+  const routedProjects = selectGalleryItems(routeContent);
+  const routedBlogPosts = selectBlogPosts(routeContent);
   const [routeState, setRouteState] = useState(getSiteRouteFromUrl);
   const { projectId, postId, projectsIndexOpen } = routeState;
 
@@ -768,12 +820,12 @@ function Root() {
     setRouteState({ projectId: null, postId: null, projectsIndexOpen: false });
   }, []);
 
-  const projectIndex = horizontalGalleryItems.findIndex((item) => item.id === projectId);
-  const project = projectIndex >= 0 ? horizontalGalleryItems[projectIndex] : null;
+  const projectIndex = routedProjects.findIndex((item) => item.id === projectId);
+  const project = projectIndex >= 0 ? routedProjects[projectIndex] : null;
   const nextProject = project
-    ? horizontalGalleryItems[(projectIndex + 1) % horizontalGalleryItems.length]
+    ? routedProjects[(projectIndex + 1) % routedProjects.length]
     : null;
-  const blogPost = blogPosts.find((post) => post.id === postId) ?? null;
+  const blogPost = routedBlogPosts.find((post) => post.id === postId) ?? null;
 
   return (
     <>
@@ -785,7 +837,7 @@ function Root() {
       />
       {projectsIndexOpen && (
         <AllProjectsPage
-          projects={horizontalGalleryItems}
+          projects={routedProjects}
           onClose={closeProjectsIndex}
           onProjectOpen={openProject}
         />

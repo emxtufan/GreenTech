@@ -1,24 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, Send } from "lucide-react";
+import { ArrowUpRight, Loader2, Mail, MapPin, Phone, Send } from "lucide-react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import SectionActionModal, { useSectionAction } from "./SectionAction.jsx";
 import useSection from "./hooks/useSection.js";
+import useSiteContent from "./hooks/useSiteContent.js";
+import { selectFooter, selectFooterGroups } from "./lib/siteContent.js";
+import { submitProjectInquiry } from "./lib/inquiryApi.js";
 import "./SolarContactSection.css";
 
 const MODEL_URL = "/3d/space_sun.glb";
 const OFFICE_EMAIL = "office@greentechpro.ro";
 const MAP_URL = "https://maps.app.goo.gl/4B6ZvpVcABLVJL5DA";
-const LINKEDIN_URL = "https://ro.linkedin.com/company/greentech-professionals";
-const FACEBOOK_URL = "https://www.facebook.com/greentechprofessionals";
-const SERVICES_URL = "https://greentechpro.ro/services/";
-const CAREERS_URL = "https://greentechpro.ro/career/";
-const FAQ_URL = "https://greentechpro.ro/faqs/";
-const PRESENTATION_RO_URL = "https://greentechpro.ro/prezentare-ro/";
-const PRESENTATION_EN_URL = "https://greentechpro.ro/prezentare-en/";
-const PRIVACY_URL = "https://greentechpro.ro/privacy-policy/";
-const TERMS_URL = "https://greentechpro.ro/terms-conditions/";
-const MODEL_SOURCE_URL =
-  "https://sketchfab.com/3d-models/space-sun-9dc16d37e8224fe9923f68de0149fcab";
 
 const RADAR_RING_PERIOD = 2.45;
 const RADAR_RING_RADIUS = 0.505;
@@ -30,6 +23,12 @@ const SUN_SCROLL_REFERENCE_SPEED = 900;
 const SUN_SPIN_ATTACK = 9;
 const SUN_SPIN_RELEASE = 1.6;
 const SUN_DESKTOP_SCALE = 0.7;
+
+// Anything not starting with "#" or "/" leaves the site and opens in a new tab.
+// "modal:privacy" style links open in-page instead of navigating away.
+const getModalKey = (href) => String(href ?? "").match(/^modal:(\w+)$/)?.[1] ?? null;
+
+const isExternalLink = (href) => /^https?:\/\//i.test(String(href ?? ""));
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
@@ -144,12 +143,31 @@ function createCoronaMaterial({ color = 0xff8a24, rimPower = 4.8 } = {}) {
 
 function SolarContactSection({ active, onShowAllProjects }) {
   const text = useSection("contact");
+  const siteContent = useSiteContent();
+  const footer = selectFooter(siteContent);
+  const footerGroups = selectFooterGroups(siteContent);
+  const socialLinks = footerGroups.find((group) => group.title === "Social")?.links ?? [];
+  const contactAction = useSectionAction("contact", {
+    label: "Send request",
+    mode: "builtin",
+  });
   const sectionRef = useRef(null);
   const mountRef = useRef(null);
-  const [formPrepared, setFormPrepared] = useState(false);
+  const [formStatus, setFormStatus] = useState({ state: "idle", message: "" });
+  const [legalModal, setLegalModal] = useState(null);
+  const legalTriggerRef = useRef(null);
 
-  const handleContactSubmit = (event) => {
+  const openLegal = (key, event) => {
+    legalTriggerRef.current = event.currentTarget;
+    setLegalModal({
+      title: footer[`${key}Title`] || "",
+      description: footer[`${key}Body`] || "",
+    });
+  };
+
+  const handleContactSubmit = async (event) => {
     event.preventDefault();
+    if (formStatus.state === "submitting") return;
 
     const form = event.currentTarget;
     if (!form.reportValidity()) return;
@@ -159,26 +177,29 @@ function SolarContactSection({ active, onShowAllProjects }) {
     const lastName = String(data.get("lastName") ?? "").trim();
     const phone = String(data.get("phone") ?? "").trim();
     const message = String(data.get("message") ?? "").trim();
-    const subject = encodeURIComponent(
-      `Project inquiry - ${firstName} ${lastName}`,
-    );
-    const body = encodeURIComponent(
-      [
-        "Hello GreenTech Professionals,",
-        "",
-        `First name: ${firstName}`,
-        `Last name: ${lastName}`,
-        `Phone: ${phone}`,
-        "",
-        "Project details:",
-        message,
-        "",
-        "GDPR consent: Accepted",
-      ].join("\n"),
-    );
 
-    setFormPrepared(true);
-    window.location.href = `mailto:${OFFICE_EMAIL}?subject=${subject}&body=${body}`;
+    setFormStatus({ state: "submitting", message: "Sending your request..." });
+
+    try {
+      await submitProjectInquiry({
+        firstName,
+        lastName,
+        phone,
+        message,
+        consent: data.get("gdprConsent") === "on",
+        website: String(data.get("website") ?? ""),
+      });
+      form.reset();
+      setFormStatus({
+        state: "success",
+        message: "Thank you. Your project inquiry has been sent to our team.",
+      });
+    } catch (error) {
+      setFormStatus({
+        state: "error",
+        message: error.message || "Your request could not be sent. Please try again.",
+      });
+    }
   };
 
   useEffect(() => {
@@ -571,10 +592,16 @@ function SolarContactSection({ active, onShowAllProjects }) {
                 id="contact-message"
                 name="message"
                 rows={4}
+                minLength={10}
                 maxLength={1200}
                 required
               />
             </div>
+
+            <label className="solar-contact-honeypot" aria-hidden="true">
+              Website
+              <input name="website" type="text" tabIndex={-1} autoComplete="off" />
+            </label>
 
             <div className="solar-contact-form-actions">
               <label className="solar-contact-consent">
@@ -583,25 +610,44 @@ function SolarContactSection({ active, onShowAllProjects }) {
                 <span>
                   I agree to the processing of my personal data so GreenTech
                   Professionals can respond to this inquiry, as described in the{" "}
-                  <a href={PRIVACY_URL} target="_blank" rel="noreferrer">
+                  <button
+                    className="solar-contact-consent-link"
+                    type="button"
+                    onClick={(event) => openLegal("privacy", event)}
+                  >
                     privacy policy
-                  </a>
+                  </button>
                   .
                 </span>
               </label>
 
-              <button className="solar-contact-submit" type="submit">
-                <span>Send request</span>
-                <Send size={18} strokeWidth={1.8} aria-hidden="true" />
-              </button>
+              {contactAction.visible && (
+                <button
+                  className="solar-contact-submit"
+                  type={contactAction.mode === "builtin" ? "submit" : "button"}
+                  disabled={contactAction.mode === "builtin" && formStatus.state === "submitting"}
+                  onClick={contactAction.mode === "builtin"
+                    ? undefined
+                    : (event) => contactAction.activate(event)}
+                >
+                  <span>
+                    {formStatus.state === "submitting" ? "Sending..." : contactAction.label}
+                  </span>
+                  {formStatus.state === "submitting" ? (
+                    <Loader2 className="solar-contact-spin" size={18} strokeWidth={1.8} aria-hidden="true" />
+                  ) : (
+                    <Send size={18} strokeWidth={1.8} aria-hidden="true" />
+                  )}
+                </button>
+              )}
             </div>
 
             <p
-              className={`solar-contact-form-status ${formPrepared ? "visible" : ""}`}
-              role="status"
+              className={`solar-contact-form-status is-${formStatus.state} ${formStatus.message ? "visible" : ""}`}
+              role={formStatus.state === "error" ? "alert" : "status"}
               aria-live="polite"
             >
-              Your request is ready in your email application.
+              {formStatus.message}
             </p>
           </div>
         </form>
@@ -638,74 +684,77 @@ function SolarContactSection({ active, onShowAllProjects }) {
                 src="/original/logo-alb.png.webp"
                 alt="GreenTech Professionals"
               />
-              <p>
-                Electrical, mechanical and construction capability for renewable
-                energy projects across Europe.
-              </p>
+              <p>{footer.tagline}</p>
+
             </div>
 
             <div className="solar-contact-footer-groups">
-              <section>
-                <h3>Explore</h3>
-                <nav aria-label="Explore GreenTech Professionals">
-                  <button type="button" onClick={onShowAllProjects}>
-                    All projects
-                  </button>
-                  <a href="#journal">Journal</a>
-                  <a href={SERVICES_URL} target="_blank" rel="noreferrer">
-                    Services
-                  </a>
-                  <a href={CAREERS_URL} target="_blank" rel="noreferrer">
-                    Careers
-                  </a>
-                </nav>
-              </section>
-
-              <section>
-                <h3>Company</h3>
-                <nav aria-label="Company resources">
-                  <a href={FAQ_URL} target="_blank" rel="noreferrer">
-                    FAQs &amp; credentials
-                  </a>
-                  <a href={PRESENTATION_RO_URL} target="_blank" rel="noreferrer">
-                    Presentation RO
-                  </a>
-                  <a href={PRESENTATION_EN_URL} target="_blank" rel="noreferrer">
-                    Presentation EN
-                  </a>
-                </nav>
-              </section>
-
-              <section>
-                <h3>Legal</h3>
-                <nav aria-label="Legal links">
-                  <a href={PRIVACY_URL} target="_blank" rel="noreferrer">
-                    Privacy policy
-                  </a>
-                  <a href={TERMS_URL} target="_blank" rel="noreferrer">
-                    Terms &amp; conditions
-                  </a>
-                </nav>
-              </section>
+              {footerGroups
+                .filter((group) => group.title !== "Social")
+                .map((group) => (
+                  <section key={group.title}>
+                    <h3>{group.title}</h3>
+                    <nav aria-label={group.title}>
+                      {group.links.map((link) => (
+                        getModalKey(link.href) ? (
+                          <button
+                            key={link.id}
+                            type="button"
+                            onClick={(event) => openLegal(getModalKey(link.href), event)}
+                          >
+                            {link.label}
+                          </button>
+                        ) : (
+                          <a
+                            key={link.id}
+                            href={link.href}
+                            {...(isExternalLink(link.href)
+                              ? { target: "_blank", rel: "noreferrer" }
+                              : null)}
+                          >
+                            {link.label}
+                            {isExternalLink(link.href) && (
+                              <ArrowUpRight size={13} strokeWidth={1.8} aria-hidden="true" />
+                            )}
+                          </a>
+                        )
+                      ))}
+                    </nav>
+                  </section>
+                ))}
             </div>
           </div>
 
           <div className="solar-contact-footer-bottom">
-            <span>&copy; {new Date().getFullYear()} GreenTech Professionals SRL</span>
-            <nav aria-label="Social links">
-              <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">
-                LinkedIn
+            <span>
+              &copy; {new Date().getFullYear()} {footer.copyright}
+            </span>
+
+            {socialLinks.length > 0 && (
+              <nav aria-label="Social links" className="solar-contact-footer-social">
+                {socialLinks.map((link) => (
+                  <a key={link.id} href={link.href} target="_blank" rel="noreferrer">
+                    {link.label}
+                  </a>
+                ))}
+              </nav>
+            )}
+
+            {footer.creditLabel && (
+              <a href={footer.creditUrl || undefined} target="_blank" rel="noreferrer">
+                {footer.creditLabel}
               </a>
-              <a href={FACEBOOK_URL} target="_blank" rel="noreferrer">
-                Facebook
-              </a>
-            </nav>
-            <a href={MODEL_SOURCE_URL} target="_blank" rel="noreferrer">
-              Sun model: Wr_titan, CC BY 4.0
-            </a>
+            )}
           </div>
         </footer>
       </div>
+      <SectionActionModal {...contactAction.modalProps} />
+      <SectionActionModal
+        open={legalModal !== null}
+        onClose={() => setLegalModal(null)}
+        content={legalModal ?? {}}
+        triggerRef={legalTriggerRef}
+      />
     </section>
   );
 }

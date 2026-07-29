@@ -1,45 +1,10 @@
-import React, { useState } from "react";
-import { geoMercator, geoPath } from "d3-geo";
+import React, { useEffect, useMemo, useState } from "react";
+import { geoCentroid, geoContains, geoMercator, geoPath } from "d3-geo";
 import { feature } from "topojson-client";
 import worldAtlas from "world-atlas/countries-110m.json";
+import { findIsoCountry } from "./lib/isoCountries.js";
 
-const networkCountries = [
-  {
-    id: "642",
-    code: "RO",
-    name: "Romania",
-    labelPoint: [24.9, 46.05],
-    cities: [
-      { name: "Butimanu", coordinates: [25.897, 44.683] },
-      { name: "Giurgiu", coordinates: [25.9699, 43.9037] },
-      { name: "Craiova", coordinates: [23.7949, 44.3302] },
-    ],
-  },
-  {
-    id: "380",
-    code: "IT",
-    name: "Italy",
-    labelPoint: [12.45, 42.95],
-    cities: [
-      { name: "Piombino", coordinates: [10.5259, 42.9256] },
-      { name: "Bologna", coordinates: [11.3426, 44.4949] },
-      { name: "Cagliari", coordinates: [9.1217, 39.2238] },
-    ],
-  },
-  {
-    id: "724",
-    code: "ES",
-    name: "Spain",
-    labelPoint: [-3.55, 40.25],
-    cities: [
-      { name: "Palencia", coordinates: [-4.5288, 42.0096] },
-      { name: "Guillena", coordinates: [-6.056, 37.542] },
-      { name: "Sevilla", coordinates: [-5.9845, 37.3891] },
-    ],
-  },
-];
-
-const visibleCountryIds = new Set([
+const BASE_VISIBLE_COUNTRY_IDS = new Set([
   "008",
   "040",
   "056",
@@ -72,11 +37,20 @@ const visibleCountryIds = new Set([
   "826",
 ]);
 
-const networkCountryIds = new Set(networkCountries.map(({ id }) => id));
 const countryCollection = feature(worldAtlas, worldAtlas.objects.countries);
-const visibleCountries = countryCollection.features.filter((country) =>
-  visibleCountryIds.has(String(country.id).padStart(3, "0")),
+const countryById = new Map(
+  countryCollection.features.map((country) => [
+    String(country.id).padStart(3, "0"),
+    country,
+  ]),
 );
+const countryByName = new Map(
+  countryCollection.features.map((country) => [
+    String(country.properties?.name || "").trim().toLowerCase(),
+    country,
+  ]),
+);
+
 const projection = geoMercator()
   .center([10, 44.5])
   .scale(1080)
@@ -86,19 +60,78 @@ const projection = geoMercator()
     [882, 522],
   ]);
 const createCountryPath = geoPath(projection);
-const originCity = networkCountries[0].cities[0];
-const originPoint = projection(originCity.coordinates);
 
-const cityPoints = networkCountries.flatMap((country) =>
-  country.cities.map((city) => ({
-    ...city,
-    countryCode: country.code,
-    countryName: country.name,
-    point: projection(city.coordinates),
-  })),
-);
+function normalizeAtlasId(value) {
+  const id = String(value ?? "").trim();
+  return /^\d{1,3}$/.test(id) ? id.padStart(3, "0") : "";
+}
 
-function createConnectionPath(destinationPoint) {
+function normalizeCityCoordinates(city, countryFeature) {
+  const longitude = Number(city.longitude);
+  const latitude = Number(city.latitude);
+  if (!Number.isFinite(longitude) || !Number.isFinite(latitude)) return null;
+
+  const coordinates = [longitude, latitude];
+  const swappedCoordinates = [latitude, longitude];
+
+  if (
+    countryFeature
+    && !geoContains(countryFeature, coordinates)
+    && geoContains(countryFeature, swappedCoordinates)
+  ) {
+    return swappedCoordinates;
+  }
+
+  return coordinates;
+}
+
+function normalizeCountries(records) {
+  if (!Array.isArray(records)) return [];
+
+  return records
+    .filter((country) => country?.enabled !== false)
+    .map((country, countryIndex) => {
+      const name = String(country.name || "").trim();
+      const storedCode = String(country.code || "").trim().toUpperCase();
+      const isoCountry = findIsoCountry(storedCode)
+        || findIsoCountry(country.iso3)
+        || findIsoCountry(name);
+      const code = isoCountry?.alpha2 || storedCode;
+      const requestedAtlasId = normalizeAtlasId(country.atlasId)
+        || isoCountry?.numeric
+        || "";
+      const countryFeature = countryById.get(requestedAtlasId)
+        || countryByName.get(name.toLowerCase())
+        || null;
+      const atlasId = countryFeature
+        ? String(countryFeature.id).padStart(3, "0")
+        : requestedAtlasId;
+      const cities = (Array.isArray(country.cities) ? country.cities : [])
+        .map((city, cityIndex) => {
+          const coordinates = normalizeCityCoordinates(city, countryFeature);
+          if (!coordinates) return null;
+
+          return {
+            id: String(city.id || `location-${cityIndex}`),
+            name: String(city.name || "").trim(),
+            coordinates,
+          };
+        })
+        .filter(Boolean);
+
+      return {
+        id: String(country.id || `country-${countryIndex}`),
+        code,
+        name,
+        atlasId,
+        feature: countryFeature,
+        cities,
+      };
+    })
+    .filter((country) => country.code && country.name);
+}
+
+function createConnectionPath(originPoint, destinationPoint) {
   const [originX, originY] = originPoint;
   const [destinationX, destinationY] = destinationPoint;
   const distance = Math.abs(destinationX - originX);
@@ -108,11 +141,53 @@ function createConnectionPath(destinationPoint) {
   return `M ${originX} ${originY} Q ${controlX} ${controlY} ${destinationX} ${destinationY}`;
 }
 
-function CompanyFootprintMap() {
-  const [selectedCountryCode, setSelectedCountryCode] = useState("RO");
-  const selectedCountry =
-    networkCountries.find(({ code }) => code === selectedCountryCode) ??
-    networkCountries[0];
+function CompanyFootprintMap({ countries = [] }) {
+  const mapData = useMemo(() => {
+    const networkCountries = normalizeCountries(countries);
+    const networkCountryById = new Map(
+      networkCountries
+        .filter((country) => country.atlasId)
+        .map((country) => [country.atlasId, country]),
+    );
+    const visibleCountryIds = new Set([
+      ...BASE_VISIBLE_COUNTRY_IDS,
+      ...networkCountryById.keys(),
+    ]);
+    const visibleCountries = countryCollection.features.filter((country) =>
+      visibleCountryIds.has(String(country.id).padStart(3, "0")),
+    );
+    const cityPoints = networkCountries.flatMap((country) =>
+      country.cities.map((city) => ({
+        ...city,
+        key: `${country.code}-${city.id}`,
+        countryCode: country.code,
+        countryName: country.name,
+        point: projection(city.coordinates),
+      })),
+    ).filter((city) => Array.isArray(city.point));
+
+    return {
+      networkCountries,
+      networkCountryById,
+      visibleCountries,
+      cityPoints,
+      originCity: cityPoints[0] ?? null,
+    };
+  }, [countries]);
+  const [selectedCountryCode, setSelectedCountryCode] = useState(
+    mapData.networkCountries[0]?.code ?? "",
+  );
+
+  useEffect(() => {
+    if (mapData.networkCountries.some(({ code }) => code === selectedCountryCode)) return;
+    setSelectedCountryCode(mapData.networkCountries[0]?.code ?? "");
+  }, [mapData.networkCountries, selectedCountryCode]);
+
+  const selectedCountry = mapData.networkCountries.find(
+    ({ code }) => code === selectedCountryCode,
+  ) ?? mapData.networkCountries[0] ?? null;
+  const countryNames = mapData.networkCountries.map(({ name }) => name).join(", ");
+  const originPoint = mapData.originCity?.point ?? null;
 
   return (
     <div className="company-footprint-map">
@@ -123,21 +198,20 @@ function CompanyFootprintMap() {
       >
         <title id="company-map-title">GreenTech Professionals European footprint</title>
         <desc id="company-map-description">
-          Project locations in Romania, Italy and Spain connected from Butimanu,
-          Romania.
+          {countryNames
+            ? `Project locations in ${countryNames}.`
+            : "European project locations map."}
         </desc>
 
         <g className="company-map-countries">
-          {visibleCountries.map((country) => {
+          {mapData.visibleCountries.map((country) => {
             const countryId = String(country.id).padStart(3, "0");
-            const networkCountry = networkCountries.find(({ id }) => id === countryId);
+            const networkCountry = mapData.networkCountryById.get(countryId);
             const classNames = [
               "company-map-country",
-              networkCountryIds.has(countryId) ? "is-network" : "",
+              networkCountry ? "is-network" : "",
               networkCountry?.code === selectedCountryCode ? "is-selected" : "",
-            ]
-              .filter(Boolean)
-              .join(" ");
+            ].filter(Boolean).join(" ");
 
             return (
               <path
@@ -147,20 +221,16 @@ function CompanyFootprintMap() {
                 key={countryId}
                 role={networkCountry ? "button" : undefined}
                 tabIndex={networkCountry ? 0 : undefined}
-                onClick={
-                  networkCountry
-                    ? () => setSelectedCountryCode(networkCountry.code)
-                    : undefined
-                }
-                onKeyDown={
-                  networkCountry
-                    ? (event) => {
-                        if (event.key !== "Enter" && event.key !== " ") return;
-                        event.preventDefault();
-                        setSelectedCountryCode(networkCountry.code);
-                      }
-                    : undefined
-                }
+                onClick={networkCountry
+                  ? () => setSelectedCountryCode(networkCountry.code)
+                  : undefined}
+                onKeyDown={networkCountry
+                  ? (event) => {
+                      if (event.key !== "Enter" && event.key !== " ") return;
+                      event.preventDefault();
+                      setSelectedCountryCode(networkCountry.code);
+                    }
+                  : undefined}
               >
                 <title>{networkCountry?.name ?? country.properties.name}</title>
               </path>
@@ -168,23 +238,30 @@ function CompanyFootprintMap() {
           })}
         </g>
 
-        <g className="company-map-connections" aria-hidden="true">
-          {cityPoints
-            .filter(({ name, countryCode }) => name !== originCity.name || countryCode !== "RO")
-            .map((city, index) => (
-              <path
-                className={city.countryCode === selectedCountryCode ? "is-selected" : ""}
-                d={createConnectionPath(city.point)}
-                key={`${city.countryCode}-${city.name}`}
-                pathLength="1"
-                style={{ "--map-line-index": index }}
-              />
-            ))}
-        </g>
+        {originPoint && (
+          <g className="company-map-connections" aria-hidden="true">
+            {mapData.cityPoints
+              .filter(({ key }) => key !== mapData.originCity.key)
+              .map((city, index) => (
+                <path
+                  className={city.countryCode === selectedCountryCode ? "is-selected" : ""}
+                  d={createConnectionPath(originPoint, city.point)}
+                  key={city.key}
+                  pathLength="1"
+                  style={{ "--map-line-index": index }}
+                />
+              ))}
+          </g>
+        )}
 
         <g className="company-map-labels" aria-hidden="true">
-          {networkCountries.map((country) => {
-            const labelPoint = projection(country.labelPoint);
+          {mapData.networkCountries.map((country) => {
+            const labelCoordinates = country.feature
+              ? geoCentroid(country.feature)
+              : country.cities[0]?.coordinates;
+            const labelPoint = labelCoordinates ? projection(labelCoordinates) : null;
+            if (!labelPoint) return null;
+
             return (
               <text
                 className={country.code === selectedCountryCode ? "is-selected" : ""}
@@ -199,14 +276,16 @@ function CompanyFootprintMap() {
         </g>
 
         <g className="company-map-markers">
-          {cityPoints.map((city) => {
-            const isOrigin = city.name === originCity.name && city.countryCode === "RO";
+          {mapData.cityPoints.map((city) => {
+            const isOrigin = city.key === mapData.originCity?.key;
             const isSelected = city.countryCode === selectedCountryCode;
 
             return (
               <g
-                className={`${isOrigin ? "is-origin" : ""} ${isSelected ? "is-selected" : ""}`}
-                key={`${city.countryCode}-${city.name}`}
+                className={[isOrigin ? "is-origin" : "", isSelected ? "is-selected" : ""]
+                  .filter(Boolean)
+                  .join(" ")}
+                key={city.key}
                 transform={`translate(${city.point[0]} ${city.point[1]})`}
               >
                 {isOrigin ? <circle className="company-map-pulse" r="14" /> : null}
@@ -220,25 +299,33 @@ function CompanyFootprintMap() {
       </svg>
 
       <div className="company-map-footer">
-        <div className="company-map-selected" aria-live="polite">
-          <span>{selectedCountry.code}</span>
-          <strong>{selectedCountry.name}</strong>
-          <p>{selectedCountry.cities.map(({ name }) => name).join(" / ")}</p>
-        </div>
+        {selectedCountry ? (
+          <div className="company-map-selected" aria-live="polite">
+            <span>{selectedCountry.code}</span>
+            <strong>{selectedCountry.name}</strong>
+            <p>{selectedCountry.cities.map(({ name }) => name).join(" / ")}</p>
+          </div>
+        ) : (
+          <p className="company-map-empty">No project countries published.</p>
+        )}
 
-        <div className="company-map-tabs" role="group" aria-label="Project countries">
-          {networkCountries.map((country) => (
-            <button
-              type="button"
-              aria-pressed={country.code === selectedCountryCode}
-              className={country.code === selectedCountryCode ? "is-active" : ""}
-              key={country.code}
-              onClick={() => setSelectedCountryCode(country.code)}
-            >
-              {country.code}
-            </button>
-          ))}
-        </div>
+        {mapData.networkCountries.length > 0 && (
+          <div className="company-map-tabs" role="group" aria-label="Project countries">
+            {mapData.networkCountries.map((country) => (
+              <button
+                type="button"
+                title={country.name}
+                aria-label={`Show ${country.name}`}
+                aria-pressed={country.code === selectedCountryCode}
+                className={country.code === selectedCountryCode ? "is-active" : ""}
+                key={country.code}
+                onClick={() => setSelectedCountryCode(country.code)}
+              >
+                {country.code}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

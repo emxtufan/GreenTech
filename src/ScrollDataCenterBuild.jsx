@@ -405,6 +405,7 @@ function ScrollDataCenterBuild({ active }) {
   return (
     <section
       ref={sectionRef}
+      id="service-data-center"
       className={`data-center-section ${active ? "visible" : ""}`}
       aria-labelledby="service-data-center-title"
     >

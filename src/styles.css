@@ -488,7 +488,7 @@ button:disabled {
   --final-background: #000000;
   --final-text: #f5f7ef;
   --final-muted: #aeb8bd;
-  --flow-blue: #00c251;
+  --flow-blue: #8bbc3f;
   position: relative;
   z-index: 12;
   display: none;
@@ -649,7 +649,7 @@ button:disabled {
   width: 56px;
   height: 56px;
   flex: 0 0 56px;
-  border: 1px solid rgba(0, 194, 10, 0.58);
+  border: 1px solid #8bbc3f;
   border-radius: 50%;
   background: #10171c;
   color: var(--flow-blue);
@@ -705,6 +705,20 @@ button:disabled {
   align-items: start;
   gap: 48px;
   padding: 24px 0 0;
+}
+
+.company-video-heading > span {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--flow-blue);
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.company-video-heading > span:last-child {
+  margin-bottom: 0;
 }
 
 .company-video-copy h2 {

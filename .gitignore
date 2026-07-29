@@ -71,4 +71,7 @@ Desktop.ini
 
 # Content backups. site-content.json itself IS tracked — it is the live content.
 data/site-content.backup.json
+data/customer-reviews.backup.json
+data/project-inquiries.json
+data/project-inquiries.backup.json
 data/site-content.2*.json

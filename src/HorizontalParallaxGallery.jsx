@@ -1,5 +1,6 @@
 import React, { useLayoutEffect, useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
+import SectionActionModal, { useSectionAction } from "./SectionAction.jsx";
 import useSection from "./hooks/useSection.js";
 import "./HorizontalParallaxGallery.css";
 
@@ -12,6 +13,10 @@ function HorizontalParallaxGallery({
   onShowAllProjects,
 }) {
   const text = useSection("projects");
+  const projectAction = useSectionAction("projects", {
+    label: "View project",
+    mode: "builtin",
+  });
   const sectionRef = useRef(null);
   const wrapperRef = useRef(null);
   const trackRef = useRef(null);
@@ -186,7 +191,7 @@ function HorizontalParallaxGallery({
         card.classList.remove("caption-copy-hidden", "caption-index-compact");
       });
     };
-  }, [entered, items]);
+  }, [entered, items, projectAction.label]);
 
   const handleProjectLink = (event, projectId) => {
     if (
@@ -223,6 +228,7 @@ function HorizontalParallaxGallery({
   return (
     <section
       ref={sectionRef}
+      id="projects"
       className={`horizontal-gallery-section ${entered ? "visible" : ""}`}
       aria-labelledby="horizontal-gallery-title"
       data-wind-stage="projects"
@@ -253,15 +259,20 @@ function HorizontalParallaxGallery({
                 <figcaption className="horizontal-gallery-caption">
                   <span>{item.category}</span>
                   <h3>{item.title}</h3>
-                  <a
-                    className="horizontal-gallery-link"
-                    href={`?project=${encodeURIComponent(item.id)}`}
-                    aria-label={`View project: ${item.title}`}
-                    onClick={(event) => handleProjectLink(event, item.id)}
-                  >
-                    <span>View project</span>
-                    <ArrowUpRight size={15} strokeWidth={1.8} aria-hidden="true" />
-                  </a>
+                  {projectAction.visible && (
+                    <a
+                      className="horizontal-gallery-link"
+                      href={projectAction.hrefFor(`?project=${encodeURIComponent(item.id)}`)}
+                      aria-label={`${projectAction.label}: ${item.title}`}
+                      onClick={(event) => projectAction.activate(
+                        event,
+                        (builtinEvent) => handleProjectLink(builtinEvent, item.id),
+                      )}
+                    >
+                      <span>{projectAction.label}</span>
+                      <ArrowUpRight size={15} strokeWidth={1.8} aria-hidden="true" />
+                    </a>
+                  )}
                   <b aria-hidden="true">{String(index + 1).padStart(2, "0")}</b>
                 </figcaption>
               </figure>
@@ -299,6 +310,7 @@ function HorizontalParallaxGallery({
           </div>
         </div>
       </div>
+      <SectionActionModal {...projectAction.modalProps} />
     </section>
   );
 }

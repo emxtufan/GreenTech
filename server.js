@@ -3,9 +3,20 @@ import { access, readFile } from "node:fs/promises";
 import { createServer } from "node:http";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { createApiRouter } from "./server/routes.js";
 
 const ROOT_DIR = fileURLToPath(new URL(".", import.meta.url));
+
+// Keep direct `node server.js` starts consistent with the npm scripts.
+// Existing OS-level variables still take precedence over values from .env.
+if (typeof process.loadEnvFile === "function") {
+  try {
+    process.loadEnvFile(path.join(ROOT_DIR, ".env"));
+  } catch (error) {
+    if (error?.code !== "ENOENT") throw error;
+  }
+}
+
+const { createApiRouter } = await import("./server/routes.js");
 const DIST_DIR = path.join(ROOT_DIR, "dist");
 const UPLOADS_DIR = path.join(ROOT_DIR, "public", "uploads");
 const HOST = process.env.HOST || "0.0.0.0";
@@ -23,6 +34,17 @@ let vite = null;
 app.disable("x-powered-by");
 
 app.use("/api", createApiRouter());
+
+// Customer review storage contains private moderation data. Keep only these
+// files away from Vite while allowing the frontend's site-content JSON import.
+app.use([
+  "/data/customer-reviews.json",
+  "/data/customer-reviews.backup.json",
+  "/data/project-inquiries.json",
+  "/data/project-inquiries.backup.json",
+], (request, response) => {
+  response.status(404).type("text").send("Not found");
+});
 
 // Served from public/ in both modes: images uploaded after a production build
 // exist on disk but not inside dist/, so this must not fall through to static.

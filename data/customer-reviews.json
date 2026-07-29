@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "customer-54325c9b-a3d1-40d8-bf64-5af5bc3b4727",
+      "status": "rejected",
+      "author": "emit tufan",
+      "email": "emitufan30@gmail.com",
+      "quote": "dwqdqwdqdqwdqwdqwdqwdqwdqwdq",
+      "rating": 5,
+      "submittedAt": "2026-07-29T08:51:07.971Z",
+      "consentAt": "2026-07-29T08:51:07.971Z",
+      "moderatedAt": "2026-07-29T08:51:36.811Z"
+    },
+    {
+      "id": "customer-56896b0f-d5b0-4d19-8d14-d38743977dc9",
+      "status": "rejected",
+      "author": "emit tufan",
+      "email": "emitufan30@gmail.com",
+      "quote": "dwdqwdqdwqdqwdwqdqwdqw",
+      "rating": 5,
+      "submittedAt": "2026-07-29T08:47:25.705Z",
+      "consentAt": "2026-07-29T08:47:25.705Z",
+      "moderatedAt": "2026-07-29T08:51:35.940Z"
+    }
+  ],
+  "updatedAt": "2026-07-29T08:51:36.811Z"
+}

@@ -7,6 +7,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Globe2,
+  Loader2,
   MessageSquarePlus,
   Quote,
   ShieldCheck,
@@ -16,11 +17,14 @@ import {
 } from "lucide-react";
 import {
   selectCredentials,
+  selectFootprintCountries,
   selectQualityPoints,
   selectTestimonials,
 } from "./lib/siteContent.js";
+import SectionActionModal, { useSectionAction } from "./SectionAction.jsx";
 import useSiteContent from "./hooks/useSiteContent.js";
 import useSection from "./hooks/useSection.js";
+import { submitCustomerReview } from "./lib/reviewApi.js";
 import "./CompanyProofSection.css";
 
 const CompanyFootprintMap = lazy(() => import("./CompanyFootprintMap.jsx"));
@@ -29,13 +33,13 @@ const CompanyFootprintMap = lazy(() => import("./CompanyFootprintMap.jsx"));
 const credentialIcons = { Award, ShieldCheck, Users, Globe2 };
 
 const TESTIMONIAL_ROTATION_MS = 7000;
-const REVIEW_STORAGE_KEY = "greentech-customer-reviews";
-const MAX_SAVED_REVIEWS = 20;
 const EMPTY_REVIEW = {
   name: "",
+  email: "",
   quote: "",
   rating: 0,
   consent: false,
+  website: "",
 };
 
 function getReviewInitials(name) {
@@ -48,37 +52,10 @@ function getReviewInitials(name) {
     .toUpperCase();
 }
 
-function loadSavedReviews() {
-  if (typeof window === "undefined") return [];
-
-  try {
-    const savedReviews = JSON.parse(window.localStorage.getItem(REVIEW_STORAGE_KEY) || "[]");
-    if (!Array.isArray(savedReviews)) return [];
-
-    return savedReviews
-      .filter((review) => (
-        typeof review?.author === "string"
-        && typeof review?.quote === "string"
-        && Number.isFinite(Number(review?.rating))
-      ))
-      .slice(-MAX_SAVED_REVIEWS)
-      .map((review, index) => ({
-        id: String(review.id || `saved-review-${index}`),
-        author: review.author.trim().slice(0, 60),
-        role: "Community review",
-        quote: review.quote.trim().slice(0, 420),
-        rating: Math.min(5, Math.max(1, Math.round(Number(review.rating)))),
-        avatarText: getReviewInitials(review.author),
-        verified: false,
-      }));
-  } catch {
-    return [];
-  }
-}
-
 function CompanyProofSection({ active }) {
   const content = useSiteContent();
   const credentials = selectCredentials(content);
+  const footprintCountries = selectFootprintCountries(content);
   const qualityPoints = selectQualityPoints(content);
   const testimonials = selectTestimonials(content);
   const credentialsText = useSection("credentials");
@@ -95,14 +72,27 @@ function CompanyProofSection({ active }) {
   const [testimonialInView, setTestimonialInView] = useState(false);
   const [testimonialIndex, setTestimonialIndex] = useState(0);
   const [testimonialPaused, setTestimonialPaused] = useState(false);
-  const [savedReviews, setSavedReviews] = useState(loadSavedReviews);
   const [reviewOpen, setReviewOpen] = useState(false);
   const [reviewSubmitted, setReviewSubmitted] = useState(false);
+  const [reviewSubmitting, setReviewSubmitting] = useState(false);
   const [reviewForm, setReviewForm] = useState(EMPTY_REVIEW);
   const [hoveredRating, setHoveredRating] = useState(0);
   const [reviewError, setReviewError] = useState("");
-  const carouselTestimonials = [...testimonials, ...savedReviews];
+  const carouselTestimonials = testimonials;
   const carouselPaused = testimonialPaused || reviewOpen;
+  const credentialsAction = useSectionAction("credentials", {
+    label: "Review credentials",
+    mode: "link",
+  });
+  const qualityAction = useSectionAction("quality", {
+    label: "Explore our capabilities",
+    mode: "link",
+    url: "#service-photovoltaic",
+  });
+  const reviewsAction = useSectionAction("reviews", {
+    label: "Create a review",
+    mode: "builtin",
+  });
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -135,7 +125,13 @@ function CompanyProofSection({ active }) {
   }, [active]);
 
   useEffect(() => {
-    if (!active || !inView || !testimonialInView || carouselPaused) {
+    if (
+      !active
+      || !inView
+      || !testimonialInView
+      || carouselPaused
+      || carouselTestimonials.length < 2
+    ) {
       return undefined;
     }
 
@@ -148,6 +144,14 @@ function CompanyProofSection({ active }) {
 
     return () => window.clearInterval(timer);
   }, [active, carouselPaused, carouselTestimonials.length, inView, testimonialInView, testimonialIndex]);
+
+  useEffect(() => {
+    setTestimonialIndex((current) => (
+      carouselTestimonials.length === 0
+        ? 0
+        : Math.min(current, carouselTestimonials.length - 1)
+    ));
+  }, [carouselTestimonials.length]);
 
   useEffect(() => {
     if (!reviewOpen) return undefined;
@@ -206,12 +210,14 @@ function CompanyProofSection({ active }) {
   }, [reviewOpen]);
 
   const showPreviousTestimonial = () => {
+    if (carouselTestimonials.length < 2) return;
     setTestimonialIndex((current) => (
       (current - 1 + carouselTestimonials.length) % carouselTestimonials.length
     ));
   };
 
   const showNextTestimonial = () => {
+    if (carouselTestimonials.length < 2) return;
     setTestimonialIndex((current) => (current + 1) % carouselTestimonials.length);
   };
 
@@ -220,6 +226,7 @@ function CompanyProofSection({ active }) {
     setHoveredRating(0);
     setReviewError("");
     setReviewSubmitted(false);
+    setReviewSubmitting(false);
     setReviewOpen(true);
   };
 
@@ -232,10 +239,11 @@ function CompanyProofSection({ active }) {
     if (reviewError) setReviewError("");
   };
 
-  const submitReview = (event) => {
+  const submitReview = async (event) => {
     event.preventDefault();
 
     const author = reviewForm.name.trim();
+    const email = reviewForm.email.trim();
     const quote = reviewForm.quote.trim();
 
     if (author.length < 2) {
@@ -249,6 +257,11 @@ function CompanyProofSection({ active }) {
       return;
     }
 
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setReviewError("Please enter a valid email address. It will not be published.");
+      return;
+    }
+
     if (quote.length < 10) {
       setReviewError("Please write at least 10 characters about your experience.");
       return;
@@ -259,25 +272,22 @@ function CompanyProofSection({ active }) {
       return;
     }
 
-    const newReview = {
-      id: globalThis.crypto?.randomUUID?.() || `review-${Date.now()}`,
-      author,
-      role: "Community review",
-      quote,
-      rating: reviewForm.rating,
-      avatarText: getReviewInitials(author),
-      verified: false,
-    };
-    const nextSavedReviews = [...savedReviews, newReview].slice(-MAX_SAVED_REVIEWS);
-
-    setSavedReviews(nextSavedReviews);
-    setTestimonialIndex(testimonials.length + nextSavedReviews.length - 1);
-    setReviewSubmitted(true);
-
+    setReviewSubmitting(true);
+    setReviewError("");
     try {
-      window.localStorage.setItem(REVIEW_STORAGE_KEY, JSON.stringify(nextSavedReviews));
-    } catch {
-      // The submitted review still remains available for the current session.
+      await submitCustomerReview({
+        name: author,
+        email,
+        quote,
+        rating: reviewForm.rating,
+        consent: reviewForm.consent,
+        website: reviewForm.website,
+      });
+      setReviewSubmitted(true);
+    } catch (error) {
+      setReviewError(error.message || "The review could not be submitted. Please try again.");
+    } finally {
+      setReviewSubmitting(false);
     }
   };
 
@@ -304,6 +314,7 @@ function CompanyProofSection({ active }) {
     <>
       <section
       ref={sectionRef}
+      id="credentials"
       className={`company-proof-section ${active ? "is-active" : ""} ${inView ? "is-in-view" : ""}`}
       aria-labelledby="company-proof-title"
     >
@@ -321,14 +332,15 @@ function CompanyProofSection({ active }) {
               )}
             </p>
           </div>
-          <a
-            href="https://greentechpro.ro/faqs/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <span>Review credentials</span>
-            <ArrowUpRight size={18} strokeWidth={1.8} aria-hidden="true" />
-          </a>
+          {credentialsAction.visible && (
+            <a
+              href={credentialsAction.hrefFor(credentialsAction.url || "#")}
+              onClick={(event) => credentialsAction.activate(event)}
+            >
+              <span>{credentialsAction.label}</span>
+              <ArrowUpRight size={18} strokeWidth={1.8} aria-hidden="true" />
+            </a>
+          )}
         </header>
 
         <div className="company-proof-credentials proof-reveal">
@@ -368,7 +380,7 @@ function CompanyProofSection({ active }) {
               </div>
             }
           >
-            <CompanyFootprintMap />
+            <CompanyFootprintMap countries={footprintCountries} />
           </Suspense>
         </section>
 
@@ -389,8 +401,10 @@ function CompanyProofSection({ active }) {
               {qualityText("title", "Control from planning to handover.")}
             </h2>
             <p>
-              Reliable delivery depends on disciplined field execution, qualified
-              personnel and checks that continue beyond installation.
+              {qualityText(
+                "description",
+                "Reliable delivery depends on disciplined field execution, qualified personnel and checks that continue beyond installation.",
+              )}
             </p>
             <ul>
               {qualityPoints.map((point) => (
@@ -400,19 +414,21 @@ function CompanyProofSection({ active }) {
                 </li>
               ))}
             </ul>
-            <a
-              href="https://greentechpro.ro/services/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <span>Explore our capabilities</span>
-              <ArrowUpRight size={18} strokeWidth={1.8} aria-hidden="true" />
-            </a>
+            {qualityAction.visible && (
+              <a
+                href={qualityAction.hrefFor(qualityAction.url || "#")}
+                onClick={(event) => qualityAction.activate(event)}
+              >
+                <span>{qualityAction.label}</span>
+                <ArrowUpRight size={18} strokeWidth={1.8} aria-hidden="true" />
+              </a>
+            )}
           </div>
         </section>
 
         <section
           ref={testimonialRef}
+          id="reviews"
           className={`company-testimonial-carousel proof-reveal ${testimonialInView ? "is-running" : ""} ${carouselPaused ? "is-paused" : ""}`}
           aria-label="Customer testimonials"
           aria-roledescription="carousel"
@@ -433,21 +449,31 @@ function CompanyProofSection({ active }) {
         >
           <div className="company-testimonial-toolbar">
             <span>{reviewsText("eyebrow", "Customer reviews")}</span>
-            <button
-              ref={reviewTriggerRef}
-              className="company-review-trigger"
-              type="button"
-              onClick={openReviewDialog}
-            >
-              <MessageSquarePlus size={18} strokeWidth={1.8} aria-hidden="true" />
-              <span>Create a review</span>
-            </button>
+            {reviewsAction.visible && (
+              <button
+                ref={reviewTriggerRef}
+                className="company-review-trigger"
+                type="button"
+                onClick={(event) => reviewsAction.activate(event, openReviewDialog)}
+              >
+                <MessageSquarePlus size={18} strokeWidth={1.8} aria-hidden="true" />
+                <span>{reviewsAction.label}</span>
+              </button>
+            )}
           </div>
 
           <div
             className="company-testimonial-stage"
             aria-live={carouselPaused ? "polite" : "off"}
           >
+            {carouselTestimonials.length === 0 && (
+              <div className="company-testimonial-empty">
+                <MessageSquarePlus size={22} strokeWidth={1.6} aria-hidden="true" />
+                <strong>No customer reviews are published yet.</strong>
+                <span>Submitted reviews appear here only after approval.</span>
+              </div>
+            )}
+
             {carouselTestimonials.map((testimonial, index) => {
               const selected = index === testimonialIndex;
 
@@ -457,12 +483,10 @@ function CompanyProofSection({ active }) {
                   key={testimonial.id}
                   role="group"
                   aria-roledescription="slide"
-                  aria-label={`${index + 1} of ${testimonials.length}`}
+                  aria-label={`${index + 1} of ${carouselTestimonials.length}`}
                   aria-hidden={!selected}
                 >
-                  <Quote size={34} strokeWidth={1.35} aria-hidden="true" />
-                  <blockquote>&ldquo;{testimonial.quote}&rdquo;</blockquote>
-                  <figcaption>
+                  <header className="company-testimonial-author">
                     <span
                       className="company-testimonial-avatar"
                       style={{ "--testimonial-avatar-position": testimonial.imagePosition }}
@@ -471,8 +495,17 @@ function CompanyProofSection({ active }) {
                       {testimonial.image ? (
                         <img src={testimonial.image} alt="" loading="lazy" decoding="async" />
                       ) : (
-                        <span>{testimonial.avatarText}</span>
+                        <span>{testimonial.avatarText || getReviewInitials(testimonial.author)}</span>
                       )}
+                    </span>
+                    <span className="company-testimonial-identity">
+                      <strong>
+                        {testimonial.author}
+                        {testimonial.verified && (
+                          <CheckCircle2 size={15} strokeWidth={1.8} aria-hidden="true" />
+                        )}
+                      </strong>
+                      <span>{testimonial.role || "Customer review"}</span>
                     </span>
                     <span
                       className="company-testimonial-rating"
@@ -488,13 +521,27 @@ function CompanyProofSection({ active }) {
                         />
                       ))}
                     </span>
-                    <strong>
-                      {testimonial.author}
-                      {testimonial.verified && (
-                        <CheckCircle2 size={15} strokeWidth={1.8} aria-hidden="true" />
+                  </header>
+
+                  <div className="company-testimonial-quote">
+                    <Quote size={24} strokeWidth={1.45} aria-hidden="true" />
+                    <blockquote>&ldquo;{testimonial.quote}&rdquo;</blockquote>
+                  </div>
+
+                  <figcaption>
+                    <span className="company-testimonial-provenance">
+                      {testimonial.source ? (
+                        <>
+                          <ShieldCheck size={15} strokeWidth={1.7} aria-hidden="true" />
+                          Source-backed testimonial
+                        </>
+                      ) : (
+                        <>
+                          <CheckCircle2 size={15} strokeWidth={1.7} aria-hidden="true" />
+                          Approved customer submission
+                        </>
                       )}
-                    </strong>
-                    <span>{testimonial.role}</span>
+                    </span>
                     {testimonial.source && (
                       <a
                         href={testimonial.source}
@@ -513,48 +560,56 @@ function CompanyProofSection({ active }) {
             })}
           </div>
 
-          <div className="company-testimonial-controls">
-            <span className="company-testimonial-count" aria-hidden="true">
-              {String(testimonialIndex + 1).padStart(2, "0")} / {String(carouselTestimonials.length).padStart(2, "0")}
-            </span>
+          {carouselTestimonials.length > 0 && (
+            <div className="company-testimonial-controls">
+              <span className="company-testimonial-count" aria-hidden="true">
+                {String(testimonialIndex + 1).padStart(2, "0")} / {String(carouselTestimonials.length).padStart(2, "0")}
+              </span>
 
-            <div className="company-testimonial-dots" role="group" aria-label="Choose testimonial">
-              {carouselTestimonials.map((testimonial, index) => (
+              <div className="company-testimonial-dots" role="group" aria-label="Choose testimonial">
+                {carouselTestimonials.map((testimonial, index) => (
+                  <button
+                    className={index === testimonialIndex ? "is-active" : ""}
+                    type="button"
+                    key={testimonial.id}
+                    aria-label={`Show testimonial ${index + 1}`}
+                    aria-current={index === testimonialIndex ? "true" : undefined}
+                    onClick={() => setTestimonialIndex(index)}
+                  >
+                    <span />
+                  </button>
+                ))}
+              </div>
+
+              <div className="company-testimonial-arrows">
                 <button
-                  className={index === testimonialIndex ? "is-active" : ""}
                   type="button"
-                  key={testimonial.id}
-                  aria-label={`Show testimonial ${index + 1}`}
-                  aria-current={index === testimonialIndex ? "true" : undefined}
-                  onClick={() => setTestimonialIndex(index)}
+                  aria-label="Previous testimonial"
+                  title="Previous testimonial"
+                  disabled={carouselTestimonials.length < 2}
+                  onClick={showPreviousTestimonial}
                 >
-                  <span />
+                  <ChevronLeft size={20} strokeWidth={1.8} aria-hidden="true" />
                 </button>
-              ))}
+                <button
+                  type="button"
+                  aria-label="Next testimonial"
+                  title="Next testimonial"
+                  disabled={carouselTestimonials.length < 2}
+                  onClick={showNextTestimonial}
+                >
+                  <ChevronRight size={20} strokeWidth={1.8} aria-hidden="true" />
+                </button>
+              </div>
             </div>
-
-            <div className="company-testimonial-arrows">
-              <button
-                type="button"
-                aria-label="Previous testimonial"
-                title="Previous testimonial"
-                onClick={showPreviousTestimonial}
-              >
-                <ChevronLeft size={20} strokeWidth={1.8} aria-hidden="true" />
-              </button>
-              <button
-                type="button"
-                aria-label="Next testimonial"
-                title="Next testimonial"
-                onClick={showNextTestimonial}
-              >
-                <ChevronRight size={20} strokeWidth={1.8} aria-hidden="true" />
-              </button>
-            </div>
-          </div>
+          )}
         </section>
       </div>
       </section>
+
+      <SectionActionModal {...credentialsAction.modalProps} />
+      <SectionActionModal {...qualityAction.modalProps} />
+      <SectionActionModal {...reviewsAction.modalProps} />
 
       {reviewOpen && createPortal(
         <div
@@ -583,18 +638,39 @@ function CompanyProofSection({ active }) {
 
             {reviewSubmitted ? (
               <div className="company-review-success" role="status">
-                <span>
+                <div className="company-review-success-icon" aria-hidden="true">
                   <CheckCircle2 size={27} strokeWidth={1.6} aria-hidden="true" />
-                </span>
-                <p>Review received</p>
-                <h2 id="company-review-title">Thank you for sharing your experience.</h2>
-                <button type="button" onClick={closeReviewDialog}>Done</button>
+                </div>
+
+                <div className="company-review-success-copy">
+                  <p className="company-review-success-eyebrow">Review received</p>
+                  <h2 id="company-review-title">Thank you for sharing your experience.</h2>
+                  <p className="company-review-success-note">
+                    Your review was sent successfully. It will appear publicly after the GreenTech team approves it.
+                  </p>
+                </div>
+
+                <div
+                  className="company-review-success-status"
+                  aria-label="Moderation status: awaiting approval"
+                >
+                  <ShieldCheck size={22} strokeWidth={1.6} aria-hidden="true" />
+                  <div>
+                    <span>Moderation status</span>
+                    <strong>Awaiting approval</strong>
+                  </div>
+                </div>
+
+                <button type="button" onClick={closeReviewDialog}>
+                  <span>Done</span>
+                  <CheckCircle2 size={17} strokeWidth={1.8} aria-hidden="true" />
+                </button>
               </div>
             ) : (
               <>
                 <header className="company-review-header">
                   <span>Customer feedback</span>
-                  <h2 id="company-review-title">Create a review</h2>
+                  <h2 id="company-review-title">{reviewsAction.label}</h2>
                 </header>
 
                 <form className="company-review-form" onSubmit={submitReview} noValidate>
@@ -609,6 +685,20 @@ function CompanyProofSection({ active }) {
                       autoComplete="name"
                       placeholder="Full name"
                       onChange={(event) => updateReviewField("name", event.target.value)}
+                    />
+                  </label>
+
+                  <label className="company-review-field">
+                    <span>Email <small>Private, used only for verification</small></span>
+                    <input
+                      type="email"
+                      name="reviewer-email"
+                      value={reviewForm.email}
+                      maxLength={160}
+                      autoComplete="email"
+                      inputMode="email"
+                      placeholder="name@company.com"
+                      onChange={(event) => updateReviewField("email", event.target.value)}
                     />
                   </label>
 
@@ -665,13 +755,29 @@ function CompanyProofSection({ active }) {
                     <span>I agree that my name and review may be displayed publicly.</span>
                   </label>
 
+                  <label className="company-review-honeypot" aria-hidden="true">
+                    <span>Website</span>
+                    <input
+                      type="text"
+                      name="website"
+                      value={reviewForm.website}
+                      tabIndex={-1}
+                      autoComplete="off"
+                      onChange={(event) => updateReviewField("website", event.target.value)}
+                    />
+                  </label>
+
                   <p className={`company-review-error ${reviewError ? "is-visible" : ""}`} role="alert">
                     {reviewError}
                   </p>
 
-                  <button className="company-review-submit" type="submit">
-                    <span>Submit review</span>
-                    <ArrowUpRight size={18} strokeWidth={1.8} aria-hidden="true" />
+                  <button className="company-review-submit" type="submit" disabled={reviewSubmitting}>
+                    <span>{reviewSubmitting ? "Submitting..." : "Submit for approval"}</span>
+                    {reviewSubmitting ? (
+                      <Loader2 className="company-review-spin" size={18} strokeWidth={1.8} aria-hidden="true" />
+                    ) : (
+                      <ArrowUpRight size={18} strokeWidth={1.8} aria-hidden="true" />
+                    )}
                   </button>
                 </form>
               </>

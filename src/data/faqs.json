@@ -1,0 +1,44 @@
+[
+  {
+    "id": "faq-services",
+    "order": 1,
+    "enabled": true,
+    "question": "What kind of projects do you take on?",
+    "answer": "We deliver electrical, mechanical and civil works for utility-scale energy sites: photovoltaic parks, electrical inspections and testing, construction services and data centre builds.\n\nProjects range from single-site installations to multi-megawatt parks across Romania, Italy and Spain."
+  },
+  {
+    "id": "faq-coverage",
+    "order": 2,
+    "enabled": true,
+    "question": "Which countries do you work in?",
+    "answer": "We have active field teams in Romania, Italy and Spain, and we mobilise across the European Union for larger contracts."
+  },
+  {
+    "id": "faq-scope",
+    "order": 3,
+    "enabled": true,
+    "question": "Do you handle a project end to end?",
+    "answer": "Yes. We cover feasibility and design, mounting structures, cabling and inverters, commissioning and grid connection, then continue with periodic testing and maintenance after handover."
+  },
+  {
+    "id": "faq-certifications",
+    "order": 4,
+    "enabled": true,
+    "question": "What certifications do you hold?",
+    "answer": "We hold ISO quality certifications and ANRE certification for work in the energy field. Full credentials are available on request."
+  },
+  {
+    "id": "faq-timeline",
+    "order": 5,
+    "enabled": true,
+    "question": "How quickly can you mobilise a team?",
+    "answer": "Mobilisation depends on scope and season. For most inspection and testing work we can be on site within two weeks; large installation contracts are planned against the client's construction programme."
+  },
+  {
+    "id": "faq-quote",
+    "order": 6,
+    "enabled": true,
+    "question": "How do I request a quote?",
+    "answer": "Send us the project location, capacity and the scope you need through the form below. Our team replies with a technical proposal and an indicative timeline."
+  }
+]
