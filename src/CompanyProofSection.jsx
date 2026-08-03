@@ -21,6 +21,7 @@ import {
   selectQualityPoints,
   selectTestimonials,
 } from "./lib/siteContent.js";
+import BlurText from "./BlurText.jsx";
 import SectionActionModal, { useSectionAction } from "./SectionAction.jsx";
 import useSiteContent from "./hooks/useSiteContent.js";
 import useSection from "./hooks/useSection.js";
@@ -322,9 +323,16 @@ function CompanyProofSection({ active }) {
         <header className="company-proof-header proof-reveal">
           <span>{credentialsText("eyebrow", "Trust & certifications")}</span>
           <div>
-            <h2 id="company-proof-title">
-              {credentialsText("title", "Built for accountable field delivery.")}
-            </h2>
+            <BlurText
+              as="h2"
+              id="company-proof-title"
+              text={credentialsText("title", "Built for accountable field delivery.")}
+              play={active}
+              animateBy="letters"
+              direction="top"
+              delay={55}
+              stepDuration={0.45}
+            />
             <p>
               {credentialsText(
                 "description",
@@ -361,7 +369,16 @@ function CompanyProofSection({ active }) {
         <section className="company-footprint proof-reveal" aria-labelledby="footprint-title">
           <header>
             <span>{footprintText("eyebrow", "European footprint")}</span>
-            <h2 id="footprint-title">{footprintText("title", "Teams close to the work.")}</h2>
+            <BlurText
+              as="h2"
+              id="footprint-title"
+              text={footprintText("title", "Teams close to the work.")}
+              play={active}
+              animateBy="letters"
+              direction="top"
+              delay={55}
+              stepDuration={0.45}
+            />
             <p>
               {footprintText(
                 "description",
@@ -397,9 +414,16 @@ function CompanyProofSection({ active }) {
 
           <div className="company-quality-copy">
             <span>{qualityText("eyebrow", "Safety & quality")}</span>
-            <h2 id="quality-title">
-              {qualityText("title", "Control from planning to handover.")}
-            </h2>
+            <BlurText
+              as="h2"
+              id="quality-title"
+              text={qualityText("title", "Control from planning to handover.")}
+              play={active}
+              animateBy="letters"
+              direction="top"
+              delay={55}
+              stepDuration={0.45}
+            />
             <p>
               {qualityText(
                 "description",

@@ -1,5 +1,6 @@
 import React, { useLayoutEffect, useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
+import BlurText from "./BlurText.jsx";
 import SectionActionModal, { useSectionAction } from "./SectionAction.jsx";
 import useSection from "./hooks/useSection.js";
 import "./HorizontalParallaxGallery.css";
@@ -236,7 +237,16 @@ function HorizontalParallaxGallery({
       <div className="horizontal-gallery-sticky">
         <header className="horizontal-gallery-heading">
           <span>{text("eyebrow", "Portfolio")}</span>
-          <h2 id="horizontal-gallery-title">{text("title", "Projects in Motion")}</h2>
+          <BlurText
+            as="h2"
+            id="horizontal-gallery-title"
+            text={text("title", "Projects in Motion")}
+            play={entered}
+            animateBy="letters"
+            direction="top"
+            delay={55}
+            stepDuration={0.45}
+          />
           <p>
             {text(
               "description",

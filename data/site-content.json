@@ -6,9 +6,9 @@
       "group": "Experience",
       "name": "Intro & 3D Hero",
       "eyebrow": "Introduction",
-      "title": "Welcome to GreenTech Professionalsdqwdqwd",
-      "description": "Electrical, mechanical and photovoltaic solutions built for a cleaner, more efficient future.dwqdqwdqw",
-      "action": "Click to exploredqwdqwdqwdqwdwqdqwd",
+      "title": "Welcome to GreenTech Professionals",
+      "description": "Electrical, mechanical and photovoltaic solutions built for a cleaner, more efficient future.",
+      "action": "Click to explored",
       "actionMode": "builtin",
       "format": "Interactive 3D experience",
       "summary": "6 GLB scenes",
@@ -19,9 +19,9 @@
       "id": "company-overview",
       "group": "Company",
       "name": "Company Overview",
-      "eyebrow": "Companydwqdqwdqwqw",
-      "title": "GreenTech Professionals SRLAAAAA",
-      "description": "GreenTech Professionals is an electrical and construction company with experience in electrical and mechanical works in the photovoltaic field.dwqdqwdqwd",
+      "eyebrow": "Company",
+      "title": "GreenTech Professionals SRL",
+      "description": "GreenTech Professionals is an electrical and construction company with experience in electrical and mechanical works in the photovoltaic field.",
       "action": "",
       "format": "Text and statistics",
       "summary": "4 impact metrics",
@@ -230,6 +230,19 @@
       "format": "Form and solar GLB",
       "summary": "Contact form + GDPR",
       "source": "src/SolarContactSection.jsx",
+      "visible": true
+    },
+    {
+      "id": "careers",
+      "group": "Content",
+      "name": "Careers",
+      "eyebrow": "Careers",
+      "title": "Join the team",
+      "description": "Send your CV and tell us what you have built.",
+      "action": "",
+      "format": "Application form",
+      "summary": "Name, position, email, phone, experience, CV",
+      "source": "src/SolarContactForms.jsx",
       "visible": true
     },
     {
@@ -701,9 +714,9 @@
         "id": "solar",
         "order": 1,
         "enabled": true,
-        "title": "Construction of Photovoltaic Parksdqwdqw",
+        "title": "Construction of Photovoltaic Parks",
         "sourceIndex": 0,
-        "body": "Solar is an abundant and cheap source of energy in South Africa. For customers with existing on-site solar panels, the addition of wheeled solar can boost renewable energy penetration by up to 50%, without the need for capital expenditure.dqwdwqdwqdqwdqw",
+        "body": "Solar is an abundant and cheap source of energy in South Africa. For customers with existing on-site solar panels, the addition of wheeled solar can boost renewable energy penetration by up to 50%, without the need for capital expenditure.",
         "footnote": ""
       },
       {
@@ -1188,7 +1201,7 @@
       }
     ]
   },
-  "updatedAt": "2026-07-29T11:47:57.185Z",
+  "updatedAt": "2026-07-29T12:32:51.106Z",
   "footer": {
     "links": [
       {

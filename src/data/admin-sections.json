@@ -230,6 +230,19 @@
     "visible": true
   },
   {
+    "id": "careers",
+    "group": "Content",
+    "name": "Careers",
+    "eyebrow": "Careers",
+    "title": "Join the team",
+    "description": "Send your CV and tell us what you have built.",
+    "action": "",
+    "format": "Application form",
+    "summary": "Name, position, email, phone, experience, CV",
+    "source": "src/SolarContactForms.jsx",
+    "visible": true
+  },
+  {
     "id": "footer",
     "group": "Content",
     "name": "Footer",

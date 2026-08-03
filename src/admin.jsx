@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import {
   ArrowUpRight,
   BadgeCheck,
+  Briefcase,
   Building2,
   Check,
   CircleDot,
@@ -59,6 +60,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import CollectionEditor from "@/components/admin/CollectionEditor.jsx";
+import ApplicationInbox from "@/components/admin/ApplicationInbox.jsx";
 import InquiryInbox from "@/components/admin/InquiryInbox.jsx";
 import ReviewModeration from "@/components/admin/ReviewModeration.jsx";
 import {
@@ -454,6 +456,7 @@ const sectionIcons = {
   "construction-service": HardHat,
   "data-center-service": ServerCog,
   faqs: MessageSquareQuote,
+  careers: Briefcase,
   blog: Newspaper,
   contact: Mail,
   footer: PanelTop,
@@ -534,13 +537,6 @@ function AppSidebar({ sections, selectedId, onSelect, onLogout }) {
       </SidebarContent>
 
       <SidebarFooter className="admin-sidebar-footer">
-        <div className="admin-sidebar-system">
-          <span className="admin-system-dot" aria-hidden="true" />
-          <span>
-            <strong>Website online</strong>
-            <small>{sections.length} sections indexed</small>
-          </span>
-        </div>
         <Button variant="ghost" size="sm" onClick={onLogout}>
           <LogOut aria-hidden="true" />
           Sign out
@@ -1205,6 +1201,12 @@ function AdminApp() {
             <>
               <Separator />
               <InquiryInbox onNotify={setNotice} />
+            </>
+          )}
+          {selectedSection?.id === "careers" && (
+            <>
+              <Separator />
+              <ApplicationInbox onNotify={setNotice} />
             </>
           )}
           {collection?.metaFields && (

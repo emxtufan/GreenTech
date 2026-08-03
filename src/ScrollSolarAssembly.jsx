@@ -466,6 +466,7 @@ function ScrollSolarAssembly({ active }) {
           aria-hidden="true"
         />
         <ServiceSectionOverlay
+          active={active}
           index={text("eyebrow", "01 / Service")}
           titleId="service-solar-title"
           title={text("title", "Construction of Photovoltaic Parks")}

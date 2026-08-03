@@ -415,6 +415,7 @@ function ScrollElectricalInspection({ active }) {
           aria-hidden="true"
         />
         <ServiceSectionOverlay
+          active={active}
           index={text("eyebrow", "02 / Service")}
           titleId="service-electrical-title"
           title={text("title", "Electrical Inspections & Testing")}

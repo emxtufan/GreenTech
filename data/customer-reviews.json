@@ -2,6 +2,17 @@
   "version": 1,
   "items": [
     {
+      "id": "customer-9c5f6eae-f2db-4736-a0da-0e1cabd48026",
+      "status": "pending",
+      "author": "emit tufan",
+      "email": "emitufan30@gmail.com",
+      "quote": "dqwdqwdqwdqwdqwdqwdqwd",
+      "rating": 5,
+      "submittedAt": "2026-07-29T12:39:29.852Z",
+      "consentAt": "2026-07-29T12:39:29.852Z",
+      "moderatedAt": null
+    },
+    {
       "id": "customer-54325c9b-a3d1-40d8-bf64-5af5bc3b4727",
       "status": "rejected",
       "author": "emit tufan",
@@ -24,5 +35,5 @@
       "moderatedAt": "2026-07-29T08:51:35.940Z"
     }
   ],
-  "updatedAt": "2026-07-29T08:51:36.811Z"
+  "updatedAt": "2026-07-29T12:39:29.852Z"
 }

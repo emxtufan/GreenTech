@@ -1,6 +1,7 @@
 import React, { useEffect, useId, useRef, useState } from "react";
 import { Plus } from "lucide-react";
 import { selectFaqs } from "./lib/siteContent.js";
+import BlurText from "./BlurText.jsx";
 import useSiteContent from "./hooks/useSiteContent.js";
 import useSection from "./hooks/useSection.js";
 import "./FaqSection.css?=dwqdwq";
@@ -103,9 +104,16 @@ function FaqSection({ active }) {
       <div className="faq-inner">
         <header className="faq-header">
           <span>{text("eyebrow", "FAQs")}</span>
-          <h2 id="faq-section-title">
-            {text("title", "Questions we hear before a project starts.")}
-          </h2>
+          <BlurText
+            as="h2"
+            id="faq-section-title"
+            text={text("title", "Questions we hear before a project starts.")}
+            play={active}
+            animateBy="letters"
+            direction="top"
+            delay={55}
+            stepDuration={0.45}
+          />
           <p>
             {text(
               "description",

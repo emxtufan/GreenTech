@@ -68,10 +68,27 @@ export default function useExperienceScrollController({
       },
     };
 
+    // Anchor links elsewhere in the app need to move the same scroller Lenis
+    // drives. Native smooth scrolling fights its animation loop, so expose a
+    // helper that defers to Lenis when it is running.
+    window.__scrollToSection = (target) => {
+      if (!target) return;
+
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (lenis) {
+        lenis.scrollTo(target, { immediate: reduced, lock: false });
+        return;
+      }
+
+      target.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+    };
+
     if (suspendedRef.current) lenis?.stop();
 
     return () => {
       sceneObserver.disconnect();
+      delete window.__scrollToSection;
       lenis?.destroy();
       scene.classList.remove("experience-rendering-paused");
       experienceRef.current?.setRenderingPaused(false);

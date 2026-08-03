@@ -14,6 +14,7 @@ import {
   X,
 } from "lucide-react";
 import { selectBlogPosts } from "./lib/siteContent.js";
+import BlurText from "./BlurText.jsx";
 import SectionActionModal, { useSectionAction } from "./SectionAction.jsx";
 import useSiteContent from "./hooks/useSiteContent.js";
 import useSection from "./hooks/useSection.js";
@@ -248,9 +249,16 @@ function BlogSection({ active, onPostOpen }) {
           <header className="blog-section-header blog-reveal">
             <span>{text("eyebrow", "The GreenTech Journal")}</span>
             <div>
-              <h2 id="blog-section-title">
-                {text("title", "Field notes, team news and opportunities.")}
-              </h2>
+              <BlurText
+                as="h2"
+                id="blog-section-title"
+                text={text("title", "Field notes, team news and opportunities.")}
+                play={active}
+                animateBy="letters"
+                direction="top"
+                delay={55}
+                stepDuration={0.45}
+              />
               <p>
                 {text(
                   "description",

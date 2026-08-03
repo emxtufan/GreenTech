@@ -1,4 +1,5 @@
 import React from "react";
+import BlurText from "./BlurText.jsx";
 import ScrollVelocity from "./ScrollVelocity.jsx";
 import "./ServiceSectionOverlay.css";
 
@@ -10,6 +11,7 @@ function ServiceSectionOverlay({
   description,
   label = "SERVICES",
   titleId,
+  active = true,
 }) {
   return (
     <>
@@ -31,9 +33,17 @@ function ServiceSectionOverlay({
           <span className="service-overlay-index" aria-hidden="true">
             {index}
           </span>
-          <h2 className="service-overlay-title" id={titleId}>
-            {title}
-          </h2>
+          <BlurText
+            as="h2"
+            className="service-overlay-title"
+            id={titleId}
+            text={title}
+            play={active}
+            animateBy="letters"
+            direction="top"
+            delay={55}
+            stepDuration={0.45}
+          />
           <p className="service-overlay-description">{description}</p>
         </div>
       </div>

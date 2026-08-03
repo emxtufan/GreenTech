@@ -1,0 +1,395 @@
+.site-nav {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + 18px);
+  right: 18px;
+  left: 18px;
+  z-index: 14;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: auto;
+  max-width: 1600px;
+  height: 58px;
+  margin: 0 auto;
+  padding: 0 8px 0 16px;
+  border: 1px solid rgb(245 247 239 / 12%);
+  border-radius: 999px;
+  /* Frosted dark bar so the 3D scenes stay readable underneath. */
+  background: rgb(6 9 7 / 72%);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  color: #f5f7ef;
+  box-shadow: 0 14px 40px rgb(0 0 0 / 34%);
+  will-change: transform, opacity;
+  transition:
+    transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.24s ease;
+}
+
+.site-nav-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(calc(-100% - 32px));
+}
+
+.site-nav-hidden:focus-within {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+
+/* --- brand --------------------------------------------------------------- */
+
+.site-nav-brand {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.site-nav-brand img {
+  display: block;
+  width: auto;
+  height: 22px;
+}
+
+/* --- desktop links ------------------------------------------------------- */
+
+.site-nav-links {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+/* A fixed height keeps the <a> links and the <button> trigger on the same line
+   regardless of font metrics or per-browser button defaults, which is what
+   pushed "Services" out of alignment. */
+.site-nav-link {
+  display: inline-flex;
+  height: 34px;
+  align-items: center;
+  align-self: center;
+  gap: 5px;
+  margin: 0;
+  padding: 0 11px;
+  border: 0;
+  border-radius: 999px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  color: #cdd6d0;
+  font: inherit;
+  font-size: 13.5px;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 180ms ease, background-color 180ms ease;
+}
+
+.site-nav-link > svg {
+  flex: 0 0 auto;
+}
+
+.site-nav-link:hover,
+.site-nav-link:focus-visible {
+  background: rgb(139 188 63 / 12%);
+  color: #8bbc3f;
+}
+
+.site-nav-link:focus-visible {
+  outline: 2px solid #8bbc3f;
+  outline-offset: 2px;
+}
+
+/* --- services dropdown --------------------------------------------------- */
+
+.site-nav-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.site-nav-group-trigger svg {
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.site-nav-group.is-open .site-nav-group-trigger {
+  background: rgb(139 188 63 / 12%);
+  color: #8bbc3f;
+}
+
+.site-nav-group.is-open .site-nav-group-trigger svg {
+  transform: rotate(180deg);
+}
+
+.site-nav-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  display: flex;
+  width: max-content;
+  min-width: 220px;
+  flex-direction: column;
+  padding: 8px;
+  border: 1px solid rgb(245 247 239 / 12%);
+  border-radius: 14px;
+  background: rgb(8 11 9 / 96%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 18px 44px rgb(0 0 0 / 46%);
+  opacity: 0;
+  transform: translate(-50%, -6px);
+  transition: opacity 200ms ease, transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.site-nav-group.is-open .site-nav-dropdown {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.site-nav-dropdown a {
+  padding: 10px 12px;
+  border-radius: 9px;
+  color: #cdd6d0;
+  font-size: 13.5px;
+  line-height: 1.3;
+  text-decoration: none;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.site-nav-dropdown a:hover,
+.site-nav-dropdown a:focus-visible {
+  background: rgb(139 188 63 / 12%);
+  color: #8bbc3f;
+}
+
+/* --- actions ------------------------------------------------------------- */
+
+.site-nav-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.site-nav-apply {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  background: #8bbc3f;
+  color: #061006;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.site-nav-apply:hover,
+.site-nav-apply:focus-visible {
+  background: #9ccb4e;
+  transform: translateY(-1px);
+}
+
+.site-nav-burger {
+  position: relative;
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgb(245 247 239 / 18%);
+  border-radius: 999px;
+  background: none;
+  color: #f5f7ef;
+  cursor: pointer;
+}
+
+.site-nav-burger i,
+.site-nav-burger i::before,
+.site-nav-burger i::after {
+  position: absolute;
+  left: 50%;
+  width: 15px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: currentColor;
+  transform: translateX(-50%);
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 160ms ease;
+}
+
+.site-nav-burger i {
+  top: 50%;
+  margin-top: -0.75px;
+}
+
+.site-nav-burger i::before,
+.site-nav-burger i::after {
+  content: "";
+  left: 0;
+  transform: none;
+}
+
+.site-nav-burger i::before { top: -5px; }
+.site-nav-burger i::after { top: 5px; }
+
+.site-nav-burger.is-open i {
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.site-nav-burger.is-open i::before {
+  top: 0;
+  opacity: 0;
+}
+
+.site-nav-burger.is-open i::after {
+  top: 0;
+  transform: rotate(-90deg);
+}
+
+/* --- mobile sheet -------------------------------------------------------- */
+
+.site-nav-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 13;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 18px;
+  padding:
+    calc(env(safe-area-inset-top, 0px) + 96px)
+    18px
+    calc(env(safe-area-inset-bottom, 0px) + 24px);
+  background: rgb(4 6 5 / 97%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 260ms ease;
+}
+
+.site-nav-sheet.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.site-nav-sheet nav {
+  display: flex;
+  overflow-y: auto;
+  flex-direction: column;
+  overscroll-behavior: contain;
+}
+
+.site-nav-sheet nav a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 15px 4px;
+  border-bottom: 1px solid rgb(245 247 239 / 10%);
+  color: #f5f7ef;
+  font-family: "Fira Sans", Arial, Helvetica, sans-serif;
+  font-size: 19px;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.site-nav-sheet nav a svg {
+  flex: 0 0 auto;
+  color: #6e7b74;
+}
+
+.site-nav-sheet nav a:active {
+  color: #8bbc3f;
+}
+
+/* Service children sit under their parent as a lighter, indented group. */
+.site-nav-sheet nav a.is-heading + a,
+.site-nav-sheet nav a.is-heading + a + a,
+.site-nav-sheet nav a.is-heading + a + a + a,
+.site-nav-sheet nav a.is-heading + a + a + a + a {
+  padding-left: 18px;
+  color: #aab4ae;
+  font-size: 15.5px;
+}
+
+.site-nav-sheet-apply {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 17px;
+  border-radius: 999px;
+  background: #8bbc3f;
+  color: #061006;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* --- responsive ---------------------------------------------------------- */
+
+@media screen and (max-width: 1240px) {
+  .site-nav-link {
+    padding: 8px 8px;
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .site-nav {
+    height: 54px;
+    gap: 10px;
+    padding: 0 8px 0 14px;
+  }
+
+  .site-nav-links {
+    display: none;
+  }
+
+  .site-nav-actions {
+    margin-left: auto;
+  }
+
+  .site-nav-burger {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .site-nav-brand img {
+    height: 19px;
+  }
+
+  .site-nav-apply {
+    padding: 10px 15px;
+    font-size: 13px;
+  }
+
+  .site-nav-apply svg {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-nav,
+  .site-nav-dropdown,
+  .site-nav-sheet,
+  .site-nav-burger i,
+  .site-nav-burger i::before,
+  .site-nav-burger i::after,
+  .site-nav-apply,
+  .site-nav-group-trigger svg {
+    transition: none;
+  }
+}

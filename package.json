@@ -4,7 +4,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "prebuild": "node scripts/extract-original-assets.mjs",
     "dev": "node --env-file-if-exists=.env server.js",
     "dev:vite": "vite --host 0.0.0.0",
     "build": "vite build",

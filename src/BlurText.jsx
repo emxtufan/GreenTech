@@ -13,6 +13,8 @@ const buildKeyframes = (from, steps) => {
 
 const BlurText = ({
   text = '',
+  as: Component = 'p',
+  play = true,
   delay = 200,
   className = '',
   animateBy = 'words',
@@ -23,13 +25,24 @@ const BlurText = ({
   animationTo,
   easing = t => t,
   onAnimationComplete,
-  stepDuration = 0.35
+  stepDuration = 0.35,
+  style,
+  ...componentProps
 }) => {
   const elements = animateBy === 'words' ? text.split(' ') : text.split('');
+  const letterWords = animateBy === 'words' ? [] : text.trim().split(/\s+/);
+  const animatedElementCount = animateBy === 'words'
+    ? elements.length
+    : letterWords.reduce((total, word) => total + Array.from(word).length, 0);
   const [inView, setInView] = useState(false);
   const ref = useRef(null);
 
   useEffect(() => {
+    if (!play) {
+      setInView(false);
+      return undefined;
+    }
+
     if (!ref.current) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -42,7 +55,7 @@ const BlurText = ({
     );
     observer.observe(ref.current);
     return () => observer.disconnect();
-  }, [threshold, rootMargin]);
+  }, [play, threshold, rootMargin]);
 
   const defaultFrom = useMemo(
     () =>
@@ -68,34 +81,61 @@ const BlurText = ({
   const stepCount = toSnapshots.length + 1;
   const totalDuration = stepDuration * (stepCount - 1);
   const times = Array.from({ length: stepCount }, (_, i) => (stepCount === 1 ? 0 : i / (stepCount - 1)));
+  const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
+
+  const renderSegment = (segment, index) => {
+    const spanTransition = {
+      duration: totalDuration,
+      times,
+      delay: (index * delay) / 1000,
+      ease: easing
+    };
+
+    return (
+      <motion.span
+        className="inline-block will-change-[transform,filter,opacity]"
+        key={`${segment}-${index}`}
+        initial={fromSnapshot}
+        animate={inView ? animateKeyframes : fromSnapshot}
+        transition={spanTransition}
+        onAnimationComplete={index === animatedElementCount - 1 ? onAnimationComplete : undefined}
+      >
+        {segment}
+      </motion.span>
+    );
+  };
+
+  let letterIndex = 0;
 
   return (
-    <p ref={ref} className={className} style={{ display: 'flex', flexWrap: 'wrap' }}>
-      {elements.map((segment, index) => {
-        const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
-
-        const spanTransition = {
-          duration: totalDuration,
-          times,
-          delay: (index * delay) / 1000
-        };
-        spanTransition.ease = easing;
-
-        return (
-          <motion.span
-            className="inline-block will-change-[transform,filter,opacity]"
-            key={index}
-            initial={fromSnapshot}
-            animate={inView ? animateKeyframes : fromSnapshot}
-            transition={spanTransition}
-            onAnimationComplete={index === elements.length - 1 ? onAnimationComplete : undefined}
+    <Component
+      {...componentProps}
+      ref={ref}
+      className={className}
+      aria-label={componentProps['aria-label'] ?? (animateBy === 'words' ? undefined : text)}
+      style={{ display: 'flex', flexWrap: 'wrap', ...style }}
+    >
+      {animateBy === 'words'
+        ? elements.map((segment, index) => (
+          <React.Fragment key={`${segment}-${index}`}>
+            {renderSegment(segment, index)}
+            {index < elements.length - 1 && '\u00A0'}
+          </React.Fragment>
+        ))
+        : letterWords.map((word, wordIndex) => (
+          <span
+            key={`${word}-${wordIndex}`}
+            aria-hidden="true"
+            style={{
+              display: 'inline-flex',
+              flexShrink: 0,
+              marginRight: wordIndex < letterWords.length - 1 ? '0.25em' : 0
+            }}
           >
-            {segment === ' ' ? '\u00A0' : segment}
-            {animateBy === 'words' && index < elements.length - 1 && '\u00A0'}
-          </motion.span>
-        );
-      })}
-    </p>
+            {Array.from(word).map(letter => renderSegment(letter, letterIndex++))}
+          </span>
+        ))}
+    </Component>
   );
 };
 

@@ -1,10 +1,9 @@
 import { writeFile, mkdir } from "node:fs/promises";
 import { randomBytes } from "node:crypto";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { UPLOADS_DIR } from "./storagePaths.js";
 
-const ROOT_DIR = fileURLToPath(new URL("..", import.meta.url));
-export const UPLOADS_DIR = path.join(ROOT_DIR, "public", "uploads");
+export { UPLOADS_DIR };
 export const MAX_UPLOAD_BYTES = 128 * 1024 * 1024;
 const MAX_IMAGE_UPLOAD_BYTES = 8 * 1024 * 1024;
 

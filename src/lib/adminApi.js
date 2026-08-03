@@ -75,6 +75,21 @@ export const deleteProjectInquiry = (id) =>
     method: "DELETE",
   }).then(json);
 
+export const getCareerApplications = () =>
+  fetch("/api/admin/applications", { headers: { Accept: "application/json" } }).then(json);
+
+export const updateCareerApplicationStatus = (id, status) =>
+  fetch(`/api/admin/applications/${encodeURIComponent(id)}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ status }),
+  }).then(json);
+
+export const deleteCareerApplication = (id) =>
+  fetch(`/api/admin/applications/${encodeURIComponent(id)}`, {
+    method: "DELETE",
+  }).then(json);
+
 /**
  * Posts the File as a raw body. Returns `{ url }` — the only thing that is ever
  * written into the content document.

@@ -7,6 +7,11 @@ import {
   ReviewError,
 } from "./reviewRepository.js";
 import { inquiryRepository, InquiryError } from "./inquiryRepository.js";
+import {
+  applicationRepository,
+  ApplicationError,
+  MAX_CV_BYTES,
+} from "./applicationRepository.js";
 import { saveUpload, UploadError, MAX_UPLOAD_BYTES } from "./uploads.js";
 import { geocodePlace, GeocodingError } from "./geocoding.js";
 import {
@@ -67,6 +72,48 @@ function consumeInquiryRateLimit(request) {
   }
 
   return true;
+}
+
+const APPLICATION_RATE_WINDOW_MS = 60 * 60 * 1000;
+const APPLICATION_RATE_LIMIT = 5;
+const applicationRateBuckets = new Map();
+
+// Keyed on the client address alone. Including the email would let a flooder
+// bypass the limit simply by varying it.
+function applicationRateKey(request) {
+  return request.ip || request.socket.remoteAddress || "unknown";
+}
+
+/**
+ * Checks the allowance without spending it. The slot is only consumed once an
+ * application is actually accepted, so somebody correcting a validation error
+ * three times is not locked out for an hour.
+ */
+function applicationRateLimitAvailable(request) {
+  const now = Date.now();
+  const recent = (applicationRateBuckets.get(applicationRateKey(request)) || [])
+    .filter((timestamp) => now - timestamp < APPLICATION_RATE_WINDOW_MS);
+
+  return recent.length < APPLICATION_RATE_LIMIT;
+}
+
+function consumeApplicationRateLimit(request) {
+  const key = applicationRateKey(request);
+  const now = Date.now();
+  const recent = (applicationRateBuckets.get(key) || [])
+    .filter((timestamp) => now - timestamp < APPLICATION_RATE_WINDOW_MS);
+
+  recent.push(now);
+  applicationRateBuckets.set(key, recent);
+
+  if (applicationRateBuckets.size > 1000) {
+    for (const [bucketKey, timestamps] of applicationRateBuckets) {
+      if (!timestamps.some((timestamp) => now - timestamp < APPLICATION_RATE_WINDOW_MS)) {
+        applicationRateBuckets.delete(bucketKey);
+      }
+    }
+  }
+
 }
 
 export function createApiRouter() {
@@ -130,6 +177,33 @@ export function createApiRouter() {
         }
 
         const submitted = await inquiryRepository.submit(request.body);
+        response.status(201).json({ success: true, ...submitted });
+      } catch (error) {
+        next(error);
+      }
+    },
+  );
+
+  router.post(
+    "/applications",
+    // Base64 inflates the payload by ~4/3, so the limit tracks MAX_CV_BYTES.
+    express.json({ limit: `${Math.ceil((MAX_CV_BYTES * 4) / 3 / 1024 / 1024) + 1}mb` }),
+    async (request, response, next) => {
+      try {
+        if (String(request.body?.website ?? "").trim()) {
+          response.status(202).json({ success: true, status: "new" });
+          return;
+        }
+
+        if (!applicationRateLimitAvailable(request)) {
+          throw new ApplicationError(
+            "Too many applications sent. Please try again later.",
+            429,
+          );
+        }
+
+        const submitted = await applicationRepository.submit(request.body);
+        consumeApplicationRateLimit(request);
         response.status(201).json({ success: true, ...submitted });
       } catch (error) {
         next(error);
@@ -244,6 +318,70 @@ export function createApiRouter() {
     },
   );
 
+  router.get("/admin/applications", requireAdmin, async (request, response, next) => {
+    try {
+      response.json({
+        success: true,
+        applications: await applicationRepository.getAll(),
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  // CVs live outside public/, so this is the only way to read one.
+  router.get(
+    "/admin/applications/:id/cv",
+    requireAdmin,
+    async (request, response, next) => {
+      try {
+        const cv = await applicationRepository.getCvPath(request.params.id);
+        response.type(cv.mime);
+        // `attachment` stops the browser rendering an uploaded document inline.
+        response.setHeader(
+          "Content-Disposition",
+          `attachment; filename="${encodeURIComponent(cv.name)}"`,
+        );
+        response.setHeader("X-Content-Type-Options", "nosniff");
+        response.sendFile(cv.path, (error) => {
+          if (error) next(error);
+        });
+      } catch (error) {
+        next(error);
+      }
+    },
+  );
+
+  router.patch(
+    "/admin/applications/:id",
+    requireAdmin,
+    express.json({ limit: "4kb" }),
+    async (request, response, next) => {
+      try {
+        const application = await applicationRepository.setStatus(
+          request.params.id,
+          request.body?.status,
+        );
+        response.json({ success: true, application });
+      } catch (error) {
+        next(error);
+      }
+    },
+  );
+
+  router.delete(
+    "/admin/applications/:id",
+    requireAdmin,
+    async (request, response, next) => {
+      try {
+        await applicationRepository.remove(request.params.id);
+        response.json({ success: true });
+      } catch (error) {
+        next(error);
+      }
+    },
+  );
+
   router.put(
     "/admin/content",
     requireAdmin,
@@ -331,6 +469,11 @@ export function createApiRouter() {
     }
 
     if (error instanceof ReviewError) {
+      response.status(error.statusCode).json({ success: false, error: error.message });
+      return;
+    }
+
+    if (error instanceof ApplicationError) {
       response.status(error.statusCode).json({ success: false, error: error.message });
       return;
     }

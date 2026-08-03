@@ -1,12 +1,11 @@
 import { randomUUID } from "node:crypto";
-import { copyFile, mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { createDocumentStore } from "./persistence.js";
+import { DATA_DIR, SEED_DATA_DIR } from "./storagePaths.js";
 
-const ROOT_DIR = fileURLToPath(new URL("..", import.meta.url));
-const DATA_DIR = path.join(ROOT_DIR, "data");
 const INQUIRIES_FILE = path.join(DATA_DIR, "project-inquiries.json");
 const INQUIRIES_BACKUP_FILE = path.join(DATA_DIR, "project-inquiries.backup.json");
+const INQUIRIES_SEED_FILE = path.join(SEED_DATA_DIR, "project-inquiries.json");
 const INQUIRY_STATUSES = new Set(["new", "contacted", "closed"]);
 const MAX_INQUIRIES = 5000;
 const DUPLICATE_WINDOW_MS = 10 * 60 * 1000;
@@ -77,42 +76,32 @@ const sortNewestFirst = (items) => [...items].sort((first, second) => (
 ));
 
 export class JsonInquiryRepository {
-  #file;
-  #backup;
+  #store;
   #writeQueue = Promise.resolve();
 
-  constructor({ file = INQUIRIES_FILE, backup = INQUIRIES_BACKUP_FILE } = {}) {
-    this.#file = file;
-    this.#backup = backup;
+  constructor({
+    file = INQUIRIES_FILE,
+    backup = INQUIRIES_BACKUP_FILE,
+    seedFile = file === INQUIRIES_FILE ? INQUIRIES_SEED_FILE : undefined,
+    store,
+  } = {}) {
+    this.#store = store || createDocumentStore({
+      file,
+      backup,
+      seedFile,
+      defaultValue: { version: 1, items: [] },
+    });
   }
 
   async #read() {
-    try {
-      const document = JSON.parse(await readFile(this.#file, "utf8"));
-      validateDocument(document);
-      return document;
-    } catch (error) {
-      if (error.code === "ENOENT") return { version: 1, items: [] };
-      if (error instanceof SyntaxError) {
-        const document = JSON.parse(await readFile(this.#backup, "utf8"));
-        validateDocument(document);
-        return document;
-      }
-      throw error;
-    }
+    const document = await this.#store.read();
+    validateDocument(document);
+    return document;
   }
 
   async #write(document) {
     validateDocument(document);
-    await mkdir(path.dirname(this.#file), { recursive: true });
-    await copyFile(this.#file, this.#backup).catch((error) => {
-      if (error.code !== "ENOENT") throw error;
-    });
-
-    const temporary = `${this.#file}.${process.pid}.tmp`;
-    await writeFile(temporary, `${JSON.stringify(document, null, 2)}\n`, "utf8");
-    JSON.parse(await readFile(temporary, "utf8"));
-    await rename(temporary, this.#file);
+    await this.#store.write(document);
   }
 
   async #mutate(mutation) {

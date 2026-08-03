@@ -1,19 +1,17 @@
-import { readFile, writeFile, rename, copyFile, mkdir } from "node:fs/promises";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import { validateContent, withDefaults, CONTENT_VERSION } from "./contentSchema.js";
+import { createDocumentStore } from "./persistence.js";
+import { DATA_DIR, SEED_DATA_DIR } from "./storagePaths.js";
 
-const ROOT_DIR = fileURLToPath(new URL("..", import.meta.url));
-const DATA_DIR = path.join(ROOT_DIR, "data");
 const CONTENT_FILE = path.join(DATA_DIR, "site-content.json");
 const BACKUP_FILE = path.join(DATA_DIR, "site-content.backup.json");
+const CONTENT_SEED_FILE = path.join(SEED_DATA_DIR, "site-content.json");
 
 /**
  * Persistence boundary for site content.
  *
- * Swapping JSON for a database means implementing this same pair of methods in
- * a `DatabaseContentRepository` and changing the export at the bottom of this
- * file — no route, hook or component needs to move.
+ * Routes and components depend only on this interface; persistence details
+ * remain contained in the repository and document store.
  *
  * @typedef {object} ContentRepository
  * @property {() => Promise<object>} getContent
@@ -21,29 +19,25 @@ const BACKUP_FILE = path.join(DATA_DIR, "site-content.backup.json");
  */
 
 export class JsonContentRepository {
-  #file;
-  #backup;
+  #store;
   #writeQueue = Promise.resolve();
 
-  constructor({ file = CONTENT_FILE, backup = BACKUP_FILE } = {}) {
-    this.#file = file;
-    this.#backup = backup;
+  constructor({
+    file = CONTENT_FILE,
+    backup = BACKUP_FILE,
+    seedFile = file === CONTENT_FILE ? CONTENT_SEED_FILE : undefined,
+    store,
+  } = {}) {
+    this.#store = store || createDocumentStore({
+      file,
+      backup,
+      seedFile,
+      defaultValue: {},
+    });
   }
 
   async getContent() {
-    try {
-      const raw = await readFile(this.#file, "utf8");
-      return withDefaults(JSON.parse(raw));
-    } catch (error) {
-      if (error.code === "ENOENT") return withDefaults({});
-      if (error instanceof SyntaxError) {
-        // A corrupt primary file must not take the site down: fall back to the
-        // last known-good copy rather than serving nothing.
-        const raw = await readFile(this.#backup, "utf8");
-        return withDefaults(JSON.parse(raw));
-      }
-      throw error;
-    }
+    return withDefaults(await this.#store.read());
   }
 
   /**
@@ -63,22 +57,7 @@ export class JsonContentRepository {
 
     validateContent(next);
 
-    await mkdir(path.dirname(this.#file), { recursive: true });
-
-    // Keep one backup of the previous good state before overwriting.
-    await copyFile(this.#file, this.#backup).catch((error) => {
-      if (error.code !== "ENOENT") throw error;
-    });
-
-    const serialised = `${JSON.stringify(next, null, 2)}\n`;
-    const temporary = `${this.#file}.${process.pid}.tmp`;
-
-    // Write to a temp file, prove it parses, then rename over the target.
-    // rename() is atomic on the same filesystem, so a crash mid-write can never
-    // leave a half-written content file behind.
-    await writeFile(temporary, serialised, "utf8");
-    JSON.parse(await readFile(temporary, "utf8"));
-    await rename(temporary, this.#file);
+    await this.#store.write(next);
 
     return next;
   }

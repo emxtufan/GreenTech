@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { BadgeCheck, BadgeDollarSign, SolarPanel, Zap } from "lucide-react";
+import { motion } from "motion/react";
 import {
   EnpowerExperience,
   SCENE_COUNT,
@@ -37,9 +38,47 @@ import useSiteContent from "./hooks/useSiteContent.js";
 import useSection from "./hooks/useSection.js";
 import "./styles.css?=122222";
 import BlurText from "./BlurText";
+import CountUp from "./CountUp.jsx";
+import SiteNavigation from "./SiteNavigation.jsx";
 
 // Icons cannot live in JSON, so content stores a name and this map resolves it.
 const impactStatIcons = { Zap, SolarPanel, BadgeCheck, BadgeDollarSign };
+
+function AnimatedImpactValue({ value }) {
+  const displayValue = String(value ?? "");
+  const numberMatch = displayValue.match(/-?\d[\d,]*(?:\.\d+)?/);
+
+  if (!numberMatch) return displayValue;
+
+  const numberText = numberMatch[0];
+  const target = Number(numberText.replace(/,/g, ""));
+  if (!Number.isFinite(target)) return displayValue;
+
+  const numberStart = numberMatch.index ?? 0;
+  const prefix = displayValue.slice(0, numberStart);
+  const suffix = displayValue.slice(numberStart + numberText.length);
+
+  return (
+    <span className="impact-stat-value-animated" aria-hidden="true">
+      {prefix}
+      <span
+        className="impact-stat-count"
+        style={{ minWidth: `${Math.max(numberText.length, 1) * 0.62}em` }}
+      >
+        <CountUp
+          from={0}
+          to={target}
+          separator=","
+          direction="up"
+          duration={1}
+          className="count-up-text"
+          delay={0}
+        />
+      </span>
+      {suffix}
+    </span>
+  );
+}
 
 // Which hero cards render the graph treatment — a UI behaviour, not content.
 const graphSections = new Set([0, 1, 4, 5]);
@@ -112,14 +151,6 @@ function LogoMark() {
   );
 }
 
-function NavigationLogo({ backToIntro }) {
-  return (
-    <button className="brand-logo" type="button" aria-label="Enpower Trading" onClick={backToIntro}>
-      <span className="brand-logo-desktop"><img src="" alt="" /></span>
-      <span className="brand-logo-mobile"><img src="/original/LOGO-BUN-Transparent.png.webp" alt="" /></span>
-    </button>
-  );
-}
 
 function useScrollAwareNavigation(enabled) {
   const [visible, setVisible] = useState(true);
@@ -166,22 +197,9 @@ function useScrollAwareNavigation(enabled) {
   return visible;
 }
 
-function Navigation({ highQuality, setHighQuality, dark, setDark, backToIntro, entered }) {
+function Navigation({ backToIntro, entered }) {
   const visible = useScrollAwareNavigation(entered);
-
-  return (
-    <header className={`nav ${visible ? "" : "nav-scroll-hidden"}`} id="menuWrapper">
-      <NavigationLogo backToIntro={backToIntro} />
-      <div className="nav-actions">
-       
-        <button className="menu-button" type="button" >
-          <span>Menu</span>
-          <i className="burger" aria-hidden="true" />
-        </button>
-      </div>
-      {/* <span className="desktop-mode">{dark ? "Light mode" : "Dark mode"}</span> */}
-    </header>
-  );
+  return <SiteNavigation visible={visible} backToIntro={backToIntro} entered={entered} />;
 }
 
 function Card({ active, entered }) {
@@ -217,7 +235,15 @@ function Card({ active, entered }) {
       data-lenis-prevent
     >
       <header className="card-header">
-        <h2>{section.title}</h2>
+        <BlurText
+          key={`${section.id}-${entered ? "visible" : "hidden"}`}
+          as="h2"
+          text={section.title}
+          play={entered}
+          delay={200}
+          animateBy="words"
+          direction="top"
+        />
         <span className="card-range">[{active + 1}]</span>
       </header>
       <div className="card-info">
@@ -260,21 +286,72 @@ function Intro({ entered, ready, enter }) {
             "Electrical, mechanical and photovoltaic solutions built for a cleaner, more efficient future.",
           )}
         </p>
+        {introAction.visible && (
+          <button
+            className="intro-cta"
+            type="button"
+            onClick={(event) => introAction.activate(event, enter)}
+            disabled={introAction.mode === "builtin" && !ready}
+          >
+            <span>{introAction.label}</span>
+            <span className="intro-cta-arrow" aria-hidden="true">{"\u2192"}</span>
+          </button>
+        )}
       </div>
-      {introAction.visible && (
-        <button
-          className="intro-cta"
-          type="button"
-          onClick={(event) => introAction.activate(event, enter)}
-          disabled={introAction.mode === "builtin" && !ready}
-        >
-          <span>{introAction.label}</span>
-          <span className="intro-cta-arrow" aria-hidden="true">{"\u2192"}</span>
-        </button>
-      )}
       <SectionActionModal {...introAction.modalProps} />
     </section>
   );
+}
+
+function useViewportReveal(enabled, revealAt = 0.88) {
+  const targetRef = useRef(null);
+  const [revealed, setRevealed] = useState(false);
+
+  useEffect(() => {
+    if (!enabled) {
+      setRevealed(false);
+      return undefined;
+    }
+
+    if (revealed) return undefined;
+
+    const target = targetRef.current;
+    if (!target) return undefined;
+
+    let animationFrame = 0;
+    const visualViewport = window.visualViewport;
+
+    const updateReveal = () => {
+      animationFrame = 0;
+      const bounds = target.getBoundingClientRect();
+      const viewportHeight = visualViewport?.height || window.innerHeight;
+
+      if (bounds.top <= viewportHeight * revealAt && bounds.bottom >= 0) {
+        setRevealed(true);
+      }
+    };
+
+    const scheduleReveal = () => {
+      if (animationFrame) return;
+      animationFrame = window.requestAnimationFrame(updateReveal);
+    };
+
+    scheduleReveal();
+    window.addEventListener("scroll", scheduleReveal, { passive: true });
+    window.addEventListener("resize", scheduleReveal);
+    visualViewport?.addEventListener("scroll", scheduleReveal, { passive: true });
+    visualViewport?.addEventListener("resize", scheduleReveal);
+
+    return () => {
+      window.removeEventListener("scroll", scheduleReveal);
+      window.removeEventListener("resize", scheduleReveal);
+      visualViewport?.removeEventListener("scroll", scheduleReveal);
+      visualViewport?.removeEventListener("resize", scheduleReveal);
+      window.cancelAnimationFrame(animationFrame);
+    };
+  }, [enabled, revealAt, revealed]);
+
+  return [targetRef, revealed];
 }
 
 function FinalSection({ entered }) {
@@ -300,6 +377,8 @@ function FinalSection({ entered }) {
   }));
   const sectionRef = useRef(null);
   const videoRef = useRef(null);
+  const [introRef, introRevealed] = useViewportReveal(entered);
+  const [clientsRef, clientsRevealed] = useViewportReveal(entered, 0.9);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -364,16 +443,29 @@ function FinalSection({ entered }) {
       data-wind-stage="company"
     >
       <div className="final-section-inner">
-        <header className="final-section-intro">
-          <h1 id="final-section-title">
-            {companyText("title", "GreenTech Professionals SRL")}
-          </h1>
-          <p>
+        <header ref={introRef} className="final-section-intro">
+          <BlurText
+            as="h1"
+            id="final-section-title"
+            text={companyText("title", "GreenTech Professionals SRL")}
+            play={introRevealed}
+            animateBy="letters"
+            direction="top"
+            delay={55}
+            stepDuration={0.45}
+          />
+          <motion.p
+            initial={false}
+            animate={introRevealed
+              ? { opacity: 1, y: 0 }
+              : { opacity: 0, y: 14 }}
+            transition={{ duration: 0.7, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
+          >
             {companyText(
               "description",
               "GreenTech Professionals is an electrical and construction company with experience in electrical and mechanical works in the photovoltaic field.",
             )}
-          </p>
+          </motion.p>
         </header>
 
         <div className="impact-network">
@@ -386,7 +478,9 @@ function FinalSection({ entered }) {
                   <span className="impact-stat-icon" aria-hidden="true">
                     <Icon size={30} strokeWidth={1.45} />
                   </span>
-                  <strong>{value}</strong>
+                  <strong aria-label={String(value)}>
+                    <AnimatedImpactValue value={value} />
+                  </strong>
                   <span className="impact-stat-label">{label}</span>
                 </article>
               );
@@ -416,7 +510,18 @@ function FinalSection({ entered }) {
               {hasCompanyVideoHeading && (
                 <div className="company-video-heading">
                   {companyVideoEyebrow && <span>{companyVideoEyebrow}</span>}
-                  {companyVideoTitle && <h2 id="company-video-title">{companyVideoTitle}</h2>}
+                  {companyVideoTitle && (
+                    <BlurText
+                      as="h2"
+                      id="company-video-title"
+                      text={companyVideoTitle}
+                      play={entered}
+                      animateBy="letters"
+                      direction="top"
+                      delay={55}
+                      stepDuration={0.45}
+                    />
+                  )}
                 </div>
               )}
               {companyVideoDescription && <p>{companyVideoDescription}</p>}
@@ -424,15 +529,37 @@ function FinalSection({ entered }) {
           )}
         </section>
 
-        <section className="clients-showcase" aria-labelledby="clients-title">
-          <h2 id="clients-title">{clientsText("title", "Our Clients")}</h2>
-          <p>
+        <section ref={clientsRef} className="clients-showcase" aria-labelledby="clients-title">
+          <BlurText
+            as="h2"
+            id="clients-title"
+            text={clientsText("title", "Our Clients")}
+            play={clientsRevealed}
+            animateBy="letters"
+            direction="top"
+            delay={55}
+            stepDuration={0.45}
+          />
+          <motion.p
+            initial={false}
+            animate={clientsRevealed
+              ? { opacity: 1, y: 0 }
+              : { opacity: 0, y: 14 }}
+            transition={{ duration: 0.9, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
+          >
             {clientsText(
               "description",
               "Selected client relationships across energy, mobility and infrastructure.",
             )}
-          </p>
-          <div className="clients-loop">
+          </motion.p>
+          <motion.div
+            className="clients-loop"
+            initial={false}
+            animate={clientsRevealed
+              ? { opacity: 1, y: 0 }
+              : { opacity: 0, y: 20 }}
+            transition={{ duration: 1, delay: 0.34, ease: [0.22, 1, 0.36, 1] }}
+          >
             <LogoLoop
               logos={clientLogos}
               speed={54}
@@ -445,7 +572,7 @@ function FinalSection({ entered }) {
               fadeOutColor="#000000"
               ariaLabel="Our clients"
             />
-          </div>
+          </motion.div>
         </section>
       </div>
     </section>
@@ -534,7 +661,9 @@ function StackSection({ entered }) {
       <div className="process-section-inner">
         <header className="process-section-intro" ref={introRef}>
           <span>{processText("eyebrow", "Process")}</span>
-          <h2 id="process-section-title">{processText("title", "Our Work Process")}</h2>
+          <h2 id="process-section-title">
+            {processText("title", "Our Work Process")}
+          </h2>
           <p>
             {processText(
               "description",
@@ -650,14 +779,7 @@ function App({ onOpenProject, onShowAllProjects, onOpenPost, routeOpen }) {
           style={{ height: entered ? `${SCROLL_HEIGHT}px` : 0 }}
         />
       </div>
-      <Navigation
-        highQuality={highQuality}
-        setHighQuality={setHighQuality}
-        dark={dark}
-        setDark={setDark}
-        backToIntro={backToIntro}
-        entered={entered}
-      />
+      <Navigation backToIntro={backToIntro} entered={entered} />
       <Intro entered={entered} ready={ready} enter={enter} />
       <Preloader loaded={loaded} ready={ready} />
       <div ref={postExperienceRef} className="post-experience-sections">

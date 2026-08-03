@@ -16,9 +16,15 @@ if (typeof process.loadEnvFile === "function") {
   }
 }
 
+const {
+  closePersistence,
+  initialisePersistence,
+  persistenceDriver,
+} = await import("./server/persistence.js");
+await initialisePersistence();
+const { SEED_UPLOADS_DIR, UPLOADS_DIR } = await import("./server/storagePaths.js");
 const { createApiRouter } = await import("./server/routes.js");
 const DIST_DIR = path.join(ROOT_DIR, "dist");
-const UPLOADS_DIR = path.join(ROOT_DIR, "public", "uploads");
 const HOST = process.env.HOST || "0.0.0.0";
 const PORT = Number.parseInt(process.env.PORT || "3000", 10);
 const production = process.argv.includes("--production")
@@ -42,23 +48,27 @@ app.use([
   "/data/customer-reviews.backup.json",
   "/data/project-inquiries.json",
   "/data/project-inquiries.backup.json",
+  "/data/career-applications.json",
+  "/data/career-applications.backup.json",
+  "/data/newsletter-subscribers.json",
+  "/data/newsletter-subscribers.backup.json",
 ], (request, response) => {
   response.status(404).type("text").send("Not found");
 });
 
-// Served from public/ in both modes: images uploaded after a production build
-// exist on disk but not inside dist/, so this must not fall through to static.
-app.use(
-  "/uploads",
-  express.static(UPLOADS_DIR, {
-    index: false,
-    // Uploaded filenames carry a random suffix, so a given URL is immutable.
-    maxAge: production ? "30d" : 0,
-    setHeaders: (response) => {
-      response.setHeader("X-Content-Type-Options", "nosniff");
-    },
-  }),
-);
+// Runtime uploads are kept outside Git. Versioned seed uploads remain a
+// fallback for URLs already present in the initial site content.
+const uploadStaticOptions = {
+  index: false,
+  maxAge: production ? "30d" : 0,
+  setHeaders: (response) => {
+    response.setHeader("X-Content-Type-Options", "nosniff");
+  },
+};
+app.use("/uploads", express.static(UPLOADS_DIR, uploadStaticOptions));
+if (path.resolve(UPLOADS_DIR) !== path.resolve(SEED_UPLOADS_DIR)) {
+  app.use("/uploads", express.static(SEED_UPLOADS_DIR, uploadStaticOptions));
+}
 
 if (production) {
   await access(path.join(DIST_DIR, "index.html")).catch(() => {
@@ -125,6 +135,7 @@ server.on("error", async (error) => {
   }
 
   await vite?.close();
+  await closePersistence();
   process.exit(1);
 });
 
@@ -132,12 +143,14 @@ server.listen(PORT, HOST, () => {
   const mode = production ? "production" : "development";
   console.log(`GreenTech server (${mode}) running at http://localhost:${PORT}`);
   console.log(`Admin: http://localhost:${PORT}/admin`);
+  console.log(`Persistence: ${persistenceDriver()}`);
 });
 
 async function shutdown(signal) {
   console.log(`\n${signal} received. Shutting down...`);
   server.close(async () => {
     await vite?.close();
+    await closePersistence();
     process.exit(0);
   });
 }

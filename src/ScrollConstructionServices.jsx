@@ -420,6 +420,7 @@ function ScrollConstructionServices({ active }) {
           aria-hidden="true"
         />
         <ServiceSectionOverlay
+          active={active}
           index={text("eyebrow", "03 / Service")}
           titleId="service-construction-title"
           title={text("title", "Construction Services")}

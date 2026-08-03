@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Loader2, Mail, MapPin, Phone, Send } from "lucide-react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import BlurText from "./BlurText.jsx";
 import SectionActionModal, { useSectionAction } from "./SectionAction.jsx";
 import useSection from "./hooks/useSection.js";
 import useSiteContent from "./hooks/useSiteContent.js";
 import { selectFooter, selectFooterGroups } from "./lib/siteContent.js";
-import { submitProjectInquiry } from "./lib/inquiryApi.js";
+import SolarContactForms from "./SolarContactForms.jsx";
 import "./SolarContactSection.css";
 
 const MODEL_URL = "/3d/space_sun.glb";
@@ -153,7 +154,6 @@ function SolarContactSection({ active, onShowAllProjects }) {
   });
   const sectionRef = useRef(null);
   const mountRef = useRef(null);
-  const [formStatus, setFormStatus] = useState({ state: "idle", message: "" });
   const [legalModal, setLegalModal] = useState(null);
   const legalTriggerRef = useRef(null);
 
@@ -165,42 +165,6 @@ function SolarContactSection({ active, onShowAllProjects }) {
     });
   };
 
-  const handleContactSubmit = async (event) => {
-    event.preventDefault();
-    if (formStatus.state === "submitting") return;
-
-    const form = event.currentTarget;
-    if (!form.reportValidity()) return;
-
-    const data = new FormData(form);
-    const firstName = String(data.get("firstName") ?? "").trim();
-    const lastName = String(data.get("lastName") ?? "").trim();
-    const phone = String(data.get("phone") ?? "").trim();
-    const message = String(data.get("message") ?? "").trim();
-
-    setFormStatus({ state: "submitting", message: "Sending your request..." });
-
-    try {
-      await submitProjectInquiry({
-        firstName,
-        lastName,
-        phone,
-        message,
-        consent: data.get("gdprConsent") === "on",
-        website: String(data.get("website") ?? ""),
-      });
-      form.reset();
-      setFormStatus({
-        state: "success",
-        message: "Thank you. Your project inquiry has been sent to our team.",
-      });
-    } catch (error) {
-      setFormStatus({
-        state: "error",
-        message: error.message || "Your request could not be sent. Please try again.",
-      });
-    }
-  };
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -528,9 +492,16 @@ function SolarContactSection({ active, onShowAllProjects }) {
       <div className="solar-contact-inner">
         <header className="solar-contact-intro">
           <span>{text("eyebrow", "Contact / Solar energy")}</span>
-          <h2 id="solar-contact-title">
-            {text("title", "Your next solar project starts here.")}
-          </h2>
+          <BlurText
+            as="h2"
+            id="solar-contact-title"
+            text={text("title", "Your next solar project starts here.")}
+            play={active}
+            animateBy="letters"
+            direction="top"
+            delay={55}
+            stepDuration={0.45}
+          />
           <p>
             {text(
               "description",
@@ -541,116 +512,7 @@ function SolarContactSection({ active, onShowAllProjects }) {
 
         <div className="solar-contact-visual-space" aria-hidden="true" />
 
-        <form className="solar-contact-form" onSubmit={handleContactSubmit}>
-          <div className="solar-contact-form-heading">
-            <span>Project inquiry</span>
-            <h3>Let's discuss your project.</h3>
-            <p>Share the essentials and our team will get back to you.</p>
-          </div>
-
-          <div className="solar-contact-form-fields">
-            <div className="solar-contact-field">
-              <label htmlFor="contact-first-name">First name</label>
-              <input
-                id="contact-first-name"
-                name="firstName"
-                type="text"
-                autoComplete="given-name"
-                required
-              />
-            </div>
-
-            <div className="solar-contact-field">
-              <label htmlFor="contact-last-name">Last name</label>
-              <input
-                id="contact-last-name"
-                name="lastName"
-                type="text"
-                autoComplete="family-name"
-                required
-              />
-            </div>
-
-            <div className="solar-contact-field solar-contact-field-phone">
-              <label htmlFor="contact-phone">Phone number</label>
-              <input
-                id="contact-phone"
-                name="phone"
-                type="tel"
-                inputMode="tel"
-                autoComplete="tel"
-                pattern="[0-9+() .-]{7,24}"
-                minLength={7}
-                maxLength={24}
-                required
-              />
-            </div>
-
-            <div className="solar-contact-field solar-contact-field-message">
-              <label htmlFor="contact-message">Message</label>
-              <textarea
-                id="contact-message"
-                name="message"
-                rows={4}
-                minLength={10}
-                maxLength={1200}
-                required
-              />
-            </div>
-
-            <label className="solar-contact-honeypot" aria-hidden="true">
-              Website
-              <input name="website" type="text" tabIndex={-1} autoComplete="off" />
-            </label>
-
-            <div className="solar-contact-form-actions">
-              <label className="solar-contact-consent">
-                <input name="gdprConsent" type="checkbox" required />
-                <span className="solar-contact-consent-box" aria-hidden="true" />
-                <span>
-                  I agree to the processing of my personal data so GreenTech
-                  Professionals can respond to this inquiry, as described in the{" "}
-                  <button
-                    className="solar-contact-consent-link"
-                    type="button"
-                    onClick={(event) => openLegal("privacy", event)}
-                  >
-                    privacy policy
-                  </button>
-                  .
-                </span>
-              </label>
-
-              {contactAction.visible && (
-                <button
-                  className="solar-contact-submit"
-                  type={contactAction.mode === "builtin" ? "submit" : "button"}
-                  disabled={contactAction.mode === "builtin" && formStatus.state === "submitting"}
-                  onClick={contactAction.mode === "builtin"
-                    ? undefined
-                    : (event) => contactAction.activate(event)}
-                >
-                  <span>
-                    {formStatus.state === "submitting" ? "Sending..." : contactAction.label}
-                  </span>
-                  {formStatus.state === "submitting" ? (
-                    <Loader2 className="solar-contact-spin" size={18} strokeWidth={1.8} aria-hidden="true" />
-                  ) : (
-                    <Send size={18} strokeWidth={1.8} aria-hidden="true" />
-                  )}
-                </button>
-              )}
-            </div>
-
-            <p
-              className={`solar-contact-form-status is-${formStatus.state} ${formStatus.message ? "visible" : ""}`}
-              role={formStatus.state === "error" ? "alert" : "status"}
-              aria-live="polite"
-            >
-              {formStatus.message}
-            </p>
-          </div>
-        </form>
+        <SolarContactForms openLegal={openLegal} contactAction={contactAction} />
 
         <div className="solar-contact-links">
           <a className="solar-contact-link" href={`mailto:${OFFICE_EMAIL}`}>

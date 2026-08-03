@@ -1,8 +1,9 @@
 # Dependencies
 /node_modules/
 
-# Vite build output and caches
-/dist/
+# Build caches. dist/ is intentionally tracked for Git-based deployment.
+/production-package/
+/GreenTech-Production.zip
 /.vite/
 /coverage/
 *.tsbuildinfo
@@ -35,43 +36,26 @@ Desktop.ini
 
 # Local agent and temporary files
 /.agents/
+/.claude/
 /.codex/
 *.tmp
 *.temp
 *.bak
 ~$*
 
-# Reference screenshots used during reconstruction
-/1.png
-/2.png
-/image.png
+# Mutable production state. Seed content remains versioned in data/ and
+# public/uploads/, while live changes are written under storage/.
+/storage/
+/public/uploads/*
 
-# Duplicate source models; runtime models live in public/3d
-/*.glb
-/draco_decoder (1).wasm
-/draco_wasm_wrapper.js
-
-# Downloaded source-site bundles kept only for reconstruction
-/1783ea98d48b4e29.css
-/8f90cbbfeea4eeed.css
-/331-*.js
-/511-*.js
-/_app-*.js
-/_buildManifest.js
-/_ssgManifest.js
-/fb7d5399-43bdbbf2d5f53765.js
-/framework-2c16ac744b6cdea6.js
-/index-f77a54d8efb451a5.js
-/insight.old.min.js
-/js.js
-/main-091093b40ca1d17f.js
-/v4513226cdae34746b4dedf0b4dfa099e1781791509496.js
-/webpack-0120bad343e67c08.js
-/f.txt
-
-# Content backups. site-content.json itself IS tracked — it is the live content.
+# Content backups. site-content.json itself is tracked as live content.
 data/site-content.backup.json
 data/customer-reviews.backup.json
 data/project-inquiries.json
 data/project-inquiries.backup.json
 data/site-content.2*.json
+
+# Personal data submitted through public forms; never commit.
+data/career-applications.json
+data/career-applications.backup.json
+data/applications/

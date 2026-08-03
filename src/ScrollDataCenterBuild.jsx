@@ -416,6 +416,7 @@ function ScrollDataCenterBuild({ active }) {
           aria-hidden="true"
         />
         <ServiceSectionOverlay
+          active={active}
           index={text("eyebrow", "04 / Service")}
           titleId="service-data-center-title"
           title={text("title", "Data Center Construction")}

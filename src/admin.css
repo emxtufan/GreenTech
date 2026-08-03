@@ -114,6 +114,7 @@ a {
 .admin-sidebar [data-sidebar="sidebar"] {
   border-color: var(--sidebar-border);
   background: var(--sidebar);
+
 }
 
 .admin-sidebar-header {
@@ -190,6 +191,7 @@ a {
   font-size: 10px;
   font-weight: 600;
   text-transform: uppercase;
+  cursor:pointer;
 }
 
 .admin-sidebar [data-sidebar="menu-button"] {
@@ -207,11 +209,7 @@ a {
   color: #f0f5f1;
 }
 
-.admin-sidebar [data-sidebar="menu-button"][data-active="true"] {
-  background: #1b281c;
-  color: #f2f7f3;
-  box-shadow: inset 2px 0 0 #8bc53f;
-}
+
 
 .admin-sidebar [data-sidebar="menu-button"][data-active="true"] svg {
   color: #8bc53f;
@@ -1859,4 +1857,9 @@ a {
     margin-left: 0;
     align-self: flex-end;
   }
+}
+
+.admin-application-position {
+  color: var(--muted-foreground);
+  font-size: 12.5px;
 }
