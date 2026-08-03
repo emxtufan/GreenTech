@@ -7,10 +7,9 @@ import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
 import { FXAAShader } from "three/examples/jsm/shaders/FXAAShader.js";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 import gsap from "gsap";
+import { SCENE_COUNT, SCROLL_SEGMENT } from "./experienceConfig.js";
 
-export const SCROLL_SEGMENT = 16500 * 0.245;
-export const SCROLL_HEIGHT = 24000;
-export const SCENE_COUNT = 6;
+export { SCENE_COUNT, SCROLL_HEIGHT, SCROLL_SEGMENT } from "./experienceConfig.js";
 
 const LIGHT_BACKGROUND = 16776954;
 const DARK_BACKGROUND = 1315860;
@@ -307,15 +306,12 @@ function applyModelMaterials(stage, model) {
 }
 
 function makeCloudMesh(texture, count, width, height, positionFactory, opacity) {
-  const geometries = [];
+  const geometry = new THREE.PlaneGeometry(width, height);
+  const matrix = new THREE.Matrix4();
+  const positions = [];
   for (let index = 0; index < count; index += 1) {
-    const geometry = new THREE.PlaneGeometry(width, height);
-    const [x, y, z] = positionFactory();
-    geometry.translate(x, y, z);
-    geometries.push(geometry);
+    positions.push(positionFactory());
   }
-  const geometry = mergeGeometries(geometries);
-  geometries.forEach((item) => item.dispose());
   const map = texture.clone();
   map.colorSpace = THREE.SRGBColorSpace;
   map.needsUpdate = true;
@@ -331,7 +327,13 @@ function makeCloudMesh(texture, count, width, height, positionFactory, opacity) 
     opacity,
     fog: false,
   });
-  return { mesh: new THREE.Mesh(geometry, material), material };
+  const mesh = new THREE.InstancedMesh(geometry, material, count);
+  positions.forEach(([x, y, z], index) => {
+    matrix.makeTranslation(x, y, z);
+    mesh.setMatrixAt(index, matrix);
+  });
+  mesh.instanceMatrix.needsUpdate = true;
+  return { mesh, material };
 }
 
 class RenderStage {
@@ -480,8 +482,10 @@ class RenderStage {
     this.clouds1 = cloudSet1.mesh;
     this.clouds2 = cloudSet2.mesh;
     this.clouds2.position.x = 300;
-    this.clouds3 = new THREE.Mesh(cloudSet1.mesh.geometry, this.cloudMaterial);
-    this.clouds4 = new THREE.Mesh(cloudSet2.mesh.geometry, this.cloudMaterial);
+    this.clouds3 = cloudSet1.mesh.clone();
+    this.clouds4 = cloudSet2.mesh.clone();
+    this.clouds3.material = this.cloudMaterial;
+    this.clouds4.material = this.cloudMaterial;
     this.clouds3.position.x = -450;
     this.globalGroup.add(this.clouds1, this.clouds2, this.clouds3, this.clouds4);
 
@@ -1383,16 +1387,22 @@ export class EnpowerExperience {
       const modelLoader = new GLTFLoader(loadingManager);
       modelLoader.setDRACOLoader(dracoLoader);
       this.dracoLoader = dracoLoader;
+      this.modelLoader = modelLoader;
 
       const textureEntries = Object.entries(textureFiles);
       const modelEntries = Object.entries(modelFiles);
+      this.modelEntries = modelEntries;
       const texturePromise = Promise.all(
         textureEntries.map(async ([key, url]) => [key, await textureLoader.loadAsync(url)]),
       );
-      const modelPromise = Promise.all(
-        modelEntries.map(async ([key, url]) => [key, await modelLoader.loadAsync(url)]),
-      );
-      const [loadedTextures, loadedModels] = await Promise.all([texturePromise, modelPromise]);
+      const [firstModelEntry] = modelEntries;
+      const firstModelPromise = modelLoader
+        .loadAsync(firstModelEntry[1])
+        .then((model) => [firstModelEntry[0], model]);
+      const [loadedTextures, loadedFirstModel] = await Promise.all([
+        texturePromise,
+        firstModelPromise,
+      ]);
       if (this.destroyed) return;
       const maxAnisotropy = Math.min(8, this.renderer.capabilities.getMaxAnisotropy());
       for (const [key, texture] of loadedTextures) {
@@ -1403,10 +1413,16 @@ export class EnpowerExperience {
         texture.needsUpdate = true;
       }
       this.textures = Object.fromEntries(loadedTextures);
-      this.models = Object.fromEntries(loadedModels);
-      this.stages = modelEntries.map(
-        ([key], index) => new RenderStage(this, key, this.models[key].scene, this.textures, index),
-      );
+      this.models = { [loadedFirstModel[0]]: loadedFirstModel[1] };
+      this.stages = [
+        new RenderStage(
+          this,
+          firstModelEntry[0],
+          loadedFirstModel[1].scene,
+          this.textures,
+          0,
+        ),
+      ];
       this.stages.forEach((stage) => {
         stage.setDark(this.dark);
         stage.setQuality(this.highQuality);
@@ -1426,7 +1442,46 @@ export class EnpowerExperience {
     }
   }
 
+  loadRemainingModels() {
+    if (this.remainingModelsPromise || this.destroyed || !this.modelLoader) {
+      return this.remainingModelsPromise;
+    }
+
+    const remainingEntries = this.modelEntries.slice(1);
+    this.remainingModelsPromise = Promise.all(
+      remainingEntries.map(async ([key, url]) => [key, await this.modelLoader.loadAsync(url)]),
+    )
+      .then((loadedModels) => {
+        if (this.destroyed) return;
+
+        for (const [key, model] of loadedModels) this.models[key] = model;
+        const addedStages = remainingEntries.map(
+          ([key], offset) => new RenderStage(
+            this,
+            key,
+            this.models[key].scene,
+            this.textures,
+            offset + 1,
+          ),
+        );
+        addedStages.forEach((stage) => {
+          stage.setDark(this.dark);
+          stage.setQuality(this.highQuality);
+          stage.updateMouse(this.mouseClient.x, this.mouseClient.y);
+        });
+        this.stages.push(...addedStages);
+        this.resize(true);
+        this.onProgress(100);
+      })
+      .catch((error) => {
+        console.error("Unable to load the remaining Enpower scenes", error);
+      });
+
+    return this.remainingModelsPromise;
+  }
+
   createTransitionScene() {
+    const nextStage = this.stages[1] ?? this.stages[0];
     this.transitionScene = new THREE.Scene();
     this.transitionScene.background = new THREE.Color(16316405);
     this.transitionCamera = new THREE.OrthographicCamera(
@@ -1443,11 +1498,11 @@ export class EnpowerExperience {
         time: { value: 0 },
         progress: { value: -0.01 },
         texture1: { value: this.stages[0].fbo.texture },
-        texture2: { value: this.stages[1].fbo.texture },
+        texture2: { value: nextStage.fbo.texture },
         displacement: { value: this.textures.displacement },
         resolution: { value: new THREE.Vector4(this.vw, this.vh, 1, 1) },
         accentFrom: { value: new THREE.Color(this.stages[0].palette.accent) },
-        accentTo: { value: new THREE.Color(this.stages[1].palette.accent) },
+        accentTo: { value: new THREE.Color(nextStage.palette.accent) },
         transitionIndex: { value: 0 },
       },
       vertexShader: transitionVertexShader,
@@ -1471,7 +1526,12 @@ export class EnpowerExperience {
     this.delta = this.clock.getDelta();
     this.elapsed += this.delta;
     this.scrollY = this.easingBase * (window.scrollY - this.scrollY) + this.scrollY;
-    const nextIndex = clamp(0, SCENE_COUNT - 1, Math.floor(this.scrollY / 16500 / 0.245));
+    const availableSceneCount = Math.max(1, this.stages.length);
+    const nextIndex = clamp(
+      0,
+      availableSceneCount - 1,
+      Math.floor(this.scrollY / 16500 / 0.245),
+    );
     if (nextIndex !== this.currentIndex) {
       this.currentIndex = nextIndex;
       this.resizeStages();
@@ -1486,8 +1546,12 @@ export class EnpowerExperience {
     this.transitionMaterial.uniforms.accentFrom.value.set(firstStage.palette.accent);
     this.transitionMaterial.uniforms.accentTo.value.set(secondStage.palette.accent);
     this.transitionMaterial.uniforms.progress.value =
-      this.currentIndex < SCENE_COUNT - 1 ? (this.scrollY / 16500) % 0.245 : 0;
-    for (let index = this.currentIndex; index <= Math.min(this.currentIndex + 1, SCENE_COUNT - 1); index += 1) {
+      this.currentIndex < availableSceneCount - 1 ? (this.scrollY / 16500) % 0.245 : 0;
+    for (
+      let index = this.currentIndex;
+      index <= Math.min(this.currentIndex + 1, availableSceneCount - 1);
+      index += 1
+    ) {
       this.stages[index].render();
       this.stages[index].update();
     }
@@ -1537,6 +1601,7 @@ export class EnpowerExperience {
 
   enter() {
     if (this.entered || !this.ready) return;
+    this.loadRemainingModels();
     this.entered = true;
     this.stages[0].enterExperience();
     this.onEnter();

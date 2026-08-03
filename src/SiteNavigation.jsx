@@ -171,7 +171,13 @@ function SiteNavigation({ visible, backToIntro, entered }) {
           aria-label="GreenTech Professionals — back to start"
           onClick={backToIntro}
         >
-          <img src="/original/logo-alb.png.webp" alt="GreenTech Professionals" />
+          <img
+            src="/original/logo-nav-480.webp"
+            width="480"
+            height="67"
+            alt="GreenTech Professionals"
+            decoding="async"
+          />
         </button>
 
         <nav className="site-nav-links" aria-label="Sections">

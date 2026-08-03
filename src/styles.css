@@ -92,6 +92,17 @@ button:disabled {
   cursor: default;
 }
 
+.route-loading {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: #050706;
+  color: #f5f7ef;
+  font-size: 14px;
+}
+
 .page,
 .experience-scroll,
 .scroll-space {
@@ -141,6 +152,34 @@ button:disabled {
   top: 0;
   left: 0;
   display: block;
+}
+
+.hero-scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: max(24px, calc(var(--browser-controls-inset) + 24px));
+  z-index: 5;
+  padding: 10px 16px;
+  border: 1px solid rgb(1 1 1 / 48%);
+  border-radius: 6px;
+  background: rgb(255 255 250 / 22%);
+  color: rgb(1 1 1 / 78%);
+  font-family: "Fira Sans", Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 8px);
+  backdrop-filter: blur(6px);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.hero-scroll-cue.visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
 }
 
 .nav {
@@ -1141,6 +1180,12 @@ button:disabled {
     border-top: 1px solid var(--text);
     border-radius: 0;
     background: var(--background2);
+  }
+
+  .hero-scroll-cue {
+    bottom: calc(var(--hero-card-offset, 116px) + 14px);
+    padding: 9px 14px;
+    font-size: 10px;
   }
 
   .card-header {

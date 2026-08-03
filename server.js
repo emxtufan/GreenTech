@@ -1,4 +1,5 @@
 import express from "express";
+import compression from "compression";
 import { access, readFile } from "node:fs/promises";
 import { createServer } from "node:http";
 import { fileURLToPath } from "node:url";
@@ -41,6 +42,7 @@ const app = express();
 let vite = null;
 
 app.disable("x-powered-by");
+app.use(compression({ threshold: 1024 }));
 
 app.use("/api", createApiRouter());
 

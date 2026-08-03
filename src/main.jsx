@@ -1,96 +1,30 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { lazy, Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { BadgeCheck, BadgeDollarSign, SolarPanel, Zap } from "lucide-react";
-import { motion } from "motion/react";
 import {
-  EnpowerExperience,
   SCENE_COUNT,
   SCROLL_HEIGHT,
   SCROLL_SEGMENT,
-} from "./enpower3d.js";
-import LogoLoop from "./LogoLoop.jsx";
-import ScrollStack, { ScrollStackItem } from "./ScrollStack.jsx";
-import HorizontalParallaxGallery from "./HorizontalParallaxGallery.jsx";
-import ScrollWindTurbine from "./ScrollWindTurbine.jsx";
-import ScrollSolarAssembly from "./ScrollSolarAssembly.jsx";
-import ScrollElectricalInspection from "./ScrollElectricalInspection.jsx";
-import ScrollConstructionServices from "./ScrollConstructionServices.jsx";
-import ScrollDataCenterBuild from "./ScrollDataCenterBuild.jsx";
-import FaqSection from "./FaqSection.jsx";
-import SolarContactSection from "./SolarContactSection.jsx";
-import CompanyProofSection from "./CompanyProofSection.jsx";
-import BlogSection from "./BlogSection.jsx";
-import BlogPostPage from "./BlogPostPage.jsx";
-import ProjectDetailPage from "./ProjectDetailPage.jsx";
-import AllProjectsPage from "./AllProjectsPage.jsx";
+} from "./experienceConfig.js";
 import SectionActionModal, { useSectionAction } from "./SectionAction.jsx";
 import useExperienceScrollController from "./useExperienceScrollController.js";
-import { TOUCH_VISUAL_EASE, usesNativeTouchScroll } from "./scrollMotion.js";
 import {
-  selectClientLogos,
   selectBlogPosts,
   selectGalleryItems,
   selectHeroCards,
-  selectImpactStats,
-  selectProcessCards,
 } from "./lib/siteContent.js";
 import useSiteContent from "./hooks/useSiteContent.js";
 import useSection from "./hooks/useSection.js";
 import "./styles.css?=122222";
-import BlurText from "./BlurText";
-import CountUp from "./CountUp.jsx";
 import SiteNavigation from "./SiteNavigation.jsx";
 
-// Icons cannot live in JSON, so content stores a name and this map resolves it.
-const impactStatIcons = { Zap, SolarPanel, BadgeCheck, BadgeDollarSign };
-
-function AnimatedImpactValue({ value }) {
-  const displayValue = String(value ?? "");
-  const numberMatch = displayValue.match(/-?\d[\d,]*(?:\.\d+)?/);
-
-  if (!numberMatch) return displayValue;
-
-  const numberText = numberMatch[0];
-  const target = Number(numberText.replace(/,/g, ""));
-  if (!Number.isFinite(target)) return displayValue;
-
-  const numberStart = numberMatch.index ?? 0;
-  const prefix = displayValue.slice(0, numberStart);
-  const suffix = displayValue.slice(numberStart + numberText.length);
-
-  return (
-    <span className="impact-stat-value-animated" aria-hidden="true">
-      {prefix}
-      <span
-        className="impact-stat-count"
-        style={{ minWidth: `${Math.max(numberText.length, 1) * 0.62}em` }}
-      >
-        <CountUp
-          from={0}
-          to={target}
-          separator=","
-          direction="up"
-          duration={1}
-          className="count-up-text"
-          delay={0}
-        />
-      </span>
-      {suffix}
-    </span>
-  );
-}
+const BlurText = lazy(() => import("./BlurText.jsx"));
+const PostExperienceSections = lazy(() => import("./PostExperienceSections.jsx"));
+const BlogPostPage = lazy(() => import("./BlogPostPage.jsx"));
+const ProjectDetailPage = lazy(() => import("./ProjectDetailPage.jsx"));
+const AllProjectsPage = lazy(() => import("./AllProjectsPage.jsx"));
 
 // Which hero cards render the graph treatment — a UI behaviour, not content.
 const graphSections = new Set([0, 1, 4, 5]);
-
-const processCardThemeClasses = {
-  design: "project-stack-card-design",
-  build: "project-stack-card-build",
-  care: "project-stack-card-care",
-};
-
-// Baselines for first paint; live values come from useSiteContent below.
-const processCards = selectProcessCards();
 
 const heroSurfaces = [
   "#fff8e8",
@@ -107,27 +41,53 @@ function useEnpower3d({ dark, highQuality, setLoaded, setReady, setActive, setEn
 
   useEffect(() => {
     if (!mountRef.current) return undefined;
-    const experience = new EnpowerExperience(mountRef.current, {
-      dark,
-      highQuality,
-      onProgress: setLoaded,
-      onReady: () => {
-        setReady(true);
-        const requestedScene = Number.parseInt(new URLSearchParams(window.location.search).get("scene"), 10);
-        if (Number.isInteger(requestedScene) && requestedScene >= 0 && requestedScene < SCENE_COUNT) {
-          experience.enter();
-          window.setTimeout(() => {
-            window.scrollTo(0, requestedScene * SCROLL_SEGMENT + 1);
-          }, 50);
-        }
-      },
-      onActiveChange: setActive,
-      onEnter: () => setEntered(true),
-      onExit: () => setEntered(false),
-    });
-    experienceRef.current = experience;
+    let cancelled = false;
+
+    // Let the branded HTML interface paint before WebGL parsing and setup.
+    // This keeps the first frame responsive even on throttled mobile CPUs.
+    const loadTimer = window.setTimeout(() => {
+      import("./enpower3d.js")
+        .then(({ EnpowerExperience }) => {
+          if (cancelled || !mountRef.current) return;
+
+          const experience = new EnpowerExperience(mountRef.current, {
+            dark,
+            highQuality,
+            onProgress: setLoaded,
+            onReady: () => {
+              if (cancelled) return;
+              setReady(true);
+              const requestedScene = Number.parseInt(
+                new URLSearchParams(window.location.search).get("scene"),
+                10,
+              );
+              if (
+                Number.isInteger(requestedScene)
+                && requestedScene >= 0
+                && requestedScene < SCENE_COUNT
+              ) {
+                experience.enter();
+                window.setTimeout(() => {
+                  window.scrollTo(0, requestedScene * SCROLL_SEGMENT + 1);
+                }, 50);
+              }
+            },
+            onActiveChange: setActive,
+            onEnter: () => setEntered(true),
+            onExit: () => setEntered(false),
+          });
+          experienceRef.current = experience;
+        })
+        .catch((error) => {
+          console.error("Unable to load the Enpower 3D experience", error);
+          setLoaded(100);
+        });
+    }, 250);
+
     return () => {
-      experience.dispose();
+      cancelled = true;
+      window.clearTimeout(loadTimer);
+      experienceRef.current?.dispose();
       experienceRef.current = null;
     };
   }, []);
@@ -146,7 +106,13 @@ function useEnpower3d({ dark, highQuality, setLoaded, setReady, setActive, setEn
 function LogoMark() {
   return (
     <span className="loader-logo-mark">
-      <img src="/original/LOGO-BUN-Transparent.png.webp" alt="" />
+      <img
+        src="/original/logo-preloader-480.webp"
+        width="480"
+        height="66"
+        alt=""
+        decoding="async"
+      />
     </span>
   );
 }
@@ -202,6 +168,50 @@ function Navigation({ backToIntro, entered }) {
   return <SiteNavigation visible={visible} backToIntro={backToIntro} entered={entered} />;
 }
 
+function HeroScrollCue({ active, entered }) {
+  const cueRef = useRef(null);
+  const [atStart, setAtStart] = useState(true);
+
+  useEffect(() => {
+    if (!entered) {
+      setAtStart(true);
+      return undefined;
+    }
+
+    const update = () => setAtStart(window.scrollY <= 24);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, [entered]);
+
+  useEffect(() => {
+    const cue = cueRef.current;
+    const card = document.getElementById(`card_content_${active}`);
+    if (!cue || !card) return undefined;
+
+    const updateOffset = () => {
+      cue.style.setProperty("--hero-card-offset", `${card.getBoundingClientRect().height}px`);
+    };
+    updateOffset();
+
+    if (typeof ResizeObserver === "undefined") return undefined;
+    const observer = new ResizeObserver(updateOffset);
+    observer.observe(card);
+    return () => observer.disconnect();
+  }, [active, entered]);
+
+  const visible = entered && active === 0 && atStart;
+  return (
+    <div
+      ref={cueRef}
+      className={`hero-scroll-cue ${visible ? "visible" : ""}`}
+      aria-hidden="true"
+    >
+      Scroll down
+    </div>
+  );
+}
+
 function Card({ active, entered }) {
   const sections = selectHeroCards(useSiteContent());
   const section = sections[active] ?? sections[0];
@@ -235,15 +245,21 @@ function Card({ active, entered }) {
       data-lenis-prevent
     >
       <header className="card-header">
-        <BlurText
-          key={`${section.id}-${entered ? "visible" : "hidden"}`}
-          as="h2"
-          text={section.title}
-          play={entered}
-          delay={200}
-          animateBy="words"
-          direction="top"
-        />
+        {entered ? (
+          <Suspense fallback={<h2>{section.title}</h2>}>
+            <BlurText
+              key={`${section.id}-visible`}
+              as="h2"
+              text={section.title}
+              play
+              delay={200}
+              animateBy="words"
+              direction="top"
+            />
+          </Suspense>
+        ) : (
+          <h2>{section.title}</h2>
+        )}
         <span className="card-range">[{active + 1}]</span>
       </header>
       <div className="card-info">
@@ -303,405 +319,18 @@ function Intro({ entered, ready, enter }) {
   );
 }
 
-function useViewportReveal(enabled, revealAt = 0.88) {
-  const targetRef = useRef(null);
-  const [revealed, setRevealed] = useState(false);
-
-  useEffect(() => {
-    if (!enabled) {
-      setRevealed(false);
-      return undefined;
-    }
-
-    if (revealed) return undefined;
-
-    const target = targetRef.current;
-    if (!target) return undefined;
-
-    let animationFrame = 0;
-    const visualViewport = window.visualViewport;
-
-    const updateReveal = () => {
-      animationFrame = 0;
-      const bounds = target.getBoundingClientRect();
-      const viewportHeight = visualViewport?.height || window.innerHeight;
-
-      if (bounds.top <= viewportHeight * revealAt && bounds.bottom >= 0) {
-        setRevealed(true);
-      }
-    };
-
-    const scheduleReveal = () => {
-      if (animationFrame) return;
-      animationFrame = window.requestAnimationFrame(updateReveal);
-    };
-
-    scheduleReveal();
-    window.addEventListener("scroll", scheduleReveal, { passive: true });
-    window.addEventListener("resize", scheduleReveal);
-    visualViewport?.addEventListener("scroll", scheduleReveal, { passive: true });
-    visualViewport?.addEventListener("resize", scheduleReveal);
-
-    return () => {
-      window.removeEventListener("scroll", scheduleReveal);
-      window.removeEventListener("resize", scheduleReveal);
-      visualViewport?.removeEventListener("scroll", scheduleReveal);
-      visualViewport?.removeEventListener("resize", scheduleReveal);
-      window.cancelAnimationFrame(animationFrame);
-    };
-  }, [enabled, revealAt, revealed]);
-
-  return [targetRef, revealed];
-}
-
-function FinalSection({ entered }) {
-  const content = useSiteContent();
-  const companyText = useSection("company-overview");
-  const companyVideoText = useSection("company-video");
-  const clientsText = useSection("clients");
-  const configuredCompanyVideoUrl = companyVideoText("videoUrl", "/video.mp4");
-  const companyVideoUrl = configuredCompanyVideoUrl.trim() || "/video.mp4";
-  const companyVideoEyebrow = companyVideoText("eyebrow", "Company film");
-  const companyVideoTitle = companyVideoText("title", "Work delivered in the field");
-  const companyVideoDescription = companyVideoText(
-    "description",
-    "Looping company video that starts when the section reaches the top of the viewport.",
-  );
-  const hasCompanyVideoHeading = Boolean(companyVideoEyebrow || companyVideoTitle);
-  const hasCompanyVideoCopy = Boolean(hasCompanyVideoHeading || companyVideoDescription);
-  const impactStats = selectImpactStats(content);
-  // LogoLoop expects `src`; the content file stores images under `image`.
-  const clientLogos = selectClientLogos(content).map((logo) => ({
-    ...logo,
-    src: logo.image ?? logo.src,
-  }));
-  const sectionRef = useRef(null);
-  const videoRef = useRef(null);
-  const [introRef, introRevealed] = useViewportReveal(entered);
-  const [clientsRef, clientsRevealed] = useViewportReveal(entered, 0.9);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    const video = videoRef.current;
-    if (!section || !video) return undefined;
-
-    let sectionReachedTop = false;
-    let animationFrame = 0;
-
-    const resetVideo = () => {
-      video.pause();
-      if (video.readyState > 0) video.currentTime = 0;
-    };
-
-    const playFromStart = () => {
-      if (video.readyState > 0) video.currentTime = 0;
-      const playPromise = video.play();
-      playPromise?.catch(() => {});
-    };
-
-    const updatePlayback = () => {
-      animationFrame = 0;
-      const bounds = section.getBoundingClientRect();
-      const shouldPlay = entered && bounds.top <= 1 && bounds.bottom > 0;
-      if (shouldPlay === sectionReachedTop) return;
-
-      sectionReachedTop = shouldPlay;
-      if (shouldPlay) playFromStart();
-      else resetVideo();
-    };
-
-    const scheduleUpdate = () => {
-      if (animationFrame) return;
-      animationFrame = window.requestAnimationFrame(updatePlayback);
-    };
-
-    const handleLoadedMetadata = () => {
-      if (sectionReachedTop) playFromStart();
-    };
-
-    resetVideo();
-    updatePlayback();
-    window.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("resize", scheduleUpdate);
-    video.addEventListener("loadedmetadata", handleLoadedMetadata);
-
-    return () => {
-      window.removeEventListener("scroll", scheduleUpdate);
-      window.removeEventListener("resize", scheduleUpdate);
-      video.removeEventListener("loadedmetadata", handleLoadedMetadata);
-      window.cancelAnimationFrame(animationFrame);
-      resetVideo();
-    };
-  }, [companyVideoUrl, entered]);
-
-  return (
-    <section
-      ref={sectionRef}
-      id="company"
-      className={`final-section ${entered ? "visible" : ""}`}
-      aria-labelledby="final-section-title"
-      data-wind-stage="company"
-    >
-      <div className="final-section-inner">
-        <header ref={introRef} className="final-section-intro">
-          <BlurText
-            as="h1"
-            id="final-section-title"
-            text={companyText("title", "GreenTech Professionals SRL")}
-            play={introRevealed}
-            animateBy="letters"
-            direction="top"
-            delay={55}
-            stepDuration={0.45}
-          />
-          <motion.p
-            initial={false}
-            animate={introRevealed
-              ? { opacity: 1, y: 0 }
-              : { opacity: 0, y: 14 }}
-            transition={{ duration: 0.7, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {companyText(
-              "description",
-              "GreenTech Professionals is an electrical and construction company with experience in electrical and mechanical works in the photovoltaic field.",
-            )}
-          </motion.p>
-        </header>
-
-        <div className="impact-network">
-          <div className="impact-stats">
-            {impactStats.map(({ id, value, label, icon }) => {
-              const Icon = impactStatIcons[icon] ?? Zap;
-
-              return (
-                <article className="impact-stat" key={id ?? label}>
-                  <span className="impact-stat-icon" aria-hidden="true">
-                    <Icon size={30} strokeWidth={1.45} />
-                  </span>
-                  <strong aria-label={String(value)}>
-                    <AnimatedImpactValue value={value} />
-                  </strong>
-                  <span className="impact-stat-label">{label}</span>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-
-        <section
-          className="company-video"
-          aria-labelledby={companyVideoTitle ? "company-video-title" : undefined}
-          aria-label={companyVideoTitle ? undefined : "Company video"}
-        >
-          <div className="company-video-frame">
-            <video
-              key={companyVideoUrl}
-              ref={videoRef}
-              src={companyVideoUrl}
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              aria-label={companyVideoTitle || "GreenTech Professionals company film"}
-            />
-          </div>
-          {hasCompanyVideoCopy && (
-            <div className="company-video-copy">
-              {hasCompanyVideoHeading && (
-                <div className="company-video-heading">
-                  {companyVideoEyebrow && <span>{companyVideoEyebrow}</span>}
-                  {companyVideoTitle && (
-                    <BlurText
-                      as="h2"
-                      id="company-video-title"
-                      text={companyVideoTitle}
-                      play={entered}
-                      animateBy="letters"
-                      direction="top"
-                      delay={55}
-                      stepDuration={0.45}
-                    />
-                  )}
-                </div>
-              )}
-              {companyVideoDescription && <p>{companyVideoDescription}</p>}
-            </div>
-          )}
-        </section>
-
-        <section ref={clientsRef} className="clients-showcase" aria-labelledby="clients-title">
-          <BlurText
-            as="h2"
-            id="clients-title"
-            text={clientsText("title", "Our Clients")}
-            play={clientsRevealed}
-            animateBy="letters"
-            direction="top"
-            delay={55}
-            stepDuration={0.45}
-          />
-          <motion.p
-            initial={false}
-            animate={clientsRevealed
-              ? { opacity: 1, y: 0 }
-              : { opacity: 0, y: 14 }}
-            transition={{ duration: 0.9, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {clientsText(
-              "description",
-              "Selected client relationships across energy, mobility and infrastructure.",
-            )}
-          </motion.p>
-          <motion.div
-            className="clients-loop"
-            initial={false}
-            animate={clientsRevealed
-              ? { opacity: 1, y: 0 }
-              : { opacity: 0, y: 20 }}
-            transition={{ duration: 1, delay: 0.34, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <LogoLoop
-              logos={clientLogos}
-              speed={54}
-              direction="left"
-              logoHeight={58}
-              gap={28}
-              hoverSpeed={12}
-              scaleOnHover
-              fadeOut
-              fadeOutColor="#000000"
-              ariaLabel="Our clients"
-            />
-          </motion.div>
-        </section>
-      </div>
-    </section>
-  );
-}
-
-function StackSection({ entered }) {
-  const cards = selectProcessCards(useSiteContent());
-  const processText = useSection("work-process");
-  const introRef = useRef(null);
-  const releaseStartRef = useRef(null);
-  const releaseFrameRef = useRef(0);
-  const releaseVisualRef = useRef(0);
-
-  const handleStackComplete = useCallback(({ scrollStart }) => {
-    releaseStartRef.current = scrollStart;
-  }, []);
-
-  useEffect(() => {
-    const intro = introRef.current;
-    if (!intro) return undefined;
-
-    if (!entered) {
-      releaseStartRef.current = null;
-      releaseVisualRef.current = 0;
-      intro.style.transform = "";
-      return undefined;
-    }
-
-    const smoothVisuals = usesNativeTouchScroll();
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    const updateIntroRelease = () => {
-      releaseFrameRef.current = 0;
-      const releaseStart = releaseStartRef.current;
-      if (releaseStart === null) {
-        releaseVisualRef.current = 0;
-        intro.style.transform = "";
-        return;
-      }
-
-      const releaseDistance = Math.max(0, window.scrollY - releaseStart);
-      const maxReleaseDistance = intro.offsetHeight + 100;
-      const targetTranslateY = Math.min(releaseDistance, maxReleaseDistance);
-      const ease = smoothVisuals && !reducedMotion.matches
-        ? TOUCH_VISUAL_EASE
-        : 1;
-      const nextTranslateY = releaseVisualRef.current
-        + (targetTranslateY - releaseVisualRef.current) * ease;
-      const translateY = Math.abs(targetTranslateY - nextTranslateY) < 0.1
-        ? targetTranslateY
-        : nextTranslateY;
-
-      releaseVisualRef.current = translateY;
-      intro.style.transform = translateY > 0 ? `translate3d(0, ${-translateY}px, 0)` : "";
-
-      if (translateY !== targetTranslateY) {
-        releaseFrameRef.current = window.requestAnimationFrame(updateIntroRelease);
-      }
-    };
-
-    const scheduleIntroRelease = () => {
-      if (releaseFrameRef.current) return;
-      releaseFrameRef.current = window.requestAnimationFrame(updateIntroRelease);
-    };
-
-    window.addEventListener("scroll", scheduleIntroRelease, { passive: true });
-    window.addEventListener("resize", scheduleIntroRelease);
-
-    return () => {
-      window.removeEventListener("scroll", scheduleIntroRelease);
-      window.removeEventListener("resize", scheduleIntroRelease);
-      window.cancelAnimationFrame(releaseFrameRef.current);
-      releaseVisualRef.current = 0;
-      intro.style.transform = "";
-    };
-  }, [entered]);
-
-  return (
-    <section
-      id="process"
-      className={`process-section ${entered ? "visible" : ""}`}
-      aria-labelledby="process-section-title"
-      data-wind-stage="process"
-    >
-      <div className="process-section-inner">
-        <header className="process-section-intro" ref={introRef}>
-          <span>{processText("eyebrow", "Process")}</span>
-          <h2 id="process-section-title">
-            {processText("title", "Our Work Process")}
-          </h2>
-          <p>
-            {processText(
-              "description",
-              "A compact view of how GreenTech Professionals moves a photovoltaic project from technical decisions to reliable field execution.",
-            )}
-          </p>
-        </header>
-
-        <ScrollStack
-          className="project-scroll-stack"
-          stackPosition="36%"
-          scaleEndPosition="23%"
-          rotationAmount={0}
-          onStackComplete={handleStackComplete}
-        >
-          {cards.map((card) => {
-            const themeClass =
-              processCardThemeClasses[card.theme] ?? processCardThemeClasses.design;
-
-            return (
-              <ScrollStackItem
-                key={card.id}
-                itemClassName={`project-stack-card ${themeClass}`}
-              >
-                <span className="project-stack-number">{card.number}</span>
-                <h3>{card.title}</h3>
-                <p>{card.description}</p>
-              </ScrollStackItem>
-            );
-          })}
-        </ScrollStack>
-        <div className="process-section-release-space" aria-hidden="true" />
-      </div>
-    </section>
-  );
-}
-
 function Preloader({ loaded, ready }) {
+  useEffect(() => {
+    if (!ready) return undefined;
+
+    const bootShell = document.getElementById("boot-shell");
+    if (!bootShell) return undefined;
+
+    bootShell.classList.add("done");
+    const removeTimer = window.setTimeout(() => bootShell.remove(), 1300);
+    return () => window.clearTimeout(removeTimer);
+  }, [ready]);
+
   return (
     <div className={`preloader ${ready ? "done" : ""}`} id="preloaderWrapper">
       <div className="loader-logo" id="logoWrapper">
@@ -713,7 +342,6 @@ function Preloader({ loaded, ready }) {
 }
 
 function App({ onOpenProject, onShowAllProjects, onOpenPost, routeOpen }) {
-  const galleryItems = selectGalleryItems(useSiteContent());
   const [loaded, setLoaded] = useState(0);
   const [ready, setReady] = useState(false);
   const [entered, setEntered] = useState(false);
@@ -772,6 +400,7 @@ function App({ onOpenProject, onShowAllProjects, onOpenPost, routeOpen }) {
           id="scene3d"
         >
           <div className="canvas-wrapper" ref={mountRef} />
+          <HeroScrollCue active={active} entered={entered} />
           <Card active={active} entered={entered} />
         </div>
         <div
@@ -783,29 +412,16 @@ function App({ onOpenProject, onShowAllProjects, onOpenPost, routeOpen }) {
       <Intro entered={entered} ready={ready} enter={enter} />
       <Preloader loaded={loaded} ready={ready} />
       <div ref={postExperienceRef} className="post-experience-sections">
-        <ScrollWindTurbine active={entered} />
-        <FinalSection entered={entered} />
-        <StackSection entered={entered} />
-        <HorizontalParallaxGallery
-          entered={entered}
-          items={galleryItems}
-          onProjectOpen={onOpenProject}
-          onShowAllProjects={onShowAllProjects}
-        />
-        <CompanyProofSection active={entered} />
-        <ScrollSolarAssembly active={entered} />
-        <ScrollElectricalInspection active={entered} />
-        <ScrollConstructionServices active={entered} />
-        <ScrollDataCenterBuild active={entered} />
-        <BlogSection
-          active={entered}
-          onPostOpen={onOpenPost}
-        />
-        <FaqSection active={entered} />
-        <SolarContactSection
-          active={entered}
-          onShowAllProjects={onShowAllProjects}
-        />
+        {entered && (
+          <Suspense fallback={<div className="post-experience-loading" aria-hidden="true" />}>
+            <PostExperienceSections
+              entered={entered}
+              onOpenProject={onOpenProject}
+              onShowAllProjects={onShowAllProjects}
+              onOpenPost={onOpenPost}
+            />
+          </Suspense>
+        )}
       </div>
     </main>
   );
@@ -957,28 +573,34 @@ function Root() {
         onOpenPost={openBlogPost}
         routeOpen={Boolean(project) || Boolean(blogPost) || projectsIndexOpen}
       />
-      {projectsIndexOpen && (
-        <AllProjectsPage
-          projects={routedProjects}
-          onClose={closeProjectsIndex}
-          onProjectOpen={openProject}
-        />
-      )}
-      {project && (
-        <ProjectDetailPage
-          project={project}
-          nextProject={nextProject}
-          onClose={closeProject}
-          onProjectOpen={changeProject}
-        />
-      )}
-      {blogPost && (
-        <BlogPostPage
-          post={blogPost}
-          onClose={closeBlogPost}
-          onProjectOpen={changeProject}
-        />
-      )}
+      <Suspense
+        fallback={routeState.projectId || routeState.postId || routeState.projectsIndexOpen
+          ? <div className="route-loading" role="status">Loading</div>
+          : null}
+      >
+        {projectsIndexOpen && (
+          <AllProjectsPage
+            projects={routedProjects}
+            onClose={closeProjectsIndex}
+            onProjectOpen={openProject}
+          />
+        )}
+        {project && (
+          <ProjectDetailPage
+            project={project}
+            nextProject={nextProject}
+            onClose={closeProject}
+            onProjectOpen={changeProject}
+          />
+        )}
+        {blogPost && (
+          <BlogPostPage
+            post={blogPost}
+            onClose={closeBlogPost}
+            onProjectOpen={changeProject}
+          />
+        )}
+      </Suspense>
     </>
   );
 }
