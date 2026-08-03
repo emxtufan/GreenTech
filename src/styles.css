@@ -781,6 +781,8 @@ button:disabled {
 .impact-stat-value-animated {
   display: inline-flex;
   align-items: baseline;
+  flex-wrap: nowrap;
+  white-space: nowrap;
 }
 
 .impact-stat-count {

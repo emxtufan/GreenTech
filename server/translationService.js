@@ -9,7 +9,9 @@ const DEEPL_LOCALES = new Set(["ro", "it", "es"]);
 const DEFAULT_TARGET_LOCALES = ["ro", "it", "es"];
 const BATCH_TEXT_LIMIT = 40;
 const BATCH_CHARACTER_LIMIT = 80_000;
-const CACHE_VERSION = 1;
+// Increment when extraction rules change so stale server snapshots and browser
+// caches cannot keep a translation produced by older rules.
+const CACHE_VERSION = 2;
 const PROTECTED_TERMS = [
   "GreenTech Professionals SRL",
   "GreenTech Professionals",
@@ -89,7 +91,7 @@ function hash(value) {
 }
 
 export function contentRevision(content) {
-  return hash(JSON.stringify(content)).slice(0, 24);
+  return hash(`${CACHE_VERSION}:${JSON.stringify(content)}`).slice(0, 24);
 }
 
 export function normaliseLocale(value) {
@@ -111,7 +113,9 @@ function looksLikeTechnicalValue(value) {
     /^(?:https?:\/\/|mailto:|tel:|\/|#|\?)/i.test(value)
     || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
     || /^\d{4}-\d{2}-\d{2}(?:T|$)/.test(value)
-    || /^[\d\s.,+%€$£MWkwKWhm²-]+$/i.test(value)
+    // Numeric measurements are data, not prose. Keeping the complete value
+    // intact also prevents DeepL from turning `1.5 GW+` into `over 15 GW`.
+    || /^[€$£]?\s*-?\d[\d.,]*\s*(?:(?:[kMGT]?W(?:h)?|[kMGT]?VA|[kMGT]|V|A|m²|%)\s*)?\+?$/i.test(value)
   );
 }
 
