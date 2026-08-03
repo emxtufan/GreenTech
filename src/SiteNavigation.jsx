@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowUpRight, ChevronDown, Globe2, Send } from "lucide-react";
+import { ArrowUpRight, Check, ChevronDown, Globe2, Send } from "lucide-react";
 import {
   LOCALE_OPTIONS,
   setLocale,
@@ -41,27 +41,127 @@ const flatten = (items) =>
 function LanguageSelector({ mobile = false }) {
   const locale = useLocale();
   const label = uiText("language", locale);
+  const [open, setOpen] = useState(false);
+  const wrapperRef = useRef(null);
+  const triggerRef = useRef(null);
+  const menuRef = useRef(null);
+  const activeOption = LOCALE_OPTIONS.find((option) => option.value === locale)
+    ?? LOCALE_OPTIONS[0];
+  const menuId = `site-language-menu-${mobile ? "mobile" : "desktop"}`;
+
+  useEffect(() => {
+    if (!open) return undefined;
+
+    const focusFrame = window.requestAnimationFrame(() => {
+      menuRef.current
+        ?.querySelector(`[data-locale="${locale}"]`)
+        ?.focus({ preventScroll: true });
+    });
+    const closeOnOutsidePress = (event) => {
+      if (!wrapperRef.current?.contains(event.target)) setOpen(false);
+    };
+    const closeOnEscape = (event) => {
+      if (event.key !== "Escape") return;
+      setOpen(false);
+      triggerRef.current?.focus({ preventScroll: true });
+    };
+
+    document.addEventListener("pointerdown", closeOnOutsidePress);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      window.cancelAnimationFrame(focusFrame);
+      document.removeEventListener("pointerdown", closeOnOutsidePress);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [locale, open]);
+
+  const chooseLocale = (nextLocale) => {
+    setLocale(nextLocale);
+    setOpen(false);
+    triggerRef.current?.focus({ preventScroll: true });
+  };
+
+  const moveMenuFocus = (event) => {
+    if (!["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) return;
+    const options = [...menuRef.current.querySelectorAll('[role="menuitemradio"]')];
+    const currentIndex = options.indexOf(document.activeElement);
+    let nextIndex;
+
+    if (event.key === "Home") nextIndex = 0;
+    else if (event.key === "End") nextIndex = options.length - 1;
+    else if (event.key === "ArrowDown") nextIndex = (currentIndex + 1) % options.length;
+    else nextIndex = (currentIndex - 1 + options.length) % options.length;
+
+    event.preventDefault();
+    options[nextIndex]?.focus({ preventScroll: true });
+  };
 
   return (
-    <label
-      className={`site-nav-language ${mobile ? "site-nav-language-mobile" : "site-nav-language-desktop"}`}
-      title={label}
+    <div
+      ref={wrapperRef}
+      className={`site-nav-language ${open ? "is-open" : ""} ${mobile ? "site-nav-language-mobile" : "site-nav-language-desktop"}`}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
+      }}
     >
-      <Globe2 size={16} strokeWidth={1.8} aria-hidden="true" />
-      <span className="site-nav-language-label">{label}</span>
-      <select
-        value={locale}
+      <button
+        ref={triggerRef}
+        className="site-nav-language-trigger"
+        type="button"
         aria-label={label}
-        onChange={(event) => setLocale(event.target.value)}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-controls={menuId}
+        onClick={() => setOpen((current) => !current)}
+        onKeyDown={(event) => {
+          if (event.key === "ArrowDown") {
+            event.preventDefault();
+            setOpen(true);
+          }
+        }}
       >
-        {LOCALE_OPTIONS.map((option) => (
-          <option key={option.value} value={option.value}>
-            {mobile ? option.label : option.shortLabel}
-          </option>
-        ))}
-      </select>
-      <ChevronDown className="site-nav-language-chevron" size={13} aria-hidden="true" />
-    </label>
+        <span className="site-nav-language-icon" aria-hidden="true">
+          <Globe2 size={15} strokeWidth={1.8} />
+        </span>
+        <span className="site-nav-language-copy">
+          <span className="site-nav-language-label">{label}</span>
+          <span className="site-nav-language-name">{activeOption.label}</span>
+        </span>
+        <span className="site-nav-language-code" aria-hidden="true">
+          {activeOption.shortLabel}
+        </span>
+        <ChevronDown className="site-nav-language-chevron" size={13} aria-hidden="true" />
+      </button>
+
+      <div
+        ref={menuRef}
+        id={menuId}
+        className="site-nav-language-menu"
+        role="menu"
+        aria-label={label}
+        inert={open ? undefined : true}
+        onKeyDown={moveMenuFocus}
+      >
+        {LOCALE_OPTIONS.map((option) => {
+          const selected = option.value === locale;
+          return (
+            <button
+              key={option.value}
+              className={`site-nav-language-option ${selected ? "is-selected" : ""}`}
+              type="button"
+              role="menuitemradio"
+              aria-checked={selected}
+              data-locale={option.value}
+              onClick={() => chooseLocale(option.value)}
+            >
+              <span className="site-nav-language-option-code">{option.shortLabel}</span>
+              <span className="site-nav-language-option-name">{option.label}</span>
+              <Check size={15} strokeWidth={2.2} aria-hidden="true" />
+            </button>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 
