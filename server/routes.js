@@ -15,6 +15,12 @@ import {
 import { saveUpload, UploadError, MAX_UPLOAD_BYTES } from "./uploads.js";
 import { geocodePlace, GeocodingError } from "./geocoding.js";
 import {
+  localiseContent,
+  normaliseLocale,
+  scheduleTranslationWarmup,
+  translationMeta,
+} from "./translationService.js";
+import {
   requireAdmin,
   verifyPassword,
   createSessionToken,
@@ -29,6 +35,20 @@ const reviewRateBuckets = new Map();
 const INQUIRY_RATE_WINDOW_MS = 60 * 60 * 1000;
 const INQUIRY_RATE_LIMIT = 6;
 const inquiryRateBuckets = new Map();
+
+async function getPublicContent() {
+  const [content, reviews] = await Promise.all([
+    contentRepository.getContent(),
+    reviewRepository.getApproved(),
+  ]);
+  return mergeApprovedReviews(content, reviews);
+}
+
+function warmPublicTranslations() {
+  getPublicContent()
+    .then(scheduleTranslationWarmup)
+    .catch((error) => console.error("[Translation] Unable to prepare public content:", error));
+}
 
 function consumeReviewRateLimit(request) {
   const email = String(request.body?.email ?? "").trim().toLowerCase();
@@ -121,13 +141,26 @@ export function createApiRouter() {
 
   // ---- public read -------------------------------------------------------
 
+  router.get("/content/meta", async (request, response, next) => {
+    try {
+      response.setHeader("Cache-Control", "no-cache");
+      response.json(translationMeta(await getPublicContent()));
+    } catch (error) {
+      next(error);
+    }
+  });
+
   router.get("/content", async (request, response, next) => {
     try {
-      const [content, reviews] = await Promise.all([
-        contentRepository.getContent(),
-        reviewRepository.getApproved(),
-      ]);
-      response.json(mergeApprovedReviews(content, reviews));
+      const requestedLocale = normaliseLocale(request.query.locale);
+      const result = await localiseContent(await getPublicContent(), requestedLocale);
+
+      response.setHeader("Cache-Control", "no-cache");
+      response.setHeader("Content-Language", result.locale);
+      response.setHeader("X-Content-Revision", result.revision);
+      response.setHeader("X-Translation-Status", result.status);
+      response.setHeader("Vary", "Accept-Language");
+      response.json(result.content);
     } catch (error) {
       next(error);
     }
@@ -260,6 +293,7 @@ export function createApiRouter() {
           request.params.id,
           request.body?.status,
         );
+        warmPublicTranslations();
         response.json({ success: true, review });
       } catch (error) {
         next(error);
@@ -273,6 +307,7 @@ export function createApiRouter() {
     async (request, response, next) => {
       try {
         await reviewRepository.remove(request.params.id);
+        warmPublicTranslations();
         response.json({ success: true });
       } catch (error) {
         next(error);
@@ -389,6 +424,7 @@ export function createApiRouter() {
     async (request, response, next) => {
       try {
         const saved = await contentRepository.updateContent(request.body);
+        warmPublicTranslations();
         response.json({ success: true, content: saved });
       } catch (error) {
         next(error);

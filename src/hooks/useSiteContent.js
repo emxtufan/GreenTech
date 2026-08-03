@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getSiteContent, fetchSiteContent } from "../lib/siteContent.js";
+import { useLocale } from "../lib/i18n.js";
 
 /**
  * Renders immediately from the bundled baseline, then swaps in the live
@@ -7,12 +8,14 @@ import { getSiteContent, fetchSiteContent } from "../lib/siteContent.js";
  * keeps showing the content it shipped with rather than an error state.
  */
 export default function useSiteContent() {
-  const [content, setContent] = useState(getSiteContent);
+  const locale = useLocale();
+  const [content, setContent] = useState(() => getSiteContent(locale));
 
   useEffect(() => {
     const controller = new AbortController();
+    setContent(getSiteContent(locale));
 
-    fetchSiteContent({ signal: controller.signal })
+    fetchSiteContent({ signal: controller.signal, locale })
       .then(setContent)
       .catch((error) => {
         if (error.name !== "AbortError") {
@@ -21,7 +24,7 @@ export default function useSiteContent() {
       });
 
     return () => controller.abort();
-  }, []);
+  }, [locale]);
 
   return content;
 }

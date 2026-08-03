@@ -1,5 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, ChevronDown, Send } from "lucide-react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { ArrowUpRight, ChevronDown, Globe2, Send } from "lucide-react";
+import {
+  LOCALE_OPTIONS,
+  setLocale,
+  uiText,
+  useLocale,
+} from "./lib/i18n.js";
 import "./SiteNavigation.css";
 
 // Hash the Apply control navigates to. SolarContactForms listens for it and
@@ -9,28 +15,55 @@ export const APPLY_HASH = "#apply";
 
 // Page anchors, not content: these mirror the section ids in the markup.
 const NAV_ITEMS = [
-  { label: "Company", href: "#company" },
+  { labelKey: "company", href: "#company" },
   {
-    label: "Services",
+    labelKey: "services",
     href: "#service-photovoltaic",
     children: [
-      { label: "Photovoltaic parks", href: "#service-photovoltaic" },
-      { label: "Electrical inspections", href: "#service-electrical" },
-      { label: "Construction services", href: "#service-construction" },
-      { label: "Data center construction", href: "#service-data-center" },
+      { labelKey: "photovoltaicParks", href: "#service-photovoltaic" },
+      { labelKey: "electricalInspections", href: "#service-electrical" },
+      { labelKey: "constructionServices", href: "#service-construction" },
+      { labelKey: "dataCenterConstruction", href: "#service-data-center" },
     ],
   },
-  { label: "Process", href: "#process" },
-  { label: "Projects", href: "#projects" },
-  { label: "Credentials", href: "#credentials" },
-  { label: "Reviews", href: "#reviews" },
-  { label: "Journal", href: "#journal" },
-  { label: "FAQs", href: "#faqs" },
-  { label: "Contact", href: "#contact" },
+  { labelKey: "process", href: "#process" },
+  { labelKey: "projects", href: "#projects" },
+  { labelKey: "credentials", href: "#credentials" },
+  { labelKey: "reviews", href: "#reviews" },
+  { labelKey: "journal", href: "#journal" },
+  { labelKey: "faqs", href: "#faqs" },
+  { labelKey: "contact", href: "#contact" },
 ];
 
 const flatten = (items) =>
   items.flatMap((item) => (item.children ? [item, ...item.children] : [item]));
+
+function LanguageSelector({ mobile = false }) {
+  const locale = useLocale();
+  const label = uiText("language", locale);
+
+  return (
+    <label
+      className={`site-nav-language ${mobile ? "site-nav-language-mobile" : "site-nav-language-desktop"}`}
+      title={label}
+    >
+      <Globe2 size={16} strokeWidth={1.8} aria-hidden="true" />
+      <span className="site-nav-language-label">{label}</span>
+      <select
+        value={locale}
+        aria-label={label}
+        onChange={(event) => setLocale(event.target.value)}
+      >
+        {LOCALE_OPTIONS.map((option) => (
+          <option key={option.value} value={option.value}>
+            {mobile ? option.label : option.shortLabel}
+          </option>
+        ))}
+      </select>
+      <ChevronDown className="site-nav-language-chevron" size={13} aria-hidden="true" />
+    </label>
+  );
+}
 
 function ServicesMenu({ item, onNavigate }) {
   const [open, setOpen] = useState(false);
@@ -100,6 +133,15 @@ function ServicesMenu({ item, onNavigate }) {
 function SiteNavigation({ visible, backToIntro, entered }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const burgerRef = useRef(null);
+  const locale = useLocale();
+  const navItems = useMemo(() => {
+    const localise = (item) => ({
+      ...item,
+      label: uiText(item.labelKey, locale),
+      children: item.children?.map(localise),
+    });
+    return NAV_ITEMS.map(localise);
+  }, [locale]);
 
   // The mobile sheet covers the page, so the page behind it must not scroll.
   useEffect(() => {
@@ -168,7 +210,7 @@ function SiteNavigation({ visible, backToIntro, entered }) {
         <button
           className="site-nav-brand"
           type="button"
-          aria-label="GreenTech Professionals — back to start"
+          aria-label={uiText("backToStart", locale)}
           onClick={backToIntro}
         >
           <img
@@ -180,8 +222,8 @@ function SiteNavigation({ visible, backToIntro, entered }) {
           />
         </button>
 
-        <nav className="site-nav-links" aria-label="Sections">
-          {NAV_ITEMS.map((item) => (
+        <nav className="site-nav-links" aria-label={uiText("sections", locale)}>
+          {navItems.map((item) => (
             item.children
               ? <ServicesMenu key={item.label} item={item} onNavigate={goToSection} />
               : (
@@ -198,8 +240,10 @@ function SiteNavigation({ visible, backToIntro, entered }) {
         </nav>
 
         <div className="site-nav-actions">
+          <LanguageSelector />
+
           <a className="site-nav-apply" href={APPLY_HASH} onClick={apply}>
-            <span>Apply</span>
+            <span>{uiText("apply", locale)}</span>
           </a>
 
           <button
@@ -208,7 +252,7 @@ function SiteNavigation({ visible, backToIntro, entered }) {
             type="button"
             aria-expanded={menuOpen}
             aria-controls="site-nav-sheet"
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-label={uiText(menuOpen ? "closeMenu" : "openMenu", locale)}
             onClick={() => setMenuOpen((current) => !current)}
           >
             <i aria-hidden="true" />
@@ -221,8 +265,8 @@ function SiteNavigation({ visible, backToIntro, entered }) {
         className={`site-nav-sheet ${menuOpen ? "is-open" : ""}`}
         inert={menuOpen ? undefined : true}
       >
-        <nav aria-label="All sections">
-          {flatten(NAV_ITEMS).map((item, index) => (
+        <nav aria-label={uiText("allSections", locale)}>
+          {flatten(navItems).map((item, index) => (
             <a
               key={`${item.href}-${index}`}
               href={item.href}
@@ -235,8 +279,10 @@ function SiteNavigation({ visible, backToIntro, entered }) {
           ))}
         </nav>
 
+        <LanguageSelector mobile />
+
         <a className="site-nav-sheet-apply" href={APPLY_HASH} onClick={apply}>
-          <span>Apply for a role</span>
+          <span>{uiText("applyRole", locale)}</span>
           <Send size={17} strokeWidth={1.9} aria-hidden="true" />
         </a>
       </div>

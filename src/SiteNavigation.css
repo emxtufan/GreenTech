@@ -179,6 +179,65 @@
   gap: 8px;
 }
 
+.site-nav-language {
+  position: relative;
+  display: inline-flex;
+  height: 38px;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 5px;
+  padding: 0 8px 0 10px;
+  border: 1px solid rgb(245 247 239 / 16%);
+  border-radius: 999px;
+  color: #cdd6d0;
+  transition: border-color 180ms ease, color 180ms ease;
+}
+
+.site-nav-language:hover,
+.site-nav-language:focus-within {
+  border-color: rgb(139 188 63 / 70%);
+  color: #f5f7ef;
+}
+
+.site-nav-language-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.site-nav-language select {
+  width: 28px;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  color: currentColor;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.site-nav-language select option {
+  background: #080b09;
+  color: #f5f7ef;
+}
+
+.site-nav-language-chevron {
+  flex: 0 0 auto;
+  pointer-events: none;
+}
+
+.site-nav-language-mobile {
+  display: none;
+}
+
 .site-nav-apply {
   display: inline-flex;
   align-items: center;
@@ -344,6 +403,10 @@
     padding: 8px 8px;
     font-size: 13px;
   }
+
+  .site-nav-language-desktop > svg:first-child {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 1000px) {
@@ -363,6 +426,37 @@
 
   .site-nav-burger {
     display: block;
+  }
+
+  .site-nav-language-desktop {
+    display: none;
+  }
+
+  .site-nav-language-mobile {
+    display: flex;
+    width: 100%;
+    height: 48px;
+    justify-content: flex-start;
+    padding: 0 14px;
+    border-radius: 8px;
+  }
+
+  .site-nav-language-mobile .site-nav-language-label {
+    position: static;
+    width: auto;
+    height: auto;
+    margin-right: auto;
+    overflow: visible;
+    clip: auto;
+    color: #aab4ae;
+    font-size: 14px;
+  }
+
+  .site-nav-language-mobile select {
+    width: auto;
+    min-width: 82px;
+    font-size: 14px;
+    text-align: right;
   }
 }
 

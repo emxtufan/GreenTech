@@ -6,10 +6,19 @@
 // makes an admin save show up after a refresh in a production build.
 
 import baseline from "../../data/site-content.json";
+import {
+  DEFAULT_LOCALE,
+  getLocale,
+  normaliseLocale,
+  readCachedContent,
+  writeCachedContent,
+} from "./i18n.js";
 
 const CONTENT_ENDPOINT = "/api/content";
+const CONTENT_META_ENDPOINT = "/api/content/meta";
 
 let current = baseline;
+const currentByLocale = new Map([[DEFAULT_LOCALE, baseline]]);
 
 const asArray = (value) => (Array.isArray(value) ? value : []);
 
@@ -97,31 +106,38 @@ export const selectBlogPosts = (content = current) =>
     ));
 
 /** Synchronous access to the most recent content the app has seen. */
-export const getSiteContent = () => current;
+export const getSiteContent = (requestedLocale = getLocale()) => {
+  const locale = normaliseLocale(requestedLocale);
+  if (currentByLocale.has(locale)) return currentByLocale.get(locale);
 
-let inFlight = null;
+  const cached = readCachedContent(locale)?.content;
+  if (cached) {
+    currentByLocale.set(locale, cached);
+    return cached;
+  }
 
-/**
- * Several components ask for content on mount; they share one request rather
- * than each triggering their own. The `signal` only detaches this caller —
- * it does not cancel the shared request for everyone else.
- */
-export function fetchSiteContent({ signal } = {}) {
-  inFlight ??= fetch(CONTENT_ENDPOINT, { headers: { Accept: "application/json" } })
+  return baseline;
+};
+
+const inFlightByLocale = new Map();
+let metaInFlight = null;
+
+function fetchContentMeta() {
+  metaInFlight ??= fetch(CONTENT_META_ENDPOINT, {
+    headers: { Accept: "application/json" },
+  })
     .then((response) => {
-      if (!response.ok) throw new Error(`Content request failed (${response.status})`);
+      if (!response.ok) throw new Error(`Content metadata request failed (${response.status})`);
       return response.json();
     })
-    .then((content) => {
-      current = content;
-      return content;
-    })
     .finally(() => {
-      inFlight = null;
+      metaInFlight = null;
     });
 
-  const request = inFlight;
+  return metaInFlight;
+}
 
+function attachAbortSignal(request, signal) {
   if (!signal) return request;
 
   return new Promise((resolve, reject) => {
@@ -130,6 +146,55 @@ export function fetchSiteContent({ signal } = {}) {
     signal.addEventListener("abort", abort, { once: true });
     request.then(resolve, reject).finally(() => signal.removeEventListener("abort", abort));
   });
+}
+
+/**
+ * Several components ask for content on mount; they share one request rather
+ * than each triggering their own. The `signal` only detaches this caller —
+ * it does not cancel the shared request for everyone else.
+ */
+export function fetchSiteContent({ signal, locale: requestedLocale = getLocale() } = {}) {
+  const locale = normaliseLocale(requestedLocale);
+
+  if (!inFlightByLocale.has(locale)) {
+    const request = fetchContentMeta()
+      .then((meta) => {
+        const cached = readCachedContent(locale);
+        if (cached?.revision === meta.revision) return cached.content;
+
+        const url = `${CONTENT_ENDPOINT}?locale=${encodeURIComponent(locale)}`;
+        return fetch(url, { headers: { Accept: "application/json" } })
+          .then(async (response) => {
+            if (!response.ok) throw new Error(`Content request failed (${response.status})`);
+            const content = await response.json();
+            const revision = response.headers.get("X-Content-Revision") || meta.revision;
+            const resolvedLocale = normaliseLocale(
+              response.headers.get("Content-Language") || DEFAULT_LOCALE,
+            );
+            const status = response.headers.get("X-Translation-Status") || "source";
+
+            // A temporary provider failure returns the English document. Never
+            // store that fallback under RO/IT/ES or it would look translated.
+            if (locale === DEFAULT_LOCALE || (resolvedLocale === locale && status !== "fallback")) {
+              writeCachedContent(locale, revision, content);
+            } else if (resolvedLocale === DEFAULT_LOCALE) {
+              writeCachedContent(DEFAULT_LOCALE, revision, content);
+            }
+
+            return content;
+          });
+      })
+      .then((content) => {
+        currentByLocale.set(locale, content);
+        current = content;
+        return content;
+      })
+      .finally(() => inFlightByLocale.delete(locale));
+
+    inFlightByLocale.set(locale, request);
+  }
+
+  return attachAbortSignal(inFlightByLocale.get(locale), signal);
 }
 
 export { baseline };

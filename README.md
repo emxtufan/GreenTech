@@ -67,6 +67,9 @@ ADMIN_PASSWORD=parola-admin-puternica
 SESSION_SECRET=cheie-lunga-si-aleatoare
 DATA_DIR=storage/data
 UPLOADS_DIR=storage/uploads
+TRANSLATIONS_DIR=storage/translations
+DEEPL_API_KEY=cheia-privata-deepl
+TRANSLATION_LOCALES=ro,it,es
 GEOCODER_USER_AGENT="GreenTechProfessionalsAdmin/1.0 (+https://greentechpro.app)"
 PORT=3000
 HOST=0.0.0.0
@@ -82,7 +85,7 @@ Pregateste directoarele care contin datele modificabile si acorda drepturi
 utilizatorului sub care ruleaza PM2:
 
 ```bash
-mkdir -p storage/data storage/uploads
+mkdir -p storage/data storage/uploads storage/translations
 chown -R www:www storage
 chmod -R u+rwX,g+rwX storage
 ```
@@ -261,10 +264,47 @@ sunt salvate in:
 ```text
 storage/data
 storage/uploads
+storage/translations
 ```
 
 Aici se afla continutul live, recenziile, solicitarile de proiect, aplicatiile,
 abonatii si fisierele incarcate. Un `git pull` nu suprascrie aceste directoare.
+
+## Traduceri automate
+
+Continutul se scrie o singura data, in engleza, din `/admin`. Site-ul detecteaza
+limba browserului la prima vizita si permite alegerea manuala intre engleza,
+romana, italiana si spaniola din navbar. Alegerea si ultima versiune tradusa se
+salveaza in `localStorage` separat pentru fiecare utilizator.
+
+Traducerea este efectuata de server, astfel incat cheia DeepL nu ajunge niciodata
+in JavaScript-ul public. Configureaza in `.env`:
+
+```dotenv
+DEEPL_API_KEY=cheia-privata-deepl
+TRANSLATION_LOCALES=ro,it,es
+TRANSLATIONS_DIR=storage/translations
+```
+
+Pentru o cheie DeepL Free, serverul selecteaza automat endpoint-ul `api-free`.
+`DEEPL_API_URL` poate fi setat explicit numai daca este necesar. Dupa modificarea
+fisierului `.env`, reporneste procesul:
+
+```bash
+pm2 restart GreenTech --update-env
+```
+
+La fiecare salvare din admin, serverul pregateste in fundal versiunile RO/IT/ES.
+Expresiile deja traduse sunt reutilizate din
+`storage/translations/phrase-cache.json`; doar textele noi sau schimbate consuma
+o noua traducere. Snapshot-urile curente se afla tot in
+`storage/translations/`. Daca DeepL nu este configurat sau este temporar
+indisponibil, site-ul afiseaza continutul englezesc fara sa intrerupa navigarea.
+
+Pentru a reseta doar preferinta unui browser, sterge cheia
+`greentech.locale.v1` din Local Storage. Cache-ul de continut foloseste chei care
+incep cu `greentech.content.v1` si se invalideaza automat cand continutul din
+admin primeste o revizie noua.
 
 ## Backup
 
@@ -309,4 +349,3 @@ pm2 logs GreenTech --lines 100
 tail -f /www/wwwlogs/GreenTech.error.log
 nginx -t
 ```
-

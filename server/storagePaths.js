@@ -14,3 +14,7 @@ function configuredDirectory(environmentKey, fallback) {
 // conflict-free after content edits, form submissions, or admin uploads.
 export const DATA_DIR = configuredDirectory("DATA_DIR", "storage/data");
 export const UPLOADS_DIR = configuredDirectory("UPLOADS_DIR", "storage/uploads");
+export const TRANSLATIONS_DIR = configuredDirectory(
+  "TRANSLATIONS_DIR",
+  "storage/translations",
+);
