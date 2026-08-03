@@ -69,7 +69,9 @@ chmod -R u+rwX,g+rwX,o-rwx storage
 echo
 echo "aaPanel PM2 settings:"
 echo "  Startup file: $ROOT_DIR/server.js"
+echo "  Arguments: --production"
 echo "  Run directory: $ROOT_DIR"
+echo "  Environment: NODE_ENV=production"
 echo "  Node version: 24 LTS"
 echo "  Run user: $RUN_USER"
 echo "  Instances: 1"

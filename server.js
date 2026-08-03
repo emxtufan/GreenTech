@@ -27,8 +27,11 @@ const { createApiRouter } = await import("./server/routes.js");
 const DIST_DIR = path.join(ROOT_DIR, "dist");
 const HOST = process.env.HOST || "0.0.0.0";
 const PORT = Number.parseInt(process.env.PORT || "3000", 10);
-const production = process.argv.includes("--production")
-  || process.env.NODE_ENV === "production";
+// A direct `node server.js` start is common in aaPanel. Default to the built
+// production app; Vite is enabled only by the explicit development command.
+const development = process.argv.includes("--development")
+  || process.env.NODE_ENV === "development";
+const production = !development;
 
 if (!Number.isInteger(PORT) || PORT < 1 || PORT > 65535) {
   throw new Error(`Invalid PORT value: ${process.env.PORT}`);

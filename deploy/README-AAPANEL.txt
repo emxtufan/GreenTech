@@ -11,7 +11,9 @@ GREENTECH - AAPANEL PRODUCTION PACKAGE
 
 4. Add the PM2 project:
    Startup file: /www/wwwroot/greentech/server.js
+   Arguments: --production
    Run directory: /www/wwwroot/greentech
+   Environment: NODE_ENV=production
    Node version: 24 LTS
    Run user: www
    Instances: 1
