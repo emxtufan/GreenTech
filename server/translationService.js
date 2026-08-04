@@ -3,15 +3,33 @@ import path from "node:path";
 import { createDocumentStore } from "./persistence.js";
 import { TRANSLATIONS_DIR } from "./storagePaths.js";
 
-export const SOURCE_LOCALE = "en";
+export const DEFAULT_LOCALE = "en";
 
-const DEEPL_LOCALES = new Set(["ro", "it", "es"]);
-const DEFAULT_TARGET_LOCALES = ["ro", "it", "es"];
+const SITE_LOCALES = ["en", "ro", "it", "es"];
+const DEEPL_LOCALES = new Set(SITE_LOCALES);
+const configuredSourceLocale = String(process.env.CONTENT_SOURCE_LOCALE || "auto")
+  .trim()
+  .toLowerCase()
+  .replace("_", "-")
+  .split("-")[0];
+
+// Admin content can contain both Romanian and older English copy. Automatic
+// detection lets every public locale, including EN, have its own snapshot.
+export const SOURCE_LOCALE = configuredSourceLocale === "auto"
+  || DEEPL_LOCALES.has(configuredSourceLocale)
+  ? configuredSourceLocale
+  : "auto";
+
+const hasConcreteSourceLocale = DEEPL_LOCALES.has(SOURCE_LOCALE);
+
+const DEFAULT_TARGET_LOCALES = SITE_LOCALES.filter((locale) => (
+  !hasConcreteSourceLocale || locale !== SOURCE_LOCALE
+));
 const BATCH_TEXT_LIMIT = 40;
 const BATCH_CHARACTER_LIMIT = 80_000;
 // Increment when extraction rules change so stale server snapshots and browser
 // caches cannot keep a translation produced by older rules.
-const CACHE_VERSION = 2;
+const CACHE_VERSION = 4;
 const PROTECTED_TERMS = [
   "GreenTech Professionals SRL",
   "GreenTech Professionals",
@@ -52,16 +70,25 @@ const SKIPPED_KEYS = new Set([
   "capacityKw",
 ]);
 
-const configuredTargets = String(
+const requestedTargets = String(
   process.env.TRANSLATION_LOCALES || DEFAULT_TARGET_LOCALES.join(","),
 )
   .split(",")
   .map((locale) => locale.trim().toLowerCase().split("-")[0])
   .filter((locale, index, locales) => (
-    DEEPL_LOCALES.has(locale) && locales.indexOf(locale) === index
+    DEEPL_LOCALES.has(locale)
+    && (!hasConcreteSourceLocale || locale !== SOURCE_LOCALE)
+    && locales.indexOf(locale) === index
   ));
 
-export const SUPPORTED_LOCALES = [SOURCE_LOCALE, ...configuredTargets];
+// Add English even when an older production .env still contains
+// TRANSLATION_LOCALES=ro,it,es. This makes the migration self-contained.
+const configuredTargets = [...new Set([
+  ...(SOURCE_LOCALE === DEFAULT_LOCALE ? [] : [DEFAULT_LOCALE]),
+  ...requestedTargets,
+])];
+
+export const SUPPORTED_LOCALES = [...SITE_LOCALES];
 
 const phraseStore = createDocumentStore({
   file: path.join(TRANSLATIONS_DIR, "phrase-cache.json"),
@@ -91,17 +118,21 @@ function hash(value) {
 }
 
 export function contentRevision(content) {
-  return hash(`${CACHE_VERSION}:${JSON.stringify(content)}`).slice(0, 24);
+  return hash(`${CACHE_VERSION}:${SOURCE_LOCALE}:${JSON.stringify(content)}`).slice(0, 24);
+}
+
+function phraseCacheKey(sourceText) {
+  return hash(`${SOURCE_LOCALE}:${sourceText}`);
 }
 
 export function normaliseLocale(value) {
-  const locale = String(value || SOURCE_LOCALE)
+  const locale = String(value || DEFAULT_LOCALE)
     .trim()
     .toLowerCase()
     .replace("_", "-")
     .split("-")[0];
 
-  return SUPPORTED_LOCALES.includes(locale) ? locale : SOURCE_LOCALE;
+  return SUPPORTED_LOCALES.includes(locale) ? locale : DEFAULT_LOCALE;
 }
 
 export function translationProviderConfigured() {
@@ -184,6 +215,17 @@ async function translateWithDeepL(texts, locale) {
   const apiKey = String(process.env.DEEPL_API_KEY || "").trim();
   if (!apiKey) throw new Error("DEEPL_API_KEY is not configured.");
 
+  const requestBody = {
+    text: texts,
+    target_lang: locale.toUpperCase(),
+    preserve_formatting: true,
+    context: "GreenTech Professionals photovoltaic, electrical and construction company website.",
+  };
+
+  if (hasConcreteSourceLocale) {
+    requestBody.source_lang = SOURCE_LOCALE.toUpperCase();
+  }
+
   const response = await fetch(deepLApiUrl(), {
     method: "POST",
     headers: {
@@ -191,13 +233,7 @@ async function translateWithDeepL(texts, locale) {
       "Content-Type": "application/json",
       Accept: "application/json",
     },
-    body: JSON.stringify({
-      text: texts,
-      source_lang: "EN",
-      target_lang: locale.toUpperCase(),
-      preserve_formatting: true,
-      context: "GreenTech Professionals photovoltaic, electrical and construction company website.",
-    }),
+    body: JSON.stringify(requestBody),
     signal: AbortSignal.timeout(45_000),
   });
 
@@ -246,7 +282,9 @@ async function readPhraseCache() {
   phraseCachePromise ??= phraseStore.read()
     .then((document) => ({
       version: CACHE_VERSION,
-      locales: document?.locales && typeof document.locales === "object"
+      locales: document?.version === CACHE_VERSION
+        && document?.locales
+        && typeof document.locales === "object"
         ? document.locales
         : {},
     }))
@@ -273,7 +311,7 @@ async function translateDocument(source, locale, translateBatch = translateWithD
 
   const missing = uniqueSources
     .map((sourceText) => {
-      const cacheKey = hash(sourceText);
+      const cacheKey = phraseCacheKey(sourceText);
       const cached = localeCache[cacheKey];
       if (cached?.source === sourceText && typeof cached.translation === "string") return null;
       const { protectedText, replacements } = protectTerms(sourceText);
@@ -297,7 +335,7 @@ async function translateDocument(source, locale, translateBatch = translateWithD
   if (missing.length) await savePhraseCache(phraseCache);
 
   for (const reference of references) {
-    const cached = localeCache[hash(reference.source)];
+    const cached = localeCache[phraseCacheKey(reference.source)];
     if (cached?.source === reference.source) {
       reference.parent[reference.key] = cached.translation;
     }
@@ -331,14 +369,14 @@ async function createTranslation(source, locale, revision, translateBatch) {
 }
 
 /**
- * Returns a translated public document, or the English source when translation
+ * Returns a translated public document, or the authored source when translation
  * is temporarily unavailable. Calls for the same revision share one job.
  */
 export async function localiseContent(source, requestedLocale, options = {}) {
   const locale = normaliseLocale(requestedLocale);
   const revision = contentRevision(source);
 
-  if (locale === SOURCE_LOCALE) {
+  if (hasConcreteSourceLocale && locale === SOURCE_LOCALE) {
     return { content: source, locale, revision, status: "source" };
   }
 
@@ -348,7 +386,7 @@ export async function localiseContent(source, requestedLocale, options = {}) {
   if (!translationProviderConfigured() && !options.translateBatch) {
     return {
       content: source,
-      locale: SOURCE_LOCALE,
+      locale: hasConcreteSourceLocale ? SOURCE_LOCALE : DEFAULT_LOCALE,
       requestedLocale: locale,
       revision,
       status: "fallback",
@@ -369,7 +407,7 @@ export async function localiseContent(source, requestedLocale, options = {}) {
     console.error(`[Translation] ${locale.toUpperCase()} failed:`, error.message);
     return {
       content: source,
-      locale: SOURCE_LOCALE,
+      locale: hasConcreteSourceLocale ? SOURCE_LOCALE : DEFAULT_LOCALE,
       requestedLocale: locale,
       revision,
       status: "fallback",
@@ -381,7 +419,8 @@ export function translationMeta(content) {
   return {
     revision: contentRevision(content),
     updatedAt: content?.updatedAt || null,
-    defaultLocale: SOURCE_LOCALE,
+    defaultLocale: DEFAULT_LOCALE,
+    sourceLocale: SOURCE_LOCALE,
     supportedLocales: SUPPORTED_LOCALES,
     providerConfigured: translationProviderConfigured(),
   };

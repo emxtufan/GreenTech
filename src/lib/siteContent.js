@@ -173,12 +173,10 @@ export function fetchSiteContent({ signal, locale: requestedLocale = getLocale()
             );
             const status = response.headers.get("X-Translation-Status") || "source";
 
-            // A temporary provider failure returns the English document. Never
-            // store that fallback under RO/IT/ES or it would look translated.
-            if (locale === DEFAULT_LOCALE || (resolvedLocale === locale && status !== "fallback")) {
+            // A temporary provider failure returns the unmodified source
+            // document. Never cache that mixed-language fallback as translated.
+            if (resolvedLocale === locale && status !== "fallback") {
               writeCachedContent(locale, revision, content);
-            } else if (resolvedLocale === DEFAULT_LOCALE) {
-              writeCachedContent(DEFAULT_LOCALE, revision, content);
             }
 
             return content;

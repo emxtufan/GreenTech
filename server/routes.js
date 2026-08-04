@@ -139,6 +139,10 @@ function consumeApplicationRateLimit(request) {
 export function createApiRouter() {
   const router = express.Router();
 
+  // Reuse valid snapshots or prepare missing locales, including English, as
+  // soon as the server starts instead of waiting for the first visitor.
+  warmPublicTranslations();
+
   // ---- public read -------------------------------------------------------
 
   router.get("/content/meta", async (request, response, next) => {

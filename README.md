@@ -69,7 +69,8 @@ DATA_DIR=storage/data
 UPLOADS_DIR=storage/uploads
 TRANSLATIONS_DIR=storage/translations
 DEEPL_API_KEY=cheia-privata-deepl
-TRANSLATION_LOCALES=ro,it,es
+CONTENT_SOURCE_LOCALE=auto
+TRANSLATION_LOCALES=en,ro,it,es
 GEOCODER_USER_AGENT="GreenTechProfessionalsAdmin/1.0 (+https://greentechpro.app)"
 PORT=3000
 HOST=0.0.0.0
@@ -272,7 +273,8 @@ abonatii si fisierele incarcate. Un `git pull` nu suprascrie aceste directoare.
 
 ## Traduceri automate
 
-Continutul se scrie o singura data, in engleza, din `/admin`. Site-ul detecteaza
+Continutul se scrie o singura data din `/admin` si poate contine texte in romana
+sau engleza. Serverul detecteaza automat limba fiecarui text. Site-ul detecteaza
 limba browserului la prima vizita si permite alegerea manuala intre engleza,
 romana, italiana si spaniola din navbar. Alegerea si ultima versiune tradusa se
 salveaza in `localStorage` separat pentru fiecare utilizator.
@@ -282,7 +284,8 @@ in JavaScript-ul public. Configureaza in `.env`:
 
 ```dotenv
 DEEPL_API_KEY=cheia-privata-deepl
-TRANSLATION_LOCALES=ro,it,es
+CONTENT_SOURCE_LOCALE=auto
+TRANSLATION_LOCALES=en,ro,it,es
 TRANSLATIONS_DIR=storage/translations
 ```
 
@@ -294,12 +297,16 @@ fisierului `.env`, reporneste procesul:
 pm2 restart GreenTech --update-env
 ```
 
-La fiecare salvare din admin, serverul pregateste in fundal versiunile RO/IT/ES.
+La pornire si la fiecare salvare din admin, serverul pregateste in fundal
+versiunile EN/RO/IT/ES. Engleza este salvata in
+`storage/translations/site-content.en.json`, iar celelalte limbi folosesc
+acelasi format de snapshot.
 Expresiile deja traduse sunt reutilizate din
 `storage/translations/phrase-cache.json`; doar textele noi sau schimbate consuma
 o noua traducere. Snapshot-urile curente se afla tot in
 `storage/translations/`. Daca DeepL nu este configurat sau este temporar
-indisponibil, site-ul afiseaza continutul englezesc fara sa intrerupa navigarea.
+indisponibil, site-ul afiseaza temporar continutul sursa fara sa intrerupa
+navigarea.
 
 Pentru a reseta doar preferinta unui browser, sterge cheia
 `greentech.locale.v1` din Local Storage. Cache-ul de continut foloseste chei care
