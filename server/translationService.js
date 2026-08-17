@@ -3,7 +3,7 @@ import path from "node:path";
 import { createDocumentStore } from "./persistence.js";
 import { TRANSLATIONS_DIR } from "./storagePaths.js";
 
-export const DEFAULT_LOCALE = "en";
+export const DEFAULT_LOCALE = "ro";
 
 const SITE_LOCALES = ["en", "ro", "it", "es"];
 const DEEPL_LOCALES = new Set(SITE_LOCALES);
@@ -81,9 +81,10 @@ const requestedTargets = String(
     && locales.indexOf(locale) === index
   ));
 
-// Add English even when an older production .env still contains
-// TRANSLATION_LOCALES=ro,it,es. This makes the migration self-contained.
+// Always prepare English and the public default even when an older production
+// .env still contains TRANSLATION_LOCALES=ro,it,es.
 const configuredTargets = [...new Set([
+  ...(SOURCE_LOCALE === "en" ? [] : ["en"]),
   ...(SOURCE_LOCALE === DEFAULT_LOCALE ? [] : [DEFAULT_LOCALE]),
   ...requestedTargets,
 ])];

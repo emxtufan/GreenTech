@@ -1,6 +1,6 @@
 import { useSyncExternalStore } from "react";
 
-export const DEFAULT_LOCALE = "en";
+export const DEFAULT_LOCALE = "ro";
 export const LOCALE_OPTIONS = [
   { value: "en", shortLabel: "EN", label: "English" },
   { value: "ro", shortLabel: "RO", label: "Rom\u00e2n\u0103" },
@@ -139,13 +139,6 @@ function detectInitialLocale() {
   const saved = readStorage(LOCALE_STORAGE_KEY);
   const savedBase = String(saved || "").trim().toLowerCase().replace("_", "-").split("-")[0];
   if (SUPPORTED.has(savedBase)) return savedBase;
-  if (typeof navigator === "undefined") return DEFAULT_LOCALE;
-
-  const languages = [...(navigator.languages || []), navigator.language];
-  for (const language of languages) {
-    const base = String(language || "").trim().toLowerCase().replace("_", "-").split("-")[0];
-    if (SUPPORTED.has(base)) return base;
-  }
   return DEFAULT_LOCALE;
 }
 

@@ -62,3 +62,4 @@ data/applications/
 
 # Local Lighthouse exports
 /greentechpro.app-*.json
+/dist

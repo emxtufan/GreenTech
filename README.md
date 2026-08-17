@@ -274,10 +274,10 @@ abonatii si fisierele incarcate. Un `git pull` nu suprascrie aceste directoare.
 ## Traduceri automate
 
 Continutul se scrie o singura data din `/admin` si poate contine texte in romana
-sau engleza. Serverul detecteaza automat limba fiecarui text. Site-ul detecteaza
-limba browserului la prima vizita si permite alegerea manuala intre engleza,
-romana, italiana si spaniola din navbar. Alegerea si ultima versiune tradusa se
-salveaza in `localStorage` separat pentru fiecare utilizator.
+sau engleza. Serverul detecteaza automat limba fiecarui text. La prima vizita,
+site-ul porneste in romana si permite alegerea manuala intre engleza, romana,
+italiana si spaniola din navbar. Alegerea si ultima versiune tradusa se salveaza
+in `localStorage` separat pentru fiecare utilizator.
 
 Traducerea este efectuata de server, astfel incat cheia DeepL nu ajunge niciodata
 in JavaScript-ul public. Configureaza in `.env`:
