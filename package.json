@@ -9,7 +9,8 @@
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
     "start": "node --env-file-if-exists=.env server.js --production",
-    "migrate:content": "node scripts/migrate-content.mjs"
+    "migrate:content": "node scripts/migrate-content.mjs",
+    "promote:romanian-content": "node scripts/promote-romanian-content.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",

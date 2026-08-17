@@ -483,6 +483,23 @@
   line-height: 1.5;
 }
 
+.solar-contact-footer-certifications {
+  width: 300px;
+  max-width: 100%;
+  margin-top: 26px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #ffffff;
+  line-height: 0;
+}
+
+.solar-contact-footer-certifications img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
 .solar-contact-footer-contact {
   display: flex;
   margin-top: 26px;
@@ -779,6 +796,10 @@
   .solar-contact-footer-brand p {
     max-width: 310px;
     margin-top: 18px;
+  }
+
+  .solar-contact-footer-certifications {
+    margin-top: 22px;
   }
 
   .solar-contact-footer-groups {

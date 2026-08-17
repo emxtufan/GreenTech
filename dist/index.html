@@ -69,7 +69,7 @@
 
       .boot-shell-content {
         display: flex;
-        width: min(280px, 82vw);
+        width: min(360px, calc(100vw - 48px));
         flex-direction: column;
         align-items: center;
         text-align: center;
@@ -79,13 +79,46 @@
         display: block;
         width: min(240px, 70vw);
         height: auto;
-        margin-bottom: 18px;
+        margin-bottom: 34px;
       }
 
-      .boot-shell p {
-        margin: 0;
-        font-size: 14px;
-        line-height: 18px;
+      .boot-progress {
+        width: 100%;
+      }
+
+      .boot-progress-value {
+        display: block;
+        margin: 0 0 12px;
+        color: #171916;
+        font-size: 16px;
+        font-variant-numeric: tabular-nums;
+        font-weight: 600;
+        line-height: 1;
+        text-align: right;
+      }
+
+      .boot-progress-track {
+        display: block;
+        width: 100%;
+        height: 3px;
+        overflow: hidden;
+        background: rgb(1 1 1 / 18%);
+      }
+
+      .boot-progress-fill {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: #8bbc3f;
+        transform: scaleX(0);
+        transform-origin: left center;
+      }
+
+      @media (max-width: 480px) {
+        .boot-shell img {
+          width: min(210px, 72vw);
+          margin-bottom: 30px;
+        }
       }
     </style>
     <link
@@ -124,9 +157,9 @@
       }
     </script>
     <title>GreenTech Professionals | Photovoltaic Construction</title>
-    <script type="module" crossorigin src="/assets/home-CqAyRVYq.js"></script>
+    <script type="module" crossorigin src="/assets/home-qIj4rCXy.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/index-Cft-f2Vh.js">
-    <link rel="stylesheet" crossorigin href="/assets/home-DU00r5dq.css" media="print" onload="this.onload=null;this.media='all'"><noscript><link rel="stylesheet" crossorigin href="/assets/home-DU00r5dq.css"></noscript>
+    <link rel="stylesheet" crossorigin href="/assets/home-BQ4CMevM.css" media="print" onload="this.onload=null;this.media='all'"><noscript><link rel="stylesheet" crossorigin href="/assets/home-BQ4CMevM.css"></noscript>
   </head>
   <body>
     <div class="boot-shell" id="boot-shell" aria-hidden="true">
@@ -138,7 +171,12 @@
           alt=""
           fetchpriority="high"
         />
-        <p>Greentech Professionals is an electrical and construction company with experience in electrical and mechanical works in the photovoltaic field.</p>
+        <div class="boot-progress">
+          <strong class="boot-progress-value">0%</strong>
+          <span class="boot-progress-track">
+            <span class="boot-progress-fill"></span>
+          </span>
+        </div>
       </div>
     </div>
     <div id="root"></div>

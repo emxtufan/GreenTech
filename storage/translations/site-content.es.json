@@ -1,0 +1,1346 @@
+{
+  "version": 4,
+  "locale": "es",
+  "revision": "c746b1aefa8eb3c039b84348",
+  "translatedAt": "2026-08-17T09:02:05.972Z",
+  "content": {
+    "version": 1,
+    "sections": [
+      {
+        "id": "intro-hero",
+        "group": "Experiencia",
+        "name": "Introducción y Hero 3D",
+        "eyebrow": "Introducción",
+        "title": "Bienvenidos a GreenTech Professionals",
+        "description": "Soluciones eléctricas, mecánicas y de ingeniería civil diseñadas para un futuro más limpio y eficiente.",
+        "action": "Haz clic para explorar",
+        "actionMode": "builtin",
+        "format": "Interactive 3D experience",
+        "summary": "6 GLB scenes",
+        "source": "src/main.jsx + src/enpower3d.js",
+        "visible": true
+      },
+      {
+        "id": "company-overview",
+        "group": "Empresa",
+        "name": "Presentación general de la empresa",
+        "eyebrow": "Empresa",
+        "title": "Greentech Professionals SRL",
+        "description": "Greentech Professionals es una empresa especializada en el sector de la energía y la construcción, con experiencia en el desarrollo y la ejecución de proyectos energéticos complejos. Gracias a su experiencia en obras eléctricas, mecánicas y de infraestructuras, la empresa contribuye a la creación de soluciones eficientes y sostenibles, adaptadas a las exigencias actuales del sector energético y a la transición hacia un futuro basado en la energía verde.",
+        "action": "",
+        "format": "Text and statistics",
+        "summary": "4 impact metrics",
+        "source": "src/main.jsx / FinalSection",
+        "visible": true
+      },
+      {
+        "id": "company-video",
+        "group": "Empresa",
+        "name": "Vídeo corporativo",
+        "eyebrow": "",
+        "title": "",
+        "description": "",
+        "action": "",
+        "format": "MP4 video",
+        "summary": "video.mp4",
+        "source": "public/video.mp4",
+        "videoUrl": "/video.mp4",
+        "visible": true
+      },
+      {
+        "id": "clients",
+        "group": "Empresa",
+        "name": "Nuestros clientes",
+        "eyebrow": "Colaboradores",
+        "title": "Colaboradores",
+        "description": "Establecemos relaciones sólidas y duraderas con nuestros socios, colaborando para desarrollar proyectos eficientes, sostenibles y orientados al futuro en el ámbito de la energía y las infraestructuras.",
+        "action": "",
+        "format": "Infinite logo loop",
+        "summary": "7 client logos",
+        "source": "src/main.jsx / clientLogos",
+        "visible": true
+      },
+      {
+        "id": "work-process",
+        "group": "Empresa",
+        "name": "El proceso de trabajo",
+        "eyebrow": "Proceso",
+        "title": "Nuestro proceso de trabajo",
+        "description": "Una presentación concisa de cómo GreenTech Professionals lleva un proyecto fotovoltaico desde la fase de decisiones técnicas hasta su ejecución fiable sobre el terreno.\n",
+        "action": "",
+        "format": "Sticky card stack",
+        "summary": "3 process cards",
+        "source": "src/data/process-cards.json",
+        "visible": true
+      },
+      {
+        "id": "projects",
+        "group": "Empresa",
+        "name": "Proyectos en curso",
+        "eyebrow": "Portafolio",
+        "title": "Nuestros proyectos",
+        "description": "Descubre algunos de nuestros proyectos y cómo convertimos las ideas en construcciones sólidas, eficientes y sostenibles.",
+        "action": "Ver el proyecto",
+        "actionMode": "builtin",
+        "format": "Horizontal gallery",
+        "summary": "5 projects + archive",
+        "source": "src/data/horizontal-gallery.json",
+        "visible": true
+      },
+      {
+        "id": "credentials",
+        "group": "Empresa",
+        "name": "Confianza y acreditaciones",
+        "eyebrow": "Confianza y certificaciones",
+        "title": "Creada para realizar instalaciones sobre el terreno con total responsabilidad.",
+        "description": "Capacidad técnica, equipos cualificados y una presencia europea en expansión, que respaldan cada fase de la ejecución.",
+        "action": "Revisión de las acreditaciones",
+        "actionMode": "link",
+        "actionUrl": "",
+        "format": "Credentials grid",
+        "summary": "3 credentials",
+        "source": "src/CompanyProofSection.jsx",
+        "visible": true
+      },
+      {
+        "id": "footprint-map",
+        "group": "Empresa",
+        "name": "La huella europea",
+        "eyebrow": "Presencia en Europa",
+        "title": "Equipos que participan directamente en la actividad",
+        "description": "Los proyectos publicados y las novedades sobre el terreno conectan a los profesionales del sector de las tecnologías verdes de Rumanía, Italia y España.",
+        "action": "",
+        "format": "Interactive map",
+        "summary": "3 countries",
+        "source": "src/CompanyFootprintMap.jsx",
+        "visible": true
+      },
+      {
+        "id": "quality",
+        "group": "Empresa",
+        "name": "Seguridad y calidad",
+        "eyebrow": "Seguridad y calidad",
+        "title": "Control desde la planificación hasta la entrega.",
+        "description": "Una entrega fiable depende de una ejecución rigurosa sobre el terreno, de personal cualificado y de comprobaciones que continúan incluso después de la instalación.\n",
+        "action": "Descubre nuestras capacidades",
+        "actionMode": "modal",
+        "actionUrl": "https://greentechpro.ro/services/",
+        "format": "Image and checklist",
+        "summary": "4 quality points",
+        "source": "src/CompanyProofSection.jsx",
+        "visible": true
+      },
+      {
+        "id": "reviews",
+        "group": "Empresa",
+        "name": "Opiniones de los clientes",
+        "eyebrow": "Opiniones de los clientes",
+        "title": "Lo que dicen nuestros clientes sobre nuestro trabajo",
+        "description": "Opiniones de clientes verificadas, mostradas en un carrusel automático, con la opción de enviar reseñas.",
+        "action": "Escribe una reseña",
+        "actionMode": "builtin",
+        "format": "Review carousel",
+        "summary": "Carousel + form",
+        "source": "src/CompanyProofSection.jsx",
+        "visible": true
+      },
+      {
+        "id": "photovoltaic-service",
+        "group": "Servicios",
+        "name": "Parques fotovoltaicos",
+        "eyebrow": "01 / Servicios",
+        "title": "Construcción de parques fotovoltaicos",
+        "description": "Proyectos solares a escala industrial gestionados de principio a fin: estudios de viabilidad y diseño, estructuras de montaje, cableado e inversores, puesta en marcha y conexión a la red.\n",
+        "action": "",
+        "format": "Scroll-driven GLB",
+        "summary": "Solar module assembly",
+        "source": "src/ScrollSolarAssembly.jsx",
+        "visible": true
+      },
+      {
+        "id": "electrical-service",
+        "group": "Servicios",
+        "name": "Inspecciones y pruebas",
+        "eyebrow": "02 / Servicios",
+        "title": "Inspecciones y comprobaciones eléctricas",
+        "description": "Puesta en servicio y revisiones periódicas de cuadros eléctricos, equipos de conmutación y redes de distribución, incluyendo mediciones, termografía y documentación.\n",
+        "action": "",
+        "format": "Scroll-driven GLB",
+        "summary": "Electrical inspection",
+        "source": "src/ScrollElectricalInspection.jsx",
+        "visible": true
+      },
+      {
+        "id": "construction-service",
+        "group": "Servicios",
+        "name": "Servicios de construcción",
+        "eyebrow": "03 / Servicios",
+        "title": "Servicios de construcción",
+        "description": "Obras de construcción civil y estructural para instalaciones energéticas, coordinadas desde el inicio de las obras hasta la entrega.\n",
+        "action": "",
+        "format": "Scroll-driven GLB",
+        "summary": "Construction model",
+        "source": "src/ScrollConstructionServices.jsx",
+        "visible": true
+      },
+      {
+        "id": "data-center-service",
+        "group": "Servicios",
+        "name": "Construcción de centros de datos",
+        "eyebrow": "04 / Servicios",
+        "title": "Construcción de centros de datos",
+        "description": "Construcción «llave en mano» de centros de datos, incluyendo el diseño del espacio, la distribución de energía y la redundancia, los sistemas de refrigeración, el aislamiento de los flujos de aire (contención) y la puesta en marcha.\n",
+        "action": "",
+        "format": "Scroll-driven GLB",
+        "summary": "Data center model",
+        "source": "src/ScrollDataCenterBuild.jsx",
+        "visible": true
+      },
+      {
+        "id": "blog",
+        "group": "Contenido",
+        "name": "Diario de obra",
+        "eyebrow": "Las últimas novedades sobre el terreno",
+        "title": "Notas desde el terreno, novedades sobre el equipo y oportunidades.",
+        "description": "Actualizaciones sobre proyectos, artículos técnicos, novedades sobre la empresa y oportunidades profesionales de GreenTech Professionals.\n",
+        "action": "Lee el artículo",
+        "actionMode": "builtin",
+        "format": "Article feed",
+        "summary": "JSON articles",
+        "source": "src/data/blog-posts.json",
+        "visible": true
+      },
+      {
+        "id": "faqs",
+        "group": "Contenido",
+        "name": "Preguntas frecuentes",
+        "eyebrow": "Preguntas frecuentes",
+        "title": "Preguntas que nos suelen hacer antes de comenzar un proyecto.",
+        "description": "Ámbito de actividad, zona de cobertura y certificaciones: los detalles que más suelen preguntar los clientes.",
+        "action": "",
+        "format": "Accordion",
+        "summary": "6 questions",
+        "source": "src/FaqSection.jsx",
+        "visible": true
+      },
+      {
+        "id": "contact",
+        "group": "Contenido",
+        "name": "Solicitud de información sobre el proyecto",
+        "eyebrow": "Contacto / Energía solar",
+        "title": "Tu próximo proyecto solar empieza aquí.",
+        "description": "Díganos dónde va a construir y qué necesita que le entreguemos. Nuestro equipo está preparado para hablar sobre el siguiente paso.",
+        "action": "Envía una solicitud",
+        "actionMode": "builtin",
+        "format": "Form and solar GLB",
+        "summary": "Contact form + GDPR",
+        "source": "src/SolarContactSection.jsx",
+        "visible": true
+      },
+      {
+        "id": "careers",
+        "group": "Contenido",
+        "name": "Empleo",
+        "eyebrow": "Empleo",
+        "title": "Únete al equipo",
+        "description": "Envíanos tu currículum y cuéntanos qué proyectos has llevado a cabo.",
+        "action": "",
+        "format": "Application form",
+        "summary": "Name, position, email, phone, experience, CV",
+        "source": "src/SolarContactForms.jsx",
+        "visible": true
+      },
+      {
+        "id": "footer",
+        "group": "Contenido",
+        "name": "Sótano",
+        "eyebrow": "Información sobre la empresa",
+        "title": "GreenTech Professionals",
+        "description": "Competencias en los ámbitos eléctrico, mecánico y de la construcción para proyectos de energía renovable en toda Europa.",
+        "action": "",
+        "format": "Navigation and legal links",
+        "summary": "3 link groups",
+        "source": "src/SolarContactSection.jsx / footer",
+        "visible": true
+      }
+    ],
+    "footprintCountries": {
+      "items": [
+        {
+          "id": "romania",
+          "order": 1,
+          "enabled": true,
+          "name": "Rumanía",
+          "code": "RO",
+          "iso3": "ROU",
+          "atlasId": "642",
+          "cities": [
+            {
+              "id": "butimanu",
+              "name": "Butimanu",
+              "longitude": 25.897,
+              "latitude": 44.683
+            },
+            {
+              "id": "giurgiu",
+              "name": "Giurgiu",
+              "longitude": 25.9699,
+              "latitude": 43.9037
+            },
+            {
+              "id": "craiova",
+              "name": "Craiova",
+              "longitude": 23.7949,
+              "latitude": 44.3302
+            }
+          ]
+        },
+        {
+          "id": "italy",
+          "order": 2,
+          "enabled": true,
+          "name": "Italia",
+          "code": "IT",
+          "iso3": "ITA",
+          "atlasId": "380",
+          "cities": [
+            {
+              "id": "80996ba3-8020-4011-b283-3b22ae9268b1",
+              "name": "Codigoro",
+              "longitude": 12.109524,
+              "latitude": 44.831581
+            },
+            {
+              "id": "piombino",
+              "name": "Piombino",
+              "longitude": 10.5259,
+              "latitude": 42.9256
+            },
+            {
+              "id": "bologna",
+              "name": "Bolonia",
+              "longitude": 11.3426,
+              "latitude": 44.4949
+            },
+            {
+              "id": "cagliari",
+              "name": "Cagliari",
+              "longitude": 9.1217,
+              "latitude": 39.2238
+            }
+          ]
+        },
+        {
+          "id": "spain",
+          "order": 3,
+          "enabled": true,
+          "name": "España",
+          "code": "ES",
+          "iso3": "ESP",
+          "atlasId": "724",
+          "cities": [
+            {
+              "id": "palencia",
+              "name": "Palencia",
+              "longitude": -4.5288,
+              "latitude": 42.0096
+            },
+            {
+              "id": "guillena",
+              "name": "Guillena",
+              "longitude": -6.056,
+              "latitude": 37.542
+            },
+            {
+              "id": "sevilla",
+              "name": "Sevilla",
+              "longitude": -5.9845,
+              "latitude": 37.3891
+            }
+          ]
+        }
+      ]
+    },
+    "processCards": {
+      "items": [
+        {
+          "id": "project-planning",
+          "order": 1,
+          "enabled": true,
+          "number": "01",
+          "title": "Planificación del proyecto",
+          "description": "Análisis del emplazamiento, planificación de las instalaciones eléctricas, coordinación de los componentes mecánicos y preparación de la documentación antes de comenzar la instalación.",
+          "theme": "design"
+        },
+        {
+          "id": "installation-commissioning",
+          "order": 2,
+          "enabled": true,
+          "number": "02",
+          "title": "Ejecución y puesta en marcha",
+          "description": "Equipos bien organizados se encargan del montaje de la estructura, el cableado, la instalación de los paneles, las pruebas y la entrega, garantizando un riguroso control de calidad.",
+          "theme": "build"
+        },
+        {
+          "id": "maintenance-monitoring",
+          "order": 3,
+          "enabled": true,
+          "number": "03",
+          "title": "Mantenimiento y supervisión",
+          "description": "Las revisiones preventivas, los trabajos de reparación y los informes técnicos garantizan el buen funcionamiento de los sistemas fotovoltaicos desde el primer día de funcionamiento.",
+          "theme": "care"
+        }
+      ]
+    },
+    "horizontalGallery": {
+      "items": [
+        {
+          "id": "butimanu-romania",
+          "order": 1,
+          "enabled": true,
+          "category": "Instalaciones eléctricas y mecánicas",
+          "title": "Butimanu, Rumanía",
+          "image": "/projects/butimanu/butimanu-01.jpg",
+          "alt": "Obras de construcción en el proyecto fotovoltaico de Butimanu",
+          "projectDate": "Junio de 2025",
+          "projectCategory": "Instalaciones eléctricas y mecánicas",
+          "location": "Butimanu, Rumanía",
+          "capacity": "300 MW",
+          "capacityKw": "300,000 kW",
+          "capacityNote": "Capacidad total del parque fotovoltaico",
+          "about": "Hemos prestado servicios completos de instalación eléctrica y mecánica para el proyecto fotovoltaico de Butimanu.",
+          "description": "GreenTech Professionals forma parte de uno de los mayores proyectos fotovoltaicos de Rumanía. El proyecto, de 300 MW, ha reunido a un equipo directivo comprometido y a más de 200 profesionales cualificados sobre el terreno.",
+          "scope": [
+            {
+              "title": "Tendido de cables",
+              "description": "Trazado, tendido e instalación de cables eléctricos en toda la obra."
+            },
+            {
+              "title": "Instalación de sistemas fotovoltaicos",
+              "description": "Trabajos de montaje mecánico para estructuras y módulos fotovoltaicos."
+            },
+            {
+              "title": "Instalaciones eléctricas",
+              "description": "Trabajos completos de instalaciones eléctricas realizados en el marco del proyecto."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/butimanu/butimanu-01.jpg",
+              "alt": "Equipos de construcción y estructuras de montaje en Butimanu"
+            },
+            {
+              "src": "/projects/butimanu/butimanu-02.jpg",
+              "alt": "Fotografía oficial de la página web del proyecto fotovoltaico de Butimanu"
+            },
+            {
+              "src": "/projects/butimanu/butimanu-03.jpg",
+              "alt": "La actividad del equipo GreenTech Professionals en la obra de Butimanu"
+            }
+          ],
+          "sourceUrl": "https://greentechpro.ro/portfolio/butimanu-romania/"
+        },
+        {
+          "id": "piombino-italy",
+          "order": 2,
+          "enabled": true,
+          "category": "Instalaciones eléctricas y mecánicas",
+          "title": "Codigoro, Italia",
+          "image": "/projects/piombino/piombino-01.jpg",
+          "alt": "Paneles fotovoltaicos en el proyecto de Codigoro",
+          "projectDate": "Julio de 2025",
+          "projectCategory": "Instalaciones eléctricas y mecánicas",
+          "location": "Codigoro, Italia",
+          "capacity": "77.3 MW",
+          "capacityKw": "77.300 kW",
+          "capacityNote": "Sin anunciar públicamente",
+          "about": "Hemos prestado servicios completos de instalación eléctrica y mecánica para el proyecto fotovoltaico de Codigoro.\n",
+          "description": "El parque solar de Codigo forma parte de la continua expansión de GreenTech Professionals en Italia y se ha anunciado públicamente que estará terminado en julio de 2025.\n",
+          "scope": [
+            {
+              "title": "Tendido de cables",
+              "description": "Trazado, tendido e instalación de cables eléctricos en la obra del proyecto.\n"
+            },
+            {
+              "title": "Instalación fotovoltaica",
+              "description": "Trabajos de montaje mecánico para estructuras y módulos fotovoltaicos."
+            },
+            {
+              "title": "Instalación eléctrica",
+              "description": "Obras completas de instalaciones eléctricas, realizadas dentro del ámbito de aplicación del proyecto."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/piombino/piombino-01.jpg",
+              "alt": "Paneles fotovoltaicos en el marco del proyecto de Piombino"
+            },
+            {
+              "src": "/projects/piombino/piombino-02.jpg",
+              "alt": "Fotografía oficial de la página web del proyecto fotovoltaico de Piombino"
+            },
+            {
+              "src": "/projects/piombino/piombino-03.webp",
+              "alt": "Trabajos de instalación eléctrica y mecánica en Piombino"
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "giurgiu-romania",
+          "order": 3,
+          "enabled": true,
+          "category": "Instalaciones eléctricas y mecánicas",
+          "title": "Giurgiu, Rumanía",
+          "image": "/projects/giurgiu/giurgiu-01.jpg",
+          "alt": "Paneles fotovoltaicos en el proyecto de Giurgiu",
+          "projectDate": "Enero de 2025",
+          "projectCategory": "Instalaciones eléctricas y mecánicas",
+          "location": "Giurgiu, Rumanía",
+          "capacity": null,
+          "capacityKw": null,
+          "capacityNote": "No se especifica públicamente",
+          "about": "Hemos prestado servicios completos de instalación eléctrica y mecánica para el proyecto fotovoltaico de Giurgiu.",
+          "description": "El proyecto de Giurgiu consolida la presencia de GreenTech Professionals en Rumanía y su contribución a la transición hacia las infraestructuras de energía renovable.",
+          "scope": [
+            {
+              "title": "Tendido de cables",
+              "description": "Trazado, tendido e instalación de cables eléctricos en toda la obra."
+            },
+            {
+              "title": "Instalación de sistemas fotovoltaicos",
+              "description": "Trabajos de montaje mecánico para estructuras y módulos fotovoltaicos."
+            },
+            {
+              "title": "Instalaciones eléctricas",
+              "description": "Trabajos completos de instalaciones eléctricas realizados en el marco del proyecto."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/giurgiu/giurgiu-01.jpg",
+              "alt": "Filas de paneles fotovoltaicos en el proyecto de Giurgiu"
+            },
+            {
+              "src": "/projects/giurgiu/giurgiu-02.jpg",
+              "alt": "Fotografía oficial de la página web del proyecto fotovoltaico de Giurgiu"
+            }
+          ],
+          "sourceUrl": "https://greentechpro.ro/portfolio/giurgiu-romania/"
+        },
+        {
+          "id": "craiova-romania",
+          "order": 4,
+          "enabled": true,
+          "category": "Parque fotovoltaico",
+          "title": "Craiova, Rumanía",
+          "image": "/projects/craiova/craiova-01.jpg",
+          "alt": "Vista aérea del proyecto fotovoltaico de Craiova",
+          "projectDate": "Enero de 2025",
+          "projectCategory": "Parque fotovoltaico",
+          "location": "Craiova, Rumanía",
+          "capacity": null,
+          "capacityKw": null,
+          "capacityNote": "No se especifica públicamente",
+          "about": "Hemos prestado servicios completos de instalación eléctrica y mecánica para el proyecto fotovoltaico de Craiova.",
+          "description": "El proyecto de Craiova refleja un ámbito completo de ejecución sobre el terreno, combinando las instalaciones eléctricas con el montaje mecánico de la infraestructura fotovoltaica.",
+          "scope": [
+            {
+              "title": "Tendido de cables",
+              "description": "Trazado, tendido e instalación de cables eléctricos en toda la obra."
+            },
+            {
+              "title": "Instalación de sistemas fotovoltaicos",
+              "description": "Trabajos de montaje mecánico para estructuras y módulos fotovoltaicos."
+            },
+            {
+              "title": "Instalaciones eléctricas",
+              "description": "Trabajos completos de instalaciones eléctricas realizados en el marco del proyecto."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/craiova/craiova-01.jpg",
+              "alt": "Vista aérea del proyecto fotovoltaico de Craiova"
+            },
+            {
+              "src": "/projects/craiova/craiova-02.webp",
+              "alt": "Obras de construcción de instalaciones fotovoltaicas en la obra de Craiova"
+            },
+            {
+              "src": "/projects/craiova/craiova-03.webp",
+              "alt": "Fotografía oficial del proyecto de Craiova"
+            }
+          ],
+          "sourceUrl": "https://greentechpro.ro/portfolio/craiova-romania/"
+        },
+        {
+          "id": "bologna-italy",
+          "order": 5,
+          "enabled": true,
+          "category": "Parque fotovoltaico",
+          "title": "Bolonia, Italia",
+          "image": "/projects/bologna/bologna-01.webp",
+          "alt": "El equipo GreenTech Professionals que trabaja en el proyecto de Bolonia",
+          "projectDate": "Noviembre de 2024",
+          "projectCategory": "Parque fotovoltaico",
+          "location": "Bolonia, Italia",
+          "capacity": null,
+          "capacityKw": null,
+          "capacityNote": "No se especifica públicamente",
+          "about": "Hemos prestado servicios completos de instalación eléctrica y mecánica para el proyecto fotovoltaico de Bolonia.",
+          "description": "El proyecto fotovoltaico de Bolonia pone de manifiesto la capacidad de coordinación sobre el terreno del equipo GreenTech Professionals, la calidad de las instalaciones realizadas y el crecimiento continuo en el mercado italiano de las energías renovables.",
+          "scope": [
+            {
+              "title": "Tendido de cables",
+              "description": "Trazado, tendido e instalación de cables eléctricos en toda la obra."
+            },
+            {
+              "title": "Instalación de sistemas fotovoltaicos",
+              "description": "Trabajos de montaje mecánico para estructuras y módulos fotovoltaicos."
+            },
+            {
+              "title": "Instalaciones eléctricas",
+              "description": "Trabajos completos de instalaciones eléctricas realizados en el marco del proyecto."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/bologna/bologna-01.webp",
+              "alt": "El equipo GreenTech Professionals que trabaja en el proyecto de Bolonia"
+            },
+            {
+              "src": "/projects/bologna/bologna-02.webp",
+              "alt": "Obras de construcción de instalaciones fotovoltaicas en la obra de Bolonia"
+            },
+            {
+              "src": "/projects/bologna/bologna-03.webp",
+              "alt": "Fotografía oficial del proyecto de Bolonia"
+            }
+          ],
+          "sourceUrl": "https://greentechpro.ro/portfolio/bologna-italy/"
+        },
+        {
+          "id": "cagliari-italy",
+          "order": 6,
+          "enabled": true,
+          "category": "Parque fotovoltaico",
+          "title": "Cagliari, Italia",
+          "image": "/projects/cagliari/cagliari-01.webp",
+          "alt": "Vista aérea del proyecto fotovoltaico de Cagliari",
+          "projectDate": "Mayo de 2023",
+          "projectCategory": "Parque fotovoltaico",
+          "location": "Cagliari, Italia",
+          "capacity": null,
+          "capacityKw": null,
+          "capacityNote": "No se especifica públicamente",
+          "about": "Hemos prestado servicios completos de instalación eléctrica y mecánica para el proyecto fotovoltaico de Cagliari.",
+          "description": "El proyecto de Cagliari ha combinado trabajos de instalación eléctrica y montaje de sistemas fotovoltaicos, como parte de la cartera de energías renovables de GreenTech Professionals en Italia.",
+          "scope": [
+            {
+              "title": "Tendido de cables",
+              "description": "Trazado, tendido e instalación de cables eléctricos en toda la obra."
+            },
+            {
+              "title": "Instalación de sistemas fotovoltaicos",
+              "description": "Trabajos de montaje mecánico para estructuras y módulos fotovoltaicos."
+            },
+            {
+              "title": "Instalaciones eléctricas",
+              "description": "Trabajos completos de instalaciones eléctricas realizados en el marco del proyecto."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/cagliari/cagliari-01.webp",
+              "alt": "Vista aérea del proyecto fotovoltaico de Cagliari"
+            },
+            {
+              "src": "/projects/cagliari/cagliari-02.webp",
+              "alt": "Trabajos de instalación de sistemas fotovoltaicos en la obra de Cagliari"
+            },
+            {
+              "src": "/projects/cagliari/cagliari-03.webp",
+              "alt": "Fotografía oficial del proyecto en Cagliari"
+            }
+          ],
+          "sourceUrl": "https://greentechpro.ro/portfolio/cagliari-italy/"
+        }
+      ]
+    },
+    "heroCards": {
+      "items": [
+        {
+          "id": "solar",
+          "order": 1,
+          "enabled": true,
+          "title": "Infraestructura fotovoltaica",
+          "sourceIndex": 0,
+          "body": "Especializada en la construcción de parques fotovoltaicos y con experiencia en toda Europa, el equipo de Greentech Professionals ha contribuido al desarrollo mundial de las energías renovables, concretamente a la construcción de infraestructuras fotovoltaicas por un total de más de 1,5 GW hasta la fecha.",
+          "footnote": ""
+        },
+        {
+          "id": "wind",
+          "order": 2,
+          "enabled": true,
+          "title": "Construcción de parques eólicos",
+          "sourceIndex": 1,
+          "body": "La empresa Greentech Professionals desarrolla la infraestructura necesaria para la producción de energía verde, ofreciendo servicios de construcción para parques eólicos con altos estándares de calidad y seguridad.",
+          "footnote": ""
+        },
+        {
+          "id": "transmission",
+          "order": 3,
+          "enabled": true,
+          "title": "Tecnologías y soluciones fotovoltaicas",
+          "sourceIndex": 3,
+          "body": "Gracias a la experiencia adquirida, los especialistas de GreenTech Professionals identifican y ofrecen las soluciones más eficaces e innovadoras para proyectos en el ámbito fotovoltaico, adaptadas a los requisitos y estándares actuales del sector a nivel mundial.",
+          "footnote": ""
+        },
+        {
+          "id": "aggregation",
+          "order": 4,
+          "enabled": true,
+          "title": "Construcción de centros de datos",
+          "sourceIndex": 4,
+          "body": "Apoyamos el desarrollo de la infraestructura digital mediante servicios de construcción para centros de datos, ofreciendo soluciones integrales para la realización de proyectos modernos, seguros y fiables a lo largo de todo el proceso de ejecución.",
+          "footnote": ""
+        },
+        {
+          "id": "customer",
+          "order": 5,
+          "enabled": true,
+          "title": "Mantenimiento",
+          "sourceIndex": 5,
+          "body": "Ofrecemos servicios de mantenimiento para infraestructuras energéticas e industriales, garantizando el funcionamiento eficiente, la seguridad y la sostenibilidad de los proyectos mediante intervenciones especializadas y soluciones adaptadas a cada necesidad.",
+          "footnote": ""
+        },
+        {
+          "id": "future",
+          "order": 6,
+          "enabled": true,
+          "title": "Construimos la energía del futuro",
+          "sourceIndex": 6,
+          "body": "Con el objetivo de acelerar la transición hacia un futuro sostenible, la misión de Greentech Professionals es impulsar el desarrollo de la energía verde mediante soluciones innovadoras, infraestructuras modernas y proyectos sostenibles, eficientes y responsables, preparados para las generaciones futuras.",
+          "footnote": ""
+        }
+      ]
+    },
+    "impactStats": {
+      "items": [
+        {
+          "id": "total-installed-power",
+          "order": 1,
+          "enabled": true,
+          "value": "1.5GW+",
+          "label": "Potencia total instalada",
+          "icon": "Zap"
+        },
+        {
+          "id": "solar-panels-installed",
+          "order": 2,
+          "enabled": true,
+          "value": "2.5M+",
+          "label": "Paneles solares instalados",
+          "icon": "SolarPanel"
+        },
+        {
+          "id": "specialized-professionals",
+          "order": 3,
+          "enabled": true,
+          "value": "500+",
+          "label": "Profesionales especializados",
+          "icon": "BadgeCheck"
+        },
+        {
+          "id": "total-invoiced",
+          "order": 4,
+          "enabled": true,
+          "value": "€ 22.5M",
+          "label": "Volumen de negocio",
+          "icon": "BadgeDollarSign"
+        }
+      ]
+    },
+    "clientLogos": {
+      "items": [
+        {
+          "id": "aj-brand",
+          "order": 1,
+          "enabled": true,
+          "image": "/clients/aj-brand.png",
+          "alt": "AJ Brand",
+          "title": "AJ Brand",
+          "href": "https://ajbrand.energy/"
+        },
+        {
+          "id": "bester",
+          "order": 2,
+          "enabled": true,
+          "image": "/clients/bester.png",
+          "alt": "La mejor",
+          "title": "La mejor",
+          "href": "https://bester.energy/"
+        },
+        {
+          "id": "caf",
+          "order": 3,
+          "enabled": true,
+          "image": "/clients/caf.png",
+          "alt": "CAF",
+          "title": "CAF",
+          "href": "https://www.cafmobility.com/soluciones/sistemas-integrales/"
+        },
+        {
+          "id": "circet",
+          "order": 4,
+          "enabled": true,
+          "image": "/clients/circet.png",
+          "alt": "Circet",
+          "title": "Circet",
+          "href": "https://www.circet.com/"
+        },
+        {
+          "id": "lantania",
+          "order": 5,
+          "enabled": true,
+          "image": "/clients/lantania.jpg",
+          "alt": "Lantania",
+          "title": "Lantania",
+          "href": "https://www.lantania.com/en/sustainability/"
+        },
+        {
+          "id": "psi-global-recruitment",
+          "order": 6,
+          "enabled": true,
+          "image": "/clients/psi-global.png",
+          "alt": "PSI Global Recruitment",
+          "title": "PSI Global Recruitment",
+          "href": "https://www.psiglobalrecruitment.com/"
+        },
+        {
+          "id": "solarig",
+          "order": 7,
+          "enabled": true,
+          "image": "/clients/solarig.png",
+          "alt": "Solarig",
+          "title": "Solarig",
+          "href": "https://solarig.com/en/home-en/"
+        }
+      ]
+    },
+    "credentials": {
+      "items": [
+        {
+          "id": "quality-certifications",
+          "order": 1,
+          "enabled": true,
+          "value": "ISO",
+          "label": "Certificaciones de calidad",
+          "detail": "Certificaciones de calidad que avalan la ejecución estructurada de los proyectos.\n",
+          "icon": "Award"
+        },
+        {
+          "id": "energy-certification",
+          "order": 2,
+          "enabled": true,
+          "value": "ANRE",
+          "label": "Certificación energética",
+          "detail": "Capacidad certificada para actividades en el sector energético.\n",
+          "icon": "ShieldCheck"
+        },
+        {
+          "id": "satisfied-clients",
+          "order": 3,
+          "enabled": true,
+          "value": "30+",
+          "label": "Clientes satisfechos",
+          "detail": "Experiencia de la empresa, basada en proyectos finalizados.\n",
+          "icon": "Users"
+        },
+        {
+          "id": "european-delivery",
+          "order": 4,
+          "enabled": true,
+          "value": "RO / IT / ES",
+          "label": "Envíos a Europa",
+          "detail": "Una presencia sobre el terreno que abarca tres mercados activos.\n",
+          "icon": "Globe2"
+        }
+      ]
+    },
+    "qualityPoints": {
+      "items": [
+        {
+          "id": "specialist-qualified-field-teams",
+          "order": 1,
+          "enabled": true,
+          "text": "Equipos de campo formados por especialistas cualificados"
+        },
+        {
+          "id": "electrical-inspections-and-pram-testing-",
+          "order": 2,
+          "enabled": true,
+          "text": "Capacidad para realizar inspecciones eléctricas y pruebas PRAM"
+        },
+        {
+          "id": "planned-execution-handover-and-maintenan",
+          "order": 3,
+          "enabled": true,
+          "text": "Planificación de la ejecución, entrega y mantenimiento"
+        },
+        {
+          "id": "a0ae6151-770b-4b69-bae5-5bd871b5229c",
+          "order": 4,
+          "enabled": true,
+          "text": "SaFFFF"
+        }
+      ]
+    },
+    "testimonials": {
+      "items": [
+        {
+          "order": 1,
+          "enabled": true,
+          "id": "official-ma",
+          "author": "M. A.",
+          "role": "Testimonio de un cliente",
+          "quote": "Estamos muy satisfechos con la profesionalidad del equipo de GreenTech Professionals. Los recomendamos encarecidamente a todos aquellos que tengan que llevar a cabo un megaproyecto fotovoltaico, ya que son socios de confianza.",
+          "image": "/projects/butimanu/butimanu-02.jpg",
+          "imagePosition": "31% 42%",
+          "rating": 5,
+          "verified": true,
+          "source": "https://greentechpro.ro/about-us/"
+        },
+        {
+          "order": 2,
+          "enabled": true,
+          "id": "official-ac",
+          "author": "A. C.",
+          "role": "Testimonio de un cliente",
+          "quote": "El cumplimiento de los plazos y la calidad de los trabajos son las ventajas más importantes a la hora de colaborar con una empresa de servicios fotovoltaicos. ¡Recomiendo GreenTech Professionals SRL!",
+          "image": "/projects/butimanu/butimanu-03.jpg",
+          "imagePosition": "43% 36%",
+          "rating": 5,
+          "verified": true,
+          "source": "https://greentechpro.ro/about-us/"
+        },
+        {
+          "order": 3,
+          "enabled": true,
+          "id": "official-sg",
+          "author": "S. G.",
+          "role": "Testimonio de un cliente",
+          "quote": "¡La empresa GreenTech Professionals nos ha impresionado de verdad! Gracias por vuestra colaboración y por los servicios de calidad prestados en nuestro parque fotovoltaico.",
+          "image": "/gallery/solar-installation.webp",
+          "imagePosition": "75% 24%",
+          "rating": 5,
+          "verified": true,
+          "source": "https://greentechpro.ro/about-us/"
+        }
+      ]
+    },
+    "blog": {
+      "posts": [
+        {
+          "slug": "inside-butimanu-300mw",
+          "status": "published",
+          "id": "inside-butimanu-300mw",
+          "order": 1,
+          "enabled": true,
+          "featured": true,
+          "category": "Actualización del proyecto",
+          "date": "2025-08-28",
+          "dateLabel": "28 de agosto de 2025",
+          "readTime": "Tiempo de lectura: 3 minutos",
+          "title": "Dentro del proyecto Butimanu de 300 MW",
+          "excerpt": "Una mirada más detallada a las personas, la planificación y la coordinación sobre el terreno que hay detrás de uno de los mayores proyectos fotovoltaicos de Rumanía.",
+          "image": "/projects/butimanu/butimanu-02.jpg",
+          "alt": "Trabajos sobre el terreno en el proyecto fotovoltaico de Butimanu",
+          "intro": "GreenTech Professionals aporta sus capacidades de instalación eléctrica y mecánica al proyecto fotovoltaico de 300 MW en Butimanu, Rumanía.",
+          "sections": [
+            {
+              "title": "La envergadura del proyecto requiere coordinación",
+              "paragraphs": [
+                "Un proyecto de esta envergadura implica decisiones técnicas, logística en la obra y una numerosa plantilla sobre el terreno. Se ha informado de la presencia de más de 200 profesionales cualificados en la obra, respaldados por un equipo directivo especializado.",
+                "La coordinación diaria garantiza la sincronización de las actividades eléctricas y mecánicas a medida que avanzan las obras en una zona de construcción extensa y activa."
+              ]
+            },
+            {
+              "title": "Entrega a domicilio",
+              "paragraphs": [
+                "Su ámbito de actividad abarca el montaje de sistemas fotovoltaicos, el tendido de cables y la instalación eléctrica. Cada etapa depende de una secuencia clara de operaciones, de comprobaciones rigurosas y de una buena comunicación entre los equipos.",
+                "Butimanu refleja, asimismo, el crecimiento continuo de GreenTech Professionals en el mercado de las energías renovables de Rumanía."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "300 MW",
+              "label": "Capacidad del parque fotovoltaico"
+            },
+            {
+              "value": "200+",
+              "label": "Profesionales cualificados que acuden in situ"
+            },
+            {
+              "value": "Rumanía",
+              "label": "Mercado de proyectos"
+            }
+          ],
+          "relatedProjectId": "butimanu-romania",
+          "primaryAction": {
+            "type": "proyecto",
+            "label": "Ver el proyecto de Butimanu"
+          },
+          "sourceUrl": "https://greentechpro.ro/",
+          "pinned": true
+        },
+        {
+          "slug": "careers-build-what-comes-next",
+          "status": "published",
+          "id": "careers-build-what-comes-next",
+          "order": 2,
+          "enabled": true,
+          "featured": false,
+          "pinned": false,
+          "pinLabel": "Buscamos personal",
+          "category": "Empleo",
+          "date": null,
+          "dateLabel": "Ya está abierto el plazo de inscripción",
+          "readTime": "Tiempo de lectura: 2 minutos",
+          "title": "Construye el futuro con GreenTech PRO",
+          "excerpt": "Descubre la empresa, el entorno de trabajo y el procedimiento oficial para presentar tu candidatura.",
+          "image": "/projects/bologna/bologna-01.webp",
+          "alt": "El equipo de campo GreenTech Professionals en un proyecto fotovoltaico",
+          "intro": "GreenTech Professionals sigue creciendo y espera con interés las candidaturas de aquellas personas que deseen contribuir a la infraestructura energética de nueva generación.",
+          "sections": [
+            {
+              "title": "Colabora con equipos que se encuentran en la fase final de entrega",
+              "paragraphs": [
+                "Nuestra actividad reúne a equipos técnicos y de campo en el marco de proyectos en los ámbitos fotovoltaico, eléctrico, mecánico y de la construcción en los mercados europeos.",
+                "El proceso de selección está diseñado para recabar información sobre el puesto deseado, su experiencia, sus datos de contacto, así como su currículum o sus referencias."
+              ]
+            },
+            {
+              "title": "Cómo presentar tu solicitud",
+              "paragraphs": [
+                "Utiliza el formulario oficial de selección de personal para consultar las opciones disponibles y enviar tu candidatura directamente a GreenTech Professionals.",
+                "Las ofertas de empleo pueden variar a medida que evolucionan los proyectos y las necesidades operativas, por lo que la página de empleo sigue siendo la fuente oficial de información."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "Ámbito de actividad",
+              "label": "Entorno de trabajo basado en proyectos"
+            },
+            {
+              "value": "Europa",
+              "label": "Cobertura internacional de los envíos"
+            },
+            {
+              "value": "En línea",
+              "label": "Procedimiento oficial para presentar la solicitud"
+            }
+          ],
+          "relatedProjectId": null,
+          "primaryAction": {
+            "type": "externo",
+            "label": "Descubre las oportunidades profesionales",
+            "href": "https://greentechpro.ro/career/"
+          },
+          "sourceUrl": "https://greentechpro.ro/career/"
+        },
+        {
+          "slug": "politehnica-visits-butimanu",
+          "status": "published",
+          "id": "politehnica-visits-butimanu",
+          "order": 3,
+          "enabled": true,
+          "featured": false,
+          "category": "Personas y formación",
+          "date": "2025-07-01",
+          "dateLabel": "1 de julio de 2025",
+          "readTime": "Tiempo de lectura: 2 minutos",
+          "title": "Los estudiantes de la Universidad Politécnica visitan la obra de Butimanu",
+          "excerpt": "Una visita técnica in situ ha permitido a la futura generación de ingenieros entrar en contacto con el sector de la construcción fotovoltaica.",
+          "image": "/projects/butimanu/butimanu-03.jpg",
+          "alt": "La actividad del equipo GreenTech Professionals en la obra de Butimanu",
+          "intro": "Los estudiantes de la Universidad Politécnica visitaron el parque solar de Butimanu para ver en la práctica el proceso de construcción de las instalaciones fotovoltaicas y su puesta en marcha.",
+          "sections": [
+            {
+              "title": "Aprendizaje en infraestructura activa",
+              "paragraphs": [
+                "La visita permitió hacerse una idea directa de la envergadura, la secuencia de las fases y la coordinación técnica que conlleva un proyecto fotovoltaico de gran envergadura.",
+                "El aprendizaje sobre el terreno ayuda a relacionar los principios de ingeniería con las decisiones y las limitaciones a las que se enfrentan los equipos durante la ejecución."
+              ]
+            },
+            {
+              "title": "Conocimientos compartidos por los equipos sobre el terreno",
+              "paragraphs": [
+                "Los especialistas técnicos y los equipos de instalación guiaron la visita y presentaron aspectos prácticos relacionados con el proyecto.",
+                "Esta iniciativa refleja un interés constante por la formación técnica y por las personas que darán forma a la infraestructura energética del futuro."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "Visita in situ",
+              "label": "Formación técnica práctica"
+            },
+            {
+              "value": "Butimanu",
+              "label": "Desarrollo en el ámbito de la energía fotovoltaica"
+            },
+            {
+              "value": "Educación",
+              "label": "Los futuros talentos de la ingeniería"
+            }
+          ],
+          "relatedProjectId": "butimanu-romania",
+          "primaryAction": {
+            "type": "proyecto",
+            "label": "Descubre el proyecto"
+          },
+          "sourceUrl": "https://greentechpro.ro/"
+        },
+        {
+          "id": "f12dba9b-e547-47d5-9905-b1b78b2d1fea",
+          "order": 4,
+          "enabled": true,
+          "featured": false,
+          "status": "published",
+          "title": "Artículo de prueba: Desde la planificación hasta la entrega en la obra",
+          "slug": "test-planning-to-field-delivery",
+          "category": "Diario de obra",
+          "date": "2026-07-29",
+          "dateLabel": "29 de julio de 2026",
+          "readTime": "Tiempo de lectura: 3 minutos",
+          "image": "/projects/butimanu/butimanu-02.jpg",
+          "alt": "Obras de construcción de instalaciones fotovoltaicas en el marco del proyecto Butimanu",
+          "excerpt": "Un ejemplo completo de diario de obra que ilustra cómo se estructura la historia de un proyecto, desde la introducción hasta los aspectos técnicos esenciales.",
+          "intro": "Esta entrada de prueba publicada muestra el formato completo de los artículos disponible para reportajes sobre el terreno, novedades de la empresa y noticias técnicas relacionadas con GreenTech Professionals.",
+          "sections": [
+            {
+              "title": "Planificación previa a la puesta en marcha",
+              "paragraphs": [
+                "Cualquier operación sobre el terreno que sea fiable comienza con un plan de ejecución claro, responsabilidades bien definidas y una secuencia de trabajo acordada.",
+                "Este primer capítulo muestra cómo el contenido editorial más extenso se divide en párrafos fáciles de leer, tanto en ordenadores de sobremesa como en dispositivos móviles."
+              ]
+            },
+            {
+              "title": "El progreso documentado sobre el terreno",
+              "paragraphs": [
+                "Las actualizaciones sobre los proyectos pueden combinar el contexto de la obra, las etapas técnicas importantes y la contribución de los equipos que participan en la ejecución.",
+                "Se pueden añadir secciones adicionales siempre que una historia requiera más detalles, mientras que los puntos clave que se indican a continuación permiten consultar fácilmente la información esencial."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "2 etapas",
+              "label": "Ejemplos de apartados del artículo"
+            },
+            {
+              "value": "3 puntos",
+              "label": "Información clave"
+            },
+            {
+              "value": "Formato completo",
+              "label": "Aspecto de los artículos en ordenadores de sobremesa y dispositivos móviles"
+            }
+          ],
+          "relatedProjectId": "01cf8ad1-62e3-4e4a-9ed1-fe0a68b22931",
+          "primaryAction": {
+            "type": "proyecto",
+            "label": "Ver el proyecto de Butimanu"
+          },
+          "sourceUrl": "https://greentechpro.ro/",
+          "pinned": true
+        }
+      ]
+    },
+    "updatedAt": "2026-08-17T08:19:17.304Z",
+    "footer": {
+      "links": [
+        {
+          "id": "explore-projects",
+          "order": 1,
+          "enabled": true,
+          "group": "Explora",
+          "label": "Todos los proyectos",
+          "href": "#projects"
+        },
+        {
+          "id": "explore-journal",
+          "order": 2,
+          "enabled": true,
+          "group": "Explora",
+          "label": "Diario",
+          "href": "#journal"
+        },
+        {
+          "id": "explore-process",
+          "order": 3,
+          "enabled": true,
+          "group": "Explora",
+          "label": "El proceso de trabajo",
+          "href": "#process"
+        },
+        {
+          "id": "explore-contact",
+          "order": 4,
+          "enabled": true,
+          "group": "Explora",
+          "label": "Contacto",
+          "href": "#contact"
+        },
+        {
+          "id": "services-photovoltaic",
+          "order": 5,
+          "enabled": true,
+          "group": "Servicios",
+          "label": "Parques fotovoltaicos",
+          "href": "#service-photovoltaic"
+        },
+        {
+          "id": "services-electrical",
+          "order": 6,
+          "enabled": true,
+          "group": "Servicios",
+          "label": "Inspecciones eléctricas",
+          "href": "#service-electrical"
+        },
+        {
+          "id": "services-construction",
+          "order": 7,
+          "enabled": true,
+          "group": "Servicios",
+          "label": "Servicios de construcción",
+          "href": "#service-construction"
+        },
+        {
+          "id": "services-data-center",
+          "order": 8,
+          "enabled": true,
+          "group": "Servicios",
+          "label": "Construcción de centros de datos",
+          "href": "#service-data-center"
+        },
+        {
+          "id": "company-about",
+          "order": 9,
+          "enabled": true,
+          "group": "Empresa",
+          "label": "Quiénes somos",
+          "href": "#company"
+        },
+        {
+          "id": "company-credentials",
+          "order": 10,
+          "enabled": true,
+          "group": "Empresa",
+          "label": "Referencias",
+          "href": "#credentials"
+        },
+        {
+          "id": "company-reviews",
+          "order": 11,
+          "enabled": true,
+          "group": "Empresa",
+          "label": "Opiniones de los clientes",
+          "href": "#reviews"
+        },
+        {
+          "id": "legal-privacy",
+          "order": 12,
+          "enabled": true,
+          "group": "Información legal",
+          "label": "Política de privacidad",
+          "href": "modal:privacy"
+        },
+        {
+          "id": "legal-terms",
+          "order": 13,
+          "enabled": true,
+          "group": "Información legal",
+          "label": "Términos y condiciones",
+          "href": "modal:terms"
+        },
+        {
+          "id": "social-linkedin",
+          "order": 14,
+          "enabled": true,
+          "group": "Redes sociales",
+          "label": "LinkedIn",
+          "href": "https://ro.linkedin.com/company/greentech-professionals"
+        },
+        {
+          "id": "social-facebook",
+          "order": 15,
+          "enabled": true,
+          "group": "Redes sociales",
+          "label": "Facebook",
+          "href": "https://www.facebook.com/greentechprofessionals"
+        }
+      ],
+      "tagline": "Competencias en los ámbitos eléctrico, mecánico y de la construcción para proyectos de energía renovable en toda Europa.",
+      "email": "office@greentechpro.ro",
+      "phone": "",
+      "address": "Calle Floreasca, 194, Distrito 1, Bucarest",
+      "mapUrl": "https://maps.app.goo.gl/4B6ZvpVcABLVJL5DA",
+      "copyright": "GreenTech Professionals SRL",
+      "privacyTitle": "Política de privacidad",
+      "privacyBody": "Greentech Professionals SRL – Política de privacidad Última actualización: junio de 2026\n\n1. Quiénes somos\n\nLa presente Política de privacidad describe cómo Greentech Professionals SRL recopila, utiliza y protege sus datos personales cuando visita greentechpro.ro o interactúa con nosotros a través de este sitio web.\n\nResponsable del tratamiento: Greentech Professionals SRL, C/ Floreasca, n.º 194, Sector 1, 014472, Bucarest, Rumanía. Correo electrónico: office@greentechpro.ro. Teléfono: +40 727 332 213.\n\nTratamos los datos personales de conformidad con el Reglamento General de Protección de Datos (UE) 2016/679 (RGPD) y con la legislación rumana aplicable.\n\n2. Qué datos recopilamos\n\nSolo recopilamos los datos personales que nos facilitas de forma voluntaria a través del formulario de candidatura de nuestra página «Empleo». Estos incluyen: nombre completo, dirección de correo electrónico, número de teléfono, puesto deseado, experiencia profesional y cualquier CV o documento de referencia que suba.\n\nSi se pone en contacto con nosotros directamente en la dirección office@greentechpro.ro, solo tratamos la información incluida en su correo electrónico. No utilizamos píxeles de seguimiento, herramientas de análisis ni ningún otro método de recogida automática de datos en este sitio web.\n\n3. Cómo utilizamos sus datos\n\nLos datos enviados a través del formulario de la página «Empleo» se utilizan exclusivamente para evaluar su candidatura a puestos vacantes o futuros, para ponernos en contacto con usted en relación con su candidatura y para llevar un registro interno del proceso de selección. No utilizaremos sus datos con fines de marketing ni para ningún otro fin sin su consentimiento explícito.\n\n4. Base jurídica del tratamiento\n\nTratamos sus datos sobre la base de su consentimiento explícito (art. 6, apartado 1, letra a) del RGPD), otorgado al marcar la casilla de selección relativa al RGPD en el formulario de candidatura. Puede retirar su consentimiento en cualquier momento poniéndose en contacto con nosotros en la dirección office@greentechpro.ro. La retirada del consentimiento no afecta a la legalidad del tratamiento realizado antes de dicha retirada.\n\n5. Durante cuánto tiempo conservamos sus datos\n\nLos datos de la solicitud de empleo se conservan durante un período máximo de 12 meses a partir de su presentación. Transcurrido este plazo, se eliminan definitivamente, salvo que haya sido contratado, en cuyo caso sus datos se conservan como parte de su expediente de contratación, de conformidad con la legislación laboral aplicable. Puede solicitar la eliminación de los datos en cualquier momento.\n\n6. A quién comunicamos los datos\n\nNo vendemos ni comunicamos sus datos a terceros con fines comerciales. Su información puede ser consultada por el personal interno del departamento de recursos humanos y de la dirección que participa en el proceso de selección, así como por nuestro proveedor de servicios de alojamiento web, que actúa como encargado del tratamiento de datos dentro del Espacio Económico Europeo (EEE). No transferimos datos fuera del EEE.\n\n7. Sus derechos\n\nDe conformidad con el RGPD, tiene derecho a acceder, rectificar, suprimir, limitar o transferir sus datos personales, así como a oponerse a su tratamiento. Para ejercer cualquiera de estos derechos, ponte en contacto con nosotros en la dirección office@greentechpro.ro. Te responderemos en un plazo de 30 días.\n\nAsimismo, puede presentar una reclamación ante la ANSPDCP (www.dataprotection.ro), la autoridad rumana de supervisión de la protección de datos, con sede en B-dul General Gheorghe Magheru n.º 28-30, Sector 1, Bucarest.\n\n8. Seguridad\n\nAplicamos medidas técnicas y organizativas adecuadas para proteger sus datos contra el acceso no autorizado, la pérdida o la divulgación. Todas las transmisiones de datos de este sitio web están cifradas mediante HTTPS.\n\n9. Cookies\n\nEste sitio web utiliza únicamente cookies técnicas esenciales, necesarias para su correcto funcionamiento. No utilizamos cookies de seguimiento, publicitarias ni de análisis. Las cookies esenciales no requieren consentimiento de conformidad con la legislación de la UE aplicable.\n\n10. Modificaciones de la presente política\n\nEs posible que actualicemos periódicamente la presente política. La fecha de la última revisión aparece en la parte superior de esta página. El uso continuado del sitio web tras cualquier modificación implica la aceptación de la política actualizada.",
+      "termsTitle": "Términos y condiciones",
+      "termsBody": "Greentech Professionals SRL – Términos y condiciones Última actualización: junio de 2026\n\n1. Generalidades\n\nLos presentes Términos y condiciones regulan el uso que usted haga del sitio web greentechpro.ro, gestionado por Greentech Professionals SRL, C/ Floreasca, n.º 194, Sector 1, 014472, Bucarest, Rumanía (n.º de inscripción en el Registro Mercantil RO46635117 – J40/15653/2022). Al acceder a este sitio web, usted acepta estos términos.\n\n2. Finalidad del sitio web\n\nEste sitio web es una plataforma de presentación que ofrece información sobre Greentech Professionals SRL, sus servicios, proyectos y oportunidades profesionales. No constituye una oferta de venta, un contrato ni una propuesta comercial de carácter vinculante.\n\n3. Propiedad intelectual\n\nTodo el contenido de este sitio web, incluidos los textos, las imágenes, los logotipos, los elementos gráficos y los documentos, es propiedad de Greentech Professionals SRL o de sus proveedores de contenido, y está protegido por la legislación aplicable en materia de derechos de autor y propiedad intelectual. No tiene derecho a reproducir, distribuir ni utilizar ningún contenido sin nuestro consentimiento previo por escrito.\n\n4. Solicitudes de empleo\n\nAl enviar una solicitud a través de nuestra página «Empleo», confirmas que toda la información facilitada es correcta y completa. El envío de una solicitud no implica ninguna obligación de contratación para ninguna de las partes. Nos reservamos el derecho a rechazar cualquier candidatura, a nuestra entera discreción.\n\n5. Limitación de responsabilidad\n\nLa información de este sitio web se proporciona exclusivamente con fines informativos generales. Greentech Professionals SRL no ofrece garantía alguna respecto a la exactitud, exhaustividad o idoneidad de cualquier información del sitio. No asumimos ninguna responsabilidad por los daños directos o indirectos que puedan derivarse del uso de este sitio web o de la confianza depositada en su contenido.\n\n6. Enlaces externos\n\nEste sitio web puede contener enlaces a sitios web de terceros. Dichos enlaces se proporcionan únicamente para mayor comodidad. Greentech Professionals SRL no tiene control alguno sobre el contenido ni las prácticas de los sitios web a los que se remite y no asume responsabilidad alguna al respecto.\n\n7. Legislación aplicable\n\nLos presentes Términos y condiciones se rigen por la legislación rumana. Cualquier litigio que se derive del uso de este sitio web estará sujeto a la jurisdicción exclusiva de los tribunales competentes de Bucarest, Rumanía.\n\n8. Modificaciones de estos Términos\n\nNos reservamos el derecho a actualizar estos Términos y condiciones en cualquier momento. La fecha de la última revisión aparece en la parte superior de esta página. El uso continuado del sitio web implica la aceptación de los términos actualizados.\n\n9. Contacto\n\nPara cualquier consulta relacionada con estos Términos y condiciones: office@greentechpro.ro, +40 727 332 213."
+    },
+    "faqs": {
+      "items": [
+        {
+          "id": "faq-services",
+          "order": 1,
+          "enabled": true,
+          "question": "¿Qué tipo de proyectos lleváis a cabo?",
+          "answer": "Realizamos trabajos eléctricos, mecánicos y de obra civil para instalaciones energéticas a escala industrial: parques fotovoltaicos, inspecciones y pruebas eléctricas, servicios de construcción y construcción de centros de datos.\n\nLos proyectos abarcan desde instalaciones en una única ubicación hasta parques de varios megavatios en Rumanía, Italia y España."
+        },
+        {
+          "id": "faq-coverage",
+          "order": 2,
+          "enabled": true,
+          "question": "¿En qué países desarrolláis vuestra actividad?",
+          "answer": "Contamos con equipos sobre el terreno activos en Rumanía, Italia y España, y nos desplazamos por toda la Unión Europea para llevar a cabo proyectos de gran envergadura."
+        },
+        {
+          "id": "faq-scope",
+          "order": 3,
+          "enabled": true,
+          "question": "¿Se encargan de un proyecto de principio a fin?",
+          "answer": "Sí. Nos encargamos del estudio de viabilidad y el diseño, las estructuras de montaje, el cableado y los inversores, la puesta en marcha y la conexión a la red; y, tras la entrega de la obra, continuamos con las pruebas periódicas y el mantenimiento."
+        },
+        {
+          "id": "faq-certifications",
+          "order": 4,
+          "enabled": true,
+          "question": "¿Qué certificaciones tienen?",
+          "answer": "Contamos con certificaciones de calidad ISO y la certificación de la ANRE para actividades en el sector energético. La documentación completa de acreditación está disponible previa solicitud."
+        },
+        {
+          "id": "faq-timeline",
+          "order": 5,
+          "enabled": true,
+          "question": "¿Con qué rapidez pueden reunir un equipo?",
+          "answer": "La movilización depende de la envergadura del proyecto y de la temporada. Para la mayoría de los trabajos de inspección y pruebas, podemos llegar al lugar en un plazo de dos semanas; los contratos de instalación a gran escala se planifican en función del calendario de construcción del cliente."
+        },
+        {
+          "id": "faq-quote",
+          "order": 6,
+          "enabled": true,
+          "question": "¿Cómo puedo solicitar un presupuesto?",
+          "answer": "Envíenos la ubicación del proyecto, la capacidad y el alcance de los trabajos que necesita a través del siguiente formulario. Nuestro equipo le responderá con una propuesta técnica y un calendario orientativo."
+        }
+      ]
+    }
+  }
+}

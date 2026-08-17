@@ -7,18 +7,17 @@ export const DEFAULT_LOCALE = "ro";
 
 const SITE_LOCALES = ["en", "ro", "it", "es"];
 const DEEPL_LOCALES = new Set(SITE_LOCALES);
-const configuredSourceLocale = String(process.env.CONTENT_SOURCE_LOCALE || "auto")
+const configuredSourceLocale = String(process.env.CONTENT_SOURCE_LOCALE || "ro")
   .trim()
   .toLowerCase()
   .replace("_", "-")
   .split("-")[0];
 
-// Admin content can contain both Romanian and older English copy. Automatic
-// detection lets every public locale, including EN, have its own snapshot.
-export const SOURCE_LOCALE = configuredSourceLocale === "auto"
-  || DEEPL_LOCALES.has(configuredSourceLocale)
+// Romanian is the authoritative admin copy and is returned exactly as saved.
+// Other public locales are generated and cached from this source document.
+export const SOURCE_LOCALE = DEEPL_LOCALES.has(configuredSourceLocale)
   ? configuredSourceLocale
-  : "auto";
+  : "ro";
 
 const hasConcreteSourceLocale = DEEPL_LOCALES.has(SOURCE_LOCALE);
 
@@ -357,8 +356,7 @@ async function readSnapshot(locale, revision) {
   return null;
 }
 
-async function createTranslation(source, locale, revision, translateBatch) {
-  const content = await translateDocument(source, locale, translateBatch);
+async function writeSnapshot(content, locale, revision) {
   await snapshotStore(locale).write({
     version: CACHE_VERSION,
     locale,
@@ -367,6 +365,11 @@ async function createTranslation(source, locale, revision, translateBatch) {
     content,
   });
   return content;
+}
+
+async function createTranslation(source, locale, revision, translateBatch) {
+  const content = await translateDocument(source, locale, translateBatch);
+  return writeSnapshot(content, locale, revision);
 }
 
 /**
@@ -378,6 +381,16 @@ export async function localiseContent(source, requestedLocale, options = {}) {
   const revision = contentRevision(source);
 
   if (hasConcreteSourceLocale && locale === SOURCE_LOCALE) {
+    const cached = await readSnapshot(locale, revision);
+    if (!cached) {
+      const jobKey = `${revision}:${locale}:source`;
+      if (!translationJobs.has(jobKey)) {
+        const job = writeSnapshot(source, locale, revision)
+          .finally(() => translationJobs.delete(jobKey));
+        translationJobs.set(jobKey, job);
+      }
+      await translationJobs.get(jobKey);
+    }
     return { content: source, locale, revision, status: "source" };
   }
 
@@ -428,16 +441,20 @@ export function translationMeta(content) {
 }
 
 export function scheduleTranslationWarmup(content) {
-  if (!translationProviderConfigured()) return;
+  const warmupLocales = [
+    ...(hasConcreteSourceLocale ? [SOURCE_LOCALE] : []),
+    ...(translationProviderConfigured() ? configuredTargets : []),
+  ];
+  if (!warmupLocales.length) return;
 
   setImmediate(() => {
     Promise.allSettled(
-      configuredTargets.map((locale) => localiseContent(content, locale)),
+      warmupLocales.map((locale) => localiseContent(content, locale)),
     ).then((results) => {
       results.forEach((result, index) => {
         if (result.status === "rejected") {
           console.error(
-            `[Translation] Warmup for ${configuredTargets[index].toUpperCase()} failed:`,
+            `[Translation] Warmup for ${warmupLocales[index].toUpperCase()} failed:`,
             result.reason,
           );
         }

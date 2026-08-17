@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Loader2, Mail, MapPin, Phone, Send } from "lucide-react";
 import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import BlurText from "./BlurText.jsx";
 import SectionActionModal, { useSectionAction } from "./SectionAction.jsx";
 import useSection from "./hooks/useSection.js";
 import useSiteContent from "./hooks/useSiteContent.js";
+import {
+  cloneCachedGLTF,
+  disposeGLTFInstance,
+} from "./lib/threeAssetCache.js";
 import { selectFooter, selectFooterGroups } from "./lib/siteContent.js";
 import SolarContactForms from "./SolarContactForms.jsx";
 import "./SolarContactSection.css";
@@ -32,77 +35,6 @@ const getModalKey = (href) => String(href ?? "").match(/^modal:(\w+)$/)?.[1] ?? 
 const isExternalLink = (href) => /^https?:\/\//i.test(String(href ?? ""));
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
-
-function getEmbeddedImageBlob(arrayBuffer) {
-  const dataView = new DataView(arrayBuffer);
-  const textDecoder = new TextDecoder();
-  let json = null;
-  let binaryOffset = 0;
-  let offset = 12;
-
-  while (offset < arrayBuffer.byteLength) {
-    const chunkLength = dataView.getUint32(offset, true);
-    const chunkType = dataView.getUint32(offset + 4, true);
-    const chunkOffset = offset + 8;
-
-    if (chunkType === 0x4e4f534a) {
-      const jsonText = textDecoder.decode(
-        new Uint8Array(arrayBuffer, chunkOffset, chunkLength),
-      );
-      json = JSON.parse(jsonText.replace(/\u0000+$/g, ""));
-    } else if (chunkType === 0x004e4942) {
-      binaryOffset = chunkOffset;
-    }
-
-    offset = chunkOffset + chunkLength;
-  }
-
-  const image = json?.images?.find((candidate) => candidate.bufferView !== undefined);
-  const bufferView = image ? json.bufferViews?.[image.bufferView] : null;
-  if (!image || !bufferView || !binaryOffset) {
-    throw new Error("The solar texture is not embedded in the GLB.");
-  }
-
-  const imageStart = binaryOffset + (bufferView.byteOffset ?? 0);
-  const imageEnd = imageStart + bufferView.byteLength;
-  return new Blob([arrayBuffer.slice(imageStart, imageEnd)], {
-    type: image.mimeType ?? "image/png",
-  });
-}
-
-async function loadEmbeddedTexture(arrayBuffer) {
-  const imageUrl = URL.createObjectURL(getEmbeddedImageBlob(arrayBuffer));
-
-  try {
-    return await new Promise((resolve, reject) => {
-      new THREE.TextureLoader().load(imageUrl, resolve, undefined, reject);
-    });
-  } finally {
-    URL.revokeObjectURL(imageUrl);
-  }
-}
-
-function disposeObject(root) {
-  const materials = new Set();
-  const textures = new Set();
-
-  root?.traverse((object) => {
-    object.geometry?.dispose?.();
-    const objectMaterials = Array.isArray(object.material)
-      ? object.material
-      : [object.material];
-
-    objectMaterials.filter(Boolean).forEach((material) => {
-      materials.add(material);
-      Object.values(material).forEach((value) => {
-        if (value?.isTexture) textures.add(value);
-      });
-    });
-  });
-
-  textures.forEach((texture) => texture.dispose());
-  materials.forEach((material) => material.dispose());
-}
 
 function createCoronaMaterial({ color = 0xff8a24, rimPower = 4.8 } = {}) {
   return new THREE.ShaderMaterial({
@@ -142,7 +74,12 @@ function createCoronaMaterial({ color = 0xff8a24, rimPower = 4.8 } = {}) {
   });
 }
 
-function SolarContactSection({ active, onShowAllProjects }) {
+function SolarContactSection({
+  active,
+  prepare = false,
+  onPrepared,
+  onShowAllProjects,
+}) {
   const text = useSection("contact");
   const siteContent = useSiteContent();
   const footer = selectFooter(siteContent);
@@ -154,8 +91,13 @@ function SolarContactSection({ active, onShowAllProjects }) {
   });
   const sectionRef = useRef(null);
   const mountRef = useRef(null);
+  const runtimeRef = useRef(null);
   const [legalModal, setLegalModal] = useState(null);
   const legalTriggerRef = useRef(null);
+
+  useEffect(() => {
+    runtimeRef.current?.setActive(active);
+  }, [active]);
 
   const openLegal = (key, event) => {
     legalTriggerRef.current = event.currentTarget;
@@ -169,7 +111,7 @@ function SolarContactSection({ active, onShowAllProjects }) {
   useEffect(() => {
     const section = sectionRef.current;
     const mount = mountRef.current;
-    if (!active || !section || !mount) return undefined;
+    if ((!active && !prepare) || !section || !mount) return undefined;
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let renderer = null;
@@ -190,7 +132,19 @@ function SolarContactSection({ active, onShowAllProjects }) {
     let initialized = false;
     let sectionVisible = false;
     let disposed = false;
-    const loadController = new AbortController();
+    let componentActive = active;
+    let preparationReported = false;
+    const layout = {
+      sectionTop: 0,
+      sectionHeight: 1,
+      viewportHeight: Math.max(1, window.innerHeight),
+    };
+
+    const reportPreparation = (success) => {
+      if (preparationReported) return;
+      preparationReported = true;
+      onPrepared?.("solar-contact", success);
+    };
 
     const measure = () => {
       measureFrame = 0;
@@ -198,6 +152,7 @@ function SolarContactSection({ active, onShowAllProjects }) {
 
       const width = Math.max(1, mount.clientWidth || window.innerWidth);
       const height = Math.max(1, mount.clientHeight || window.innerHeight);
+      const sectionBounds = section.getBoundingClientRect();
       const mobile = width <= 700;
       const pixelRatio = Math.min(
         window.devicePixelRatio || 1,
@@ -208,6 +163,9 @@ function SolarContactSection({ active, onShowAllProjects }) {
       renderer.setSize(width, height, false);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
+      layout.sectionTop = window.scrollY + sectionBounds.top;
+      layout.sectionHeight = Math.max(1, sectionBounds.height);
+      layout.viewportHeight = Math.max(1, window.innerHeight);
 
       const distance = camera.position.z;
       const verticalView =
@@ -231,7 +189,15 @@ function SolarContactSection({ active, onShowAllProjects }) {
     };
 
     const render = (time) => {
-      if (!renderer || !scene || !camera || !sunGroup || !sectionVisible || disposed) {
+      if (
+        !renderer
+        || !scene
+        || !camera
+        || !sunGroup
+        || !sectionVisible
+        || !componentActive
+        || disposed
+      ) {
         frame = 0;
         lastFrameTime = 0;
         return;
@@ -285,10 +251,10 @@ function SolarContactSection({ active, onShowAllProjects }) {
         shell.material.uniforms.rimPower.value = 5.2 + phase * 13;
       });
 
-      const bounds = section.getBoundingClientRect();
-      const viewportHeight = Math.max(1, window.innerHeight);
+      const viewportHeight = layout.viewportHeight;
+      const boundsTop = layout.sectionTop - window.scrollY;
       const travel = clamp(
-        (viewportHeight - bounds.top) / Math.max(1, viewportHeight + bounds.height),
+        (viewportHeight - boundsTop) / Math.max(1, viewportHeight + layout.sectionHeight),
         0,
         1,
       );
@@ -299,8 +265,22 @@ function SolarContactSection({ active, onShowAllProjects }) {
     };
 
     const startRendering = () => {
-      if (!initialized || frame || !sectionVisible) return;
+      if (!initialized || frame || !sectionVisible || !componentActive) return;
       frame = window.requestAnimationFrame(render);
+    };
+
+    runtimeRef.current = {
+      setActive(nextActive) {
+        componentActive = nextActive;
+        if (componentActive) {
+          startRendering();
+          return;
+        }
+
+        window.cancelAnimationFrame(frame);
+        frame = 0;
+        lastFrameTime = 0;
+      },
     };
 
     const initialize = () => {
@@ -345,29 +325,20 @@ function SolarContactSection({ active, onShowAllProjects }) {
         sunGroup.add(shell);
       }
 
-      const loader = new GLTFLoader();
       const loadModel = async () => {
         try {
-          const response = await fetch(MODEL_URL, {
-            signal: loadController.signal,
-          });
-          if (!response.ok) {
-            throw new Error(`Unable to load the solar model (${response.status}).`);
-          }
-
-          const arrayBuffer = await response.arrayBuffer();
-          const [gltf, solarTexture] = await Promise.all([
-            new Promise((resolve, reject) => {
-              loader.parse(arrayBuffer, "", resolve, reject);
-            }),
-            loadEmbeddedTexture(arrayBuffer),
-          ]);
+          const gltf = await cloneCachedGLTF(MODEL_URL);
 
           if (disposed) {
-            disposeObject(gltf.scene);
-            solarTexture.dispose();
+            disposeGLTFInstance(gltf.scene);
             return;
           }
+
+          // The model uses the legacy specular-glossiness extension. Current
+          // GLTFLoader versions keep its embedded texture in the parser cache,
+          // even though they do not attach it to the converted material.
+          const solarTexture = await gltf.parser.getDependency("texture", 0);
+          if (!solarTexture) throw new Error("The solar texture is missing from the GLB.");
 
           solarTexture.colorSpace = THREE.SRGBColorSpace;
           solarTexture.flipY = false;
@@ -414,10 +385,15 @@ function SolarContactSection({ active, onShowAllProjects }) {
           sunGroup.visible = true;
           mount.classList.add("model-ready");
           measure();
+          renderer.compile(scene, camera);
+          renderer.render(scene, camera);
+          reportPreparation(true);
           startRendering();
         } catch (error) {
-          if (error?.name === "AbortError" || disposed) return;
+          if (disposed) return;
+          console.error("Unable to prepare the solar contact model", error);
           mount.classList.add("load-error");
+          reportPreparation(false);
         }
       };
       loadModel();
@@ -443,6 +419,7 @@ function SolarContactSection({ active, onShowAllProjects }) {
         sectionVisible = entries.some((entry) => entry.isIntersecting);
         if (sectionVisible) {
           initialize();
+          measure();
           startRendering();
         } else {
           window.cancelAnimationFrame(frame);
@@ -455,6 +432,7 @@ function SolarContactSection({ active, onShowAllProjects }) {
 
     loadObserver.observe(section);
     visibilityObserver.observe(mount);
+    if (prepare) initialize();
 
     return () => {
       disposed = true;
@@ -464,8 +442,7 @@ function SolarContactSection({ active, onShowAllProjects }) {
       window.removeEventListener("resize", scheduleMeasure);
       window.cancelAnimationFrame(frame);
       window.cancelAnimationFrame(measureFrame);
-      loadController.abort();
-      disposeObject(modelRoot);
+      disposeGLTFInstance(modelRoot);
       radarShells.forEach((shell) => shell.material.dispose());
       coronaShell?.material.dispose();
       radarGeometry?.dispose();
@@ -473,8 +450,9 @@ function SolarContactSection({ active, onShowAllProjects }) {
       renderer?.forceContextLoss();
       renderer?.domElement.remove();
       mount.classList.remove("model-ready", "load-error");
+      if (runtimeRef.current) runtimeRef.current = null;
     };
-  }, [active]);
+  }, [onPrepared, prepare]);
 
   return (
     <section
@@ -547,7 +525,16 @@ function SolarContactSection({ active, onShowAllProjects }) {
                 alt="GreenTech Professionals"
               />
               <p>{footer.tagline}</p>
-
+              <div className="solar-contact-footer-certifications">
+                <img
+                  src="/original/footer-certifications.webp"
+                  alt="Atestat ANRE și certificări ISO 9001, ISO 14001 și IQNet"
+                  width="300"
+                  height="69"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
             </div>
 
             <div className="solar-contact-footer-groups">
@@ -602,11 +589,6 @@ function SolarContactSection({ active, onShowAllProjects }) {
               </nav>
             )}
 
-            {footer.creditLabel && (
-              <a href={footer.creditUrl || undefined} target="_blank" rel="noreferrer">
-                {footer.creditLabel}
-              </a>
-            )}
           </div>
         </footer>
       </div>

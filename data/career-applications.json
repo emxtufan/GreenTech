@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "application-c70d5334-1429-4b11-9bf7-abd98a32647b",
+      "status": "new",
+      "name": "emit tufan",
+      "position": "It",
+      "email": "emitufan30@gmail.com",
+      "phone": "0755938367",
+      "experience": "Hello my names emi and i need this job because",
+      "cvFile": "invoice-3dsupmcy-0002-1-efc6e4979eeabb17.pdf",
+      "cvName": "Invoice-3DSUPMCY-0002 (1).pdf",
+      "cvMime": "application/pdf",
+      "cvBytes": 37580,
+      "submittedAt": "2026-07-30T07:43:34.791Z",
+      "consentAt": "2026-07-30T07:43:34.791Z",
+      "statusChangedAt": null
+    }
+  ],
+  "updatedAt": "2026-07-30T07:43:34.791Z"
+}

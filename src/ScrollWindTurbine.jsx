@@ -1,6 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import useNearViewport from "./hooks/useNearViewport.js";
+import {
+  cloneCachedGLTF,
+  disposeGLTFInstance,
+} from "./lib/threeAssetCache.js";
 import "./ScrollWindTurbine.css";
 
 const MODEL_URL = "/3d/animated_wind_turbine.glb";
@@ -15,34 +19,19 @@ const smoothstep = (progress) => {
   return value * value * (3 - 2 * value);
 };
 
-function disposeModel(root) {
-  const materials = new Set();
-  const textures = new Set();
-
-  root?.traverse((object) => {
-    object.geometry?.dispose?.();
-    const objectMaterials = Array.isArray(object.material)
-      ? object.material
-      : [object.material];
-
-    objectMaterials.filter(Boolean).forEach((material) => {
-      materials.add(material);
-      Object.values(material).forEach((value) => {
-        if (value?.isTexture) textures.add(value);
-      });
-    });
-  });
-
-  textures.forEach((texture) => texture.dispose());
-  materials.forEach((material) => material.dispose());
-}
-
-function ScrollWindTurbine({ active }) {
+function ScrollWindTurbine({ active, prepare = false, onPrepared }) {
   const layerRef = useRef(null);
+  const runtimeRef = useRef(null);
+  const nearViewport = useNearViewport(layerRef, active);
+  const webglActive = prepare || nearViewport;
+
+  useEffect(() => {
+    runtimeRef.current?.setActive(active);
+  }, [active]);
 
   useEffect(() => {
     const layer = layerRef.current;
-    if (!active || !layer) return undefined;
+    if (!webglActive || !layer) return undefined;
 
     const sectionGroup = layer.parentElement;
     const stageElements = Array.from(
@@ -109,6 +98,15 @@ function ScrollWindTurbine({ active }) {
     let frame = 0;
     let measureFrame = 0;
     let disposed = false;
+    let componentActive = active;
+    let stagesInRange = false;
+    let preparationReported = false;
+
+    const reportPreparation = (success) => {
+      if (preparationReported) return;
+      preparationReported = true;
+      onPrepared?.("wind-turbine", success);
+    };
 
     const updateModelLayout = () => {
       const distance = camera.position.z;
@@ -244,6 +242,11 @@ function ScrollWindTurbine({ active }) {
     };
 
     const render = () => {
+      frame = 0;
+      if (!componentActive || !stagesInRange || disposed) {
+        return;
+      }
+
       const targets = getScrollTargets();
       const ease = reducedMotion.matches
         ? 1
@@ -258,6 +261,10 @@ function ScrollWindTurbine({ active }) {
 
       if (Math.abs(targets.opacity - state.opacity) < 0.001) state.opacity = targets.opacity;
       if (Math.abs(targets.x - state.x) < 0.001) state.x = targets.x;
+      if (Math.abs(targets.y - state.y) < 0.001) state.y = targets.y;
+      if (Math.abs(targets.zRotation - state.zRotation) < 0.001) {
+        state.zRotation = targets.zRotation;
+      }
 
       layer.style.opacity = state.opacity.toFixed(3);
       pivot.position.x = state.x;
@@ -270,15 +277,38 @@ function ScrollWindTurbine({ active }) {
       }
 
       if (state.opacity > 0.002) renderer.render(scene, camera);
-      frame = window.requestAnimationFrame(render);
+
+      const animationSettled =
+        Math.abs(targets.opacity - state.opacity) < 0.001
+        && Math.abs(targets.x - state.x) < 0.001
+        && Math.abs(targets.y - state.y) < 0.001
+        && Math.abs(targets.zRotation - state.zRotation) < 0.001;
+      if (!animationSettled) syncRenderLoop();
     };
 
-    const loader = new GLTFLoader();
-    loader.load(
-      MODEL_URL,
-      (gltf) => {
+    const syncRenderLoop = () => {
+      if (componentActive && stagesInRange && !frame) {
+        frame = window.requestAnimationFrame(render);
+        return;
+      }
+
+      if (!componentActive || !stagesInRange) {
+        window.cancelAnimationFrame(frame);
+        frame = 0;
+      }
+    };
+
+    runtimeRef.current = {
+      setActive(nextActive) {
+        componentActive = nextActive;
+        syncRenderLoop();
+      },
+    };
+
+    cloneCachedGLTF(MODEL_URL)
+      .then((gltf) => {
         if (disposed) {
-          disposeModel(gltf.scene);
+          disposeGLTFInstance(gltf.scene);
           return;
         }
 
@@ -316,35 +346,58 @@ function ScrollWindTurbine({ active }) {
           action.play();
           clipDuration = Math.max(0.001, gltf.animations[0].duration);
         }
+
+        renderer.compile(scene, camera);
+        renderer.render(scene, camera);
+        reportPreparation(true);
       },
-      undefined,
-      () => {
+      (error) => {
+        console.error("Unable to prepare the wind turbine model", error);
         layer.classList.add("load-error");
+        reportPreparation(false);
       },
     );
+
+    const visibleStages = new Set();
+    const renderObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) visibleStages.add(entry.target);
+          else visibleStages.delete(entry.target);
+        });
+        stagesInRange = visibleStages.size > 0;
+        syncRenderLoop();
+      },
+      { rootMargin: "50% 0px" },
+    );
+    stageElements.forEach((element) => renderObserver.observe(element));
 
     const resizeObserver = new ResizeObserver(scheduleMeasure);
     resizeObserver.observe(sectionGroup);
     stageElements.forEach((element) => resizeObserver.observe(element));
+    window.addEventListener("scroll", syncRenderLoop, { passive: true });
     window.addEventListener("resize", scheduleMeasure);
     measure();
-    frame = window.requestAnimationFrame(render);
+    syncRenderLoop();
 
     return () => {
       disposed = true;
+      renderObserver.disconnect();
       resizeObserver.disconnect();
+      window.removeEventListener("scroll", syncRenderLoop);
       window.removeEventListener("resize", scheduleMeasure);
       window.cancelAnimationFrame(frame);
       window.cancelAnimationFrame(measureFrame);
       mixer?.stopAllAction();
-      disposeModel(modelRoot);
+      disposeGLTFInstance(modelRoot);
       renderer.dispose();
       renderer.forceContextLoss();
       renderer.domElement.remove();
       layer.style.opacity = "";
       layer.classList.remove("load-error");
+      if (runtimeRef.current) runtimeRef.current = null;
     };
-  }, [active]);
+  }, [onPrepared, webglActive]);
 
   return <div ref={layerRef} className="scroll-wind-turbine-layer" aria-hidden="true" />;
 }

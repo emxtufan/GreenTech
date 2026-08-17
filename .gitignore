@@ -43,23 +43,11 @@ Desktop.ini
 *.bak
 ~$*
 
-# Mutable production state. Seed content remains versioned in data/ and
-# public/uploads/, while live changes are written under storage/.
-/storage/
-/public/uploads/*
-
-# Content backups. site-content.json itself is tracked as live content.
-data/site-content.backup.json
-data/customer-reviews.backup.json
-data/project-inquiries.json
-data/project-inquiries.backup.json
-data/site-content.2*.json
-
-# Personal data submitted through public forms; never commit.
-data/career-applications.json
-data/career-applications.backup.json
+# Website content is intentionally versioned, including storage/data,
+# translations, JSON backups, local databases and public admin uploads.
+# Keep submitted binary documents private even when the JSON databases are
+# committed, because this directory can contain CVs, invoices or identity data.
 data/applications/
 
 # Local Lighthouse exports
 /greentechpro.app-*.json
-/dist

@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "inquiry-61aabe89-8515-40eb-809e-b71727d7c54f",
+      "status": "contacted",
+      "firstName": "emit",
+      "lastName": "tufan",
+      "phone": "+40755938367",
+      "message": "helliodwqdqwdqdq",
+      "submittedAt": "2026-07-29T09:43:53.361Z",
+      "consentAt": "2026-07-29T09:43:53.361Z",
+      "statusChangedAt": "2026-07-29T09:47:18.406Z"
+    }
+  ],
+  "updatedAt": "2026-07-29T09:47:18.406Z"
+}

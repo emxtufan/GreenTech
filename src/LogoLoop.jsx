@@ -66,6 +66,7 @@ const useImageLoader = (seqRef, onLoad, dependencies) => {
 };
 
 const useAnimationLoop = (
+  containerRef,
   trackRef,
   targetVelocity,
   seqWidth,
@@ -81,7 +82,8 @@ const useAnimationLoop = (
 
   useEffect(() => {
     const track = trackRef.current;
-    if (!track) return undefined;
+    const container = containerRef.current;
+    if (!track || !container) return undefined;
 
     const seqSize = isVertical ? seqHeight : seqWidth;
 
@@ -93,7 +95,15 @@ const useAnimationLoop = (
       track.style.transform = transformValue;
     }
 
+    let inRenderRange = false;
+
     const animate = (timestamp) => {
+      if (!inRenderRange) {
+        rafRef.current = null;
+        lastTimestampRef.current = null;
+        return;
+      }
+
       if (lastTimestampRef.current === null) {
         lastTimestampRef.current = timestamp;
       }
@@ -118,16 +128,26 @@ const useAnimationLoop = (
       rafRef.current = requestAnimationFrame(animate);
     };
 
-    rafRef.current = requestAnimationFrame(animate);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        inRenderRange = entry.isIntersecting;
+        if (inRenderRange && rafRef.current === null) {
+          rafRef.current = requestAnimationFrame(animate);
+        }
+      },
+      { rootMargin: "25% 0px" },
+    );
+    observer.observe(container);
 
     return () => {
+      observer.disconnect();
       if (rafRef.current !== null) {
         cancelAnimationFrame(rafRef.current);
         rafRef.current = null;
       }
       lastTimestampRef.current = null;
     };
-  }, [targetVelocity, seqWidth, seqHeight, isHovered, hoverSpeed, isVertical, trackRef]);
+  }, [targetVelocity, seqWidth, seqHeight, isHovered, hoverSpeed, isVertical, containerRef, trackRef]);
 };
 
 export const LogoLoop = memo(
@@ -217,6 +237,7 @@ export const LogoLoop = memo(
     ]);
     useImageLoader(seqRef, updateDimensions, [logos, gap, logoHeight, isVertical]);
     useAnimationLoop(
+      containerRef,
       trackRef,
       targetVelocity,
       seqWidth,

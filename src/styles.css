@@ -386,17 +386,8 @@ button:disabled {
   display: none;
 }
 
-.future-link {
-  display: inline-flex;
-  align-items: center;
-  min-height: calc(28 / var(--gfs) * 1rem);
-  color: inherit;
-  font-size: calc(14 / var(--gfs) * 1rem);
-  text-decoration: none;
-}
-
 .card-toggle {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: flex-end;
   width: 100%;
@@ -594,6 +585,18 @@ button:disabled {
   z-index: 12;
   background: #000000;
   isolation: isolate;
+}
+
+.post-experience-sections.preparing {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: var(--experience-viewport-height);
+  overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: -1;
+  contain: strict;
 }
  
 .final-section {
@@ -1004,7 +1007,7 @@ button:disabled {
   justify-content: center;
   background: var(--grey2);
   color: #010101;
-  z-index: 20;
+  z-index: 22;
   transition: opacity 0.5s ease 0.7s;
 }
 
@@ -1017,14 +1020,14 @@ button:disabled {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: calc(280 / var(--gfs) * 1rem);
+  width: min(360px, calc(100vw - 48px));
   text-align: center;
 }
 
 .loader-logo-mark {
   display: block;
   width: min(240px, 70vw);
-  margin-bottom: calc(18 / var(--gfs) * 1rem);
+  margin-bottom: 34px;
   line-height: 0;
 }
 
@@ -1034,10 +1037,38 @@ button:disabled {
   height: auto;
 }
 
-.loader-logo p {
-  margin: 0;
-  font-size: calc(14 / var(--gfs) * 1rem);
-  line-height: calc(18 / var(--gfs) * 1rem);
+.loader-progress {
+  width: 100%;
+}
+
+.loader-progress-value {
+  display: block;
+  margin: 0 0 12px;
+  color: #171916;
+  font-family: "Fira Sans", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  line-height: 1;
+  text-align: right;
+}
+
+.loader-progress-track {
+  display: block;
+  width: 100%;
+  height: 3px;
+  overflow: hidden;
+  background: rgb(1 1 1 / 18%);
+}
+
+.loader-progress-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #8bbc3f;
+  transform-origin: left center;
+  transition: transform 180ms ease-out;
+  will-change: transform;
 }
 
 .loading-bar {
@@ -1148,7 +1179,7 @@ button:disabled {
 
   .loader-logo-mark {
     width: min(210px, 72vw);
-    margin-bottom: calc(16 / var(--gfs) * 1rem);
+    margin-bottom: 30px;
   }
 
   .energy-button,
@@ -1229,6 +1260,7 @@ button:disabled {
   }
 
   .card-toggle {
+    display: flex;
     position: relative;
     z-index: 1;
     height: calc(40 / var(--gfs) * 1rem);

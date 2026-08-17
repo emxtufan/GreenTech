@@ -280,7 +280,7 @@ function CareerForm({ openLegal }) {
 }
 
 function SolarContactForms({ openLegal, contactAction }) {
-  const [openPanel, setOpenPanel] = useState(null);
+  const [openPanel, setOpenPanel] = useState("project");
   const rootRef = useRef(null);
 
   // The nav's Apply control and any shared `#apply` link land here: open the

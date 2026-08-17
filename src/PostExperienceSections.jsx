@@ -457,15 +457,37 @@ function StackSection({ entered }) {
 
 function PostExperienceSections({
   entered,
+  prepare3d = false,
+  onPreparationProgress,
   onOpenPost,
   onOpenProject,
   onShowAllProjects,
 }) {
   const galleryItems = selectGalleryItems(useSiteContent());
+  const preparedModelsRef = useRef(new Set());
+
+  const handleModelPrepared = useCallback((key, success) => {
+    if (!success) return;
+    if (preparedModelsRef.current.has(key)) return;
+    preparedModelsRef.current.add(key);
+    onPreparationProgress?.(
+      Math.round((preparedModelsRef.current.size / 6) * 100),
+    );
+  }, [onPreparationProgress]);
+
+  useEffect(() => {
+    onPreparationProgress?.(
+      Math.round((preparedModelsRef.current.size / 6) * 100),
+    );
+  }, [onPreparationProgress]);
 
   return (
     <>
-      <ScrollWindTurbine active={entered} />
+      <ScrollWindTurbine
+        active={entered}
+        prepare={prepare3d}
+        onPrepared={handleModelPrepared}
+      />
       <FinalSection entered={entered} />
       <StackSection entered={entered} />
       <HorizontalParallaxGallery
@@ -475,13 +497,34 @@ function PostExperienceSections({
         onShowAllProjects={onShowAllProjects}
       />
       <CompanyProofSection active={entered} />
-      <ScrollSolarAssembly active={entered} />
-      <ScrollElectricalInspection active={entered} />
-      <ScrollConstructionServices active={entered} />
-      <ScrollDataCenterBuild active={entered} />
+      <ScrollSolarAssembly
+        active={entered}
+        prepare={prepare3d}
+        onPrepared={handleModelPrepared}
+      />
+      <ScrollElectricalInspection
+        active={entered}
+        prepare={prepare3d}
+        onPrepared={handleModelPrepared}
+      />
+      <ScrollConstructionServices
+        active={entered}
+        prepare={prepare3d}
+        onPrepared={handleModelPrepared}
+      />
+      <ScrollDataCenterBuild
+        active={entered}
+        prepare={prepare3d}
+        onPrepared={handleModelPrepared}
+      />
       <BlogSection active={entered} onPostOpen={onOpenPost} />
       <FaqSection active={entered} />
-      <SolarContactSection active={entered} onShowAllProjects={onShowAllProjects} />
+      <SolarContactSection
+        active={entered}
+        prepare={prepare3d}
+        onPrepared={handleModelPrepared}
+        onShowAllProjects={onShowAllProjects}
+      />
     </>
   );
 }

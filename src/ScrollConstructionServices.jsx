@@ -1,19 +1,23 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import ServiceSectionOverlay from "./ServiceSectionOverlay.jsx";
 import useSection from "./hooks/useSection.js";
+import useNearViewport from "./hooks/useNearViewport.js";
+import {
+  cloneCachedGLTF,
+  disposeGLTFInstance,
+} from "./lib/threeAssetCache.js";
 import "./ScrollConstructionServices.css";
 
 const MODEL_URL = "/3d/construction.glb";
 const MODEL_REST_LIFT = 0.13;
 const MODEL_REST_LIFT_MOBILE = 0.06;
-const ENTRANCE_COMPLETE_AT = 0.14;
-const ZOOM_COMPLETE_AT = 0.82;
-const ZOOM_SCALE = 1.6;
+const MODEL_SCALE_BOOST = 1.50;
 const MODEL_Y_ROTATION = Math.PI;
 const FRONTAL_TILT = THREE.MathUtils.degToRad(10);
+const WIND_TURBINE_BLADES_NODE = "Windturbine Blades_1";
+const WIND_TURBINE_BLADE_SPEED = THREE.MathUtils.degToRad(54);
 
 // The rig is inherited from the solar section, which carries a dark textured
 // model. This one is untextured flat colour — two of its materials are pure
@@ -24,43 +28,55 @@ const ENV_MAP_INTENSITY = 0.55;
 const MODEL_COLOR_LEVEL = 0.32;
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
-const lerp = (start, end, progress) => start + (end - start) * progress;
 const smoothstep = (progress) => {
   const value = clamp(progress, 0, 1);
   return value * value * (3 - 2 * value);
 };
 
-function disposeModel(root) {
-  const materials = new Set();
-  const textures = new Set();
+function createWindTurbineRotor(root) {
+  const targetName = WIND_TURBINE_BLADES_NODE
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "");
+  let blades = null;
 
   root?.traverse((object) => {
-    object.geometry?.dispose?.();
-    const objectMaterials = Array.isArray(object.material)
-      ? object.material
-      : [object.material];
-
-    objectMaterials.filter(Boolean).forEach((material) => {
-      materials.add(material);
-      Object.values(material).forEach((value) => {
-        if (value?.isTexture) textures.add(value);
-      });
-    });
+    const objectName = object.name.toLowerCase().replace(/[^a-z0-9]/g, "");
+    if (!blades && objectName === targetName) blades = object;
   });
 
-  textures.forEach((texture) => texture.dispose());
-  materials.forEach((material) => material.dispose());
+  const parent = blades?.parent;
+  if (!blades || !parent) return null;
+
+  let bladeMesh = null;
+  blades.traverse((object) => {
+    if (!bladeMesh && object.isMesh) bladeMesh = object;
+  });
+  if (!bladeMesh) return null;
+
+  root.updateMatrixWorld(true);
+  // The mesh origin is the authored hub. A bounding-box centre is offset by
+  // the asymmetric three-blade silhouette and makes the whole rotor orbit.
+  const hubCenter = bladeMesh.getWorldPosition(new THREE.Vector3());
+  const rotor = new THREE.Group();
+  rotor.name = "Windturbine Blade Rotor";
+  rotor.position.copy(parent.worldToLocal(hubCenter));
+  parent.add(rotor);
+  rotor.attach(blades);
+
+  return rotor;
 }
 
-function ScrollConstructionServices({ active }) {
+function ScrollConstructionServices({ active, prepare = false, onPrepared }) {
   const text = useSection("construction-service");
   const sectionRef = useRef(null);
   const mountRef = useRef(null);
+  const nearViewport = useNearViewport(sectionRef, active);
+  const webglActive = prepare || nearViewport;
 
   useEffect(() => {
     const section = sectionRef.current;
     const mount = mountRef.current;
-    if (!active || !section || !mount) return undefined;
+    if (!webglActive || !section || !mount) return undefined;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
@@ -121,10 +137,7 @@ function ScrollConstructionServices({ active }) {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const state = {
       opacity: 0,
-      entranceProgress: 0,
-      entranceOffsetY: 0,
       restOffsetY: 0,
-      zoomProgress: 0,
       baseScale: 1,
       normalizedWidth: 1,
       normalizedHeight: 1,
@@ -132,13 +145,27 @@ function ScrollConstructionServices({ active }) {
 
     let modelRoot = null;
     let sourceModel = null;
+    let bladeRotor = null;
     let frame = 0;
     let measureFrame = 0;
+    let previousFrameTime = 0;
     let disposed = false;
     let loadStarted = false;
     let preparationTask = 0;
     let sectionInRange = false;
     let shadowFrame = 0;
+    let preparationReported = false;
+    const layout = {
+      sectionTop: 0,
+      sectionHeight: 1,
+      viewportHeight: Math.max(1, window.innerHeight),
+    };
+
+    const reportPreparation = (success) => {
+      if (preparationReported) return;
+      preparationReported = true;
+      onPrepared?.("construction-services", success);
+    };
 
     const scheduleIdleTask = (callback) => {
       if (typeof window.requestIdleCallback === "function") {
@@ -166,20 +193,19 @@ function ScrollConstructionServices({ active }) {
       const mobile = window.innerWidth <= 700;
       const availableWidth = horizontalView * (mobile ? 0.92 : 0.62);
       const availableHeight = verticalView * (mobile ? 0.42 : 0.4);
-      const modelScale = Math.min(
-        availableWidth / Math.max(0.001, state.normalizedWidth),
-        availableHeight / Math.max(0.001, state.normalizedHeight),
-      );
+      const modelScale =
+        Math.min(
+          availableWidth / Math.max(0.001, state.normalizedWidth),
+          availableHeight / Math.max(0.001, state.normalizedHeight),
+        ) * MODEL_SCALE_BOOST;
 
       state.baseScale = modelScale;
-      modelRoot.scale.setScalar(
-        state.baseScale * lerp(1, ZOOM_SCALE, state.zoomProgress),
-      );
-      state.entranceOffsetY = verticalView * (mobile ? 0.32 : 0.3);
+      modelRoot.scale.setScalar(state.baseScale);
       // Sit above centre so the service copy owns the lower third.
       state.restOffsetY =
         verticalView * (mobile ? MODEL_REST_LIFT_MOBILE : MODEL_REST_LIFT);
       pivot.position.x = 0;
+      pivot.position.y = state.restOffsetY;
       pivot.position.z = 0;
     };
 
@@ -189,6 +215,7 @@ function ScrollConstructionServices({ active }) {
 
       const width = Math.max(1, mount.clientWidth || window.innerWidth);
       const height = Math.max(1, mount.clientHeight || window.innerHeight);
+      const sectionBounds = section.getBoundingClientRect();
       const mobile = window.innerWidth <= 700;
       const pixelRatio = Math.min(
         window.devicePixelRatio || 1,
@@ -199,6 +226,9 @@ function ScrollConstructionServices({ active }) {
       renderer.setSize(width, height, false);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
+      layout.sectionTop = window.scrollY + sectionBounds.top;
+      layout.sectionHeight = Math.max(1, sectionBounds.height);
+      layout.viewportHeight = height;
       updateModelLayout();
     };
 
@@ -207,34 +237,28 @@ function ScrollConstructionServices({ active }) {
       measureFrame = window.requestAnimationFrame(measure);
     };
 
-    const render = () => {
+    const render = (time = 0) => {
       if (!sectionInRange || disposed) {
         frame = 0;
+        previousFrameTime = 0;
         return;
       }
 
-      const bounds = section.getBoundingClientRect();
-      const viewportHeight = Math.max(1, mount.clientHeight || window.innerHeight);
-      const scrollTravel = Math.max(1, bounds.height - viewportHeight);
-      const rawProgress = -bounds.top / scrollTravel;
-      const targetEntrance = reducedMotion.matches
-        ? 1
-        : smoothstep(rawProgress / ENTRANCE_COMPLETE_AT);
-      const targetZoom = reducedMotion.matches
-        ? 0
-        : smoothstep(
-            (rawProgress - ENTRANCE_COMPLETE_AT) /
-              (ZOOM_COMPLETE_AT - ENTRANCE_COMPLETE_AT),
-          );
+      const deltaSeconds = previousFrameTime
+        ? Math.min(0.05, Math.max(0, (time - previousFrameTime) / 1000))
+        : 0;
+      previousFrameTime = time;
+
+      const viewportHeight = layout.viewportHeight;
+      const boundsTop = layout.sectionTop - window.scrollY;
+      const boundsBottom = boundsTop + layout.sectionHeight;
       const entryVisibility = smoothstep(
-        (viewportHeight - bounds.top) / Math.max(1, viewportHeight * 0.65),
+        (viewportHeight - boundsTop) / Math.max(1, viewportHeight * 0.65),
       );
       const exitVisibility = smoothstep(
-        bounds.bottom / Math.max(1, viewportHeight * 0.5),
+        boundsBottom / Math.max(1, viewportHeight * 0.5),
       );
-      const targetOpacity = modelRoot
-        ? entryVisibility * exitVisibility * targetEntrance
-        : 0;
+      const targetOpacity = modelRoot ? entryVisibility * exitVisibility : 0;
       const ease = reducedMotion.matches
         ? 1
         : window.innerWidth <= 700
@@ -242,31 +266,22 @@ function ScrollConstructionServices({ active }) {
           : 0.09;
 
       state.opacity += (targetOpacity - state.opacity) * ease;
-      state.entranceProgress +=
-        (targetEntrance - state.entranceProgress) * ease;
-      state.zoomProgress += (targetZoom - state.zoomProgress) * ease;
 
       if (Math.abs(targetOpacity - state.opacity) < 0.001) {
         state.opacity = targetOpacity;
       }
-      if (Math.abs(targetEntrance - state.entranceProgress) < 0.0005) {
-        state.entranceProgress = targetEntrance;
-      }
-      if (Math.abs(targetZoom - state.zoomProgress) < 0.0005) {
-        state.zoomProgress = targetZoom;
-      }
 
       mount.style.opacity = state.opacity.toFixed(3);
-      pivot.position.y = lerp(
-        state.entranceOffsetY,
-        state.restOffsetY,
-        state.entranceProgress,
-      );
+      pivot.position.y = state.restOffsetY;
 
       if (modelRoot) {
         modelRoot.rotation.y = MODEL_Y_ROTATION;
-        modelRoot.scale.setScalar(
-          state.baseScale * lerp(1, ZOOM_SCALE, state.zoomProgress),
+      }
+
+      if (bladeRotor && !reducedMotion.matches) {
+        bladeRotor.rotation.z = THREE.MathUtils.euclideanModulo(
+          bladeRotor.rotation.z + deltaSeconds * WIND_TURBINE_BLADE_SPEED,
+          Math.PI * 2,
         );
       }
 
@@ -280,16 +295,14 @@ function ScrollConstructionServices({ active }) {
       frame = window.requestAnimationFrame(render);
     };
 
-    const loadModel = () => {
+    const loadModel = async () => {
       if (loadStarted || disposed) return;
       loadStarted = true;
 
-      const loader = new GLTFLoader();
-      loader.load(
-        MODEL_URL,
-        (gltf) => {
+      try {
+        const gltf = await cloneCachedGLTF(MODEL_URL);
           if (disposed) {
-            disposeModel(gltf.scene);
+            disposeGLTFInstance(gltf.scene);
             return;
           }
 
@@ -320,6 +333,8 @@ function ScrollConstructionServices({ active }) {
               material.needsUpdate = true;
             });
           });
+
+          bladeRotor = createWindTurbineRotor(sourceModel);
 
           const bounds = new THREE.Box3().setFromObject(sourceModel);
           const size = bounds.getSize(new THREE.Vector3());
@@ -353,28 +368,30 @@ function ScrollConstructionServices({ active }) {
             renderer.shadowMap.needsUpdate = true;
             renderer.compile(scene, camera);
             renderer.render(scene, camera);
+            reportPreparation(true);
           });
-        },
-        undefined,
-        () => {
-          mount.classList.add("load-error");
-        },
-      );
+      } catch (error) {
+        console.error("Unable to prepare the construction services model", error);
+        mount.classList.add("load-error");
+        reportPreparation(false);
+      }
     };
 
     const renderObserver = new IntersectionObserver(
       (entries) => {
         sectionInRange = entries.some((entry) => entry.isIntersecting);
         if (sectionInRange && !frame) {
+          measure();
           frame = window.requestAnimationFrame(render);
         } else if (!sectionInRange) {
           window.cancelAnimationFrame(frame);
           frame = 0;
+          previousFrameTime = 0;
           state.opacity = 0;
           mount.style.opacity = "0";
         }
       },
-      { rootMargin: "100% 0px" },
+      { rootMargin: "20% 0px" },
     );
     renderObserver.observe(section);
     loadModel();
@@ -393,7 +410,7 @@ function ScrollConstructionServices({ active }) {
       window.cancelAnimationFrame(frame);
       window.cancelAnimationFrame(measureFrame);
       cancelIdleTask(preparationTask);
-      disposeModel(sourceModel);
+      disposeGLTFInstance(sourceModel);
       scene.environment = null;
       environmentMap.dispose();
       environment.dispose();
@@ -404,7 +421,7 @@ function ScrollConstructionServices({ active }) {
       mount.style.opacity = "";
       mount.classList.remove("load-error");
     };
-  }, [active]);
+  }, [onPrepared, webglActive]);
 
   return (
     <section

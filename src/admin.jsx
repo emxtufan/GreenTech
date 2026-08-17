@@ -110,8 +110,6 @@ const COLLECTIONS = {
       { key: "address", label: "Address" },
       { key: "mapUrl", label: "Map URL" },
       { key: "copyright", label: "Copyright holder", placeholder: "GreenTech Professionals SRL" },
-      { key: "creditLabel", label: "Credit label", placeholder: "Leave empty to hide" },
-      { key: "creditUrl", label: "Credit URL" },
       { key: "privacyTitle", label: "Privacy modal title" },
       { key: "privacyBody", label: "Privacy modal text", type: "textarea", rows: 9 },
       { key: "termsTitle", label: "Terms modal title" },

@@ -28,6 +28,15 @@ const LINE_MSAA_SAMPLES = 2;
 const MSAA_RENDER_PIXEL_LIMIT = 2500000;
 const MOBILE_SOLAR_CLOUD_OPACITY = 0.12;
 const MOBILE_SOLAR_INTRO_CLOUD_OPACITY = 0.235;
+const ASSET_DOWNLOAD_PROGRESS_LIMIT = 72;
+const STAGE_BUILD_PROGRESS_START = 74;
+const STAGE_BUILD_PROGRESS_SPAN = 14;
+const STAGE_WARMUP_PROGRESS_START = 89;
+const STAGE_WARMUP_PROGRESS_SPAN = 9;
+
+function yieldToBrowser() {
+  return new Promise((resolve) => window.setTimeout(resolve, 0));
+}
 
 function getSolarCloudOpacity(dark, width, height, intro = false) {
   if (dark) return intro ? 0.03 : 0.02;
@@ -149,6 +158,21 @@ const modelFiles = {
   factory: "/3d/factory.glb",
   overview: "/3d/overview.glb",
 };
+
+const heroAssetBytes = new Map([
+  [textureFiles.displacement, 4_397],
+  [textureFiles.cloud, 32_547],
+  [textureFiles.light, 87_820],
+  [textureFiles.alpha, 950],
+  [textureFiles.alpha2, 954],
+  [textureFiles.particle, 1_951],
+  [modelFiles.solar, 849_600],
+  [modelFiles.wind, 582_748],
+  [modelFiles.towers, 1_496_824],
+  [modelFiles.central, 414_032],
+  [modelFiles.factory, 683_580],
+  [modelFiles.overview, 2_580_824],
+]);
 
 const stageSettings = {
   solar: {
@@ -1377,9 +1401,6 @@ export class EnpowerExperience {
   async initialize() {
     try {
       const loadingManager = new THREE.LoadingManager();
-      loadingManager.onProgress = (_url, loaded, total) => {
-        this.onProgress(Math.floor((loaded / total) * 100));
-      };
       const textureLoader = new THREE.TextureLoader(loadingManager);
       textureLoader.crossOrigin = "";
       const dracoLoader = new DRACOLoader(loadingManager);
@@ -1391,19 +1412,59 @@ export class EnpowerExperience {
 
       const textureEntries = Object.entries(textureFiles);
       const modelEntries = Object.entries(modelFiles);
-      this.modelEntries = modelEntries;
-      const texturePromise = Promise.all(
-        textureEntries.map(async ([key, url]) => [key, await textureLoader.loadAsync(url)]),
+      const downloadProgress = new Map(
+        [...heroAssetBytes.keys()].map((url) => [url, 0]),
       );
-      const [firstModelEntry] = modelEntries;
-      const firstModelPromise = modelLoader
-        .loadAsync(firstModelEntry[1])
-        .then((model) => [firstModelEntry[0], model]);
-      const [loadedTextures, loadedFirstModel] = await Promise.all([
+      const totalDownloadBytes = [...heroAssetBytes.values()]
+        .reduce((total, bytes) => total + bytes, 0);
+      const reportDownloadProgress = () => {
+        const loadedBytes = [...downloadProgress.values()]
+          .reduce((total, bytes) => total + bytes, 0);
+        this.onProgress(
+          Math.floor(
+            (loadedBytes / Math.max(1, totalDownloadBytes))
+            * ASSET_DOWNLOAD_PROGRESS_LIMIT,
+          ),
+        );
+      };
+      const trackDownload = (url) => (event) => {
+        const expectedBytes = heroAssetBytes.get(url) ?? 1;
+        const reportedTotal = event.total > 0 ? event.total : expectedBytes;
+        const normalizedLoaded = Math.min(
+          expectedBytes,
+          (event.loaded / Math.max(1, reportedTotal)) * expectedBytes,
+        );
+        downloadProgress.set(
+          url,
+          Math.max(downloadProgress.get(url) ?? 0, normalizedLoaded),
+        );
+        reportDownloadProgress();
+      };
+      const markDownloadComplete = (url) => {
+        downloadProgress.set(url, heroAssetBytes.get(url) ?? 1);
+        reportDownloadProgress();
+      };
+      const texturePromise = Promise.all(
+        textureEntries.map(async ([key, url]) => {
+          const texture = await textureLoader.loadAsync(url, trackDownload(url));
+          markDownloadComplete(url);
+          return [key, texture];
+        }),
+      );
+      const modelPromise = Promise.all(
+        modelEntries.map(async ([key, url]) => {
+          const model = await modelLoader.loadAsync(url, trackDownload(url));
+          markDownloadComplete(url);
+          return [key, model];
+        }),
+      );
+      const [loadedTextures, loadedModels] = await Promise.all([
         texturePromise,
-        firstModelPromise,
+        modelPromise,
       ]);
       if (this.destroyed) return;
+      this.onProgress(STAGE_BUILD_PROGRESS_START);
+
       const maxAnisotropy = Math.min(8, this.renderer.capabilities.getMaxAnisotropy());
       for (const [key, texture] of loadedTextures) {
         if (key !== "alpha" && key !== "alpha2") continue;
@@ -1413,23 +1474,51 @@ export class EnpowerExperience {
         texture.needsUpdate = true;
       }
       this.textures = Object.fromEntries(loadedTextures);
-      this.models = { [loadedFirstModel[0]]: loadedFirstModel[1] };
-      this.stages = [
-        new RenderStage(
-          this,
-          firstModelEntry[0],
-          loadedFirstModel[1].scene,
-          this.textures,
-          0,
-        ),
-      ];
-      this.stages.forEach((stage) => {
+      this.models = Object.fromEntries(loadedModels);
+      this.stages = [];
+
+      for (let index = 0; index < loadedModels.length; index += 1) {
+        const [key, model] = loadedModels[index];
+        const stage = new RenderStage(this, key, model.scene, this.textures, index);
         stage.setDark(this.dark);
         stage.setQuality(this.highQuality);
-      });
+        stage.updateMouse(this.mouseClient.x, this.mouseClient.y);
+        this.stages.push(stage);
+        this.onProgress(
+          STAGE_BUILD_PROGRESS_START
+          + Math.round(((index + 1) / loadedModels.length) * STAGE_BUILD_PROGRESS_SPAN),
+        );
+        await yieldToBrowser();
+        if (this.destroyed) return;
+      }
+
       this.createTransitionScene();
       this.resize(true);
+
+      for (let index = 0; index < this.stages.length; index += 1) {
+        this.stages[index].render();
+        this.renderer.setRenderTarget(null);
+        this.onProgress(
+          STAGE_WARMUP_PROGRESS_START
+          + Math.round(((index + 1) / this.stages.length) * STAGE_WARMUP_PROGRESS_SPAN),
+        );
+        await yieldToBrowser();
+        if (this.destroyed) return;
+      }
+
+      this.renderer.setRenderTarget(null);
+      this.renderer.clear();
+      this.composer.render();
+      this.onProgress(99);
+      await yieldToBrowser();
+      if (this.destroyed) return;
+
       this.stages[0].finishIntro();
+      this.clock.getDelta();
+      this.delta = 0;
+      this.frames = 0;
+      this.fpsStart = performance.now();
+      this.fpsChecks = 0;
       this.ready = true;
       this.onProgress(100);
       this.onReady();
@@ -1440,44 +1529,6 @@ export class EnpowerExperience {
       console.error("Unable to initialize the Enpower 3D experience", error);
       this.onProgress(100);
     }
-  }
-
-  loadRemainingModels() {
-    if (this.remainingModelsPromise || this.destroyed || !this.modelLoader) {
-      return this.remainingModelsPromise;
-    }
-
-    const remainingEntries = this.modelEntries.slice(1);
-    this.remainingModelsPromise = Promise.all(
-      remainingEntries.map(async ([key, url]) => [key, await this.modelLoader.loadAsync(url)]),
-    )
-      .then((loadedModels) => {
-        if (this.destroyed) return;
-
-        for (const [key, model] of loadedModels) this.models[key] = model;
-        const addedStages = remainingEntries.map(
-          ([key], offset) => new RenderStage(
-            this,
-            key,
-            this.models[key].scene,
-            this.textures,
-            offset + 1,
-          ),
-        );
-        addedStages.forEach((stage) => {
-          stage.setDark(this.dark);
-          stage.setQuality(this.highQuality);
-          stage.updateMouse(this.mouseClient.x, this.mouseClient.y);
-        });
-        this.stages.push(...addedStages);
-        this.resize(true);
-        this.onProgress(100);
-      })
-      .catch((error) => {
-        console.error("Unable to load the remaining Enpower scenes", error);
-      });
-
-    return this.remainingModelsPromise;
   }
 
   createTransitionScene() {
@@ -1601,7 +1652,6 @@ export class EnpowerExperience {
 
   enter() {
     if (this.entered || !this.ready) return;
-    this.loadRemainingModels();
     this.entered = true;
     this.stages[0].enterExperience();
     this.onEnter();

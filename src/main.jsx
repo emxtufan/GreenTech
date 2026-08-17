@@ -35,7 +35,14 @@ const heroSurfaces = [
   "#f2f7f2",
 ];
 
-function useEnpower3d({ dark, highQuality, setLoaded, setReady, setActive, setEntered }) {
+function useEnpower3d({
+  dark,
+  highQuality,
+  setHeroProgress,
+  setHeroReady,
+  setActive,
+  setEntered,
+}) {
   const mountRef = useRef(null);
   const experienceRef = useRef(null);
 
@@ -53,24 +60,12 @@ function useEnpower3d({ dark, highQuality, setLoaded, setReady, setActive, setEn
           const experience = new EnpowerExperience(mountRef.current, {
             dark,
             highQuality,
-            onProgress: setLoaded,
+            onProgress: (progress) => {
+              setHeroProgress((current) => Math.max(current, progress));
+            },
             onReady: () => {
               if (cancelled) return;
-              setReady(true);
-              const requestedScene = Number.parseInt(
-                new URLSearchParams(window.location.search).get("scene"),
-                10,
-              );
-              if (
-                Number.isInteger(requestedScene)
-                && requestedScene >= 0
-                && requestedScene < SCENE_COUNT
-              ) {
-                experience.enter();
-                window.setTimeout(() => {
-                  window.scrollTo(0, requestedScene * SCROLL_SEGMENT + 1);
-                }, 50);
-              }
+              setHeroReady(true);
             },
             onActiveChange: setActive,
             onEnter: () => setEntered(true),
@@ -80,7 +75,7 @@ function useEnpower3d({ dark, highQuality, setLoaded, setReady, setActive, setEn
         })
         .catch((error) => {
           console.error("Unable to load the Enpower 3D experience", error);
-          setLoaded(100);
+          setHeroProgress(100);
         });
     }, 250);
 
@@ -265,10 +260,6 @@ function Card({ active, entered }) {
       <div className="card-info">
         {paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         {section.footnote && <p className="card-footnote">{section.footnote}</p>}
-        
-        {active === sections.length - 1 && (
-          <a className="future-link" href="/products">Invest in the sustainability of your future</a>
-        )}
       </div>
       <button
         className="card-toggle"
@@ -320,6 +311,8 @@ function Intro({ entered, ready, enter }) {
 }
 
 function Preloader({ loaded, ready }) {
+  const progress = Math.min(100, Math.max(0, Math.round(loaded)));
+
   useEffect(() => {
     if (!ready) return undefined;
 
@@ -335,26 +328,56 @@ function Preloader({ loaded, ready }) {
     <div className={`preloader ${ready ? "done" : ""}`} id="preloaderWrapper">
       <div className="loader-logo" id="logoWrapper">
         <LogoMark />
-        <p>Greentech Professionals is an electrical and construction company with experience in electrical and mechanical works in the photovoltaic field.</p>
+        <div
+          className="loader-progress"
+          role="progressbar"
+          aria-label="Loading 3D experience"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow={progress}
+        >
+          <strong className="loader-progress-value">{progress}%</strong>
+          <span className="loader-progress-track" aria-hidden="true">
+            <span
+              className="loader-progress-fill"
+              style={{ transform: `scaleX(${progress / 100})` }}
+            />
+          </span>
+        </div>
       </div>
     </div>
   );
 }
 
-function App({ onOpenProject, onShowAllProjects, onOpenPost, routeOpen }) {
+function App({
+  siteContent,
+  onOpenProject,
+  onShowAllProjects,
+  onOpenPost,
+  routeOpen,
+}) {
   const [loaded, setLoaded] = useState(0);
-  const [ready, setReady] = useState(false);
+  const [heroProgress, setHeroProgress] = useState(0);
+  const [heroReady, setHeroReady] = useState(false);
+  const [pageAssetProgress, setPageAssetProgress] = useState(0);
+  const [pageAssetsReady, setPageAssetsReady] = useState(false);
+  const [postPreparationProgress, setPostPreparationProgress] = useState(0);
   const [entered, setEntered] = useState(false);
   const [active, setActive] = useState(0);
   const [dark, setDark] = useState(false);
   const [highQuality, setHighQuality] = useState(true);
   const sceneRef = useRef(null);
   const postExperienceRef = useRef(null);
+  const requestedSceneHandledRef = useRef(false);
+  const ready =
+    heroReady
+    && pageAssetsReady
+    && postPreparationProgress >= 100;
   const { mountRef, experienceRef } = useEnpower3d({
     dark,
     highQuality,
-    setLoaded,
-    setReady,
+    setHeroProgress,
+    setHeroReady,
     setActive,
     setEntered,
   });
@@ -364,6 +387,73 @@ function App({ onOpenProject, onShowAllProjects, onOpenPost, routeOpen }) {
   }, [dark]);
 
   useEffect(() => {
+    let cancelled = false;
+    setPageAssetsReady(false);
+
+    import("./lib/pageAssetPreloader.js")
+      .then(({ preloadPageAssets }) => preloadPageAssets(siteContent, (progress) => {
+        if (cancelled) return;
+        setPageAssetProgress((current) => Math.max(current, progress));
+      }))
+      .then(() => {
+        if (cancelled) return;
+        setPageAssetProgress(100);
+        setPageAssetsReady(true);
+      })
+      .catch((error) => {
+        console.error("Unable to preload every page asset", error);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [siteContent]);
+
+  useEffect(() => {
+    const aggregate = Math.min(
+      99,
+      Math.round(
+        heroProgress * 0.24
+        + pageAssetProgress * 0.56
+        + postPreparationProgress * 0.2,
+      ),
+    );
+    setLoaded((current) => (ready ? 100 : Math.max(current, aggregate)));
+  }, [heroProgress, pageAssetProgress, postPreparationProgress, ready]);
+
+  useEffect(() => {
+    if (!ready || requestedSceneHandledRef.current) return undefined;
+
+    const requestedScene = Number.parseInt(
+      new URLSearchParams(window.location.search).get("scene"),
+      10,
+    );
+    if (
+      !Number.isInteger(requestedScene)
+      || requestedScene < 0
+      || requestedScene >= SCENE_COUNT
+    ) {
+      return undefined;
+    }
+
+    requestedSceneHandledRef.current = true;
+    experienceRef.current?.enter();
+    const firstFrame = window.requestAnimationFrame(() => {
+      const secondFrame = window.requestAnimationFrame(() => {
+        window.scrollTo(0, requestedScene * SCROLL_SEGMENT + 1);
+      });
+      requestedSceneHandledRef.current = secondFrame;
+    });
+
+    return () => {
+      window.cancelAnimationFrame(firstFrame);
+      if (typeof requestedSceneHandledRef.current === "number") {
+        window.cancelAnimationFrame(requestedSceneHandledRef.current);
+      }
+    };
+  }, [experienceRef, ready]);
+
+  useEffect(() => {
     const root = document.documentElement;
     const heroSurface = dark ? "#141414" : heroSurfaces[active] ?? heroSurfaces[0];
     root.style.setProperty("--hero-surface", heroSurface);
@@ -371,9 +461,8 @@ function App({ onOpenProject, onShowAllProjects, onOpenPost, routeOpen }) {
 
   const prepareForHeroNavigation = useExperienceScrollController({
     entered,
-    projectOpen: routeOpen,
+    routeOpen,
     sceneRef,
-    postExperienceRef,
     experienceRef,
   });
 
@@ -385,6 +474,10 @@ function App({ onOpenProject, onShowAllProjects, onOpenPost, routeOpen }) {
     prepareForHeroNavigation();
     experienceRef.current?.returnToIntro();
   }, [experienceRef, prepareForHeroNavigation]);
+
+  const handlePostPreparationProgress = useCallback((progress) => {
+    setPostPreparationProgress((current) => Math.max(current, progress));
+  }, []);
 
   return (
     <main
@@ -411,17 +504,20 @@ function App({ onOpenProject, onShowAllProjects, onOpenPost, routeOpen }) {
       <Navigation backToIntro={backToIntro} entered={entered} />
       <Intro entered={entered} ready={ready} enter={enter} />
       <Preloader loaded={loaded} ready={ready} />
-      <div ref={postExperienceRef} className="post-experience-sections">
-        {entered && (
-          <Suspense fallback={<div className="post-experience-loading" aria-hidden="true" />}>
-            <PostExperienceSections
-              entered={entered}
-              onOpenProject={onOpenProject}
-              onShowAllProjects={onShowAllProjects}
-              onOpenPost={onOpenPost}
-            />
-          </Suspense>
-        )}
+      <div
+        ref={postExperienceRef}
+        className={`post-experience-sections ${entered ? "" : "preparing"}`}
+      >
+        <Suspense fallback={<div className="post-experience-loading" aria-hidden="true" />}>
+          <PostExperienceSections
+            entered={entered}
+            prepare3d
+            onPreparationProgress={handlePostPreparationProgress}
+            onOpenProject={onOpenProject}
+            onShowAllProjects={onShowAllProjects}
+            onOpenPost={onOpenPost}
+          />
+        </Suspense>
       </div>
     </main>
   );
@@ -568,6 +664,7 @@ function Root() {
   return (
     <>
       <App
+        siteContent={routeContent}
         onOpenProject={openProject}
         onShowAllProjects={openProjectsIndex}
         onOpenPost={openBlogPost}

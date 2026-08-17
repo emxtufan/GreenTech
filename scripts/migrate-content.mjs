@@ -93,8 +93,6 @@ const content = withDefaults({
     address: "194 Floreasca Way, District 1, Bucharest",
     mapUrl: "https://maps.app.goo.gl/4B6ZvpVcABLVJL5DA",
     copyright: "GreenTech Professionals SRL",
-    creditLabel: "",
-    creditUrl: "https://sketchfab.com/3d-models/space-sun-9dc16d37e8224fe9923f68de0149fcab",
     // Blank lines become separate paragraphs in the legal modal.
     privacyTitle: "Privacy policy",
     privacyBody: [

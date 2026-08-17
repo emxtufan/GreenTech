@@ -69,8 +69,8 @@ DATA_DIR=storage/data
 UPLOADS_DIR=storage/uploads
 TRANSLATIONS_DIR=storage/translations
 DEEPL_API_KEY=cheia-privata-deepl
-CONTENT_SOURCE_LOCALE=auto
-TRANSLATION_LOCALES=en,ro,it,es
+CONTENT_SOURCE_LOCALE=ro
+TRANSLATION_LOCALES=en,it,es
 GEOCODER_USER_AGENT="GreenTechProfessionalsAdmin/1.0 (+https://greentechpro.app)"
 PORT=3000
 HOST=0.0.0.0
@@ -273,19 +273,19 @@ abonatii si fisierele incarcate. Un `git pull` nu suprascrie aceste directoare.
 
 ## Traduceri automate
 
-Continutul se scrie o singura data din `/admin` si poate contine texte in romana
-sau engleza. Serverul detecteaza automat limba fiecarui text. La prima vizita,
-site-ul porneste in romana si permite alegerea manuala intre engleza, romana,
-italiana si spaniola din navbar. Alegerea si ultima versiune tradusa se salveaza
-in `localStorage` separat pentru fiecare utilizator.
+Continutul principal se scrie in romana din `/admin` si este afisat exact asa cum
+a fost salvat. Serverul genereaza din el versiunile engleza, italiana si spaniola.
+La prima vizita, site-ul porneste in romana si permite alegerea manuala a limbii
+din navbar. Alegerea si ultima versiune tradusa se salveaza in `localStorage`
+separat pentru fiecare utilizator.
 
 Traducerea este efectuata de server, astfel incat cheia DeepL nu ajunge niciodata
 in JavaScript-ul public. Configureaza in `.env`:
 
 ```dotenv
 DEEPL_API_KEY=cheia-privata-deepl
-CONTENT_SOURCE_LOCALE=auto
-TRANSLATION_LOCALES=en,ro,it,es
+CONTENT_SOURCE_LOCALE=ro
+TRANSLATION_LOCALES=en,it,es
 TRANSLATIONS_DIR=storage/translations
 ```
 
@@ -298,9 +298,21 @@ pm2 restart GreenTech --update-env
 ```
 
 La pornire si la fiecare salvare din admin, serverul pregateste in fundal
-versiunile EN/RO/IT/ES. Engleza este salvata in
-`storage/translations/site-content.en.json`, iar celelalte limbi folosesc
-acelasi format de snapshot.
+versiunile EN/IT/ES. Romana este documentul sursa, iar engleza este salvata in
+`storage/translations/site-content.en.json`; celelalte limbi folosesc acelasi
+format de snapshot.
+
+Daca versiunea romana urmarita in Git trebuie promovata o singura data peste
+documentul live existent, opreste aplicatia, ruleaza comanda de mai jos si apoi
+reporneste procesul. Continutul live anterior este arhivat automat in
+`storage/data/` inainte de inlocuire.
+
+```bash
+pm2 stop GreenTech
+npm run promote:romanian-content
+pm2 restart GreenTech --update-env
+```
+
 Expresiile deja traduse sunt reutilizate din
 `storage/translations/phrase-cache.json`; doar textele noi sau schimbate consuma
 o noua traducere. Snapshot-urile curente se afla tot in

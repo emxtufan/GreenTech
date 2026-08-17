@@ -1,20 +1,19 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import ServiceSectionOverlay from "./ServiceSectionOverlay.jsx";
 import useSection from "./hooks/useSection.js";
+import useNearViewport from "./hooks/useNearViewport.js";
+import {
+  cloneCachedGLTF,
+  disposeGLTFInstance,
+} from "./lib/threeAssetCache.js";
 import "./ScrollElectricalInspection.css";
 
 const MODEL_URL = "/3d/factory__electrical__box_12_mb.glb";
 const MODEL_REST_LIFT = 0.13;
 const MODEL_REST_LIFT_MOBILE = 0.06;
-const ENTRANCE_COMPLETE_AT = 0.14;
-const SPIN_COMPLETE_AT = 0.82;
-const SPIN_TURNS = 1.15;
-// Scroll owns the rotation, matching the assembly section: the model holds
-// still when the page does. Raise this to add autonomous drift back.
-const IDLE_SPIN = 0;
+const AUTO_ROTATION_SPEED = THREE.MathUtils.degToRad(12);
 const FRONTAL_TILT = THREE.MathUtils.degToRad(6);
 
 // Metalness and roughness here come from a texture, so they must not be
@@ -24,43 +23,22 @@ const TONE_EXPOSURE = 1;
 const ENV_MAP_INTENSITY = 0.6;
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
-const lerp = (start, end, progress) => start + (end - start) * progress;
 const smoothstep = (progress) => {
   const value = clamp(progress, 0, 1);
   return value * value * (3 - 2 * value);
 };
 
-function disposeModel(root) {
-  const materials = new Set();
-  const textures = new Set();
-
-  root?.traverse((object) => {
-    object.geometry?.dispose?.();
-    const objectMaterials = Array.isArray(object.material)
-      ? object.material
-      : [object.material];
-
-    objectMaterials.filter(Boolean).forEach((material) => {
-      materials.add(material);
-      Object.values(material).forEach((value) => {
-        if (value?.isTexture) textures.add(value);
-      });
-    });
-  });
-
-  textures.forEach((texture) => texture.dispose());
-  materials.forEach((material) => material.dispose());
-}
-
-function ScrollElectricalInspection({ active }) {
+function ScrollElectricalInspection({ active, prepare = false, onPrepared }) {
   const text = useSection("electrical-service");
   const sectionRef = useRef(null);
   const mountRef = useRef(null);
+  const nearViewport = useNearViewport(sectionRef, active);
+  const webglActive = prepare || nearViewport;
 
   useEffect(() => {
     const section = sectionRef.current;
     const mount = mountRef.current;
-    if (!active || !section || !mount) return undefined;
+    if (!webglActive || !section || !mount) return undefined;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
@@ -122,10 +100,7 @@ function ScrollElectricalInspection({ active }) {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const state = {
       opacity: 0,
-      entranceProgress: 0,
-      entranceOffsetY: 0,
       restOffsetY: 0,
-      spinProgress: 0,
       normalizedWidth: 1,
       normalizedHeight: 1,
     };
@@ -141,6 +116,18 @@ function ScrollElectricalInspection({ active }) {
     let preparationTask = 0;
     let sectionInRange = false;
     let shadowFrame = 0;
+    let preparationReported = false;
+    const layout = {
+      sectionTop: 0,
+      sectionHeight: 1,
+      viewportHeight: Math.max(1, window.innerHeight),
+    };
+
+    const reportPreparation = (success) => {
+      if (preparationReported) return;
+      preparationReported = true;
+      onPrepared?.("electrical-inspection", success);
+    };
 
     const scheduleIdleTask = (callback) => {
       if (typeof window.requestIdleCallback === "function") {
@@ -174,11 +161,11 @@ function ScrollElectricalInspection({ active }) {
       );
 
       modelRoot.scale.setScalar(modelScale);
-      state.entranceOffsetY = verticalView * (mobile ? 0.32 : 0.3);
       // Sit above centre so the service copy owns the lower third.
       state.restOffsetY =
         verticalView * (mobile ? MODEL_REST_LIFT_MOBILE : MODEL_REST_LIFT);
       pivot.position.x = 0;
+      pivot.position.y = state.restOffsetY;
       pivot.position.z = 0;
     };
 
@@ -188,6 +175,7 @@ function ScrollElectricalInspection({ active }) {
 
       const width = Math.max(1, mount.clientWidth || window.innerWidth);
       const height = Math.max(1, mount.clientHeight || window.innerHeight);
+      const sectionBounds = section.getBoundingClientRect();
       const mobile = window.innerWidth <= 700;
       const pixelRatio = Math.min(
         window.devicePixelRatio || 1,
@@ -198,6 +186,9 @@ function ScrollElectricalInspection({ active }) {
       renderer.setSize(width, height, false);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
+      layout.sectionTop = window.scrollY + sectionBounds.top;
+      layout.sectionHeight = Math.max(1, sectionBounds.height);
+      layout.viewportHeight = height;
       updateModelLayout();
     };
 
@@ -218,26 +209,16 @@ function ScrollElectricalInspection({ active }) {
         : 0;
       lastFrameTime = time;
 
-      const bounds = section.getBoundingClientRect();
-      const viewportHeight = Math.max(1, mount.clientHeight || window.innerHeight);
-      const scrollTravel = Math.max(1, bounds.height - viewportHeight);
-      const rawProgress = -bounds.top / scrollTravel;
-      const targetEntrance = reducedMotion.matches
-        ? 1
-        : smoothstep(rawProgress / ENTRANCE_COMPLETE_AT);
-      const targetProgress = smoothstep(
-        (rawProgress - ENTRANCE_COMPLETE_AT) /
-          (SPIN_COMPLETE_AT - ENTRANCE_COMPLETE_AT),
-      );
+      const viewportHeight = layout.viewportHeight;
+      const boundsTop = layout.sectionTop - window.scrollY;
+      const boundsBottom = boundsTop + layout.sectionHeight;
       const entryVisibility = smoothstep(
-        (viewportHeight - bounds.top) / Math.max(1, viewportHeight * 0.65),
+        (viewportHeight - boundsTop) / Math.max(1, viewportHeight * 0.65),
       );
       const exitVisibility = smoothstep(
-        bounds.bottom / Math.max(1, viewportHeight * 0.5),
+        boundsBottom / Math.max(1, viewportHeight * 0.5),
       );
-      const targetOpacity = modelRoot
-        ? entryVisibility * exitVisibility * targetEntrance
-        : 0;
+      const targetOpacity = modelRoot ? entryVisibility * exitVisibility : 0;
       const ease = reducedMotion.matches
         ? 1
         : window.innerWidth <= 700
@@ -245,31 +226,22 @@ function ScrollElectricalInspection({ active }) {
           : 0.09;
 
       state.opacity += (targetOpacity - state.opacity) * ease;
-      state.entranceProgress +=
-        (targetEntrance - state.entranceProgress) * ease;
-      state.spinProgress += (targetProgress - state.spinProgress) * ease;
 
       if (Math.abs(targetOpacity - state.opacity) < 0.001) {
         state.opacity = targetOpacity;
       }
-      if (Math.abs(targetEntrance - state.entranceProgress) < 0.0005) {
-        state.entranceProgress = targetEntrance;
-      }
-      if (Math.abs(targetProgress - state.spinProgress) < 0.0005) {
-        state.spinProgress = targetProgress;
-      }
 
       mount.style.opacity = state.opacity.toFixed(3);
-      pivot.position.y = lerp(
-        state.entranceOffsetY,
-        state.restOffsetY,
-        state.entranceProgress,
-      );
+      pivot.position.y = state.restOffsetY;
 
-      if (!reducedMotion.matches) idleRotation += delta * IDLE_SPIN;
+      if (!reducedMotion.matches) {
+        idleRotation = THREE.MathUtils.euclideanModulo(
+          idleRotation + delta * AUTO_ROTATION_SPEED,
+          Math.PI * 2,
+        );
+      }
       if (modelRoot) {
-        modelRoot.rotation.y =
-          idleRotation + state.spinProgress * SPIN_TURNS * Math.PI * 2;
+        modelRoot.rotation.y = idleRotation;
       }
 
       if (state.opacity > 0.002) {
@@ -282,16 +254,14 @@ function ScrollElectricalInspection({ active }) {
       frame = window.requestAnimationFrame(render);
     };
 
-    const loadModel = () => {
+    const loadModel = async () => {
       if (loadStarted || disposed) return;
       loadStarted = true;
 
-      const loader = new GLTFLoader();
-      loader.load(
-        MODEL_URL,
-        (gltf) => {
+      try {
+        const gltf = await cloneCachedGLTF(MODEL_URL);
           if (disposed) {
-            disposeModel(gltf.scene);
+            disposeGLTFInstance(gltf.scene);
             return;
           }
 
@@ -347,19 +317,20 @@ function ScrollElectricalInspection({ active }) {
             renderer.shadowMap.needsUpdate = true;
             renderer.compile(scene, camera);
             renderer.render(scene, camera);
+            reportPreparation(true);
           });
-        },
-        undefined,
-        () => {
-          mount.classList.add("load-error");
-        },
-      );
+      } catch (error) {
+        console.error("Unable to prepare the electrical inspection model", error);
+        mount.classList.add("load-error");
+        reportPreparation(false);
+      }
     };
 
     const renderObserver = new IntersectionObserver(
       (entries) => {
         sectionInRange = entries.some((entry) => entry.isIntersecting);
         if (sectionInRange && !frame) {
+          measure();
           frame = window.requestAnimationFrame(render);
         } else if (!sectionInRange) {
           window.cancelAnimationFrame(frame);
@@ -369,7 +340,7 @@ function ScrollElectricalInspection({ active }) {
           mount.style.opacity = "0";
         }
       },
-      { rootMargin: "100% 0px" },
+      { rootMargin: "20% 0px" },
     );
     renderObserver.observe(section);
     loadModel();
@@ -388,7 +359,7 @@ function ScrollElectricalInspection({ active }) {
       window.cancelAnimationFrame(frame);
       window.cancelAnimationFrame(measureFrame);
       cancelIdleTask(preparationTask);
-      disposeModel(sourceModel);
+      disposeGLTFInstance(sourceModel);
       scene.environment = null;
       environmentMap.dispose();
       environment.dispose();
@@ -399,7 +370,7 @@ function ScrollElectricalInspection({ active }) {
       mount.style.opacity = "";
       mount.classList.remove("load-error");
     };
-  }, [active]);
+  }, [onPrepared, webglActive]);
 
   return (
     <section
