@@ -65,7 +65,7 @@ function PostImage({ post }) {
   );
 }
 
-function BlogArchiveModal({ open, posts, onClose, onPostOpen, triggerRef }) {
+function BlogArchiveModal({ open, posts, onClose, onPostOpen, triggerRef, copy }) {
   const panelRef = useRef(null);
   const closeRef = useRef(null);
 
@@ -141,15 +141,17 @@ function BlogArchiveModal({ open, posts, onClose, onPostOpen, triggerRef }) {
       >
         <header className="blog-archive-header">
           <div>
-            <span>Field Journal</span>
-            <h2 id="blog-archive-title">All stories</h2>
-            <p>{posts.length} published {posts.length === 1 ? "article" : "articles"}.</p>
+            <span>{copy.archiveEyebrow}</span>
+            <h2 id="blog-archive-title">{copy.archiveTitle}</h2>
+            <p>
+              {posts.length} {posts.length === 1 ? copy.publishedSingle : copy.publishedPlural}.
+            </p>
           </div>
           <button
             ref={closeRef}
             type="button"
-            aria-label="Close all articles"
-            title="Close"
+            aria-label={copy.closeArchive}
+            title={copy.close}
             onClick={onClose}
           >
             <X size={20} strokeWidth={1.8} aria-hidden="true" />
@@ -167,7 +169,7 @@ function BlogArchiveModal({ open, posts, onClose, onPostOpen, triggerRef }) {
                   <span className="blog-archive-number">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <span className="blog-archive-category">{post.category || "Journal"}</span>
+                  <span className="blog-archive-category">{post.category || copy.categoryFallback}</span>
                   <strong>{post.title}</strong>
                   <span className="blog-archive-details">
                     {(post.date || post.dateLabel) && (
@@ -185,7 +187,7 @@ function BlogArchiveModal({ open, posts, onClose, onPostOpen, triggerRef }) {
                   </span>
                 </span>
                 <span className="blog-archive-open" aria-hidden="true">
-                  <span>Read</span>
+                  <span>{copy.read}</span>
                   <ArrowRight className="blog-archive-arrow" size={20} strokeWidth={1.8} />
                 </span>
               </button>
@@ -202,7 +204,7 @@ function BlogSection({ active, onPostOpen }) {
   const content = useSiteContent();
   const text = useSection("blog");
   const storyAction = useSectionAction("blog", {
-    label: "Read story",
+    label: "Citeste articolul",
     mode: "builtin",
   });
   const sectionRef = useRef(null);
@@ -213,6 +215,16 @@ function BlogSection({ active, onPostOpen }) {
   const homepagePosts = posts.slice(0, HOMEPAGE_POST_LIMIT);
   const featuredPost = homepagePosts[0] ?? null;
   const secondaryPosts = homepagePosts.slice(1);
+  const copy = {
+    archiveEyebrow: text("archiveEyebrow", "Jurnal"),
+    archiveTitle: text("archiveTitle", "Toate articolele"),
+    publishedSingle: text("publishedSingle", "articol publicat"),
+    publishedPlural: text("publishedPlural", "articole publicate"),
+    closeArchive: text("closeArchiveLabel", "Inchide lista articolelor"),
+    close: text("closeLabel", "Inchide"),
+    categoryFallback: text("categoryFallback", "Jurnal"),
+    read: text("readLabel", "Citeste"),
+  };
 
   const closeArchive = useCallback(() => setArchiveOpen(false), []);
   const openArchivePost = useCallback((postId) => {
@@ -247,12 +259,12 @@ function BlogSection({ active, onPostOpen }) {
       >
         <div className="blog-section-inner">
           <header className="blog-section-header blog-reveal">
-            <span>{text("eyebrow", "The GreenTech Journal")}</span>
+            <span>{text("eyebrow", "Jurnal")}</span>
             <div>
               <BlurText
                 as="h2"
                 id="blog-section-title"
-                text={text("title", "Field notes, team news and opportunities.")}
+                text={text("title", "Din proiecte si din echipa.")}
                 play={active}
                 animateBy="letters"
                 direction="top"
@@ -262,7 +274,7 @@ function BlogSection({ active, onPostOpen }) {
               <p>
                 {text(
                   "description",
-                  "Project updates, technical stories, company news and careers in one dedicated editorial space.",
+                  "Actualizari de santier, explicatii tehnice, noutati despre companie si roluri deschise.",
                 )}
               </p>
             </div>
@@ -294,7 +306,10 @@ function BlogSection({ active, onPostOpen }) {
               </article>
 
               {secondaryPosts.length > 0 && (
-                <div className="blog-story-list" aria-label="More journal stories">
+                <div
+                  className="blog-story-list"
+                  aria-label={text("moreStoriesLabel", "Alte articole")}
+                >
                   {secondaryPosts.map((post, index) => (
                     <article
                       className="blog-story blog-reveal"
@@ -329,16 +344,18 @@ function BlogSection({ active, onPostOpen }) {
           ) : (
             <div className="blog-empty blog-reveal">
               <BookOpenText size={24} strokeWidth={1.5} aria-hidden="true" />
-              <strong>No published stories yet.</strong>
+              <strong>{text("emptyTitle", "Nu exista articole publicate.")}</strong>
             </div>
           )}
 
           {posts.length > 0 && (
             <div className="blog-archive-cta blog-reveal">
               <div>
-                <span>Journal archive</span>
+                <span>{text("archiveLabel", "Arhiva jurnalului")}</span>
                 <strong>
-                  Showing {homepagePosts.length} of {posts.length} published {posts.length === 1 ? "story" : "stories"}
+                  {text("showingLabel", "Afisam")} {homepagePosts.length} {text("ofLabel", "din")} {posts.length} {posts.length === 1
+                    ? text("storySingle", "articol")
+                    : text("storyPlural", "articole")}
                 </strong>
               </div>
               <button
@@ -346,7 +363,7 @@ function BlogSection({ active, onPostOpen }) {
                 type="button"
                 onClick={() => setArchiveOpen(true)}
               >
-                <span>Show all articles</span>
+                <span>{text("showAllLabel", "Vezi toate articolele")}</span>
                 <span className="blog-archive-count">{String(posts.length).padStart(2, "0")}</span>
                 <ArrowRight size={19} strokeWidth={1.8} aria-hidden="true" />
               </button>
@@ -362,6 +379,7 @@ function BlogSection({ active, onPostOpen }) {
         triggerRef={archiveTriggerRef}
         onClose={closeArchive}
         onPostOpen={openArchivePost}
+        copy={copy}
       />
     </>
   );

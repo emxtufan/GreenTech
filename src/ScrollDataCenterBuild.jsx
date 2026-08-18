@@ -388,10 +388,11 @@ function ScrollDataCenterBuild({ active, prepare = false, onPrepared }) {
         />
         <ServiceSectionOverlay
           active={active}
-          index={text("eyebrow", "04 / Service")}
+          label={text("marqueeLabel", "SERVICII")}
+          index={text("eyebrow", "04 / Servicii")}
           titleId="service-data-center-title"
-          title={text("title", "Data Center Construction")}
-          description={text("description", "Turnkey data center builds — white space fit-out, power distribution and redundancy, cooling and containment, commissioned and documented to spec.")}
+          title={text("title", "Constructia centrelor de date")}
+          description={text("description", "Executam amenajarea spatiilor, distributia electrica, sistemele de redundanta si racire, precum si lucrarile de punere in functiune.")}
         />
       </div>
     </section>

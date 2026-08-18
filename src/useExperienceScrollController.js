@@ -42,6 +42,8 @@ export default function useExperienceScrollController({
     let savedScrollY = window.scrollY;
     let restoreFrameOne = 0;
     let restoreFrameTwo = 0;
+    let pendingScrollTarget = null;
+    let restoringScroll = false;
     let lenis = null;
 
     window.history.scrollRestoration = "manual";
@@ -75,6 +77,29 @@ export default function useExperienceScrollController({
       window.cancelAnimationFrame(restoreFrameTwo);
       restoreFrameOne = 0;
       restoreFrameTwo = 0;
+      restoringScroll = false;
+    };
+
+    const scrollToSection = (target) => {
+      if (!target?.isConnected) return;
+
+      if (lenis) {
+        lenis.scrollTo(target, { immediate: false, lock: false });
+        return;
+      }
+
+      target.scrollIntoView({
+        behavior: reducedMotion ? "auto" : "smooth",
+        block: "start",
+      });
+    };
+
+    const flushPendingSectionScroll = () => {
+      if (!pendingScrollTarget || isSuspended() || restoringScroll) return;
+
+      const target = pendingScrollTarget;
+      pendingScrollTarget = null;
+      scrollToSection(target);
     };
 
     const rememberScrollPosition = () => {
@@ -103,6 +128,7 @@ export default function useExperienceScrollController({
       if (isSuspended()) return;
 
       cancelRestore();
+      restoringScroll = true;
       createLenis();
       lenis?.stop();
       syncScrollPosition();
@@ -121,6 +147,8 @@ export default function useExperienceScrollController({
           syncScrollPosition();
           createLenis();
           lenis?.start();
+          restoringScroll = false;
+          flushPendingSectionScroll();
         });
       });
     };
@@ -183,14 +211,14 @@ export default function useExperienceScrollController({
     // Anchor links elsewhere in the app need to move the same scroller Lenis
     // drives. Native touch scrolling stays fully native.
     window.__scrollToSection = (target) => {
-      if (!target || isSuspended()) return;
+      if (!target) return;
 
-      if (lenis) {
-        lenis.scrollTo(target, { immediate: false, lock: false });
+      if (isSuspended() || restoringScroll) {
+        pendingScrollTarget = target;
         return;
       }
 
-      target.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+      scrollToSection(target);
     };
 
     const handlePageShow = () => {
@@ -212,6 +240,7 @@ export default function useExperienceScrollController({
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("pageshow", handlePageShow);
       delete window.__scrollToSection;
+      pendingScrollTarget = null;
       destroyLenis();
       window.history.scrollRestoration = previousScrollRestoration;
       scene.classList.remove("experience-rendering-paused");

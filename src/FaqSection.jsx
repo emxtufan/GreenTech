@@ -4,7 +4,7 @@ import { selectFaqs } from "./lib/siteContent.js";
 import BlurText from "./BlurText.jsx";
 import useSiteContent from "./hooks/useSiteContent.js";
 import useSection from "./hooks/useSection.js";
-import "./FaqSection.css?=dwqdwq";
+import "./FaqSection.css";
 
 function FaqItem({ faq, open, onToggle, index }) {
   const answerId = useId();
@@ -103,11 +103,11 @@ function FaqSection({ active }) {
     >
       <div className="faq-inner">
         <header className="faq-header">
-          <span>{text("eyebrow", "FAQs")}</span>
+          <span>{text("eyebrow", "Intrebari frecvente")}</span>
           <BlurText
             as="h2"
             id="faq-section-title"
-            text={text("title", "Questions we hear before a project starts.")}
+            text={text("title", "Ce trebuie clarificat inainte de inceperea lucrarilor.")}
             play={active}
             animateBy="letters"
             direction="top"
@@ -117,7 +117,7 @@ function FaqSection({ active }) {
           <p>
             {text(
               "description",
-              "Scope, coverage and certification — the details clients ask about most often.",
+              "Raspunsuri despre servicii, arie de lucru, certificari, mobilizare si solicitarea unei oferte.",
             )}
           </p>
         </header>

@@ -86,7 +86,7 @@ function SolarContactSection({
   const footerGroups = selectFooterGroups(siteContent);
   const socialLinks = footerGroups.find((group) => group.title === "Social")?.links ?? [];
   const contactAction = useSectionAction("contact", {
-    label: "Send request",
+    label: "Trimite solicitarea",
     mode: "builtin",
   });
   const sectionRef = useRef(null);
@@ -469,11 +469,11 @@ function SolarContactSection({
 
       <div className="solar-contact-inner">
         <header className="solar-contact-intro">
-          <span>{text("eyebrow", "Contact / Solar energy")}</span>
+          <span>{text("eyebrow", "Solicitare proiect")}</span>
           <BlurText
             as="h2"
             id="solar-contact-title"
-            text={text("title", "Your next solar project starts here.")}
+            text={text("title", "Discutam despre proiectul dumneavoastra.")}
             play={active}
             animateBy="letters"
             direction="top"
@@ -483,7 +483,7 @@ function SolarContactSection({
           <p>
             {text(
               "description",
-              "Tell us where you are building and what needs to be delivered. Our team is ready to discuss the next step.",
+              "Trimiteti-ne amplasamentul, capacitatea estimata si lucrarile necesare. Revenim cu intrebarile tehnice si pasii urmatori.",
             )}
           </p>
         </header>
@@ -493,23 +493,23 @@ function SolarContactSection({
         <SolarContactForms openLegal={openLegal} contactAction={contactAction} />
 
         <div className="solar-contact-links">
-          <a className="solar-contact-link" href={`mailto:${OFFICE_EMAIL}`}>
-            <span>Email us</span>
-            <strong>office@greentechpro.ro</strong>
+          <a className="solar-contact-link" href={`mailto:${footer.email || OFFICE_EMAIL}`}>
+            <span>{text("emailLabel", "E-mail")}</span>
+            <strong>{footer.email || OFFICE_EMAIL}</strong>
             <i aria-hidden="true">
               <ArrowUpRight size={22} strokeWidth={1.7} />
             </i>
           </a>
           <a
             className="solar-contact-link"
-            href={MAP_URL}
+            href={footer.mapUrl || MAP_URL}
             target="_blank"
             rel="noreferrer"
           >
-            <span>Head office</span>
+            <span>{text("officeLabel", "Sediu")}</span>
             <strong>
-              194 Floreasca Way, District 1, Bucharest
-              <small>Floreasca Lake Offices</small>
+              {text("officeAddress", footer.address || "Calea Floreasca nr. 194, Sector 1, Bucuresti")}
+              <small>{text("officeBuilding", "Floreasca Lake Offices")}</small>
             </strong>
             <i aria-hidden="true">
               <ArrowUpRight size={22} strokeWidth={1.7} />
@@ -522,13 +522,13 @@ function SolarContactSection({
             <div className="solar-contact-footer-brand">
               <img
                 src="/original/logo-alb.png.webp"
-                alt="GreenTech Professionals"
+                alt="Greentech Professionals"
               />
               <p>{footer.tagline}</p>
               <div className="solar-contact-footer-certifications">
                 <img
                   src="/original/footer-certifications.webp"
-                  alt="Atestat ANRE și certificări ISO 9001, ISO 14001 și IQNet"
+                  alt="Atestat ANRE si certificari ISO 9001, ISO 14001 si IQNet"
                   width="300"
                   height="69"
                   loading="lazy"
@@ -580,7 +580,10 @@ function SolarContactSection({
             </span>
 
             {socialLinks.length > 0 && (
-              <nav aria-label="Social links" className="solar-contact-footer-social">
+              <nav
+                aria-label={text("socialLinksLabel", "Retele sociale")}
+                className="solar-contact-footer-social"
+              >
                 {socialLinks.map((link) => (
                   <a key={link.id} href={link.href} target="_blank" rel="noreferrer">
                     {link.label}

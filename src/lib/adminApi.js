@@ -104,4 +104,120 @@ export const uploadAsset = (file, category = "misc") => {
   }).then(json);
 };
 
-export const uploadImage = uploadAsset;
+const IMAGE_OPTIMISE_THRESHOLD = 7 * 1024 * 1024;
+const IMAGE_TARGET_BYTES = 6 * 1024 * 1024;
+const IMAGE_MAX_EDGE = 3200;
+
+const canvasBlob = (canvas, type, quality) => new Promise((resolve, reject) => {
+  canvas.toBlob(
+    (blob) => (blob ? resolve(blob) : reject(new Error("The browser could not optimise this image."))),
+    type,
+    quality,
+  );
+});
+
+const decodeImage = async (file) => {
+  if (typeof createImageBitmap === "function") {
+    try {
+      let bitmap;
+      try {
+        bitmap = await createImageBitmap(file, { imageOrientation: "from-image" });
+      } catch {
+        bitmap = await createImageBitmap(file);
+      }
+
+      return {
+        source: bitmap,
+        width: bitmap.width,
+        height: bitmap.height,
+        release: () => bitmap.close(),
+      };
+    } catch {
+      // Fall back to an HTML image decoder below.
+    }
+  }
+
+  const url = URL.createObjectURL(file);
+  const image = new Image();
+
+  try {
+    await new Promise((resolve, reject) => {
+      image.onload = resolve;
+      image.onerror = () => reject(new Error(`Could not read ${file.name}.`));
+      image.src = url;
+    });
+
+    return {
+      source: image,
+      width: image.naturalWidth,
+      height: image.naturalHeight,
+      release: () => URL.revokeObjectURL(url),
+    };
+  } catch (error) {
+    URL.revokeObjectURL(url);
+    throw error;
+  }
+};
+
+async function optimiseLargeImage(file) {
+  if (
+    file.size <= IMAGE_OPTIMISE_THRESHOLD
+    || file.type === "image/gif"
+    || typeof document === "undefined"
+  ) {
+    return file;
+  }
+
+  const decoded = await decodeImage(file);
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d", { alpha: file.type !== "image/jpeg" });
+
+  if (!context) {
+    decoded.release();
+    throw new Error("This browser cannot optimise large images.");
+  }
+
+  const outputType = file.type === "image/jpeg" ? "image/jpeg" : "image/webp";
+  const outputExtension = outputType === "image/jpeg" ? "jpg" : "webp";
+  const stem = file.name.replace(/\.[^.]+$/, "") || "image";
+  let scale = Math.min(1, IMAGE_MAX_EDGE / Math.max(decoded.width, decoded.height));
+  let quality = 0.86;
+  let blob = null;
+
+  try {
+    for (let attempt = 0; attempt < 6; attempt += 1) {
+      canvas.width = Math.max(1, Math.round(decoded.width * scale));
+      canvas.height = Math.max(1, Math.round(decoded.height * scale));
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(decoded.source, 0, 0, canvas.width, canvas.height);
+      blob = await canvasBlob(canvas, outputType, quality);
+
+      if (blob.size <= IMAGE_TARGET_BYTES) break;
+      scale *= 0.82;
+      quality = Math.max(0.66, quality - 0.05);
+    }
+  } finally {
+    decoded.release();
+    canvas.width = 1;
+    canvas.height = 1;
+  }
+
+  if (!blob || blob.size >= file.size) return file;
+
+  return new File([blob], `${stem}.${outputExtension}`, {
+    type: outputType,
+    lastModified: file.lastModified,
+  });
+}
+
+export const uploadImage = async (file, category = "misc") => {
+  const prepared = await optimiseLargeImage(file);
+  const result = await uploadAsset(prepared, category);
+
+  return {
+    ...result,
+    optimised: prepared !== file,
+    originalBytes: file.size,
+    uploadedBytes: prepared.size,
+  };
+};

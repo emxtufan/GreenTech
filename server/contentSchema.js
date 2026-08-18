@@ -8,6 +8,7 @@ export const CONTENT_GROUPS = [
   "sections",
   "processCards",
   "horizontalGallery",
+  "photoGallery",
   "heroCards",
   "impactStats",
   "clientLogos",
@@ -199,6 +200,13 @@ export function validateContent(content) {
 
   validateItems(content.processCards?.items, "processCards.items", issues);
 
+  validateItems(content.photoGallery?.items, "photoGallery.items", issues, (item, label) => {
+    validateImagePath(item.src, `${label}.src`, issues);
+    if (item.originalName !== undefined && typeof item.originalName !== "string") {
+      issues.push(`${label}.originalName: must be a string`);
+    }
+  });
+
   validateItems(content.heroCards?.items, "heroCards.items", issues, (item, label) => {
     if (item.sourceIndex !== undefined && !Number.isInteger(item.sourceIndex)) {
       issues.push(`${label}: "sourceIndex" must be an integer`);
@@ -358,6 +366,7 @@ export function withDefaults(content) {
     sections: Array.isArray(source.sections) ? source.sections : [],
     processCards: { items: [], ...(source.processCards || {}) },
     horizontalGallery: { items: [], ...(source.horizontalGallery || {}) },
+    photoGallery: { items: [], ...(source.photoGallery || {}) },
     heroCards: { items: [], ...(source.heroCards || {}) },
     impactStats: { items: [], ...(source.impactStats || {}) },
     clientLogos: { items: [], ...(source.clientLogos || {}) },

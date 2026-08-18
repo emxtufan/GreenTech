@@ -25,6 +25,12 @@ const newId = () =>
 const numberInputValue = (event) =>
   (event.target.value === "" ? "" : Number(event.target.value));
 
+const readableFileName = (name) => String(name || "")
+  .replace(/\.[^.]+$/, "")
+  .replace(/[-_]+/g, " ")
+  .replace(/\s+/g, " ")
+  .trim();
+
 const copyDefaultValue = (value) => {
   if (Array.isArray(value)) return value.map(copyDefaultValue);
   if (value && typeof value === "object") {
@@ -211,10 +217,18 @@ function NestedList({ field, rows, category, parentItem, onChange, onNotify }) {
     // Sequential: keeps the progress count honest and avoids firing a dozen
     // concurrent writes at the server for what is usually a handful of photos.
     for (const [index, file] of files.entries()) {
-      setProgress({ done: index, total: files.length });
+      setProgress({ done: index, total: files.length, name: file.name });
       try {
         const { url } = await uploadImage(file, category);
-        added.push({ id: newId(), [imageKey]: url });
+        const row = { id: newId() };
+        for (const nested of field.fields) row[nested.key] = initialFieldValue(nested);
+        row[imageKey] = url;
+        if (Object.hasOwn(row, "originalName")) row.originalName = file.name;
+        if (Object.hasOwn(row, "name")) row.name = file.name;
+        if (Object.hasOwn(row, "title")) row.title = readableFileName(file.name);
+        if (Object.hasOwn(row, "alt")) row.alt = readableFileName(file.name);
+        added.push(row);
+        setProgress({ done: index + 1, total: files.length, name: file.name });
       } catch (error) {
         failed.push(`${file.name}: ${error.message}`);
       }
@@ -317,6 +331,36 @@ function NestedList({ field, rows, category, parentItem, onChange, onNotify }) {
 
   return (
     <div className="admin-nested">
+      {imageKey && (
+        <div className="admin-bulk-upload admin-bulk-upload-compact">
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            disabled={Boolean(progress)}
+            onClick={() => bulkRef.current?.click()}
+          >
+            {progress ? (
+              <Loader2 className="admin-spin" aria-hidden="true" />
+            ) : (
+              <ImageUp aria-hidden="true" />
+            )}
+            {progress
+              ? `Uploading ${progress.done}/${progress.total}`
+              : "Upload multiple images"}
+          </Button>
+          {progress && <small title={progress.name}>{progress.name}</small>}
+          <input
+            ref={bulkRef}
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/gif"
+            multiple
+            hidden
+            onChange={uploadMany}
+          />
+        </div>
+      )}
+
       {items.map((row, index) => (
         <div className="admin-nested-row" key={row.id ?? index}>
           <div className="admin-nested-head">
@@ -577,7 +621,12 @@ export default function CollectionEditor({
   onNotify,
 }) {
   const [openId, setOpenId] = useState(null);
+  const bulkInputRef = useRef(null);
+  const itemsRef = useRef(items);
+  const [bulkProgress, setBulkProgress] = useState(null);
   const supportsPinning = collection.fields.some((field) => field.key === "pinned");
+
+  itemsRef.current = items;
 
   const replace = (index, next) =>
     onItemsChange(items.map((item, position) => (position === index ? next : item)));
@@ -604,6 +653,64 @@ export default function CollectionEditor({
     setOpenId(item.id);
   };
 
+  const uploadMany = async (event) => {
+    const files = [...(event.target.files ?? [])];
+    event.target.value = "";
+    if (!collection.bulkUpload || files.length === 0) return;
+
+    const added = [];
+    const failed = [];
+
+    for (const [index, file] of files.entries()) {
+      setBulkProgress({ done: index, total: files.length, name: file.name });
+
+      try {
+        const { url } = await uploadImage(file, collection.uploadCategory);
+        const item = {
+          id: newId(),
+          order: itemsRef.current.length + added.length + 1,
+          enabled: true,
+          uploadedAt: new Date().toISOString(),
+        };
+
+        for (const field of collection.fields) {
+          item[field.key] = initialFieldValue(field);
+        }
+
+        item[collection.bulkImageKey] = url;
+        item[collection.bulkNameKey] = file.name;
+        item[collection.bulkTitleKey] = readableFileName(file.name);
+        item[collection.bulkAltKey] = readableFileName(file.name);
+        added.push(item);
+        setBulkProgress({ done: index + 1, total: files.length, name: file.name });
+      } catch (error) {
+        failed.push(`${file.name}: ${error.message}`);
+      }
+    }
+
+    setBulkProgress(null);
+
+    if (added.length > 0) {
+      onItemsChange(
+        [...itemsRef.current, ...added]
+          .map((item, index) => ({ ...item, order: index + 1 })),
+      );
+    }
+
+    if (failed.length === 0) {
+      onNotify?.({
+        tone: "success",
+        message: `${added.length} photograph${added.length === 1 ? "" : "s"} uploaded. Publish changes to add them to the website.`,
+      });
+    } else {
+      onNotify?.({
+        tone: "error",
+        message: `${added.length} of ${files.length} photographs uploaded. ${failed.length} failed.`,
+        issues: failed,
+      });
+    }
+  };
+
   const remove = (index) => {
     const item = items[index];
     const label = item[collection.titleField] || "this item";
@@ -623,8 +730,44 @@ export default function CollectionEditor({
           <h2 id={`${collection.key}-title`}>{collection.heading}</h2>
           <p>{collection.description}</p>
         </div>
-        <Badge variant="secondary">{items.length} items</Badge>
+        <div className="admin-collection-heading-actions">
+          {collection.bulkUpload && (
+            <>
+              <Button
+                type="button"
+                variant="outline"
+                disabled={Boolean(bulkProgress)}
+                onClick={() => bulkInputRef.current?.click()}
+              >
+                {bulkProgress ? (
+                  <Loader2 className="admin-spin" aria-hidden="true" />
+                ) : (
+                  <ImageUp aria-hidden="true" />
+                )}
+                {bulkProgress
+                  ? `Uploading ${bulkProgress.done}/${bulkProgress.total}`
+                  : "Upload photographs"}
+              </Button>
+              <input
+                ref={bulkInputRef}
+                type="file"
+                accept="image/jpeg,image/png,image/webp,image/gif"
+                multiple
+                hidden
+                onChange={uploadMany}
+              />
+            </>
+          )}
+          <Badge variant="secondary">{items.length} items</Badge>
+        </div>
       </div>
+
+      {bulkProgress && (
+        <div className="admin-bulk-progress" aria-live="polite">
+          <span style={{ width: `${(bulkProgress.done / bulkProgress.total) * 100}%` }} />
+          <small title={bulkProgress.name}>{bulkProgress.name}</small>
+        </div>
+      )}
 
       <ul className="admin-collection">
         {items.map((item, index) => {

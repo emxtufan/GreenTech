@@ -11,10 +11,12 @@ import {
   selectBlogPosts,
   selectGalleryItems,
   selectHeroCards,
+  selectPhotoGalleryItems,
 } from "./lib/siteContent.js";
 import useSiteContent from "./hooks/useSiteContent.js";
 import useSection from "./hooks/useSection.js";
-import "./styles.css?=122222";
+import { uiText, useLocale } from "./lib/i18n.js";
+import "./styles.css";
 import SiteNavigation from "./SiteNavigation.jsx";
 
 const BlurText = lazy(() => import("./BlurText.jsx"));
@@ -22,6 +24,7 @@ const PostExperienceSections = lazy(() => import("./PostExperienceSections.jsx")
 const BlogPostPage = lazy(() => import("./BlogPostPage.jsx"));
 const ProjectDetailPage = lazy(() => import("./ProjectDetailPage.jsx"));
 const AllProjectsPage = lazy(() => import("./AllProjectsPage.jsx"));
+const AllPhotosPage = lazy(() => import("./AllPhotosPage.jsx"));
 
 // Which hero cards render the graph treatment — a UI behaviour, not content.
 const graphSections = new Set([0, 1, 4, 5]);
@@ -164,6 +167,7 @@ function Navigation({ backToIntro, entered }) {
 }
 
 function HeroScrollCue({ active, entered }) {
+  const locale = useLocale();
   const cueRef = useRef(null);
   const [atStart, setAtStart] = useState(true);
 
@@ -202,12 +206,13 @@ function HeroScrollCue({ active, entered }) {
       className={`hero-scroll-cue ${visible ? "visible" : ""}`}
       aria-hidden="true"
     >
-      Scroll down
+      {uiText("scrollDown", locale)}
     </div>
   );
 }
 
 function Card({ active, entered }) {
+  const locale = useLocale();
   const sections = selectHeroCards(useSiteContent());
   const section = sections[active] ?? sections[0];
   const [expandedSectionKey, setExpandedSectionKey] = useState(null);
@@ -264,7 +269,7 @@ function Card({ active, entered }) {
       <button
         className="card-toggle"
         type="button"
-        aria-label={expanded ? "Hide info" : "Show info"}
+        aria-label={uiText(expanded ? "hideInfo" : "showInfo", locale)}
         aria-expanded={expanded}
         onClick={toggleExpanded}
       >
@@ -277,7 +282,7 @@ function Card({ active, entered }) {
 function Intro({ entered, ready, enter }) {
   const text = useSection("intro-hero");
   const introAction = useSectionAction("intro-hero", {
-    label: "Click to explore",
+    label: "Incepeti explorarea",
     mode: "builtin",
   });
 
@@ -285,12 +290,12 @@ function Intro({ entered, ready, enter }) {
     <section className={`intro ${entered ? "hidden" : ""}`} id="introUi">
       <div className="intro-content">
         <h1 className="intro-title">
-          {text("title", "Welcome to GreenTech Professionals")}
+          {text("title", "Greentech Professionals")}
         </h1>
         <p className="intro-copy">
           {text(
             "description",
-            "Electrical, mechanical and photovoltaic solutions built for a cleaner, more efficient future.",
+            "Executie electrica, mecanica si civila pentru proiecte energetice in Romania si Europa.",
           )}
         </p>
         {introAction.visible && (
@@ -311,6 +316,7 @@ function Intro({ entered, ready, enter }) {
 }
 
 function Preloader({ loaded, ready }) {
+  const locale = useLocale();
   const progress = Math.min(100, Math.max(0, Math.round(loaded)));
 
   useEffect(() => {
@@ -331,7 +337,7 @@ function Preloader({ loaded, ready }) {
         <div
           className="loader-progress"
           role="progressbar"
-          aria-label="Loading 3D experience"
+          aria-label={uiText("loadingExperience", locale)}
           aria-valuemin="0"
           aria-valuemax="100"
           aria-valuenow={progress}
@@ -353,6 +359,7 @@ function App({
   siteContent,
   onOpenProject,
   onShowAllProjects,
+  onShowAllPhotos,
   onOpenPost,
   routeOpen,
 }) {
@@ -515,6 +522,7 @@ function App({
             onPreparationProgress={handlePostPreparationProgress}
             onOpenProject={onOpenProject}
             onShowAllProjects={onShowAllProjects}
+            onShowAllPhotos={onShowAllPhotos}
             onOpenPost={onOpenPost}
           />
         </Suspense>
@@ -527,12 +535,18 @@ function getSiteRouteFromUrl() {
   const searchParams = new URLSearchParams(window.location.search);
   const postId = searchParams.get("post");
   const projectId = postId ? null : searchParams.get("project");
+  const projectsIndexOpen =
+    !projectId && !postId && searchParams.get("projects") === "all";
 
   return {
     projectId,
     postId,
-    projectsIndexOpen:
-      !projectId && !postId && searchParams.get("projects") === "all",
+    projectsIndexOpen,
+    photosIndexOpen:
+      !projectId
+      && !postId
+      && !projectsIndexOpen
+      && searchParams.get("gallery") === "all",
   };
 }
 
@@ -550,6 +564,13 @@ function getProjectsIndexUrl() {
   return `${url.pathname}${url.search}${url.hash}`;
 }
 
+function getPhotosIndexUrl() {
+  const url = new URL(window.location.href);
+  url.search = "";
+  url.searchParams.set("gallery", "all");
+  return `${url.pathname}${url.search}${url.hash}`;
+}
+
 function getBlogPostUrl(postId) {
   const url = new URL(window.location.href);
   url.search = "";
@@ -558,11 +579,18 @@ function getBlogPostUrl(postId) {
 }
 
 function Root() {
+  const locale = useLocale();
   const routeContent = useSiteContent();
   const routedProjects = selectGalleryItems(routeContent);
+  const routedPhotos = selectPhotoGalleryItems(routeContent);
   const routedBlogPosts = selectBlogPosts(routeContent);
   const [routeState, setRouteState] = useState(getSiteRouteFromUrl);
-  const { projectId, postId, projectsIndexOpen } = routeState;
+  const {
+    projectId,
+    postId,
+    projectsIndexOpen,
+    photosIndexOpen,
+  } = routeState;
 
   useEffect(() => {
     const handlePopState = () => setRouteState(getSiteRouteFromUrl());
@@ -580,6 +608,7 @@ function Root() {
       projectId: nextProjectId,
       postId: null,
       projectsIndexOpen: false,
+      photosIndexOpen: false,
     });
   }, []);
 
@@ -593,6 +622,7 @@ function Root() {
       projectId: nextProjectId,
       postId: null,
       projectsIndexOpen: false,
+      photosIndexOpen: false,
     });
   }, []);
 
@@ -602,7 +632,26 @@ function Root() {
       "",
       getProjectsIndexUrl(),
     );
-    setRouteState({ projectId: null, postId: null, projectsIndexOpen: true });
+    setRouteState({
+      projectId: null,
+      postId: null,
+      projectsIndexOpen: true,
+      photosIndexOpen: false,
+    });
+  }, []);
+
+  const openPhotosIndex = useCallback(() => {
+    window.history.pushState(
+      { photosIndex: true },
+      "",
+      getPhotosIndexUrl(),
+    );
+    setRouteState({
+      projectId: null,
+      postId: null,
+      projectsIndexOpen: false,
+      photosIndexOpen: true,
+    });
   }, []);
 
   const openBlogPost = useCallback((nextPostId) => {
@@ -615,6 +664,7 @@ function Root() {
       projectId: null,
       postId: nextPostId,
       projectsIndexOpen: false,
+      photosIndexOpen: false,
     });
   }, []);
 
@@ -627,7 +677,12 @@ function Root() {
     const url = new URL(window.location.href);
     url.searchParams.delete("project");
     window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
-    setRouteState({ projectId: null, postId: null, projectsIndexOpen: false });
+    setRouteState({
+      projectId: null,
+      postId: null,
+      projectsIndexOpen: false,
+      photosIndexOpen: false,
+    });
   }, []);
 
   const closeProjectsIndex = useCallback(() => {
@@ -639,7 +694,29 @@ function Root() {
     const url = new URL(window.location.href);
     url.searchParams.delete("projects");
     window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
-    setRouteState({ projectId: null, postId: null, projectsIndexOpen: false });
+    setRouteState({
+      projectId: null,
+      postId: null,
+      projectsIndexOpen: false,
+      photosIndexOpen: false,
+    });
+  }, []);
+
+  const closePhotosIndex = useCallback(() => {
+    if (window.history.state?.photosIndex) {
+      window.history.back();
+      return;
+    }
+
+    const url = new URL(window.location.href);
+    url.searchParams.delete("gallery");
+    window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+    setRouteState({
+      projectId: null,
+      postId: null,
+      projectsIndexOpen: false,
+      photosIndexOpen: false,
+    });
   }, []);
 
   const closeBlogPost = useCallback(() => {
@@ -651,7 +728,12 @@ function Root() {
     const url = new URL(window.location.href);
     url.searchParams.delete("post");
     window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
-    setRouteState({ projectId: null, postId: null, projectsIndexOpen: false });
+    setRouteState({
+      projectId: null,
+      postId: null,
+      projectsIndexOpen: false,
+      photosIndexOpen: false,
+    });
   }, []);
 
   const projectIndex = routedProjects.findIndex((item) => item.id === projectId);
@@ -667,14 +749,32 @@ function Root() {
         siteContent={routeContent}
         onOpenProject={openProject}
         onShowAllProjects={openProjectsIndex}
+        onShowAllPhotos={openPhotosIndex}
         onOpenPost={openBlogPost}
-        routeOpen={Boolean(project) || Boolean(blogPost) || projectsIndexOpen}
+        routeOpen={
+          Boolean(project)
+          || Boolean(blogPost)
+          || projectsIndexOpen
+          || photosIndexOpen
+        }
       />
       <Suspense
-        fallback={routeState.projectId || routeState.postId || routeState.projectsIndexOpen
-          ? <div className="route-loading" role="status">Loading</div>
-          : null}
+        fallback={
+          routeState.projectId
+          || routeState.postId
+          || routeState.projectsIndexOpen
+          || routeState.photosIndexOpen
+          ? <div className="route-loading" role="status">{uiText("loading", locale)}</div>
+          : null
+        }
       >
+        {photosIndexOpen && (
+          <AllPhotosPage
+            projects={routedProjects}
+            photos={routedPhotos}
+            onClose={closePhotosIndex}
+          />
+        )}
         {projectsIndexOpen && (
           <AllProjectsPage
             projects={routedProjects}

@@ -50,6 +50,9 @@ export const selectProcessCards = (content = current) =>
 export const selectGalleryItems = (content = current) =>
   enabledInOrder(content?.horizontalGallery?.items);
 
+export const selectPhotoGalleryItems = (content = current) =>
+  enabledInOrder(content?.photoGallery?.items);
+
 export const selectHeroCards = (content = current) =>
   enabledInOrder(content?.heroCards?.items);
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import useSection from "./hooks/useSection.js";
 import "./ProjectDetailPage.css";
 
 function shouldHandleNavigation(event) {
@@ -13,6 +14,7 @@ function shouldHandleNavigation(event) {
 }
 
 function ProjectDetailPage({ project, nextProject, onClose, onProjectOpen }) {
+  const text = useSection("projects");
   const pageRef = useRef(null);
   const backButtonRef = useRef(null);
 
@@ -27,7 +29,7 @@ function ProjectDetailPage({ project, nextProject, onClose, onProjectOpen }) {
       if (event.key === "Escape") onClose();
     };
 
-    document.title = `${project.title} | GreenTech Professionals`;
+    document.title = `${project.title} | Greentech Professionals`;
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
@@ -54,10 +56,10 @@ function ProjectDetailPage({ project, nextProject, onClose, onProjectOpen }) {
         <button
           className="project-detail-brand"
           type="button"
-          aria-label="Return to projects"
+          aria-label={text("returnProjectsLabel", "Inapoi la proiecte")}
           onClick={onClose}
         >
-          <img src="/original/logo-alb.png.webp" alt="GreenTech Professionals" />
+          <img src="/original/logo-alb.png.webp" alt="Greentech Professionals" />
         </button>
         <button
           className="project-detail-back"
@@ -66,7 +68,7 @@ function ProjectDetailPage({ project, nextProject, onClose, onProjectOpen }) {
           onClick={onClose}
         >
           <ArrowLeft size={18} strokeWidth={1.8} aria-hidden="true" />
-          <span>Back to projects</span>
+          <span>{text("returnProjectsLabel", "Inapoi la proiecte")}</span>
         </button>
       </header>
 
@@ -75,7 +77,7 @@ function ProjectDetailPage({ project, nextProject, onClose, onProjectOpen }) {
           <img src={project.image} alt={project.alt} fetchPriority="high" />
           <div className="project-detail-hero-shade" aria-hidden="true" />
           <div className="project-detail-hero-content">
-            <span>Project {String(project.order).padStart(2, "0")}</span>
+            <span>{text("projectLabel", "Proiect")} {String(project.order).padStart(2, "0")}</span>
             <h1 id="project-detail-title">{project.title}</h1>
             <p>{project.projectCategory}</p>
           </div>
@@ -83,27 +85,27 @@ function ProjectDetailPage({ project, nextProject, onClose, onProjectOpen }) {
 
         <section className="project-detail-about" aria-labelledby="project-about-title">
           <div className="project-detail-about-copy">
-            <span>Project overview</span>
-            <h2 id="project-about-title">About the project</h2>
+            <span>{text("overviewEyebrow", "Prezentarea proiectului")}</span>
+            <h2 id="project-about-title">{text("aboutTitle", "Despre proiect")}</h2>
             <p>{project.about}</p>
             <p>{project.description}</p>
           </div>
 
           <dl className="project-detail-facts">
             <div>
-              <dt>Project Date</dt>
+              <dt>{text("projectDateLabel", "Data proiectului")}</dt>
               <dd>{project.projectDate}</dd>
             </div>
             <div>
-              <dt>Category</dt>
+              <dt>{text("categoryLabel", "Categorie")}</dt>
               <dd>{project.projectCategory}</dd>
             </div>
             <div>
-              <dt>Project Location</dt>
+              <dt>{text("projectLocationLabel", "Locatia proiectului")}</dt>
               <dd>{project.location}</dd>
             </div>
             <div className="project-detail-capacity">
-              <dt>Project Capacity</dt>
+              <dt>{text("projectCapacityLabel", "Capacitatea proiectului")}</dt>
               <dd>
                 <strong>{project.capacity ?? project.capacityNote}</strong>
                 {project.capacityKw && <span>{project.capacityKw}</span>}
@@ -116,8 +118,8 @@ function ProjectDetailPage({ project, nextProject, onClose, onProjectOpen }) {
         <section className="project-detail-scope" aria-labelledby="project-scope-title">
           <div className="project-detail-section-inner">
             <header className="project-detail-section-heading">
-              <span>Technical scope</span>
-              <h2 id="project-scope-title">What we installed</h2>
+              <span>{text("scopeEyebrow", "Lucrari executate")}</span>
+              <h2 id="project-scope-title">{text("scopeTitle", "Ce am instalat")}</h2>
             </header>
             <div className="project-detail-scope-grid">
               {project.scope.map((item, index) => (
@@ -134,8 +136,8 @@ function ProjectDetailPage({ project, nextProject, onClose, onProjectOpen }) {
         <section className="project-detail-gallery" aria-labelledby="project-gallery-title">
           <div className="project-detail-section-inner">
             <header className="project-detail-section-heading">
-              <span>On site</span>
-              <h2 id="project-gallery-title">Project gallery</h2>
+              <span>{text("galleryEyebrow", "Din santier")}</span>
+              <h2 id="project-gallery-title">{text("projectGalleryTitle", "Galeria proiectului")}</h2>
             </header>
             <div className={`project-detail-gallery-grid images-${project.gallery.length}`}>
               {project.gallery.map((image, index) => (
@@ -150,20 +152,19 @@ function ProjectDetailPage({ project, nextProject, onClose, onProjectOpen }) {
 
         <section className="project-detail-source">
           <div>
-            <span>Verified project information</span>
-            <p>
-              Project metadata and photographs are based on GreenTech Professionals'
-              official portfolio. Unpublished technical values are not estimated.
-            </p>
+            <span>{text("sourceEyebrow", "Informatii despre proiect")}</span>
+            <p>{text("sourceDescription")}</p>
           </div>
-          <a href={project.sourceUrl} target="_blank" rel="noreferrer">
-            <span>Official project page</span>
-            <ArrowUpRight size={18} strokeWidth={1.8} aria-hidden="true" />
-          </a>
+          {project.sourceUrl && (
+            <a href={project.sourceUrl} target="_blank" rel="noreferrer">
+              <span>{text("officialPageLabel", "Pagina oficiala a proiectului")}</span>
+              <ArrowUpRight size={18} strokeWidth={1.8} aria-hidden="true" />
+            </a>
+          )}
         </section>
 
         <footer className="project-detail-next">
-          <span>Next project</span>
+          <span>{text("nextProjectLabel", "Proiectul urmator")}</span>
           <a
             href={`?project=${encodeURIComponent(nextProject.id)}`}
             onClick={handleNextProject}

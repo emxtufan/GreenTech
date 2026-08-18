@@ -15,7 +15,7 @@ function HorizontalParallaxGallery({
 }) {
   const text = useSection("projects");
   const projectAction = useSectionAction("projects", {
-    label: "View project",
+    label: "Vezi proiectul",
     mode: "builtin",
   });
   const sectionRef = useRef(null);
@@ -236,11 +236,11 @@ function HorizontalParallaxGallery({
     >
       <div className="horizontal-gallery-sticky">
         <header className="horizontal-gallery-heading">
-          <span>{text("eyebrow", "Portfolio")}</span>
+          <span>{text("eyebrow", "Portofoliu")}</span>
           <BlurText
             as="h2"
             id="horizontal-gallery-title"
-            text={text("title", "Projects in Motion")}
+            text={text("title", "Proiecte selectate")}
             play={entered}
             animateBy="letters"
             direction="top"
@@ -250,7 +250,7 @@ function HorizontalParallaxGallery({
           <p>
             {text(
               "description",
-              "A compact view of how GreenTech Professionals moves a photovoltaic project from technical decisions to reliable field execution.",
+              "Lucrari din Romania si Italia, prezentate cu amplasament, capacitate si domeniul de executie.",
             )}
           </p>
         </header>
@@ -300,18 +300,15 @@ function HorizontalParallaxGallery({
                 />
               )}
               <figcaption className="horizontal-gallery-all-content">
-                <span>Complete portfolio</span>
-                <h3>Show all projects</h3>
-                <p>
-                  Explore every active and completed GreenTech Professionals
-                  project in one place.
-                </p>
+                <span>{text("archiveEyebrow", "Portofoliu complet")}</span>
+                <h3>{text("archiveTitle", "Toate proiectele")}</h3>
+                <p>{text("archiveDescription")}</p>
                 <a
                   href="?projects=all"
                   onClick={handleArchiveLink}
-                  aria-label="Show all GreenTech Professionals projects"
+                  aria-label={text("archiveAriaLabel", "Vezi toate proiectele Greentech Professionals")}
                 >
-                  <span>View portfolio</span>
+                  <span>{text("archiveAction", "Vezi portofoliul")}</span>
                   <ArrowUpRight size={17} strokeWidth={1.8} aria-hidden="true" />
                 </a>
                 <b aria-hidden="true">{String(items.length).padStart(2, "0")}</b>

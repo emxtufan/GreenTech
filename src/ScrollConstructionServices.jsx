@@ -438,10 +438,11 @@ function ScrollConstructionServices({ active, prepare = false, onPrepared }) {
         />
         <ServiceSectionOverlay
           active={active}
-          index={text("eyebrow", "03 / Service")}
+          label={text("marqueeLabel", "SERVICII")}
+          index={text("eyebrow", "03 / Servicii")}
           titleId="service-construction-title"
-          title={text("title", "Construction Services")}
-          description={text("description", "Civil and structural works for energy sites — access roads, foundations, mounting structures and technical buildings, coordinated from groundbreaking to handover.")}
+          title={text("title", "Servicii de constructii")}
+          description={text("description", "Executam lucrari civile si structurale pentru obiective energetice, de la organizarea santierului pana la predarea lucrarilor.")}
         />
       </div>
     </section>

@@ -457,10 +457,11 @@ function ScrollSolarAssembly({ active, prepare = false, onPrepared }) {
         />
         <ServiceSectionOverlay
           active={active}
-          index={text("eyebrow", "01 / Service")}
+          label={text("marqueeLabel", "SERVICII")}
+          index={text("eyebrow", "01 / Servicii")}
           titleId="service-solar-title"
-          title={text("title", "Construction of Photovoltaic Parks")}
-          description={text("description", "Utility-scale solar delivered end to end — feasibility and design, mounting structures, cabling and inverters, through to commissioning and grid connection.")}
+          title={text("title", "Constructia parcurilor fotovoltaice")}
+          description={text("description", "Executam montajul structurilor si modulelor, cablarea DC si AC, instalarea invertoarelor, testarile si pregatirea pentru racordare.")}
         />
       </div>
     </section>

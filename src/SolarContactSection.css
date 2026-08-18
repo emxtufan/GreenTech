@@ -686,7 +686,7 @@
 
   .solar-contact-intro h2 {
     max-width: 370px;
-    font-size: clamp(40px, 11.4vw, 50px);
+    font-size: clamp(36px, 10vw, 45px);
     line-height: 0.96;
   }
 

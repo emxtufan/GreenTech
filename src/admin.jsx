@@ -75,6 +75,27 @@ import "./admin.css";
 
 const GROUP_ORDER = ["Experience", "Company", "Services", "Content"];
 
+const GROUP_ALIASES = {
+  experience: "Experience",
+  experienta: "Experience",
+  company: "Company",
+  companie: "Company",
+  services: "Services",
+  servicii: "Services",
+  content: "Content",
+  continut: "Content",
+};
+
+const normalizeGroupName = (value) => {
+  const original = String(value ?? "").trim();
+  const key = original
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+
+  return GROUP_ALIASES[key] || original || "Content";
+};
+
 // Sidebar sections that also own a repeatable collection in the content file.
 const COLLECTIONS = {
   faqs: {
@@ -109,7 +130,7 @@ const COLLECTIONS = {
       { key: "phone", label: "Phone", placeholder: "Leave empty to hide" },
       { key: "address", label: "Address" },
       { key: "mapUrl", label: "Map URL" },
-      { key: "copyright", label: "Copyright holder", placeholder: "GreenTech Professionals SRL" },
+      { key: "copyright", label: "Copyright holder", placeholder: "Greentech Professionals SRL" },
       { key: "privacyTitle", label: "Privacy modal title" },
       { key: "privacyBody", label: "Privacy modal text", type: "textarea", rows: 9 },
       { key: "termsTitle", label: "Terms modal title" },
@@ -161,9 +182,41 @@ const COLLECTIONS = {
         type: "nested",
         singular: "image",
         fields: [
+          { key: "originalName", label: "Original file name" },
           { key: "src", label: "Image", type: "image" },
           { key: "alt", label: "Alt text" },
         ],
+      },
+    ],
+  },
+  "photo-gallery": {
+    key: "photoGallery",
+    path: ["photoGallery", "items"],
+    uploadCategory: "gallery",
+    bulkUpload: true,
+    bulkImageKey: "src",
+    bulkNameKey: "originalName",
+    bulkTitleKey: "title",
+    bulkAltKey: "alt",
+    heading: "Photo gallery",
+    description: "Independent photographs displayed in the homepage corridor and the complete photo archive.",
+    singular: "photograph",
+    titleField: "title",
+    fields: [
+      {
+        key: "originalName",
+        label: "Original file name",
+        hint: "Saved in site content together with the generated public URL.",
+      },
+      { key: "title", label: "Display title" },
+      { key: "src", label: "Image", type: "image" },
+      { key: "alt", label: "Alternative text" },
+      { key: "caption", label: "Caption", type: "textarea", rows: 3 },
+      {
+        key: "projectId",
+        label: "Related project",
+        type: "select",
+        optionsSource: "projects",
       },
     ],
   },
@@ -458,6 +511,7 @@ const sectionIcons = {
   blog: Newspaper,
   contact: Mail,
   footer: PanelTop,
+  "photo-gallery": Image,
 };
 
 function getSectionFromUrl(sections) {
@@ -472,15 +526,25 @@ function AppSidebar({ sections, selectedId, onSelect, onLogout }) {
   const { isMobile, setOpenMobile } = useSidebar();
   const normalizedQuery = query.trim().toLowerCase();
 
-  const groupedSections = useMemo(() => GROUP_ORDER.map((group) => ({
-    group,
-    sections: sections.filter((section) => (
-      section.group === group
-      && (!normalizedQuery
-        || section.name.toLowerCase().includes(normalizedQuery)
-        || section.title.toLowerCase().includes(normalizedQuery))
-    )),
-  })).filter((entry) => entry.sections.length > 0), [normalizedQuery, sections]);
+  const groupedSections = useMemo(() => {
+    const groupNames = [...GROUP_ORDER];
+
+    sections.forEach((section) => {
+      const group = normalizeGroupName(section.group);
+      if (!groupNames.includes(group)) groupNames.push(group);
+    });
+
+    return groupNames.map((group) => ({
+      group,
+      sections: sections.filter((section) => {
+        if (normalizeGroupName(section.group) !== group) return false;
+        if (!normalizedQuery) return true;
+
+        const searchableText = `${section.name ?? ""} ${section.title ?? ""}`.toLowerCase();
+        return searchableText.includes(normalizedQuery);
+      }),
+    })).filter((entry) => entry.sections.length > 0);
+  }, [normalizedQuery, sections]);
 
   const selectSection = (sectionId) => {
     onSelect(sectionId);
@@ -490,8 +554,8 @@ function AppSidebar({ sections, selectedId, onSelect, onLogout }) {
   return (
     <Sidebar collapsible="icon" className="admin-sidebar">
       <SidebarHeader className="admin-sidebar-header">
-        <a className="admin-sidebar-brand" href="/" aria-label="GreenTech Professionals home">
-          <img src="/original/logo-alb.png.webp" alt="GreenTech Professionals" />
+        <a className="admin-sidebar-brand" href="/" aria-label="Greentech Professionals home">
+          <img src="/original/logo-alb.png.webp" alt="Greentech Professionals" />
           <span>Admin</span>
         </a>
         <div className="admin-sidebar-search">
@@ -937,7 +1001,7 @@ function LoginScreen({ onAuthenticated }) {
   return (
     <div className="admin-login">
       <form className="admin-login-card" onSubmit={submit}>
-        <img src="/original/logo-alb.png.webp" alt="GreenTech Professionals" />
+        <img src="/original/logo-alb.png.webp" alt="Greentech Professionals" />
         <div className="admin-field">
           <Label htmlFor="admin-password">Password</Label>
           <Input

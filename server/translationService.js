@@ -30,9 +30,16 @@ const BATCH_CHARACTER_LIMIT = 80_000;
 // caches cannot keep a translation produced by older rules.
 const CACHE_VERSION = 4;
 const PROTECTED_TERMS = [
-  "GreenTech Professionals SRL",
-  "GreenTech Professionals",
-  "GreenTech PRO",
+  "Greentech Professionals SRL",
+  "Greentech Professionals",
+  "Greentech PRO",
+  "AJ Brand",
+  "Bester",
+  "CAF",
+  "Circet",
+  "Lantania",
+  "PSI Global Recruitment",
+  "Solarig",
 ];
 
 const SKIPPED_KEYS = new Set([
@@ -52,6 +59,9 @@ const SKIPPED_KEYS = new Set([
   "sourceUrl",
   "videoUrl",
   "relatedProjectId",
+  "projectId",
+  "originalName",
+  "uploadedAt",
   "code",
   "iso3",
   "atlasId",
@@ -219,7 +229,7 @@ async function translateWithDeepL(texts, locale) {
     text: texts,
     target_lang: locale.toUpperCase(),
     preserve_formatting: true,
-    context: "GreenTech Professionals photovoltaic, electrical and construction company website.",
+    context: "Greentech Professionals photovoltaic, electrical and construction company website.",
   };
 
   if (hasConcreteSourceLocale) {

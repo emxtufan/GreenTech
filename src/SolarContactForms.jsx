@@ -3,24 +3,10 @@ import { Briefcase, Loader2, Paperclip, Send, X } from "lucide-react";
 import { submitProjectInquiry } from "./lib/inquiryApi.js";
 import { submitCareerApplication, MAX_CV_BYTES } from "./lib/applicationApi.js";
 import { APPLY_HASH } from "./SiteNavigation.jsx";
+import useSection from "./hooks/useSection.js";
 import "./SolarContactForms.css";
 
 const IDLE = { state: "idle", message: "" };
-
-const PANELS = [
-  {
-    key: "project",
-    eyebrow: "Project inquiry",
-    title: "Discuss a project",
-    hint: "Site, capacity and the scope you need.",
-  },
-  {
-    key: "career",
-    eyebrow: "Careers",
-    title: "Join the team",
-    hint: "Send your CV and tell us what you have built.",
-  },
-];
 
 function StatusLine({ status }) {
   return (
@@ -44,10 +30,10 @@ function ConsentField({ name, children }) {
   );
 }
 
-function SubmitButton({ label, busy, disabled, icon: Icon = Send }) {
+function SubmitButton({ label, busyLabel, busy, disabled, icon: Icon = Send }) {
   return (
     <button className="contact-forms-submit" type="submit" disabled={busy || disabled}>
-      <span>{busy ? "Sending..." : label}</span>
+      <span>{busy ? busyLabel : label}</span>
       {busy
         ? <Loader2 className="contact-forms-spin" size={18} strokeWidth={1.8} aria-hidden="true" />
         : <Icon size={18} strokeWidth={1.8} aria-hidden="true" />}
@@ -55,7 +41,7 @@ function SubmitButton({ label, busy, disabled, icon: Icon = Send }) {
   );
 }
 
-function ProjectForm({ openLegal, contactAction }) {
+function ProjectForm({ openLegal, contactAction, text }) {
   const [status, setStatus] = useState(IDLE);
   const busy = status.state === "submitting";
 
@@ -67,7 +53,10 @@ function ProjectForm({ openLegal, contactAction }) {
     if (!form.reportValidity()) return;
 
     const data = new FormData(form);
-    setStatus({ state: "submitting", message: "Sending your request..." });
+    setStatus({
+      state: "submitting",
+      message: text("sendingRequestMessage", "Solicitarea se trimite..."),
+    });
 
     try {
       await submitProjectInquiry({
@@ -81,12 +70,12 @@ function ProjectForm({ openLegal, contactAction }) {
       form.reset();
       setStatus({
         state: "success",
-        message: "Thank you. Your project inquiry has been sent to our team.",
+        message: text("requestSuccessMessage", "Va multumim. Solicitarea a ajuns la echipa noastra."),
       });
-    } catch (error) {
+    } catch {
       setStatus({
         state: "error",
-        message: error.message || "Your request could not be sent. Please try again.",
+        message: text("requestErrorMessage", "Solicitarea nu a putut fi trimisa. Incercati din nou."),
       });
     }
   };
@@ -95,52 +84,55 @@ function ProjectForm({ openLegal, contactAction }) {
     <form className="contact-forms-form" onSubmit={submit} noValidate>
       <div className="contact-forms-grid">
         <div className="contact-forms-field">
-          <label htmlFor="project-first-name">First name</label>
+          <label htmlFor="project-first-name">{text("firstNameLabel", "Prenume")}</label>
           <input id="project-first-name" name="firstName" type="text"
             autoComplete="given-name" required />
         </div>
 
         <div className="contact-forms-field">
-          <label htmlFor="project-last-name">Last name</label>
+          <label htmlFor="project-last-name">{text("lastNameLabel", "Nume")}</label>
           <input id="project-last-name" name="lastName" type="text"
             autoComplete="family-name" required />
         </div>
 
         <div className="contact-forms-field">
-          <label htmlFor="project-phone">Phone number</label>
+          <label htmlFor="project-phone">{text("phoneLabel", "Numar de telefon")}</label>
           <input id="project-phone" name="phone" type="tel" autoComplete="tel" required />
         </div>
 
         <div className="contact-forms-field contact-forms-field-wide">
-          <label htmlFor="project-message">Describe your project</label>
+          <label htmlFor="project-message">{text("messageLabel", "Descrieti proiectul")}</label>
           <textarea id="project-message" name="message" rows={5} required />
         </div>
       </div>
 
       <label className="contact-forms-honeypot" aria-hidden="true">
-        Website
+        {text("websiteLabel", "Website")}
         <input name="website" type="text" tabIndex={-1} autoComplete="off" />
       </label>
 
       <ConsentField name="gdprConsent">
-        I agree to the processing of my personal data so GreenTech Professionals
-        can respond to this inquiry, as described in the{" "}
+        {text("consentPrefix", "Sunt de acord cu prelucrarea datelor personale pentru ca Greentech Professionals sa poata raspunde solicitarii, conform")} {" "}
         <button type="button" className="contact-forms-inline-link"
           onClick={(event) => openLegal("privacy", event)}>
-          privacy policy
+          {text("privacyPolicyLabel", "politicii de confidentialitate")}
         </button>
-        .
+        {text("consentSuffix", ".")}
       </ConsentField>
 
       <div className="contact-forms-actions">
-        <SubmitButton label={contactAction?.label || "Send request"} busy={busy} />
+        <SubmitButton
+          label={contactAction?.label || "Trimite solicitarea"}
+          busyLabel={text("sendingLabel", "Se trimite...")}
+          busy={busy}
+        />
         <StatusLine status={status} />
       </div>
     </form>
   );
 }
 
-function CareerForm({ openLegal }) {
+function CareerForm({ openLegal, text }) {
   const [status, setStatus] = useState(IDLE);
   const [cvFile, setCvFile] = useState(null);
   const fileRef = useRef(null);
@@ -154,12 +146,15 @@ function CareerForm({ openLegal }) {
     if (!form.reportValidity()) return;
 
     if (!cvFile) {
-      setStatus({ state: "error", message: "Please attach your CV." });
+      setStatus({ state: "error", message: text("missingCvMessage", "Atasati CV-ul.") });
       return;
     }
 
     const data = new FormData(form);
-    setStatus({ state: "submitting", message: "Sending your application..." });
+    setStatus({
+      state: "submitting",
+      message: text("sendingApplicationMessage", "Candidatura se trimite..."),
+    });
 
     try {
       await submitCareerApplication({
@@ -176,12 +171,12 @@ function CareerForm({ openLegal }) {
       setCvFile(null);
       setStatus({
         state: "success",
-        message: "Thank you. Your application and CV have reached our team.",
+        message: text("applicationSuccessMessage", "Va multumim. Candidatura si CV-ul au ajuns la echipa noastra."),
       });
-    } catch (error) {
+    } catch {
       setStatus({
         state: "error",
-        message: error.message || "Your application could not be sent. Please try again.",
+        message: text("applicationErrorMessage", "Candidatura nu a putut fi trimisa. Incercati din nou."),
       });
     }
   };
@@ -190,46 +185,54 @@ function CareerForm({ openLegal }) {
     <form className="contact-forms-form" onSubmit={submit} noValidate>
       <div className="contact-forms-grid">
         <div className="contact-forms-field">
-          <label htmlFor="career-name">Name</label>
+          <label htmlFor="career-name">{text("nameLabel", "Nume")}</label>
           <input id="career-name" name="name" type="text" autoComplete="name" required />
         </div>
 
         <div className="contact-forms-field">
-          <label htmlFor="career-position">Position</label>
+          <label htmlFor="career-position">{text("positionLabel", "Pozitia dorita")}</label>
           <input id="career-position" name="position" type="text"
-            placeholder="Electrician, inginer, coordonator..." required />
+            placeholder={text("positionPlaceholder", "Electrician, inginer, coordonator...")} required />
         </div>
 
         <div className="contact-forms-field">
-          <label htmlFor="career-email">Email</label>
+          <label htmlFor="career-email">{text("emailLabel", "E-mail")}</label>
           <input id="career-email" name="email" type="email" autoComplete="email" required />
         </div>
 
         <div className="contact-forms-field">
-          <label htmlFor="career-phone">Phone Number</label>
+          <label htmlFor="career-phone">{text("phoneLabel", "Numar de telefon")}</label>
           <input id="career-phone" name="phone" type="tel" autoComplete="tel" required />
         </div>
 
         <div className="contact-forms-field contact-forms-field-wide">
-          <label htmlFor="career-experience">Describe your experience</label>
+          <label htmlFor="career-experience">{text("experienceLabel", "Descrieti experienta")}</label>
           <textarea id="career-experience" name="experience" rows={5} required />
         </div>
 
         <div className="contact-forms-field contact-forms-field-wide">
-          <label htmlFor="career-cv">Upload your CV / References</label>
+          <label htmlFor="career-cv">{text("cvLabel", "Incarcati CV-ul sau referintele")}</label>
           <div className="contact-forms-file">
             <button type="button" onClick={() => fileRef.current?.click()}>
               <Paperclip size={16} strokeWidth={1.8} aria-hidden="true" />
-              {cvFile ? "Change file" : "Choose file"}
+              {cvFile
+                ? text("changeFileLabel", "Schimba fisierul")
+                : text("chooseFileLabel", "Alege fisierul")}
             </button>
 
             <span className="contact-forms-file-name">
-              {cvFile ? `${cvFile.name} · ${Math.ceil(cvFile.size / 1024)} KB` : "PDF, DOC or DOCX"}
+              {cvFile
+                ? `${cvFile.name} - ${Math.ceil(cvFile.size / 1024)} KB`
+                : text("fileTypesLabel", "PDF, DOC sau DOCX")}
             </span>
 
             {cvFile && (
-              <button type="button" className="contact-forms-file-clear"
-                aria-label="Elimină fișierul" onClick={() => setCvFile(null)}>
+              <button
+                type="button"
+                className="contact-forms-file-clear"
+                aria-label={text("clearFileLabel", "Elimina fisierul")}
+                onClick={() => setCvFile(null)}
+              >
                 <X size={15} strokeWidth={1.9} aria-hidden="true" />
               </button>
             )}
@@ -250,29 +253,32 @@ function CareerForm({ openLegal }) {
             />
           </div>
           <small>
-            Maxim {Math.round(MAX_CV_BYTES / 1024 / 1024)} MB. Fișierul ajunge doar la
-            echipa noastră de recrutare.
+            {text("fileHintPrefix", "Maximum")} {Math.round(MAX_CV_BYTES / 1024 / 1024)} {text("fileHintSuffix", "MB. Fisierul ajunge doar la echipa de recrutare.")}
           </small>
         </div>
       </div>
 
       <label className="contact-forms-honeypot" aria-hidden="true">
-        Website
+        {text("websiteLabel", "Website")}
         <input name="website" type="text" tabIndex={-1} autoComplete="off" />
       </label>
 
       <ConsentField name="gdprConsent">
-        Sunt de acord cu prelucrarea datelor mele personale și a CV-ului în scopul
-        recrutării, conform{" "}
+        {text("consentPrefix", "Sunt de acord cu prelucrarea datelor personale si a CV-ului in scopul recrutarii, conform")} {" "}
         <button type="button" className="contact-forms-inline-link"
           onClick={(event) => openLegal("privacy", event)}>
-          politicii de confidențialitate
+          {text("privacyPolicyLabel", "politicii de confidentialitate")}
         </button>
-        .
+        {text("consentSuffix", ".")}
       </ConsentField>
 
       <div className="contact-forms-actions">
-        <SubmitButton label="Trimite aplicația" busy={busy} icon={Briefcase} />
+        <SubmitButton
+          label={text("action", "Trimite candidatura")}
+          busyLabel={text("sendingLabel", "Se trimite...")}
+          busy={busy}
+          icon={Briefcase}
+        />
         <StatusLine status={status} />
       </div>
     </form>
@@ -280,8 +286,24 @@ function CareerForm({ openLegal }) {
 }
 
 function SolarContactForms({ openLegal, contactAction }) {
+  const contactText = useSection("contact");
+  const careerText = useSection("careers");
   const [openPanel, setOpenPanel] = useState("project");
   const rootRef = useRef(null);
+  const panels = [
+    {
+      key: "project",
+      eyebrow: contactText("projectPanelEyebrow", "Solicitare proiect"),
+      title: contactText("projectPanelTitle", "Discutati un proiect"),
+      hint: contactText("projectPanelHint", "Amplasament, capacitate si lucrari necesare."),
+    },
+    {
+      key: "career",
+      eyebrow: careerText("careerPanelEyebrow", "Cariere"),
+      title: careerText("careerPanelTitle", "Alaturati-va echipei"),
+      hint: careerText("careerPanelHint", "CV, experienta si rolul urmarit."),
+    },
+  ];
 
   // The nav's Apply control and any shared `#apply` link land here: open the
   // career panel and bring it into view.
@@ -312,7 +334,7 @@ function SolarContactForms({ openLegal, contactAction }) {
   return (
     <div className="contact-forms" ref={rootRef}>
       <div className="contact-forms-triggers">
-        {PANELS.map((panel) => {
+        {panels.map((panel) => {
           const open = openPanel === panel.key;
 
           return (
@@ -333,7 +355,7 @@ function SolarContactForms({ openLegal, contactAction }) {
         })}
       </div>
 
-      {PANELS.map((panel) => {
+      {panels.map((panel) => {
         const open = openPanel === panel.key;
 
         return (
@@ -346,8 +368,15 @@ function SolarContactForms({ openLegal, contactAction }) {
             inert={open ? undefined : true}
           >
             {panel.key === "project"
-              ? <ProjectForm openLegal={openLegal} contactAction={contactAction} />
-              : <CareerForm openLegal={openLegal} />}
+              ? (
+                <ProjectForm
+                  openLegal={openLegal}
+                  contactAction={contactAction}
+                  text={contactText}
+                />
+              ) : (
+                <CareerForm openLegal={openLegal} text={careerText} />
+              )}
           </div>
         );
       })}

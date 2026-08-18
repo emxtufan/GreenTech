@@ -6,9 +6,11 @@ import {
   CalendarDays,
   Clock3,
 } from "lucide-react";
+import useSection from "./hooks/useSection.js";
 import "./BlogPostPage.css";
 
 function BlogPostPage({ post, onClose, onProjectOpen }) {
+  const text = useSection("blog");
   const pageRef = useRef(null);
   const backButtonRef = useRef(null);
   const sections = (Array.isArray(post.sections) ? post.sections : [])
@@ -41,8 +43,11 @@ function BlogPostPage({ post, onClose, onProjectOpen }) {
   );
   const hasAction = hasProjectAction || hasLinkAction;
   const actionLabel = hasProjectAction
-    ? (action?.type === "project" && action.label ? action.label : "View related project")
+    ? (action?.type === "project" && action.label
+      ? action.label
+      : text("relatedProjectFallback", "Vezi proiectul asociat"))
     : action?.label;
+  const actionIsExternal = /^https?:\/\//i.test(String(action?.href || ""));
   const lead = post.intro || post.excerpt;
 
   useEffect(() => {
@@ -56,7 +61,7 @@ function BlogPostPage({ post, onClose, onProjectOpen }) {
       if (event.key === "Escape") onClose();
     };
 
-    document.title = `${post.title} | GreenTech Journal`;
+    document.title = `${post.title} | Jurnal Greentech`;
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
@@ -77,10 +82,10 @@ function BlogPostPage({ post, onClose, onProjectOpen }) {
         <button
           className="blog-post-brand"
           type="button"
-          aria-label="Return to the journal"
+          aria-label={text("returnJournalLabel", "Inapoi la jurnal")}
           onClick={onClose}
         >
-          <img src="/original/logo-alb.png.webp" alt="GreenTech Professionals" />
+          <img src="/original/logo-alb.png.webp" alt="Greentech Professionals" />
         </button>
         <button
           className="blog-post-back"
@@ -89,7 +94,7 @@ function BlogPostPage({ post, onClose, onProjectOpen }) {
           onClick={onClose}
         >
           <ArrowLeft size={18} strokeWidth={1.8} aria-hidden="true" />
-          <span>Back to journal</span>
+          <span>{text("returnJournalLabel", "Inapoi la jurnal")}</span>
         </button>
       </header>
 
@@ -120,11 +125,14 @@ function BlogPostPage({ post, onClose, onProjectOpen }) {
           </figure>
         )}
 
-        <section className="blog-post-article" aria-label="Article content">
+        <section
+          className="blog-post-article"
+          aria-label={text("articleContentLabel", "Continutul articolului")}
+        >
           <aside>
-            <span>Published in</span>
+            <span>{text("publishedInLabel", "Publicat in")}</span>
             <strong>{post.category}</strong>
-            <span>Reading time</span>
+            <span>{text("readingTimeLabel", "Timp de citire")}</span>
             <strong>{post.readTime}</strong>
           </aside>
 
@@ -142,7 +150,10 @@ function BlogPostPage({ post, onClose, onProjectOpen }) {
         </section>
 
         {highlights.length > 0 && (
-          <section className="blog-post-highlights" aria-label="Article highlights">
+          <section
+            className="blog-post-highlights"
+            aria-label={text("highlightsLabel", "Idei principale")}
+          >
             {highlights.map((highlight, index) => (
               <div key={highlight.id || `${highlight.label || "highlight"}-${index}`}>
                 {highlight.value && <strong>{highlight.value}</strong>}
@@ -155,11 +166,11 @@ function BlogPostPage({ post, onClose, onProjectOpen }) {
         {hasAction && (
           <section className="blog-post-action" aria-labelledby="blog-post-action-title">
             <div>
-              <span>Continue exploring</span>
+              <span>{text("continueLabel", "Continuati explorarea")}</span>
               <h2 id="blog-post-action-title">
                 {hasProjectAction
-                  ? "See the work behind the story."
-                  : "Take the next step with GreenTech PRO."}
+                  ? text("relatedProjectHeading", "Vedeti proiectul din spatele articolului.")
+                  : text("externalActionHeading", "Aflati mai multe despre Greentech Professionals.")}
               </h2>
             </div>
 
@@ -169,7 +180,10 @@ function BlogPostPage({ post, onClose, onProjectOpen }) {
                 <ArrowRight size={19} strokeWidth={1.8} aria-hidden="true" />
               </button>
             ) : (
-              <a href={action.href} target="_blank" rel="noreferrer">
+              <a
+                href={action.href}
+                {...(actionIsExternal ? { target: "_blank", rel: "noreferrer" } : null)}
+              >
                 <span>{action.label}</span>
                 <ArrowUpRight size={19} strokeWidth={1.8} aria-hidden="true" />
               </a>
@@ -179,9 +193,9 @@ function BlogPostPage({ post, onClose, onProjectOpen }) {
 
         {post.sourceUrl && (
           <footer className="blog-post-source">
-            <span>Source</span>
+            <span>{text("sourceLabel", "Sursa")}</span>
             <a href={post.sourceUrl} target="_blank" rel="noreferrer">
-              GreenTech Professionals official website
+              {text("officialSiteLabel", "Site-ul oficial Greentech Professionals")}
               <ArrowUpRight size={15} strokeWidth={1.8} aria-hidden="true" />
             </a>
           </footer>

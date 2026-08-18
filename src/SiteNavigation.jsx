@@ -29,6 +29,7 @@ const NAV_ITEMS = [
   { labelKey: "process", href: "#process" },
   { labelKey: "projects", href: "#projects" },
   { labelKey: "credentials", href: "#credentials" },
+  { labelKey: "gallery", href: "#photo-gallery" },
   { labelKey: "reviews", href: "#reviews" },
   { labelKey: "journal", href: "#journal" },
   { labelKey: "faqs", href: "#faqs" },
@@ -317,7 +318,7 @@ function SiteNavigation({ visible, backToIntro, entered }) {
             src="/original/logo-nav-480.webp"
             width="480"
             height="67"
-            alt="GreenTech Professionals"
+            alt="Greentech Professionals"
             decoding="async"
           />
         </button>

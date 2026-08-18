@@ -387,10 +387,11 @@ function ScrollElectricalInspection({ active, prepare = false, onPrepared }) {
         />
         <ServiceSectionOverlay
           active={active}
-          index={text("eyebrow", "02 / Service")}
+          label={text("marqueeLabel", "SERVICII")}
+          index={text("eyebrow", "02 / Servicii")}
           titleId="service-electrical-title"
-          title={text("title", "Electrical Inspections & Testing")}
-          description={text("description", "Acceptance and periodic testing for panels, switchgear and distribution networks — insulation and earthing measurements, thermography, and full documentation.")}
+          title={text("title", "Inspectii si verificari electrice")}
+          description={text("description", "Realizam masuratori, termografie, verificari PRAM si documentatie pentru tablouri, echipamente si retele de distributie.")}
         />
       </div>
     </section>

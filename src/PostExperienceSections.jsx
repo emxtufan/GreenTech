@@ -8,6 +8,7 @@ import CountUp from "./CountUp.jsx";
 import FaqSection from "./FaqSection.jsx";
 import HorizontalParallaxGallery from "./HorizontalParallaxGallery.jsx";
 import LogoLoop from "./LogoLoop.jsx";
+import PhotoGallerySection from "./PhotoGallerySection.jsx";
 import ScrollConstructionServices from "./ScrollConstructionServices.jsx";
 import ScrollDataCenterBuild from "./ScrollDataCenterBuild.jsx";
 import ScrollElectricalInspection from "./ScrollElectricalInspection.jsx";
@@ -21,6 +22,7 @@ import {
   selectClientLogos,
   selectGalleryItems,
   selectImpactStats,
+  selectPhotoGalleryItems,
   selectProcessCards,
 } from "./lib/siteContent.js";
 import { TOUCH_VISUAL_EASE, usesNativeTouchScroll } from "./scrollMotion.js";
@@ -127,11 +129,11 @@ function FinalSection({ entered }) {
   const clientsText = useSection("clients");
   const configuredCompanyVideoUrl = companyVideoText("videoUrl", "/video.mp4");
   const companyVideoUrl = configuredCompanyVideoUrl.trim() || "/video.mp4";
-  const companyVideoEyebrow = companyVideoText("eyebrow", "Company film");
-  const companyVideoTitle = companyVideoText("title", "Work delivered in the field");
+  const companyVideoEyebrow = companyVideoText("eyebrow", "Film de prezentare");
+  const companyVideoTitle = companyVideoText("title", "Lucrari din santier");
   const companyVideoDescription = companyVideoText(
     "description",
-    "Looping company video that starts when the section reaches the top of the viewport.",
+    "Imagini din lucrarile executate de echipele noastre.",
   );
   const hasCompanyVideoHeading = Boolean(companyVideoEyebrow || companyVideoTitle);
   const hasCompanyVideoCopy = Boolean(hasCompanyVideoHeading || companyVideoDescription);
@@ -211,7 +213,7 @@ function FinalSection({ entered }) {
           <BlurText
             as="h1"
             id="final-section-title"
-            text={companyText("title", "GreenTech Professionals SRL")}
+            text={companyText("title", "Greentech Professionals SRL")}
             play={introRevealed}
             animateBy="letters"
             direction="top"
@@ -225,7 +227,7 @@ function FinalSection({ entered }) {
           >
             {companyText(
               "description",
-              "GreenTech Professionals is an electrical and construction company with experience in electrical and mechanical works in the photovoltaic field.",
+              "Executam lucrari electrice, mecanice si civile pentru parcuri fotovoltaice si infrastructura tehnica.",
             )}
           </motion.p>
         </header>
@@ -253,7 +255,7 @@ function FinalSection({ entered }) {
         <section
           className="company-video"
           aria-labelledby={companyVideoTitle ? "company-video-title" : undefined}
-          aria-label={companyVideoTitle ? undefined : "Company video"}
+          aria-label={companyVideoTitle ? undefined : companyVideoText("ariaLabel", "Prezentare video")}
         >
           <div className="company-video-frame">
             <video
@@ -264,7 +266,7 @@ function FinalSection({ entered }) {
               loop
               playsInline
               preload="metadata"
-              aria-label={companyVideoTitle || "GreenTech Professionals company film"}
+              aria-label={companyVideoTitle || companyVideoText("ariaLabel", "Prezentare video Greentech Professionals")}
             />
           </div>
           {hasCompanyVideoCopy && (
@@ -295,7 +297,7 @@ function FinalSection({ entered }) {
           <BlurText
             as="h2"
             id="clients-title"
-            text={clientsText("title", "Our Clients")}
+            text={clientsText("title", "Clienti si parteneri")}
             play={clientsRevealed}
             animateBy="letters"
             direction="top"
@@ -309,7 +311,7 @@ function FinalSection({ entered }) {
           >
             {clientsText(
               "description",
-              "Selected client relationships across energy, mobility and infrastructure.",
+              "Lucram alaturi de dezvoltatori, antreprenori generali si parteneri tehnici implicati in proiecte de energie si infrastructura.",
             )}
           </motion.p>
           <motion.div
@@ -328,7 +330,7 @@ function FinalSection({ entered }) {
               scaleOnHover
               fadeOut
               fadeOutColor="#000000"
-              ariaLabel="Our clients"
+              ariaLabel={clientsText("loopAriaLabel", "Clientii si partenerii Greentech Professionals")}
             />
           </motion.div>
         </section>
@@ -417,11 +419,11 @@ function StackSection({ entered }) {
       <div className="process-section-inner">
         <header className="process-section-intro" ref={introRef}>
           <span>{processText("eyebrow", "Process")}</span>
-          <h2 id="process-section-title">{processText("title", "Our Work Process")}</h2>
+          <h2 id="process-section-title">{processText("title", "Cum lucram")}</h2>
           <p>
             {processText(
               "description",
-              "A compact view of how GreenTech Professionals moves a photovoltaic project from technical decisions to reliable field execution.",
+              "Trei etape clare: pregatirea lucrarilor, executia in santier si verificarile de dupa punerea in functiune.",
             )}
           </p>
         </header>
@@ -462,8 +464,11 @@ function PostExperienceSections({
   onOpenPost,
   onOpenProject,
   onShowAllProjects,
+  onShowAllPhotos,
 }) {
-  const galleryItems = selectGalleryItems(useSiteContent());
+  const siteContent = useSiteContent();
+  const galleryItems = selectGalleryItems(siteContent);
+  const photoGalleryItems = selectPhotoGalleryItems(siteContent);
   const preparedModelsRef = useRef(new Set());
 
   const handleModelPrepared = useCallback((key, success) => {
@@ -496,7 +501,17 @@ function PostExperienceSections({
         onProjectOpen={onOpenProject}
         onShowAllProjects={onShowAllProjects}
       />
-      <CompanyProofSection active={entered} />
+      <CompanyProofSection
+        active={entered}
+        beforeFootprint={(
+          <PhotoGallerySection
+            active={entered}
+            projects={galleryItems}
+            photos={photoGalleryItems}
+            onShowAllPhotos={onShowAllPhotos}
+          />
+        )}
+      />
       <ScrollSolarAssembly
         active={entered}
         prepare={prepare3d}

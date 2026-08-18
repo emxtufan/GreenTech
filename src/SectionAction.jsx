@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { ArrowUpRight, X } from "lucide-react";
 import { selectSection, sectionText } from "./lib/siteContent.js";
+import { uiText, useLocale } from "./lib/i18n.js";
 import useSiteContent from "./hooks/useSiteContent.js";
 import "./SectionAction.css";
 
@@ -22,7 +23,7 @@ export function useSectionAction(
   const configuredModal = section?.actionModal;
   const modal = {
     eyebrow: modalText(configuredModal, "eyebrow", sectionText(section, "eyebrow", "")),
-    title: modalText(configuredModal, "title", sectionText(section, "title", "More information")),
+    title: modalText(configuredModal, "title", sectionText(section, "title", "Mai multe informatii")),
     description: modalText(
       configuredModal,
       "description",
@@ -87,6 +88,7 @@ export function useSectionAction(
 }
 
 export default function SectionActionModal({ open, onClose, content, triggerRef }) {
+  const locale = useLocale();
   const titleId = useId();
   const descriptionId = useId();
   const panelRef = useRef(null);
@@ -163,14 +165,14 @@ export default function SectionActionModal({ open, onClose, content, triggerRef 
         aria-modal="true"
         aria-labelledby={content.title ? titleId : undefined}
         aria-describedby={hasDescription ? descriptionId : undefined}
-        aria-label={content.title ? undefined : "More information"}
+        aria-label={content.title ? undefined : uiText("moreInformation", locale)}
         tabIndex={-1}
       >
         <button
           ref={closeRef}
           className="section-action-modal-close"
           type="button"
-          aria-label="Close dialog"
+          aria-label={uiText("closeDialog", locale)}
           onClick={onClose}
         >
           <X aria-hidden="true" />
@@ -202,4 +204,3 @@ export default function SectionActionModal({ open, onClose, content, triggerRef 
     document.body,
   );
 }
-

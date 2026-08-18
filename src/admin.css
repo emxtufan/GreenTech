@@ -1152,6 +1152,50 @@ a {
 .admin-toast button:hover { color: var(--foreground); }
 .admin-toast button svg { width: 15px; height: 15px; }
 
+.admin-collection-heading-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.admin-collection-heading-actions > button svg,
+.admin-bulk-upload > button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.admin-bulk-progress {
+  position: relative;
+  display: flex;
+  min-height: 32px;
+  margin: -10px 0 18px;
+  padding: 0 11px;
+  overflow: hidden;
+  align-items: center;
+  border: 1px solid #2a382d;
+  border-radius: 4px;
+  background: #090e0b;
+}
+
+.admin-bulk-progress > span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: rgb(139 197 63 / 18%);
+  transition: width 180ms ease;
+}
+
+.admin-bulk-progress > small {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  color: #aab4ac;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .admin-collection {
   display: flex;
   margin: 0 0 16px;
@@ -1361,6 +1405,43 @@ a {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.admin-bulk-upload {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-bulk-upload > small {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--muted-foreground);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-bulk-upload-compact {
+  padding-bottom: 2px;
+}
+
+@media (max-width: 640px) {
+  .admin-form-heading {
+    flex-wrap: wrap;
+  }
+
+  .admin-collection-heading-actions {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .admin-bulk-upload {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }
 
 .admin-nested-row {

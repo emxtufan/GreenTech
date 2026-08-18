@@ -166,6 +166,20 @@
   line-height: 1.45;
 }
 
+.company-proof-gallery-slot {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin-top: clamp(86px, 11vw, 160px);
+  transform: translateX(-50%);
+}
+
+.company-proof-gallery-slot + .company-footprint {
+  margin-top: 0;
+  padding-top: clamp(76px, 9vw, 132px);
+  border-top: 0;
+}
+
 .company-footprint {
   display: grid;
   grid-template-columns: minmax(260px, 0.65fr) minmax(520px, 1.35fr);

@@ -9,7 +9,7 @@ function ServiceSectionOverlay({
   index,
   title,
   description,
-  label = "SERVICES",
+  label = "SERVICII",
   titleId,
   active = true,
 }) {

@@ -53,7 +53,7 @@ function getReviewInitials(name) {
     .toUpperCase();
 }
 
-function CompanyProofSection({ active }) {
+function CompanyProofSection({ active, beforeFootprint = null }) {
   const content = useSiteContent();
   const credentials = selectCredentials(content);
   const footprintCountries = selectFootprintCountries(content);
@@ -82,16 +82,16 @@ function CompanyProofSection({ active }) {
   const carouselTestimonials = testimonials;
   const carouselPaused = testimonialPaused || reviewOpen;
   const credentialsAction = useSectionAction("credentials", {
-    label: "Review credentials",
+    label: "Vezi acreditarile",
     mode: "link",
   });
   const qualityAction = useSectionAction("quality", {
-    label: "Explore our capabilities",
+    label: "Vezi serviciile",
     mode: "link",
     url: "#service-photovoltaic",
   });
   const reviewsAction = useSectionAction("reviews", {
-    label: "Create a review",
+    label: "Scrie o recenzie",
     mode: "builtin",
   });
 
@@ -248,28 +248,28 @@ function CompanyProofSection({ active }) {
     const quote = reviewForm.quote.trim();
 
     if (author.length < 2) {
-      setReviewError("Please enter your name.");
+      setReviewError(reviewsText("validationName", "Introduceti numele."));
       reviewNameRef.current?.focus();
       return;
     }
 
     if (reviewForm.rating < 1) {
-      setReviewError("Please select a star rating.");
+      setReviewError(reviewsText("validationRating", "Alegeti numarul de stele."));
       return;
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setReviewError("Please enter a valid email address. It will not be published.");
+      setReviewError(reviewsText("validationEmail", "Introduceti o adresa de e-mail valida. Adresa nu va fi publicata."));
       return;
     }
 
     if (quote.length < 10) {
-      setReviewError("Please write at least 10 characters about your experience.");
+      setReviewError(reviewsText("validationReview", "Scrieti cel putin 10 caractere despre experienta dumneavoastra."));
       return;
     }
 
     if (!reviewForm.consent) {
-      setReviewError("Please confirm that your review may be displayed publicly.");
+      setReviewError(reviewsText("validationConsent", "Confirmati ca recenzia poate fi afisata public."));
       return;
     }
 
@@ -285,8 +285,8 @@ function CompanyProofSection({ active }) {
         website: reviewForm.website,
       });
       setReviewSubmitted(true);
-    } catch (error) {
-      setReviewError(error.message || "The review could not be submitted. Please try again.");
+    } catch {
+      setReviewError(reviewsText("submitError", "Recenzia nu a putut fi trimisa. Incercati din nou."));
     } finally {
       setReviewSubmitting(false);
     }
@@ -321,12 +321,12 @@ function CompanyProofSection({ active }) {
     >
       <div className="company-proof-inner">
         <header className="company-proof-header proof-reveal">
-          <span>{credentialsText("eyebrow", "Trust & certifications")}</span>
+          <span>{credentialsText("eyebrow", "Certificari si experienta")}</span>
           <div>
             <BlurText
               as="h2"
               id="company-proof-title"
-              text={credentialsText("title", "Built for accountable field delivery.")}
+              text={credentialsText("title", "Competente verificate pentru lucrari bine executate.")}
               play={active}
               animateBy="letters"
               direction="top"
@@ -336,7 +336,7 @@ function CompanyProofSection({ active }) {
             <p>
               {credentialsText(
                 "description",
-                "Technical capability, qualified teams and a growing European footprint behind every stage of execution.",
+                "Certificarile, experienta echipelor si prezenta in trei piete europene sustin modul nostru de lucru.",
               )}
             </p>
           </div>
@@ -366,13 +366,19 @@ function CompanyProofSection({ active }) {
           })}
         </div>
 
+        {beforeFootprint && (
+          <div className="company-proof-gallery-slot">
+            {beforeFootprint}
+          </div>
+        )}
+
         <section className="company-footprint proof-reveal" aria-labelledby="footprint-title">
           <header>
-            <span>{footprintText("eyebrow", "European footprint")}</span>
+            <span>{footprintText("eyebrow", "Amprenta europeana")}</span>
             <BlurText
               as="h2"
               id="footprint-title"
-              text={footprintText("title", "Teams close to the work.")}
+              text={footprintText("title", "Echipe active in Romania, Italia si Spania.")}
               play={active}
               animateBy="letters"
               direction="top"
@@ -382,7 +388,7 @@ function CompanyProofSection({ active }) {
             <p>
               {footprintText(
                 "description",
-                "Published projects and field updates connect GreenTech Professionals across Romania, Italy and Spain.",
+                "Harta arata tarile si amplasamentele in care Greentech Professionals a desfasurat lucrari.",
               )}
             </p>
           </header>
@@ -393,11 +399,21 @@ function CompanyProofSection({ active }) {
                 className="company-footprint-map company-footprint-map-loading"
                 role="status"
               >
-                <span>Loading European project map</span>
+                <span>{footprintText("mapLoadingLabel", "Se incarca harta proiectelor europene")}</span>
               </div>
             }
           >
-            <CompanyFootprintMap countries={footprintCountries} />
+            <CompanyFootprintMap
+              countries={footprintCountries}
+              labels={{
+                title: footprintText("mapTitle"),
+                descriptionPrefix: footprintText("mapDescriptionPrefix"),
+                descriptionFallback: footprintText("mapDescriptionFallback"),
+                showCountry: footprintText("mapShowCountryLabel"),
+                countries: footprintText("mapCountriesLabel"),
+                empty: footprintText("mapEmptyLabel"),
+              }}
+            />
           </Suspense>
         </section>
 
@@ -405,19 +421,19 @@ function CompanyProofSection({ active }) {
           <figure className="company-quality-media">
             <img
               src="/gallery/solar-safety.webp"
-              alt="Protective equipment positioned on photovoltaic panels"
+              alt={qualityText("imageAlt", "Echipament de protectie asezat pe module fotovoltaice")}
               loading="lazy"
               decoding="async"
             />
-            <figcaption>Safety is designed into the work.</figcaption>
+            <figcaption>{qualityText("imageCaption", "Siguranta incepe inaintea lucrarilor.")}</figcaption>
           </figure>
 
           <div className="company-quality-copy">
-            <span>{qualityText("eyebrow", "Safety & quality")}</span>
+            <span>{qualityText("eyebrow", "Siguranta si calitate")}</span>
             <BlurText
               as="h2"
               id="quality-title"
-              text={qualityText("title", "Control from planning to handover.")}
+              text={qualityText("title", "Control tehnic, de la mobilizare la predare.")}
               play={active}
               animateBy="letters"
               direction="top"
@@ -427,7 +443,7 @@ function CompanyProofSection({ active }) {
             <p>
               {qualityText(
                 "description",
-                "Reliable delivery depends on disciplined field execution, qualified personnel and checks that continue beyond installation.",
+                "Urmarim executia prin verificari planificate, masuratori si documentatie de santier.",
               )}
             </p>
             <ul>
@@ -454,7 +470,7 @@ function CompanyProofSection({ active }) {
           ref={testimonialRef}
           id="reviews"
           className={`company-testimonial-carousel proof-reveal ${testimonialInView ? "is-running" : ""} ${carouselPaused ? "is-paused" : ""}`}
-          aria-label="Customer testimonials"
+          aria-label={reviewsText("carouselLabel", "Recenzii ale clientilor")}
           aria-roledescription="carousel"
           onPointerEnter={() => setTestimonialPaused(true)}
           onPointerLeave={() => setTestimonialPaused(false)}
@@ -472,7 +488,7 @@ function CompanyProofSection({ active }) {
           }}
         >
           <div className="company-testimonial-toolbar">
-            <span>{reviewsText("eyebrow", "Customer reviews")}</span>
+            <span>{reviewsText("eyebrow", "Recenzii")}</span>
             {reviewsAction.visible && (
               <button
                 ref={reviewTriggerRef}
@@ -493,8 +509,8 @@ function CompanyProofSection({ active }) {
             {carouselTestimonials.length === 0 && (
               <div className="company-testimonial-empty">
                 <MessageSquarePlus size={22} strokeWidth={1.6} aria-hidden="true" />
-                <strong>No customer reviews are published yet.</strong>
-                <span>Submitted reviews appear here only after approval.</span>
+                <strong>{reviewsText("noReviewsTitle", "Nu exista recenzii publicate.")}</strong>
+                <span>{reviewsText("noReviewsDescription", "Recenziile trimise apar aici dupa aprobare.")}</span>
               </div>
             )}
 
@@ -529,11 +545,11 @@ function CompanyProofSection({ active }) {
                           <CheckCircle2 size={15} strokeWidth={1.8} aria-hidden="true" />
                         )}
                       </strong>
-                      <span>{testimonial.role || "Customer review"}</span>
+                      <span>{testimonial.role || reviewsText("reviewRole", "Recenzie client")}</span>
                     </span>
                     <span
                       className="company-testimonial-rating"
-                      aria-label={`${testimonial.rating} out of 5 stars`}
+                      aria-label={`${testimonial.rating} ${reviewsText("ratingOutOfLabel", "stele din 5")}`}
                     >
                       {[1, 2, 3, 4, 5].map((star) => (
                         <Star
@@ -557,12 +573,12 @@ function CompanyProofSection({ active }) {
                       {testimonial.source ? (
                         <>
                           <ShieldCheck size={15} strokeWidth={1.7} aria-hidden="true" />
-                          Source-backed testimonial
+                          {reviewsText("sourceBackedLabel", "Recenzie din sursa publica")}
                         </>
                       ) : (
                         <>
                           <CheckCircle2 size={15} strokeWidth={1.7} aria-hidden="true" />
-                          Approved customer submission
+                          {reviewsText("approvedSubmissionLabel", "Recenzie aprobata")}
                         </>
                       )}
                     </span>
@@ -572,9 +588,9 @@ function CompanyProofSection({ active }) {
                         target="_blank"
                         rel="noreferrer"
                         tabIndex={selected ? 0 : -1}
-                        aria-label={`Read ${testimonial.author} testimonial source`}
+                        aria-label={`${reviewsText("readSourceLabel", "Citeste sursa recenziei scrise de")} ${testimonial.author}`}
                       >
-                        Original source
+                        {reviewsText("originalSourceLabel", "Sursa originala")}
                         <ArrowUpRight size={15} strokeWidth={1.8} aria-hidden="true" />
                       </a>
                     )}
@@ -590,13 +606,17 @@ function CompanyProofSection({ active }) {
                 {String(testimonialIndex + 1).padStart(2, "0")} / {String(carouselTestimonials.length).padStart(2, "0")}
               </span>
 
-              <div className="company-testimonial-dots" role="group" aria-label="Choose testimonial">
+              <div
+                className="company-testimonial-dots"
+                role="group"
+                aria-label={reviewsText("chooseReviewLabel", "Alege recenzia")}
+              >
                 {carouselTestimonials.map((testimonial, index) => (
                   <button
                     className={index === testimonialIndex ? "is-active" : ""}
                     type="button"
                     key={testimonial.id}
-                    aria-label={`Show testimonial ${index + 1}`}
+                    aria-label={`${reviewsText("showReviewLabel", "Afiseaza recenzia")} ${index + 1}`}
                     aria-current={index === testimonialIndex ? "true" : undefined}
                     onClick={() => setTestimonialIndex(index)}
                   >
@@ -608,8 +628,8 @@ function CompanyProofSection({ active }) {
               <div className="company-testimonial-arrows">
                 <button
                   type="button"
-                  aria-label="Previous testimonial"
-                  title="Previous testimonial"
+                  aria-label={reviewsText("previousReviewLabel", "Recenzia anterioara")}
+                  title={reviewsText("previousReviewLabel", "Recenzia anterioara")}
                   disabled={carouselTestimonials.length < 2}
                   onClick={showPreviousTestimonial}
                 >
@@ -617,8 +637,8 @@ function CompanyProofSection({ active }) {
                 </button>
                 <button
                   type="button"
-                  aria-label="Next testimonial"
-                  title="Next testimonial"
+                  aria-label={reviewsText("nextReviewLabel", "Recenzia urmatoare")}
+                  title={reviewsText("nextReviewLabel", "Recenzia urmatoare")}
                   disabled={carouselTestimonials.length < 2}
                   onClick={showNextTestimonial}
                 >
@@ -653,8 +673,8 @@ function CompanyProofSection({ active }) {
             <button
               className="company-review-close"
               type="button"
-              aria-label="Close review form"
-              title="Close"
+              aria-label={reviewsText("closeFormLabel", "Inchide formularul de recenzie")}
+              title={reviewsText("closeLabel", "Inchide")}
               onClick={closeReviewDialog}
             >
               <X size={20} strokeWidth={1.8} aria-hidden="true" />
@@ -667,39 +687,46 @@ function CompanyProofSection({ active }) {
                 </div>
 
                 <div className="company-review-success-copy">
-                  <p className="company-review-success-eyebrow">Review received</p>
-                  <h2 id="company-review-title">Thank you for sharing your experience.</h2>
+                  <p className="company-review-success-eyebrow">
+                    {reviewsText("successEyebrow", "Recenzie primita")}
+                  </p>
+                  <h2 id="company-review-title">
+                    {reviewsText("successTitle", "Va multumim pentru recenzie.")}
+                  </h2>
                   <p className="company-review-success-note">
-                    Your review was sent successfully. It will appear publicly after the GreenTech team approves it.
+                    {reviewsText(
+                      "successDescription",
+                      "Recenzia a fost trimisa si va deveni publica dupa aprobarea echipei Greentech.",
+                    )}
                   </p>
                 </div>
 
                 <div
                   className="company-review-success-status"
-                  aria-label="Moderation status: awaiting approval"
+                  aria-label={`${reviewsText("moderationStatusLabel", "Starea moderarii")}: ${reviewsText("awaitingApprovalLabel", "In asteptarea aprobarii")}`}
                 >
                   <ShieldCheck size={22} strokeWidth={1.6} aria-hidden="true" />
                   <div>
-                    <span>Moderation status</span>
-                    <strong>Awaiting approval</strong>
+                    <span>{reviewsText("moderationStatusLabel", "Starea moderarii")}</span>
+                    <strong>{reviewsText("awaitingApprovalLabel", "In asteptarea aprobarii")}</strong>
                   </div>
                 </div>
 
                 <button type="button" onClick={closeReviewDialog}>
-                  <span>Done</span>
+                  <span>{reviewsText("doneLabel", "Gata")}</span>
                   <CheckCircle2 size={17} strokeWidth={1.8} aria-hidden="true" />
                 </button>
               </div>
             ) : (
               <>
                 <header className="company-review-header">
-                  <span>Customer feedback</span>
+                  <span>{reviewsText("formEyebrow", "Opinia clientilor")}</span>
                   <h2 id="company-review-title">{reviewsAction.label}</h2>
                 </header>
 
                 <form className="company-review-form" onSubmit={submitReview} noValidate>
                   <label className="company-review-field">
-                    <span>Your name</span>
+                    <span>{reviewsText("nameLabel", "Nume")}</span>
                     <input
                       ref={reviewNameRef}
                       type="text"
@@ -707,13 +734,16 @@ function CompanyProofSection({ active }) {
                       value={reviewForm.name}
                       maxLength={60}
                       autoComplete="name"
-                      placeholder="Full name"
+                      placeholder={reviewsText("namePlaceholder", "Nume complet")}
                       onChange={(event) => updateReviewField("name", event.target.value)}
                     />
                   </label>
 
                   <label className="company-review-field">
-                    <span>Email <small>Private, used only for verification</small></span>
+                    <span>
+                      {reviewsText("emailLabel", "E-mail")} {" "}
+                      <small>{reviewsText("emailHint", "Ramane privat si este folosit doar pentru verificare")}</small>
+                    </span>
                     <input
                       type="email"
                       name="reviewer-email"
@@ -727,9 +757,12 @@ function CompanyProofSection({ active }) {
                   </label>
 
                   <fieldset className="company-review-rating-field">
-                    <legend>Your rating</legend>
+                    <legend>{reviewsText("ratingLabel", "Evaluare")}</legend>
                     <div className="company-review-rating-picker" onPointerLeave={() => setHoveredRating(0)}>
-                      <div role="radiogroup" aria-label="Choose a rating from 1 to 5 stars">
+                      <div
+                        role="radiogroup"
+                        aria-label={reviewsText("ratingPickerLabel", "Alegeti intre 1 si 5 stele")}
+                      >
                         {[1, 2, 3, 4, 5].map((rating) => {
                           const filled = rating <= (hoveredRating || reviewForm.rating);
 
@@ -747,24 +780,30 @@ function CompanyProofSection({ active }) {
                                 onChange={() => updateReviewField("rating", rating)}
                               />
                               <Star size={27} strokeWidth={1.55} aria-hidden="true" />
-                              <span className="company-review-sr-only">{rating} stars</span>
+                              <span className="company-review-sr-only">
+                                {rating} {reviewsText("starsLabel", "stele")}
+                              </span>
                             </label>
                           );
                         })}
                       </div>
-                      <output>{reviewForm.rating ? `${reviewForm.rating}.0` : "Select"}</output>
+                      <output>
+                        {reviewForm.rating
+                          ? `${reviewForm.rating}.0`
+                          : reviewsText("selectLabel", "Alegeti")}
+                      </output>
                     </div>
                   </fieldset>
 
                   <label className="company-review-field">
-                    <span>Your review</span>
+                    <span>{reviewsText("reviewLabel", "Recenzie")}</span>
                     <textarea
                       name="review-message"
                       value={reviewForm.quote}
                       minLength={10}
                       maxLength={420}
                       rows={5}
-                      placeholder="Tell us about your experience"
+                      placeholder={reviewsText("reviewPlaceholder", "Descrieti experienta colaborarii")}
                       onChange={(event) => updateReviewField("quote", event.target.value)}
                     />
                     <small>{reviewForm.quote.length} / 420</small>
@@ -776,11 +815,11 @@ function CompanyProofSection({ active }) {
                       checked={reviewForm.consent}
                       onChange={(event) => updateReviewField("consent", event.target.checked)}
                     />
-                    <span>I agree that my name and review may be displayed publicly.</span>
+                    <span>{reviewsText("consentLabel", "Sunt de acord ca numele si recenzia mea sa fie afisate public.")}</span>
                   </label>
 
                   <label className="company-review-honeypot" aria-hidden="true">
-                    <span>Website</span>
+                    <span>{reviewsText("websiteLabel", "Website")}</span>
                     <input
                       type="text"
                       name="website"
@@ -796,7 +835,11 @@ function CompanyProofSection({ active }) {
                   </p>
 
                   <button className="company-review-submit" type="submit" disabled={reviewSubmitting}>
-                    <span>{reviewSubmitting ? "Submitting..." : "Submit for approval"}</span>
+                    <span>
+                      {reviewSubmitting
+                        ? reviewsText("submittingLabel", "Se trimite...")
+                        : reviewsText("submitLabel", "Trimite pentru aprobare")}
+                    </span>
                     {reviewSubmitting ? (
                       <Loader2 className="company-review-spin" size={18} strokeWidth={1.8} aria-hidden="true" />
                     ) : (

@@ -119,7 +119,7 @@
   }
 
   .service-overlay-title {
-    max-width: 14ch;
+    max-width: 100%;
     font-size: clamp(30px, 8.4vw, 42px);
   }
 

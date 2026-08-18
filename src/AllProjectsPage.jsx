@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import useSection from "./hooks/useSection.js";
 import "./AllProjectsPage.css";
 
 function shouldHandleNavigation(event) {
@@ -13,6 +14,7 @@ function shouldHandleNavigation(event) {
 }
 
 function AllProjectsPage({ projects, onClose, onProjectOpen }) {
+  const text = useSection("projects");
   const pageRef = useRef(null);
   const backButtonRef = useRef(null);
 
@@ -27,7 +29,7 @@ function AllProjectsPage({ projects, onClose, onProjectOpen }) {
       if (event.key === "Escape") onClose();
     };
 
-    document.title = "All Projects | GreenTech Professionals";
+    document.title = `${text("allProjectsTitle", "Toate proiectele")} | Greentech Professionals`;
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
@@ -35,7 +37,7 @@ function AllProjectsPage({ projects, onClose, onProjectOpen }) {
       window.removeEventListener("keydown", handleKeyDown);
       window.cancelAnimationFrame(focusFrame);
     };
-  }, [onClose]);
+  }, [onClose, text]);
 
   const handleProjectLink = (event, projectId) => {
     if (!shouldHandleNavigation(event)) return;
@@ -54,10 +56,10 @@ function AllProjectsPage({ projects, onClose, onProjectOpen }) {
         <button
           className="projects-index-brand"
           type="button"
-          aria-label="Return to the portfolio"
+          aria-label={text("backPortfolioLabel", "Inapoi la portofoliu")}
           onClick={onClose}
         >
-          <img src="/original/logo-alb.png.webp" alt="GreenTech Professionals" />
+          <img src="/original/logo-alb.png.webp" alt="Greentech Professionals" />
         </button>
         <button
           className="projects-index-back"
@@ -66,31 +68,30 @@ function AllProjectsPage({ projects, onClose, onProjectOpen }) {
           onClick={onClose}
         >
           <ArrowLeft size={18} strokeWidth={1.8} aria-hidden="true" />
-          <span>Back to portfolio</span>
+          <span>{text("backPortfolioLabel", "Inapoi la portofoliu")}</span>
         </button>
       </header>
 
       <main>
         <header className="projects-index-intro">
           <div>
-            <span>Portfolio / {String(projects.length).padStart(2, "0")}</span>
-            <h1 id="projects-index-title">All Projects</h1>
+            <span>{text("portfolioLabel", "Portofoliu")} / {String(projects.length).padStart(2, "0")}</span>
+            <h1 id="projects-index-title">{text("allProjectsTitle", "Toate proiectele")}</h1>
           </div>
-          <p>
-            Photovoltaic projects delivered by GreenTech Professionals across
-            Romania and Europe, from electrical installation to complete field
-            execution.
-          </p>
+          <p>{text("allProjectsDescription")}</p>
         </header>
 
-        <section className="projects-index-grid" aria-label="Project portfolio">
+        <section
+          className="projects-index-grid"
+          aria-label={text("projectPortfolioLabel", "Portofoliu proiecte")}
+        >
           {projects.map((project, index) => (
             <a
               className="projects-index-card"
               href={`?project=${encodeURIComponent(project.id)}`}
               key={project.id}
               onClick={(event) => handleProjectLink(event, project.id)}
-              aria-label={`View project: ${project.title}`}
+              aria-label={`${text("viewProjectLabel", "Vezi proiectul")}: ${project.title}`}
             >
               <figure>
                 <img
@@ -109,15 +110,15 @@ function AllProjectsPage({ projects, onClose, onProjectOpen }) {
                 <h2>{project.title}</h2>
                 <dl>
                   <div>
-                    <dt>Location</dt>
+                    <dt>{text("locationLabel", "Locatie")}</dt>
                     <dd>{project.location}</dd>
                   </div>
                   <div>
-                    <dt>Date</dt>
+                    <dt>{text("dateLabel", "Data")}</dt>
                     <dd>{project.projectDate}</dd>
                   </div>
                   <div>
-                    <dt>Capacity</dt>
+                    <dt>{text("capacityLabel", "Capacitate")}</dt>
                     <dd>{project.capacity ?? project.capacityNote}</dd>
                   </div>
                 </dl>

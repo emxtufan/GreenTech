@@ -1,7 +1,7 @@
 const GEOCODER_URL = process.env.GEOCODER_URL
   || "https://nominatim.openstreetmap.org/search";
 const GEOCODER_USER_AGENT = process.env.GEOCODER_USER_AGENT
-  || "GreenTechProfessionalsAdmin/1.0 (+https://greentechpro.ro)";
+  || "GreentechProfessionalsAdmin/1.0 (+https://greentechpro.ro)";
 const MIN_REQUEST_INTERVAL_MS = 1100;
 const MAX_CACHE_ENTRIES = 500;
 

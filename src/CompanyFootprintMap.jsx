@@ -141,7 +141,15 @@ function createConnectionPath(originPoint, destinationPoint) {
   return `M ${originX} ${originY} Q ${controlX} ${controlY} ${destinationX} ${destinationY}`;
 }
 
-function CompanyFootprintMap({ countries = [] }) {
+function CompanyFootprintMap({ countries = [], labels = {} }) {
+  const copy = {
+    title: labels.title || "Amprenta europeana Greentech Professionals",
+    descriptionPrefix: labels.descriptionPrefix || "Locatii de proiect in",
+    descriptionFallback: labels.descriptionFallback || "Harta locatiilor proiectelor europene.",
+    showCountry: labels.showCountry || "Afiseaza locatiile proiectelor din",
+    countries: labels.countries || "Tarile proiectelor",
+    empty: labels.empty || "Nu sunt publicate tari pentru proiecte.",
+  };
   const mapData = useMemo(() => {
     const networkCountries = normalizeCountries(countries);
     const networkCountryById = new Map(
@@ -196,11 +204,11 @@ function CompanyFootprintMap({ countries = [] }) {
         role="img"
         aria-labelledby="company-map-title company-map-description"
       >
-        <title id="company-map-title">GreenTech Professionals European footprint</title>
+        <title id="company-map-title">{copy.title}</title>
         <desc id="company-map-description">
           {countryNames
-            ? `Project locations in ${countryNames}.`
-            : "European project locations map."}
+            ? `${copy.descriptionPrefix} ${countryNames}.`
+            : copy.descriptionFallback}
         </desc>
 
         <g className="company-map-countries">
@@ -215,7 +223,7 @@ function CompanyFootprintMap({ countries = [] }) {
 
             return (
               <path
-                aria-label={networkCountry ? `Show ${networkCountry.name} project locations` : undefined}
+                aria-label={networkCountry ? `${copy.showCountry} ${networkCountry.name}` : undefined}
                 className={classNames}
                 d={createCountryPath(country)}
                 key={countryId}
@@ -306,16 +314,16 @@ function CompanyFootprintMap({ countries = [] }) {
             <p>{selectedCountry.cities.map(({ name }) => name).join(" / ")}</p>
           </div>
         ) : (
-          <p className="company-map-empty">No project countries published.</p>
+          <p className="company-map-empty">{copy.empty}</p>
         )}
 
         {mapData.networkCountries.length > 0 && (
-          <div className="company-map-tabs" role="group" aria-label="Project countries">
+          <div className="company-map-tabs" role="group" aria-label={copy.countries}>
             {mapData.networkCountries.map((country) => (
               <button
                 type="button"
                 title={country.name}
-                aria-label={`Show ${country.name}`}
+                aria-label={`${copy.showCountry} ${country.name}`}
                 aria-pressed={country.code === selectedCountryCode}
                 className={country.code === selectedCountryCode ? "is-active" : ""}
                 key={country.code}
