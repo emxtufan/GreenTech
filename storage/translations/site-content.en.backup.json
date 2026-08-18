@@ -1,8 +1,8 @@
 {
   "version": 4,
   "locale": "en",
-  "revision": "abc243e6eed47ff2fb65721c",
-  "translatedAt": "2026-08-18T10:23:43.136Z",
+  "revision": "f53653cd56d9ab2d8755597b",
+  "translatedAt": "2026-08-18T10:28:22.400Z",
   "content": {
     "version": 1,
     "sections": [
@@ -45,7 +45,8 @@
         "summary": "video.mp4",
         "source": "public/video.mp4",
         "videoUrl": "/video.mp4",
-        "visible": true
+        "visible": true,
+        "ariaLabel": "Greentech Professionals Video Presentation"
       },
       {
         "id": "clients",
@@ -237,7 +238,8 @@
         "format": "Scroll-driven GLB",
         "summary": "Solar module assembly",
         "source": "src/ScrollSolarAssembly.jsx",
-        "visible": true
+        "visible": true,
+        "marqueeLabel": "SERVICES"
       },
       {
         "id": "electrical-service",
@@ -250,7 +252,8 @@
         "format": "Scroll-driven GLB",
         "summary": "Electrical inspection",
         "source": "src/ScrollElectricalInspection.jsx",
-        "visible": true
+        "visible": true,
+        "marqueeLabel": "SERVICES"
       },
       {
         "id": "construction-service",
@@ -263,7 +266,8 @@
         "format": "Scroll-driven GLB",
         "summary": "Construction model",
         "source": "src/ScrollConstructionServices.jsx",
-        "visible": true
+        "visible": true,
+        "marqueeLabel": "SERVICES"
       },
       {
         "id": "data-center-service",
@@ -276,7 +280,8 @@
         "format": "Scroll-driven GLB",
         "summary": "Data center model",
         "source": "src/ScrollDataCenterBuild.jsx",
-        "visible": true
+        "visible": true,
+        "marqueeLabel": "SERVICES"
       },
       {
         "id": "blog",
@@ -434,7 +439,7 @@
         "name": "Basement",
         "eyebrow": "Company Information",
         "title": "Greentech Professionals",
-        "description": "Electrical, mechanical, and civil engineering work for energy projects in Romania and Europe.",
+        "description": "Technical teams for energy works carried out in Romania, Italy and Spain.",
         "action": "",
         "format": "Navigation and legal links",
         "summary": "3 link groups",
@@ -713,7 +718,7 @@
           "category": "Photovoltaic Park",
           "title": "Craiova, Romania",
           "image": "/projects/craiova/craiova-01.jpg",
-          "alt": "Aerial view of the photovoltaic project in Craiova",
+          "alt": "Aerial view of the Craiova photovoltaic site",
           "projectDate": "January 2025",
           "projectCategory": "Photovoltaic Park",
           "location": "Craiova, Romania",
@@ -739,7 +744,7 @@
           "gallery": [
             {
               "src": "/projects/craiova/craiova-01.jpg",
-              "alt": "Aerial view of the photovoltaic project in Craiova"
+              "alt": "Rows of structures and modules at the Craiova photovoltaic project"
             },
             {
               "src": "/projects/craiova/craiova-02.webp",
@@ -759,7 +764,7 @@
           "category": "Photovoltaic Park",
           "title": "Bologna, Italy",
           "image": "/projects/bologna/bologna-01.webp",
-          "alt": "The Greentech Professionals team working on the project in Bologna",
+          "alt": "Greentech team members at the Bologna site",
           "projectDate": "November 2024",
           "projectCategory": "Photovoltaic Park",
           "location": "Bologna, Italy",
@@ -785,7 +790,7 @@
           "gallery": [
             {
               "src": "/projects/bologna/bologna-01.webp",
-              "alt": "The Greentech Professionals team working on the project in Bologna"
+              "alt": "Installation work at the Bologna photovoltaic project"
             },
             {
               "src": "/projects/bologna/bologna-02.webp",
@@ -805,7 +810,7 @@
           "category": "Photovoltaic Park",
           "title": "Cagliari, Italy",
           "image": "/projects/cagliari/cagliari-01.webp",
-          "alt": "Aerial view of the photovoltaic project in Cagliari",
+          "alt": "Aerial view of the Cagliari photovoltaic park",
           "projectDate": "May 2023",
           "projectCategory": "Photovoltaic Park",
           "location": "Cagliari, Italy",
@@ -831,7 +836,7 @@
           "gallery": [
             {
               "src": "/projects/cagliari/cagliari-01.webp",
-              "alt": "Aerial view of the photovoltaic project in Cagliari"
+              "alt": "Rows of panels at the Cagliari photovoltaic project"
             },
             {
               "src": "/projects/cagliari/cagliari-02.webp",
@@ -900,7 +905,7 @@
           "enabled": true,
           "title": "Electrical Inspections and Solutions",
           "sourceIndex": 3,
-          "body": "We perform measurements, thermal imaging, PRAM inspections, and prepare documentation for switchboards, equipment, and distribution networks.",
+          "body": "We inspect electrical installations using measurements, thermography and PRAM testing, then deliver reports and technical documentation.",
           "footnote": ""
         },
         {
@@ -1307,7 +1312,7 @@
         }
       ]
     },
-    "updatedAt": "2026-08-18T10:13:45.031Z",
+    "updatedAt": "2026-08-18T10:28:22.394Z",
     "footer": {
       "links": [
         {

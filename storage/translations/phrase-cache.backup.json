@@ -5049,6 +5049,38 @@
       "967c439f8a6e2b256c8335e12e4483ca78741874ca444684710bd5e3b0f4161e": {
         "source": "SERVICII",
         "translation": "SERVICES"
+      },
+      "e0116aca6291081c62298bafd46638ef0493a1229d4afc2c8403f978e3be8d22": {
+        "source": "Echipe tehnice pentru lucrari energetice executate in Romania, Italia si Spania.",
+        "translation": "Technical teams for energy projects carried out in Romania, Italy, and Spain."
+      },
+      "236dbff7ef881d62bffe600bd57c232ea4642bd32764d5b63bc0b572bcde545b": {
+        "source": "Vedere aeriana a amplasamentului fotovoltaic din Craiova",
+        "translation": "Aerial view of the photovoltaic site in Craiova"
+      },
+      "e33cdf9a74364bbcd4f496b75784a8dd3cc4e8b4199384ee075cfb27cddf8d6a": {
+        "source": "Randuri de structuri si module in proiectul fotovoltaic din Craiova",
+        "translation": "Rows of structures and modules in the photovoltaic project in Craiova"
+      },
+      "a59c4a1f836f0858698b92df047cc665de881d941ad374e83e4b8353b51e152c": {
+        "source": "Membri ai echipei Greentech in santierul din Bologna",
+        "translation": "Members of the Greentech team at the construction site in Bologna"
+      },
+      "38b8a96edabce6ef36f48ae2b059e9eaab2d3e9b66040ec8d62c8f5d6be63dd4": {
+        "source": "Lucrari de montaj la proiectul fotovoltaic din Bologna",
+        "translation": "Installation work on the photovoltaic project in Bologna"
+      },
+      "92991bc99f12271df217fe9ad0f9479e88b62321bbfc5396fda848abfbab01df": {
+        "source": "Imagine aeriana a parcului fotovoltaic din Cagliari",
+        "translation": "Aerial view of the photovoltaic park in Cagliari"
+      },
+      "1ab76d7c1d217f6e3eb0c5111bbd44668e38cab50305d4da93003359bc63a706": {
+        "source": "Randuri de panouri in proiectul fotovoltaic din Cagliari",
+        "translation": "Rows of panels in the photovoltaic project in Cagliari"
+      },
+      "9c2c53c74e31a9206ac8f4d44df077a008dfa92d689dc7175a929cf9d1597d3f": {
+        "source": "Tehnologii și soluții PV",
+        "translation": "PV Technologies and Solutions"
       }
     },
     "ro": {
@@ -11305,6 +11337,38 @@
       "4c3a6ab19f94ca8ca76a8d78e0f7fc94cb733304597e70096cc3b54a9feaec59": {
         "source": "Transmiteti prin formular amplasamentul, capacitatea estimata, tipul lucrarilor si perioada dorita. Revenim cu intrebarile tehnice necesare pentru definirea ofertei si a calendarului.",
         "translation": "Inviateci tramite il modulo l'ubicazione, la potenza stimata, il tipo di lavori e il periodo desiderato. Vi ricontatteremo con le domande tecniche necessarie per definire l'offerta e il calendario."
+      },
+      "e0116aca6291081c62298bafd46638ef0493a1229d4afc2c8403f978e3be8d22": {
+        "source": "Echipe tehnice pentru lucrari energetice executate in Romania, Italia si Spania.",
+        "translation": "Team tecnici per interventi nel settore energetico realizzati in Romania, Italia e Spagna."
+      },
+      "236dbff7ef881d62bffe600bd57c232ea4642bd32764d5b63bc0b572bcde545b": {
+        "source": "Vedere aeriana a amplasamentului fotovoltaic din Craiova",
+        "translation": "Vista aerea del sito fotovoltaico di Craiova"
+      },
+      "e33cdf9a74364bbcd4f496b75784a8dd3cc4e8b4199384ee075cfb27cddf8d6a": {
+        "source": "Randuri de structuri si module in proiectul fotovoltaic din Craiova",
+        "translation": "File di strutture e moduli nel progetto fotovoltaico di Craiova"
+      },
+      "a59c4a1f836f0858698b92df047cc665de881d941ad374e83e4b8353b51e152c": {
+        "source": "Membri ai echipei Greentech in santierul din Bologna",
+        "translation": "I membri del team Greentech nel cantiere di Bologna"
+      },
+      "38b8a96edabce6ef36f48ae2b059e9eaab2d3e9b66040ec8d62c8f5d6be63dd4": {
+        "source": "Lucrari de montaj la proiectul fotovoltaic din Bologna",
+        "translation": "Lavori di installazione presso il progetto fotovoltaico di Bologna"
+      },
+      "92991bc99f12271df217fe9ad0f9479e88b62321bbfc5396fda848abfbab01df": {
+        "source": "Imagine aeriana a parcului fotovoltaic din Cagliari",
+        "translation": "Vista aerea del parco fotovoltaico di Cagliari"
+      },
+      "1ab76d7c1d217f6e3eb0c5111bbd44668e38cab50305d4da93003359bc63a706": {
+        "source": "Randuri de panouri in proiectul fotovoltaic din Cagliari",
+        "translation": "File di pannelli nel progetto fotovoltaico di Cagliari"
+      },
+      "9c2c53c74e31a9206ac8f4d44df077a008dfa92d689dc7175a929cf9d1597d3f": {
+        "source": "Tehnologii și soluții PV",
+        "translation": "Tecnologie e soluzioni fotovoltaiche"
       }
     },
     "es": {
@@ -13775,6 +13839,1538 @@
       "91d5191a01c8d668f657ba8a88f7d31f6fa09e755834c0ecfd75ca51d3cd6440": {
         "source": "preview",
         "translation": "vista previa"
+      },
+      "0fbb2ef2c3dda60f9428491485f8beec53937b24c2626feee768451d1657d3da": {
+        "source": "Experienta",
+        "translation": "Experiencia"
+      },
+      "546e39e0061ec7738bfd8d3808752777ff4722ee90654c8de243209189ae12cb": {
+        "source": "Introducere si Hero 3D",
+        "translation": "Introducción y Hero 3D"
+      },
+      "8d04213ae0a5b21b32ddb3c158ad8f048cc13ad304fb0eaa7e374e1cea0f83c1": {
+        "source": "Energie si infrastructura",
+        "translation": "Energía e infraestructuras"
+      },
+      "e001401fd6e435be5fe18e9b70e1a6449ebc1933485116d36b3e4938bfd5f716": {
+        "source": "Greentech Professionals",
+        "translation": "Greentech Professionals"
+      },
+      "0264141d8bce079c89e1c9c2c2f79511e2ea2733ff4ab3bae1457a10ab8a98bf": {
+        "source": "Executie electrica, mecanica si civila pentru proiecte energetice in Romania si Europa.",
+        "translation": "Ejecución de obras eléctricas, mecánicas y civiles para proyectos energéticos en Rumanía y Europa."
+      },
+      "13867f7f9e4b11040eb92700bcb687d7892826434d7e72b5efe4dffcb66a2a1e": {
+        "source": "Incepeti explorarea",
+        "translation": "Empieza a explorar"
+      },
+      "6d7ceacb5fd5870d96b9d74afe5c9136f7037d3ca25b3d88bdbe69436e62f3bd": {
+        "source": "Prezentare generala a companiei",
+        "translation": "Presentación general de la empresa"
+      },
+      "58cadc6b6c3673ac1db1a6a903350b890abf20b2a5828623ac9d53d8e34ecf8b": {
+        "source": "Despre companie",
+        "translation": "Acerca de la empresa"
+      },
+      "7b4a7a54e33c2640ec36c7498ed5e2d97a18f4a7a2d5a93c145fd4930bb81301": {
+        "source": "Executam lucrari electrice, mecanice si civile pentru parcuri fotovoltaice si infrastructura tehnica. Echipele noastre lucreaza in Romania, Italia si Spania, de la pregatirea santierului pana la testare si predare.",
+        "translation": "Realizamos obras eléctricas, mecánicas y de obra civil para parques fotovoltaicos e infraestructuras técnicas. Nuestros equipos trabajan en Rumanía, Italia y España, desde la preparación de la obra hasta las pruebas y la entrega."
+      },
+      "b9d3aeac1eab13c0655e42de7517c457fe8fb9401b2248deedebf80ae41dbf1f": {
+        "source": "Prezentare video Greentech Professionals",
+        "translation": "Vídeo de presentación de Greentech Professionals"
+      },
+      "a8d201cecbcc841526159b7b7e8fd5aee722a4e694f48669fe407894c149ff30": {
+        "source": "Clientii nostri",
+        "translation": "Nuestros clientes"
+      },
+      "c748ff0951124eab60ae521e02ebe4d992cab7c0b4ab12041ac3bd7cadd7c034": {
+        "source": "Colaborari",
+        "translation": "Colaboraciones"
+      },
+      "0cbcfa7ab1bfa5c95b33e5755ed5a46cd15c0fbd01b35767db8b725a54279dbc": {
+        "source": "Clienti si parteneri",
+        "translation": "Clientes y socios"
+      },
+      "6668e26e19782997668732b4fbf0b35e095a4883fcdf48382f959e7f043a5d18": {
+        "source": "Lucram alaturi de dezvoltatori, antreprenori generali si parteneri tehnici implicati in proiecte de energie si infrastructura.",
+        "translation": "Trabajamos junto a promotores, contratistas generales y socios técnicos que participan en proyectos de energía e infraestructuras."
+      },
+      "852f1be16261b2ad9ed1894bfb8807def1f1f7c946906fe239af16776b506d37": {
+        "source": "Clientii si partenerii Greentech Professionals",
+        "translation": "Clientes y socios de Greentech Professionals"
+      },
+      "6f54b48669c412b30ddcaca494576f15d044ad01e88ad3233142f0473a97c15a": {
+        "source": "Cum lucram",
+        "translation": "Cómo trabajamos"
+      },
+      "9a52d802aa41dfc7a48554f493b34f341b9f6a7dfc1c262f698edcda0afbbe63": {
+        "source": "Trei etape clare: pregatirea lucrarilor, executia in santier si verificarile de dupa punerea in functiune.",
+        "translation": "Tres fases bien definidas: preparación de las obras, ejecución en la obra y comprobaciones tras la puesta en marcha."
+      },
+      "1a98033cde3b2ba2e9196540c0e690c3b837585fcfaa5621c8c02b7164cac274": {
+        "source": "Proiecte in derulare",
+        "translation": "Proyectos en curso"
+      },
+      "9629c4034487eb703fa1f42916fa763301d5c2857f4ed582c252543e25e19820": {
+        "source": "Proiecte selectate",
+        "translation": "Proyectos seleccionados"
+      },
+      "02521568a38ba46b5ed80c451debb740d3c60c61e00d733d16efe8e322316142": {
+        "source": "Lucrari din Romania si Italia, prezentate cu amplasament, capacitate si domeniul de executie.",
+        "translation": "Obras realizadas en Rumanía e Italia, presentadas con su ubicación, capacidad y ámbito de ejecución."
+      },
+      "841afefe70f1b0627519027e3d9cf7b41dc3eb04d7e5f4095911ea6fd903f14e": {
+        "source": "Portofoliu complet",
+        "translation": "Portafolio completo"
+      },
+      "c1ac6224807d69b3264663bc94014a65192ede00c5fee13312535532c6cff71f": {
+        "source": "Consultati proiectele publicate de Greentech Professionals si detaliile disponibile pentru fiecare amplasament.",
+        "translation": "Consulte los proyectos publicados por Greentech Professionals y la información disponible sobre cada emplazamiento."
+      },
+      "27b923e89c13b047a4e5a7f424732126cbf6ed6fd3a0e0fe859ab3b3250b9c6f": {
+        "source": "Vezi portofoliul",
+        "translation": "Ver el portafolio"
+      },
+      "4dae3dee60f49e7d85ab1ba6373734d1f7fa62609b33972947a811732fdf7c94": {
+        "source": "Vezi toate proiectele Greentech Professionals",
+        "translation": "Ver todos los proyectos de Greentech Professionals"
+      },
+      "6c68d2d19cc37b2ae50acdf4f1ec302aeada3986a414beac9b8e5ab8c3cb6090": {
+        "source": "Inapoi la portofoliu",
+        "translation": "Volver al portafolio"
+      },
+      "e4252a4369a4dbb94e9c2604183f69970ba7bce51db69e1d92503849c9b6b4c0": {
+        "source": "Proiecte fotovoltaice executate de Greentech Professionals in Romania si Europa, de la montaj mecanic si cablare pana la instalatii electrice.",
+        "translation": "Proyectos fotovoltaicos realizados por Greentech Professionals en Rumanía y Europa, desde el montaje mecánico y el cableado hasta las instalaciones eléctricas."
+      },
+      "12513cc9f846f3d74e8046de9341a6f685c7d1ea2fca1ef2417ad39a6433462f": {
+        "source": "Portofoliu proiecte",
+        "translation": "Portafolio de proyectos"
+      },
+      "85ebb384afb59de92ad6df5de2820dd2af36d08f5bf4fde54ec1c45e10546479": {
+        "source": "Locatie",
+        "translation": "Ubicación"
+      },
+      "44665aeda4bb93ad35c4c317c128003a22c6416bdb1c6feb6e2ddd0811e2a20e": {
+        "source": "Data",
+        "translation": "Fecha"
+      },
+      "f8bdc475538b563f8ba4f3778dc5293a816439f10f54a847d606fec9c104ed91": {
+        "source": "Capacitate",
+        "translation": "Capacidad"
+      },
+      "25be84e41bd5f3303dc38250ed78079faa87b6c33443b4a2f1a2b238ac8d2a20": {
+        "source": "Inapoi la proiecte",
+        "translation": "Volver a los proyectos"
+      },
+      "a460fb8d0506ab614c240e524f554060036226dff5920c0b7e70fd6345fb9934": {
+        "source": "Proiect",
+        "translation": "Proyecto"
+      },
+      "9b6fa58399a0e6f63430938593adadc4c5e519e7144b6b971314f1c10f9c63d9": {
+        "source": "Prezentarea proiectului",
+        "translation": "Presentación del proyecto"
+      },
+      "6feb58a8ecc2428b675426838449a4e01f2b52e5043b74c5a6abd9bfbab4c3a0": {
+        "source": "Despre proiect",
+        "translation": "Acerca del proyecto"
+      },
+      "35f273bf5e614ddd8add32c2f88db02cddbc6e7cc4ba7938211e7480b3a412a3": {
+        "source": "Data proiectului",
+        "translation": "Fecha del proyecto"
+      },
+      "449e06ada9db050e69499476ab071b35d9e54ffc990d2578d4dbef61a0f7ac0e": {
+        "source": "Categorie",
+        "translation": "Categoría"
+      },
+      "7d0304dc301f8126c47da6ae7fdd286542037d3f6588d8a02aa5fd5312e5cbe7": {
+        "source": "Locatia proiectului",
+        "translation": "Ubicación del proyecto"
+      },
+      "7a6854b3437c5e54a3df2a14cb702a940f600b716e0ff4495aa5321a7506b6ad": {
+        "source": "Capacitatea proiectului",
+        "translation": "Capacidad del proyecto"
+      },
+      "0bb84f7468107325873b4b13a4d043611dfa6f1ad463b4415d0a9b8e9646d605": {
+        "source": "Lucrari executate",
+        "translation": "Obras realizadas"
+      },
+      "e162168b10c04e52a278fe9bfbe45121241441ecb3954691c1df19ca0e407328": {
+        "source": "Ce am instalat",
+        "translation": "Lo que hemos instalado"
+      },
+      "2ed12fa93cfe02de9c8f111beb78190ec2c5f00a7280290937d391a1ed61e249": {
+        "source": "Din santier",
+        "translation": "Desde la obra"
+      },
+      "f76ce375f2b93ede487972e22e15cde3341a2e9a6b834ffa471031ac12acf16f": {
+        "source": "Galeria proiectului",
+        "translation": "Galería del proyecto"
+      },
+      "44ec4a75bda81e7d57439a7e36849cb2f9f9122984df45d311eb0dcefae2d7be": {
+        "source": "Informatii despre proiect",
+        "translation": "Información sobre el proyecto"
+      },
+      "681b395a594795efb7975f53af1224f239d6cff189621c89caa71e5a2181ef1e": {
+        "source": "Datele si fotografiile provin din portofoliul Greentech Professionals. Valorile tehnice care nu sunt publicate nu sunt estimate.",
+        "translation": "Los datos y las fotografías proceden del portafolio de Greentech Professionals. Los valores técnicos que no se publican no son estimaciones."
+      },
+      "0ff31bd64989559905245924d303a2e55b758c8e9ec3337dd913667f521322dd": {
+        "source": "Pagina oficiala a proiectului",
+        "translation": "Página web oficial del proyecto"
+      },
+      "66c268e92933c8d84ef55ac479ec79582bdf952b0ad30e04b296d043413a3aeb": {
+        "source": "Proiectul urmator",
+        "translation": "Próximo proyecto"
+      },
+      "ea01cb1c206e7139eb869c6d6924394387da2adcb7972cde513578a83bf9b9e4": {
+        "source": "Incredere si acreditari",
+        "translation": "Confianza y acreditaciones"
+      },
+      "cea0d2da1dc233adad8f11c3ec9e2e8a311ecb08471776ab3143fd7039692125": {
+        "source": "Certificari si experienta",
+        "translation": "Certificaciones y experiencia"
+      },
+      "5ceac8b34e80649f9a4ba68b1ab9eef3f129fa8138b44fee2162c1b0a1629504": {
+        "source": "Competente verificate pentru lucrari bine executate.",
+        "translation": "Competencias contrastadas para trabajos bien ejecutados."
+      },
+      "e6c5b9153b9a30b9199b13e142bc7fee0bef79b0cb30c6cfd92b9b573251a48d": {
+        "source": "Certificarile, experienta echipelor si prezenta in trei piete europene sustin modul nostru de lucru.",
+        "translation": "Las certificaciones, la experiencia de nuestros equipos y nuestra presencia en tres mercados europeos avalan nuestra forma de trabajar."
+      },
+      "9f87ffc762d5462b154192b3288681c5cfe0830f9ab082aaa1ac25ebfa8398fd": {
+        "source": "Vezi acreditarile",
+        "translation": "Ver acreditaciones"
+      },
+      "6ca9e09f90844a9ab2fbaddc40d7d1b8d644a468d7331006f781dacc20cf6755": {
+        "source": "Amprenta europeana",
+        "translation": "La huella europea"
+      },
+      "6478ee0dd48561d31f8bea5992e7f413691fbb87458c3d6393798bdf2bb063d9": {
+        "source": "Echipe active in Romania, Italia si Spania.",
+        "translation": "Equipos que operan en Rumanía, Italia y España."
+      },
+      "a509c453334b10076e96a8f864d22c20e23c0a447eca9f6b810e55ec6485500c": {
+        "source": "Harta arata tarile si amplasamentele in care Greentech Professionals a desfasurat lucrari.",
+        "translation": "El mapa muestra los países y las ubicaciones en las que Greentech Professionals ha llevado a cabo obras."
+      },
+      "54d8325504319a995edea84c25f536da7d80e473a8e88cfb3cb6aa26f2bc0e36": {
+        "source": "Amprenta europeana Greentech Professionals",
+        "translation": "La huella europea de Greentech Professionals"
+      },
+      "5b379fe07ade7ae021aecb8e8a38546e9a2c80f62d32f6f3f85a5740d6de0a84": {
+        "source": "Locatii de proiect in",
+        "translation": "Ubicaciones de los proyectos en"
+      },
+      "cdb5576acef80963c0fa12760f7139ce01afedd59597b97d9e4e04eca59f2e9f": {
+        "source": "Harta locatiilor proiectelor europene.",
+        "translation": "Mapa de ubicaciones de los proyectos europeos."
+      },
+      "45b21348ad352db20ec50468d58bcf99240cadeb6edb6fdca708de104144e004": {
+        "source": "Afiseaza locatiile proiectelor din",
+        "translation": "Muestra las ubicaciones de los proyectos en"
+      },
+      "9a3c17471712f8f5773734c3e9321521dcdaa024383531caaf40a3ab89df0883": {
+        "source": "Tarile proiectelor",
+        "translation": "Países en los que se desarrollan los proyectos"
+      },
+      "3f13e708a94a8fb5d5db781486ae36fc2f65cfd06f1c2217b891fc3ed65a027b": {
+        "source": "Nu sunt publicate tari pentru proiecte.",
+        "translation": "No se han publicado los países en los que se llevan a cabo los proyectos."
+      },
+      "a0bf5048a825066c54a5db2e918b9fdf2e6804adf88ccad5b19070d89c6fe30d": {
+        "source": "Se incarca harta proiectelor europene",
+        "translation": "Se está cargando el mapa de proyectos europeos"
+      },
+      "eef074f7e353496e1201cadb48525b07ef5831af11c934097b0b77ea6cb645b6": {
+        "source": "Siguranta si calitate",
+        "translation": "Seguridad y calidad"
+      },
+      "bdd7370405e925dd785f4918260fffbf2f0a4ce558115845c16aada9556e126f": {
+        "source": "Control tehnic, de la mobilizare la predare.",
+        "translation": "Control técnico, desde la puesta en marcha hasta la entrega."
+      },
+      "cbbfadac6d13a6331b25c29769f94911941b08dd55f4f558fbbb0ac12f4dcec0": {
+        "source": "Urmarim executia prin verificari planificate, masuratori si documentatie de santier.",
+        "translation": "Supervisamos la ejecución mediante comprobaciones programadas, mediciones y documentación de obra."
+      },
+      "0b91591835cdde324f4329ab84b45d336991f6829c58ab51770f81763bfa525c": {
+        "source": "Vezi serviciile",
+        "translation": "Ver servicios"
+      },
+      "945cb8ab9604367b742fc59409438ff9f094d7f4277f05db1b3cbf1bfe78f6b1": {
+        "source": "Echipament de protectie asezat pe module fotovoltaice",
+        "translation": "Equipo de protección instalado sobre módulos fotovoltaicos"
+      },
+      "dc8fd1699dec4500736968296964da6fdd8a5f6b5c04551efa8a678bac6b53c6": {
+        "source": "Siguranta incepe inaintea lucrarilor.",
+        "translation": "La seguridad empieza antes de comenzar las obras."
+      },
+      "18ea150906938a90597e59d04ea00f07646e243bf2ba6efbfe9f7b33aca01c70": {
+        "source": "Recenzii ale clientilor",
+        "translation": "Opiniones de los clientes"
+      },
+      "801255f7e1f8353977d0f6d7bbca422e97bb014603204eb7726a1287818df3e9": {
+        "source": "Recenzii",
+        "translation": "Opiniones"
+      },
+      "72d60891a88e8a6df691f8be9cb2066095bc863562fa4da1c6c14523424ef6ed": {
+        "source": "Experiente relatate de clienti",
+        "translation": "Testimonios de clientes"
+      },
+      "2c8113879ba82b9993c3f7d65278106d93d266940666f073764b88e7177b12bb": {
+        "source": "Recenziile trimise prin site sunt publicate numai dupa aprobare.",
+        "translation": "Las reseñas enviadas a través de la web solo se publican tras su aprobación."
+      },
+      "896f4135d98232e54590f62bfbbd3052913c47e6019f64a4863cd55b499f03e8": {
+        "source": "Recenzie client",
+        "translation": "Opinión de un cliente"
+      },
+      "708d6b1230dbde59a59c9d146447c45feb598f7efb0d4dfe1cd3b06a13eaa938": {
+        "source": "Nu exista recenzii publicate.",
+        "translation": "No hay opiniones publicadas."
+      },
+      "27886f9097430c2018e478f2d97d25c5eeb05d0bdc2923151c70e0c9ae03fedd": {
+        "source": "Recenziile trimise apar aici dupa aprobare.",
+        "translation": "Las opiniones enviadas se publican aquí tras su aprobación."
+      },
+      "9b29d4ef42e97cb876c30d6b4f0687f377bc133fce8142e2738c36ab9de90c58": {
+        "source": "Recenzie din sursa publica",
+        "translation": "Reseña de una fuente pública"
+      },
+      "c5be0e8eef7fe7ca9cf18e3e5dac29707c73bdc287902fcd1067385d389f3430": {
+        "source": "Recenzie aprobata",
+        "translation": "Reseña aprobada"
+      },
+      "7704b947a137c16e81cc99225506c983a3f7cc2b98aa06dd795b30856a200b92": {
+        "source": "Sursa originala",
+        "translation": "Fuente original"
+      },
+      "922c2ef43428276e9e3016a1de6a4d826907923834c4290c9870f9d9c03b1e1d": {
+        "source": "Citeste sursa recenziei scrise de",
+        "translation": "Lee la fuente de la reseña escrita por"
+      },
+      "38d560ae4ffad38a5b09f09e9c42f8de0c89f533ad566f4542eaffc1633053af": {
+        "source": "stele din 5",
+        "translation": "5 estrellas"
+      },
+      "0e023ee854e12db02c226b299e74f7b0eb12469fc858aff7113d7f3b5c87b23c": {
+        "source": "Alege recenzia",
+        "translation": "Elige la reseña"
+      },
+      "5d58cb4e6f6836438e471e6af99594533e84a2a106f813bbe33ebc1f3c7ddac0": {
+        "source": "Afiseaza recenzia",
+        "translation": "Ver la reseña"
+      },
+      "4338cc66fb48bdf4bdec802acf4809e16fbe7d67a1d7d00089164e21676b7e3a": {
+        "source": "Recenzia anterioara",
+        "translation": "Reseña anterior"
+      },
+      "cf1bd464c12824357728f1ff77bebfd2dd761795f5c986759da887e14010dea3": {
+        "source": "Recenzia urmatoare",
+        "translation": "Siguiente reseña"
+      },
+      "28401420584ff4a1edb7224c3931856f518143f4b3c34f949204da61b448a64d": {
+        "source": "Inchide formularul de recenzie",
+        "translation": "Cerrar el formulario de reseña"
+      },
+      "6deba4253a003188bb6145990c58857527ecd8fdd2f846267d18e53576d49b33": {
+        "source": "Inchide",
+        "translation": "Cerrar"
+      },
+      "baeebe52920f9878b96490f0e4211bb6f1f745292121fc1e6bb398d1ee8b23f1": {
+        "source": "Recenzie primita",
+        "translation": "Comentario recibido"
+      },
+      "80ed09fe190989d0c173cabb26f2da81ab0434f196a30c252c3e7971ce29f24a": {
+        "source": "Va multumim pentru recenzie.",
+        "translation": "Gracias por tu reseña."
+      },
+      "9859c7c0513e0560df479e72ab0ecee7a450b4a45980246de86081427b561f8a": {
+        "source": "Recenzia a fost trimisa si va deveni publica dupa aprobarea echipei Greentech.",
+        "translation": "La reseña se ha enviado y se publicará tras su aprobación por parte del equipo de Greentech."
+      },
+      "516778d358177a5dc8a9651922b7804c8ccd6706d6551bb65e17e26de5bdf63f": {
+        "source": "Starea moderarii",
+        "translation": "Estado de la moderación"
+      },
+      "77cde38b06c51e8b09a293394deb67f308bd54ca93e3e474892b0e1c8ec82606": {
+        "source": "In asteptarea aprobarii",
+        "translation": "A la espera de su aprobación"
+      },
+      "eba1bc8270db68b9196a5b310f4e1ad6ee3647ff6f17f21d21787682f046ecc9": {
+        "source": "Gata",
+        "translation": "Listo"
+      },
+      "f7a0a787e4fe9e39675578f322ea91febde6bdc97698da05c95cfa28cfec44a9": {
+        "source": "Opinia clientilor",
+        "translation": "Opiniones de los clientes"
+      },
+      "d9b602cdbeba90bcd473cd5631a633dd7fff972a63ce6b9a07886d2a776d2192": {
+        "source": "Nume",
+        "translation": "Nombre"
+      },
+      "23368c26fe132813fceb695c75daa6b8c9db21ecf60a72a97a60297959cb885f": {
+        "source": "Nume complet",
+        "translation": "Nombre completo"
+      },
+      "bc104f0743d6acf639943cb636d50ff19cf24e0be6cb5ad0c242eb74fb385279": {
+        "source": "E-mail",
+        "translation": "Correo electrónico"
+      },
+      "34854147a8b9f35bf4bc5a24f2a8333b602db9ef7b70bc2b40ced11d6b5e6ec0": {
+        "source": "Ramane privat si este folosit doar pentru verificare",
+        "translation": "Es de carácter privado y solo se utiliza con fines de verificación."
+      },
+      "3aaef6b36650d6ee52a18a7202c8b83dd27ecbbe4c9e301af7bc277cfa4194fa": {
+        "source": "Evaluare",
+        "translation": "Valoración"
+      },
+      "e2af248257aa33480f0dae14f834e9daacc87392da682f2b54583408a88413c0": {
+        "source": "Alegeti intre 1 si 5 stele",
+        "translation": "Elige entre 1 y 5 estrellas"
+      },
+      "c68aad75a9e3132ed870497acaa80a8ab0de23d849e8251b5bb7193dc2b714ae": {
+        "source": "stele",
+        "translation": "estrellas"
+      },
+      "5a374d32a8ea8581953b57a17bd3ab5a6a2d615731a6549af913038fc33ca276": {
+        "source": "Alegeti",
+        "translation": "Elige"
+      },
+      "1466d4fb9a391a4bed3a56df3b26ad7c3bfe80a4c2789b4c1c875a5d262e3ef0": {
+        "source": "Recenzie",
+        "translation": "Reseña"
+      },
+      "763d738372152691d3c5fdae966f7410884fc2af99db91c33756debaf2b4b5ab": {
+        "source": "Descrieti experienta colaborarii",
+        "translation": "Describe tu experiencia de colaboración"
+      },
+      "36edff5e7c8c16cef53fc5790c7b48213830af4e5a15de249bf41eba4be881f9": {
+        "source": "Sunt de acord ca numele si recenzia mea sa fie afisate public.",
+        "translation": "Acepto que mi nombre y mi reseña se publiquen."
+      },
+      "0780e222f6b124cb185c2549bf05fede1286fd4da6c75df2cb1f592cc9462ec7": {
+        "source": "Website",
+        "translation": "Página web"
+      },
+      "b01a469446106d115035e34dd17f7b29cb6389dad86581261a884d419be20d95": {
+        "source": "Se trimite...",
+        "translation": "Se está cargando..."
+      },
+      "0ed9a3b08bf520c40081c5f89cf2e3d53d1f4f2f15cfdeb837ea45961aaebb9c": {
+        "source": "Trimite pentru aprobare",
+        "translation": "Enviar para aprobación"
+      },
+      "b4b80bf9f49c264635e0bdc000ec3a08aea91af25a34d7f1b2a8c4812561a51e": {
+        "source": "Introduceti numele.",
+        "translation": "Introduce tu nombre."
+      },
+      "68982ea7cdc7660f4eaeead94d03ae2143d9e49297758590a850c3b9ecb1ab22": {
+        "source": "Alegeti numarul de stele.",
+        "translation": "Elige el número de estrellas."
+      },
+      "cb7f4140037e147e748b3b841ee80180120a6d5333c529402187e19c06274f5f": {
+        "source": "Introduceti o adresa de e-mail valida. Adresa nu va fi publicata.",
+        "translation": "Introduce una dirección de correo electrónico válida. La dirección no se publicará."
+      },
+      "46a33e4d76c85e97c6e607aa72cea74db0ad7d9d9099310dfb5f05d02ebd3503": {
+        "source": "Scrieti cel putin 10 caractere despre experienta dumneavoastra.",
+        "translation": "Escriba al menos 10 caracteres sobre su experiencia."
+      },
+      "57eb1cdc5a9189a74be3ebb12b9dcde534968c33cced91df41bed967412e06bf": {
+        "source": "Confirmati ca recenzia poate fi afisata public.",
+        "translation": "Confirma que la reseña se puede publicar."
+      },
+      "e2f7a9b02facab8d4570f8fe2f3470db509cdd9bbbf448b7625ce88250217466": {
+        "source": "Recenzia nu a putut fi trimisa. Incercati din nou.",
+        "translation": "No se ha podido enviar la reseña. Inténtalo de nuevo."
+      },
+      "7f4dddf9a12c6f1d4e6dbbbe9e586f643f54bd9f45abd234fe4d93ab10eb2534": {
+        "source": "Constructia parcurilor fotovoltaice",
+        "translation": "Construcción de parques fotovoltaicos"
+      },
+      "5532fc22bcf89c0cbd4e1494ee52b9a062c7d399ea45951599b080e3afd3e577": {
+        "source": "Executam montajul structurilor si modulelor, cablarea DC si AC, instalarea invertoarelor, testarile si pregatirea pentru racordare.",
+        "translation": "Nos encargamos del montaje de estructuras y módulos, el cableado de CC y CA, la instalación de los inversores, las pruebas y la preparación para la conexión a la red."
+      },
+      "967c439f8a6e2b256c8335e12e4483ca78741874ca444684710bd5e3b0f4161e": {
+        "source": "SERVICII",
+        "translation": "SERVICIOS"
+      },
+      "766f6e0302331f3ea8c990c99f94f8cc30218919922f81e3f2e582f68a59ac70": {
+        "source": "Inspectii si testari",
+        "translation": "Inspecciones y pruebas"
+      },
+      "7abbd3fc32d6ca56f247619f8c7cb4785d7567622ba782d1e0eafdeb8ace3c32": {
+        "source": "Inspectii si verificari electrice",
+        "translation": "Inspecciones y comprobaciones eléctricas"
+      },
+      "2fe2f5709a9950450cf165d0dfaa97f20adefff4fbc3ab433eb845e703d78f90": {
+        "source": "Realizam masuratori, termografie, verificari PRAM si documentatie pentru tablouri, echipamente si retele de distributie.",
+        "translation": "Realizamos mediciones, termografía, verificaciones PRAM y documentación para cuadros eléctricos, equipos y redes de distribución."
+      },
+      "ca5c53bd11aee927b673d7df7cb771e063820c1a92eaab5577279cf09852492e": {
+        "source": "Servicii de constructii",
+        "translation": "Servicios de construcción"
+      },
+      "b7d2541f80a1c61f4dbafcfec7d7acd88f5acf7ba7680a31471849d1d60db421": {
+        "source": "Executam lucrari civile si structurale pentru obiective energetice, de la organizarea santierului pana la predarea lucrarilor.",
+        "translation": "Realizamos obras civiles y estructurales para proyectos energéticos, desde la organización de la obra hasta la entrega de las obras."
+      },
+      "cbe31da882bd1b9879fc9eb1123a1dbfa42477b5e612056062e9d4c6b682a181": {
+        "source": "Constructia centrelor de date",
+        "translation": "Construcción de centros de datos"
+      },
+      "179708331bf96a3ae15a16147de432d3f022fe2d60e4802e85d9a943a398c36a": {
+        "source": "Executam amenajarea spatiilor, distributia electrica, sistemele de redundanta si racire, precum si lucrarile de punere in functiune.",
+        "translation": "Nos encargamos del acondicionamiento de los espacios, la distribución eléctrica, los sistemas de redundancia y refrigeración, así como de los trabajos de puesta en marcha."
+      },
+      "900eab3892a6c2474fd7db6636e5ad3166c831c15a9461affe8245eee4511b74": {
+        "source": "Continut",
+        "translation": "Contenido"
+      },
+      "465deae3a1c3dba3789d1825b627f30660c8dfa97d9e0fa582c00a1fb0c49bdb": {
+        "source": "Din proiecte si din echipa.",
+        "translation": "Nuestros proyectos y nuestro equipo."
+      },
+      "33cd2e4bb37fe5da4aa310c50f7466001b1d0817e3ecde288494e8c456f0c1c6": {
+        "source": "Actualizari de santier, explicatii tehnice, noutati despre companie si roluri deschise.",
+        "translation": "Actualizaciones sobre las obras, explicaciones técnicas, novedades sobre la empresa y puestos vacantes."
+      },
+      "13a8fb5463703d8e639c8e1bb04caee621af6118b37f310f003a4473e4a08f5f": {
+        "source": "Citeste articolul",
+        "translation": "Lee el artículo"
+      },
+      "3d23a71fbe266384c800a64292e22a6df7ea4a21e6cb86ca12a08e8357edaf53": {
+        "source": "Toate articolele",
+        "translation": "Todos los artículos"
+      },
+      "b3570252ff2d5895606f62b06d1bbf663a5b7bfbcc356f5fd9956ff91a88d622": {
+        "source": "articol publicat",
+        "translation": "artículo publicado"
+      },
+      "22e602641bd89f3a12ad0512aa2bef32f4840c6bde96fff5c6cefb7a21824eea": {
+        "source": "articole publicate",
+        "translation": "artículos publicados"
+      },
+      "183c66ec6c3306ed969977d86817fbf3d1854f758aeb20761cfebdf2d194edb7": {
+        "source": "Inchide lista articolelor",
+        "translation": "Cerrar la lista de artículos"
+      },
+      "5d169bffaabdea194f39bbdbc21299c30f3c9b61c0c8511e8c79848625eaa774": {
+        "source": "Citeste",
+        "translation": "Leer"
+      },
+      "88dfa8ffdcfa60422a22001837a5cb81b6eab957dd90a50edcfdd66dd6f50db9": {
+        "source": "Alte articole",
+        "translation": "Otros artículos"
+      },
+      "4a5b61be79ccf165fb5342f8e1bff9bb00f72a7f61bc76358c53ded0c0e99f7f": {
+        "source": "Nu exista articole publicate.",
+        "translation": "No hay artículos publicados."
+      },
+      "bc92436dfc571bda5f511cfc7d47252c3ccec076a84aa199cbab0d3062aaa8a0": {
+        "source": "Arhiva jurnalului",
+        "translation": "Archivo del diario"
+      },
+      "682b1e1405f5059be72d7a606e4d79aac08cc454c176086f9336fe759499fa6f": {
+        "source": "Afisam",
+        "translation": "Mostrar"
+      },
+      "59a905df24e65d488abeeaf9f0628aba70d50fd6212cf00b43291007c96fc6cd": {
+        "source": "din",
+        "translation": "de"
+      },
+      "824190e02f903094c99a085ba7e33bcb2b032f24c723fc021a020378e9326068": {
+        "source": "articol",
+        "translation": "artículo"
+      },
+      "8b98872030631dcfc47f97fc8d5c959a2622916d5f07d4e7c27456b988d074d2": {
+        "source": "articole",
+        "translation": "artículos"
+      },
+      "644467db39043bce045eb46037276d9931aa04c682a452f622b1c3127fa7ffb2": {
+        "source": "Vezi toate articolele",
+        "translation": "Ver todos los artículos"
+      },
+      "61785084e7399b2aa61ed92be8deece3eb4790bbfd0702b894fa6a26d725c562": {
+        "source": "Inapoi la jurnal",
+        "translation": "Volver al diario"
+      },
+      "a04e6b3e94d2f4326fad74cf915e990463e03ad46ae2072b2e54abcca897c7b5": {
+        "source": "Continutul articolului",
+        "translation": "Contenido del artículo"
+      },
+      "bef10b3c873617316157d049adf0ef24cd1787aea72d472154176a6bae53d47c": {
+        "source": "Publicat in",
+        "translation": "Publicado en"
+      },
+      "6ea02c59fde8aac5b6192ac942b78cee8f099dd04454680a71b861298687fdf8": {
+        "source": "Timp de citire",
+        "translation": "Tiempo de lectura"
+      },
+      "f1f1ebbdf9e94175fa59eb06baa91732612ff2273d45b90c9ba24211798edaa5": {
+        "source": "Idei principale",
+        "translation": "Ideas principales"
+      },
+      "9769b09cc0afa1f5225a854eb64ed13ad0886519ba8543422da0684c9115a1f0": {
+        "source": "Continuati explorarea",
+        "translation": "Sigue explorando"
+      },
+      "3da32b446d9e8370f332472d6736759f6e111576337b1f7a8db77afd1ebe620d": {
+        "source": "Vedeti proiectul din spatele articolului.",
+        "translation": "Echa un vistazo al proyecto que hay detrás del artículo."
+      },
+      "4ba4555f0c796f50dfb41e01f5e17ea68f1a1f9d4995111dd17e52e9f6318b0e": {
+        "source": "Aflati mai multe despre Greentech Professionals.",
+        "translation": "Descubre más sobre Greentech Professionals."
+      },
+      "f8d38d6af3e525d80969dba5b4fcc8a0b9b772fca64fc65e2ec0509a3938d49e": {
+        "source": "Vezi proiectul asociat",
+        "translation": "Ver el proyecto relacionado"
+      },
+      "65eea27db78c5680f9de63a89dedc39f57f585ec30c151d8ad484f747408de69": {
+        "source": "Sursa",
+        "translation": "Fuente"
+      },
+      "d2e912024d75cec746587bc5aff64310de2eaff0e127252b04e6565ac4925385": {
+        "source": "Site-ul oficial Greentech Professionals",
+        "translation": "Página web oficial de Greentech Professionals"
+      },
+      "fad564a44a850973cf481bb48fa2021a727fc670ffa86daf1ece87ed38b69ac0": {
+        "source": "Intrebari frecvente",
+        "translation": "Preguntas frecuentes"
+      },
+      "8bd2af0afb1e88cd919fb7aec0d3e46f18ef7dfcc614636d7dbbc725ef2321a6": {
+        "source": "Ce trebuie clarificat inainte de inceperea lucrarilor.",
+        "translation": "Lo que hay que aclarar antes de comenzar las obras."
+      },
+      "b2c9f73f461662217977ec29cc826b43019961c73076124f7eeb4f0bd353131f": {
+        "source": "Raspunsuri despre servicii, arie de lucru, certificari, mobilizare si solicitarea unei oferte.",
+        "translation": "Información sobre servicios, ámbito de actuación, certificaciones, puesta en marcha y solicitud de presupuesto."
+      },
+      "31cb5b7801bfdea935a0403ab4328caeb81370a3d832e9c216b9a60890bdd382": {
+        "source": "Imagini din santier",
+        "translation": "Imágenes de la obra"
+      },
+      "64ffe341760ae7b27cdd9728f1f944f29b303b2b201ca28fb5ccf78fa7bf6960": {
+        "source": "Lucrarile, vazute de aproape.",
+        "translation": "Las obras, vistas de cerca."
+      },
+      "7cd88d7ce720cb6240eacd519945deb39ffe85c94820c2f20f24b7cf3acd72f6": {
+        "source": "Fotografii din timpul montajului, cablarii, verificarilor si punerii in functiune.",
+        "translation": "Fotografías tomadas durante el montaje, el cableado, las comprobaciones y la puesta en marcha."
+      },
+      "4a091d9b697358e45cf3362d8743f49c46fa71ed31b492a3c15efd61362f4508": {
+        "source": "Inapoi la pagina principala",
+        "translation": "Volver a la página principal"
+      },
+      "d273618fd3d4c0f3701364db6f2bc1f5043c1cdd2926582531126de01b4df561": {
+        "source": "Arhiva foto",
+        "translation": "Archivo fotográfico"
+      },
+      "e4f8851704623a450e6472126546e0a2bed3b953f26fa4ec846b1f3303421cf6": {
+        "source": "Inchide galeria",
+        "translation": "Cerrar la galería"
+      },
+      "317da62f7f2c5442aa7d177c4db2fb4335b95935fbde2414239a44e847adc6ea": {
+        "source": "Fotografia anterioara",
+        "translation": "Foto anterior"
+      },
+      "0c4b093e37879848128bd111ff5b917cb63ff39affb9c960f4bc1de0200b30b9": {
+        "source": "Fotografia urmatoare",
+        "translation": "Siguiente fotografía"
+      },
+      "798ba6b64a38c819bdbe986aeb539f174bea2d4a585bea79772cbc871d1ceec7": {
+        "source": "Nu sunt fotografii publicate.",
+        "translation": "No hay fotos publicadas."
+      },
+      "5961fe88433cc921369330451d09d00b58f3245ce6c87df796a68288cc5d7178": {
+        "source": "Deschide fotografia",
+        "translation": "Abrir la foto"
+      },
+      "b991ed26dcca5e67f7dadaa03822810ba8443850533f07e5cb81fd689d09feac": {
+        "source": "Inapoi la galerie",
+        "translation": "Volver a la galería"
+      },
+      "59ef76a4bec3be6fa1d13ef1b2dd6e8a2a2cb725bd132aa0d7ea9101c1e39379": {
+        "source": "Solicitare de informatii privind proiectul",
+        "translation": "Solicitud de información sobre el proyecto"
+      },
+      "55b5aeb33686c762613b23fb8e636e7ee9c2b6c1a3b136df5a95a2c27e284d6e": {
+        "source": "Solicitare proiect",
+        "translation": "Solicitud de proyecto"
+      },
+      "c84d168025de157c83797aaf97295243f8e0aad8104e446830fd20654a251635": {
+        "source": "Discutam despre proiectul dumneavoastra.",
+        "translation": "Hablemos de su proyecto."
+      },
+      "7acb1fdd6ff85b6554e0c2ddaed32cf04db8e7cb4fa737cb66b2cc6e39ee9025": {
+        "source": "Trimiteti-ne amplasamentul, capacitatea estimata si lucrarile necesare. Revenim cu intrebarile tehnice si pasii urmatori.",
+        "translation": "Envíenos la ubicación, la capacidad estimada y los trabajos necesarios. Nos pondremos en contacto con usted para resolver las dudas técnicas y explicarle los siguientes pasos."
+      },
+      "a34e7e83d65c6d0746daf31bc87a0a1603bfb0dbf5ee4644c69697372a4e0c38": {
+        "source": "Trimite solicitarea",
+        "translation": "Enviar la solicitud"
+      },
+      "b90f7447215b635e3abb0d3d57fe0bda21087d78247b86c09dcc4fe8ee7fadf0": {
+        "source": "Discutati un proiect",
+        "translation": "Comenta un proyecto"
+      },
+      "cf1e1b6d0bdcfee1942499cfa5f729c7e3f26566e899a66c0a3bc622cdecbcb0": {
+        "source": "Amplasament, capacitate si lucrari necesare.",
+        "translation": "Ubicación, capacidad y obras necesarias."
+      },
+      "60b106350e094d8bd05f12daaadb6dbf79a7db702b938ccfdcf209a053aa549c": {
+        "source": "Prenume",
+        "translation": "Nombre"
+      },
+      "a2365918a8a4b427087cead8a2785051570b6e8193c533b399bdb01d27853f78": {
+        "source": "Numar de telefon",
+        "translation": "Número de teléfono"
+      },
+      "f9a61d8463980ccd4ce2d4b5e7a2aa212f5d5590150149147c39e7ff4de8d9be": {
+        "source": "Descrieti proiectul",
+        "translation": "Describe el proyecto"
+      },
+      "a30000b86c25b35a6226b8a73ea2ddb7ea7b27a9653e7050071b8cbe7052102a": {
+        "source": "Sunt de acord cu prelucrarea datelor personale pentru ca Greentech Professionals sa poata raspunde solicitarii, conform",
+        "translation": "Acepto el tratamiento de mis datos personales para que Greentech Professionals pueda responder a mi solicitud, de conformidad con"
+      },
+      "ac2bab1f88d84bc3f6e10f515fe1a952d0a0f8e7322e502f53fb2fa3d4761240": {
+        "source": "politicii de confidentialitate",
+        "translation": "Política de privacidad"
+      },
+      "e31140dc2547967c116b5214df31ddd0e4d7ff9f324d53166d7647b2f49fbd99": {
+        "source": "Solicitarea se trimite...",
+        "translation": "La solicitud se envía..."
+      },
+      "efca213b9e712e8c068f3da7512cd809dbb202ce2546fb62d4b1f74340ee1ab1": {
+        "source": "Va multumim. Solicitarea a ajuns la echipa noastra.",
+        "translation": "Gracias. Tu solicitud ha llegado a nuestro equipo."
+      },
+      "297e08b27d7ab63a6cd6c5001c93c60ef94c4898c0c394450cf96fb372aa9c61": {
+        "source": "Solicitarea nu a putut fi trimisa. Incercati din nou.",
+        "translation": "No se ha podido enviar la solicitud. Inténtalo de nuevo."
+      },
+      "b11f75811973e13911b866324a365884eb73661fe5a19c15152d0a3bceae87ff": {
+        "source": "Sediu",
+        "translation": "Sede"
+      },
+      "6b751cf00151d4f498b1170b89709a9642cfc7848f951d0e386adf96c020af7d": {
+        "source": "Calea Floreasca nr. 194, Sector 1, Bucuresti",
+        "translation": "Calea Floreasca, n.º 194, Sector 1, Bucarest"
+      },
+      "85a2d6d5667fc42f20ae8c4a2874d49cad1844f375584300ad972983e6e6675f": {
+        "source": "Floreasca Lake Offices",
+        "translation": "Oficinas del lago Floreasca"
+      },
+      "ac93f03ad08d8c111fe79f17a36ec17cd32d0d2120a121586a79bfcda6e9dbb7": {
+        "source": "Retele sociale",
+        "translation": "Redes sociales"
+      },
+      "14f847a2d015602bdeb1ea86cff4736e41448ce7b84a11e8e31b1622c1e4b936": {
+        "source": "Alaturati-va echipei",
+        "translation": "Únete al equipo"
+      },
+      "b72850fd667862f181fb4a78043a55af2b1feaf7e67dd2f10fd547e5a4f8f22d": {
+        "source": "Transmiteti CV-ul si cateva detalii despre experienta profesionala.",
+        "translation": "Envía tu CV y algunos detalles sobre tu experiencia profesional."
+      },
+      "930e7f160fc1348562ad233e62fa2cee5eb5bc189ba6c7be086535c510102b9f": {
+        "source": "Trimite candidatura",
+        "translation": "Enviar solicitud"
+      },
+      "58546547562ff2802b52f9bd569d95a12b691e9d68d662147ac34c4fd1f2685e": {
+        "source": "CV, experienta si rolul urmarit.",
+        "translation": "Currículum, experiencia y puesto al que aspiras."
+      },
+      "f44f34723f58a42eb64c35bd44c02c2bd58e0f0127afee7626133d6435eb7ac3": {
+        "source": "Pozitia dorita",
+        "translation": "Puesto deseado"
+      },
+      "f25463839ddfdf34e1d62f5210cfd075cf9fd298e27b14261d50a3f8c90b110c": {
+        "source": "Electrician, inginer, coordonator...",
+        "translation": "Electricista, ingeniero, coordinador..."
+      },
+      "851727d5c3ad5ee07f25d3d1dbefdac449ae2afa30f2e52ee9bc95dafe05a30d": {
+        "source": "Descrieti experienta",
+        "translation": "Describe tu experiencia"
+      },
+      "0005d42a7f6191da3ff87d6708185d417e350000a1d73ebc8c7a2623357cd9a6": {
+        "source": "Incarcati CV-ul sau referintele",
+        "translation": "Sube tu currículum o tus referencias"
+      },
+      "be484ab93136f8cc57e30af8b25eb988afe55d0c6a1bc9ae31deb9b90d1dd1fa": {
+        "source": "Schimba fisierul",
+        "translation": "Cambiar de archivo"
+      },
+      "de39fea416200968afc20e7d70caeb1d7085be3a9456716f2e244f3eac03cae4": {
+        "source": "Alege fisierul",
+        "translation": "Elige el archivo"
+      },
+      "d73a20559149f2f0a5f1957787b6e0d9dfc0551fa64609c92f2f30438de1660e": {
+        "source": "PDF, DOC sau DOCX",
+        "translation": "PDF, DOC o DOCX"
+      },
+      "9a2f5fa212e4319246589bee78887cae4976e2f8a93e17e533a442a4e4f163c1": {
+        "source": "Elimina fisierul",
+        "translation": "Eliminar el archivo"
+      },
+      "3a3593e632a88d3cf1ffe5509ed18a646a754f98dfd61937366eeda4c1f92de5": {
+        "source": "Maximum",
+        "translation": "Máximo"
+      },
+      "7d1782fd524b23537c140934646a2c05a3c6cde4132c30fb0c88c780347c2c52": {
+        "source": "MB. Fisierul ajunge doar la echipa de recrutare.",
+        "translation": "MB. El archivo solo llega al equipo de selección de personal."
+      },
+      "0bd1d0cd91a16b94eb9f01aa0c2958168fe6a4e20df8cd9831499d2fc96d2db1": {
+        "source": "Sunt de acord cu prelucrarea datelor personale si a CV-ului in scopul recrutarii, conform",
+        "translation": "Acepto el tratamiento de mis datos personales y de mi currículum con fines de selección de personal, de conformidad con"
+      },
+      "3c208be8ebea234dc247ba39ace382095aaa0e405972fb4feaa80ce9e1ed2ade": {
+        "source": "Candidatura se trimite...",
+        "translation": "La solicitud debe enviarse..."
+      },
+      "6f5a13233ffb7da085682873fa8d94675ecbe3346935753cb978727239e07fe7": {
+        "source": "Va multumim. Candidatura si CV-ul au ajuns la echipa noastra.",
+        "translation": "Muchas gracias. Hemos recibido tu solicitud y tu currículum."
+      },
+      "7c276e8676801be2987381d1fd76ddaad9eae5df9cc5adc27bd77cfae286a91c": {
+        "source": "Candidatura nu a putut fi trimisa. Incercati din nou.",
+        "translation": "No se ha podido enviar la solicitud. Inténtalo de nuevo."
+      },
+      "7a8da287bc3478ea9feea5abda4588db76fd22a1d6cb0197ac77a2a3b3169c54": {
+        "source": "Atasati CV-ul.",
+        "translation": "Adjunta tu currículum."
+      },
+      "927bffd81c51589485a95c72a90a8c5ab15c7a83c3337e34dd63bdeb574b1d7d": {
+        "source": "Informatii despre companie",
+        "translation": "Información sobre la empresa"
+      },
+      "07dca19c446b25ce20de9a11beb88a469f55509fc25487d4a43296fa31d6e93c": {
+        "source": "Lucrari electrice, mecanice si civile pentru proiecte energetice in Romania si Europa.",
+        "translation": "Obras eléctricas, mecánicas y de obra civil para proyectos energéticos en Rumanía y Europa."
+      },
+      "a5b99d3a9024e130934bbcbb90b06ead7b2e882cc19ccb80b3bafb869059722b": {
+        "source": "Planificare si mobilizare",
+        "translation": "Planificación y puesta en marcha"
+      },
+      "cad5bd385271ac10603d1a9c016670e1c0c1cbbcebb669d57078c5fd1646299c": {
+        "source": "Verificam amplasamentul, documentatia tehnica, traseele si resursele necesare inainte de mobilizare.",
+        "translation": "Comprobamos la ubicación, la documentación técnica, los trazados y los recursos necesarios antes de la puesta en marcha."
+      },
+      "11e99bdf8a33ce9eef5e97c60e54f6e9d9217c7d5ef6a2f497404123591e0c16": {
+        "source": "Executie si punere in functiune",
+        "translation": "Ejecución y puesta en marcha"
+      },
+      "c10f737fdedcd7d5a32531f3397d77b49e6cc7d7d3d7ca2587a3d5331f4bcb69": {
+        "source": "Coordonam montajul mecanic, cablarea, instalarea echipamentelor, testarea si predarea.",
+        "translation": "Nos encargamos de coordinar el montaje mecánico, el cableado, la instalación de los equipos, las pruebas y la entrega."
+      },
+      "aba1bca573f03922437e4eeb5783dbddf6e0ac91a3e3e6cfa551cc3f718481c5": {
+        "source": "Mentenanta si monitorizare",
+        "translation": "Mantenimiento y supervisión"
+      },
+      "62cdc562a7ac3fe2023036ffb52c4fa3d1c20b1eb3a4021679bfc95a021ef0bc": {
+        "source": "Programam inspectii, remedieri si raportari tehnice pentru mentinerea instalatiei dupa punerea in functiune.",
+        "translation": "Programamos inspecciones, reparaciones e informes técnicos para el mantenimiento de la instalación tras su puesta en marcha."
+      },
+      "6c44d84b86eee2f10f8dcddb911abd4b963aac72974c3ce4a33eb48bfce9ec81": {
+        "source": "Instalatii electrice si mecanice",
+        "translation": "Instalaciones eléctricas y mecánicas"
+      },
+      "adb19c1c7faddb57835c50be26fbaf62c441be6299bd9630dd4a94d1b874c5c0": {
+        "source": "Lucrari de constructie la proiectul fotovoltaic Butimanu",
+        "translation": "Obras de construcción en el proyecto fotovoltaico de Butimanu"
+      },
+      "e605d7688af14793752290c827c8a053e3bd790473b004015e40bdd504b0ede5": {
+        "source": "Capacitatea totala a parcului fotovoltaic",
+        "translation": "Capacidad total del parque fotovoltaico"
+      },
+      "fc3a4a652a13ca60ff5fe5f05cdde63030effc1cab4842908ba309515c96f96e": {
+        "source": "Am executat lucrari electrice si mecanice pentru proiectul fotovoltaic din Butimanu.",
+        "translation": "Hemos realizado los trabajos eléctricos y mecánicos para el proyecto fotovoltaico de Butimanu."
+      },
+      "a6d9b824d7b17d9c8ee74d3903ee48f871bfa32dc5d95c865ba4c26289de69af": {
+        "source": "Proiectul de 300 MW a reunit o echipa de management dedicata si peste 200 de profesionisti calificati in santier.",
+        "translation": "El proyecto de 300 MW ha reunido a un equipo directivo comprometido y a más de 200 profesionales cualificados en la obra."
+      },
+      "91fa37e60f75be70f66d94d61d0f62862324dc3ee61b0621d20944f3d419e698": {
+        "source": "Cablare si trasee",
+        "translation": "Cableado y trazados"
+      },
+      "3b32b25fec3d40efe90c94f3d804485caf64f0b520a34b567114cd039c86d260": {
+        "source": "Pozarea cablurilor si organizarea traseelor electrice pe amplasament.",
+        "translation": "Tendido de cables y organización de los trazados eléctricos en la obra."
+      },
+      "fab3cc4ec20af0fcdfd6e9692757d3cb4dc88b5c32dec90e55e4f4f74658959b": {
+        "source": "Montaj mecanic",
+        "translation": "Montaje mecánico"
+      },
+      "7096a1e7495e032a5193d7d49f72d8ae2c905d167a1c4c23559ff14548d5374e": {
+        "source": "Asamblarea structurilor si montarea modulelor fotovoltaice.",
+        "translation": "Montaje de estructuras e instalación de módulos fotovoltaicos."
+      },
+      "30cfb62b65ce552032d38bea52945a12d7b73830adfc5772bad7de95a0c031d3": {
+        "source": "Instalatii electrice",
+        "translation": "Instalaciones eléctricas"
+      },
+      "828b8bcc38a75cfe024ad6d5bd69540fc1d135af56d8271ad15152839646a079": {
+        "source": "Conexiuni, echipare si verificari pentru circuitele executate in santier.",
+        "translation": "Conexiones, equipamiento y comprobaciones de los circuitos instalados en la obra."
+      },
+      "3b67efdf36f4bc9b2ddfd62ca800f4ceaf49d86de82c4b9d7879c0872f27ec9f": {
+        "source": "Echipamente de constructii si structuri de montare la Butimanu",
+        "translation": "Equipos de construcción y estructuras de montaje en Butimanu"
+      },
+      "1670e7a08f8ce343842ecda82cedca8afbd3fe3543318de61760a59608864703": {
+        "source": "Fotografie oficiala de pe site-ul proiectului fotovoltaic Butimanu",
+        "translation": "Fotografía oficial de la página web del proyecto fotovoltaico de Butimanu"
+      },
+      "5b49f5db49b52fc94daefe4768b3e1bee3b1526b00cfcce79ed7283f1edcb0dd": {
+        "source": "Activitatea echipei Greentech Professionals la santierul din Butimanu",
+        "translation": "El trabajo del equipo de Greentech Professionals en la obra de Butimanu"
+      },
+      "52a3df0a71405df6fd904483dd9a70246954d07d026bf3751e200dec8aed45d7": {
+        "source": "Iulie 2025",
+        "translation": "Julio de 2025"
+      },
+      "63de5e16f1ccc3969ee5acac6c527f3f781cf38066af3a2ee7ab42c64160194a": {
+        "source": "Am executat lucrari electrice si mecanice pentru proiectul fotovoltaic din Codigoro.",
+        "translation": "Hemos realizado los trabajos eléctricos y mecánicos para el proyecto fotovoltaico de Codigoro."
+      },
+      "dd04882fa1f320321d60c35e9c4efda0267776244be5e61e46134d47e49d97e5": {
+        "source": "La Codigoro, echipa a lucrat la un parc de 77.3 MW, finalizat in iulie 2025.",
+        "translation": "En Codigoro, el equipo ha trabajado en un parque de 77,3 MW, que se terminará en julio de 2025."
+      },
+      "e64d1291d757a35f5fd27ec46ea2a3c78724af2679361d5664262741440b50fd": {
+        "source": "Pozarea cablurilor",
+        "translation": "Tendido de cables"
+      },
+      "8d03234666e8124e8aa6612ea3a9697ac20f632f822cc1e331ad19875de7e2f5": {
+        "source": "Traseele electrice au fost pregatite si cablurile au fost pozate in zonele de lucru.",
+        "translation": "Se han preparado los tendidos eléctricos y se han tendido los cables en las zonas de trabajo."
+      },
+      "0dc1ea6a95034fb841e67ef887044e6099880612be8d76e02f0622ee3fe1f733": {
+        "source": "Structuri si module",
+        "translation": "Estructuras y módulos"
+      },
+      "9aef5fe813c06f8e1d3388815b990e27702cb6144e8dbe290b6fe16873f73aef": {
+        "source": "Echipa mecanica a asamblat structurile si a montat modulele fotovoltaice.",
+        "translation": "El equipo de mecánica ha montado las estructuras y ha instalado los módulos fotovoltaicos."
+      },
+      "72f370bf713e47f64fbd86d497a6671f117e19b7ff3ed27a4fc33d6ee9440a06": {
+        "source": "Executie electrica",
+        "translation": "Instalaciones eléctricas"
+      },
+      "a777bc7857659cb6f8c460411d591be33218fe8c80cec21c3cdd553822f60615": {
+        "source": "Circuitele si conexiunile au fost realizate conform documentatiei proiectului.",
+        "translation": "Los circuitos y las conexiones se han realizado de acuerdo con la documentación del proyecto."
+      },
+      "5215fdced6b01a40e83ce2c2e877cc2c9d88d97e540ebc11b9192c7261413136": {
+        "source": "Zona de lucru a proiectului fotovoltaic din Codigoro",
+        "translation": "Área de trabajo del proyecto fotovoltaico de Codigoro"
+      },
+      "997176dff66d377471f3588da20760c739bc958a9e2e01fd37c3ec43532e8a04": {
+        "source": "Lucrari electrice si mecanice la proiectul Codigoro",
+        "translation": "Trabajos eléctricos y mecánicos en el proyecto de Codigoro"
+      },
+      "9e8255b6f6d7202fef9bf186361317ac8ccb64d1030bb6ec9a4ce03291c943c3": {
+        "source": "Am realizat montaj mecanic, cablare si instalatii electrice pentru proiectul fotovoltaic din Giurgiu.",
+        "translation": "Hemos llevado a cabo el montaje mecánico, el cableado y las instalaciones eléctricas para el proyecto fotovoltaico de Giurgiu."
+      },
+      "15f4cd1d436e5ef779dbeaaeed17e93d0a6e5eb10e29f7c63fd882387c215fc0": {
+        "source": "Lucrarile au urmarit pregatirea infrastructurii fotovoltaice si coordonarea etapelor electrice si mecanice din santier.",
+        "translation": "Las obras se centraron en la preparación de la infraestructura fotovoltaica y en la coordinación de las fases eléctricas y mecánicas de la obra."
+      },
+      "e47d6b4c8b6f951532d554931585f4f95111285d3f24485aa744bbdb3a3fef8e": {
+        "source": "Pregatirea traseelor",
+        "translation": "Preparación de los trazados"
+      },
+      "c3762722978339112f0d1ac90e83d04dfb9b7e5698493d0387531ee692420bb6": {
+        "source": "Au fost marcate si pregatite traseele necesare cablurilor electrice.",
+        "translation": "Se han marcado y preparado los trazados necesarios para los cables eléctricos."
+      },
+      "2a907efa7e382ca8ac8d38ec87d2ac60f0db1a832e6bf586a65d067d77d1337f": {
+        "source": "Asamblarea structurilor",
+        "translation": "Montaje de estructuras"
+      },
+      "964818b4dd3039ea53588bc8e9abcf3150e03c1a58662fc4dbc5881a4f7ab4ec": {
+        "source": "Structurile de sustinere au fost asamblate pentru montarea modulelor.",
+        "translation": "Se han montado las estructuras de soporte para la instalación de los módulos."
+      },
+      "4661c5dccef3e966b8315262703a6dcc8761c9a3ed0a8d15cae2c01b5543172a": {
+        "source": "Conectarea echipamentelor",
+        "translation": "Conexión de equipos"
+      },
+      "71c108817d6d6fdd7e8c2ad5e8eb25fac9d5d4bfc040241fd6f67d1aa8971b3c": {
+        "source": "Echipamentele si circuitele au fost conectate si verificate in teren.",
+        "translation": "Los equipos y los circuitos se han conectado y comprobado in situ."
+      },
+      "d96e649f895c17501942c25127e20cd3bd7d62e0f23a91c0e2ea88b62ecae995": {
+        "source": "Randuri de panouri fotovoltaice la proiectul din Giurgiu",
+        "translation": "Filas de paneles fotovoltaicos en el proyecto de Giurgiu"
+      },
+      "c9981765198226d0542b6108b6a15b60742b8b4e731e4e05e36d0a5f81b9e25f": {
+        "source": "Fotografie oficiala de pe site-ul proiectului fotovoltaic din Giurgiu",
+        "translation": "Fotografía oficial de la página web del proyecto fotovoltaico de Giurgiu"
+      },
+      "2a8db3e8e2137aa587a34b2e5669ae3321e52102a5de5846e4d8ddaee62910ea": {
+        "source": "Vedere aeriana a proiectului fotovoltaic din Craiova",
+        "translation": "Vista aérea del proyecto fotovoltaico de Craiova"
+      },
+      "12448384d1e9f7c496170b041cdfc4b3c9ec99c3f2727d7015dd24fd992728f5": {
+        "source": "Am executat lucrari mecanice si electrice pentru proiectul fotovoltaic din Craiova.",
+        "translation": "Hemos realizado los trabajos mecánicos y eléctricos para el proyecto fotovoltaico de Craiova."
+      },
+      "fd73730d1751f5485676456e5d260a2092f13349094f54202270ef59b1a91238": {
+        "source": "Lucrarile au inclus asamblarea structurilor, montarea modulelor si executia instalatiilor electrice.",
+        "translation": "Los trabajos incluyeron el montaje de las estructuras, la instalación de los módulos y la ejecución de las instalaciones eléctricas."
+      },
+      "01b60bf7ef1d5c1c262dd3c26a6e8f00d5fa92eaa5da0c03eeb2ac1e890d40af": {
+        "source": "Structuri de montaj",
+        "translation": "Estructuras de montaje"
+      },
+      "c64df184a018969a63bf2f509d364d25fe620fe897254fee9924ce70dbca7e27": {
+        "source": "Elementele metalice au fost asamblate si aliniate pe randurile proiectului.",
+        "translation": "Los elementos metálicos se han montado y alineado según las filas del proyecto."
+      },
+      "2821562a7ea1527acfea69b56f90e2db60df64f6d6d5e5562592dd596695561c": {
+        "source": "Module fotovoltaice",
+        "translation": "Módulos fotovoltaicos"
+      },
+      "7561ec851f909434c57bb794710585cf3a164b60c852cf0fd24d846de96469c6": {
+        "source": "Modulele au fost montate si fixate pe structurile pregatite.",
+        "translation": "Los módulos se han montado y fijado a las estructuras preparadas."
+      },
+      "e26fe9eec1759ea3d2e396d40ec43ddb616ae26dba0e6b73c64348068f8ef80b": {
+        "source": "Cablarea si conexiunile electrice au completat lucrarile mecanice.",
+        "translation": "El cableado y las conexiones eléctricas han completado los trabajos mecánicos."
+      },
+      "9c80bf3db25f67229988f402ddbeb5db01b8dee4ed99a865feda022021d66c85": {
+        "source": "Lucrari de constructie a instalatiilor fotovoltaice la santierul din Craiova",
+        "translation": "Obras de construcción de instalaciones fotovoltaicas en la obra de Craiova"
+      },
+      "345c08c7310d90f99d05357b738d98d5f1251f501a3dcfa524e6c4f4b81a0727": {
+        "source": "Fotografie oficiala a proiectului din Craiova",
+        "translation": "Fotografía oficial del proyecto en Craiova"
+      },
+      "e70ec70b142e0ea60b091f31d7bf7a13fda0b792e6956068aadd835a29f89666": {
+        "source": "Echipa Greentech Professionals care lucreaza la proiectul din Bologna",
+        "translation": "El equipo de Greentech Professionals que trabaja en el proyecto de Bolonia"
+      },
+      "03f293924f14bf5af63b70000de5cf726a9ac3394bcd956ef761ead2ebb321be": {
+        "source": "Am coordonat lucrari de montaj fotovoltaic si instalatii electrice pentru proiectul din Bologna.",
+        "translation": "He coordinado los trabajos de montaje fotovoltaico y las instalaciones eléctricas para el proyecto de Bolonia."
+      },
+      "cc9ed707642a87011e81068f9b9b92c0e798d9b846a565bc9361834bbad02282": {
+        "source": "Echipa din Bologna a urmarit succesiunea lucrarilor mecanice si electrice pe durata executiei in santier.",
+        "translation": "El equipo de Bolonia supervisó el desarrollo de los trabajos mecánicos y eléctricos durante la ejecución de las obras."
+      },
+      "0822222d9087aef9b0e611ae4f2fa1a10778a219ab7d5c0c7de4e1d95ceaabe2": {
+        "source": "Organizarea frontului de lucru",
+        "translation": "Organización del frente de trabajo"
+      },
+      "bba4f396176866b041c719192d573288b7947039e16384c0ce195b4fe056e971": {
+        "source": "Zonele de montaj au fost pregatite pentru o executie ordonata pe etape.",
+        "translation": "Se han preparado las zonas de montaje para que los trabajos se lleven a cabo de forma ordenada y por fases."
+      },
+      "3e58cdf2a514bc3e598b35b321d2ee3f03aeea5376e4d07811be8565a5f6629e": {
+        "source": "Montaj fotovoltaic",
+        "translation": "Instalación fotovoltaica"
+      },
+      "72eba38e1e9eb472d4d1f0217b534bf5e37147ac1f1186851e0844db792855a0": {
+        "source": "Structurile si modulele au fost instalate conform planului de executie.",
+        "translation": "Las estructuras y los módulos se han instalado según el plano de ejecución."
+      },
+      "e1927f44eb7312d186aa917005672011e19b7d92c14675e096df89651c302a7f": {
+        "source": "Cablare si conexiuni",
+        "translation": "Cableado y conexiones"
+      },
+      "a63c0a2f35fc70471a75020fbb94f0ba62aba426b29343cb094f1582bbc65e4e": {
+        "source": "Traseele, cablurile si conexiunile au fost realizate in zonele finalizate mecanic.",
+        "translation": "Los trazados, los cables y las conexiones se han realizado en las zonas en las que se han completado los trabajos mecánicos."
+      },
+      "5b8c31a7a815f4a42baca1480ad51101a053506086089a536e99b02fbb23d62b": {
+        "source": "Lucrari de constructie a instalatiilor fotovoltaice la santierul din Bologna",
+        "translation": "Obras de construcción de instalaciones fotovoltaicas en la obra de Bolonia"
+      },
+      "2ffbb025f67ce880b47136c56ec418ecc24deb434fbe85b78681a8222a70b888": {
+        "source": "Fotografie oficiala a proiectului din Bologna",
+        "translation": "Fotografía oficial del proyecto de Bolonia"
+      },
+      "c0778a5610c8a1c4bef8982ad7ddc8ab48487475f0cb294c28dd82513f6f488f": {
+        "source": "Vedere aeriana a proiectului fotovoltaic din Cagliari",
+        "translation": "Vista aérea del proyecto fotovoltaico de Cagliari"
+      },
+      "0b34ef9249d1c81aecc1215edd6d8fbdc1f01c70b180cc85036a688d33047f07": {
+        "source": "Am executat instalarea electrica si montajul mecanic pentru proiectul fotovoltaic din Cagliari.",
+        "translation": "Hemos llevado a cabo la instalación eléctrica y el montaje mecánico del proyecto fotovoltaico de Cagliari."
+      },
+      "b99eed96025d3b0b32e9d7278f8dac1fcd7ec3737af70bd5f55413f1d93ef62b": {
+        "source": "Lucrarile din Cagliari au combinat montajul structurilor si modulelor cu pozarea cablurilor si verificarile electrice.",
+        "translation": "Las obras realizadas en Cagliari combinaron el montaje de las estructuras y los módulos con el tendido de los cables y las comprobaciones eléctricas."
+      },
+      "e25347e8b096688a044743cb8a9ce18fe0d6c2f453b782fc919b55afd1306d5f": {
+        "source": "Structurile au fost asamblate, iar modulele au fost fixate pe randurile pregatite.",
+        "translation": "Se han montado las estructuras y se han fijado los módulos en las filas preparadas."
+      },
+      "42701c3fe1efe3972f1d0b19ca7ef5c68195c7339965bc707c7ed0ea7fa50669": {
+        "source": "Cablurile au fost distribuite si pozate pe traseele stabilite in proiect.",
+        "translation": "Los cables se han distribuido y tendido siguiendo los trazados establecidos en el proyecto."
+      },
+      "73e3a49223bce009763ec9ab737e94bd7dc722cf3abce06fc4479d1e68637c85": {
+        "source": "Verificari electrice",
+        "translation": "Revisiones eléctricas"
+      },
+      "7c6062aa3ae84cbf0200f35ece970b12079236409d7fa1bec867c4ccbc005a3c": {
+        "source": "Conexiunile executate au fost inspectate inainte de predarea zonelor de lucru.",
+        "translation": "Las conexiones realizadas se inspeccionaron antes de entregar las zonas de trabajo."
+      },
+      "f5f3852cd430f83ee9be8e5b355d22c1a69111cf40dc0f5876ddf25e8644b9f9": {
+        "source": "Lucrari de instalare a sistemelor fotovoltaice la santierul din Cagliari",
+        "translation": "Trabajos de instalación de sistemas fotovoltaicos en la obra de Cagliari"
+      },
+      "ceb642ba7c9e699a22c01a7361dddc51b8555028d1b0f9a90be0a2e6886b9da3": {
+        "source": "Fotografie oficiala a proiectului din Cagliari",
+        "translation": "Fotografía oficial del proyecto de Cagliari"
+      },
+      "344f1f7a667b66cf76e98ffc3c16905a94ffb034de850d14aefed0511e25d46d": {
+        "source": "Montajul structurii fotovoltaice",
+        "translation": "Montaje de la estructura fotovoltaica"
+      },
+      "724e35a9b392b7fa85d23a9baa51a29ca2c83593c73e7054b26739badb39d677": {
+        "source": "Tehnician Greentech la montajul structurii fotovoltaice",
+        "translation": "Técnico de Greentech para el montaje de estructuras fotovoltaicas"
+      },
+      "28543028a20f40bcdfae60539cd35258b457ff18a7e17e874284c6e7a85c7ab6": {
+        "source": "Fixarea si verificarea elementelor structurii de montaj.",
+        "translation": "Fijación y comprobación de los elementos de la estructura de montaje."
+      },
+      "eabf8893b5125fa357570e4b6b23e72ec77f396aab36a496f8d5c94ee8ece1a7": {
+        "source": "Logistica in santier",
+        "translation": "Logística en obra"
+      },
+      "c8aaeace4b8558ae7d67e783c8069dc9cd63c45df8cf9f2bd443543cb9e221f1": {
+        "source": "Utilaj de santier intre structurile unui parc fotovoltaic",
+        "translation": "Maquinaria de obra entre las estructuras de un parque fotovoltaico"
+      },
+      "728ab0f08f1cebb618a1f3ec22467e3e98fd754e1386207abbae8ef1a519e7a7": {
+        "source": "Manipularea materialelor in zona de montaj.",
+        "translation": "Manipulación de materiales en la zona de montaje."
+      },
+      "d4cb4309d349d2b581d94e752d20749d44b775cd6c98348fa10888f05afefbee": {
+        "source": "Infrastructura fotovoltaica",
+        "translation": "Infraestructura fotovoltaica"
+      },
+      "06284c98a7f92be0532eaeb512f30ee2be2d52e56696a63945d6dc72a2dbbcd9": {
+        "source": "Executam montaj mecanic, cablare si instalatii electrice pentru parcuri fotovoltaice de mare capacitate. Portofoliul cumulat al proiectelor la care au lucrat echipele noastre depaseste 1.5 GW.",
+        "translation": "Realizamos montajes mecánicos, cableado e instalaciones eléctricas para parques fotovoltaicos de gran capacidad. La cartera acumulada de proyectos en los que han trabajado nuestros equipos supera los 1,5 GW."
+      },
+      "5697ad691cf5a6627fb365f879e91ffa178cd343635bbf99a56c7729547f4d9a": {
+        "source": "Constructia parcurilor eoliene",
+        "translation": "Construcción de parques eólicos"
+      },
+      "3d8415444b68640ef85868495c0750da02f49c6d7c14589a578318b160c4f7dc": {
+        "source": "Executam lucrari civile si electrice pentru infrastructura parcurilor eoliene, cu proceduri clare de siguranta si control.",
+        "translation": "Realizamos obras civiles y eléctricas para la infraestructura de parques eólicos, con procedimientos claros de seguridad y control."
+      },
+      "cc6866d3ac258b7e40aa2a61913300ef4c278ee64f890f9a3212f8a5af0c56ff": {
+        "source": "Inspectii si solutii electrice",
+        "translation": "Inspecciones y soluciones eléctricas"
+      },
+      "5d4c6e0940fa59f2084b8a977634068f549af29d838dd1a733a1792439fc68e8": {
+        "source": "Executam lucrari pentru centre de date: amenajare, distributie electrica, redundanta, racire si punere in functiune.",
+        "translation": "Realizamos obras para centros de datos: acondicionamiento, distribución eléctrica, redundancia, refrigeración y puesta en marcha."
+      },
+      "3a1222a983b65ca9e4ab9f04c9fdafc54497478afafbae2a0d37b3a14aeec1a3": {
+        "source": "Mentenanta tehnica",
+        "translation": "Mantenimiento técnico"
+      },
+      "c1726c382d010326f7ef9e1bfe625b42b9921927d93a7e9003967d95c6a4fa5e": {
+        "source": "Planificam inspectii, interventii si remedieri pentru mentinerea instalatiilor energetice si industriale.",
+        "translation": "Planificamos inspecciones, intervenciones y reparaciones para el mantenimiento de instalaciones energéticas e industriales."
+      },
+      "ab24e811d03ff0ea61c8285defd4c166ce55d597365231c9ae92c47551531110": {
+        "source": "Greentech Professionals reuneste echipe electrice, mecanice si civile pentru proiecte executate in Romania si pe alte piete europene.",
+        "translation": "Greentech Professionals reúne a equipos de ingeniería eléctrica, mecánica y de obra para proyectos que se llevan a cabo en Rumanía y en otros mercados europeos."
+      },
+      "b71b2bbe26ec952d2d36dd1643d6f55e405a628cf5b4fbdcb61cc89e89e0257b": {
+        "source": "Putere totala instalata",
+        "translation": "Potencia total instalada"
+      },
+      "f32ddec9232fef41688d125f86425bf30026b2f2fb01eb7eb9609e368409156f": {
+        "source": "Profesionisti specializati",
+        "translation": "Profesionales especializados"
+      },
+      "0d50ca669b08c5227e143425628c6d502339156d0e1914d41e94ea0b4f270ba1": {
+        "source": "Bester",
+        "translation": "Bester"
+      },
+      "d006cdda8bb4260ab21ffe3d35a4714dfc44789c9155db83b85b720e5023bad4": {
+        "source": "Certificari de calitate",
+        "translation": "Certificaciones de calidad"
+      },
+      "ee0c06cd6ba1ef988c0f432858698f1c38bb653fc0599a4ffcf66403d23bc418": {
+        "source": "Standarde aplicate pentru organizarea si controlul lucrarilor.",
+        "translation": "Normas aplicadas para la organización y el control de las obras."
+      },
+      "4f9a8a00868be402aeade92f1da0bec791f144b1d27828245cae31f238385a61": {
+        "source": "Atestare ANRE",
+        "translation": "Certificación de la ANRE"
+      },
+      "191d3358f1b32bdc53934cd65cfdd0b782bd710022a96c7fa3f07e30133f87d9": {
+        "source": "Atestare pentru activitati din domeniul instalatiilor electrice.",
+        "translation": "Certificado para actividades en el ámbito de las instalaciones eléctricas."
+      },
+      "f8153b1127639c9e6ff74fdc81def838d0ce826510c66c43761e2845c772eb21": {
+        "source": "Relatii comerciale dezvoltate prin proiecte executate in Romania si Europa.",
+        "translation": "Relaciones comerciales desarrolladas a través de proyectos ejecutados en Rumanía y Europa."
+      },
+      "8fca4ec05122bf8fb25279f331eb38e43e6652f0221237910557ea3a207c2f07": {
+        "source": "Prezenta europeana",
+        "translation": "Presencia en Europa"
+      },
+      "73a1fc34f0e2ef8203c913b3c36d62454a3d435aa05518615d227b5a53621ef2": {
+        "source": "Proiecte si echipe mobilizate in trei piete europene.",
+        "translation": "Proyectos y equipos en marcha en tres mercados europeos."
+      },
+      "633b3a0a72527dcac22b04ed2f4d678abc1094d62add5d86c00fde04a78d3acd": {
+        "source": "Echipe calificate pentru lucrari electrice, mecanice si civile",
+        "translation": "Equipos cualificados para trabajos eléctricos, mecánicos y de obra civil"
+      },
+      "8bb25ab10b87a691b84bb2e15b47a07ff86254972134ac603d6ef220aa27f47e": {
+        "source": "Inspectii electrice, masuratori si verificari PRAM",
+        "translation": "Inspecciones eléctricas, mediciones y verificaciones PRAM"
+      },
+      "c9e933337a92a8f24f32a3de003bdbace1061c052d08a7229d8c1f973f1883dd": {
+        "source": "Planificarea executiei, documentarea si predarea lucrarilor",
+        "translation": "Planificación de la ejecución, documentación y entrega de las obras"
+      },
+      "990f402c1fc6c0f52af204f091462148f981bb7154f21810afd1adb1690dfa62": {
+        "source": "Suntem foarte multumiti de profesionalismul echipei Greentech Professionals. Ii recomandam cu caldura tuturor celor care au de realizat un megaproiect fotovoltaic, deoarece sunt parteneri de incredere.",
+        "translation": "Estamos muy satisfechos con la profesionalidad del equipo de Greentech Professionals. Los recomendamos encarecidamente a todos aquellos que tengan que llevar a cabo un megaproyecto fotovoltaico, ya que son socios de confianza."
+      },
+      "0011f4ba71d377ff0fe8b8a1ad0572901829992947b1c717010cf53b6cde4469": {
+        "source": "Respectarea termenelor limita si a calitatii lucrarilor sunt cele mai importante atuuri atunci cand colaborati cu o companie de servicii fotovoltaice. Recomand Greentech Professionals SRL!",
+        "translation": "El cumplimiento de los plazos y la calidad de los trabajos son las ventajas más importantes a la hora de colaborar con una empresa de servicios fotovoltaicos. ¡Recomiendo Greentech Professionals SRL!"
+      },
+      "18776704ef68dd33b3e83e2400f25cfc04b3fa65d9bea2f56eac5854334ac002": {
+        "source": "Compania Greentech Professionals te impresioneaza cu adevarat! Va multumim pentru colaborare si pentru serviciile de calitate prestate in parcul nostru fotovoltaic.",
+        "translation": "¡La empresa Greentech Professionals nos ha dejado realmente impresionados! Gracias por vuestra colaboración y por los servicios de calidad prestados en nuestro parque fotovoltaico."
+      },
+      "2e06f445d2ce90a819485466993ff0af8147a3339fd762d4c5d1465ccd2b4c7b": {
+        "source": "Actualizare din santier",
+        "translation": "Novedades desde la obra"
+      },
+      "8cf3a677e2ba098adeb9f7f11b11c996ae635e92cfddbf9042cad029e0ff98f3": {
+        "source": "3 minute",
+        "translation": "3 minutos"
+      },
+      "45eaafd96b7969400b705e85fbc24ebd7b0be3d974abc7c70961637f175def99": {
+        "source": "Butimanu: coordonarea lucrarilor pe un santier de 300 MW",
+        "translation": "Butimanu: coordinación de las obras en una obra de 300 MW"
+      },
+      "fa798d7957cd00a5cd12d4e8beea72bb14b5e558b89bd3a59a2d9e1fc1b9da70": {
+        "source": "Montajul electric si mecanic la scara mare cere planificare zilnica, trasee clare si coordonare intre echipe.",
+        "translation": "Los montajes eléctricos y mecánicos a gran escala requieren una planificación diaria, itinerarios claros y coordinación entre los equipos."
+      },
+      "1ceadc58414344e34cbdd04839976cc65552f7337b8f483341caaa8343c4e477": {
+        "source": "Lucrari in santierul fotovoltaic Butimanu",
+        "translation": "Obras en la obra fotovoltaica de Butimanu"
+      },
+      "c25c554c4093ddbb2aceb2e958cea2995515107a927de19ba0b008da70aff71d": {
+        "source": "La Butimanu, echipele Greentech Professionals participa la lucrarile electrice si mecanice pentru un parc fotovoltaic de 300 MW.",
+        "translation": "En Butimanu, los equipos de Greentech Professionals participan en los trabajos eléctricos y mecánicos de un parque fotovoltaico de 300 MW."
+      },
+      "edd486eb02fe413b3bf83d14fc0e8fffe1898bae089a770546c93cc56974b642": {
+        "source": "Lucrari coordonate pe un amplasament extins",
+        "translation": "Obras coordinadas en una amplia obra"
+      },
+      "7af5f41434475d3c6c85ab8cf0e192147ab460d644afbcdc5a4e5b4eb8bc2242": {
+        "source": "Peste 200 de profesionisti au fost implicati in proiect, alaturi de o echipa de management dedicata coordonarii activitatilor din santier.",
+        "translation": "Más de 200 profesionales han participado en el proyecto, junto con un equipo directivo encargado de coordinar las actividades en la obra."
+      },
+      "4869e19b631658c8d5d0f87b61056670b40e47058e3b68b12e08f5df60f381bb": {
+        "source": "Planificarea zilnica sincronizeaza fronturile de lucru electrice si mecanice si reduce blocajele dintre etape.",
+        "translation": "La planificación diaria sincroniza las fases de trabajo eléctricas y mecánicas y reduce los cuellos de botella entre las distintas etapas."
+      },
+      "6397c96938197aa12201b4cb2e189cd1588fcbde5a34e1f0cd18d47e0c829806": {
+        "source": "De la structuri la instalatia electrica",
+        "translation": "Desde estructuras hasta la instalación eléctrica"
+      },
+      "f38db1460c0ca9ce68ad34b64fe25772038e2917c8e3aaed70457f9e3328e311": {
+        "source": "Lucrarile includ montajul structurilor si modulelor, pozarea cablurilor si executia instalatiilor electrice.",
+        "translation": "Los trabajos incluyen el montaje de estructuras y módulos, el tendido de cables y la ejecución de instalaciones eléctricas."
+      },
+      "bf4fd47756c9fa5b1856c62e99dac3a2d0a5862e6cab39bc9c8b0d49e5578bd3": {
+        "source": "Fiecare zona este verificata inainte de predare, iar progresul este urmarit impreuna cu echipele implicate in proiect.",
+        "translation": "Cada zona se revisa antes de la entrega y se realiza un seguimiento del progreso junto con los equipos que participan en el proyecto."
+      },
+      "ea3f2b965cba82d6de63117f556f1e967be448cfb583a665f94ec8c7bab531ca": {
+        "source": "Profesionisti implicati in santier",
+        "translation": "Profesionales que trabajan en la obra"
+      },
+      "00fb4b10b55c36d44ff9a4117b41354924900b905d6c4d52d864ccee8961ed63": {
+        "source": "Amplasamentul proiectului",
+        "translation": "Ubicación del proyecto"
+      },
+      "3fa43a138508ce7a0888d88be51804c7e819987297245ffa10c37a92a0ccc4e5": {
+        "source": "Vezi proiectul Butimanu",
+        "translation": "Ver el proyecto Butimanu"
+      },
+      "abdc2f495616fdaa2824611e6c99d68753e358269e973dcbb4abf7d80f68ed40": {
+        "source": "Angajam",
+        "translation": "Buscamos personal"
+      },
+      "a22e881f75eb9cf5d7efb2008c0f24f8a36df347f7a967da73b4cee41b30ec58": {
+        "source": "Candidaturi deschise",
+        "translation": "Ofertas de empleo"
+      },
+      "5d9e923770126e15fde023a6535a255e424a062c9637f5468f4e02eb5b0aa5eb": {
+        "source": "2 minute",
+        "translation": "2 minutos"
+      },
+      "cc7e41d4cf1241e188466220e1a6da68386887fe2b4f4f6a33da3f78d7765728": {
+        "source": "Roluri deschise in echipele Greentech",
+        "translation": "Puestos vacantes en los equipos de Greentech"
+      },
+      "81ded33f608761bfff34079bbfc405689145ad5356845f0d21bc8871db5cf36b": {
+        "source": "Primim candidaturi pentru roluri tehnice si de coordonare in proiectele noastre din Romania si Europa.",
+        "translation": "Aceptamos candidaturas para puestos técnicos y de coordinación en nuestros proyectos en Rumanía y Europa."
+      },
+      "7d63ee112a27f13d9992e1713bfe56f77f4180b60e1b607081de28d93aef673b": {
+        "source": "Echipa Greentech intr-un proiect fotovoltaic",
+        "translation": "El equipo de Greentech en un proyecto fotovoltaico"
+      },
+      "5101584d2e10ec266c39e0c3aa65a520ae4d936154db9cfe064408cd25f3be25": {
+        "source": "Primim candidaturi de la electricieni, ingineri, coordonatori si specialisti cu experienta in proiecte energetice si de constructii.",
+        "translation": "Aceptamos candidaturas de electricistas, ingenieros, coordinadores y especialistas con experiencia en proyectos energéticos y de construcción."
+      },
+      "7504469ccc965c7ddc9972ad512ef0743cb6c71e1ec911415243328544abb71a": {
+        "source": "Lucru in echipe de santier",
+        "translation": "Trabajo en equipos de obra"
+      },
+      "3fcfaa3ac33671d2faff141038b73d18e9a2457a2b6583771b3c0eceb552db4f": {
+        "source": "Rolurile pot implica activitati electrice, mecanice, civile sau de coordonare, in functie de proiect si de experienta candidatului.",
+        "translation": "Los puestos pueden implicar tareas eléctricas, mecánicas, de obra civil o de coordinación, en función del proyecto y de la experiencia del candidato."
+      },
+      "4aa0828ac773d9178542ae6026f12e3f6e58ae4531de7fe4783c0eafe43c62c5": {
+        "source": "Experienta practica, respectarea procedurilor de siguranta si colaborarea cu celelalte echipe sunt importante in fiecare amplasament.",
+        "translation": "La experiencia práctica, el cumplimiento de los procedimientos de seguridad y la colaboración con el resto de equipos son fundamentales en cada obra."
+      },
+      "6bf95e88d729af3de6578a854975f876626a3cfa010b2755b55ea9436fa8f777": {
+        "source": "Cum trimiteti candidatura",
+        "translation": "Cómo enviar tu candidatura"
+      },
+      "d4e8a5c4c3b0fbbc03cb629297a216083cd044f489343d903a0c758b4adc10b5": {
+        "source": "Completati formularul de recrutare si atasati CV-ul, impreuna cu rolul urmarit si o scurta descriere a experientei.",
+        "translation": "Rellene el formulario de selección de personal y adjunte su currículum, indicando el puesto que le interesa y una breve descripción de su experiencia."
+      },
+      "c886ca92ec8e21baddecc9473d1f172368b2cd2bbe586d3ea09fbbba33e1b4d4": {
+        "source": "Disponibilitatea rolurilor se modifica in functie de proiectele active. Echipa noastra va contacteaza candidatii potriviti pentru etapa urmatoare.",
+        "translation": "La disponibilidad de los puestos varía en función de los proyectos activos. Nuestro equipo se pondrá en contacto con los candidatos adecuados para la siguiente fase."
+      },
+      "6045fbee2e316e3dfe3d90b0f7dd935fc3e535ffa18a9f4174a8232991b7829c": {
+        "source": "Tehnic",
+        "translation": "Técnico"
+      },
+      "3358a4268b2e9dd80d6967b98e64ff362d01d67e4139d92b707dee8052fe5ac1": {
+        "source": "Roluri electrice, mecanice si civile",
+        "translation": "Obras eléctricas, mecánicas y de obra civil"
+      },
+      "fff087112b0835b07c5ec2afc998a08ddda3d17c019957a4ef5025f124b0b429": {
+        "source": "Proiecte in mai multe piete",
+        "translation": "Proyectos en varios mercados"
+      },
+      "8ad0b0fa998b638fb04796d5155fe6f1d578a78d86a8dde3c58558d32fc66492": {
+        "source": "Candidatura prin formular",
+        "translation": "Solicitud a través del formulario"
+      },
+      "938df5ade15353021f9e9501bdbb2c3da44646eb8bb986e6af5e773d1011b598": {
+        "source": "link",
+        "translation": "enlace"
+      },
+      "285c5d94c74e8ed8dce15a6c36025b242a06cc332b782e094d5f8cf9bd65b70a": {
+        "source": "Oameni si educatie",
+        "translation": "Personas y formación"
+      },
+      "4ae6831ef9a73a93ee18fa01aa379b03189b378a947f4173ba7e78558a1093b6": {
+        "source": "Studentii de la Politehnica au vizitat santierul din Butimanu",
+        "translation": "Los estudiantes de la Universidad Politécnica visitaron la obra de Butimanu"
+      },
+      "c64412e14f8981358bf84df48b30fca8f529a60d616bb7db1fcc5e7810f47c56": {
+        "source": "Vizita tehnica le-a oferit studentilor o imagine directa asupra lucrarilor dintr-un parc fotovoltaic de mare capacitate.",
+        "translation": "La visita técnica ofreció a los estudiantes una visión directa de los trabajos que se llevan a cabo en un parque fotovoltaico de gran capacidad."
+      },
+      "d6051197803e080fddc9ee98225ce210ca5e4e589c7533317b444e187010e2c9": {
+        "source": "Studenti si membri ai echipei Greentech in santierul din Butimanu",
+        "translation": "Estudiantes y miembros del equipo de Greentech en la obra de Butimanu"
+      },
+      "f416476f33f9a07705a3f2fd1e6861da91fa981cadd62acdcfb62bdac55de268": {
+        "source": "Studentii Universitatii Politehnica au vizitat parcul fotovoltaic Butimanu pentru a urmari etapele de montaj si organizarea lucrarilor din santier.",
+        "translation": "Los estudiantes de la Universidad Politécnica visitaron el parque fotovoltaico de Butimanu para observar las fases de montaje y la organización de los trabajos en la obra."
+      },
+      "a60f91b62e0e4a2ff68fa907760531ad7cd164dbce94b6e6c3c17dd3126119a1": {
+        "source": "Teoria vazuta in santier",
+        "translation": "La teoría puesta en práctica en la obra"
+      },
+      "00cef9d18a9a9b227b93067186c1b3b06feb0f23281488a0f7f785963a7462ea": {
+        "source": "Vizita a prezentat scara proiectului, succesiunea operatiunilor si legatura dintre documentatia tehnica si executia din teren.",
+        "translation": "La visita permitió conocer el alcance del proyecto, la secuencia de las operaciones y la relación entre la documentación técnica y la ejecución sobre el terreno."
+      },
+      "9dfe0aebfebc09daddfe480278553e5f4ea2277d6d06f3efdcdd9a0f3728de38": {
+        "source": "Studentii au putut observa modul in care echipele electrice si mecanice isi coordoneaza activitatea pe acelasi amplasament.",
+        "translation": "Los estudiantes pudieron observar cómo los equipos eléctricos y mecánicos coordinan su trabajo en una misma obra."
+      },
+      "af254888f5353a9d0badaa44154bc4a0e7e068f18d5ecec963a35e264abfd1f3": {
+        "source": "Discutii cu echipele tehnice",
+        "translation": "Reuniones con los equipos técnicos"
+      },
+      "9bcb046249de530a1d9dc142a182e290be206ffebc1eef06cd2c3beb2f97d9bd": {
+        "source": "Specialistii Greentech au explicat etapele principale ale lucrarilor si cerintele de siguranta aplicate in santier.",
+        "translation": "Los especialistas de Greentech han explicado las principales fases de las obras y las medidas de seguridad aplicadas en la obra."
+      },
+      "d5b5d701ce6a47a91ae57a3d52ac0d57f9d1f934db628c520b0d48bf3fcde334": {
+        "source": "Astfel de vizite apropie pregatirea academica de situatiile concrete intalnite in proiectele energetice.",
+        "translation": "Este tipo de visitas permite acercar la formación académica a las situaciones concretas que se dan en los proyectos energéticos."
+      },
+      "3f5d57936f6303fbcfb3f231b5d4ef2ff4476aa9fb551a5b03a3367f74651317": {
+        "source": "Santier",
+        "translation": "Obra"
+      },
+      "ca214a2f9f1690781dbb6c5103026afd306247108049714e3759340a85ff8799": {
+        "source": "Experienta tehnica directa",
+        "translation": "Experiencia técnica directa"
+      },
+      "3aa5a18a0f6cdacebccbaf34c0cee0e399183b24c733b7f697a0a71c6f055854": {
+        "source": "Parc fotovoltaic de 300 MW",
+        "translation": "Parque fotovoltaico de 300 MW"
+      },
+      "3a58bd991085eac92f2c44b52abe3789d79fcab87d0eae54bd614bcbd05e6564": {
+        "source": "Educatie",
+        "translation": "Educación"
+      },
+      "71d591630bfd4203869a5d81d49cfa448fbf5185d1253ddf262f96adc58d7cf1": {
+        "source": "Dialog cu viitorii ingineri",
+        "translation": "Diálogo con los futuros ingenieros"
+      },
+      "fea237eb44ac2cf46860b8b41d6226d33cefe30a5f8ef11c48011ccce8d7fad3": {
+        "source": "Explorati",
+        "translation": "Explora"
+      },
+      "25ccc7ed6efbf5bb78e8fb74b17c3b3394d8a6b4a2c8b3d86ec2ea1dbb21950d": {
+        "source": "Inspectii electrice",
+        "translation": "Inspecciones eléctricas"
+      },
+      "80231d83629778beb13ec74591da285bb83dfe3930dd6270fc2faab1f213e938": {
+        "source": "Referinte",
+        "translation": "Referencias"
+      },
+      "fb2a932e90eadddcbcaa33ca0d4eeb793153b8e42a879aeaa1b81330e05f9a7f": {
+        "source": "Informatii legale",
+        "translation": "Información legal"
+      },
+      "dd634784f8e62d557ba7df61e32ba9363d9e69ca1c21c6619ee6007642afad78": {
+        "source": "Politica de confidentialitate",
+        "translation": "Política de privacidad"
+      },
+      "74d2da8d1b2c6c0cf8a4dd4a2e5e4501a685844e886294b7af9e083cc5b7a9a9": {
+        "source": "Termeni si conditii",
+        "translation": "Términos y condiciones"
+      },
+      "2c2dadff4a1a9ac1309a92eae008c808e18f1afa864460396439e511bb1e5ffe": {
+        "source": "Greentech Professionals SRL – Politica de confidentialitate Ultima actualizare: iunie 2026\n\n1. Cine suntem\n\nPrezenta Politica de confidentialitate descrie modul in care Greentech Professionals SRL colecteaza, utilizeaza si protejeaza datele dvs. cu caracter personal atunci cand vizitati greentechpro.ro sau interactionati cu noi prin intermediul acestui site web.\n\nOperator de date: Greentech Professionals SRL, Calea Floreasca nr. 194, Sectorul 1, 014472, Bucuresti, Romania. E-mail: office@greentechpro.ro. Telefon: +40 727 332 213.\n\nPrelucram datele cu caracter personal in conformitate cu Regulamentul general privind protectia datelor (UE) 2016/679 (GDPR) si cu legislatia romana aplicabila.\n\n2. Ce date colectam\n\nColectam numai datele cu caracter personal pe care ni le furnizati in mod voluntar prin intermediul formularului de candidatura de pe pagina noastra „Cariere”. Acestea includ: numele complet, adresa de e-mail, numarul de telefon, postul dorit, experienta profesionala si orice CV sau documente de referinta pe care le incarcati.\n\nDaca ne contactati direct la adresa office@greentechpro.ro, prelucram doar informatiile incluse in e-mailul dumneavoastra. Nu utilizam pixeli de urmarire, instrumente de analiza sau orice alta metoda de colectare automata a datelor pe acest site web.\n\n3. Cum utilizam datele dumneavoastra\n\nDatele transmise prin formularul de pe pagina „Cariera” sunt utilizate exclusiv pentru a evalua candidatura dumneavoastra pentru posturile vacante sau viitoare, pentru a va contacta in legatura cu candidatura dumneavoastra si pentru tinerea evidentei interne a procesului de recrutare. Nu vom utiliza datele dumneavoastra in scopuri de marketing sau in orice alt scop fara consimtamantul dumneavoastra explicit.\n\n4. Temeiul juridic al prelucrarii\n\nPrelucram datele dumneavoastra pe baza consimtamantului dumneavoastra explicit (art. 6(1)(a) din RGPD), acordat atunci cand bifati caseta de selectare privind RGPD din formularul de candidatura. Va puteti retrage consimtamantul in orice moment, contactandu-ne la adresa office@greentechpro.ro. Retragerea consimtamantului nu afecteaza legalitatea prelucrarii efectuate inainte de retragere.\n\n5. Cat timp pastram datele dumneavoastra\n\nDatele din cererea de angajare sunt pastrate pentru o perioada maxima de 12 luni de la depunere. Dupa aceasta perioada, ele sunt sterse definitiv, cu exceptia cazului in care ati fost angajat, situatie in care datele dumneavoastra sunt pastrate ca parte a dosarului dumneavoastra de angajare, in conformitate cu legislatia muncii aplicabila. Puteti solicita stergerea datelor in orice moment.\n\n6. Cui ii comunicam datele\n\nNu vindem si nu comunicam datele dumneavoastra catre terti in scopuri comerciale. Datele dumneavoastra pot fi accesate de personalul intern din departamentul de resurse umane si de conducere implicat in procesul de recrutare, precum si de furnizorul nostru de servicii de gazduire a site-ului web, care actioneaza in calitate de procesator de date in cadrul Spatiului Economic European (SEE). Nu transferam date in afara SEE.\n\n7. Drepturile dumneavoastra\n\nIn conformitate cu RGPD, aveti dreptul de a accesa, rectifica, sterge, restrictiona sau transfera datele dumneavoastra cu caracter personal, precum si de a va opune prelucrarii acestora. Pentru a va exercita oricare dintre aceste drepturi, contactati-ne la adresa office@greentechpro.ro. Va vom raspunde in termen de 30 de zile.\n\nDe asemenea, puteti depune o plangere la ANSPDCP (www.dataprotection.ro), autoritatea romana de supraveghere a protectiei datelor, situata pe B-dul General Gheorghe Magheru nr. 28-30, Sectorul 1, Bucuresti.\n\n8. Securitate\n\nAplicam masuri tehnice si organizatorice adecvate pentru a va proteja datele impotriva accesului neautorizat, pierderii sau divulgarii. Toate transmisiile de date de pe acest site web sunt criptate prin HTTPS.\n\n9. Cookie-uri\n\nAcest site web utilizeaza numai cookie-uri tehnice esentiale, necesare pentru functionarea corespunzatoare a acestuia. Nu utilizam cookie-uri de urmarire, publicitare sau de analiza. Cookie-urile esentiale nu necesita consimtamant in conformitate cu legislatia UE aplicabila.\n\n10. Modificari ale prezentei politici\n\nEste posibil sa actualizam periodic prezenta politica. Data ultimei revizuiri este afisata in partea de sus a acestei pagini. Utilizarea in continuare a site-ului web dupa orice modificare constituie acceptarea politicii actualizate.",
+        "translation": "Greentech Professionals SRL – Política de privacidad Última actualización: junio de 2026\n\n1. Quiénes somos\n\nLa presente Política de privacidad describe cómo Greentech Professionals SRL recopila, utiliza y protege sus datos personales cuando visita greentechpro.ro o interactúa con nosotros a través de este sitio web.\n\nResponsable del tratamiento: Greentech Professionals SRL, Calea Floreasca n.º 194, Sector 1, 014472, Bucarest, Rumanía. Correo electrónico: office@greentechpro.ro. Teléfono: +40 727 332 213.\n\nTratamos los datos personales de conformidad con el Reglamento General de Protección de Datos (UE) 2016/679 (RGPD) y con la legislación rumana aplicable.\n\n2. Qué datos recopilamos\n\nSolo recopilamos los datos personales que nos facilitas de forma voluntaria a través del formulario de candidatura de nuestra página «Empleo». Estos incluyen: nombre completo, dirección de correo electrónico, número de teléfono, puesto deseado, experiencia profesional y cualquier CV o documento de referencia que suba.\n\nSi se pone en contacto con nosotros directamente a través de la dirección office@greentechpro.ro, solo tratamos la información incluida en su correo electrónico. No utilizamos píxeles de seguimiento, herramientas de análisis ni ningún otro método de recogida automática de datos en este sitio web.\n\n3. Cómo utilizamos sus datos\n\nLos datos enviados a través del formulario de la página «Carrera profesional» se utilizan exclusivamente para evaluar su candidatura para los puestos vacantes o futuros, para ponernos en contacto con usted en relación con su candidatura y para llevar un registro interno del proceso de selección. No utilizaremos sus datos con fines de marketing ni para ningún otro fin sin su consentimiento explícito.\n\n4. Base jurídica del tratamiento\n\nTratamos sus datos sobre la base de su consentimiento explícito (art. 6, apartado 1, letra a) del RGPD), otorgado al marcar la casilla de selección relativa al RGPD en el formulario de candidatura. Puede retirar su consentimiento en cualquier momento poniéndose en contacto con nosotros en la dirección office@greentechpro.ro. La retirada del consentimiento no afecta a la legalidad del tratamiento realizado antes de dicha retirada.\n\n5. Durante cuánto tiempo conservamos sus datos\n\nLos datos de la solicitud de empleo se conservan durante un plazo máximo de 12 meses a partir de su presentación. Transcurrido este plazo, se eliminan definitivamente, salvo en el caso de que haya sido contratado, en cuyo caso sus datos se conservan como parte de su expediente de contratación, de conformidad con la legislación laboral aplicable. Puede solicitar la eliminación de los datos en cualquier momento.\n\n6. A quién comunicamos los datos\n\nNo vendemos ni comunicamos sus datos a terceros con fines comerciales. Su información puede ser consultada por el personal interno del departamento de recursos humanos y de la dirección que participe en el proceso de selección, así como por nuestro proveedor de servicios de alojamiento web, que actúa como encargado del tratamiento de datos dentro del Espacio Económico Europeo (EEE). No transferimos datos fuera del EEE.\n\n7. Sus derechos\n\nDe conformidad con el RGPD, tiene derecho a acceder, rectificar, suprimir, limitar o transferir sus datos personales, así como a oponerse a su tratamiento. Para ejercer cualquiera de estos derechos, póngase en contacto con nosotros en la dirección office@greentechpro.ro. Le responderemos en un plazo de 30 días.\n\nAsimismo, puede presentar una reclamación ante la ANSPDCP (www.dataprotection.ro), la autoridad rumana de supervisión de la protección de datos, con sede en B-dul General Gheorghe Magheru n.º 28-30, Sector 1, Bucarest.\n\n8. Seguridad\n\nAplicamos medidas técnicas y organizativas adecuadas para proteger sus datos contra el acceso no autorizado, la pérdida o la divulgación. Todas las transmisiones de datos de este sitio web se cifran mediante HTTPS.\n\n9. Cookies\n\nEste sitio web utiliza únicamente cookies técnicas esenciales, necesarias para su correcto funcionamiento. No utilizamos cookies de seguimiento, publicitarias ni de análisis. Las cookies esenciales no requieren consentimiento de acuerdo con la legislación de la UE aplicable.\n\n10. Modificaciones de la presente política\n\nEs posible que actualicemos periódicamente la presente política. La fecha de la última revisión aparece en la parte superior de esta página. El uso continuado del sitio web tras cualquier modificación implica la aceptación de la política actualizada."
+      },
+      "3db1e9fde5d48c935a715f58c86ca153d9de12dae9a267c324cb257ba74b6bca": {
+        "source": "Greentech Professionals SRL – Termeni si conditii Ultima actualizare: iunie 2026\n\n1. Generalitati\n\nPrezentii Termeni si conditii reglementeaza utilizarea de catre dumneavoastra a site-ului web greentechpro.ro, operat de Greentech Professionals SRL, Calea Floreasca nr. 194, Sectorul 1, 014472, Bucuresti, Romania (nr. de inregistrare in registrul comertului RO46635117 – J40/15653/2022). Prin accesarea acestui site web, sunteti de acord cu acesti termeni.\n\n2. Scopul site-ului web\n\nAcest site web este o platforma de prezentare care ofera informatii despre Greentech Professionals SRL, serviciile sale, proiectele si oportunitatile de cariera. Acesta nu constituie o oferta de vanzare, un contract sau o propunere comerciala cu caracter obligatoriu.\n\n3. Proprietate intelectuala\n\nIntregul continut al acestui site web, inclusiv textul, imaginile, logo-urile, elementele grafice si documentele, este proprietatea Greentech Professionals SRL sau a furnizorilor sai de continut si este protejat de legislatia aplicabila in materie de drepturi de autor si proprietate intelectuala. Nu aveti dreptul sa reproduceti, sa distribuiti sau sa utilizati niciun continut fara consimtamantul nostru prealabil in scris.\n\n4. Candidaturi pentru posturi\n\nPrin trimiterea unei candidaturi prin intermediul paginii noastre „Cariere”, confirmati ca toate informatiile furnizate sunt corecte si complete. Trimiterea unei candidaturi nu creeaza nicio obligatie de angajare pentru niciuna dintre parti. Ne rezervam dreptul de a respinge orice candidatura, la propria noastra discretie.\n\n5. Limitarea raspunderii\n\nInformatiile de pe acest site web sunt furnizate exclusiv in scop informativ general. Greentech Professionals SRL nu ofera nicio garantie cu privire la acuratetea, exhaustivitatea sau adecvarea oricarei informatii de pe site. Nu ne asumam raspunderea pentru niciun prejudiciu direct sau indirect care decurge din utilizarea acestui site web sau din bazarea pe continutul sau.\n\n6. Linkuri externe\n\nAcest site web poate contine linkuri catre site-uri web ale unor terti. Aceste linkuri sunt furnizate doar pentru comoditate. Greentech Professionals SRL nu are niciun control asupra continutului sau practicilor site-urilor web catre care se face trimitere si nu isi asuma nicio responsabilitate in acest sens.\n\n7. Legislatia aplicabila\n\nPrezentele Termeni si conditii sunt reglementate de legislatia romana. Orice litigiu care decurge din utilizarea acestui site web va fi supus jurisdictiei exclusive a instantelor competente din Bucuresti, Romania.\n\n8. Modificari ale acestor Termeni\n\nNe rezervam dreptul de a actualiza acesti Termeni si conditii in orice moment. Data ultimei revizuiri este afisata in partea de sus a acestei pagini. Utilizarea in continuare a site-ului web constituie acceptarea termenilor actualizati.\n\n9. Contact\n\nPentru orice intrebari referitoare la acesti Termeni si conditii: office@greentechpro.ro, +40 727 332 213.",
+        "translation": "Greentech Professionals SRL – Términos y condiciones Última actualización: junio de 2026\n\n1. Generalidades\n\nLos presentes Términos y condiciones regulan el uso que usted haga del sitio web greentechpro.ro, gestionado por Greentech Professionals SRL, Calea Floreasca n.º 194, Sector 1, 014472, Bucarest, Rumanía (n.º de inscripción en el Registro Mercantil RO46635117 – J40/15653/2022). Al acceder a este sitio web, usted acepta estos términos.\n\n2. Finalidad del sitio web\n\nEste sitio web es una plataforma de presentación que ofrece información sobre Greentech Professionals SRL, sus servicios, proyectos y oportunidades profesionales. No constituye una oferta de venta, un contrato ni una propuesta comercial de carácter vinculante.\n\n3. Propiedad intelectual\n\nTodo el contenido de este sitio web, incluidos los textos, las imágenes, los logotipos, los elementos gráficos y los documentos, es propiedad de Greentech Professionals SRL o de sus proveedores de contenido, y está protegido por la legislación aplicable en materia de derechos de autor y propiedad intelectual. No tiene derecho a reproducir, distribuir ni utilizar ningún contenido sin nuestro consentimiento previo por escrito.\n\n4. Candidaturas a puestos de trabajo\n\nAl enviar una candidatura a través de nuestra página «Empleo», confirmas que toda la información facilitada es correcta y completa. El envío de una candidatura no implica ninguna obligación de contratación para ninguna de las partes. Nos reservamos el derecho a rechazar cualquier candidatura, a nuestra entera discreción.\n\n5. Limitación de responsabilidad\n\nLa información de este sitio web se proporciona exclusivamente con fines informativos generales. Greentech Professionals SRL no ofrece garantía alguna respecto a la exactitud, exhaustividad o idoneidad de cualquier información del sitio. No asumimos responsabilidad alguna por cualquier daño directo o indirecto que se derive del uso de este sitio web o de basarse en su contenido.\n\n6. Enlaces externos\n\nEste sitio web puede contener enlaces a sitios web de terceros. Dichos enlaces se proporcionan únicamente para mayor comodidad. Greentech Professionals SRL no tiene control alguno sobre el contenido o las prácticas de los sitios web a los que se hace referencia y no asume responsabilidad alguna al respecto.\n\n7. Legislación aplicable\n\nLos presentes Términos y condiciones se rigen por la legislación rumana. Cualquier litigio que se derive del uso de este sitio web se someterá a la jurisdicción exclusiva de los tribunales competentes de Bucarest, Rumanía.\n\n8. Modificaciones de estos Términos\n\nNos reservamos el derecho a actualizar estos Términos y condiciones en cualquier momento. La fecha de la última revisión aparece en la parte superior de esta página. El uso continuado del sitio web implica la aceptación de los términos actualizados.\n\n9. Contacto\n\nPara cualquier consulta relacionada con estos Términos y condiciones: office@greentechpro.ro, +40 727 332 213."
+      },
+      "fe8db0124693dc75bbd930c6131ea9e38a6018b4f694446b69fd6992ae85db70": {
+        "source": "Ce tip de proiecte executati?",
+        "translation": "¿Qué tipo de proyectos lleváis a cabo?"
+      },
+      "0863ea3501c859864b1e0dc0380002d5b8fb3c6307ffbd1ed602755419db366d": {
+        "source": "Executam lucrari electrice, mecanice si civile pentru parcuri fotovoltaice, infrastructura eoliana, instalatii tehnice si centre de date.\n\nDomeniul exact al lucrarilor se stabileste dupa analiza documentatiei si a amplasamentului.",
+        "translation": "Realizamos obras eléctricas, mecánicas y de ingeniería civil para parques fotovoltaicos, infraestructuras eólicas, instalaciones técnicas y centros de datos.\n\nEl alcance exacto de las obras se determina tras analizar la documentación y el emplazamiento."
+      },
+      "625f186ddb316959e056c32aa83bbb23e8c5d3a49f4e60d75fcb9e19f0e37a7a": {
+        "source": "In ce tari lucrati?",
+        "translation": "¿En qué países trabajáis?"
+      },
+      "b95c94bf57c3d6134cf3f9572361a5afe5c3ae4802ec03847112b55224951874": {
+        "source": "Avem experienta de lucru in Romania, Italia si Spania. Pentru alte amplasamente din Uniunea Europeana, mobilizarea este evaluata in functie de durata, volumul si cerintele proiectului.",
+        "translation": "Contamos con experiencia laboral en Rumanía, Italia y España. Para otras ubicaciones de la Unión Europea, la movilización se evalúa en función de la duración, el volumen y los requisitos del proyecto."
+      },
+      "46e26456a457f77702ef67a0a323b6fd9c89109c9739cbd58b56b9bb0ad171dd": {
+        "source": "Puteti prelua mai multe etape ale aceluiasi proiect?",
+        "translation": "¿Podéis encargaros de varias fases del mismo proyecto?"
+      },
+      "4a14dc068a4b0f1e804f32ebab9aa242b8687cbdca0a802abf686afa0287a712": {
+        "source": "Da. Putem combina montajul mecanic, cablarea, instalatiile electrice, testarile si mentenanta. Responsabilitatile sunt definite clar inainte de mobilizare.",
+        "translation": "Sí. Podemos encargarnos de la montaje mecánico, el cableado, las instalaciones eléctricas, las pruebas y el mantenimiento. Las responsabilidades se definen claramente antes de comenzar los trabajos."
+      },
+      "8fd2e866a4df551734b375b1d0583d0a2a492f411337993ccd25f8b502a9f7b4": {
+        "source": "Ce certificari detineti?",
+        "translation": "¿Qué certificaciones tienen?"
+      },
+      "933786726f1ae74e735ef0c6dbb47ddefedac339574823b3fb2875bd9a23060a": {
+        "source": "Compania detine certificari ISO si atestare ANRE pentru activitati din domeniul energetic. Documentele aplicabile proiectului pot fi prezentate la cerere.",
+        "translation": "La empresa cuenta con certificaciones ISO y la acreditación de la ANRE para actividades en el sector energético. Los documentos pertinentes para el proyecto pueden presentarse previa solicitud."
+      },
+      "6b4dd441d4d39dc9919f7821884ea26610a3766bc5ab82a3c1d6715cb8be48a4": {
+        "source": "Cum se stabileste termenul de mobilizare?",
+        "translation": "¿Cómo se establece el plazo de movilización?"
+      },
+      "18899c5ba8a521e75d38aeb34d16c6dcd8ed009da88110fb3cbd82b3d49e0b93": {
+        "source": "Termenul de mobilizare se stabileste dupa evaluarea amplasamentului, a volumului de lucrari si a disponibilitatii echipei. Pentru fiecare solicitare comunicam un calendar realist inainte de confirmarea lucrarii.",
+        "translation": "El plazo de puesta en marcha se establece tras evaluar el emplazamiento, el volumen de trabajo y la disponibilidad del equipo. Para cada solicitud, comunicamos un calendario realista antes de confirmar el trabajo."
+      },
+      "33dd3b16645bbcd9dd208382e8217541cc10925944cac377aaaf34b1bfa1703c": {
+        "source": "Cum solicit o oferta?",
+        "translation": "¿Cómo solicito un presupuesto?"
+      },
+      "4c3a6ab19f94ca8ca76a8d78e0f7fc94cb733304597e70096cc3b54a9feaec59": {
+        "source": "Transmiteti prin formular amplasamentul, capacitatea estimata, tipul lucrarilor si perioada dorita. Revenim cu intrebarile tehnice necesare pentru definirea ofertei si a calendarului.",
+        "translation": "Indique en el formulario la ubicación, la capacidad estimada, el tipo de obra y el plazo deseado. Nos pondremos en contacto con usted para plantearle las preguntas técnicas necesarias para definir el presupuesto y el calendario."
+      },
+      "e0116aca6291081c62298bafd46638ef0493a1229d4afc2c8403f978e3be8d22": {
+        "source": "Echipe tehnice pentru lucrari energetice executate in Romania, Italia si Spania.",
+        "translation": "Equipos técnicos para obras energéticas realizadas en Rumanía, Italia y España."
+      },
+      "236dbff7ef881d62bffe600bd57c232ea4642bd32764d5b63bc0b572bcde545b": {
+        "source": "Vedere aeriana a amplasamentului fotovoltaic din Craiova",
+        "translation": "Vista aérea de la instalación fotovoltaica de Craiova"
+      },
+      "e33cdf9a74364bbcd4f496b75784a8dd3cc4e8b4199384ee075cfb27cddf8d6a": {
+        "source": "Randuri de structuri si module in proiectul fotovoltaic din Craiova",
+        "translation": "Filas de estructuras y módulos en el proyecto fotovoltaico de Craiova"
+      },
+      "a59c4a1f836f0858698b92df047cc665de881d941ad374e83e4b8353b51e152c": {
+        "source": "Membri ai echipei Greentech in santierul din Bologna",
+        "translation": "Miembros del equipo de Greentech en la obra de Bolonia"
+      },
+      "38b8a96edabce6ef36f48ae2b059e9eaab2d3e9b66040ec8d62c8f5d6be63dd4": {
+        "source": "Lucrari de montaj la proiectul fotovoltaic din Bologna",
+        "translation": "Trabajos de montaje en el proyecto fotovoltaico de Bolonia"
+      },
+      "92991bc99f12271df217fe9ad0f9479e88b62321bbfc5396fda848abfbab01df": {
+        "source": "Imagine aeriana a parcului fotovoltaic din Cagliari",
+        "translation": "Vista aérea del parque fotovoltaico de Cagliari"
+      },
+      "1ab76d7c1d217f6e3eb0c5111bbd44668e38cab50305d4da93003359bc63a706": {
+        "source": "Randuri de panouri in proiectul fotovoltaic din Cagliari",
+        "translation": "Filas de paneles en el proyecto fotovoltaico de Cagliari"
+      },
+      "9c2c53c74e31a9206ac8f4d44df077a008dfa92d689dc7175a929cf9d1597d3f": {
+        "source": "Tehnologii și soluții PV",
+        "translation": "Tecnologías y soluciones fotovoltaicas"
       }
     }
   }

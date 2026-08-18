@@ -8,6 +8,7 @@ import { FXAAShader } from "three/examples/jsm/shaders/FXAAShader.js";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 import gsap from "gsap";
 import { SCENE_COUNT, SCROLL_SEGMENT } from "./experienceConfig.js";
+import { shouldConserveWebGLMemory } from "./lib/devicePerformance.js";
 
 export { SCENE_COUNT, SCROLL_HEIGHT, SCROLL_SEGMENT } from "./experienceConfig.js";
 
@@ -24,6 +25,8 @@ const DESKTOP_MIN_PIXEL_RATIO = 1.5;
 const PHONE_MIN_PIXEL_RATIO = 2;
 const MAX_DESKTOP_PIXEL_RATIO = 2;
 const MAX_PHONE_PIXEL_RATIO = 3;
+const CONSTRAINED_PHONE_MIN_PIXEL_RATIO = 1.5;
+const MAX_CONSTRAINED_PHONE_PIXEL_RATIO = 2;
 const LINE_MSAA_SAMPLES = 2;
 const MSAA_RENDER_PIXEL_LIMIT = 2500000;
 const MOBILE_SOLAR_CLOUD_OPACITY = 0.12;
@@ -46,12 +49,20 @@ function getSolarCloudOpacity(dark, width, height, intro = false) {
   return 0.26;
 }
 
-function getExperiencePixelRatio(highQuality, width, height) {
+function getExperiencePixelRatio(highQuality, width, height, conserveMemory = false) {
   const devicePixelRatio = Math.max(1, window.devicePixelRatio || 1);
   if (!highQuality) return devicePixelRatio > 1 ? 1 : 0.5;
   const phoneScreen = Math.min(width, height) <= 600;
-  const minimum = phoneScreen ? PHONE_MIN_PIXEL_RATIO : DESKTOP_MIN_PIXEL_RATIO;
-  const maximum = phoneScreen ? MAX_PHONE_PIXEL_RATIO : MAX_DESKTOP_PIXEL_RATIO;
+  const minimum = phoneScreen
+    ? conserveMemory
+      ? CONSTRAINED_PHONE_MIN_PIXEL_RATIO
+      : PHONE_MIN_PIXEL_RATIO
+    : DESKTOP_MIN_PIXEL_RATIO;
+  const maximum = phoneScreen
+    ? conserveMemory
+      ? MAX_CONSTRAINED_PHONE_PIXEL_RATIO
+      : MAX_PHONE_PIXEL_RATIO
+    : MAX_DESKTOP_PIXEL_RATIO;
   return Math.min(Math.max(devicePixelRatio, minimum), maximum);
 }
 
@@ -1099,6 +1110,7 @@ class RenderStage {
       && renderWidth * renderHeight <= MSAA_RENDER_PIXEL_LIMIT;
     const targetSamples =
       fullResolution
+      && !this.owner.conserveMemory
       && this.owner.renderer.capabilities.isWebGL2
       && (phonePortrait || lowDensitySurface)
         ? Math.min(LINE_MSAA_SAMPLES, maxSamples)
@@ -1359,10 +1371,16 @@ export class EnpowerExperience {
     this.destroyed = false;
     this.ready = false;
     this.renderingPaused = false;
+    this.conserveMemory = shouldConserveWebGLMemory();
     this.vw = Math.max(1, this.container.clientWidth || window.innerWidth || 0);
     this.vhSaved = Math.max(1, this.container.clientHeight || window.innerHeight || 0);
     this.vh = this.vw / this.vhSaved > 2 ? this.vw / 2 : this.vhSaved;
-    this.pixelRatio = getExperiencePixelRatio(this.highQuality, this.vw, this.vhSaved);
+    this.pixelRatio = getExperiencePixelRatio(
+      this.highQuality,
+      this.vw,
+      this.vhSaved,
+      this.conserveMemory,
+    );
     this.renderer = new THREE.WebGLRenderer({ antialias: false });
     this.renderer.shadowMap.enabled = false;
     this.renderer.sortObjects = true;
@@ -1621,10 +1639,16 @@ export class EnpowerExperience {
     if (nextPaused) {
       cancelAnimationFrame(this.raf);
       this.raf = 0;
+      if (this.conserveMemory && this.ready) {
+        this.stages?.forEach((stage) => stage.fbo.setSize(1, 1));
+        this.composer?.setSize(1, 1);
+        this.renderer.setSize(1, 1, false);
+      }
       return;
     }
 
     if (!this.ready) return;
+    if (this.conserveMemory) this.resize(true);
     this.clock.start();
     this.raf = requestAnimationFrame(this.boundLoop);
   }
@@ -1723,6 +1747,7 @@ export class EnpowerExperience {
       this.highQuality,
       nextWidth,
       nextSavedHeight,
+      this.conserveMemory,
     );
 
     if (

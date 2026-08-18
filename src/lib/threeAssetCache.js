@@ -1,6 +1,7 @@
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { clone as cloneSkeleton } from "three/examples/jsm/utils/SkeletonUtils.js";
+import { shouldConserveWebGLMemory } from "./devicePerformance.js";
 
 export const PAGE_GLTF_ASSETS = [
   {
@@ -38,7 +39,10 @@ export const PAGE_GLTF_ASSETS = [
 const assetByUrl = new Map(PAGE_GLTF_ASSETS.map((asset) => [asset.url, asset]));
 const sourceCache = new Map();
 const promiseCache = new Map();
+const instanceCountByUrl = new Map();
 const progressListeners = new Set();
+const instanceSourceUrl = Symbol("instanceSourceUrl");
+const LARGE_MODEL_BYTES = 4_000_000;
 const progressByUrl = new Map(
   PAGE_GLTF_ASSETS.map((asset) => [
     asset.url,
@@ -160,6 +164,13 @@ export async function cloneCachedGLTF(url) {
       : cloneMaterial(object.material);
   });
 
+  Object.defineProperty(scene, instanceSourceUrl, {
+    configurable: true,
+    value: url,
+    writable: true,
+  });
+  instanceCountByUrl.set(url, (instanceCountByUrl.get(url) ?? 0) + 1);
+
   return {
     ...source,
     scene,
@@ -167,12 +178,75 @@ export async function cloneCachedGLTF(url) {
   };
 }
 
+function disposeCachedSource(url) {
+  const source = sourceCache.get(url);
+  if (!source) return;
+
+  const geometries = new Set();
+  const materials = new Set();
+  const textures = new Set();
+
+  source.scene?.traverse((object) => {
+    if (object.geometry) geometries.add(object.geometry);
+    const objectMaterials = Array.isArray(object.material)
+      ? object.material
+      : [object.material];
+    objectMaterials.filter(Boolean).forEach((material) => materials.add(material));
+  });
+
+  materials.forEach((material) => {
+    Object.values(material).forEach((value) => {
+      if (value?.isTexture) textures.add(value);
+    });
+    Object.values(material.uniforms ?? {}).forEach((uniform) => {
+      if (uniform?.value?.isTexture) textures.add(uniform.value);
+    });
+  });
+
+  geometries.forEach((geometry) => geometry.dispose());
+  materials.forEach((material) => material.dispose());
+  textures.forEach((texture) => texture.dispose());
+
+  sourceCache.delete(url);
+  promiseCache.delete(url);
+
+  const progress = progressByUrl.get(url);
+  if (progress) {
+    progress.loaded = 0;
+    progress.parsed = false;
+    progress.failed = false;
+  }
+}
+
+function releaseInstanceSource(url) {
+  const remaining = Math.max(0, (instanceCountByUrl.get(url) ?? 1) - 1);
+
+  if (remaining > 0) {
+    instanceCountByUrl.set(url, remaining);
+    return;
+  }
+
+  instanceCountByUrl.delete(url);
+  const asset = assetByUrl.get(url);
+  if (
+    shouldConserveWebGLMemory()
+    && (asset?.bytes ?? 0) >= LARGE_MODEL_BYTES
+  ) {
+    disposeCachedSource(url);
+  }
+}
+
 // Geometry and textures belong to the shared source cache. Instances only own
 // their cloned or replacement materials.
 export function disposeGLTFInstance(root) {
   const materials = new Set();
+  const sourceUrls = new Set();
 
   root?.traverse((object) => {
+    if (object[instanceSourceUrl]) {
+      sourceUrls.add(object[instanceSourceUrl]);
+      object[instanceSourceUrl] = null;
+    }
     const objectMaterials = Array.isArray(object.material)
       ? object.material
       : [object.material];
@@ -180,4 +254,5 @@ export function disposeGLTFInstance(root) {
   });
 
   materials.forEach((material) => material.dispose());
+  sourceUrls.forEach((url) => releaseInstanceSource(url));
 }

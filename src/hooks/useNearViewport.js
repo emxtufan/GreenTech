@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
+import { shouldConserveWebGLMemory } from "../lib/devicePerformance.js";
 
-export default function useNearViewport(targetRef, enabled, rootMargin = "2000px 0px") {
+export default function useNearViewport(targetRef, enabled, rootMargin) {
   const [nearViewport, setNearViewport] = useState(false);
+  const conserveMemory = shouldConserveWebGLMemory();
+  const observerMargin = rootMargin
+    ?? (conserveMemory ? "35% 0px 120% 0px" : "2000px 0px");
 
   useEffect(() => {
     if (!enabled) {
@@ -18,14 +22,21 @@ export default function useNearViewport(targetRef, enabled, rootMargin = "2000px
     }
 
     const observer = new IntersectionObserver((entries) => {
-      if (!entries.some((entry) => entry.isIntersecting)) return;
+      const isNear = entries.some((entry) => entry.isIntersecting);
+
+      if (conserveMemory) {
+        setNearViewport(isNear);
+        return;
+      }
+
+      if (!isNear) return;
       setNearViewport(true);
       observer.disconnect();
-    }, { rootMargin });
+    }, { rootMargin: observerMargin });
 
     observer.observe(target);
     return () => observer.disconnect();
-  }, [enabled, rootMargin, targetRef]);
+  }, [conserveMemory, enabled, observerMargin, targetRef]);
 
   return enabled && nearViewport;
 }

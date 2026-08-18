@@ -15,6 +15,7 @@ import {
 } from "./lib/siteContent.js";
 import useSiteContent from "./hooks/useSiteContent.js";
 import useSection from "./hooks/useSection.js";
+import { shouldConserveWebGLMemory } from "./lib/devicePerformance.js";
 import { uiText, useLocale } from "./lib/i18n.js";
 import "./styles.css";
 import SiteNavigation from "./SiteNavigation.jsx";
@@ -363,12 +364,15 @@ function App({
   onOpenPost,
   routeOpen,
 }) {
+  const [progressiveAssets] = useState(() => shouldConserveWebGLMemory());
   const [loaded, setLoaded] = useState(0);
   const [heroProgress, setHeroProgress] = useState(0);
   const [heroReady, setHeroReady] = useState(false);
   const [pageAssetProgress, setPageAssetProgress] = useState(0);
   const [pageAssetsReady, setPageAssetsReady] = useState(false);
-  const [postPreparationProgress, setPostPreparationProgress] = useState(0);
+  const [postPreparationProgress, setPostPreparationProgress] = useState(
+    () => (progressiveAssets ? 100 : 0),
+  );
   const [entered, setEntered] = useState(false);
   const [active, setActive] = useState(0);
   const [dark, setDark] = useState(false);
@@ -398,10 +402,14 @@ function App({
     setPageAssetsReady(false);
 
     import("./lib/pageAssetPreloader.js")
-      .then(({ preloadPageAssets }) => preloadPageAssets(siteContent, (progress) => {
-        if (cancelled) return;
-        setPageAssetProgress((current) => Math.max(current, progress));
-      }))
+      .then(({ preloadPageAssets }) => preloadPageAssets(
+        siteContent,
+        (progress) => {
+          if (cancelled) return;
+          setPageAssetProgress((current) => Math.max(current, progress));
+        },
+        { deferHeavyAssets: progressiveAssets },
+      ))
       .then(() => {
         if (cancelled) return;
         setPageAssetProgress(100);
@@ -414,7 +422,7 @@ function App({
     return () => {
       cancelled = true;
     };
-  }, [siteContent]);
+  }, [progressiveAssets, siteContent]);
 
   useEffect(() => {
     const aggregate = Math.min(
@@ -518,7 +526,7 @@ function App({
         <Suspense fallback={<div className="post-experience-loading" aria-hidden="true" />}>
           <PostExperienceSections
             entered={entered}
-            prepare3d
+            prepare3d={!progressiveAssets}
             onPreparationProgress={handlePostPreparationProgress}
             onOpenProject={onOpenProject}
             onShowAllProjects={onShowAllProjects}

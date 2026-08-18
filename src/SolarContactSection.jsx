@@ -3,6 +3,7 @@ import { ArrowUpRight, Loader2, Mail, MapPin, Phone, Send } from "lucide-react";
 import * as THREE from "three";
 import BlurText from "./BlurText.jsx";
 import SectionActionModal, { useSectionAction } from "./SectionAction.jsx";
+import useNearViewport from "./hooks/useNearViewport.js";
 import useSection from "./hooks/useSection.js";
 import useSiteContent from "./hooks/useSiteContent.js";
 import {
@@ -92,6 +93,8 @@ function SolarContactSection({
   const sectionRef = useRef(null);
   const mountRef = useRef(null);
   const runtimeRef = useRef(null);
+  const nearViewport = useNearViewport(sectionRef, active);
+  const webglActive = prepare || nearViewport;
   const [legalModal, setLegalModal] = useState(null);
   const legalTriggerRef = useRef(null);
 
@@ -111,7 +114,7 @@ function SolarContactSection({
   useEffect(() => {
     const section = sectionRef.current;
     const mount = mountRef.current;
-    if ((!active && !prepare) || !section || !mount) return undefined;
+    if (!webglActive || !section || !mount) return undefined;
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let renderer = null;
@@ -452,7 +455,7 @@ function SolarContactSection({
       mount.classList.remove("model-ready", "load-error");
       if (runtimeRef.current) runtimeRef.current = null;
     };
-  }, [onPrepared, prepare]);
+  }, [onPrepared, prepare, webglActive]);
 
   return (
     <section

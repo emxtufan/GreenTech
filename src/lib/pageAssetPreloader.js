@@ -78,12 +78,16 @@ function preloadVideo(url) {
   });
 }
 
-export async function preloadPageAssets(content, onProgress = () => {}) {
-  const mediaUrls = collectMediaUrls(content);
+export async function preloadPageAssets(
+  content,
+  onProgress = () => {},
+  { deferHeavyAssets = false } = {},
+) {
+  const mediaUrls = deferHeavyAssets ? new Set() : collectMediaUrls(content);
   STATIC_CRITICAL_IMAGES.forEach((url) => mediaUrls.add(url));
 
   const media = [...mediaUrls];
-  let modelProgress = 0;
+  let modelProgress = deferHeavyAssets ? 100 : 0;
   let completedMedia = 0;
   let fontsReady = false;
 
@@ -96,10 +100,12 @@ export async function preloadPageAssets(content, onProgress = () => {}) {
     onProgress(Math.min(100, Math.round(progress)));
   };
 
-  const unsubscribe = subscribePageModelProgress((progress) => {
-    modelProgress = progress;
-    emit();
-  });
+  const unsubscribe = deferHeavyAssets
+    ? () => {}
+    : subscribePageModelProgress((progress) => {
+      modelProgress = progress;
+      emit();
+    });
 
   const mediaPromise = Promise.all(
     media.map(async (url) => {
@@ -119,7 +125,7 @@ export async function preloadPageAssets(content, onProgress = () => {}) {
 
   try {
     const [models, mediaResults] = await Promise.all([
-      preloadPageGLTFs(),
+      deferHeavyAssets ? Promise.resolve([]) : preloadPageGLTFs(),
       mediaPromise,
       fontsPromise,
     ]);

@@ -1,8 +1,8 @@
 {
   "version": 4,
   "locale": "en",
-  "revision": "f53653cd56d9ab2d8755597b",
-  "translatedAt": "2026-08-18T10:28:22.400Z",
+  "revision": "bea67ab69f226e9a93b7c644",
+  "translatedAt": "2026-08-18T12:36:55.151Z",
   "content": {
     "version": 1,
     "sections": [
@@ -26,7 +26,7 @@
         "name": "Company Overview",
         "eyebrow": "About the Company",
         "title": "Greentech Professionals SRL",
-        "description": "We perform electrical, mechanical, and civil engineering work for photovoltaic parks and technical infrastructure. Our teams work in Romania, Italy, and Spain, from site preparation through testing and handover.",
+        "description": "Greentech Professionals is a company specializing in the energy and construction sectors, with experience in developing and implementing complex energy projects. Through its expertise in electrical, mechanical, and infrastructure work, the company helps deliver efficient and sustainable solutions tailored to the current needs of the energy sector and the transition toward a future based on green energy.",
         "action": "",
         "format": "Text and statistics",
         "summary": "4 impact metrics",
@@ -54,7 +54,7 @@
         "name": "Our Clients",
         "eyebrow": "Partnerships",
         "title": "Clients and Partners",
-        "description": "We work alongside developers, general contractors, and technical partners involved in energy and infrastructure projects.",
+        "description": "We build strong, lasting relationships with our partners, collaborating to develop efficient, sustainable, and forward-looking projects in the energy and infrastructure sectors.",
         "action": "",
         "format": "Infinite logo loop",
         "summary": "7 client logos",
@@ -80,8 +80,8 @@
         "group": "Company",
         "name": "Current Projects",
         "eyebrow": "Portfolio",
-        "title": "Selected Projects",
-        "description": "Projects in Romania and Italy, presented with location, capacity, and scope of work.",
+        "title": "Our Projects",
+        "description": "Discover some of our projects and how we turn ideas into solid, efficient, and sustainable structures.",
         "action": "View the project",
         "actionMode": "builtin",
         "format": "Horizontal gallery",
@@ -439,7 +439,7 @@
         "name": "Basement",
         "eyebrow": "Company Information",
         "title": "Greentech Professionals",
-        "description": "Technical teams for energy works carried out in Romania, Italy and Spain.",
+        "description": "Technical teams for energy projects carried out in Romania, Italy, and Spain.",
         "action": "",
         "format": "Navigation and legal links",
         "summary": "3 link groups",
@@ -718,7 +718,7 @@
           "category": "Photovoltaic Park",
           "title": "Craiova, Romania",
           "image": "/projects/craiova/craiova-01.jpg",
-          "alt": "Aerial view of the Craiova photovoltaic site",
+          "alt": "Aerial view of the photovoltaic site in Craiova",
           "projectDate": "January 2025",
           "projectCategory": "Photovoltaic Park",
           "location": "Craiova, Romania",
@@ -744,7 +744,7 @@
           "gallery": [
             {
               "src": "/projects/craiova/craiova-01.jpg",
-              "alt": "Rows of structures and modules at the Craiova photovoltaic project"
+              "alt": "Rows of structures and modules in the photovoltaic project in Craiova"
             },
             {
               "src": "/projects/craiova/craiova-02.webp",
@@ -764,7 +764,7 @@
           "category": "Photovoltaic Park",
           "title": "Bologna, Italy",
           "image": "/projects/bologna/bologna-01.webp",
-          "alt": "Greentech team members at the Bologna site",
+          "alt": "Members of the Greentech team at the construction site in Bologna",
           "projectDate": "November 2024",
           "projectCategory": "Photovoltaic Park",
           "location": "Bologna, Italy",
@@ -790,7 +790,7 @@
           "gallery": [
             {
               "src": "/projects/bologna/bologna-01.webp",
-              "alt": "Installation work at the Bologna photovoltaic project"
+              "alt": "Installation work on the photovoltaic project in Bologna"
             },
             {
               "src": "/projects/bologna/bologna-02.webp",
@@ -810,7 +810,7 @@
           "category": "Photovoltaic Park",
           "title": "Cagliari, Italy",
           "image": "/projects/cagliari/cagliari-01.webp",
-          "alt": "Aerial view of the Cagliari photovoltaic park",
+          "alt": "Aerial view of the photovoltaic park in Cagliari",
           "projectDate": "May 2023",
           "projectCategory": "Photovoltaic Park",
           "location": "Cagliari, Italy",
@@ -836,7 +836,7 @@
           "gallery": [
             {
               "src": "/projects/cagliari/cagliari-01.webp",
-              "alt": "Rows of panels at the Cagliari photovoltaic project"
+              "alt": "Rows of panels in the photovoltaic project in Cagliari"
             },
             {
               "src": "/projects/cagliari/cagliari-02.webp",
@@ -887,7 +887,7 @@
           "enabled": true,
           "title": "Photovoltaic Infrastructure",
           "sourceIndex": 0,
-          "body": "We perform mechanical assembly, wiring, and electrical installations for large-capacity photovoltaic parks. The cumulative portfolio of projects our teams have worked on exceeds 1.5 GW.",
+          "body": "Specializing in the construction of photovoltaic parks, with experience throughout Europe, the Greentech Professionals team has contributed to the global development of renewable energy, specifically by building over 1.5 GW of photovoltaic infrastructure to date.",
           "footnote": ""
         },
         {
@@ -896,16 +896,16 @@
           "enabled": true,
           "title": "Wind Farm Construction",
           "sourceIndex": 1,
-          "body": "We perform civil and electrical work for wind farm infrastructure, following clear safety and quality control procedures.",
+          "body": "Greentech Professionals develops the infrastructure needed to generate green energy, providing construction services for wind farms that meet high standards of quality and safety.",
           "footnote": ""
         },
         {
           "id": "transmission",
           "order": 3,
           "enabled": true,
-          "title": "Electrical Inspections and Solutions",
+          "title": "PV Technologies and Solutions",
           "sourceIndex": 3,
-          "body": "We inspect electrical installations using measurements, thermography and PRAM testing, then deliver reports and technical documentation.",
+          "body": "Drawing on their extensive experience, GreenTech Professionals’ specialists identify and provide the most efficient and innovative solutions for photovoltaic projects, tailored to current global industry requirements and standards.",
           "footnote": ""
         },
         {
@@ -914,7 +914,7 @@
           "enabled": true,
           "title": "Data Center Construction",
           "sourceIndex": 4,
-          "body": "We perform work for data centers: design, electrical distribution, redundancy, cooling, and commissioning.",
+          "body": "We support the development of digital infrastructure through construction services for data centers, offering comprehensive solutions for the implementation of modern, secure, and reliable projects throughout the entire construction process.",
           "footnote": ""
         },
         {
@@ -923,16 +923,16 @@
           "enabled": true,
           "title": "Technical Maintenance",
           "sourceIndex": 5,
-          "body": "We schedule inspections, maintenance, and repairs to ensure the proper upkeep of energy and industrial facilities.",
+          "body": "We provide maintenance services for energy and industrial infrastructure, ensuring the efficient operation, safety, and sustainability of projects through specialized interventions and solutions tailored to each specific requirement.",
           "footnote": ""
         },
         {
           "id": "future",
           "order": 6,
           "enabled": true,
-          "title": "Energy and Infrastructure",
+          "title": "Building the Energy of the Future",
           "sourceIndex": 6,
-          "body": "Greentech Professionals brings together electrical, mechanical, and civil engineering teams for projects carried out in Romania and other European markets.",
+          "body": "With the goal of accelerating the transition to a sustainable future, Greentech Professionals’ mission is to support the development of green energy through innovative solutions, modern infrastructure, and sustainable, efficient, and responsible projects designed for future generations.",
           "footnote": ""
         }
       ]

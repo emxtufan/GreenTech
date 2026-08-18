@@ -1,8 +1,8 @@
 {
   "version": 4,
   "locale": "es",
-  "revision": "f53653cd56d9ab2d8755597b",
-  "translatedAt": "2026-08-18T10:28:22.404Z",
+  "revision": "bea67ab69f226e9a93b7c644",
+  "translatedAt": "2026-08-18T12:36:55.128Z",
   "content": {
     "version": 1,
     "sections": [
@@ -26,7 +26,7 @@
         "name": "Presentación general de la empresa",
         "eyebrow": "Acerca de la empresa",
         "title": "Greentech Professionals SRL",
-        "description": "Realizamos obras eléctricas, mecánicas y de obra civil para parques fotovoltaicos e infraestructuras técnicas. Nuestros equipos trabajan en Rumanía, Italia y España, desde la preparación de la obra hasta las pruebas y la entrega.",
+        "description": "Greentech Professionals es una empresa especializada en el sector de la energía y la construcción, con experiencia en el desarrollo y la ejecución de proyectos energéticos complejos. Gracias a su experiencia en obras eléctricas, mecánicas y de infraestructuras, la empresa contribuye a la creación de soluciones eficientes y sostenibles, adaptadas a las exigencias actuales del sector energético y a la transición hacia un futuro basado en la energía verde.",
         "action": "",
         "format": "Text and statistics",
         "summary": "4 impact metrics",
@@ -54,7 +54,7 @@
         "name": "Nuestros clientes",
         "eyebrow": "Colaboraciones",
         "title": "Clientes y socios",
-        "description": "Trabajamos junto a promotores, contratistas generales y socios técnicos que participan en proyectos de energía e infraestructuras.",
+        "description": "Establecemos relaciones sólidas y duraderas con nuestros socios, colaborando para desarrollar proyectos eficientes, sostenibles y orientados al futuro en el ámbito de la energía y las infraestructuras.",
         "action": "",
         "format": "Infinite logo loop",
         "summary": "7 client logos",
@@ -80,8 +80,8 @@
         "group": "Empresa",
         "name": "Proyectos en curso",
         "eyebrow": "Portafolio",
-        "title": "Proyectos seleccionados",
-        "description": "Obras realizadas en Rumanía e Italia, presentadas con su ubicación, capacidad y ámbito de ejecución.",
+        "title": "Nuestros proyectos",
+        "description": "Descubre algunos de nuestros proyectos y cómo convertimos las ideas en construcciones sólidas, eficientes y sostenibles.",
         "action": "Ver el proyecto",
         "actionMode": "builtin",
         "format": "Horizontal gallery",
@@ -439,7 +439,7 @@
         "name": "Sótano",
         "eyebrow": "Información sobre la empresa",
         "title": "Greentech Professionals",
-        "description": "Equipos técnicos para trabajos energéticos realizados en Rumanía, Italia y España.",
+        "description": "Equipos técnicos para obras energéticas realizadas en Rumanía, Italia y España.",
         "action": "",
         "format": "Navigation and legal links",
         "summary": "3 link groups",
@@ -718,7 +718,7 @@
           "category": "Parque fotovoltaico",
           "title": "Craiova, Rumanía",
           "image": "/projects/craiova/craiova-01.jpg",
-          "alt": "Vista aérea del emplazamiento fotovoltaico de Craiova",
+          "alt": "Vista aérea de la instalación fotovoltaica de Craiova",
           "projectDate": "Enero de 2025",
           "projectCategory": "Parque fotovoltaico",
           "location": "Craiova, Rumanía",
@@ -764,7 +764,7 @@
           "category": "Parque fotovoltaico",
           "title": "Bolonia, Italia",
           "image": "/projects/bologna/bologna-01.webp",
-          "alt": "Miembros del equipo Greentech en la obra de Bolonia",
+          "alt": "Miembros del equipo de Greentech en la obra de Bolonia",
           "projectDate": "Noviembre de 2024",
           "projectCategory": "Parque fotovoltaico",
           "location": "Bolonia, Italia",
@@ -887,7 +887,7 @@
           "enabled": true,
           "title": "Infraestructura fotovoltaica",
           "sourceIndex": 0,
-          "body": "Realizamos montajes mecánicos, cableado e instalaciones eléctricas para parques fotovoltaicos de gran capacidad. La cartera acumulada de proyectos en los que han trabajado nuestros equipos supera los 1,5 GW.",
+          "body": "Especializada en la construcción de parques fotovoltaicos y con experiencia en toda Europa, el equipo de Greentech Professionals ha contribuido al desarrollo mundial de las energías renovables, concretamente a la construcción de infraestructuras fotovoltaicas por un total de más de 1,5 GW hasta la fecha.",
           "footnote": ""
         },
         {
@@ -896,16 +896,16 @@
           "enabled": true,
           "title": "Construcción de parques eólicos",
           "sourceIndex": 1,
-          "body": "Realizamos obras civiles y eléctricas para la infraestructura de parques eólicos, con procedimientos claros de seguridad y control.",
+          "body": "La empresa Greentech Professionals desarrolla la infraestructura necesaria para la producción de energía verde, ofreciendo servicios de construcción para parques eólicos con altos estándares de calidad y seguridad.",
           "footnote": ""
         },
         {
           "id": "transmission",
           "order": 3,
           "enabled": true,
-          "title": "Inspecciones y soluciones eléctricas",
+          "title": "Tecnologías y soluciones fotovoltaicas",
           "sourceIndex": 3,
-          "body": "Inspeccionamos instalaciones eléctricas mediante mediciones, termografía y verificaciones PRAM, y entregamos los informes y la documentación técnica.",
+          "body": "Gracias a la experiencia adquirida, los especialistas de GreenTech Professionals identifican y ofrecen las soluciones más eficaces e innovadoras para proyectos en el ámbito fotovoltaico, adaptadas a los requisitos y estándares actuales del sector a nivel mundial.",
           "footnote": ""
         },
         {
@@ -914,7 +914,7 @@
           "enabled": true,
           "title": "Construcción de centros de datos",
           "sourceIndex": 4,
-          "body": "Realizamos obras para centros de datos: acondicionamiento, distribución eléctrica, redundancia, refrigeración y puesta en marcha.",
+          "body": "Apoyamos el desarrollo de la infraestructura digital mediante servicios de construcción para centros de datos, ofreciendo soluciones integrales para la realización de proyectos modernos, seguros y fiables a lo largo de todo el proceso de ejecución.",
           "footnote": ""
         },
         {
@@ -923,16 +923,16 @@
           "enabled": true,
           "title": "Mantenimiento técnico",
           "sourceIndex": 5,
-          "body": "Planificamos inspecciones, intervenciones y reparaciones para el mantenimiento de instalaciones energéticas e industriales.",
+          "body": "Ofrecemos servicios de mantenimiento para infraestructuras energéticas e industriales, garantizando el funcionamiento eficiente, la seguridad y la sostenibilidad de los proyectos mediante intervenciones especializadas y soluciones adaptadas a cada necesidad.",
           "footnote": ""
         },
         {
           "id": "future",
           "order": 6,
           "enabled": true,
-          "title": "Energía e infraestructuras",
+          "title": "Construimos la energía del futuro",
           "sourceIndex": 6,
-          "body": "Greentech Professionals reúne a equipos de ingeniería eléctrica, mecánica y de obra para proyectos que se llevan a cabo en Rumanía y en otros mercados europeos.",
+          "body": "Con el objetivo de acelerar la transición hacia un futuro sostenible, la misión de Greentech Professionals es impulsar el desarrollo de la energía verde mediante soluciones innovadoras, infraestructuras modernas y proyectos sostenibles, eficientes y responsables, preparados para las generaciones futuras.",
           "footnote": ""
         }
       ]

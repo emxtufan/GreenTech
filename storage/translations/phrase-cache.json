@@ -5049,6 +5049,38 @@
       "967c439f8a6e2b256c8335e12e4483ca78741874ca444684710bd5e3b0f4161e": {
         "source": "SERVICII",
         "translation": "SERVICES"
+      },
+      "e0116aca6291081c62298bafd46638ef0493a1229d4afc2c8403f978e3be8d22": {
+        "source": "Echipe tehnice pentru lucrari energetice executate in Romania, Italia si Spania.",
+        "translation": "Technical teams for energy projects carried out in Romania, Italy, and Spain."
+      },
+      "236dbff7ef881d62bffe600bd57c232ea4642bd32764d5b63bc0b572bcde545b": {
+        "source": "Vedere aeriana a amplasamentului fotovoltaic din Craiova",
+        "translation": "Aerial view of the photovoltaic site in Craiova"
+      },
+      "e33cdf9a74364bbcd4f496b75784a8dd3cc4e8b4199384ee075cfb27cddf8d6a": {
+        "source": "Randuri de structuri si module in proiectul fotovoltaic din Craiova",
+        "translation": "Rows of structures and modules in the photovoltaic project in Craiova"
+      },
+      "a59c4a1f836f0858698b92df047cc665de881d941ad374e83e4b8353b51e152c": {
+        "source": "Membri ai echipei Greentech in santierul din Bologna",
+        "translation": "Members of the Greentech team at the construction site in Bologna"
+      },
+      "38b8a96edabce6ef36f48ae2b059e9eaab2d3e9b66040ec8d62c8f5d6be63dd4": {
+        "source": "Lucrari de montaj la proiectul fotovoltaic din Bologna",
+        "translation": "Installation work on the photovoltaic project in Bologna"
+      },
+      "92991bc99f12271df217fe9ad0f9479e88b62321bbfc5396fda848abfbab01df": {
+        "source": "Imagine aeriana a parcului fotovoltaic din Cagliari",
+        "translation": "Aerial view of the photovoltaic park in Cagliari"
+      },
+      "1ab76d7c1d217f6e3eb0c5111bbd44668e38cab50305d4da93003359bc63a706": {
+        "source": "Randuri de panouri in proiectul fotovoltaic din Cagliari",
+        "translation": "Rows of panels in the photovoltaic project in Cagliari"
+      },
+      "9c2c53c74e31a9206ac8f4d44df077a008dfa92d689dc7175a929cf9d1597d3f": {
+        "source": "Tehnologii și soluții PV",
+        "translation": "PV Technologies and Solutions"
       }
     },
     "ro": {
@@ -11305,6 +11337,38 @@
       "4c3a6ab19f94ca8ca76a8d78e0f7fc94cb733304597e70096cc3b54a9feaec59": {
         "source": "Transmiteti prin formular amplasamentul, capacitatea estimata, tipul lucrarilor si perioada dorita. Revenim cu intrebarile tehnice necesare pentru definirea ofertei si a calendarului.",
         "translation": "Inviateci tramite il modulo l'ubicazione, la potenza stimata, il tipo di lavori e il periodo desiderato. Vi ricontatteremo con le domande tecniche necessarie per definire l'offerta e il calendario."
+      },
+      "e0116aca6291081c62298bafd46638ef0493a1229d4afc2c8403f978e3be8d22": {
+        "source": "Echipe tehnice pentru lucrari energetice executate in Romania, Italia si Spania.",
+        "translation": "Team tecnici per interventi nel settore energetico realizzati in Romania, Italia e Spagna."
+      },
+      "236dbff7ef881d62bffe600bd57c232ea4642bd32764d5b63bc0b572bcde545b": {
+        "source": "Vedere aeriana a amplasamentului fotovoltaic din Craiova",
+        "translation": "Vista aerea del sito fotovoltaico di Craiova"
+      },
+      "e33cdf9a74364bbcd4f496b75784a8dd3cc4e8b4199384ee075cfb27cddf8d6a": {
+        "source": "Randuri de structuri si module in proiectul fotovoltaic din Craiova",
+        "translation": "File di strutture e moduli nel progetto fotovoltaico di Craiova"
+      },
+      "a59c4a1f836f0858698b92df047cc665de881d941ad374e83e4b8353b51e152c": {
+        "source": "Membri ai echipei Greentech in santierul din Bologna",
+        "translation": "I membri del team Greentech nel cantiere di Bologna"
+      },
+      "38b8a96edabce6ef36f48ae2b059e9eaab2d3e9b66040ec8d62c8f5d6be63dd4": {
+        "source": "Lucrari de montaj la proiectul fotovoltaic din Bologna",
+        "translation": "Lavori di installazione presso il progetto fotovoltaico di Bologna"
+      },
+      "92991bc99f12271df217fe9ad0f9479e88b62321bbfc5396fda848abfbab01df": {
+        "source": "Imagine aeriana a parcului fotovoltaic din Cagliari",
+        "translation": "Vista aerea del parco fotovoltaico di Cagliari"
+      },
+      "1ab76d7c1d217f6e3eb0c5111bbd44668e38cab50305d4da93003359bc63a706": {
+        "source": "Randuri de panouri in proiectul fotovoltaic din Cagliari",
+        "translation": "File di pannelli nel progetto fotovoltaico di Cagliari"
+      },
+      "9c2c53c74e31a9206ac8f4d44df077a008dfa92d689dc7175a929cf9d1597d3f": {
+        "source": "Tehnologii și soluții PV",
+        "translation": "Tecnologie e soluzioni fotovoltaiche"
       }
     },
     "es": {
@@ -15275,6 +15339,38 @@
       "4c3a6ab19f94ca8ca76a8d78e0f7fc94cb733304597e70096cc3b54a9feaec59": {
         "source": "Transmiteti prin formular amplasamentul, capacitatea estimata, tipul lucrarilor si perioada dorita. Revenim cu intrebarile tehnice necesare pentru definirea ofertei si a calendarului.",
         "translation": "Indique en el formulario la ubicación, la capacidad estimada, el tipo de obra y el plazo deseado. Nos pondremos en contacto con usted para plantearle las preguntas técnicas necesarias para definir el presupuesto y el calendario."
+      },
+      "e0116aca6291081c62298bafd46638ef0493a1229d4afc2c8403f978e3be8d22": {
+        "source": "Echipe tehnice pentru lucrari energetice executate in Romania, Italia si Spania.",
+        "translation": "Equipos técnicos para obras energéticas realizadas en Rumanía, Italia y España."
+      },
+      "236dbff7ef881d62bffe600bd57c232ea4642bd32764d5b63bc0b572bcde545b": {
+        "source": "Vedere aeriana a amplasamentului fotovoltaic din Craiova",
+        "translation": "Vista aérea de la instalación fotovoltaica de Craiova"
+      },
+      "e33cdf9a74364bbcd4f496b75784a8dd3cc4e8b4199384ee075cfb27cddf8d6a": {
+        "source": "Randuri de structuri si module in proiectul fotovoltaic din Craiova",
+        "translation": "Filas de estructuras y módulos en el proyecto fotovoltaico de Craiova"
+      },
+      "a59c4a1f836f0858698b92df047cc665de881d941ad374e83e4b8353b51e152c": {
+        "source": "Membri ai echipei Greentech in santierul din Bologna",
+        "translation": "Miembros del equipo de Greentech en la obra de Bolonia"
+      },
+      "38b8a96edabce6ef36f48ae2b059e9eaab2d3e9b66040ec8d62c8f5d6be63dd4": {
+        "source": "Lucrari de montaj la proiectul fotovoltaic din Bologna",
+        "translation": "Trabajos de montaje en el proyecto fotovoltaico de Bolonia"
+      },
+      "92991bc99f12271df217fe9ad0f9479e88b62321bbfc5396fda848abfbab01df": {
+        "source": "Imagine aeriana a parcului fotovoltaic din Cagliari",
+        "translation": "Vista aérea del parque fotovoltaico de Cagliari"
+      },
+      "1ab76d7c1d217f6e3eb0c5111bbd44668e38cab50305d4da93003359bc63a706": {
+        "source": "Randuri de panouri in proiectul fotovoltaic din Cagliari",
+        "translation": "Filas de paneles en el proyecto fotovoltaico de Cagliari"
+      },
+      "9c2c53c74e31a9206ac8f4d44df077a008dfa92d689dc7175a929cf9d1597d3f": {
+        "source": "Tehnologii și soluții PV",
+        "translation": "Tecnologías y soluciones fotovoltaicas"
       }
     }
   }
