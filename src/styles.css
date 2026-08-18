@@ -587,6 +587,19 @@ button:disabled {
   isolation: isolate;
 }
 
+/* During a touch gesture that starts inside the 3D hero, stop native Safari
+   momentum at the first content section. The controller removes this class as
+   soon as the gesture settles, so reverse scrolling remains completely free. */
+html.hero-exit-snap-active {
+  scroll-snap-type: y proximity;
+}
+
+html.hero-exit-snap-active #company {
+  scroll-margin-top: 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
 .post-experience-sections.preparing {
   position: fixed;
   inset: 0;
