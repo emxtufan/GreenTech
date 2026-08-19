@@ -63,12 +63,21 @@ function HorizontalParallaxGallery({
       if (disposed) return;
 
       const viewportHeight = Math.max(1, wrapper.clientHeight || window.innerHeight);
-      scroll.limit = Math.max(0, track.scrollWidth - wrapper.clientWidth);
+      const cards = Array.from(track.querySelectorAll(".horizontal-gallery-card"));
+      const naturalLimit = Math.max(0, track.scrollWidth - wrapper.clientWidth);
+      const archiveCard = cards[cards.length - 1];
+      const mobileArchiveLimit = archiveCard ? Math.max(0, archiveCard.offsetLeft) : naturalLimit;
+
+      // The archive card is wider than a phone viewport. Stop when its leading
+      // edge reaches the wrapper instead of continuing to push it off-screen.
+      scroll.limit = window.matchMedia("(max-width: 700px)").matches
+        ? Math.min(naturalLimit, mobileArchiveLimit)
+        : naturalLimit;
       section.style.height = `${viewportHeight + scroll.limit}px`;
       scroll.sectionTop = section.getBoundingClientRect().top + window.scrollY;
       scroll.travel = Math.max(1, section.offsetHeight - viewportHeight);
 
-      cardMetrics = Array.from(track.querySelectorAll(".horizontal-gallery-card")).map(
+      cardMetrics = cards.map(
         (card) => ({
           card,
           center: card.offsetLeft + card.offsetWidth * 0.5,
