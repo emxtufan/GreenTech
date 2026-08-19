@@ -94,14 +94,77 @@ export const deleteCareerApplication = (id) =>
  * Posts the File as a raw body. Returns `{ url }` — the only thing that is ever
  * written into the content document.
  */
-export const uploadAsset = (file, category = "misc") => {
+export const uploadAsset = (file, category = "misc", { onProgress, signal } = {}) => {
   const query = new URLSearchParams({ filename: file.name, category });
 
-  return fetch(`/api/admin/upload?${query}`, {
-    method: "POST",
-    headers: { "Content-Type": file.type || "application/octet-stream" },
-    body: file,
-  }).then(json);
+  return new Promise((resolve, reject) => {
+    // Fetch does not expose browser upload progress, so this request uses XHR.
+    const request = new XMLHttpRequest();
+    const totalBytes = file.size || 0;
+
+    const abortRequest = () => request.abort();
+    const cleanup = () => signal?.removeEventListener("abort", abortRequest);
+    const fail = (message, status, issues) => {
+      const error = new Error(message);
+      error.status = status;
+      error.issues = issues;
+      reject(error);
+    };
+
+    request.open("POST", `/api/admin/upload?${query}`);
+    request.setRequestHeader("Content-Type", file.type || "application/octet-stream");
+    request.setRequestHeader("Accept", "application/json");
+
+    request.upload.addEventListener("progress", (event) => {
+      const total = event.lengthComputable && event.total > 0 ? event.total : totalBytes;
+      const loaded = Math.min(event.loaded, total || event.loaded);
+      const percentage = total > 0 ? Math.min(100, Math.round((loaded / total) * 100)) : 0;
+
+      onProgress?.({ loaded, total, percentage });
+    });
+
+    request.addEventListener("load", () => {
+      cleanup();
+
+      let payload = {};
+      try {
+        payload = request.responseText ? JSON.parse(request.responseText) : {};
+      } catch {
+        payload = {};
+      }
+
+      if (request.status < 200 || request.status >= 300) {
+        const fallbackMessage = request.status === 413
+          ? "The server rejected this file as too large. Check the Nginx client_max_body_size setting."
+          : `Upload failed (${request.status || "network error"}).`;
+
+        fail(payload.error || fallbackMessage, request.status, payload.issues);
+        return;
+      }
+
+      onProgress?.({ loaded: totalBytes, total: totalBytes, percentage: 100 });
+      resolve(payload);
+    });
+
+    request.addEventListener("error", () => {
+      cleanup();
+      fail("The upload connection was interrupted. Check the network and try again.", 0);
+    });
+
+    request.addEventListener("abort", () => {
+      cleanup();
+      reject(new DOMException("Upload canceled.", "AbortError"));
+    });
+
+    if (signal?.aborted) {
+      reject(new DOMException("Upload canceled.", "AbortError"));
+      return;
+    }
+
+    signal?.addEventListener("abort", abortRequest, { once: true });
+    onProgress?.({ loaded: 0, total: totalBytes, percentage: 0 });
+    request.send(file);
+  });
 };
 
 const IMAGE_OPTIMISE_THRESHOLD = 7 * 1024 * 1024;

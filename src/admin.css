@@ -1393,6 +1393,81 @@ a {
   gap: 8px;
 }
 
+.admin-video-progress {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid #2a382d;
+  border-radius: 6px;
+  background: #090e0b;
+}
+
+.admin-video-progress-heading,
+.admin-video-progress > small {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.admin-video-progress-heading span {
+  color: #dfe7e1;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.admin-video-progress-heading strong {
+  color: var(--primary);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.admin-video-progress-track {
+  height: 6px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: #1a211c;
+}
+
+.admin-video-progress-track > span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--primary);
+  transition: width 160ms ease;
+}
+
+.admin-video-progress.is-processing .admin-video-progress-track > span {
+  animation: admin-video-processing 1.15s ease-in-out infinite;
+}
+
+.admin-video-progress.is-complete {
+  border-color: rgb(139 197 63 / 55%);
+}
+
+.admin-video-progress > small {
+  color: var(--muted-foreground);
+  font-size: 11px;
+}
+
+.admin-video-progress > small span:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-video-progress > small span:last-child {
+  flex: 0 0 auto;
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes admin-video-processing {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
 @media screen and (max-width: 640px) {
   .admin-image-field { flex-direction: column; }
   .admin-video-field { grid-template-columns: 1fr; }

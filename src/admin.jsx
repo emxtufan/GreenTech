@@ -637,28 +637,83 @@ function SectionPreview({ section }) {
 
 function CompanyVideoEditor({ value, onChange, onNotify }) {
   const inputRef = useRef(null);
+  const abortRef = useRef(null);
   const [busy, setBusy] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(null);
   const videoUrl = value || "/video.mp4";
+
+  useEffect(() => () => abortRef.current?.abort(), []);
+
+  const formatBytes = (bytes) => {
+    if (!Number.isFinite(bytes) || bytes <= 0) return "0 MB";
+    return `${(bytes / (1024 * 1024)).toFixed(bytes >= 10 * 1024 * 1024 ? 1 : 2)} MB`;
+  };
 
   const pickVideo = async (event) => {
     const file = event.target.files?.[0];
     event.target.value = "";
     if (!file) return;
 
+    if (file.size > 128 * 1024 * 1024) {
+      onNotify({ tone: "error", message: `${file.name} is larger than 128 MB.` });
+      return;
+    }
+
+    const controller = new AbortController();
+    abortRef.current = controller;
     setBusy(true);
+    setUploadProgress({
+      fileName: file.name,
+      loaded: 0,
+      total: file.size,
+      percentage: 0,
+      stage: "uploading",
+    });
+
     try {
-      const { url } = await uploadAsset(file, "video");
+      const { url } = await uploadAsset(file, "video", {
+        signal: controller.signal,
+        onProgress: ({ loaded, total, percentage }) => {
+          setUploadProgress((current) => ({
+            ...current,
+            fileName: file.name,
+            loaded,
+            total: total || file.size,
+            percentage,
+            stage: percentage >= 100 ? "processing" : "uploading",
+          }));
+        },
+      });
+
       onChange(url);
+      setUploadProgress((current) => ({
+        ...current,
+        loaded: file.size,
+        total: file.size,
+        percentage: 100,
+        stage: "complete",
+      }));
       onNotify({
         tone: "success",
         message: `${file.name} uploaded. Publish changes to make the new video live.`,
       });
     } catch (error) {
-      onNotify({ tone: "error", message: error.message });
+      setUploadProgress(null);
+      onNotify({
+        tone: error.name === "AbortError" ? "neutral" : "error",
+        message: error.name === "AbortError" ? "Video upload canceled." : error.message,
+      });
     } finally {
+      abortRef.current = null;
       setBusy(false);
     }
   };
+
+  const progressLabel = uploadProgress?.stage === "processing"
+    ? "Saving on server..."
+    : uploadProgress?.stage === "complete"
+      ? "Upload complete"
+      : "Uploading video";
 
   return (
     <section className="admin-form-section" aria-labelledby="company-video-file-title">
@@ -682,10 +737,37 @@ function CompanyVideoEditor({ value, onChange, onNotify }) {
               id="company-video-url"
               value={value ?? ""}
               placeholder="/uploads/video/company-film.mp4"
+              disabled={busy}
               onChange={(event) => onChange(event.target.value)}
             />
             <small>Only this URL is saved in data/site-content.json. Maximum file size: 128 MB.</small>
           </div>
+
+          {uploadProgress && (
+            <div
+              className={`admin-video-progress is-${uploadProgress.stage}`}
+              role="progressbar"
+              aria-label="Video upload progress"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow={uploadProgress.percentage}
+              aria-live="polite"
+            >
+              <div className="admin-video-progress-heading">
+                <span>{progressLabel}</span>
+                <strong>{uploadProgress.percentage}%</strong>
+              </div>
+              <div className="admin-video-progress-track" aria-hidden="true">
+                <span style={{ width: `${uploadProgress.percentage}%` }} />
+              </div>
+              <small title={uploadProgress.fileName}>
+                <span>{uploadProgress.fileName}</span>
+                <span>
+                  {formatBytes(uploadProgress.loaded)} / {formatBytes(uploadProgress.total)}
+                </span>
+              </small>
+            </div>
+          )}
 
           <div className="admin-video-buttons">
             <Button
@@ -695,8 +777,18 @@ function CompanyVideoEditor({ value, onChange, onNotify }) {
               onClick={() => inputRef.current?.click()}
             >
               {busy ? <Loader2 className="admin-spin" aria-hidden="true" /> : <Upload aria-hidden="true" />}
-              {busy ? "Uploading..." : value ? "Replace video" : "Upload video"}
+              {busy
+                ? uploadProgress?.stage === "processing"
+                  ? "Saving..."
+                  : `Uploading ${uploadProgress?.percentage ?? 0}%`
+                : value ? "Replace video" : "Upload video"}
             </Button>
+            {busy && (
+              <Button type="button" variant="ghost" onClick={() => abortRef.current?.abort()}>
+                <X aria-hidden="true" />
+                Cancel upload
+              </Button>
+            )}
             {videoUrl !== "/video.mp4" && (
               <Button type="button" variant="ghost" disabled={busy} onClick={() => onChange("/video.mp4")}>
                 <RotateCcw aria-hidden="true" />
