@@ -26,7 +26,7 @@ const PHONE_MIN_PIXEL_RATIO = 2;
 const MAX_DESKTOP_PIXEL_RATIO = 2;
 const MAX_PHONE_PIXEL_RATIO = 3;
 const CONSTRAINED_PHONE_MIN_PIXEL_RATIO = 1.5;
-const MAX_CONSTRAINED_PHONE_PIXEL_RATIO = 2;
+const MAX_CONSTRAINED_PHONE_PIXEL_RATIO = 2.5;
 const LINE_MSAA_SAMPLES = 2;
 const MSAA_RENDER_PIXEL_LIMIT = 2500000;
 const MOBILE_SOLAR_CLOUD_OPACITY = 0.12;
@@ -49,20 +49,42 @@ function getSolarCloudOpacity(dark, width, height, intro = false) {
   return 0.26;
 }
 
+function canUsePhoneMsaa(renderer, pixelRatio, width, height) {
+  const phonePortrait = Math.min(width, height) <= 600 && width / height < 1;
+  const renderPixels = Math.ceil(width * pixelRatio) * Math.ceil(height * pixelRatio);
+  return phonePortrait
+    && renderer.capabilities.isWebGL2
+    && (renderer.capabilities.maxSamples ?? 0) > 0
+    && renderPixels <= MSAA_RENDER_PIXEL_LIMIT;
+}
+
+function shouldEnableFxaa(pixelRatio, renderer, width, height) {
+  return pixelRatio < 2 || (
+    Math.min(width, height) <= 600
+    && width / height < 1
+    && !canUsePhoneMsaa(renderer, pixelRatio, width, height)
+  );
+}
+
 function getExperiencePixelRatio(highQuality, width, height, conserveMemory = false) {
   const devicePixelRatio = Math.max(1, window.devicePixelRatio || 1);
   if (!highQuality) return devicePixelRatio > 1 ? 1 : 0.5;
   const phoneScreen = Math.min(width, height) <= 600;
-  const minimum = phoneScreen
+  const configuredMinimum = phoneScreen
     ? conserveMemory
       ? CONSTRAINED_PHONE_MIN_PIXEL_RATIO
       : PHONE_MIN_PIXEL_RATIO
     : DESKTOP_MIN_PIXEL_RATIO;
-  const maximum = phoneScreen
+  const configuredMaximum = phoneScreen
     ? conserveMemory
       ? MAX_CONSTRAINED_PHONE_PIXEL_RATIO
       : MAX_PHONE_PIXEL_RATIO
     : MAX_DESKTOP_PIXEL_RATIO;
+  const pixelBudgetMaximum = phoneScreen && conserveMemory
+    ? Math.sqrt(MSAA_RENDER_PIXEL_LIMIT / Math.max(1, width * height))
+    : configuredMaximum;
+  const maximum = Math.max(1, Math.min(configuredMaximum, pixelBudgetMaximum));
+  const minimum = Math.min(configuredMinimum, maximum);
   return Math.min(Math.max(devicePixelRatio, minimum), maximum);
 }
 
@@ -419,7 +441,7 @@ class RenderStage {
     this.setupSpecificModel(textures);
     this.globalGroup.add(model);
     this.setDark(false);
-    this.resize(owner.vw, owner.vh, owner.pixelRatio);
+    this.resize(owner.vw, owner.vh, owner.pixelRatio, displayIndex <= 1);
   }
 
   registerPaletteMaterial(lightColor, darkColor, side = THREE.DoubleSide) {
@@ -1105,14 +1127,19 @@ class RenderStage {
     const aspect = width / height;
     const phonePortrait = Math.min(width, height) <= 600 && aspect < 1;
     const maxSamples = this.owner.renderer.capabilities.maxSamples ?? 0;
+    const phoneMsaa = canUsePhoneMsaa(
+      this.owner.renderer,
+      pixelRatio,
+      width,
+      height,
+    );
     const lowDensitySurface =
       pixelRatio <= DESKTOP_MIN_PIXEL_RATIO
       && renderWidth * renderHeight <= MSAA_RENDER_PIXEL_LIMIT;
     const targetSamples =
       fullResolution
-      && !this.owner.conserveMemory
       && this.owner.renderer.capabilities.isWebGL2
-      && (phonePortrait || lowDensitySurface)
+      && (phoneMsaa || (!this.owner.conserveMemory && lowDensitySurface))
         ? Math.min(LINE_MSAA_SAMPLES, maxSamples)
         : 0;
     if (this.fbo.samples !== targetSamples) {
@@ -1584,7 +1611,12 @@ export class EnpowerExperience {
     this.transitionScene.add(this.transitionPlane);
     this.renderPass = new RenderPass(this.transitionScene, this.transitionCamera);
     this.fxaaPass = new ShaderPass(FXAAShader);
-    this.fxaaPass.enabled = this.pixelRatio < 2;
+    this.fxaaPass.enabled = shouldEnableFxaa(
+      this.pixelRatio,
+      this.renderer,
+      this.vw,
+      this.vhSaved,
+    );
     this.composer = new EffectComposer(this.renderer);
     this.composer.addPass(this.renderPass);
     this.composer.addPass(this.fxaaPass);
@@ -1785,7 +1817,12 @@ export class EnpowerExperience {
       1 / (this.vw * this.pixelRatio),
       1 / (this.vh * this.pixelRatio),
     );
-    this.fxaaPass.enabled = this.pixelRatio < 2;
+    this.fxaaPass.enabled = shouldEnableFxaa(
+      this.pixelRatio,
+      this.renderer,
+      this.vw,
+      this.vhSaved,
+    );
     this.composer.setSize(this.vw, this.vh);
     this.resizeStages();
   }
