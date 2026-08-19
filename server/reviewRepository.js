@@ -98,7 +98,7 @@ export function mergeApprovedReviews(content, approvedReviews) {
     0,
   );
   const submitted = approvedReviews
-    .filter((review) => !existingIds.has(review.id))
+    .filter((review) => !review.demo && !existingIds.has(review.id))
     .map((review, index) => ({
       id: review.id,
       order: firstOrder + index + 1,
@@ -171,7 +171,9 @@ export class JsonReviewRepository {
   }
 
   async getApproved() {
-    return (await this.getAll()).filter((review) => review.status === "approved");
+    return (await this.getAll()).filter((review) => (
+      review.status === "approved" && review.demo !== true
+    ));
   }
 
   async submit(input) {
@@ -217,6 +219,9 @@ export class JsonReviewRepository {
     return this.#mutate((document) => {
       const review = document.items.find((item) => item.id === id);
       if (!review) throw new ReviewError("Review not found.", 404);
+      if (review.demo === true && status === "approved") {
+        throw new ReviewError("Demo reviews cannot be published.");
+      }
 
       review.status = status;
       review.moderatedAt = status === "pending" ? null : new Date().toISOString();

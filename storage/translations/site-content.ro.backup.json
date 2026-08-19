@@ -1,8 +1,8 @@
 {
-  "version": 4,
+  "version": 5,
   "locale": "ro",
-  "revision": "462b2bce053ac542fbcd18dc",
-  "translatedAt": "2026-08-19T10:43:12.614Z",
+  "revision": "5ed1a5dd81c276811711ffbb",
+  "translatedAt": "2026-08-19T10:51:24.663Z",
   "content": {
     "version": 1,
     "sections": [
@@ -95,7 +95,7 @@
         "archiveAriaLabel": "Vezi toate proiectele Greentech Professionals",
         "backPortfolioLabel": "Inapoi la portofoliu",
         "portfolioLabel": "Portofoliu",
-        "allProjectsTitle": "Toate proiectele",
+        "allProjectsTitle": "Proiectele nostre",
         "allProjectsDescription": "22 de proiecte fotovoltaice executate sau aflate in lucru in Romania, Italia si Spania.",
         "projectPortfolioLabel": "Portofoliu proiecte",
         "viewProjectLabel": "Vezi proiectul",

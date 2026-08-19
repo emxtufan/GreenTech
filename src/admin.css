@@ -1593,7 +1593,7 @@ a {
 
 .admin-review-filters {
   display: inline-grid;
-  grid-template-columns: repeat(4, minmax(0, auto));
+  grid-template-columns: repeat(5, minmax(0, auto));
   padding: 3px;
   border: 1px solid #2b352e;
   border-radius: 6px;
@@ -1691,11 +1691,28 @@ a {
 }
 
 .admin-review-item-header strong {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
   overflow: hidden;
   color: #edf3ee;
   font-size: 13px;
-  text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.admin-review-item-header strong > span:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-review-demo-badge {
+  flex: 0 0 auto;
+  border-color: rgb(213 169 72 / 34%);
+  color: #e5c57d;
+  background: rgb(213 169 72 / 8%);
+  font-size: 8px;
+  text-transform: uppercase;
 }
 
 .admin-review-item-header a {
