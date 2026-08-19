@@ -1,57 +1,71 @@
-GREENTECH - AAPANEL PRODUCTION PACKAGE
+GREENTECH - DEPLOY PE UBUNTU CU AAPANEL, NGINX SI PM2
 
-1. Extract the archive to:
-   /www/wwwroot/greentech
+Configuratia curenta:
+  Repository: https://github.com/emxtufan/GreenTech.git
+  Director: /var/www/greentech
+  Aplicatie: http://127.0.0.1:3000
+  PM2: GreenTech, o singura instanta
+  Nginx: /etc/nginx/sites-enabled/greentechpro.app
+  Domenii: greentechpro.app, www.greentechpro.app,
+           greentechpro.ro, www.greentechpro.ro
 
-2. Install Node.js 24 LTS in aaPanel.
+INSTALARE
 
-3. Run:
-   cd /www/wwwroot/greentech
-   bash deploy/install-aapanel.sh
+  cd /var/www
+  git clone https://github.com/emxtufan/GreenTech.git greentech
+  cd /var/www/greentech
+  npm ci --omit=dev
+  cp .env.example .env
 
-4. Add the PM2 project:
-   Startup file: /www/wwwroot/greentech/server.js
-   Arguments: --production
-   Run directory: /www/wwwroot/greentech
-   Environment: NODE_ENV=production
-   Node version: 24 LTS
-   Run user: www
-   Instances: 1
-   Memory limit: 512M
-   Port: 3000
+Completeaza .env, apoi porneste o singura instanta:
 
-5. Map the domain through aaPanel to:
-   http://127.0.0.1:3000
+  pm2 start server.js --name GreenTech -- --production
+  pm2 save
 
-6. The expected application log contains:
-   [Storage] Using local JSON persistence.
-   GreenTech server (production) running at http://localhost:3000
-   Persistence: json
+DEPLOY DIN GIT
 
-7. Keep PM2 at one instance. Back up the storage/ directory because it contains
-   content, reviews, inquiries, applications and newsletter subscribers.
+Buildul se face local si dist/ se trimite in Git. Pe server:
 
-GIT DEPLOYMENT WITHOUT A SERVER BUILD
+  cd /var/www/greentech
+  git fetch origin main
+  git pull --ff-only origin main
+  npm ci --omit=dev
+  pm2 restart GreenTech --update-env
 
-Build locally, then commit both source changes and dist/:
-   npm ci
-   npm run build
-   git add -A
-   git commit -m "Update website"
-   git push
+Nu rula npm run build pe server.
 
-On the server, deploy only with:
-   cd /www/wwwroot/greentech
-   git pull --ff-only
-   npm ci --omit=dev
-   pm2 restart greentech --update-env
+CLOUDFLARE
 
-Do not run npm run build on the server. The tracked dist/ directory is served
-directly. Live JSON, CVs and uploads are written to ignored storage/, so they
-survive git pull without making the server repository dirty.
+La registrar se folosesc nameserverele oferite de Cloudflare. In fiecare zona
+Cloudflare, recordul A pentru @ indica IP-ul public al serverului, iar www este
+CNAME catre domeniul principal. Dupa emiterea certificatului, proxy-ul poate fi
+activat si SSL/TLS trebuie setat pe Full (strict).
 
-SECURITY
+NGINX SI UPLOADURI
 
-The .env file contains private credentials. Never place this archive in a
-public directory, Git repository, email attachment or public download URL.
-Delete the uploaded archive after extracting it in aaPanel.
+Virtual hostul trebuie sa contina toate cele patru domenii, reverse proxy catre
+127.0.0.1:3000 si urmatoarele limite:
+
+  client_max_body_size 250M;
+  client_body_timeout 600s;
+  proxy_request_buffering off;
+  proxy_send_timeout 600s;
+  proxy_read_timeout 600s;
+
+Verificare si reload:
+
+  sudo nginx -t
+  sudo systemctl reload nginx
+
+DATE LIVE
+
+Continutul, traducerile si uploadurile sunt modificabile. Pentru a evita
+conflictele Git, foloseste in .env directoare din afara repository-ului:
+
+  DATA_DIR=/var/lib/greentech/data
+  UPLOADS_DIR=/var/lib/greentech/uploads
+  TRANSLATIONS_DIR=/var/lib/greentech/translations
+
+Pastreaza backup pentru /var/www/greentech/.env si /var/lib/greentech/.
+Instructiunile complete, configuratia Nginx si procedura pentru conflicte Git se
+afla in README.md.

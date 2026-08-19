@@ -1,66 +1,100 @@
-# GreenTech Professionals
+# Greentech Professionals
 
-Website React/Vite cu experienta Three.js, server Express, panou de administrare
-la `/admin` si persistenta locala in fisiere JSON.
+Website React/Vite cu scene Three.js, server Express, panou de administrare la
+`/admin`, continut JSON si traduceri automate.
 
-## Productie
+## Arhitectura de productie
 
-Instalarea curenta foloseste:
-
-- Ubuntu cu aaPanel
-- Nginx administrat de aaPanel
-- Node.js 24 LTS
-- PM2 / Node Project Manager din aaPanel
-- Git pentru deploy
-- fisiere JSON pentru continut si formulare
-- domeniile `greentechpro.app` si `www.greentechpro.app`
-- aplicatia Node pe `127.0.0.1:3000`
-
-Directorul recomandat pe server este:
+Configuratia folosita in productie este:
 
 ```text
-/www/wwwroot/greentech
+Vizitator
+  -> Cloudflare DNS si proxy
+  -> Nginx pe Ubuntu (HTTPS)
+  -> Node.js / PM2 pe 127.0.0.1:3000
+  -> dist/ + datele JSON si uploadurile din storage/
 ```
 
-`dist/` este versionat in Git. Buildul se face local si nu se executa pe
-serverul de productie.
+- repository: `https://github.com/emxtufan/GreenTech.git`
+- director pe server: `/var/www/greentech`
+- proces PM2: `GreenTech`
+- port intern: `3000`
+- domenii: `greentechpro.app`, `www.greentechpro.app`, `greentechpro.ro` si
+  `www.greentechpro.ro`
+- configuratie Nginx activa: `/etc/nginx/sites-enabled/greentechpro.app`
+- SSL: Certbot / Let's Encrypt
+- `dist/` este versionat in Git; buildul se face local, nu pe server
+- o singura instanta PM2, deoarece persistenta este bazata pe fisiere JSON
 
-## Cerinte aaPanel
+aaPanel poate fi folosit pentru administrarea procesului Node, a fisierelor si
+a backupurilor. Traficul public trece prin configuratia Nginx de mai sus.
 
-Instaleaza din aaPanel App Store:
+## 1. Domenii si Cloudflare
 
-1. Nginx
-2. Node.js Version Manager si Node.js 24 LTS
-3. PM2 Manager / Node Project Manager
-4. Git, daca nu este deja disponibil pe Ubuntu
+Pentru fiecare domeniu adaugat in Cloudflare:
 
-Verificare prin terminal:
+1. Adauga domeniul ca zona noua in Cloudflare.
+2. Inlocuieste la registrar nameserverele vechi cu nameserverele oferite de
+   Cloudflare.
+3. In Cloudflare DNS adauga un record `A` pentru `@`, cu IP-ul public al
+   serverului Ubuntu.
+4. Adauga `www` ca `CNAME` catre domeniul principal sau ca record `A` catre
+   acelasi IP.
+5. Activeaza proxy-ul Cloudflare pentru recordurile web dupa emiterea
+   certificatului SSL.
+6. In `SSL/TLS`, foloseste `Full (strict)` dupa ce certificatul de pe server
+   include toate cele patru nume.
+
+In recordul `A` se introduce IP-ul public al serverului de origine, nu un IP
+Cloudflare. Cand proxy-ul este activ, vizitatorii vor primi automat IP-urile
+Cloudflare.
+
+Nu sterge recordurile `MX`, `TXT`, `DKIM` sau alte recorduri folosite pentru
+email. Nu configura reguli de tip `Cache Everything` pentru `/admin*` sau
+`/api*`.
+
+Verificari DNS:
 
 ```bash
-node -v
-npm -v
-git --version
+dig +short greentechpro.app
+dig +short greentechpro.ro
+dig NS greentechpro.ro +short
 ```
 
-Daca NVM raporteaza un `prefix` incompatibil din `.npmrc`, ruleaza:
+## 2. Instalare initiala
+
+Cerinte:
+
+- Ubuntu
+- Nginx
+- Git
+- Node.js 24 LTS
+- PM2
+- Certbot cu modulul Nginx
+
+Instalare:
+
+```bash
+cd /var/www
+git clone https://github.com/emxtufan/GreenTech.git greentech
+cd /var/www/greentech
+npm ci --omit=dev
+cp .env.example .env
+```
+
+Daca NVM raporteaza un `prefix` incompatibil din `.npmrc`:
 
 ```bash
 nvm use --delete-prefix v24.18.1 --silent
 ```
 
-## Instalare initiala
-
-Cloneaza repository-ul si instaleaza doar dependentele necesare serverului:
+Genereaza o cheie privata pentru sesiuni:
 
 ```bash
-cd /www/wwwroot
-git clone <URL_REPOSITORY> greentech
-cd /www/wwwroot/greentech
-npm ci --omit=dev
-cp .env.example .env
+node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"
 ```
 
-Completeaza `.env` cu valori private:
+Completeaza `.env` doar pe server:
 
 ```dotenv
 ADMIN_PASSWORD=parola-admin-puternica
@@ -71,196 +105,23 @@ TRANSLATIONS_DIR=storage/translations
 DEEPL_API_KEY=cheia-privata-deepl
 CONTENT_SOURCE_LOCALE=ro
 TRANSLATION_LOCALES=en,it,es
-GEOCODER_USER_AGENT="GreenTechProfessionalsAdmin/1.0 (+https://greentechpro.app)"
+GEOCODER_USER_AGENT="GreentechProfessionalsAdmin/1.0 (+https://greentechpro.ro)"
 PORT=3000
 HOST=0.0.0.0
 ```
 
-O cheie de sesiune poate fi generata astfel:
+Protejeaza fisierul:
 
 ```bash
-node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"
+chmod 600 /var/www/greentech/.env
 ```
 
-Pregateste directoarele care contin datele modificabile si acorda drepturi
-utilizatorului sub care ruleaza PM2:
+Nu urca niciodata `.env` in Git. Parola de admin, cheia de sesiune si cheia
+DeepL sunt secrete de productie.
 
-```bash
-mkdir -p storage/data storage/uploads storage/translations
-chown -R www:www storage
-chmod -R u+rwX,g+rwX storage
-```
+## 3. Datele live
 
-Nu adauga `.env` sau `storage/` in Git.
-
-## Configurare PM2 in aaPanel
-
-Adauga un proiect Node cu urmatoarele valori:
-
-| Camp | Valoare |
-| --- | --- |
-| Name | `GreenTech` |
-| Run directory | `/www/wwwroot/greentech` |
-| Startup file | `/www/wwwroot/greentech/server.js` |
-| Arguments | `--production` |
-| Node version | `24 LTS` |
-| Environment | `NODE_ENV=production` |
-| Port | `3000` |
-| Instances | `1` |
-| Memory limit | `512M` sau mai mult |
-| Run user | `www` |
-
-Aplicatia trebuie sa ruleze intr-o singura instanta PM2 deoarece fisierele JSON
-sunt locale. Mai multe instante pot incerca sa scrie simultan acelasi fisier.
-
-Logul corect de pornire contine:
-
-```text
-[Storage] Using local JSON persistence.
-GreenTech server (production) running at http://localhost:3000
-Admin: http://localhost:3000/admin
-Persistence: json
-```
-
-Verificare locala pe server:
-
-```bash
-curl -I http://127.0.0.1:3000/
-curl -I http://127.0.0.1:3000/admin
-pm2 logs GreenTech --lines 100
-```
-
-## Configurare Nginx in aaPanel
-
-Blocul complet de mai jos este configuratia virtual host. In aaPanel se pune la:
-
-```text
-Website -> greentechpro.app -> Config
-```
-
-Nu pune un al doilea bloc `server {}` in tabul `Rewrite`. Fisierul Rewrite este
-deja inclus prin linia:
-
-```nginx
-include /www/server/panel/vhost/rewrite/node_GreenTech.conf;
-```
-
-Configuratia folosita:
-
-```nginx
-server {
-    listen 80;
-    listen [::]:80;
-
-    listen 443 ssl;
-    listen [::]:443 ssl;
-
-    server_name greentechpro.app www.greentechpro.app;
-
-    index index.html index.htm default.htm default.html;
-
-    # Permite uploadul video din panoul de administrare.
-    client_max_body_size 250M;
-
-    # SSL
-    if ($server_port !~ 443) {
-        rewrite ^(/.*)$ https://$host$1 permanent;
-    }
-
-    ssl_certificate /www/server/panel/vhost/cert/GreenTech/fullchain.pem;
-    ssl_certificate_key /www/server/panel/vhost/cert/GreenTech/privkey.pem;
-
-    ssl_protocols TLSv1.2 TLSv1.3;
-    ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256;
-    ssl_prefer_server_ciphers on;
-    ssl_session_cache shared:SSL:10m;
-    ssl_session_timeout 10m;
-
-    add_header Strict-Transport-Security "max-age=31536000";
-    error_page 497 https://$host$request_uri;
-
-    # Rewrite
-    include /www/server/panel/vhost/rewrite/node_GreenTech.conf;
-
-    # Protected files
-    location ~ ^/(\.user.ini|\.htaccess|\.git|\.svn|\.project|LICENSE|README.md|package.json|package-lock.json|\.env|node_modules) {
-        return 404;
-    }
-
-    # SSL verification
-    location /.well-known/ {
-        root /www/wwwroot/greentech;
-    }
-
-    # Reverse proxy to Node
-    location / {
-        proxy_pass http://127.0.0.1:3000;
-
-        proxy_http_version 1.1;
-
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "upgrade";
-
-        proxy_no_cache 1;
-        proxy_cache_bypass 1;
-
-        proxy_connect_timeout 30s;
-        proxy_read_timeout 86400s;
-        proxy_send_timeout 30s;
-    }
-
-    access_log /www/wwwlogs/GreenTech.log;
-    error_log /www/wwwlogs/GreenTech.error.log;
-}
-```
-
-Dupa salvare, verifica si reincarca Nginx:
-
-```bash
-nginx -t
-nginx -s reload
-```
-
-SSL-ul si DNS-ul trebuie configurate in aaPanel pentru ambele domenii. Domeniul
-principal si `www` trebuie sa aiba in DNS inregistrari care indica serverul.
-
-## Deploy prin Git
-
-### Pe calculatorul de dezvoltare
-
-Instaleaza dependentele, construieste `dist/`, apoi trimite inclusiv buildul in
-repository:
-
-```bash
-npm ci
-npm run build
-git add -A
-git commit -m "Update website"
-git push
-```
-
-### Pe serverul aaPanel
-
-```bash
-cd /www/wwwroot/greentech
-git pull --ff-only
-npm ci --omit=dev
-pm2 restart GreenTech --update-env
-```
-
-Nu rula `npm run build` pe server. Express serveste direct fisierele din
-`dist/`, iar serverul nu are nevoie de dependentele Vite/Tailwind de dezvoltare.
-
-## Persistenta JSON
-
-Continutul initial versionat se afla in `data/`. La prima citire, acesta este
-folosit drept seed. Modificarile efectuate din `/admin` si formularele publice
-sunt salvate in:
+Configuratia existenta foloseste:
 
 ```text
 storage/data
@@ -268,44 +129,257 @@ storage/uploads
 storage/translations
 ```
 
-Aici se afla continutul live, recenziile, solicitarile de proiect, aplicatiile,
-abonatii si fisierele incarcate. Un `git pull` nu suprascrie aceste directoare.
+Acest repository contine in prezent si snapshoturi versionate din `storage/`.
+Din acest motiv, modificarile facute din admin pe server pot aparea in
+`git status` si pot bloca un `git pull`.
 
-## Traduceri automate
+### Varianta recomandata
 
-Continutul principal se scrie in romana din `/admin` si este afisat exact asa cum
-a fost salvat. Serverul genereaza din el versiunile engleza, italiana si spaniola.
-La prima vizita, site-ul porneste in romana si permite alegerea manuala a limbii
-din navbar. Alegerea si ultima versiune tradusa se salveaza in `localStorage`
-separat pentru fiecare utilizator.
+Pentru ca datele live sa ramana complet in afara checkoutului Git, muta-le o
+singura data intr-un director separat:
 
-Traducerea este efectuata de server, astfel incat cheia DeepL nu ajunge niciodata
-in JavaScript-ul public. Configureaza in `.env`:
+```bash
+sudo mkdir -p /var/lib/greentech/data
+sudo mkdir -p /var/lib/greentech/uploads
+sudo mkdir -p /var/lib/greentech/translations
 
-```dotenv
-DEEPL_API_KEY=cheia-privata-deepl
-CONTENT_SOURCE_LOCALE=ro
-TRANSLATION_LOCALES=en,it,es
-TRANSLATIONS_DIR=storage/translations
+sudo cp -a /var/www/greentech/storage/data/. /var/lib/greentech/data/
+sudo cp -a /var/www/greentech/storage/uploads/. /var/lib/greentech/uploads/
+sudo cp -a /var/www/greentech/storage/translations/. /var/lib/greentech/translations/
 ```
 
-Pentru o cheie DeepL Free, serverul selecteaza automat endpoint-ul `api-free`.
-`DEEPL_API_URL` poate fi setat explicit numai daca este necesar. Dupa modificarea
-fisierului `.env`, reporneste procesul:
+Afla utilizatorul procesului Node si acorda-i drepturi pe noul director:
+
+```bash
+ps -eo user,pid,cmd | grep '[n]ode .*server.js'
+sudo chown -R UTILIZATOR_PM2:UTILIZATOR_PM2 /var/lib/greentech
+sudo chmod -R u+rwX,g+rwX,o-rwx /var/lib/greentech
+```
+
+Inlocuieste `UTILIZATOR_PM2` cu utilizatorul afisat, apoi schimba `.env`:
+
+```dotenv
+DATA_DIR=/var/lib/greentech/data
+UPLOADS_DIR=/var/lib/greentech/uploads
+TRANSLATIONS_DIR=/var/lib/greentech/translations
+```
+
+Reporneste aplicatia si verifica adminul inainte sa stergi orice copie veche:
+
+```bash
+pm2 restart GreenTech --update-env
+pm2 logs GreenTech --lines 100
+```
+
+## 4. PM2
+
+Pornire din terminal:
+
+```bash
+cd /var/www/greentech
+pm2 start server.js --name GreenTech -- --production
+pm2 save
+pm2 startup
+```
+
+Daca proiectul este creat din PM2 Manager in aaPanel, foloseste:
+
+| Camp | Valoare |
+| --- | --- |
+| Name | `GreenTech` |
+| Run directory | `/var/www/greentech` |
+| Startup file | `/var/www/greentech/server.js` |
+| Arguments | `--production` |
+| Node version | `24 LTS` |
+| Environment | `NODE_ENV=production` |
+| Port | `3000` |
+| Instances | `1` |
+
+Serverul incarca automat `.env` din radacina proiectului. Verificare:
+
+```bash
+pm2 status
+pm2 logs GreenTech --lines 100
+curl -I http://127.0.0.1:3000/
+curl -I http://127.0.0.1:3000/admin
+```
+
+## 5. Nginx
+
+Configuratia finala pentru ambele domenii se afla in:
+
+```text
+/etc/nginx/sites-enabled/greentechpro.app
+```
+
+Continut recomandat:
+
+```nginx
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name greentechpro.app www.greentechpro.app
+                greentechpro.ro www.greentechpro.ro;
+
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+
+    server_name greentechpro.app www.greentechpro.app
+                greentechpro.ro www.greentechpro.ro;
+
+    ssl_certificate /etc/letsencrypt/live/greentechpro.app/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/greentechpro.app/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    # Uploaduri video din admin.
+    client_max_body_size 250M;
+    client_body_timeout 600s;
+
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+
+        # Trimite uploadul catre Node pe masura ce este primit.
+        proxy_request_buffering off;
+        proxy_connect_timeout 30s;
+        proxy_send_timeout 600s;
+        proxy_read_timeout 600s;
+    }
+}
+```
+
+Verifica intotdeauna configuratia inainte de reload:
+
+```bash
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+Pentru a vedea ce fisier Nginx foloseste efectiv:
+
+```bash
+sudo nginx -T 2>&1 | grep -n "server_name.*greentechpro"
+```
+
+## 6. SSL pentru ambele domenii
+
+Dupa ce DNS-ul celor doua domenii ajunge la server, extinde certificatul
+existent:
+
+```bash
+sudo certbot --nginx --cert-name greentechpro.app \
+  -d greentechpro.app \
+  -d www.greentechpro.app \
+  -d greentechpro.ro \
+  -d www.greentechpro.ro
+```
+
+Verificare:
+
+```bash
+sudo certbot certificates
+sudo nginx -t
+sudo systemctl reload nginx
+curl -I https://greentechpro.app
+curl -I https://greentechpro.ro
+```
+
+Abia dupa emiterea corecta a certificatului seteaza recordurile pe `Proxied` si
+modul Cloudflare SSL pe `Full (strict)`.
+
+## 7. Deploy prin Git
+
+### Pe calculatorul de dezvoltare
+
+Buildul de productie se genereaza local si se trimite impreuna cu sursele:
+
+```bash
+npm ci
+npm run build
+git status --short
+git add -p
+git add dist
+git status --short
+git commit -m "Update website"
+git push origin main
+```
+
+Adauga separat orice fisier nou care nu apare in modul interactiv `git add -p`.
+Verifica apoi `git status` inainte de commit. Nu adauga `.env`, arhive mari,
+exporturi temporare, CV-uri sau documente private.
+
+### Pe server
+
+```bash
+cd /var/www/greentech
+git status -sb
+git fetch origin main
+git pull --ff-only origin main
+npm ci --omit=dev
+pm2 restart GreenTech --update-env
+```
+
+Nu rula `npm run build` pe server. Express serveste buildul versionat din
+`dist/`.
+
+### Daca `git pull` este blocat de `storage/`
+
+Mai intai creeaza un backup, apoi pastreaza temporar modificarile live:
+
+```bash
+cd /var/www/greentech
+tar -czf "/root/greentech-storage-$(date +%Y%m%d-%H%M%S).tar.gz" storage
+git stash push -m "runtime inainte de deploy" -- storage
+git pull --ff-only origin main
+git restore --source='stash@{0}' --worktree -- storage
+git stash drop 'stash@{0}'
+npm ci --omit=dev
+pm2 restart GreenTech --update-env
+```
+
+Aceasta procedura pastreaza versiunea live din admin. Dupa migrarea directoarelor
+runtime in `/var/lib/greentech`, acest conflict nu ar mai trebui sa apara.
+
+Verifica revizia si fisierele servite:
+
+```bash
+git log -1 --oneline
+grep -oE 'assets/home-[A-Za-z0-9_-]+\.(js|css)' dist/index.html
+grep -oE 'assets/admin-[A-Za-z0-9_-]+\.(js|css)' dist/admin.html
+pm2 status
+```
+
+## 8. Continut si traduceri
+
+- `data/` contine seedul versionat al aplicatiei.
+- `DATA_DIR` contine continutul live, recenziile, solicitarile, aplicatiile si
+  abonatii.
+- `UPLOADS_DIR` contine imaginile, videoclipurile si alte fisiere incarcate.
+- `TRANSLATIONS_DIR` contine snapshoturile RO/EN/IT/ES si cache-ul de fraze.
+- limba sursa este romana; EN, IT si ES sunt generate pe server prin DeepL.
+- preferinta vizitatorului este salvata in `localStorage`.
+
+Dupa modificarea `.env`:
 
 ```bash
 pm2 restart GreenTech --update-env
 ```
 
-La pornire si la fiecare salvare din admin, serverul pregateste in fundal
-versiunile EN/IT/ES. Romana este documentul sursa, iar engleza este salvata in
-`storage/translations/site-content.en.json`; celelalte limbi folosesc acelasi
-format de snapshot.
-
-Daca versiunea romana urmarita in Git trebuie promovata o singura data peste
-documentul live existent, opreste aplicatia, ruleaza comanda de mai jos si apoi
-reporneste procesul. Continutul live anterior este arhivat automat in
-`storage/data/` inainte de inlocuire.
+Promovarea manuala a continutului romanesc versionat peste continutul live se
+face numai cand acest lucru este intentionat:
 
 ```bash
 pm2 stop GreenTech
@@ -313,31 +387,25 @@ npm run promote:romanian-content
 pm2 restart GreenTech --update-env
 ```
 
-Expresiile deja traduse sunt reutilizate din
-`storage/translations/phrase-cache.json`; doar textele noi sau schimbate consuma
-o noua traducere. Snapshot-urile curente se afla tot in
-`storage/translations/`. Daca DeepL nu este configurat sau este temporar
-indisponibil, site-ul afiseaza temporar continutul sursa fara sa intrerupa
-navigarea.
+## 9. Backup
 
-Pentru a reseta doar preferinta unui browser, sterge cheia
-`greentech.locale.v1` din Local Storage. Cache-ul de continut foloseste chei care
-incep cu `greentech.content.v1` si se invalideaza automat cand continutul din
-admin primeste o revizie noua.
-
-## Backup
-
-Include in backupul aaPanel:
+Backupul trebuie sa includa:
 
 ```text
-/www/wwwroot/greentech/.env
-/www/wwwroot/greentech/storage/
+/var/www/greentech/.env
+/var/lib/greentech/
 ```
 
-Repository-ul Git si `dist/` pot fi reconstruite, dar continutul din `storage/`
-este date de productie si trebuie salvat periodic.
+Daca nu ai facut migrarea recomandata, salveaza in schimb:
 
-## Dezvoltare locala
+```text
+/var/www/greentech/storage/
+```
+
+`dist/` si sursele pot fi recuperate din Git. Continutul live si uploadurile nu
+pot fi reconstruite si trebuie salvate periodic.
+
+## 10. Dezvoltare locala
 
 ```bash
 npm ci
@@ -345,14 +413,14 @@ cp .env.example .env
 npm run dev
 ```
 
-Adrese locale:
+Adrese:
 
 ```text
 http://localhost:3000/
 http://localhost:3000/admin
 ```
 
-Pentru un build local de productie:
+Build local de productie:
 
 ```bash
 npm run build
@@ -365,6 +433,14 @@ npm start
 pm2 status
 pm2 restart GreenTech --update-env
 pm2 logs GreenTech --lines 100
-tail -f /www/wwwlogs/GreenTech.error.log
-nginx -t
+sudo nginx -t
+sudo systemctl reload nginx
+sudo systemctl status nginx --no-pager
+sudo certbot certificates
 ```
+
+## Referinte
+
+- Nginx server names: https://nginx.org/en/docs/http/server_names.html
+- Certbot, schimbarea domeniilor unui certificat:
+  https://eff-certbot.readthedocs.io/en/stable/using.html#changing-a-certificate-s-domains
