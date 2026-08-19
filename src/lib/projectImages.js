@@ -1,11 +1,13 @@
 export function collectProjectImages(projects = [], uploadedPhotos = []) {
   const seen = new Set();
-  const images = [];
+  const imageGroups = [];
   const projectsById = new Map(
     projects
       .filter((project) => project?.id)
       .map((project) => [project.id, project]),
   );
+
+  const uploadedImages = [];
 
   uploadedPhotos.forEach((photo, imageIndex) => {
     const src = typeof photo?.src === "string" ? photo.src.trim() : "";
@@ -18,7 +20,7 @@ export function collectProjectImages(projects = [], uploadedPhotos = []) {
       .trim();
 
     seen.add(src);
-    images.push({
+    uploadedImages.push({
       id: `upload-${photo?.id || imageIndex}`,
       src,
       alt: photo?.alt || photo?.title || project?.alt || readableName,
@@ -31,7 +33,10 @@ export function collectProjectImages(projects = [], uploadedPhotos = []) {
     });
   });
 
+  if (uploadedImages.length > 0) imageGroups.push(uploadedImages);
+
   projects.forEach((project) => {
+    const projectGroup = [];
     const projectImages = Array.isArray(project?.gallery) && project.gallery.length > 0
       ? project.gallery
       : [{ src: project?.image, alt: project?.alt }];
@@ -42,7 +47,7 @@ export function collectProjectImages(projects = [], uploadedPhotos = []) {
       if (!src || seen.has(src)) return;
 
       seen.add(src);
-      images.push({
+      projectGroup.push({
         id: `${project?.id || "project"}-${imageIndex}`,
         src,
         alt: typeof image?.alt === "string" && image.alt.trim()
@@ -54,7 +59,21 @@ export function collectProjectImages(projects = [], uploadedPhotos = []) {
         category: project?.category || "",
       });
     });
+
+    if (projectGroup.length > 0) imageGroups.push(projectGroup);
   });
+
+  const images = [];
+  const longestGroup = imageGroups.reduce(
+    (longest, group) => Math.max(longest, group.length),
+    0,
+  );
+
+  for (let imageIndex = 0; imageIndex < longestGroup; imageIndex += 1) {
+    imageGroups.forEach((group) => {
+      if (group[imageIndex]) images.push(group[imageIndex]);
+    });
+  }
 
   return images;
 }

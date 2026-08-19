@@ -18,6 +18,8 @@ const gallerySpring = {
   mass: 1,
 };
 
+const GALLERY_CLUSTER_SIZE = 6;
+
 function AllPhotosPage({ projects = [], photos = [], onClose }) {
   const pageRef = useRef(null);
   const backButtonRef = useRef(null);
@@ -28,6 +30,20 @@ function AllPhotosPage({ projects = [], photos = [], onClose }) {
     () => collectProjectImages(projects, photos),
     [photos, projects],
   );
+  const imageClusters = useMemo(() => {
+    const clusters = [];
+
+    for (let index = 0; index < images.length; index += GALLERY_CLUSTER_SIZE) {
+      clusters.push(
+        images.slice(index, index + GALLERY_CLUSTER_SIZE).map((image, offset) => ({
+          image,
+          index: index + offset,
+        })),
+      );
+    }
+
+    return clusters;
+  }, [images]);
   const text = useSection("photo-gallery");
   const copy = {
     back: text("galleryBackLabel"),
@@ -154,39 +170,44 @@ function AllPhotosPage({ projects = [], photos = [], onClose }) {
             className="photos-index-grid"
             aria-label={`${images.length} ${copy.imageCount}`}
           >
-            {images.map((image, index) => (
-              <motion.button
-                className="photos-index-tile"
-                ref={(node) => { imageButtonsRef.current[index] = node; }}
-                type="button"
-                key={image.id}
-                onClick={() => setSelectedIndex(index)}
-                whileHover={{ y: -3 }}
-                whileTap={{ scale: 0.985 }}
-                transition={gallerySpring}
-                aria-label={`${image.projectTitle}${image.location ? `, ${image.location}` : ""}`}
+            {imageClusters.map((cluster, clusterIndex) => (
+              <div
+                className={`photos-index-cluster ${clusterIndex % 2 === 1 ? "is-reversed" : ""}`}
+                data-count={cluster.length}
+                key={cluster.map(({ image }) => image.id).join("-")}
               >
-                <motion.img
-                  layoutId={`photo-${image.id}`}
-                  src={image.src}
-                  alt={image.alt}
-                  loading={index < 4 ? "eager" : "lazy"}
-                  fetchPriority={index === 0 ? "high" : "auto"}
-                  decoding="async"
-                  draggable={false}
-                  transition={gallerySpring}
-                />
-                <span className="photos-index-tile-shade" aria-hidden="true" />
-                <span className="photos-index-tile-number" aria-hidden="true">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span className="photos-index-tile-copy">
-                  <strong>{image.projectTitle}</strong>
-                  {(image.caption || image.location) && (
-                    <small>{image.caption || image.location}</small>
-                  )}
-                </span>
-              </motion.button>
+                {cluster.map(({ image, index }, slotIndex) => (
+                  <motion.button
+                    className={`photos-index-tile is-slot-${slotIndex + 1}`}
+                    ref={(node) => { imageButtonsRef.current[index] = node; }}
+                    type="button"
+                    key={image.id}
+                    onClick={() => setSelectedIndex(index)}
+                    whileHover={{ y: -3 }}
+                    whileTap={{ scale: 0.985 }}
+                    transition={gallerySpring}
+                    aria-label={`${image.projectTitle}${image.location ? `, ${image.location}` : ""}`}
+                  >
+                    <motion.img
+                      layoutId={`photo-${image.id}`}
+                      src={image.src}
+                      alt={image.alt}
+                      loading={index < 6 ? "eager" : "lazy"}
+                      fetchPriority={index === 0 ? "high" : "auto"}
+                      decoding="async"
+                      draggable={false}
+                      transition={gallerySpring}
+                    />
+                    <span className="photos-index-tile-shade" aria-hidden="true" />
+                    <span className="photos-index-tile-copy">
+                      <strong>{image.projectTitle}</strong>
+                      {(image.caption || image.location) && (
+                        <small>{image.caption || image.location}</small>
+                      )}
+                    </span>
+                  </motion.button>
+                ))}
+              </div>
             ))}
           </section>
         ) : (
