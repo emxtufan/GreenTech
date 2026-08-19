@@ -28,7 +28,7 @@ const BATCH_TEXT_LIMIT = 40;
 const BATCH_CHARACTER_LIMIT = 80_000;
 // Increment when extraction rules change so stale server snapshots and browser
 // caches cannot keep a translation produced by older rules.
-const CACHE_VERSION = 4;
+const CACHE_VERSION = 5;
 const PROTECTED_TERMS = [
   "Greentech Professionals SRL",
   "Greentech Professionals",
@@ -77,6 +77,8 @@ const SKIPPED_KEYS = new Set([
   "updatedAt",
   "capacity",
   "capacityKw",
+  "client",
+  "projectManager",
 ]);
 
 const requestedTargets = String(

@@ -1,8 +1,8 @@
 {
   "version": 4,
   "locale": "it",
-  "revision": "f53653cd56d9ab2d8755597b",
-  "translatedAt": "2026-08-18T10:28:22.402Z",
+  "revision": "e6a86a64feea749654ac2741",
+  "translatedAt": "2026-08-19T09:52:08.473Z",
   "content": {
     "version": 1,
     "sections": [
@@ -12,7 +12,7 @@
         "name": "Introduzione e Hero 3D",
         "eyebrow": "Energia e infrastrutture",
         "title": "Greentech Professionals",
-        "description": "Lavori elettrici, meccanici e di ingegneria civile per progetti energetici in Romania e in Europa.",
+        "description": "Lavori elettrici, meccanici e edili per progetti energetici in Romania e in Europa.",
         "action": "Iniziate la vostra esplorazione",
         "actionMode": "builtin",
         "format": "Interactive 3D experience",
@@ -26,7 +26,7 @@
         "name": "Panoramica generale dell'azienda",
         "eyebrow": "Informazioni sull'azienda",
         "title": "Greentech Professionals SRL",
-        "description": "Eseguiamo lavori elettrici, meccanici e di ingegneria civile per parchi fotovoltaici e infrastrutture tecniche. I nostri team operano in Romania, Italia e Spagna, dalla preparazione del cantiere fino al collaudo e alla consegna.",
+        "description": "Greentech Professionals è un'azienda specializzata nel settore dell'energia e delle costruzioni, con esperienza nello sviluppo e nella realizzazione di progetti energetici complessi. Grazie alla propria competenza nei lavori elettrici, meccanici e infrastrutturali, l’azienda contribuisce alla realizzazione di soluzioni efficienti e sostenibili, adeguate alle attuali esigenze del settore energetico e alla transizione verso un futuro basato sull’energia verde.",
         "action": "",
         "format": "Text and statistics",
         "summary": "4 impact metrics",
@@ -54,7 +54,7 @@
         "name": "I nostri clienti",
         "eyebrow": "Collaborazioni",
         "title": "Clienti e partner",
-        "description": "Collaboriamo con sviluppatori, appaltatori generali e partner tecnici coinvolti in progetti nel settore dell'energia e delle infrastrutture.",
+        "description": "Costruiamo relazioni solide e durature con i nostri partner, collaborando allo sviluppo di progetti efficienti, sostenibili e orientati al futuro nel settore dell'energia e delle infrastrutture.",
         "action": "",
         "format": "Infinite logo loop",
         "summary": "7 client logos",
@@ -68,7 +68,7 @@
         "name": "Il processo di lavoro",
         "eyebrow": "Processo",
         "title": "Come lavoriamo",
-        "description": "Tre fasi ben definite: preparazione dei lavori, esecuzione in cantiere e verifiche post-messa in funzione.",
+        "description": "Tre fasi ben definite: preparazione dei lavori, esecuzione in cantiere e verifiche successive alla messa in funzione.",
         "action": "",
         "format": "Sticky card stack",
         "summary": "3 process cards",
@@ -80,24 +80,24 @@
         "group": "Azienda",
         "name": "Progetti in corso",
         "eyebrow": "Portfolio",
-        "title": "Progetti selezionati",
-        "description": "Lavori realizzati in Romania e in Italia, presentati con l'ubicazione, la potenza e il settore di intervento.",
+        "title": "I nostri progetti",
+        "description": "22 progetti fotovoltaici in Romania, Italia e Spagna, realizzati o in fase di realizzazione dal 2023.",
         "action": "Visualizza il progetto",
         "actionMode": "builtin",
         "format": "Horizontal gallery",
-        "summary": "5 projects + archive",
+        "summary": "22 projects + archive",
         "source": "src/data/horizontal-gallery.json",
         "visible": true,
         "archiveEyebrow": "Portafoglio completo",
         "archiveTitle": "Tutti i progetti",
-        "archiveDescription": "Consultate i progetti pubblicati da Greentech Professionals e i dettagli disponibili per ogni sito.",
+        "archiveDescription": "Il portfolio di Greentech comprende 22 progetti fotovoltaici e i dati disponibili per ciascun sito.",
         "archiveAction": "Guarda il portfolio",
         "archiveAriaLabel": "Scopri tutti i progetti di Greentech Professionals",
         "backPortfolioLabel": "Torna al portfolio",
         "portfolioLabel": "Portfolio",
         "allProjectsTitle": "Tutti i progetti",
-        "allProjectsDescription": "Progetti fotovoltaici realizzati da Greentech Professionals in Romania e in Europa, dall'installazione meccanica e dal cablaggio fino agli impianti elettrici.",
-        "projectPortfolioLabel": "Portfolio progetti",
+        "allProjectsDescription": "22 progetti fotovoltaici realizzati o in fase di realizzazione in Romania, Italia e Spagna.",
+        "projectPortfolioLabel": "Portafoglio progetti",
         "viewProjectLabel": "Visualizza il progetto",
         "locationLabel": "Sede",
         "dateLabel": "Data",
@@ -115,17 +115,21 @@
         "galleryEyebrow": "Dal cantiere",
         "projectGalleryTitle": "Galleria del progetto",
         "sourceEyebrow": "Informazioni sul progetto",
-        "sourceDescription": "I dati e le fotografie provengono dal portfolio di Greentech Professionals. I valori tecnici non pubblicati non sono stimati.",
-        "officialPageLabel": "Pagina ufficiale del progetto",
-        "nextProjectLabel": "Il prossimo progetto"
+        "sourceDescription": "I dati e le fotografie provengono dal portfolio di Greentech. I valori tecnici non pubblicati non sono stimati.",
+        "nextProjectLabel": "Il prossimo progetto",
+        "clientLabel": "Cliente",
+        "statusLabel": "Stato",
+        "projectManagerLabel": "Coordinatore del progetto",
+        "scopeDescription": "Ogni pacchetto è strutturato in fasi ben definite, dalla preparazione del cantiere fino al collaudo e alla consegna delle aree completate.",
+        "galleryNote": "La galleria comprende fotografie del progetto e immagini rappresentative dei cantieri Greentech, selezionate per illustrare i tipi di lavori presentati."
       },
       {
         "id": "credentials",
         "group": "Azienda",
         "name": "Fiducia e certificazioni",
         "eyebrow": "Certificazioni ed esperienza",
-        "title": "Competenze comprovate per lavori eseguiti a regola d’arte.",
-        "description": "Le certificazioni, l’esperienza dei nostri team e la presenza in tre mercati europei sono a conferma del nostro modo di lavorare.",
+        "title": "Competenze comprovate per lavori eseguiti a regola d'arte.",
+        "description": "Le certificazioni, l’esperienza dei nostri team e la nostra presenza in tre mercati europei sono a conferma del nostro modo di lavorare.",
         "action": "Visualizza le certificazioni",
         "actionMode": "link",
         "actionUrl": "",
@@ -140,7 +144,7 @@
         "name": "L'impronta europea",
         "eyebrow": "L'impronta europea",
         "title": "Squadre operative in Romania, Italia e Spagna.",
-        "description": "La mappa mostra i paesi e i luoghi in cui Greentech Professionals ha svolto i propri lavori.",
+        "description": "La mappa mostra i paesi e le località in cui Greentech Professionals ha realizzato i propri progetti.",
         "action": "",
         "format": "Interactive map",
         "summary": "3 countries",
@@ -149,10 +153,10 @@
         "mapTitle": "L'impronta europea di Greentech Professionals",
         "mapDescriptionPrefix": "Sedi dei progetti in",
         "mapDescriptionFallback": "Mappa delle sedi dei progetti europei.",
-        "mapShowCountryLabel": "Visualizza le sedi dei progetti in",
+        "mapShowCountryLabel": "Visualizza le ubicazioni dei progetti in",
         "mapCountriesLabel": "Paesi in cui si svolgono i progetti",
-        "mapEmptyLabel": "Non vengono pubblicati i paesi di riferimento dei progetti.",
-        "mapLoadingLabel": "Caricamento in corso della mappa dei progetti europei"
+        "mapEmptyLabel": "Non sono pubblicati i paesi di riferimento per i progetti.",
+        "mapLoadingLabel": "Caricamento della mappa dei progetti europei in corso"
       },
       {
         "id": "quality",
@@ -177,7 +181,7 @@
         "name": "Recensioni dei clienti",
         "eyebrow": "Recensioni",
         "title": "Testimonianze dei clienti",
-        "description": "Le recensioni inviate tramite il sito vengono pubblicate solo previa approvazione.",
+        "description": "Le recensioni inviate tramite il sito vengono pubblicate solo dopo l'approvazione.",
         "action": "Scrivi una recensione",
         "actionMode": "builtin",
         "format": "Review carousel",
@@ -187,7 +191,7 @@
         "carouselLabel": "Recensioni dei clienti",
         "reviewRole": "Recensione di un cliente",
         "noReviewsTitle": "Non ci sono recensioni pubblicate.",
-        "noReviewsDescription": "Le recensioni inviate vengono pubblicate qui dopo l'approvazione.",
+        "noReviewsDescription": "Le recensioni inviate vengono pubblicate qui dopo l’approvazione.",
         "sourceBackedLabel": "Recensione tratta da una fonte pubblica",
         "approvedSubmissionLabel": "Recensione approvata",
         "originalSourceLabel": "Fonte originale",
@@ -201,7 +205,7 @@
         "closeLabel": "Chiudi",
         "successEyebrow": "Recensione ricevuta",
         "successTitle": "Grazie per la recensione.",
-        "successDescription": "La recensione è stata inviata e verrà pubblicata dopo l’approvazione da parte del team di Greentech.",
+        "successDescription": "La recensione è stata inviata e sarà pubblicata dopo l'approvazione da parte del team di Greentech.",
         "moderationStatusLabel": "Stato della moderazione",
         "awaitingApprovalLabel": "In attesa di approvazione",
         "doneLabel": "Fatto",
@@ -213,7 +217,7 @@
         "ratingLabel": "Valutazione",
         "ratingPickerLabel": "Scegliete da 1 a 5 stelle",
         "starsLabel": "stelle",
-        "selectLabel": "Scegliete",
+        "selectLabel": "Scegli",
         "reviewLabel": "Recensione",
         "reviewPlaceholder": "Descrivete la vostra esperienza di collaborazione",
         "consentLabel": "Acconsento alla pubblicazione del mio nome e della mia recensione.",
@@ -233,7 +237,7 @@
         "name": "Parchi fotovoltaici",
         "eyebrow": "01 / Servizi",
         "title": "Realizzazione di parchi fotovoltaici",
-        "description": "Eseguiamo il montaggio delle strutture e dei moduli, il cablaggio in corrente continua e alternata, l’installazione degli inverter, i collaudi e la preparazione per l’allacciamento alla rete.",
+        "description": "Eseguiamo il montaggio delle strutture e dei moduli, il cablaggio in corrente continua e alternata, l’installazione degli inverter, i collaudi e la preparazione per l’allacciamento.",
         "action": "",
         "format": "Scroll-driven GLB",
         "summary": "Solar module assembly",
@@ -247,7 +251,7 @@
         "name": "Ispezioni e collaudi",
         "eyebrow": "02 / Servizi",
         "title": "Ispezioni e verifiche elettriche",
-        "description": "Eseguiamo misurazioni, termografia, verifiche PRAM e redazione della documentazione relativa a quadri elettrici, apparecchiature e reti di distribuzione.",
+        "description": "Eseguiamo rilievi, termografia, verifiche PRAM e redazione della documentazione relativa a quadri elettrici, apparecchiature e reti di distribuzione.",
         "action": "",
         "format": "Scroll-driven GLB",
         "summary": "Electrical inspection",
@@ -261,7 +265,7 @@
         "name": "Servizi edili",
         "eyebrow": "03 / Servizi",
         "title": "Servizi edili",
-        "description": "Eseguiamo lavori civili e strutturali per progetti nel settore energetico, dall’allestimento del cantiere alla consegna dei lavori.",
+        "description": "Eseguiamo lavori civili e strutturali per impianti energetici, dall’organizzazione del cantiere alla consegna dei lavori.",
         "action": "",
         "format": "Scroll-driven GLB",
         "summary": "Construction model",
@@ -289,7 +293,7 @@
         "name": "Diario di cantiere",
         "eyebrow": "Diario",
         "title": "I nostri progetti e il nostro team.",
-        "description": "Aggiornamenti sui cantieri, approfondimenti tecnici, notizie sull'azienda e offerte di lavoro.",
+        "description": "Aggiornamenti sui cantieri, approfondimenti tecnici, novità sull'azienda e posizioni aperte.",
         "action": "Leggi l'articolo",
         "actionMode": "builtin",
         "format": "Article feed",
@@ -318,7 +322,7 @@
         "readingTimeLabel": "Tempo di lettura",
         "highlightsLabel": "Idee principali",
         "continueLabel": "Continua la navigazione",
-        "relatedProjectHeading": "Scoprite il progetto alla base dell’articolo.",
+        "relatedProjectHeading": "Scoprite il progetto alla base dell'articolo.",
         "externalActionHeading": "Scoprite di più su Greentech Professionals.",
         "relatedProjectFallback": "Vedi il progetto correlato",
         "sourceLabel": "Fonte",
@@ -329,8 +333,8 @@
         "group": "Contenuto",
         "name": "Domande frequenti",
         "eyebrow": "Domande frequenti",
-        "title": "Cosa è necessario chiarire prima dell’inizio dei lavori.",
-        "description": "Informazioni sui servizi, l’area di intervento, le certificazioni, la messa in opera e la richiesta di un preventivo.",
+        "title": "Cosa occorre chiarire prima dell’inizio dei lavori.",
+        "description": "Informazioni su servizi, area di intervento, certificazioni, mobilitazione e richiesta di preventivo.",
         "action": "",
         "format": "Accordion",
         "summary": "6 questions",
@@ -343,7 +347,7 @@
         "name": "Galleria fotografica",
         "eyebrow": "Immagini dal cantiere",
         "title": "I lavori, visti da vicino.",
-        "description": "Foto scattate durante l'installazione, il cablaggio, i controlli e la messa in funzione.",
+        "description": "Foto scattate durante il montaggio, il cablaggio, i controlli e la messa in funzione.",
         "action": "Guarda tutte le foto",
         "actionMode": "builtin",
         "galleryBackLabel": "Torna alla pagina principale",
@@ -391,7 +395,7 @@
         "emailLabel": "E-mail",
         "officeLabel": "Sede",
         "officeAddress": "Calea Floreasca n. 194, Settore 1, Bucarest",
-        "officeBuilding": "Uffici presso il Lago Floreasca",
+        "officeBuilding": "Uffici sul Lago Floreasca",
         "socialLinksLabel": "Social media",
         "companyVideoLabel": "Video di presentazione di Greentech Professionals"
       },
@@ -401,7 +405,7 @@
         "name": "Opportunità di lavoro",
         "eyebrow": "Opportunità di lavoro",
         "title": "Entra a far parte del nostro team",
-        "description": "Inviateci il vostro curriculum e alcune informazioni sulla vostra esperienza professionale.",
+        "description": "Inviateci il vostro CV e alcune informazioni sulla vostra esperienza professionale.",
         "action": "Invia la candidatura",
         "format": "Application form",
         "summary": "Name, position, email, phone, experience, CV",
@@ -409,7 +413,7 @@
         "visible": true,
         "careerPanelEyebrow": "Opportunità di lavoro",
         "careerPanelTitle": "Entra a far parte del nostro team",
-        "careerPanelHint": "Curriculum, esperienza e ruolo desiderato.",
+        "careerPanelHint": "Curriculum, esperienza e ruolo ricercato.",
         "nameLabel": "Nome",
         "positionLabel": "Posizione desiderata",
         "positionPlaceholder": "Elettricista, ingegnere, coordinatore...",
@@ -423,7 +427,7 @@
         "clearFileLabel": "Elimina il file",
         "fileHintPrefix": "Massimo",
         "fileHintSuffix": "MB. Il file viene inviato esclusivamente al team di reclutamento.",
-        "consentPrefix": "Acconsento al trattamento dei dati personali e del mio curriculum vitae ai fini della selezione del personale, in conformità con",
+        "consentPrefix": "Acconsento al trattamento dei dati personali e del curriculum vitae ai fini della selezione del personale, in conformità con",
         "privacyPolicyLabel": "Informativa sulla privacy",
         "consentSuffix": ".",
         "sendingLabel": "Invio in corso...",
@@ -439,7 +443,7 @@
         "name": "Seminterrato",
         "eyebrow": "Informazioni sull'azienda",
         "title": "Greentech Professionals",
-        "description": "Squadre tecniche per lavori energetici eseguiti in Romania, Italia e Spagna.",
+        "description": "Team tecnici per interventi nel settore energetico realizzati in Romania, Italia e Spagna.",
         "action": "",
         "format": "Navigation and legal links",
         "summary": "3 link groups",
@@ -552,7 +556,7 @@
           "enabled": true,
           "number": "01",
           "title": "Pianificazione e mobilitazione",
-          "description": "Prima di procedere alla mobilitazione, verifichiamo il sito, la documentazione tecnica, i percorsi e le risorse necessarie.",
+          "description": "Prima di procedere con la mobilitazione, verifichiamo il sito, la documentazione tecnica, i percorsi e le risorse necessarie.",
           "theme": "design"
         },
         {
@@ -561,7 +565,7 @@
           "enabled": true,
           "number": "02",
           "title": "Realizzazione e messa in funzione",
-          "description": "Ci occupiamo del montaggio meccanico, del cablaggio, dell'installazione delle apparecchiature, del collaudo e della consegna.",
+          "description": "Ci occupiamo del montaggio meccanico, del cablaggio, dell’installazione delle apparecchiature, del collaudo e della consegna.",
           "theme": "build"
         },
         {
@@ -570,7 +574,7 @@
           "enabled": true,
           "number": "03",
           "title": "Manutenzione e monitoraggio",
-          "description": "Organizziamo ispezioni, interventi di riparazione e redazione di relazioni tecniche per la manutenzione dell'impianto dopo la messa in servizio.",
+          "description": "Organizziamo ispezioni, interventi di riparazione e redigiamo relazioni tecniche per la manutenzione dell'impianto dopo la messa in funzione.",
           "theme": "care"
         }
       ]
@@ -581,273 +585,1958 @@
           "id": "butimanu-romania",
           "order": 1,
           "enabled": true,
-          "category": "Impianti elettrici e meccanici",
+          "category": "Elettricità e meccanica",
           "title": "Butimanu, Romania",
-          "image": "/projects/butimanu/butimanu-01.jpg",
-          "alt": "Lavori di costruzione nell’ambito del progetto fotovoltaico di Butimanu",
-          "projectDate": "Giugno 2025",
+          "image": "/projects/portfolio-2026/butimanu/butimanu-02.webp",
+          "alt": "Progetto fotovoltaico Butimanu, Romania",
+          "projectDate": "2025",
           "projectCategory": "Impianti elettrici e meccanici",
-          "location": "Butimanu, Romania",
-          "capacity": "300 MW",
-          "capacityKw": "300,000 kW",
-          "capacityNote": "Capacità totale del parco fotovoltaico",
-          "about": "Abbiamo eseguito lavori elettrici e meccanici per il progetto fotovoltaico di Butimanu.",
-          "description": "Il progetto da 300 MW ha riunito un team dirigenziale dedicato e oltre 200 professionisti qualificati in cantiere.",
+          "location": "Butimanu, provincia di Dâmbovița, Romania",
+          "capacity": "297 MW",
+          "capacityKw": "297,000 kW",
+          "capacityNote": "Potenza totale del progetto",
+          "projectStatus": "In fase di realizzazione",
+          "client": "AJ Brand",
+          "projectManager": "Mario Aurelian Sasu",
+          "about": "Greentech esegue i lavori meccanici ed elettrici per il parco fotovoltaico di Butimanu.",
+          "description": "Il progetto ha coinvolto un team di circa 300 professionisti specializzati in strutture, moduli, cablaggio e collegamenti.",
           "scope": [
             {
-              "title": "Cablaggio e tracciati",
-              "description": "Posa dei cavi e organizzazione dei percorsi elettrici in cantiere."
+              "title": "Fondazioni e posa in opera",
+              "description": "Le squadre hanno effettuato il tracciamento delle file, il posizionamento dei punti di lavoro e l’installazione dei pali di fondazione secondo la configurazione sul terreno. La successione dei fronti di lavoro è stata coordinata per mantenere il ritmo tra i lavori meccanici e quelli elettrici."
             },
             {
-              "title": "Installazione meccanica",
-              "description": "Assemblaggio delle strutture e installazione dei moduli fotovoltaici."
+              "title": "Strutture portanti",
+              "description": "Gli elementi metallici sono stati preassemblati, montati e allineati su ogni fila. I fissaggi e la geometria della struttura sono stati verificati prima dell’inizio del montaggio dei moduli."
             },
             {
-              "title": "Impianti elettrici",
-              "description": "Collegamenti, cablaggio e verifiche per i circuiti realizzati in cantiere."
+              "title": "Moduli fotovoltaici",
+              "description": "I moduli sono stati distribuiti in modo controllato in cantiere, montati sulle strutture predisposte e sottoposti a controllo visivo dopo il fissaggio. Il lavoro per zone ha consentito la consegna progressiva delle file completate."
+            },
+            {
+              "title": "Reti elettriche e messa in servizio",
+              "description": "Il pacchetto comprendeva il cablaggio in corrente continua (DC) e in corrente alternata (AC), la disposizione dei percorsi e la realizzazione dei relativi collegamenti. Le fasi eseguite sono state ispezionate e preparate per il collaudo e la messa in funzione."
             }
           ],
           "gallery": [
             {
-              "src": "/projects/butimanu/butimanu-01.jpg",
-              "alt": "Attrezzature edili e strutture di montaggio a Butimanu"
+              "src": "/projects/portfolio-2026/butimanu/butimanu-01.webp",
+              "alt": "Butimanu, Romania - foto n. 1 del cantiere"
             },
             {
-              "src": "/projects/butimanu/butimanu-02.jpg",
-              "alt": "Foto ufficiale tratta dal sito web del progetto fotovoltaico Butimanu"
+              "src": "/projects/portfolio-2026/butimanu/butimanu-02.webp",
+              "alt": "Butimanu, Romania - foto n. 2 del cantiere"
             },
             {
-              "src": "/projects/butimanu/butimanu-03.jpg",
-              "alt": "L'attività del team di Greentech Professionals nel cantiere di Butimanu"
-            }
-          ],
-          "sourceUrl": "https://greentechpro.ro/portfolio/butimanu-romania/"
-        },
-        {
-          "id": "piombino-italy",
-          "order": 2,
-          "enabled": true,
-          "category": "Impianti elettrici e meccanici",
-          "title": "Codigoro, Italia",
-          "image": "/projects/piombino/piombino-01.jpg",
-          "alt": "Pannelli fotovoltaici nel progetto Codigoro",
-          "projectDate": "Luglio 2025",
-          "projectCategory": "Impianti elettrici e meccanici",
-          "location": "Codigoro, Italia",
-          "capacity": "77.3 MW",
-          "capacityKw": "77.300 kW",
-          "capacityNote": "Capacità del progetto",
-          "about": "Abbiamo eseguito lavori elettrici e meccanici per il progetto fotovoltaico di Codigoro.",
-          "description": "A Codigoro, il team ha lavorato a un parco da 77,3 MW, completato nel luglio 2025.",
-          "scope": [
-            {
-              "title": "Posa dei cavi",
-              "description": "Sono stati predisposti i percorsi elettrici e sono stati posati i cavi nelle aree di lavoro."
+              "src": "/projects/portfolio-2026/butimanu/representative-03.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 3",
+              "representative": true
             },
             {
-              "title": "Strutture e moduli",
-              "description": "Il team di meccanici ha assemblato le strutture e installato i moduli fotovoltaici."
+              "src": "/projects/portfolio-2026/butimanu/representative-04.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 4",
+              "representative": true
             },
             {
-              "title": "Lavori elettrici",
-              "description": "I circuiti e i collegamenti sono stati realizzati in conformità alla documentazione di progetto."
-            }
-          ],
-          "gallery": [
-            {
-              "src": "/projects/piombino/piombino-01.jpg",
-              "alt": "Pannelli fotovoltaici nel progetto Codigoro"
+              "src": "/projects/portfolio-2026/butimanu/representative-05.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 5",
+              "representative": true
             },
             {
-              "src": "/projects/piombino/piombino-02.jpg",
-              "alt": "Area di intervento del progetto fotovoltaico a Codigoro"
+              "src": "/projects/portfolio-2026/butimanu/representative-06.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 6",
+              "representative": true
             },
             {
-              "src": "/projects/piombino/piombino-03.webp",
-              "alt": "Lavori elettrici e meccanici per il progetto Codigoro"
+              "src": "/projects/portfolio-2026/butimanu/representative-07.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/butimanu/representative-08.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/butimanu/representative-09.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/butimanu/representative-10.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 10",
+              "representative": true
             }
           ],
           "sourceUrl": ""
         },
         {
-          "id": "giurgiu-romania",
-          "order": 3,
+          "id": "corbii-mari-romania",
+          "order": 2,
           "enabled": true,
-          "category": "Impianti elettrici e meccanici",
-          "title": "Giurgiu, Romania",
-          "image": "/projects/giurgiu/giurgiu-01.jpg",
-          "alt": "Pannelli fotovoltaici nel progetto di Giurgiu",
-          "projectDate": "Gennaio 2025",
+          "category": "Elettricità e meccanica",
+          "title": "Corbii Mari, Romania",
+          "image": "/projects/portfolio-2026/corbii-mari/corbii-mari-01.webp",
+          "alt": "Progetto fotovoltaico Corbii Mari, Romania",
+          "projectDate": "2026",
           "projectCategory": "Impianti elettrici e meccanici",
-          "location": "Giurgiu, Romania",
-          "capacity": null,
-          "capacityKw": null,
-          "capacityNote": "Non è specificato pubblicamente",
-          "about": "Abbiamo realizzato il montaggio meccanico, il cablaggio e gli impianti elettrici per il progetto fotovoltaico a Giurgiu.",
-          "description": "I lavori hanno riguardato la realizzazione dell'infrastruttura fotovoltaica e il coordinamento delle fasi elettriche e meccaniche in cantiere.",
+          "location": "Corbii Mari, provincia di Dâmbovița, Romania",
+          "capacity": "274 MW",
+          "capacityKw": "274,000 kW",
+          "capacityNote": "Potenza totale del progetto",
+          "projectStatus": "In fase di realizzazione",
+          "client": "AJ Brand",
+          "projectManager": "Mario Aurelian Sasu",
+          "about": "Cantiere fotovoltaico di grande capacità, realizzato dai team di Greentech nei settori meccanico ed elettrico.",
+          "description": "I lavori sono proseguiti anche durante la stagione fredda, con un impiego di personale che ha raggiunto le 300 unità.",
           "scope": [
             {
-              "title": "Preparazione dei percorsi",
-              "description": "Sono stati tracciati e predisposti i percorsi necessari per i cavi elettrici."
+              "title": "Preparazione dei cantieri",
+              "description": "Il cantiere è stato suddiviso in zone di lavoro per consentire l’accesso alle attrezzature, la distribuzione dei materiali e la tracciatura delle file. L’organizzazione per fasi ha garantito la continuità dei lavori anche in condizioni stagionali difficili."
+            },
+            {
+              "title": "Pali e strutture",
+              "description": "I pali sono stati installati seguendo i punti di riferimento tracciati, mentre le strutture sono state assemblate e allineate una dopo l’altra. Ogni area è stata controllata prima di procedere al montaggio dei moduli."
+            },
+            {
+              "title": "Moduli e impianti elettrici",
+              "description": "I lavori sono proseguiti con l'installazione dei moduli, il cablaggio in corrente continua e alternata e la sistemazione dei tracciati. Le interfacce tra le squadre sono state coordinate per evitare di bloccare i cantieri già avviati."
+            },
+            {
+              "title": "Controllo e preparazione all’avvio",
+              "description": "Le file completate sono state sottoposte a ispezioni meccaniche ed elettriche, con la correzione dei punti individuati. La documentazione dello stato di avanzamento ha accompagnato il passaggio graduale alla fase di collaudo."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/corbii-mari/corbii-mari-01.webp",
+              "alt": "Corbii Mari, Romania - foto n. 1 dal cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/corbii-mari/corbii-mari-02.webp",
+              "alt": "Corbii Mari, Romania - foto n. 2 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/corbii-mari/representative-03.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/corbii-mari/representative-04.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/corbii-mari/representative-05.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/corbii-mari/representative-06.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/corbii-mari/representative-07.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/corbii-mari/representative-08.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/corbii-mari/representative-09.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/corbii-mari/representative-10.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "pfv-guillena-spain",
+          "order": 3,
+          "enabled": true,
+          "category": "Elettricità e meccanica",
+          "title": "PFV Guillena 400 & 220, Spagna",
+          "image": "/projects/portfolio-2026/guillena/guillena-01.webp",
+          "alt": "Progetto fotovoltaico PFV Guillena 400 & 220, Spagna",
+          "projectDate": "2025",
+          "projectCategory": "Impianti elettrici e meccanici",
+          "location": "Guillena, Burguillos e Alcalá del Río, Siviglia, Spagna",
+          "capacity": "225 MW",
+          "capacityKw": "225,000 kW",
+          "capacityNote": "Potenza totale del progetto",
+          "projectStatus": "Completato",
+          "client": "Cox Energy",
+          "projectManager": "Mario Aurelian Sasu",
+          "about": "Due impianti fotovoltaici, da 110 MW e 115 MW, realizzati nell’ambito di un unico programma di lavori.",
+          "description": "Oltre 120 professionisti hanno lavorato alla realizzazione dei pali di fondazione, degli inseguitori solari, dei moduli, al cablaggio in corrente continua e alternata e alla preparazione per la messa in funzione.",
+          "scope": [
+            {
+              "title": "Coordinamento dei cantieri",
+              "description": "Le due aree del programma sono state pianificate come fronti di lavoro complementari, con squadre e materiali distribuiti in base allo stato di avanzamento dei lavori. Questa organizzazione ha permesso di mantenere un ritmo di esecuzione costante in entrambi i cantieri."
+            },
+            {
+              "title": "Pali e sistemi di inseguimento",
+              "description": "Dopo il tracciamento sono stati installati i pali e assemblate le strutture con inseguimento solare. L'allineamento dei componenti e il funzionamento meccanico sono stati verificati prima del montaggio dei moduli."
+            },
+            {
+              "title": "Installazione dei moduli",
+              "description": "I moduli fotovoltaici sono stati movimentati, posizionati e fissati sulle file predisposte. Le squadre hanno garantito l’uniformità del montaggio e la protezione dei componenti durante l’intero svolgimento dei lavori."
+            },
+            {
+              "title": "Cablaggio e assistenza tecnica",
+              "description": "I lavori elettrici hanno riguardato i percorsi in corrente continua (DC) e in corrente alternata (AC), i relativi collegamenti e i controlli. Le aree completate sono state preparate per i test e per le fasi di messa in funzione."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/guillena/guillena-01.webp",
+              "alt": "PFV Guillena 400 & 220, Spagna - foto n. 1 dal cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/guillena/guillena-02.webp",
+              "alt": "PFV Guillena 400 & 220, Spagna - foto n. 2 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/guillena/representative-03.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/guillena/representative-04.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/guillena/representative-05.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/guillena/representative-06.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/guillena/representative-07.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/guillena/representative-08.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/guillena/representative-09.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/guillena/representative-10.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "burgos-spain",
+          "order": 4,
+          "enabled": true,
+          "category": "Elettricità e meccanica",
+          "title": "Burgos, Spagna",
+          "image": "/projects/portfolio-2026/burgos/burgos-01.webp",
+          "alt": "Progetto fotovoltaico a Burgos, Spagna",
+          "projectDate": "2026",
+          "projectCategory": "Impianti elettrici e meccanici",
+          "location": "Burgos, Castiglia e León, Spagna",
+          "capacity": "220 MW",
+          "capacityKw": "220,000 kW",
+          "capacityNote": "Potenza totale del progetto",
+          "projectStatus": "In fase di realizzazione",
+          "client": "Solaria",
+          "projectManager": "Mario Aurelian Sasu",
+          "about": "Greentech fornisce il pacchetto meccanico ed elettrico per il progetto fotovoltaico di Burgos.",
+          "description": "I lavori comprendono il tracciamento, i pali, gli inseguitori solari, i moduli, il cablaggio e l'assistenza alla messa in funzione.",
+          "scope": [
+            {
+              "title": "Rilievo e tracciamento",
+              "description": "I punti di riferimento del progetto sono stati riportati sul terreno per il posizionamento delle file e l’organizzazione degli accessi. L’installazione dei pali è avvenuta secondo la sequenza stabilita di comune accordo con le squadre di montaggio."
+            },
+            {
+              "title": "Inseguitori solari e allineamento",
+              "description": "Le strutture dei tracker sono state assemblate, regolate e sottoposte a controlli meccanici prima della messa in carico. I controlli intermedi hanno verificato la continuità delle file e il corretto funzionamento dei gruppi."
+            },
+            {
+              "title": "Moduli e cablaggio",
+              "description": "I moduli sono stati montati sulle strutture predisposte, mentre i cavi sono stati posati e fissati lungo i percorsi stabiliti. I lavori relativi ai circuiti in corrente continua (DC) e in corrente alternata (AC) sono proseguiti in modo coordinato con il completamento delle opere meccaniche."
+            },
+            {
+              "title": "Ispezioni e messa in funzione",
+              "description": "I team hanno verificato i fissaggi, i collegamenti e lo stato delle aree interessate dai lavori. Le questioni in sospeso sono state seguite fino alla loro risoluzione, prima dei test di sistema."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/burgos/burgos-01.webp",
+              "alt": "Burgos, Spagna - foto n. 1 dal cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/burgos/burgos-02.webp",
+              "alt": "Burgos, Spagna - foto n. 2 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/burgos/representative-03.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/burgos/representative-04.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/burgos/representative-05.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/burgos/representative-06.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/burgos/representative-07.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/burgos/representative-08.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/burgos/representative-09.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/burgos/representative-10.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "valter-maracineanu-romania",
+          "order": 5,
+          "enabled": true,
+          "category": "Installazione meccanica",
+          "title": "Valter Maracineanu, Romania",
+          "image": "/projects/portfolio-2026/valter-maracineanu/valter-maracineanu-01.webp",
+          "alt": "Progetto fotovoltaico Valter Maracineanu, Romania",
+          "projectDate": "2026",
+          "projectCategory": "Realizzazione di un parco fotovoltaico",
+          "location": "Iepuresti, Romania",
+          "capacity": "178 MW",
+          "capacityKw": "178,000 kW",
+          "capacityNote": "Potenza totale del progetto",
+          "projectStatus": "In fase di realizzazione",
+          "client": "",
+          "projectManager": "",
+          "about": "Progetto fotovoltaico in fase di realizzazione a Iepuresti, con una potenza totale di 178 MW.",
+          "description": "I team di Greentech si occupano dell'installazione delle strutture di supporto e dei moduli fotovoltaici.",
+          "scope": [
+            {
+              "title": "Logistica di installazione",
+              "description": "I materiali sono stati ricevuti, smistati e distribuiti per aree al fine di ridurre le movimentazioni superflue. I fronti sono stati preparati nell'ordine necessario per il montaggio meccanico."
+            },
+            {
+              "title": "Strutture di sostegno",
+              "description": "I componenti metallici sono stati assemblati e allineati secondo la configurazione prevista dal progetto. Le squadre hanno verificato la posizione delle file e dei fissaggi prima dell’installazione dei moduli."
+            },
+            {
+              "title": "Installazione dei moduli",
+              "description": "I moduli fotovoltaici sono stati posizionati e fissati sulle strutture completate, prestando attenzione alla movimentazione e all’uniformità del montaggio. Le aree completate sono state progressivamente rese disponibili per le successive verifiche."
+            },
+            {
+              "title": "Controlli meccanici",
+              "description": "Il controllo finale ha riguardato il serraggio degli elementi, l’allineamento e l’integrità dei componenti installati. Le non conformità individuate sono state corrette prima della consegna dei frontali."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/valter-maracineanu/valter-maracineanu-01.webp",
+              "alt": "Valter Maracineanu, Romania - foto n. 1 dal cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/valter-maracineanu/valter-maracineanu-02.webp",
+              "alt": "Valter Maracineanu, Romania - foto n. 2 dal cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/valter-maracineanu/representative-03.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/valter-maracineanu/representative-04.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/valter-maracineanu/representative-05.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/valter-maracineanu/representative-06.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/valter-maracineanu/representative-07.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/valter-maracineanu/representative-08.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/valter-maracineanu/representative-09.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/valter-maracineanu/representative-10.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "ottana-italy",
+          "order": 6,
+          "enabled": true,
+          "category": "Installazione meccanica",
+          "title": "Ottana, Italia",
+          "image": "/projects/portfolio-2026/ottana/ottana-01.webp",
+          "alt": "Progetto fotovoltaico Ottana, Italia",
+          "projectDate": "2025",
+          "projectCategory": "Impianti meccanici",
+          "location": "Ottana, Sardegna, Italia",
+          "capacity": "89.13 MW",
+          "capacityKw": "89,130 kW",
+          "capacityNote": "Potenza totale del progetto",
+          "projectStatus": "Completato",
+          "client": "Circet S.p.A.",
+          "projectManager": "",
+          "about": "Pacchetto meccanico completo per un parco fotovoltaico da 89,13 MW in Sardegna.",
+          "description": "I lavori hanno compreso la posa dei pali, l’assemblaggio delle strutture e l’installazione dei moduli fino al completamento meccanico.",
+          "scope": [
+            {
+              "title": "Tracciamento e posa di pali",
+              "description": "La posizione delle file è stata tracciata sul terreno e i pali sono stati installati con macchinari specifici. Le quote e l’allineamento sono stati controllati man mano che i lavori procedevano, al fine di preparare le strutture."
             },
             {
               "title": "Montaggio delle strutture",
-              "description": "Sono state assemblate le strutture di sostegno per l’installazione dei moduli."
-            },
-            {
-              "title": "Collegamento delle apparecchiature",
-              "description": "Le apparecchiature e i circuiti sono stati collegati e verificati in loco."
-            }
-          ],
-          "gallery": [
-            {
-              "src": "/projects/giurgiu/giurgiu-01.jpg",
-              "alt": "File di pannelli fotovoltaici nel progetto di Giurgiu"
-            },
-            {
-              "src": "/projects/giurgiu/giurgiu-02.jpg",
-              "alt": "Foto ufficiale tratta dal sito web del progetto fotovoltaico di Giurgiu"
-            }
-          ],
-          "sourceUrl": "https://greentechpro.ro/portfolio/giurgiu-romania/"
-        },
-        {
-          "id": "craiova-romania",
-          "order": 4,
-          "enabled": true,
-          "category": "Parco fotovoltaico",
-          "title": "Craiova, Romania",
-          "image": "/projects/craiova/craiova-01.jpg",
-          "alt": "Vista aerea del sito fotovoltaico di Craiova",
-          "projectDate": "Gennaio 2025",
-          "projectCategory": "Parco fotovoltaico",
-          "location": "Craiova, Romania",
-          "capacity": null,
-          "capacityKw": null,
-          "capacityNote": "Non è specificato pubblicamente",
-          "about": "Abbiamo eseguito lavori meccanici ed elettrici per il progetto fotovoltaico di Craiova.",
-          "description": "I lavori hanno compreso l'assemblaggio delle strutture, l'installazione dei moduli e la realizzazione degli impianti elettrici.",
-          "scope": [
-            {
-              "title": "Strutture di montaggio",
-              "description": "Gli elementi metallici sono stati assemblati e allineati secondo lo schema di progetto."
-            },
-            {
-              "title": "Moduli fotovoltaici",
-              "description": "I moduli sono stati montati e fissati sulle strutture predisposte."
-            },
-            {
-              "title": "Impianti elettrici",
-              "description": "Il cablaggio e i collegamenti elettrici hanno completato i lavori meccanici."
-            }
-          ],
-          "gallery": [
-            {
-              "src": "/projects/craiova/craiova-01.jpg",
-              "alt": "File di strutture e moduli nel progetto fotovoltaico di Craiova"
-            },
-            {
-              "src": "/projects/craiova/craiova-02.webp",
-              "alt": "Lavori di costruzione di impianti fotovoltaici nel cantiere di Craiova"
-            },
-            {
-              "src": "/projects/craiova/craiova-03.webp",
-              "alt": "Foto ufficiale del progetto a Craiova"
-            }
-          ],
-          "sourceUrl": "https://greentechpro.ro/portfolio/craiova-romania/"
-        },
-        {
-          "id": "bologna-italy",
-          "order": 5,
-          "enabled": true,
-          "category": "Parco fotovoltaico",
-          "title": "Bologna, Italia",
-          "image": "/projects/bologna/bologna-01.webp",
-          "alt": "Membri del team Greentech nel cantiere di Bologna",
-          "projectDate": "Novembre 2024",
-          "projectCategory": "Parco fotovoltaico",
-          "location": "Bologna, Italia",
-          "capacity": null,
-          "capacityKw": null,
-          "capacityNote": "Non è specificato pubblicamente",
-          "about": "Abbiamo coordinato i lavori di montaggio degli impianti fotovoltaici e degli impianti elettrici per il progetto di Bologna.",
-          "description": "Il team di Bologna ha seguito lo svolgimento dei lavori meccanici ed elettrici durante la fase di esecuzione in cantiere.",
-          "scope": [
-            {
-              "title": "Organizzazione del cantiere",
-              "description": "Le aree di installazione sono state preparate per un'esecuzione ordinata e per fasi."
+              "description": "I sottogruppi metallici sono stati distribuiti, montati e regolati su ogni facciata. La verifica della geometria ha preceduto la consegna delle file alle squadre incaricate dei moduli."
             },
             {
               "title": "Installazione di impianti fotovoltaici",
-              "description": "Le strutture e i moduli sono stati installati secondo il progetto esecutivo."
+              "description": "I moduli sono stati installati e fissati sulle strutture sottoposte a collaudo meccanico. La movimentazione controllata e l’ispezione visiva hanno ridotto il rischio di danni durante i lavori."
             },
             {
-              "title": "Cablaggio e collegamenti",
-              "description": "I tracciati, i cavi e i collegamenti sono stati realizzati nelle aree in cui i lavori meccanici sono stati completati."
+              "title": "Completamento delle opere meccaniche",
+              "description": "Le squadre hanno ispezionato le file per verificare i fissaggi, l’allineamento e i componenti rimanenti. Le aree chiuse sono state consegnate con relativa documentazione per il proseguimento dei lavori previsti dal progetto."
             }
           ],
           "gallery": [
             {
-              "src": "/projects/bologna/bologna-01.webp",
-              "alt": "Lavori di montaggio nel progetto fotovoltaico di Bologna"
+              "src": "/projects/portfolio-2026/ottana/ottana-01.webp",
+              "alt": "Ottana, Italia - foto n. 1 del cantiere"
             },
             {
-              "src": "/projects/bologna/bologna-02.webp",
-              "alt": "Lavori di costruzione di impianti fotovoltaici nel cantiere di Bologna"
+              "src": "/projects/portfolio-2026/ottana/ottana-02.webp",
+              "alt": "Ottana, Italia - foto n. 2 del cantiere"
             },
             {
-              "src": "/projects/bologna/bologna-03.webp",
-              "alt": "Foto ufficiale del progetto a Bologna"
+              "src": "/projects/portfolio-2026/ottana/ottana-03.webp",
+              "alt": "Ottana, Italia - foto n. 3 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/ottana/representative-04.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/ottana/representative-05.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/ottana/representative-06.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/ottana/representative-07.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/ottana/representative-08.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/ottana/representative-09.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/ottana/representative-10.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 10",
+              "representative": true
             }
           ],
-          "sourceUrl": "https://greentechpro.ro/portfolio/bologna-italy/"
+          "sourceUrl": ""
         },
         {
-          "id": "cagliari-italy",
-          "order": 6,
+          "id": "codigoro-italy",
+          "order": 7,
           "enabled": true,
-          "category": "Parco fotovoltaico",
-          "title": "Cagliari, Italia",
-          "image": "/projects/cagliari/cagliari-01.webp",
-          "alt": "Vista aerea del parco fotovoltaico di Cagliari",
-          "projectDate": "Maggio 2023",
-          "projectCategory": "Parco fotovoltaico",
-          "location": "Cagliari, Italia",
-          "capacity": null,
-          "capacityKw": null,
-          "capacityNote": "Non è specificato pubblicamente",
-          "about": "Abbiamo eseguito l’installazione elettrica e il montaggio meccanico per il progetto fotovoltaico a Cagliari.",
-          "description": "I lavori a Cagliari hanno combinato il montaggio delle strutture e dei moduli con la posa dei cavi e le verifiche elettriche.",
+          "category": "Installazione meccanica",
+          "title": "Codigoro, Italia",
+          "image": "/projects/portfolio-2026/codigoro/codigoro-01.webp",
+          "alt": "Progetto fotovoltaico a Codigoro, Italia",
+          "projectDate": "2024",
+          "projectCategory": "Realizzazione di un parco fotovoltaico",
+          "location": "Codigoro, Italia",
+          "capacity": "77.30 MW",
+          "capacityKw": "77,300 kW",
+          "capacityNote": "Potenza totale del progetto",
+          "projectStatus": "Completato",
+          "client": "CAF Italia",
+          "projectManager": "",
+          "about": "Progetto fotovoltaico da 77,30 MW realizzato a Codigoro.",
+          "description": "Il team di Greentech ha eseguito l'installazione delle strutture di sostegno e dei moduli fotovoltaici.",
           "scope": [
             {
-              "title": "Installazione meccanica",
-              "description": "Le strutture sono state assemblate e i moduli sono stati fissati sulle file predisposte."
+              "title": "Organizzazione dei materiali",
+              "description": "Le strutture e i moduli sono stati distribuiti sulle facciate in base alla sequenza di esecuzione. I percorsi interni e i punti di stoccaggio sono stati mantenuti ben definiti per le squadre di montaggio."
             },
             {
-              "title": "Posa dei cavi",
-              "description": "I cavi sono stati distribuiti e posati lungo i percorsi stabiliti nel progetto."
+              "title": "Installazione delle strutture",
+              "description": "Gli elementi di sostegno sono stati assemblati, posizionati e allineati lungo le file predisposte. I fissaggi sono stati controllati prima di caricare la struttura con i moduli."
             },
             {
-              "title": "Controlli elettrici",
-              "description": "I collegamenti realizzati sono stati ispezionati prima della consegna delle aree di lavoro."
+              "title": "Installazione dei moduli",
+              "description": "I pannelli sono stati movimentati e installati secondo la sequenza stabilita per ciascuna zona. Al termine di ogni fila, le squadre hanno verificato il corretto posizionamento e l’integrità estetica."
+            },
+            {
+              "title": "Controllo dei lavori",
+              "description": "Le ispezioni finali hanno riguardato l’allineamento, il serraggio dei componenti e la completezza dell’installazione. Le osservazioni raccolte sul campo sono state risolte prima della consegna meccanica."
             }
           ],
           "gallery": [
             {
-              "src": "/projects/cagliari/cagliari-01.webp",
-              "alt": "File di pannelli nel progetto fotovoltaico di Cagliari"
+              "src": "/projects/portfolio-2026/codigoro/codigoro-01.webp",
+              "alt": "Codigoro, Italia - foto n. 1 dal cantiere"
             },
             {
-              "src": "/projects/cagliari/cagliari-02.webp",
-              "alt": "Lavori di installazione di impianti fotovoltaici nel cantiere di Cagliari"
+              "src": "/projects/portfolio-2026/codigoro/codigoro-02.webp",
+              "alt": "Codigoro, Italia - foto n. 2 dal cantiere"
             },
             {
-              "src": "/projects/cagliari/cagliari-03.webp",
-              "alt": "Foto ufficiale del progetto a Cagliari"
+              "src": "/projects/portfolio-2026/codigoro/codigoro-03.webp",
+              "alt": "Codigoro, Italia - foto n. 3 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/codigoro/representative-04.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/codigoro/representative-05.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/codigoro/representative-06.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/codigoro/representative-07.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/codigoro/representative-08.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/codigoro/representative-09.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/codigoro/representative-10.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 10",
+              "representative": true
             }
           ],
-          "sourceUrl": "https://greentechpro.ro/portfolio/cagliari-italy/"
+          "sourceUrl": ""
+        },
+        {
+          "id": "sunkingdom-giurgiu-romania",
+          "order": 8,
+          "enabled": true,
+          "category": "Installazione meccanica",
+          "title": "Sunkingdom - Giurgiu, Romania",
+          "image": "/projects/portfolio-2026/giurgiu/giurgiu-01.webp",
+          "alt": "Progetto fotovoltaico Sunkingdom - Giurgiu, Romania",
+          "projectDate": "2024",
+          "projectCategory": "Impianti meccanici",
+          "location": "Giurgiu, Romania",
+          "capacity": "74.33 MW",
+          "capacityKw": "74,330 kW",
+          "capacityNote": "Potenza totale del progetto",
+          "projectStatus": "Completato",
+          "client": "",
+          "projectManager": "Tanase Constantin",
+          "about": "Installazione meccanica per un parco da 74,33 MW dotato di strutture di inseguimento monoassiali.",
+          "description": "I lavori hanno riguardato le strutture dei tracker, la calibrazione, l’installazione dei moduli e i controlli di qualità.",
+          "scope": [
+            {
+              "title": "Strutture di inseguimento",
+              "description": "I componenti del sistema di inseguimento monoassiale sono stati distribuiti e assemblati in file. La posizione degli elementi mobili è stata monitorata durante l'installazione."
+            },
+            {
+              "title": "Regolazioni e calibrazione",
+              "description": "I gruppi sono stati allineati e regolati per garantire un movimento uniforme, senza interferenze tra i componenti. Le verifiche meccaniche sono state effettuate prima del montaggio dei moduli."
+            },
+            {
+              "title": "Moduli fotovoltaici",
+              "description": "I moduli sono stati fissati sulle strutture di inseguimento preparate, rispettando l'ordine di installazione delle file. Ogni fase è stata accompagnata da operazioni di movimentazione e controllo visivo."
+            },
+            {
+              "title": "Ispezione e consegna",
+              "description": "I team hanno verificato i fissaggi, l’allineamento e il funzionamento meccanico delle aree realizzate. Le file conformi sono state progressivamente consegnate alle discipline successive."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/giurgiu/giurgiu-01.webp",
+              "alt": "Sunkingdom - Giurgiu, Romania - foto n. 1 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/giurgiu/giurgiu-02.webp",
+              "alt": "Sunkingdom - Giurgiu, Romania - foto n. 2 dal cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/giurgiu/representative-03.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/giurgiu/representative-04.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/giurgiu/representative-05.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/giurgiu/representative-06.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/giurgiu/representative-07.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/giurgiu/representative-08.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/giurgiu/representative-09.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/giurgiu/representative-10.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "pielesti-robanesti-craiova-romania",
+          "order": 9,
+          "enabled": true,
+          "category": "Installazione meccanica",
+          "title": "Pielesti & Robanesti - Craiova, Romania",
+          "image": "/projects/portfolio-2026/craiova/craiova-01.webp",
+          "alt": "Progetto fotovoltaico Pielesti & Robanesti - Craiova, Romania",
+          "projectDate": "2024",
+          "projectCategory": "Impianti meccanici",
+          "location": "Pielesti e Robanesti, provincia di Dolj, Romania",
+          "capacity": "59.89 MW",
+          "capacityKw": "59,890 kW",
+          "capacityNote": "Potenza totale del progetto",
+          "projectStatus": "Completato",
+          "client": "",
+          "projectManager": "Dobra Alexandru",
+          "about": "Due parchi adiacenti, realizzati come un unico cantiere nella provincia di Dolj.",
+          "description": "Oltre 100 persone hanno lavorato durante l'inverno alla realizzazione di pali, strutture fisse, moduli e al completamento delle opere meccaniche.",
+          "scope": [
+            {
+              "title": "Fondazione e pali di fondazione",
+              "description": "I lavori sono iniziati con il tracciamento e l’installazione dei pali di fondazione nei due cantieri. Le fasi di lavoro sono state adattate alle condizioni del terreno e all’accessibilità dei macchinari."
+            },
+            {
+              "title": "Strutture fisse",
+              "description": "Le strutture metalliche sono state preassemblate, montate e allineate sulle facciate predisposte. Il controllo delle quote ha garantito la continuità delle file prima della fase successiva."
+            },
+            {
+              "title": "Installazione dei moduli",
+              "description": "I moduli fotovoltaici sono stati distribuiti e installati man mano che le strutture venivano collaudate dal punto di vista meccanico. Le squadre hanno lavorato per fasi, in modo da mantenere le aree in ordine e accessibili."
+            },
+            {
+              "title": "Accettazione meccanica",
+              "description": "Le file completate sono state ispezionate per verificare il fissaggio, l’allineamento e l’integrità dei componenti. I punti rimanenti sono stati corretti prima della consegna dei lavori."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/craiova/craiova-01.webp",
+              "alt": "Pielesti & Robanesti - Craiova, Romania - foto n. 1 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/craiova/craiova-02.webp",
+              "alt": "Pielesti & Robanesti - Craiova, Romania - foto n. 2 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/craiova/craiova-03.webp",
+              "alt": "Pielesti & Robanesti - Craiova, Romania - foto n. 3 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/craiova/representative-04.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/craiova/representative-05.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/craiova/representative-06.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/craiova/representative-07.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/craiova/representative-08.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/craiova/representative-09.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/craiova/representative-10.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "anguillara-italy",
+          "order": 10,
+          "enabled": true,
+          "category": "Installazione meccanica",
+          "title": "Anguillara, Italia",
+          "image": "/projects/portfolio-2026/anguillara/anguillara-01.webp",
+          "alt": "Progetto fotovoltaico ad Anguillara, Italia",
+          "projectDate": "2023",
+          "projectCategory": "Realizzazione di un parco fotovoltaico",
+          "location": "Anguillara, Italia",
+          "capacity": "51.22 MW",
+          "capacityKw": "51,220 kW",
+          "capacityNote": "Potenza totale del progetto",
+          "projectStatus": "Completato",
+          "client": "",
+          "projectManager": "",
+          "about": "Parco fotovoltaico da 51,22 MW incluso nel portafoglio di Greentech in Italia.",
+          "description": "I lavori di Greentech hanno compreso l'assemblaggio delle strutture e l'installazione dei moduli fotovoltaici.",
+          "scope": [
+            {
+              "title": "Preparazione dell'installazione",
+              "description": "I materiali sono stati organizzati per aree e i pannelli frontali sono stati controllati prima dell’inizio del montaggio. La sequenza di lavoro è stata pianificata in modo da ridurre gli spostamenti e le operazioni di movimentazione ripetute."
+            },
+            {
+              "title": "Strutture metalliche",
+              "description": "Gli elementi di sostegno sono stati montati e allineati secondo le file previste dal progetto. Le squadre hanno verificato i fissaggi e la geometria prima dell’installazione dei moduli."
+            },
+            {
+              "title": "Moduli fotovoltaici",
+              "description": "I pannelli sono stati posizionati e fissati sulle strutture predisposte, con ispezione visiva a montaggio ultimato. I lavori sono stati eseguiti per settori per garantire una consegna ben definita."
+            },
+            {
+              "title": "Verifica e chiusura",
+              "description": "L'ultima fase ha previsto il controllo dei fissaggi, l'allineamento delle file e il completamento degli elementi mancanti. Le aree conformi sono state preparate per il collaudo meccanico."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/anguillara/anguillara-01.webp",
+              "alt": "Anguillara, Italia - foto n. 1 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/anguillara/anguillara-02.webp",
+              "alt": "Anguillara, Italia - foto n. 2 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/anguillara/representative-03.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/anguillara/representative-04.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/anguillara/representative-05.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/anguillara/representative-06.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/anguillara/representative-07.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/anguillara/representative-08.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/anguillara/representative-09.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/anguillara/representative-10.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "marconi-italy",
+          "order": 11,
+          "enabled": true,
+          "category": "Installazione meccanica",
+          "title": "Marconi, Italia",
+          "image": "/projects/portfolio-2026/marconi/marconi-01.webp",
+          "alt": "Progetto fotovoltaico Marconi, Italia",
+          "projectDate": "2024",
+          "projectCategory": "Impianti meccanici",
+          "location": "Montalto di Castro, Lazio, Italia",
+          "capacity": "49.52 MW",
+          "capacityKw": "49,520 kW",
+          "capacityNote": "Potenza totale del progetto",
+          "projectStatus": "Completato",
+          "client": "Circet S.p.A.",
+          "projectManager": "Valentin Cotoi",
+          "about": "Progetto meccanico da 49,52 MW realizzato a Montalto di Castro, nella regione Lazio.",
+          "description": "I team hanno gestito l’installazione dei pali, l’assemblaggio delle strutture e il montaggio dei moduli.",
+          "scope": [
+            {
+              "title": "Installazione dei pali",
+              "description": "I piloni sono stati posizionati in base al tracciamento e installati nell'ordine delle facciate disponibili. Le misurazioni intermedie hanno garantito la corretta preparazione della struttura metallica."
+            },
+            {
+              "title": "Strutture di sostegno",
+              "description": "I componenti sono stati assemblati e allineati su ogni fila, verificando i collegamenti meccanici. Le file collaudate sono state rilasciate in modo graduale per i moduli."
+            },
+            {
+              "title": "Installazione dei moduli",
+              "description": "I moduli fotovoltaici sono stati trasportati sul posto, installati e sottoposti a controllo visivo. L'organizzazione delle squadre ha consentito di lavorare contemporaneamente su più aree senza che i materiali si mescolassero."
+            },
+            {
+              "title": "Completamento meccanico",
+              "description": "L'ispezione finale ha verificato l'allineamento, le coppie di serraggio e la completezza dei gruppi. Le anomalie riscontrate sono state risolte prima della consegna definitiva del pacchetto meccanico."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/marconi/marconi-01.webp",
+              "alt": "Marconi, Italia - foto n. 1 dal cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/marconi/marconi-02.webp",
+              "alt": "Marconi, Italia - foto n. 2 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/marconi/marconi-03.webp",
+              "alt": "Marconi, Italia - foto n. 3 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/marconi/representative-04.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/marconi/representative-05.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/marconi/representative-06.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/marconi/representative-07.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/marconi/representative-08.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/marconi/representative-09.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/marconi/representative-10.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "sandalia-cagliari-italy",
+          "order": 12,
+          "enabled": true,
+          "category": "Installazione meccanica",
+          "title": "Sandalia - Cagliari, Italia",
+          "image": "/projects/portfolio-2026/sandalia/sandalia-01.webp",
+          "alt": "Progetto fotovoltaico Sandalia - Cagliari, Italia",
+          "projectDate": "2023",
+          "projectCategory": "Realizzazione di un parco fotovoltaico",
+          "location": "Cagliari, Sardegna, Italia",
+          "capacity": "45.40 MW",
+          "capacityKw": "45,400 kW",
+          "capacityNote": "Potenza totale del progetto",
+          "projectStatus": "Completato",
+          "client": "",
+          "projectManager": "",
+          "about": "Progetto fotovoltaico da 45,40 MW realizzato nella zona di Cagliari, in Sardegna.",
+          "description": "Greentech ha provveduto all'installazione delle strutture di sostegno e dei moduli fotovoltaici.",
+          "scope": [
+            {
+              "title": "Distribuzione dei componenti",
+              "description": "Le strutture e i moduli sono stati disposti per zone in modo da garantire un flusso continuo di montaggio. Gli spazi di lavoro sono stati mantenuti accessibili per le squadre e le attrezzature."
+            },
+            {
+              "title": "Assemblaggio meccanico",
+              "description": "Le strutture di sostegno sono state montate e regolate sulle file disponibili. I fissaggi e la posizione dei gruppi sono stati verificati prima del carico."
+            },
+            {
+              "title": "Installazione dei pannelli",
+              "description": "I moduli sono stati maneggiati con cura e fissati alle strutture ricevute. Ogni settore completato è stato ispezionato per verificarne l'uniformità e individuare eventuali componenti danneggiati."
+            },
+            {
+              "title": "Trasmissione meccanica",
+              "description": "Le squadre hanno completato i lavori nei punti rimanenti e hanno verificato la completezza delle file. I lavori terminati sono stati preparati per il proseguimento delle fasi successive in cantiere."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/sandalia/sandalia-01.webp",
+              "alt": "Sandalia - Cagliari, Italia - foto n. 1 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/sandalia/sandalia-02.webp",
+              "alt": "Sandalia - Cagliari, Italia - foto n. 2 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/sandalia/sandalia-03.webp",
+              "alt": "Sandalia - Cagliari, Italia - foto n. 3 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/sandalia/representative-04.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sandalia/representative-05.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sandalia/representative-06.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sandalia/representative-07.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sandalia/representative-08.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sandalia/representative-09.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sandalia/representative-10.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "pontinia-italy",
+          "order": 13,
+          "enabled": true,
+          "category": "Installazione meccanica",
+          "title": "Pontinia, Italia",
+          "image": "/projects/portfolio-2026/pontinia/pontinia-01.webp",
+          "alt": "Progetto fotovoltaico Pontinia, Italia",
+          "projectDate": "2023",
+          "projectCategory": "Realizzazione di un parco fotovoltaico",
+          "location": "Pontinia, Italia",
+          "capacity": "35.60 MW",
+          "capacityKw": "35,600 kW",
+          "capacityNote": "Potenza totale del progetto",
+          "projectStatus": "Completato",
+          "client": "",
+          "projectManager": "",
+          "about": "Parco fotovoltaico da 35,60 MW realizzato in Italia.",
+          "description": "Il pacchetto Greentech comprendeva il montaggio delle strutture e l’installazione dei moduli fotovoltaici.",
+          "scope": [
+            {
+              "title": "Pianificazione dei cantieri",
+              "description": "Le aree di installazione sono state aperte gradualmente, man mano che i materiali e gli accessi diventavano disponibili. Questa sequenza ha garantito un flusso ben definito tra la preparazione, le strutture e i moduli."
+            },
+            {
+              "title": "Impianti fotovoltaici",
+              "description": "Gli elementi metallici sono stati assemblati e allineati in cantiere. Il controllo meccanico intermedio ha preceduto la consegna di ogni fila al team addetto ai moduli."
+            },
+            {
+              "title": "Installazione dei moduli",
+              "description": "I moduli sono stati trasportati in loco, installati e fissati secondo la sequenza di lavoro prevista. Durante la movimentazione è stata garantita l’integrità estetica dei componenti."
+            },
+            {
+              "title": "Ispezioni finali",
+              "description": "Le file realizzate sono state ispezionate per verificare l'allineamento e i fissaggi. Gli interventi correttivi sono stati raccolti e completati prima del collaudo meccanico."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/pontinia/pontinia-02.webp",
+              "alt": "Pontinia, Italia - foto n. 2 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/pontinia/representative-02.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 2",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/pontinia/representative-03.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/pontinia/representative-04.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/pontinia/representative-05.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/pontinia/representative-06.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/pontinia/representative-07.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/pontinia/representative-08.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/pontinia/representative-09.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/pontinia/representative-10.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "sole-italy",
+          "order": 14,
+          "enabled": true,
+          "category": "Installazione meccanica",
+          "title": "Sole, Italia",
+          "image": "/projects/portfolio-2026/sole/sole-01.webp",
+          "alt": "Progetto fotovoltaico Sole, Italia",
+          "projectDate": "2024",
+          "projectCategory": "Impianti meccanici",
+          "location": "Tuscania, Lazio, Italia",
+          "capacity": "33.80 MW",
+          "capacityKw": "33,800 kW",
+          "capacityNote": "Potenza totale del progetto",
+          "projectStatus": "Completato",
+          "client": "Circet S.p.A.",
+          "projectManager": "Valentin Cotoi",
+          "about": "Progetto meccanico da 33,80 MW realizzato a Tuscania, nella regione Lazio.",
+          "description": "I lavori hanno compreso la realizzazione dei pali di fondazione, delle strutture di sostegno e l'installazione dei moduli fotovoltaici.",
+          "scope": [
+            {
+              "title": "Posa di pali",
+              "description": "Le squadre hanno posizionato e installato i pali sulla base dei tracciati sul terreno. Le verifiche di posizione hanno consentito di passare in modo ordinato al montaggio delle strutture."
+            },
+            {
+              "title": "Montaggio strutturale",
+              "description": "Le strutture metalliche sono state assemblate, allineate e fissate sulle file predisposte. I gruppi sono stati sottoposti a controlli meccanici prima del montaggio dei moduli."
+            },
+            {
+              "title": "Installazione dei moduli",
+              "description": "I moduli fotovoltaici sono stati installati in successione, prestando attenzione alla movimentazione e all’uniformità delle file. Le aree completate sono state lasciate libere per consentire l’ispezione."
+            },
+            {
+              "title": "Controllo qualità",
+              "description": "Le ispezioni hanno verificato la completezza dell’installazione, i fissaggi e l’integrità visiva. I team hanno completato le osservazioni prima della consegna del pacchetto meccanico."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/sole/sole-01.webp",
+              "alt": "Sole, Italia - foto n. 1 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/sole/representative-02.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 2",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sole/representative-03.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sole/representative-04.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sole/representative-05.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sole/representative-06.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sole/representative-07.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sole/representative-08.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sole/representative-09.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sole/representative-10.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "celeste-italy",
+          "order": 15,
+          "enabled": true,
+          "category": "Installazione meccanica",
+          "title": "Celeste, Italia",
+          "image": "/projects/portfolio-2026/celeste/celeste-01.webp",
+          "alt": "Progetto fotovoltaico Celeste, Italia",
+          "projectDate": "2024",
+          "projectCategory": "Impianti meccanici",
+          "location": "Viterbo, Lazio, Italia",
+          "capacity": "23.90 MW",
+          "capacityKw": "23,900 kW",
+          "capacityNote": "Potenza totale del progetto",
+          "projectStatus": "Completato",
+          "client": "Circet S.p.A.",
+          "projectManager": "Valentin Cotoi",
+          "about": "Parco fotovoltaico da 23,90 MW realizzato a Viterbo in collaborazione con Circet S.p.A.",
+          "description": "I lavori meccanici hanno riguardato la posa dei pali di fondazione, le strutture e i moduli fotovoltaici.",
+          "scope": [
+            {
+              "title": "Rilevamento e posizionamento",
+              "description": "Le file sono state tracciate sul terreno e i pali sono stati installati lungo i tracciati approvati. Le squadre hanno verificato la posizione degli elementi per limitare le successive regolazioni."
+            },
+            {
+              "title": "Strutture di sostegno",
+              "description": "I componenti metallici sono stati assemblati e allineati secondo la sequenza stabilita. I fissaggi sono stati controllati prima che le file venissero prelevate per i moduli."
+            },
+            {
+              "title": "Moduli fotovoltaici",
+              "description": "I pannelli sono stati trasportati sul posto e montati sulle strutture già completate. Durante i lavori è stata effettuata un'ispezione visiva per individuare rapidamente eventuali problemi."
+            },
+            {
+              "title": "Conclusione dei lavori",
+              "description": "I settori completati sono stati controllati, puliti e preparati per il collaudo. Gli elementi rimanenti e le osservazioni relative alla qualità sono stati risolti in più fasi."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/celeste/celeste-01.webp",
+              "alt": "Celeste, Italia - foto n. 1 dal cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/celeste/celeste-02.webp",
+              "alt": "Celeste, Italia - foto n. 2 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/celeste/representative-03.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/celeste/representative-04.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/celeste/representative-05.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/celeste/representative-06.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/celeste/representative-07.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/celeste/representative-08.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/celeste/representative-09.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/celeste/representative-10.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "bombardia-palencia-spain",
+          "order": 16,
+          "enabled": true,
+          "category": "Installazione meccanica",
+          "title": "Bombardia - Palencia, Spagna",
+          "image": "/projects/portfolio-2026/bombardia/bombardia-01.webp",
+          "alt": "Progetto fotovoltaico Bombardia - Palencia, Spagna",
+          "projectDate": "2024",
+          "projectCategory": "Realizzazione di un parco fotovoltaico",
+          "location": "Palencia, Spagna",
+          "capacity": "22.25 MW",
+          "capacityKw": "22,250 kW",
+          "capacityNote": "Potenza totale del progetto",
+          "projectStatus": "Completato",
+          "client": "Lantania",
+          "projectManager": "",
+          "about": "Progetto fotovoltaico da 22,25 MW realizzato nella provincia di Palencia.",
+          "description": "I team di Greentech hanno installato le strutture di sostegno e i moduli nel sito di Bombardia.",
+          "scope": [
+            {
+              "title": "Preparazione dei settori",
+              "description": "I materiali sono stati distribuiti per zona e l’accesso è stato organizzato per le squadre di montaggio. I cantieri sono stati aperti gradualmente per mantenere il controllo sull’esecuzione dei lavori."
+            },
+            {
+              "title": "Montaggio delle strutture",
+              "description": "Le strutture di sostegno sono state montate e allineate lungo le file disponibili. Il controllo dei fissaggi ha preceduto l’installazione dei moduli fotovoltaici."
+            },
+            {
+              "title": "Installazione dei moduli",
+              "description": "I moduli sono stati movimentati, posizionati e fissati sugli impianti ricevuti. Le squadre hanno garantito un’esecuzione uniforme e la protezione delle superfici attive."
+            },
+            {
+              "title": "Accettazione e riparazioni",
+              "description": "Le ispezioni finali hanno individuato i punti che necessitavano di adeguamenti o integrazioni. Questi sono stati risolti prima della consegna delle aree completate."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/bombardia/bombardia-02.webp",
+              "alt": "Bombardia - Palencia, Spagna - foto n. 2 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/bombardia/bombardia-03.webp",
+              "alt": "Bombardia - Palencia, Spagna - foto n. 3 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/bombardia/representative-03.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/bombardia/representative-04.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/bombardia/representative-05.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/bombardia/representative-06.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/bombardia/representative-07.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/bombardia/representative-08.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/bombardia/representative-09.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/bombardia/representative-10.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "maas-catania-italy",
+          "order": 17,
+          "enabled": true,
+          "category": "Ingegneria civile e meccanica",
+          "title": "MAAS - Catania, Italia",
+          "image": "/projects/portfolio-2026/catania/catania-01.webp",
+          "alt": "Progetto fotovoltaico MAAS - Catania, Italia",
+          "projectDate": "2024",
+          "projectCategory": "Lavori edili e meccanici",
+          "location": "Catania, Sicilia, Italia",
+          "capacity": "22.20 MW",
+          "capacityKw": "22,200 kW",
+          "capacityNote": "Potenza totale del progetto",
+          "projectStatus": "Completato",
+          "client": "Circet S.p.A.",
+          "projectManager": "",
+          "about": "Progetto da 22,20 MW realizzato a Catania, con lavori di ingegneria civile e meccanica eseguiti da Greentech.",
+          "description": "Il pacchetto comprendeva la mobilitazione, la logistica, i lavori di sterro, i pali di fondazione, le strutture e i moduli fotovoltaici.",
+          "scope": [
+            {
+              "title": "Opere civili e logistica",
+              "description": "La mobilitazione ha compreso l’organizzazione del cantiere, la circolazione dei macchinari e la preparazione delle aree di lavoro. I lavori di sterro e la logistica dei materiali sono stati coordinati con le fasi meccaniche."
+            },
+            {
+              "title": "Tracciamento e posa di pali",
+              "description": "Le posizioni delle strutture sono state tracciate sul terreno, dopodiché i pali sono stati installati sulle facciate preparate. Le verifiche intermedie hanno garantito la continuità del montaggio."
+            },
+            {
+              "title": "Strutture e moduli",
+              "description": "Gli elementi metallici sono stati assemblati e allineati, dopodiché sono stati installati i moduli fotovoltaici. Le squadre hanno lavorato per settori per garantire un flusso di lavoro controllato."
+            },
+            {
+              "title": "Verifica e consegna",
+              "description": "Le fasi relative alle opere civili e meccaniche sono state ispezionate man mano che venivano completate. Le osservazioni sono state seguite fino alla chiusura dei lavori e le aree conformi sono state consegnate con relativa documentazione."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/catania/catania-01.webp",
+              "alt": "MAAS - Catania, Italia - foto n. 1 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/catania/catania-02.webp",
+              "alt": "MAAS - Catania, Italia - foto n. 2 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/catania/catania-03.webp",
+              "alt": "MAAS - Catania, Italia - foto n. 3 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/catania/representative-04.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/catania/representative-05.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/catania/representative-06.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/catania/representative-07.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/catania/representative-08.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/catania/representative-09.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/catania/representative-10.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "it003-piombino-italy",
+          "order": 18,
+          "enabled": true,
+          "category": "Installazione meccanica",
+          "title": "IT003 Piombino, Italia",
+          "image": "/projects/portfolio-2026/piombino/piombino-01.webp",
+          "alt": "Progetto fotovoltaico IT003 a Piombino, Italia",
+          "projectDate": "2025",
+          "projectCategory": "Impianti meccanici",
+          "location": "Piombino, Toscana, Italia",
+          "capacity": "22 MW",
+          "capacityKw": "22,000 kW",
+          "capacityNote": "Potenza totale del progetto",
+          "projectStatus": "Completato",
+          "client": "Solarig",
+          "projectManager": "Mario Aurelian Sasu",
+          "about": "Progetto fotovoltaico da 22 MW realizzato a Piombino per Solarig.",
+          "description": "La realizzazione meccanica ha compreso i pali, le strutture e i moduli, con rigorosi controlli di qualità.",
+          "scope": [
+            {
+              "title": "Posizionamento e pali",
+              "description": "Il tracciamento ha definito i punti di riferimento delle file e i pali di guida sono stati installati secondo la sequenza di esecuzione. La loro posizione è stata verificata prima del montaggio degli elementi metallici."
+            },
+            {
+              "title": "Strutture metalliche",
+              "description": "I sottogruppi sono stati distribuiti, assemblati e allineati in cantiere. Il controllo dei fissaggi ha consentito la consegna graduale alle squadre incaricate dei moduli."
+            },
+            {
+              "title": "Moduli fotovoltaici",
+              "description": "I moduli sono stati installati sulle file ricevute meccanicamente, verificandone lo stato durante la movimentazione. Il montaggio è stato organizzato in modo da garantire il libero accesso tra le file."
+            },
+            {
+              "title": "Garanzia di qualità",
+              "description": "I team hanno documentato lo stato di avanzamento dei lavori e verificato l'allineamento, i fissaggi e la completezza dei lavori. I punti individuati sono stati corretti prima della consegna."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/piombino/piombino-01.webp",
+              "alt": "IT003 Piombino, Italia - foto n. 1 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/piombino/piombino-02.webp",
+              "alt": "IT003 Piombino, Italia - foto n. 2 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/piombino/representative-03.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/piombino/representative-04.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/piombino/representative-05.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/piombino/representative-06.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/piombino/representative-07.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/piombino/representative-08.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/piombino/representative-09.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/piombino/representative-10.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "rinnovabili-italy",
+          "order": 19,
+          "enabled": true,
+          "category": "Installazione meccanica",
+          "title": "Energie rinnovabili, Italia",
+          "image": "/projects/portfolio-2026/rinnovabili/rinnovabili-01.webp",
+          "alt": "Progetto fotovoltaico Rinnovabili, Italia",
+          "projectDate": "2024",
+          "projectCategory": "Impianti meccanici",
+          "location": "Montalto di Castro, Lazio, Italia",
+          "capacity": "21.50 MW",
+          "capacityKw": "21,500 kW",
+          "capacityNote": "Potenza totale del progetto",
+          "projectStatus": "Completato",
+          "client": "Circet S.p.A.",
+          "projectManager": "Valentin Cotoi",
+          "about": "Progetto meccanico da 21,50 MW realizzato a Montalto di Castro.",
+          "description": "I lavori sono stati consegnati pronti per la fase elettrica dopo l’installazione dei pali, delle strutture e dei moduli.",
+          "scope": [
+            {
+              "title": "Installazione di pali",
+              "description": "I pali di guida sono stati installati seguendo i punti di riferimento stabiliti sul terreno, man mano che venivano liberati i fronti di lavoro. Le verifiche di posizione hanno preparato le file per le strutture di sostegno."
+            },
+            {
+              "title": "Montaggio e allineamento",
+              "description": "Le strutture sono state montate e regolate per ottenere una geometria uniforme. I fissaggi sono stati controllati prima di passare alla fase successiva."
+            },
+            {
+              "title": "Installazione di impianti fotovoltaici",
+              "description": "I moduli sono stati distribuiti e installati sulle strutture completate, con ispezione visiva costante. Le file sono state chiuse progressivamente per evitare che i lavori rimanenti rimanessero sparsi."
+            },
+            {
+              "title": "Preparazione per la fase elettrica",
+              "description": "Dopo il controllo meccanico, le aree sono state pulite e consegnate per il proseguimento dei lavori di installazione. Le osservazioni relative all'esecuzione sono state risolte prima del rilascio dei fronti di lavoro."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/rinnovabili/rinnovabili-02.webp",
+              "alt": "Rinnovabili, Italia - foto n. 2 dal cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/rinnovabili/representative-02.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 2",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/rinnovabili/representative-03.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/rinnovabili/representative-04.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/rinnovabili/representative-05.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/rinnovabili/representative-06.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/rinnovabili/representative-07.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/rinnovabili/representative-08.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/rinnovabili/representative-09.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/rinnovabili/representative-10.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "volta-italy",
+          "order": 20,
+          "enabled": true,
+          "category": "Installazione meccanica",
+          "title": "Volta, Italia",
+          "image": "/projects/portfolio-2026/volta/volta-01.webp",
+          "alt": "Progetto fotovoltaico Volta, Italia",
+          "projectDate": "2024",
+          "projectCategory": "Impianti meccanici",
+          "location": "Lazio, Italia",
+          "capacity": "21.50 MW",
+          "capacityKw": "21,500 kW",
+          "capacityNote": "Potenza totale del progetto",
+          "projectStatus": "Completato",
+          "client": "Circet S.p.A.",
+          "projectManager": "Valentin Cotoi",
+          "about": "Progetto fotovoltaico da 21,50 MW realizzato nella regione Lazio.",
+          "description": "Greentech ha eseguito l'installazione dei pali, l'assemblaggio delle strutture e il montaggio dei moduli.",
+          "scope": [
+            {
+              "title": "Tracciamento delle file",
+              "description": "I team hanno verificato i punti di riferimento sul terreno e hanno organizzato la sequenza dei cantieri. L'accesso dei macchinari e la distribuzione dei componenti sono stati coordinati con la fase pilota."
+            },
+            {
+              "title": "Pali e strutture",
+              "description": "Sono stati installati i pali, quindi le strutture metalliche sono state assemblate e allineate. Il controllo meccanico intermedio ha ridotto le regolazioni necessarie durante il montaggio dei moduli."
+            },
+            {
+              "title": "Installazione dei pannelli",
+              "description": "I moduli fotovoltaici sono stati installati sulle aree già collaudate, con manipolazione controllata e verifica dei fissaggi. Il lavoro svolto per fasi ha permesso di seguire chiaramente lo stato di avanzamento di ogni fila."
+            },
+            {
+              "title": "Ispezione di chiusura",
+              "description": "L'ultima ispezione ha verificato la completezza, l'allineamento e lo stato estetico dei componenti. Gli interventi correttivi sono stati eseguiti prima della consegna meccanica."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/volta/volta-01.webp",
+              "alt": "Volta, Italia - foto n. 1 dal cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/volta/volta-02.webp",
+              "alt": "Volta, Italia - foto n. 2 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/volta/volta-03.webp",
+              "alt": "Volta, Italia - foto n. 3 del cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/volta/representative-04.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/volta/representative-05.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/volta/representative-06.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/volta/representative-07.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/volta/representative-08.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/volta/representative-09.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/volta/representative-10.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "porto-torres-italy",
+          "order": 21,
+          "enabled": true,
+          "category": "Installazione meccanica",
+          "title": "Porto Torres, Italia",
+          "image": "/projects/portfolio-2026/porto-torres/porto-torres-01.webp",
+          "alt": "Progetto fotovoltaico a Porto Torres, Italia",
+          "projectDate": "2023",
+          "projectCategory": "Realizzazione di un parco fotovoltaico",
+          "location": "Porto Torres, Sardegna, Italia",
+          "capacity": "19.47 MW",
+          "capacityKw": "19,470 kW",
+          "capacityNote": "Potenza totale del progetto",
+          "projectStatus": "Completato",
+          "client": "",
+          "projectManager": "",
+          "about": "Progetto fotovoltaico da 19,47 MW realizzato a Porto Torres, in Sardegna.",
+          "description": "I team di Greentech hanno assemblato le strutture e installato i moduli fotovoltaici.",
+          "scope": [
+            {
+              "title": "Preparazione delle aree",
+              "description": "I cantieri sono stati organizzati in modo da consentire la distribuzione delle strutture e dei moduli. I materiali sono stati posizionati in modo tale che il montaggio potesse procedere senza ostacolare l'accesso."
+            },
+            {
+              "title": "Strutture di sostegno",
+              "description": "I telai metallici sono stati montati, allineati e controllati fila per fila. Le aree conformi sono state consegnate una dopo l’altra per l’installazione dei moduli."
+            },
+            {
+              "title": "Moduli fotovoltaici",
+              "description": "I pannelli sono stati installati e fissati sulle strutture predisposte, con un controllo visivo durante la movimentazione. Le squadre hanno verificato l’uniformità e la completezza delle file."
+            },
+            {
+              "title": "Controllo e collaudo",
+              "description": "L'ispezione finale ha riguardato i fissaggi, l'allineamento e gli elementi ancora da completare. Le osservazioni sono state risolte prima della consegna dell'impianto meccanico."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/porto-torres/porto-torres-01.webp",
+              "alt": "Porto Torres, Italia - foto n. 1 dal cantiere"
+            },
+            {
+              "src": "/projects/portfolio-2026/porto-torres/representative-02.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 2",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/porto-torres/representative-03.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/porto-torres/representative-04.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/porto-torres/representative-05.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/porto-torres/representative-06.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/porto-torres/representative-07.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/porto-torres/representative-08.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/porto-torres/representative-09.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/porto-torres/representative-10.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "sabaudia-italy",
+          "order": 22,
+          "enabled": true,
+          "category": "Installazione meccanica",
+          "title": "Sabaudia, Italia",
+          "image": "/projects/portfolio-2026/sabaudia/sabaudia-01.webp",
+          "alt": "Progetto fotovoltaico a Sabaudia, Italia",
+          "projectDate": "2024",
+          "projectCategory": "Realizzazione di un parco fotovoltaico",
+          "location": "Sabaudia, Italia",
+          "capacity": "10 MW",
+          "capacityKw": "10,000 kW",
+          "capacityNote": "Potenza totale del progetto",
+          "projectStatus": "Completato",
+          "client": "",
+          "projectManager": "",
+          "about": "Progetto fotovoltaico da 10 MW completato a Sabaudia.",
+          "description": "Il pacchetto Greentech comprendeva le strutture di supporto e l’installazione dei moduli fotovoltaici.",
+          "scope": [
+            {
+              "title": "Organizzazione dei lavori",
+              "description": "Le strutture e i moduli sono stati predisposti per settore, nell’ordine di montaggio. Le aree di lavoro sono state mantenute libere per garantire una circolazione sicura e un avanzamento dei lavori facilmente monitorabile."
+            },
+            {
+              "title": "Montaggio strutturale",
+              "description": "Gli elementi di sostegno sono stati assemblati e allineati secondo la configurazione del parco. Le verifiche meccaniche hanno preceduto l'installazione dei pannelli."
+            },
+            {
+              "title": "Installazione dei moduli",
+              "description": "I moduli fotovoltaici sono stati posizionati, fissati e ispezionati dopo l’installazione. Le squadre hanno completato ogni settore prima di passare al fronte di lavoro successivo."
+            },
+            {
+              "title": "Completamento e consegna",
+              "description": "I lavori sono stati controllati per verificarne la completezza, l'allineamento e l'integrità visiva. I punti rimanenti sono stati corretti prima del collaudo meccanico."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/sabaudia/representative-01.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 1",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sabaudia/representative-02.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 2",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sabaudia/representative-03.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sabaudia/representative-04.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sabaudia/representative-05.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sabaudia/representative-06.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sabaudia/representative-07.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sabaudia/representative-08.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sabaudia/representative-09.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sabaudia/representative-10.webp",
+              "alt": "Lavori fotovoltaici Greentech - immagine rappresentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
         }
       ]
     },
@@ -887,7 +2576,7 @@
           "enabled": true,
           "title": "Infrastruttura fotovoltaica",
           "sourceIndex": 0,
-          "body": "Eseguiamo lavori di montaggio meccanico, cablaggio e impianti elettrici per parchi fotovoltaici di grande potenza. Il portafoglio complessivo dei progetti a cui hanno lavorato i nostri team supera 1,5 GW.",
+          "body": "Specializzata nella realizzazione di parchi fotovoltaici, con esperienza in tutta Europa, il team di Greentech Professionals ha contribuito allo sviluppo globale dell'energia rinnovabile, in particolare alla realizzazione di infrastrutture fotovoltaiche per oltre 1,5 GW fino ad oggi.",
           "footnote": ""
         },
         {
@@ -896,16 +2585,16 @@
           "enabled": true,
           "title": "Costruzione di parchi eolici",
           "sourceIndex": 1,
-          "body": "Eseguiamo lavori di ingegneria civile e impianti elettrici per le infrastrutture dei parchi eolici, con procedure chiare in materia di sicurezza e controllo.",
+          "body": "L'azienda Greentech Professionals sviluppa le infrastrutture necessarie alla produzione di energia verde, offrendo servizi di costruzione per parchi eolici secondo elevati standard di qualità e sicurezza.",
           "footnote": ""
         },
         {
           "id": "transmission",
           "order": 3,
           "enabled": true,
-          "title": "Ispezioni e soluzioni elettriche",
+          "title": "Tecnologie e soluzioni fotovoltaiche",
           "sourceIndex": 3,
-          "body": "Ispezioniamo gli impianti elettrici mediante misure, termografia e verifiche PRAM, quindi forniamo rapporti e documentazione tecnica.",
+          "body": "Grazie all’esperienza acquisita, gli specialisti di GreenTech Professionals individuano e offrono le soluzioni più efficienti e innovative per i progetti nel settore fotovoltaico, in linea con le esigenze e gli standard attuali del settore a livello globale.",
           "footnote": ""
         },
         {
@@ -914,7 +2603,7 @@
           "enabled": true,
           "title": "Costruzione di centri dati",
           "sourceIndex": 4,
-          "body": "Eseguiamo lavori per centri dati: allestimento, distribuzione elettrica, ridondanza, raffreddamento e messa in funzione.",
+          "body": "Sosteniamo lo sviluppo delle infrastrutture digitali attraverso servizi di costruzione per centri dati, offrendo soluzioni complete per la realizzazione di progetti moderni, sicuri e affidabili, durante l'intero processo di esecuzione.",
           "footnote": ""
         },
         {
@@ -923,16 +2612,16 @@
           "enabled": true,
           "title": "Manutenzione tecnica",
           "sourceIndex": 5,
-          "body": "Pianifichiamo ispezioni, interventi e riparazioni per la manutenzione degli impianti energetici e industriali.",
+          "body": "Offriamo servizi di manutenzione per infrastrutture energetiche e industriali, garantendo l'efficienza operativa, la sicurezza e la sostenibilità dei progetti attraverso interventi specializzati e soluzioni su misura per ogni esigenza.",
           "footnote": ""
         },
         {
           "id": "future",
           "order": 6,
           "enabled": true,
-          "title": "Energia e infrastrutture",
+          "title": "Costruiamo l'energia del futuro",
           "sourceIndex": 6,
-          "body": "Greentech Professionals riunisce team di ingegneri elettrici, meccanici e civili per progetti realizzati in Romania e in altri mercati europei.",
+          "body": "Con l'obiettivo di accelerare la transizione verso un futuro sostenibile, la missione di Greentech Professionals è quella di sostenere lo sviluppo dell'energia verde attraverso soluzioni innovative, infrastrutture moderne e progetti sostenibili, efficienti e responsabili, pensati per le generazioni future.",
           "footnote": ""
         }
       ]
@@ -1048,7 +2737,7 @@
           "enabled": true,
           "value": "ISO",
           "label": "Certificazioni di qualità",
-          "detail": "Standard applicati per l'organizzazione e il controllo dei lavori.",
+          "detail": "Standard applicati per l’organizzazione e il controllo dei lavori.",
           "icon": "Award"
         },
         {
@@ -1136,7 +2825,7 @@
           "id": "official-sg",
           "author": "S. G.",
           "role": "Recensione di un cliente",
-          "quote": "L’azienda Greentech Professionals ci ha davvero colpiti! Vi ringraziamo per la collaborazione e per i servizi di qualità forniti nel nostro parco fotovoltaico.",
+          "quote": "L'azienda Greentech Professionals ti lascia davvero a bocca aperta! Vi ringraziamo per la collaborazione e per i servizi di qualità forniti nel nostro parco fotovoltaico.",
           "image": "/gallery/solar-installation.webp",
           "imagePosition": "75% 24%",
           "rating": 5,
@@ -1159,23 +2848,23 @@
           "dateLabel": "28 agosto 2025",
           "readTime": "3 minuti",
           "title": "Butimanu: coordinamento dei lavori in un cantiere da 300 MW",
-          "excerpt": "L'installazione elettrica e meccanica su larga scala richiede una pianificazione quotidiana, percorsi chiari e coordinamento tra le squadre.",
+          "excerpt": "L'installazione elettrica e meccanica su larga scala richiede una pianificazione quotidiana, percorsi ben definiti e coordinamento tra i team.",
           "image": "/projects/butimanu/butimanu-02.jpg",
           "alt": "Lavori nel cantiere fotovoltaico di Butimanu",
           "intro": "A Butimanu, i team di Greentech Professionals partecipano ai lavori elettrici e meccanici per un parco fotovoltaico da 300 MW.",
           "sections": [
             {
-              "title": "Lavori coordinati su un cantiere di ampie dimensioni",
+              "title": "Lavori coordinati su un ampio cantiere",
               "paragraphs": [
                 "Oltre 200 professionisti hanno partecipato al progetto, affiancati da un team dirigenziale dedicato al coordinamento delle attività in cantiere.",
                 "La pianificazione giornaliera sincronizza i fronti di lavoro elettrici e meccanici e riduce i colli di bottiglia tra le diverse fasi."
               ]
             },
             {
-              "title": "Dalle strutture all’impianto elettrico",
+              "title": "Dalle strutture all'impianto elettrico",
               "paragraphs": [
                 "I lavori comprendono il montaggio delle strutture e dei moduli, la posa dei cavi e la realizzazione degli impianti elettrici.",
-                "Ogni area viene controllata prima della consegna e lo stato di avanzamento dei lavori viene monitorato insieme alle squadre coinvolte nel progetto."
+                "Ogni area viene controllata prima della consegna e lo stato di avanzamento dei lavori viene monitorato insieme ai team coinvolti nel progetto."
               ]
             }
           ],
@@ -1186,7 +2875,7 @@
             },
             {
               "value": "200+",
-              "label": "Professionisti impegnati nei cantieri"
+              "label": "Professionisti impegnati in cantiere"
             },
             {
               "value": "Butimanu",
@@ -1218,20 +2907,20 @@
           "excerpt": "Accettiamo candidature per ruoli tecnici e di coordinamento nei nostri progetti in Romania e in Europa.",
           "image": "/projects/bologna/bologna-01.webp",
           "alt": "Il team Greentech al lavoro su un progetto fotovoltaico",
-          "intro": "Accettiamo candidature da elettricisti, ingegneri, coordinatori e specialisti con esperienza in progetti nel settore energetico ed edilizio.",
+          "intro": "Accettiamo candidature da parte di elettricisti, ingegneri, coordinatori e specialisti con esperienza in progetti nel settore energetico ed edilizio.",
           "sections": [
             {
               "title": "Lavoro in squadre di cantiere",
               "paragraphs": [
                 "I ruoli possono comprendere attività elettriche, meccaniche, edili o di coordinamento, a seconda del progetto e dell’esperienza del candidato.",
-                "L’esperienza pratica, il rispetto delle procedure di sicurezza e la collaborazione con le altre squadre sono fondamentali in ogni cantiere."
+                "L'esperienza pratica, il rispetto delle procedure di sicurezza e la collaborazione con gli altri team sono fondamentali in ogni cantiere."
               ]
             },
             {
               "title": "Come inviare la candidatura",
               "paragraphs": [
                 "Compilate il modulo di candidatura e allegate il vostro CV, indicando la posizione desiderata e una breve descrizione della vostra esperienza.",
-                "La disponibilità delle posizioni varia in base ai progetti in corso. Il nostro team contatterà i candidati idonei per la fase successiva."
+                "La disponibilità delle posizioni varia in base ai progetti attivi. Il nostro team contatterà i candidati idonei per la fase successiva."
               ]
             }
           ],
@@ -1272,13 +2961,13 @@
           "excerpt": "La visita tecnica ha offerto agli studenti una visione diretta dei lavori in corso in un parco fotovoltaico di grande capacità.",
           "image": "/projects/butimanu/butimanu-03.jpg",
           "alt": "Studenti e membri del team Greentech nel cantiere di Butimanu",
-          "intro": "Gli studenti dell’Università Politecnica hanno visitato il parco fotovoltaico di Butimanu per osservare le fasi di montaggio e l’organizzazione dei lavori in cantiere.",
+          "intro": "Gli studenti dell'Università Politecnica hanno visitato il parco fotovoltaico di Butimanu per osservare le fasi di montaggio e l'organizzazione dei lavori in cantiere.",
           "sections": [
             {
               "title": "La teoria applicata in cantiere",
               "paragraphs": [
                 "La visita ha illustrato la portata del progetto, la sequenza delle operazioni e il nesso tra la documentazione tecnica e l’esecuzione in cantiere.",
-                "Gli studenti hanno potuto osservare come i team elettrici e meccanici coordinino il proprio lavoro sullo stesso cantiere."
+                "Gli studenti hanno potuto osservare come le squadre di elettricisti e meccanici coordinino il proprio lavoro sullo stesso cantiere."
               ]
             },
             {
@@ -1436,16 +3125,16 @@
           "href": "https://www.facebook.com/greentechprofessionals"
         }
       ],
-      "tagline": "Lavori elettrici, meccanici e di ingegneria civile per progetti energetici in Romania e in Europa.",
+      "tagline": "Lavori elettrici, meccanici e edili per progetti energetici in Romania e in Europa.",
       "email": "office@greentechpro.ro",
       "phone": "",
       "address": "Calea Floreasca n. 194, Settore 1, Bucarest",
       "mapUrl": "https://maps.app.goo.gl/4B6ZvpVcABLVJL5DA",
       "copyright": "Greentech Professionals SRL",
       "privacyTitle": "Informativa sulla privacy",
-      "privacyBody": "Greentech Professionals SRL – Informativa sulla privacy Ultimo aggiornamento: giugno 2026\n\n1. Chi siamo\n\nLa presente Informativa sulla privacy descrive le modalità con cui Greentech Professionals SRL raccoglie, utilizza e protegge i dati personali degli utenti quando visitano il sito greentechpro.ro o interagiscono con noi tramite questo sito web.\n\nTitolare del trattamento: Greentech Professionals SRL, Calea Floreasca n. 194, Settore 1, 014472, Bucarest, Romania. E-mail: office@greentechpro.ro. Telefono: +40 727 332 213.\n\nTrattiamo i dati personali in conformità al Regolamento generale sulla protezione dei dati (UE) 2016/679 (GDPR) e alla normativa rumena applicabile.\n\n2. Quali dati raccogliamo\n\nRaccogliamo solo i dati personali che ci fornite volontariamente tramite il modulo di candidatura presente nella nostra pagina “Carriere”. Questi includono: nome completo, indirizzo e-mail, numero di telefono, posizione desiderata, esperienza professionale e qualsiasi curriculum vitae o documento di riferimento che caricate.\n\nSe ci contattate direttamente all’indirizzo office@greentechpro.ro, trattiamo solo le informazioni contenute nella vostra e-mail. Non utilizziamo pixel di tracciamento, strumenti di analisi o qualsiasi altro metodo di raccolta automatica dei dati su questo sito web.\n\n3. Come utilizziamo i vostri dati\n\nI dati trasmessi tramite il modulo presente nella pagina “Carriere” vengono utilizzati esclusivamente per valutare la vostra candidatura per le posizioni vacanti o future, per contattarvi in merito alla vostra candidatura e per la tenuta di un registro interno del processo di reclutamento. Non utilizzeremo i vostri dati per finalità di marketing o per qualsiasi altro scopo senza il vostro consenso esplicito.\n\n4. Base giuridica del trattamento\n\nTrattiamo i vostri dati sulla base del vostro consenso esplicito (art. 6, comma 1, lettera a) del RGPD), prestato quando spuntate la casella relativa al RGPD nel modulo di candidatura. Potete revocare il vostro consenso in qualsiasi momento, contattandoci all’indirizzo office@greentechpro.ro. La revoca del consenso non pregiudica la liceità del trattamento effettuato prima della revoca.\n\n5. Per quanto tempo conserviamo i vostri dati\n\nI dati contenuti nella domanda di assunzione vengono conservati per un periodo massimo di 12 mesi dalla presentazione della stessa. Trascorso tale periodo, i dati vengono cancellati definitivamente, salvo nel caso in cui siate stati assunti; in tal caso, i vostri dati vengono conservati come parte del vostro fascicolo di assunzione, in conformità con la normativa sul lavoro applicabile. Potete richiedere la cancellazione dei dati in qualsiasi momento.\n\n6. A chi comunichiamo i dati\n\nNon vendiamo né comunichiamo i vostri dati a terzi per scopi commerciali. I vostri dati possono essere consultati dal personale interno del dipartimento delle risorse umane e dalla dirigenza coinvolti nel processo di selezione, nonché dal nostro fornitore di servizi di hosting del sito web, che agisce in qualità di responsabile del trattamento dei dati all’interno dello Spazio economico europeo (SEE). Non trasferiamo dati al di fuori del SEE.\n\n7. I vostri diritti\n\nAi sensi del RGPD, avete il diritto di accedere, rettificare, cancellare, limitare o trasferire i vostri dati personali, nonché di opporvi al loro trattamento. Per esercitare uno qualsiasi di questi diritti, contattateci all’indirizzo office@greentechpro.ro. Vi risponderemo entro 30 giorni.\n\nInoltre, potete presentare un reclamo all'ANSPDCP (www.dataprotection.ro), l'autorità rumena di controllo per la protezione dei dati, con sede in B-dul General Gheorghe Magheru n. 28-30, Settore 1, Bucarest.\n\n8. Sicurezza\n\nAdottiamo misure tecniche e organizzative adeguate per proteggere i vostri dati da accessi non autorizzati, perdita o divulgazione. Tutte le trasmissioni di dati su questo sito web sono crittografate tramite HTTPS.\n\n9. Cookie\n\nQuesto sito web utilizza esclusivamente cookie tecnici essenziali, necessari per il suo corretto funzionamento. Non utilizziamo cookie di tracciamento, pubblicitari o di analisi. I cookie essenziali non richiedono il consenso ai sensi della normativa UE applicabile.\n\n10. Modifiche alla presente informativa\n\nÈ possibile che aggiorniamo periodicamente la presente informativa. La data dell’ultima revisione è indicata nella parte superiore di questa pagina. L’ulteriore utilizzo del sito web dopo qualsiasi modifica costituisce accettazione dell’informativa aggiornata.",
+      "privacyBody": "Greentech Professionals SRL – Informativa sulla privacy Ultimo aggiornamento: giugno 2026\n\n1. Chi siamo\n\nLa presente Informativa sulla privacy descrive le modalità con cui Greentech Professionals SRL raccoglie, utilizza e protegge i dati personali degli utenti quando visitano il sito greentechpro.ro o interagiscono con noi tramite questo sito web.\n\nTitolare del trattamento: Greentech Professionals SRL, Calea Floreasca n. 194, Settore 1, 014472, Bucarest, Romania. E-mail: office@greentechpro.ro. Telefono: +40 727 332 213.\n\nTrattiamo i dati personali in conformità al Regolamento generale sulla protezione dei dati (UE) 2016/679 (GDPR) e alla normativa rumena applicabile.\n\n2. Quali dati raccogliamo\n\nRaccogliamo solo i dati personali che ci fornite volontariamente tramite il modulo di candidatura presente nella nostra pagina “Carriere”. Questi includono: nome completo, indirizzo e-mail, numero di telefono, posizione desiderata, esperienza professionale ed eventuali CV o documenti di riferimento che caricate.\n\nSe ci contattate direttamente all’indirizzo office@greentechpro.ro, trattiamo solo le informazioni contenute nella vostra e-mail. Non utilizziamo pixel di tracciamento, strumenti di analisi o qualsiasi altro metodo di raccolta automatica dei dati su questo sito web.\n\n3. Come utilizziamo i vostri dati\n\nI dati trasmessi tramite il modulo nella pagina “Carriere” vengono utilizzati esclusivamente per valutare la vostra candidatura per le posizioni vacanti o future, per contattarvi in merito alla vostra candidatura e per la gestione interna del processo di reclutamento. Non utilizzeremo i vostri dati per finalità di marketing o per qualsiasi altro scopo senza il vostro esplicito consenso.\n\n4. Base giuridica del trattamento\n\nTrattiamo i vostri dati sulla base del vostro consenso esplicito (art. 6, comma 1, lettera a) del RGPD), prestato quando spuntate la casella relativa al RGPD nel modulo di candidatura. Potete revocare il vostro consenso in qualsiasi momento, contattandoci all’indirizzo office@greentechpro.ro. La revoca del consenso non pregiudica la liceità del trattamento effettuato prima della revoca.\n\n5. Per quanto tempo conserviamo i vostri dati\n\nI dati contenuti nella domanda di assunzione vengono conservati per un periodo massimo di 12 mesi dalla data di presentazione. Trascorso tale periodo, i dati vengono cancellati definitivamente, salvo nel caso in cui siate stati assunti; in tal caso, i vostri dati vengono conservati come parte del vostro fascicolo di assunzione, in conformità con la normativa sul lavoro applicabile. Potete richiedere la cancellazione dei dati in qualsiasi momento.\n\n6. A chi comunichiamo i dati\n\nNon vendiamo né comunichiamo i vostri dati a terzi per finalità commerciali. I vostri dati possono essere consultati dal personale interno del dipartimento delle risorse umane e dalla direzione coinvolta nel processo di reclutamento, nonché dal nostro fornitore di servizi di hosting del sito web, che agisce in qualità di responsabile del trattamento dei dati all’interno dello Spazio economico europeo (SEE). Non trasferiamo dati al di fuori del SEE.\n\n7. I vostri diritti\n\nAi sensi del RGPD, avete il diritto di accedere, rettificare, cancellare, limitare o trasferire i vostri dati personali, nonché di opporvi al loro trattamento. Per esercitare uno qualsiasi di questi diritti, contattateci all’indirizzo office@greentechpro.ro. Vi risponderemo entro 30 giorni.\n\nInoltre, potete presentare un reclamo all’ANSPDCP (www.dataprotection.ro), l’autorità rumena di controllo per la protezione dei dati, con sede in B-dul General Gheorghe Magheru n. 28-30, Settore 1, Bucarest.\n\n8. Sicurezza\n\nApplichiamo misure tecniche e organizzative adeguate per proteggere i vostri dati da accessi non autorizzati, perdita o divulgazione. Tutte le trasmissioni di dati su questo sito web sono crittografate tramite HTTPS.\n\n9. Cookie\n\nQuesto sito web utilizza esclusivamente cookie tecnici essenziali, necessari per il suo corretto funzionamento. Non utilizziamo cookie di tracciamento, pubblicitari o di analisi. I cookie essenziali non richiedono il consenso ai sensi della normativa UE applicabile.\n\n10. Modifiche alla presente informativa\n\nÈ possibile che aggiorniamo periodicamente la presente informativa. La data dell’ultima revisione è indicata nella parte superiore di questa pagina. L’ulteriore utilizzo del sito web dopo qualsiasi modifica costituisce accettazione dell’informativa aggiornata.",
       "termsTitle": "Termini e condizioni",
-      "termsBody": "Greentech Professionals SRL – Termini e condizioni Ultimo aggiornamento: giugno 2026\n\n1. Informazioni generali\n\nI presenti Termini e condizioni regolano l’utilizzo da parte vostra del sito web greentechpro.ro, gestito da Greentech Professionals SRL, Calea Floreasca n. 194, Settore 1, 014472, Bucarest, Romania (numero di iscrizione al registro delle imprese RO46635117 – J40/15653/2022). Accedendo a questo sito web, l’utente accetta i presenti termini.\n\n2. Finalità del sito web\n\nIl presente sito web è una piattaforma di presentazione che fornisce informazioni su Greentech Professionals SRL, i suoi servizi, i progetti e le opportunità di carriera. Esso non costituisce un’offerta di vendita, un contratto o una proposta commerciale vincolante.\n\n3. Proprietà intellettuale\n\nL’intero contenuto del presente sito web, inclusi testi, immagini, loghi, elementi grafici e documenti, è di proprietà di Greentech Professionals SRL o dei suoi fornitori di contenuti ed è protetto dalla legislazione applicabile in materia di diritti d’autore e proprietà intellettuale. Non è consentito riprodurre, distribuire o utilizzare alcun contenuto senza il nostro previo consenso scritto.\n\n4. Candidature per posizioni lavorative\n\nInviando una candidatura tramite la nostra pagina «Carriere», confermate che tutte le informazioni fornite sono corrette e complete. L’invio di una candidatura non crea alcun obbligo di assunzione per nessuna delle parti. Ci riserviamo il diritto di respingere qualsiasi candidatura, a nostra esclusiva discrezione.\n\n5. Limitazione di responsabilità\n\nLe informazioni presenti su questo sito web sono fornite esclusivamente a scopo informativo generale. Greentech Professionals SRL non offre alcuna garanzia in merito all’accuratezza, all’esaustività o all’adeguatezza di qualsiasi informazione presente sul sito. Non ci assumiamo alcuna responsabilità per eventuali danni diretti o indiretti derivanti dall’utilizzo di questo sito web o dall’aver fatto affidamento sui suoi contenuti.\n\n6. Link esterni\n\nIl presente sito web può contenere collegamenti a siti web di terzi. Tali collegamenti sono forniti esclusivamente per comodità. Greentech Professionals SRL non ha alcun controllo sui contenuti o sulle pratiche dei siti web a cui si fa riferimento e non si assume alcuna responsabilità al riguardo.\n\n7. Legislazione applicabile\n\nI presenti Termini e condizioni sono regolati dalla legislazione rumena. Qualsiasi controversia derivante dall’utilizzo del presente sito web sarà soggetta alla giurisdizione esclusiva dei tribunali competenti di Bucarest, in Romania.\n\n8. Modifiche ai presenti Termini\n\nCi riserviamo il diritto di aggiornare i presenti Termini e condizioni in qualsiasi momento. La data dell’ultima revisione è indicata nella parte superiore di questa pagina. L’ulteriore utilizzo del sito web costituisce accettazione dei termini aggiornati.\n\n9. Contatti\n\nPer qualsiasi domanda relativa ai presenti Termini e condizioni: office@greentechpro.ro, +40 727 332 213."
+      "termsBody": "Greentech Professionals SRL – Termini e condizioni Ultimo aggiornamento: giugno 2026\n\n1. Informazioni generali\n\nI presenti Termini e condizioni regolano l'utilizzo da parte vostra del sito web greentechpro.ro, gestito da Greentech Professionals SRL, Calea Floreasca n. 194, Settore 1, 014472, Bucarest, Romania (numero di iscrizione al registro delle imprese RO46635117 – J40/15653/2022). Accedendo a questo sito web, l’utente accetta i presenti termini.\n\n2. Finalità del sito web\n\nIl presente sito web è una piattaforma di presentazione che fornisce informazioni su Greentech Professionals SRL, i suoi servizi, i progetti e le opportunità di carriera. Esso non costituisce un’offerta di vendita, un contratto o una proposta commerciale vincolante.\n\n3. Proprietà intellettuale\n\nL’intero contenuto del presente sito web, inclusi testi, immagini, loghi, elementi grafici e documenti, è di proprietà di Greentech Professionals SRL o dei suoi fornitori di contenuti ed è protetto dalla legislazione applicabile in materia di diritti d’autore e proprietà intellettuale. Non è consentito riprodurre, distribuire o utilizzare alcun contenuto senza il nostro previo consenso scritto.\n\n4. Candidature per posizioni lavorative\n\nInviando una candidatura tramite la nostra pagina «Carriere», confermate che tutte le informazioni fornite sono corrette e complete. L’invio di una candidatura non comporta alcun obbligo di assunzione per nessuna delle parti. Ci riserviamo il diritto di respingere qualsiasi candidatura, a nostra esclusiva discrezione.\n\n5. Limitazione di responsabilità\n\nLe informazioni presenti su questo sito web sono fornite esclusivamente a scopo informativo generale. Greentech Professionals SRL non offre alcuna garanzia in merito all’accuratezza, all’esaustività o all’adeguatezza di qualsiasi informazione presente sul sito. Non ci assumiamo alcuna responsabilità per eventuali danni diretti o indiretti derivanti dall’utilizzo di questo sito web o dall’aver fatto affidamento sui suoi contenuti.\n\n6. Link esterni\n\nIl presente sito web può contenere collegamenti a siti web di terzi. Tali collegamenti sono forniti solo per comodità. Greentech Professionals SRL non ha alcun controllo sul contenuto o sulle pratiche dei siti web a cui si fa riferimento e non si assume alcuna responsabilità al riguardo.\n\n7. Legislazione applicabile\n\nI presenti Termini e condizioni sono regolati dalla legislazione rumena. Qualsiasi controversia derivante dall’utilizzo del presente sito web sarà soggetta alla giurisdizione esclusiva dei tribunali competenti di Bucarest, in Romania.\n\n8. Modifiche ai presenti Termini\n\nCi riserviamo il diritto di aggiornare i presenti Termini e condizioni in qualsiasi momento. La data dell’ultima revisione è indicata nella parte superiore di questa pagina. L’ulteriore utilizzo del sito web costituisce accettazione dei termini aggiornati.\n\n9. Contatti\n\nPer qualsiasi domanda relativa ai presenti Termini e condizioni: office@greentechpro.ro, +40 727 332 213."
     },
     "faqs": {
       "items": [
@@ -1461,7 +3150,7 @@
           "order": 2,
           "enabled": true,
           "question": "In quali paesi operate?",
-          "answer": "Abbiamo maturato esperienza lavorativa in Romania, Italia e Spagna. Per altre sedi nell’Unione Europea, la mobilitazione viene valutata in base alla durata, al volume e ai requisiti del progetto."
+          "answer": "Abbiamo maturato esperienza in Romania, Italia e Spagna. Per altri cantieri nell’Unione Europea, la mobilitazione viene valutata in base alla durata, al volume e alle esigenze del progetto."
         },
         {
           "id": "faq-scope",
@@ -1475,21 +3164,21 @@
           "order": 4,
           "enabled": true,
           "question": "Di quali certificazioni disponete?",
-          "answer": "L'azienda è in possesso delle certificazioni ISO e dell'attestazione ANRE per le attività nel settore energetico. I documenti relativi al progetto possono essere presentati su richiesta."
+          "answer": "L'azienda è in possesso delle certificazioni ISO e dell'attestazione ANRE per le attività nel settore energetico. La documentazione relativa al progetto può essere presentata su richiesta."
         },
         {
           "id": "faq-timeline",
           "order": 5,
           "enabled": true,
           "question": "Come viene stabilito il termine di mobilitazione?",
-          "answer": "I tempi di intervento vengono stabiliti in seguito alla valutazione del sito, del volume dei lavori e della disponibilità del team. Per ogni richiesta comunichiamo un calendario realistico prima della conferma del lavoro."
+          "answer": "I tempi di mobilitazione vengono stabiliti in base alla valutazione del sito, al volume dei lavori e alla disponibilità del team. Per ogni richiesta comunichiamo un calendario realistico prima della conferma del lavoro."
         },
         {
           "id": "faq-quote",
           "order": 6,
           "enabled": true,
           "question": "Come posso richiedere un preventivo?",
-          "answer": "Inviateci tramite il modulo l'ubicazione, la potenza stimata, il tipo di lavori e il periodo desiderato. Vi ricontatteremo con le domande tecniche necessarie per definire l'offerta e il calendario."
+          "answer": "Inviateci tramite il modulo l'ubicazione, la potenza stimata, il tipo di lavori e il periodo desiderato. Vi ricontatteremo con le domande tecniche necessarie per definire l'offerta e il calendario dei lavori."
         }
       ]
     }

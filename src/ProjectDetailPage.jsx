@@ -17,6 +17,8 @@ function ProjectDetailPage({ project, nextProject, onClose, onProjectOpen }) {
   const text = useSection("projects");
   const pageRef = useRef(null);
   const backButtonRef = useRef(null);
+  const scopeDescription = text("scopeDescription", "");
+  const galleryNote = text("galleryNote", "");
 
   useEffect(() => {
     const previousTitle = document.title;
@@ -96,6 +98,12 @@ function ProjectDetailPage({ project, nextProject, onClose, onProjectOpen }) {
               <dt>{text("projectDateLabel", "Data proiectului")}</dt>
               <dd>{project.projectDate}</dd>
             </div>
+            {project.projectStatus && (
+              <div>
+                <dt>{text("statusLabel", "Status")}</dt>
+                <dd>{project.projectStatus}</dd>
+              </div>
+            )}
             <div>
               <dt>{text("categoryLabel", "Categorie")}</dt>
               <dd>{project.projectCategory}</dd>
@@ -104,6 +112,18 @@ function ProjectDetailPage({ project, nextProject, onClose, onProjectOpen }) {
               <dt>{text("projectLocationLabel", "Locatia proiectului")}</dt>
               <dd>{project.location}</dd>
             </div>
+            {project.client && (
+              <div>
+                <dt>{text("clientLabel", "Client")}</dt>
+                <dd>{project.client}</dd>
+              </div>
+            )}
+            {project.projectManager && (
+              <div>
+                <dt>{text("projectManagerLabel", "Coordonator proiect")}</dt>
+                <dd>{project.projectManager}</dd>
+              </div>
+            )}
             <div className="project-detail-capacity">
               <dt>{text("projectCapacityLabel", "Capacitatea proiectului")}</dt>
               <dd>
@@ -120,6 +140,9 @@ function ProjectDetailPage({ project, nextProject, onClose, onProjectOpen }) {
             <header className="project-detail-section-heading">
               <span>{text("scopeEyebrow", "Lucrari executate")}</span>
               <h2 id="project-scope-title">{text("scopeTitle", "Ce am instalat")}</h2>
+              {scopeDescription && (
+                <p className="project-detail-section-intro">{scopeDescription}</p>
+              )}
             </header>
             <div className="project-detail-scope-grid">
               {project.scope.map((item, index) => (
@@ -138,6 +161,9 @@ function ProjectDetailPage({ project, nextProject, onClose, onProjectOpen }) {
             <header className="project-detail-section-heading">
               <span>{text("galleryEyebrow", "Din santier")}</span>
               <h2 id="project-gallery-title">{text("projectGalleryTitle", "Galeria proiectului")}</h2>
+              {galleryNote && (
+                <p className="project-detail-section-intro">{galleryNote}</p>
+              )}
             </header>
             <div className={`project-detail-gallery-grid images-${project.gallery.length}`}>
               {project.gallery.map((image, index) => (
@@ -155,12 +181,6 @@ function ProjectDetailPage({ project, nextProject, onClose, onProjectOpen }) {
             <span>{text("sourceEyebrow", "Informatii despre proiect")}</span>
             <p>{text("sourceDescription")}</p>
           </div>
-          {project.sourceUrl && (
-            <a href={project.sourceUrl} target="_blank" rel="noreferrer">
-              <span>{text("officialPageLabel", "Pagina oficiala a proiectului")}</span>
-              <ArrowUpRight size={18} strokeWidth={1.8} aria-hidden="true" />
-            </a>
-          )}
         </section>
 
         <footer className="project-detail-next">

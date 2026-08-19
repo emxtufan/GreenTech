@@ -29,7 +29,7 @@ function AllProjectsPage({ projects, onClose, onProjectOpen }) {
       if (event.key === "Escape") onClose();
     };
 
-    document.title = `${text("allProjectsTitle", "Toate proiectele")} | Greentech Professionals`;
+    document.title = `${text("allProjectsTitle", "Proiectele nostre")} | Greentech Professionals`;
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
@@ -76,7 +76,7 @@ function AllProjectsPage({ projects, onClose, onProjectOpen }) {
         <header className="projects-index-intro">
           <div>
             <span>{text("portfolioLabel", "Portofoliu")} / {String(projects.length).padStart(2, "0")}</span>
-            <h1 id="projects-index-title">{text("allProjectsTitle", "Toate proiectele")}</h1>
+            <h1 id="projects-index-title">{text("allProjectsTitle", "Proiectele nostre")}</h1>
           </div>
           <p>{text("allProjectsDescription")}</p>
         </header>

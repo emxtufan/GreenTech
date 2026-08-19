@@ -1,8 +1,8 @@
 {
-  "version": 4,
+  "version": 5,
   "locale": "ro",
-  "revision": "bea67ab69f226e9a93b7c644",
-  "translatedAt": "2026-08-18T10:46:42.882Z",
+  "revision": "5ed1a5dd81c276811711ffbb",
+  "translatedAt": "2026-08-19T10:51:24.663Z",
   "content": {
     "version": 1,
     "sections": [
@@ -81,22 +81,22 @@
         "name": "Proiecte in derulare",
         "eyebrow": "Portofoliu",
         "title": "Proiectele noastre",
-        "description": "Descoperă o parte dintre proiectele noastre și modul în care transformăm ideile în construcții solide, eficiente și sustenabile.",
+        "description": "22 de proiecte fotovoltaice in Romania, Italia si Spania, executate sau aflate in lucru din 2023.",
         "action": "Vezi proiectul",
         "actionMode": "builtin",
         "format": "Horizontal gallery",
-        "summary": "5 projects + archive",
+        "summary": "22 projects + archive",
         "source": "src/data/horizontal-gallery.json",
         "visible": true,
         "archiveEyebrow": "Portofoliu complet",
         "archiveTitle": "Toate proiectele",
-        "archiveDescription": "Consultati proiectele publicate de Greentech Professionals si detaliile disponibile pentru fiecare amplasament.",
+        "archiveDescription": "Portofoliul Greentech reuneste 22 de proiecte fotovoltaice si datele disponibile pentru fiecare amplasament.",
         "archiveAction": "Vezi portofoliul",
         "archiveAriaLabel": "Vezi toate proiectele Greentech Professionals",
         "backPortfolioLabel": "Inapoi la portofoliu",
         "portfolioLabel": "Portofoliu",
-        "allProjectsTitle": "Toate proiectele",
-        "allProjectsDescription": "Proiecte fotovoltaice executate de Greentech Professionals in Romania si Europa, de la montaj mecanic si cablare pana la instalatii electrice.",
+        "allProjectsTitle": "Proiectele nostre",
+        "allProjectsDescription": "22 de proiecte fotovoltaice executate sau aflate in lucru in Romania, Italia si Spania.",
         "projectPortfolioLabel": "Portofoliu proiecte",
         "viewProjectLabel": "Vezi proiectul",
         "locationLabel": "Locatie",
@@ -115,9 +115,13 @@
         "galleryEyebrow": "Din santier",
         "projectGalleryTitle": "Galeria proiectului",
         "sourceEyebrow": "Informatii despre proiect",
-        "sourceDescription": "Datele si fotografiile provin din portofoliul Greentech Professionals. Valorile tehnice care nu sunt publicate nu sunt estimate.",
-        "officialPageLabel": "Pagina oficiala a proiectului",
-        "nextProjectLabel": "Proiectul urmator"
+        "sourceDescription": "Datele si fotografiile provin din portofoliul Greentech. Valorile tehnice care nu sunt publicate nu sunt estimate.",
+        "nextProjectLabel": "Proiectul urmator",
+        "clientLabel": "Client",
+        "statusLabel": "Status",
+        "projectManagerLabel": "Coordonator proiect",
+        "scopeDescription": "Fiecare pachet este organizat pe etape clare, de la pregatirea frontului de lucru pana la inspectia si predarea zonelor executate.",
+        "galleryNote": "Galeria include fotografii ale proiectului si imagini reprezentative din santiere Greentech, selectate pentru a ilustra tipurile de lucrari prezentate."
       },
       {
         "id": "credentials",
@@ -581,273 +585,1958 @@
           "id": "butimanu-romania",
           "order": 1,
           "enabled": true,
-          "category": "Instalatii electrice si mecanice",
+          "category": "Electric si mecanic",
           "title": "Butimanu, Romania",
-          "image": "/projects/butimanu/butimanu-01.jpg",
-          "alt": "Lucrari de constructie la proiectul fotovoltaic Butimanu",
-          "projectDate": "Iunie 2025",
+          "image": "/projects/portfolio-2026/butimanu/butimanu-02.webp",
+          "alt": "Proiectul fotovoltaic Butimanu, Romania",
+          "projectDate": "2025",
           "projectCategory": "Instalatii electrice si mecanice",
-          "location": "Butimanu, Romania",
-          "capacity": "300 MW",
-          "capacityKw": "300,000 kW",
-          "capacityNote": "Capacitatea totala a parcului fotovoltaic",
-          "about": "Am executat lucrari electrice si mecanice pentru proiectul fotovoltaic din Butimanu.",
-          "description": "Proiectul de 300 MW a reunit o echipa de management dedicata si peste 200 de profesionisti calificati in santier.",
+          "location": "Butimanu, judetul Dambovita, Romania",
+          "capacity": "297 MW",
+          "capacityKw": "297,000 kW",
+          "capacityNote": "Puterea totala a proiectului",
+          "projectStatus": "In derulare",
+          "client": "AJ Brand",
+          "projectManager": "Mario Aurelian Sasu",
+          "about": "Greentech executa lucrarile mecanice si electrice pentru parcul fotovoltaic de la Butimanu.",
+          "description": "Proiectul a mobilizat o echipa de pana la 300 de profesionisti pentru structuri, module, cablare si conexiuni.",
           "scope": [
             {
-              "title": "Cablare si trasee",
-              "description": "Pozarea cablurilor si organizarea traseelor electrice pe amplasament."
+              "title": "Fundatii si implantare",
+              "description": "Echipele au realizat trasarea randurilor, pozitionarea punctelor de lucru si instalarea pilotilor conform configuratiei din teren. Succesiunea fronturilor a fost coordonata pentru a mentine ritmul dintre lucrarile mecanice si cele electrice."
             },
             {
-              "title": "Montaj mecanic",
-              "description": "Asamblarea structurilor si montarea modulelor fotovoltaice."
+              "title": "Structuri portante",
+              "description": "Elementele metalice au fost preasamblate, montate si aliniate pe fiecare rand. Fixarile si geometria structurii au fost verificate inainte de inceperea montajului modulelor."
             },
             {
-              "title": "Instalatii electrice",
-              "description": "Conexiuni, echipare si verificari pentru circuitele executate in santier."
+              "title": "Module fotovoltaice",
+              "description": "Modulele au fost distribuite controlat in santier, montate pe structurile pregatite si verificate vizual dupa fixare. Lucrul pe zone a permis predarea progresiva a randurilor finalizate."
+            },
+            {
+              "title": "Retele electrice si predare",
+              "description": "Pachetul a inclus cablarea DC si AC, organizarea traseelor si realizarea conexiunilor aferente. Etapele executate au fost inspectate si pregatite pentru testare si punere in functiune."
             }
           ],
           "gallery": [
             {
-              "src": "/projects/butimanu/butimanu-01.jpg",
-              "alt": "Echipamente de constructii si structuri de montare la Butimanu"
+              "src": "/projects/portfolio-2026/butimanu/butimanu-01.webp",
+              "alt": "Butimanu, Romania - fotografie 1 din santier"
             },
             {
-              "src": "/projects/butimanu/butimanu-02.jpg",
-              "alt": "Fotografie oficiala de pe site-ul proiectului fotovoltaic Butimanu"
+              "src": "/projects/portfolio-2026/butimanu/butimanu-02.webp",
+              "alt": "Butimanu, Romania - fotografie 2 din santier"
             },
             {
-              "src": "/projects/butimanu/butimanu-03.jpg",
-              "alt": "Activitatea echipei Greentech Professionals la santierul din Butimanu"
-            }
-          ],
-          "sourceUrl": "https://greentechpro.ro/portfolio/butimanu-romania/"
-        },
-        {
-          "id": "piombino-italy",
-          "order": 2,
-          "enabled": true,
-          "category": "Instalatii electrice si mecanice",
-          "title": "Codigoro, Italia",
-          "image": "/projects/piombino/piombino-01.jpg",
-          "alt": "Panouri fotovoltaice la proiectul Codigoro",
-          "projectDate": "Iulie 2025",
-          "projectCategory": "Instalatii electrice si mecanice",
-          "location": "Codigoro, Italia",
-          "capacity": "77.3 MW",
-          "capacityKw": "77.300 kW",
-          "capacityNote": "Capacitatea proiectului",
-          "about": "Am executat lucrari electrice si mecanice pentru proiectul fotovoltaic din Codigoro.",
-          "description": "La Codigoro, echipa a lucrat la un parc de 77.3 MW, finalizat in iulie 2025.",
-          "scope": [
-            {
-              "title": "Pozarea cablurilor",
-              "description": "Traseele electrice au fost pregatite si cablurile au fost pozate in zonele de lucru."
+              "src": "/projects/portfolio-2026/butimanu/representative-03.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 3",
+              "representative": true
             },
             {
-              "title": "Structuri si module",
-              "description": "Echipa mecanica a asamblat structurile si a montat modulele fotovoltaice."
+              "src": "/projects/portfolio-2026/butimanu/representative-04.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 4",
+              "representative": true
             },
             {
-              "title": "Executie electrica",
-              "description": "Circuitele si conexiunile au fost realizate conform documentatiei proiectului."
-            }
-          ],
-          "gallery": [
-            {
-              "src": "/projects/piombino/piombino-01.jpg",
-              "alt": "Panouri fotovoltaice la proiectul Codigoro"
+              "src": "/projects/portfolio-2026/butimanu/representative-05.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 5",
+              "representative": true
             },
             {
-              "src": "/projects/piombino/piombino-02.jpg",
-              "alt": "Zona de lucru a proiectului fotovoltaic din Codigoro"
+              "src": "/projects/portfolio-2026/butimanu/representative-06.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 6",
+              "representative": true
             },
             {
-              "src": "/projects/piombino/piombino-03.webp",
-              "alt": "Lucrari electrice si mecanice la proiectul Codigoro"
+              "src": "/projects/portfolio-2026/butimanu/representative-07.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/butimanu/representative-08.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/butimanu/representative-09.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/butimanu/representative-10.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 10",
+              "representative": true
             }
           ],
           "sourceUrl": ""
         },
         {
-          "id": "giurgiu-romania",
-          "order": 3,
+          "id": "corbii-mari-romania",
+          "order": 2,
           "enabled": true,
-          "category": "Instalatii electrice si mecanice",
-          "title": "Giurgiu, Romania",
-          "image": "/projects/giurgiu/giurgiu-01.jpg",
-          "alt": "Panouri fotovoltaice la proiectul din Giurgiu",
-          "projectDate": "Ianuarie 2025",
+          "category": "Electric si mecanic",
+          "title": "Corbii Mari, Romania",
+          "image": "/projects/portfolio-2026/corbii-mari/corbii-mari-01.webp",
+          "alt": "Proiectul fotovoltaic Corbii Mari, Romania",
+          "projectDate": "2026",
           "projectCategory": "Instalatii electrice si mecanice",
-          "location": "Giurgiu, Romania",
-          "capacity": null,
-          "capacityKw": null,
-          "capacityNote": "Nu este specificat public",
-          "about": "Am realizat montaj mecanic, cablare si instalatii electrice pentru proiectul fotovoltaic din Giurgiu.",
-          "description": "Lucrarile au urmarit pregatirea infrastructurii fotovoltaice si coordonarea etapelor electrice si mecanice din santier.",
+          "location": "Corbii Mari, judetul Dambovita, Romania",
+          "capacity": "274 MW",
+          "capacityKw": "274,000 kW",
+          "capacityNote": "Puterea totala a proiectului",
+          "projectStatus": "In derulare",
+          "client": "AJ Brand",
+          "projectManager": "Mario Aurelian Sasu",
+          "about": "Santier fotovoltaic de mare capacitate, executat de echipele Greentech pe discipline mecanice si electrice.",
+          "description": "Lucrarile au continuat inclusiv in sezonul rece, cu o mobilizare de pana la 300 de oameni.",
           "scope": [
             {
-              "title": "Pregatirea traseelor",
-              "description": "Au fost marcate si pregatite traseele necesare cablurilor electrice."
+              "title": "Pregatirea fronturilor",
+              "description": "Amplasamentul a fost impartit in zone de lucru pentru accesul utilajelor, distributia materialelor si trasarea randurilor. Organizarea pe etape a sustinut continuitatea executiei inclusiv in conditii dificile de sezon."
+            },
+            {
+              "title": "Piloti si structuri",
+              "description": "Pilotii au fost instalati dupa reperele de trasare, iar structurile au fost asamblate si aliniate succesiv. Fiecare zona a fost verificata inainte de trecerea la montajul modulelor."
+            },
+            {
+              "title": "Module si instalatii electrice",
+              "description": "Lucrarile au continuat cu montarea modulelor, cablarea DC si AC si ordonarea traseelor. Interfetele dintre echipe au fost coordonate pentru a evita blocarea fronturilor deja deschise."
+            },
+            {
+              "title": "Control si pregatire pentru pornire",
+              "description": "Randurile finalizate au trecut prin inspectii mecanice si electrice, cu remedierea punctelor identificate. Documentarea progresului a insotit predarea etapizata catre faza de testare."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/corbii-mari/corbii-mari-01.webp",
+              "alt": "Corbii Mari, Romania - fotografie 1 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/corbii-mari/corbii-mari-02.webp",
+              "alt": "Corbii Mari, Romania - fotografie 2 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/corbii-mari/representative-03.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/corbii-mari/representative-04.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/corbii-mari/representative-05.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/corbii-mari/representative-06.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/corbii-mari/representative-07.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/corbii-mari/representative-08.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/corbii-mari/representative-09.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/corbii-mari/representative-10.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "pfv-guillena-spain",
+          "order": 3,
+          "enabled": true,
+          "category": "Electric si mecanic",
+          "title": "PFV Guillena 400 & 220, Spania",
+          "image": "/projects/portfolio-2026/guillena/guillena-01.webp",
+          "alt": "Proiectul fotovoltaic PFV Guillena 400 & 220, Spania",
+          "projectDate": "2025",
+          "projectCategory": "Instalatii electrice si mecanice",
+          "location": "Guillena, Burguillos si Alcala del Rio, Sevilla, Spania",
+          "capacity": "225 MW",
+          "capacityKw": "225,000 kW",
+          "capacityNote": "Puterea totala a proiectului",
+          "projectStatus": "Finalizat",
+          "client": "Cox Energy",
+          "projectManager": "Mario Aurelian Sasu",
+          "about": "Doua amplasamente fotovoltaice, de 110 MW si 115 MW, executate ca un program comun de lucrari.",
+          "description": "Peste 120 de profesionisti au lucrat la piloti, trackere, module, cablare DC si AC si pregatirea pentru pornire.",
+          "scope": [
+            {
+              "title": "Coordonarea amplasamentelor",
+              "description": "Cele doua zone ale programului au fost planificate ca fronturi complementare, cu echipe si materiale distribuite in functie de progres. Aceasta organizare a permis mentinerea unei executii constante pe ambele amplasamente."
+            },
+            {
+              "title": "Piloti si sisteme tracker",
+              "description": "Dupa trasare au fost instalati pilotii si ansamblate structurile cu urmarire solara. Alinierea componentelor si functionarea mecanica au fost verificate inainte de montarea modulelor."
+            },
+            {
+              "title": "Montajul modulelor",
+              "description": "Modulele fotovoltaice au fost manipulate, pozitionate si fixate pe randurile pregatite. Echipele au urmarit uniformitatea montajului si protejarea componentelor pe tot parcursul executiei."
+            },
+            {
+              "title": "Cablare si asistenta tehnica",
+              "description": "Executia electrica a acoperit traseele DC si AC, conexiunile si verificarile aferente. Zonele finalizate au fost pregatite pentru testare si pentru etapele de punere in functiune."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/guillena/guillena-01.webp",
+              "alt": "PFV Guillena 400 & 220, Spania - fotografie 1 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/guillena/guillena-02.webp",
+              "alt": "PFV Guillena 400 & 220, Spania - fotografie 2 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/guillena/representative-03.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/guillena/representative-04.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/guillena/representative-05.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/guillena/representative-06.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/guillena/representative-07.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/guillena/representative-08.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/guillena/representative-09.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/guillena/representative-10.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "burgos-spain",
+          "order": 4,
+          "enabled": true,
+          "category": "Electric si mecanic",
+          "title": "Burgos, Spania",
+          "image": "/projects/portfolio-2026/burgos/burgos-01.webp",
+          "alt": "Proiectul fotovoltaic Burgos, Spania",
+          "projectDate": "2026",
+          "projectCategory": "Instalatii electrice si mecanice",
+          "location": "Burgos, Castilla y Leon, Spania",
+          "capacity": "220 MW",
+          "capacityKw": "220,000 kW",
+          "capacityNote": "Puterea totala a proiectului",
+          "projectStatus": "In derulare",
+          "client": "Solaria",
+          "projectManager": "Mario Aurelian Sasu",
+          "about": "Greentech livreaza pachetul mecanic si electric pentru proiectul fotovoltaic din Burgos.",
+          "description": "Executia acopera trasarea, pilotii, trackerele, modulele, cablarea si asistenta pentru punerea in functiune.",
+          "scope": [
+            {
+              "title": "Trasare si implantare",
+              "description": "Reperele din proiect au fost transpuse in teren pentru pozitionarea randurilor si organizarea accesului. Instalarea pilotilor a urmat succesiunea stabilita impreuna cu echipele de montaj."
+            },
+            {
+              "title": "Trackere si aliniere",
+              "description": "Structurile tracker au fost asamblate, reglate si controlate mecanic inainte de incarcare. Verificarile intermediare au urmarit continuitatea randurilor si miscarea corecta a ansamblurilor."
+            },
+            {
+              "title": "Module si cablare",
+              "description": "Modulele au fost montate pe structurile pregatite, iar cablurile au fost distribuite si fixate pe traseele stabilite. Lucrarile DC si AC au avansat coordonat cu finalizarea mecanica."
+            },
+            {
+              "title": "Inspectii si punere in functiune",
+              "description": "Echipele au verificat fixarile, conexiunile si starea zonelor executate. Punctele deschise au fost urmarite pana la inchidere, inaintea testelor de sistem."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/burgos/burgos-01.webp",
+              "alt": "Burgos, Spania - fotografie 1 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/burgos/burgos-02.webp",
+              "alt": "Burgos, Spania - fotografie 2 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/burgos/representative-03.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/burgos/representative-04.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/burgos/representative-05.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/burgos/representative-06.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/burgos/representative-07.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/burgos/representative-08.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/burgos/representative-09.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/burgos/representative-10.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "valter-maracineanu-romania",
+          "order": 5,
+          "enabled": true,
+          "category": "Montaj mecanic",
+          "title": "Valter Maracineanu, Romania",
+          "image": "/projects/portfolio-2026/valter-maracineanu/valter-maracineanu-01.webp",
+          "alt": "Proiectul fotovoltaic Valter Maracineanu, Romania",
+          "projectDate": "2026",
+          "projectCategory": "Constructie parc fotovoltaic",
+          "location": "Iepuresti, Romania",
+          "capacity": "178 MW",
+          "capacityKw": "178,000 kW",
+          "capacityNote": "Puterea totala a proiectului",
+          "projectStatus": "In derulare",
+          "client": "",
+          "projectManager": "",
+          "about": "Proiect fotovoltaic aflat in executie la Iepuresti, cu o capacitate totala de 178 MW.",
+          "description": "Echipele Greentech executa montajul structurilor de sustinere si al modulelor fotovoltaice.",
+          "scope": [
+            {
+              "title": "Logistica de montaj",
+              "description": "Materialele au fost receptionate, sortate si distribuite pe zone pentru a reduce manipularile inutile. Fronturile au fost pregatite in ordinea necesara montajului mecanic."
+            },
+            {
+              "title": "Structuri de sustinere",
+              "description": "Componentele metalice au fost asamblate si aliniate conform configuratiei proiectului. Echipele au controlat pozitia randurilor si fixarile inaintea montarii modulelor."
+            },
+            {
+              "title": "Instalarea modulelor",
+              "description": "Modulele fotovoltaice au fost pozitionate si fixate pe structurile finalizate, cu atentie la manipulare si uniformitatea montajului. Zonele executate au fost eliberate progresiv pentru verificarile urmatoare."
+            },
+            {
+              "title": "Verificari mecanice",
+              "description": "Controlul final a urmarit strangerea elementelor, alinierea si integritatea componentelor montate. Neconformitatile identificate au fost corectate inainte de predarea fronturilor."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/valter-maracineanu/valter-maracineanu-01.webp",
+              "alt": "Valter Maracineanu, Romania - fotografie 1 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/valter-maracineanu/valter-maracineanu-02.webp",
+              "alt": "Valter Maracineanu, Romania - fotografie 2 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/valter-maracineanu/representative-03.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/valter-maracineanu/representative-04.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/valter-maracineanu/representative-05.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/valter-maracineanu/representative-06.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/valter-maracineanu/representative-07.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/valter-maracineanu/representative-08.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/valter-maracineanu/representative-09.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/valter-maracineanu/representative-10.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "ottana-italy",
+          "order": 6,
+          "enabled": true,
+          "category": "Montaj mecanic",
+          "title": "Ottana, Italia",
+          "image": "/projects/portfolio-2026/ottana/ottana-01.webp",
+          "alt": "Proiectul fotovoltaic Ottana, Italia",
+          "projectDate": "2025",
+          "projectCategory": "Instalatii mecanice",
+          "location": "Ottana, Sardinia, Italia",
+          "capacity": "89.13 MW",
+          "capacityKw": "89,130 kW",
+          "capacityNote": "Puterea totala a proiectului",
+          "projectStatus": "Finalizat",
+          "client": "Circet S.p.A.",
+          "projectManager": "",
+          "about": "Pachet mecanic complet pentru un parc fotovoltaic de 89.13 MW din Sardinia.",
+          "description": "Lucrarile au inclus baterea pilotilor, asamblarea structurilor si montarea modulelor pana la finalizarea mecanica.",
+          "scope": [
+            {
+              "title": "Trasare si batere piloti",
+              "description": "Pozitiile randurilor au fost marcate in teren, iar pilotii au fost instalati cu utilaje dedicate. Cotele si alinierea au fost urmarite pe masura avansului pentru a pregati structurile."
             },
             {
               "title": "Asamblarea structurilor",
-              "description": "Structurile de sustinere au fost asamblate pentru montarea modulelor."
-            },
-            {
-              "title": "Conectarea echipamentelor",
-              "description": "Echipamentele si circuitele au fost conectate si verificate in teren."
-            }
-          ],
-          "gallery": [
-            {
-              "src": "/projects/giurgiu/giurgiu-01.jpg",
-              "alt": "Randuri de panouri fotovoltaice la proiectul din Giurgiu"
-            },
-            {
-              "src": "/projects/giurgiu/giurgiu-02.jpg",
-              "alt": "Fotografie oficiala de pe site-ul proiectului fotovoltaic din Giurgiu"
-            }
-          ],
-          "sourceUrl": "https://greentechpro.ro/portfolio/giurgiu-romania/"
-        },
-        {
-          "id": "craiova-romania",
-          "order": 4,
-          "enabled": true,
-          "category": "Parc fotovoltaic",
-          "title": "Craiova, Romania",
-          "image": "/projects/craiova/craiova-01.jpg",
-          "alt": "Vedere aeriana a amplasamentului fotovoltaic din Craiova",
-          "projectDate": "Ianuarie 2025",
-          "projectCategory": "Parc fotovoltaic",
-          "location": "Craiova, Romania",
-          "capacity": null,
-          "capacityKw": null,
-          "capacityNote": "Nu este specificat public",
-          "about": "Am executat lucrari mecanice si electrice pentru proiectul fotovoltaic din Craiova.",
-          "description": "Lucrarile au inclus asamblarea structurilor, montarea modulelor si executia instalatiilor electrice.",
-          "scope": [
-            {
-              "title": "Structuri de montaj",
-              "description": "Elementele metalice au fost asamblate si aliniate pe randurile proiectului."
-            },
-            {
-              "title": "Module fotovoltaice",
-              "description": "Modulele au fost montate si fixate pe structurile pregatite."
-            },
-            {
-              "title": "Instalatii electrice",
-              "description": "Cablarea si conexiunile electrice au completat lucrarile mecanice."
-            }
-          ],
-          "gallery": [
-            {
-              "src": "/projects/craiova/craiova-01.jpg",
-              "alt": "Randuri de structuri si module in proiectul fotovoltaic din Craiova"
-            },
-            {
-              "src": "/projects/craiova/craiova-02.webp",
-              "alt": "Lucrari de constructie a instalatiilor fotovoltaice la santierul din Craiova"
-            },
-            {
-              "src": "/projects/craiova/craiova-03.webp",
-              "alt": "Fotografie oficiala a proiectului din Craiova"
-            }
-          ],
-          "sourceUrl": "https://greentechpro.ro/portfolio/craiova-romania/"
-        },
-        {
-          "id": "bologna-italy",
-          "order": 5,
-          "enabled": true,
-          "category": "Parc fotovoltaic",
-          "title": "Bologna, Italia",
-          "image": "/projects/bologna/bologna-01.webp",
-          "alt": "Membri ai echipei Greentech in santierul din Bologna",
-          "projectDate": "Noiembrie 2024",
-          "projectCategory": "Parc fotovoltaic",
-          "location": "Bologna, Italia",
-          "capacity": null,
-          "capacityKw": null,
-          "capacityNote": "Nu este specificat public",
-          "about": "Am coordonat lucrari de montaj fotovoltaic si instalatii electrice pentru proiectul din Bologna.",
-          "description": "Echipa din Bologna a urmarit succesiunea lucrarilor mecanice si electrice pe durata executiei in santier.",
-          "scope": [
-            {
-              "title": "Organizarea frontului de lucru",
-              "description": "Zonele de montaj au fost pregatite pentru o executie ordonata pe etape."
+              "description": "Subansamblurile metalice au fost distribuite, montate si ajustate pe fiecare front. Verificarea geometriei a precedat predarea randurilor catre echipele de module."
             },
             {
               "title": "Montaj fotovoltaic",
-              "description": "Structurile si modulele au fost instalate conform planului de executie."
+              "description": "Modulele au fost instalate si fixate pe structurile receptionate mecanic. Manipularea controlata si inspectia vizuala au redus riscul de deteriorare pe parcursul lucrarilor."
             },
             {
-              "title": "Cablare si conexiuni",
-              "description": "Traseele, cablurile si conexiunile au fost realizate in zonele finalizate mecanic."
+              "title": "Finalizare mecanica",
+              "description": "Echipele au parcurs randurile pentru verificarea prinderilor, alinierii si componentelor ramase. Zonele inchise au fost predate documentat pentru continuarea lucrarilor din proiect."
             }
           ],
           "gallery": [
             {
-              "src": "/projects/bologna/bologna-01.webp",
-              "alt": "Lucrari de montaj la proiectul fotovoltaic din Bologna"
+              "src": "/projects/portfolio-2026/ottana/ottana-01.webp",
+              "alt": "Ottana, Italia - fotografie 1 din santier"
             },
             {
-              "src": "/projects/bologna/bologna-02.webp",
-              "alt": "Lucrari de constructie a instalatiilor fotovoltaice la santierul din Bologna"
+              "src": "/projects/portfolio-2026/ottana/ottana-02.webp",
+              "alt": "Ottana, Italia - fotografie 2 din santier"
             },
             {
-              "src": "/projects/bologna/bologna-03.webp",
-              "alt": "Fotografie oficiala a proiectului din Bologna"
+              "src": "/projects/portfolio-2026/ottana/ottana-03.webp",
+              "alt": "Ottana, Italia - fotografie 3 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/ottana/representative-04.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/ottana/representative-05.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/ottana/representative-06.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/ottana/representative-07.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/ottana/representative-08.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/ottana/representative-09.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/ottana/representative-10.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 10",
+              "representative": true
             }
           ],
-          "sourceUrl": "https://greentechpro.ro/portfolio/bologna-italy/"
+          "sourceUrl": ""
         },
         {
-          "id": "cagliari-italy",
-          "order": 6,
+          "id": "codigoro-italy",
+          "order": 7,
           "enabled": true,
-          "category": "Parc fotovoltaic",
-          "title": "Cagliari, Italia",
-          "image": "/projects/cagliari/cagliari-01.webp",
-          "alt": "Imagine aeriana a parcului fotovoltaic din Cagliari",
-          "projectDate": "Mai 2023",
-          "projectCategory": "Parc fotovoltaic",
-          "location": "Cagliari, Italia",
-          "capacity": null,
-          "capacityKw": null,
-          "capacityNote": "Nu este specificat public",
-          "about": "Am executat instalarea electrica si montajul mecanic pentru proiectul fotovoltaic din Cagliari.",
-          "description": "Lucrarile din Cagliari au combinat montajul structurilor si modulelor cu pozarea cablurilor si verificarile electrice.",
+          "category": "Montaj mecanic",
+          "title": "Codigoro, Italia",
+          "image": "/projects/portfolio-2026/codigoro/codigoro-01.webp",
+          "alt": "Proiectul fotovoltaic Codigoro, Italia",
+          "projectDate": "2024",
+          "projectCategory": "Constructie parc fotovoltaic",
+          "location": "Codigoro, Italia",
+          "capacity": "77.30 MW",
+          "capacityKw": "77,300 kW",
+          "capacityNote": "Puterea totala a proiectului",
+          "projectStatus": "Finalizat",
+          "client": "CAF Italia",
+          "projectManager": "",
+          "about": "Proiect fotovoltaic de 77.30 MW realizat la Codigoro.",
+          "description": "Echipa Greentech a executat montajul structurilor de sustinere si al modulelor fotovoltaice.",
           "scope": [
             {
-              "title": "Montaj mecanic",
-              "description": "Structurile au fost asamblate, iar modulele au fost fixate pe randurile pregatite."
+              "title": "Organizarea materialelor",
+              "description": "Structurile si modulele au fost repartizate pe fronturi in functie de secventa de executie. Circulatia interna si punctele de stocare au fost mentinute clare pentru echipele de montaj."
             },
             {
-              "title": "Pozarea cablurilor",
-              "description": "Cablurile au fost distribuite si pozate pe traseele stabilite in proiect."
+              "title": "Montajul structurilor",
+              "description": "Elementele de sustinere au fost asamblate, pozitionate si aliniate pe randurile pregatite. Fixarile au fost controlate inainte de incarcarea structurii cu module."
             },
             {
-              "title": "Verificari electrice",
-              "description": "Conexiunile executate au fost inspectate inainte de predarea zonelor de lucru."
+              "title": "Instalarea modulelor",
+              "description": "Panourile au fost manipulate si montate in succesiunea stabilita pentru fiecare zona. Echipele au verificat asezarea si integritatea vizuala dupa finalizarea randurilor."
+            },
+            {
+              "title": "Controlul lucrarilor",
+              "description": "Inspectiile de final au urmarit alinierea, strangerea elementelor si completitudinea montajului. Observatiile din teren au fost inchise inaintea predarii mecanice."
             }
           ],
           "gallery": [
             {
-              "src": "/projects/cagliari/cagliari-01.webp",
-              "alt": "Randuri de panouri in proiectul fotovoltaic din Cagliari"
+              "src": "/projects/portfolio-2026/codigoro/codigoro-01.webp",
+              "alt": "Codigoro, Italia - fotografie 1 din santier"
             },
             {
-              "src": "/projects/cagliari/cagliari-02.webp",
-              "alt": "Lucrari de instalare a sistemelor fotovoltaice la santierul din Cagliari"
+              "src": "/projects/portfolio-2026/codigoro/codigoro-02.webp",
+              "alt": "Codigoro, Italia - fotografie 2 din santier"
             },
             {
-              "src": "/projects/cagliari/cagliari-03.webp",
-              "alt": "Fotografie oficiala a proiectului din Cagliari"
+              "src": "/projects/portfolio-2026/codigoro/codigoro-03.webp",
+              "alt": "Codigoro, Italia - fotografie 3 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/codigoro/representative-04.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/codigoro/representative-05.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/codigoro/representative-06.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/codigoro/representative-07.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/codigoro/representative-08.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/codigoro/representative-09.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/codigoro/representative-10.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 10",
+              "representative": true
             }
           ],
-          "sourceUrl": "https://greentechpro.ro/portfolio/cagliari-italy/"
+          "sourceUrl": ""
+        },
+        {
+          "id": "sunkingdom-giurgiu-romania",
+          "order": 8,
+          "enabled": true,
+          "category": "Montaj mecanic",
+          "title": "Sunkingdom - Giurgiu, Romania",
+          "image": "/projects/portfolio-2026/giurgiu/giurgiu-01.webp",
+          "alt": "Proiectul fotovoltaic Sunkingdom - Giurgiu, Romania",
+          "projectDate": "2024",
+          "projectCategory": "Instalatii mecanice",
+          "location": "Giurgiu, Romania",
+          "capacity": "74.33 MW",
+          "capacityKw": "74,330 kW",
+          "capacityNote": "Puterea totala a proiectului",
+          "projectStatus": "Finalizat",
+          "client": "",
+          "projectManager": "Tanase Constantin",
+          "about": "Montaj mecanic pentru un parc de 74.33 MW echipat cu structuri tracker pe o singura axa.",
+          "description": "Lucrarile au acoperit structurile tracker, calibrarea, montarea modulelor si inspectiile de calitate.",
+          "scope": [
+            {
+              "title": "Structuri tracker",
+              "description": "Componentele sistemului cu urmarire pe o singura axa au fost distribuite si asamblate pe randuri. Pozitia elementelor mobile a fost controlata pe parcursul montajului."
+            },
+            {
+              "title": "Reglaje si calibrare",
+              "description": "Ansamblurile au fost aliniate si reglate pentru o miscare uniforma, fara interferente intre componente. Verificarile mecanice au fost efectuate inainte de montarea modulelor."
+            },
+            {
+              "title": "Module fotovoltaice",
+              "description": "Modulele au fost fixate pe structurile tracker pregatite, respectand ordinea de incarcare a randurilor. Manipularea si controlul vizual au insotit fiecare etapa."
+            },
+            {
+              "title": "Inspectie si predare",
+              "description": "Echipele au verificat prinderile, alinierea si functionarea mecanica a zonelor executate. Randurile conforme au fost predate progresiv catre urmatoarele discipline."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/giurgiu/giurgiu-01.webp",
+              "alt": "Sunkingdom - Giurgiu, Romania - fotografie 1 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/giurgiu/giurgiu-02.webp",
+              "alt": "Sunkingdom - Giurgiu, Romania - fotografie 2 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/giurgiu/representative-03.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/giurgiu/representative-04.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/giurgiu/representative-05.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/giurgiu/representative-06.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/giurgiu/representative-07.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/giurgiu/representative-08.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/giurgiu/representative-09.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/giurgiu/representative-10.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "pielesti-robanesti-craiova-romania",
+          "order": 9,
+          "enabled": true,
+          "category": "Montaj mecanic",
+          "title": "Pielesti & Robanesti - Craiova, Romania",
+          "image": "/uploads/gallery/craiova-78-of-112-5802f25e1a39.jpg",
+          "alt": "Proiectul fotovoltaic Pielesti & Robanesti - Craiova, Romania",
+          "projectDate": "2024",
+          "projectCategory": "Instalatii mecanice",
+          "location": "Pielesti si Robanesti, judetul Dolj, Romania",
+          "capacity": "59.89 MW",
+          "capacityKw": "59,890 kW",
+          "capacityNote": "Puterea totala a proiectului",
+          "projectStatus": "Finalizat",
+          "client": "",
+          "projectManager": "Dobra Alexandru",
+          "about": "Doua parcuri alaturate, executate ca un singur front de lucru in judetul Dolj.",
+          "description": "Peste 100 de oameni au lucrat pe timp de iarna la piloti, structuri fixe, module si finalizarea mecanica.",
+          "scope": [
+            {
+              "title": "Implantare si piloti",
+              "description": "Lucrarile au inceput cu trasarea si instalarea pilotilor pe cele doua amplasamente. Secventele de lucru au fost adaptate conditiilor din teren si accesului utilajelor."
+            },
+            {
+              "title": "Structuri fixe",
+              "description": "Structurile metalice au fost preasamblate, montate si aliniate pe fronturile eliberate. Controlul cotelor a asigurat continuitatea randurilor inainte de etapa urmatoare."
+            },
+            {
+              "title": "Montarea modulelor",
+              "description": "Modulele fotovoltaice au fost distribuite si instalate pe masura receptiei mecanice a structurilor. Echipele au lucrat etapizat pentru a mentine zonele ordonate si accesibile."
+            },
+            {
+              "title": "Receptie mecanica",
+              "description": "Randurile finalizate au fost inspectate pentru fixari, aliniere si integritatea componentelor. Punctele ramase au fost corectate inainte de predarea lucrarilor."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/craiova/craiova-01.webp",
+              "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 1 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/craiova/craiova-02.webp",
+              "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 2 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/craiova/craiova-03.webp",
+              "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 3 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/craiova/representative-04.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/craiova/representative-05.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/craiova/representative-06.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/craiova/representative-07.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/craiova/representative-08.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/craiova/representative-09.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/craiova/representative-10.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "anguillara-italy",
+          "order": 10,
+          "enabled": true,
+          "category": "Montaj mecanic",
+          "title": "Anguillara, Italia",
+          "image": "/projects/portfolio-2026/anguillara/anguillara-01.webp",
+          "alt": "Proiectul fotovoltaic Anguillara, Italia",
+          "projectDate": "2023",
+          "projectCategory": "Constructie parc fotovoltaic",
+          "location": "Anguillara, Italia",
+          "capacity": "51.22 MW",
+          "capacityKw": "51,220 kW",
+          "capacityNote": "Puterea totala a proiectului",
+          "projectStatus": "Finalizat",
+          "client": "",
+          "projectManager": "",
+          "about": "Parc fotovoltaic de 51.22 MW inclus in portofoliul Greentech din Italia.",
+          "description": "Lucrarile Greentech au inclus asamblarea structurilor si montarea modulelor fotovoltaice.",
+          "scope": [
+            {
+              "title": "Pregatirea montajului",
+              "description": "Materialele au fost organizate pe zone, iar fronturile au fost verificate inainte de inceperea asamblarii. Succesiunea de lucru a urmarit reducerea deplasarilor si a manipularilor repetate."
+            },
+            {
+              "title": "Structuri metalice",
+              "description": "Elementele de sustinere au fost montate si aliniate conform randurilor proiectate. Echipele au verificat fixarile si geometria inainte de instalarea modulelor."
+            },
+            {
+              "title": "Module fotovoltaice",
+              "description": "Panourile au fost pozitionate si fixate pe structurile pregatite, cu inspectie vizuala dupa montaj. Lucrarile au avansat pe sectoare pentru o predare clara."
+            },
+            {
+              "title": "Verificare si inchidere",
+              "description": "Ultima etapa a inclus controlul prinderilor, alinierea randurilor si completarea elementelor lipsa. Zonele conforme au fost pregatite pentru receptia mecanica."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/anguillara/anguillara-01.webp",
+              "alt": "Anguillara, Italia - fotografie 1 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/anguillara/anguillara-02.webp",
+              "alt": "Anguillara, Italia - fotografie 2 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/anguillara/representative-03.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/anguillara/representative-04.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/anguillara/representative-05.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/anguillara/representative-06.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/anguillara/representative-07.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/anguillara/representative-08.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/anguillara/representative-09.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/anguillara/representative-10.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "marconi-italy",
+          "order": 11,
+          "enabled": true,
+          "category": "Montaj mecanic",
+          "title": "Marconi, Italia",
+          "image": "/projects/portfolio-2026/marconi/marconi-01.webp",
+          "alt": "Proiectul fotovoltaic Marconi, Italia",
+          "projectDate": "2024",
+          "projectCategory": "Instalatii mecanice",
+          "location": "Montalto di Castro, Lazio, Italia",
+          "capacity": "49.52 MW",
+          "capacityKw": "49,520 kW",
+          "capacityNote": "Puterea totala a proiectului",
+          "projectStatus": "Finalizat",
+          "client": "Circet S.p.A.",
+          "projectManager": "Valentin Cotoi",
+          "about": "Proiect mecanic de 49.52 MW livrat la Montalto di Castro, in regiunea Lazio.",
+          "description": "Echipele au gestionat instalarea pilotilor, asamblarea structurilor si montarea modulelor.",
+          "scope": [
+            {
+              "title": "Instalarea pilotilor",
+              "description": "Pilotii au fost pozitionati dupa trasare si instalati in ordinea fronturilor disponibile. Masuratorile intermediare au sustinut pregatirea corecta a montajului metalic."
+            },
+            {
+              "title": "Structuri de sustinere",
+              "description": "Componentele au fost asamblate si aliniate pe fiecare rand, cu verificarea legaturilor mecanice. Randurile receptionate au fost eliberate etapizat pentru module."
+            },
+            {
+              "title": "Montajul modulelor",
+              "description": "Modulele fotovoltaice au fost transportate la pozitie, montate si controlate vizual. Organizarea echipelor a permis lucrul simultan pe mai multe zone fara amestecarea materialelor."
+            },
+            {
+              "title": "Mechanical completion",
+              "description": "Inspectia de inchidere a urmarit alinierea, cuplurile de strangere si completitudinea ansamblurilor. Observatiile au fost remediate inaintea predarii finale a pachetului mecanic."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/marconi/marconi-01.webp",
+              "alt": "Marconi, Italia - fotografie 1 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/marconi/marconi-02.webp",
+              "alt": "Marconi, Italia - fotografie 2 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/marconi/marconi-03.webp",
+              "alt": "Marconi, Italia - fotografie 3 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/marconi/representative-04.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/marconi/representative-05.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/marconi/representative-06.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/marconi/representative-07.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/marconi/representative-08.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/marconi/representative-09.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/marconi/representative-10.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "sandalia-cagliari-italy",
+          "order": 12,
+          "enabled": true,
+          "category": "Montaj mecanic",
+          "title": "Sandalia - Cagliari, Italia",
+          "image": "/projects/portfolio-2026/sandalia/sandalia-01.webp",
+          "alt": "Proiectul fotovoltaic Sandalia - Cagliari, Italia",
+          "projectDate": "2023",
+          "projectCategory": "Constructie parc fotovoltaic",
+          "location": "Cagliari, Sardinia, Italia",
+          "capacity": "45.40 MW",
+          "capacityKw": "45,400 kW",
+          "capacityNote": "Puterea totala a proiectului",
+          "projectStatus": "Finalizat",
+          "client": "",
+          "projectManager": "",
+          "about": "Proiect fotovoltaic de 45.40 MW executat in zona Cagliari, Sardinia.",
+          "description": "Greentech a realizat montajul structurilor de sustinere si al modulelor fotovoltaice.",
+          "scope": [
+            {
+              "title": "Distributia componentelor",
+              "description": "Structurile si modulele au fost pregatite pe zone pentru a sustine un flux continuu de montaj. Spatiile de lucru au fost mentinute accesibile pentru echipe si utilaje."
+            },
+            {
+              "title": "Asamblare mecanica",
+              "description": "Structurile de sustinere au fost montate si reglate pe randurile disponibile. Fixarile si pozitia ansamblurilor au fost verificate inainte de incarcare."
+            },
+            {
+              "title": "Montarea panourilor",
+              "description": "Modulele au fost manipulate cu atentie si fixate pe structurile receptionate. Fiecare sector finalizat a fost inspectat pentru uniformitate si componente deteriorate."
+            },
+            {
+              "title": "Predarea mecanica",
+              "description": "Echipele au inchis punctele ramase si au verificat completitudinea randurilor. Lucrarile finalizate au fost pregatite pentru continuarea etapelor din santier."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/sandalia/sandalia-01.webp",
+              "alt": "Sandalia - Cagliari, Italia - fotografie 1 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/sandalia/sandalia-02.webp",
+              "alt": "Sandalia - Cagliari, Italia - fotografie 2 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/sandalia/sandalia-03.webp",
+              "alt": "Sandalia - Cagliari, Italia - fotografie 3 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/sandalia/representative-04.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sandalia/representative-05.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sandalia/representative-06.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sandalia/representative-07.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sandalia/representative-08.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sandalia/representative-09.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sandalia/representative-10.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "pontinia-italy",
+          "order": 13,
+          "enabled": true,
+          "category": "Montaj mecanic",
+          "title": "Pontinia, Italia",
+          "image": "/projects/portfolio-2026/pontinia/pontinia-01.webp",
+          "alt": "Proiectul fotovoltaic Pontinia, Italia",
+          "projectDate": "2023",
+          "projectCategory": "Constructie parc fotovoltaic",
+          "location": "Pontinia, Italia",
+          "capacity": "35.60 MW",
+          "capacityKw": "35,600 kW",
+          "capacityNote": "Puterea totala a proiectului",
+          "projectStatus": "Finalizat",
+          "client": "",
+          "projectManager": "",
+          "about": "Parc fotovoltaic de 35.60 MW realizat in Italia.",
+          "description": "Pachetul Greentech a inclus montajul structurilor si instalarea modulelor fotovoltaice.",
+          "scope": [
+            {
+              "title": "Planificarea fronturilor",
+              "description": "Zonele de montaj au fost deschise progresiv, odata cu disponibilitatea materialelor si accesului. Aceasta succesiune a mentinut un flux clar intre pregatire, structuri si module."
+            },
+            {
+              "title": "Structuri fotovoltaice",
+              "description": "Elementele metalice au fost asamblate si aliniate pe amplasament. Controlul mecanic intermediar a precedat predarea fiecarui rand catre echipa de module."
+            },
+            {
+              "title": "Montajul modulelor",
+              "description": "Modulele au fost distribuite la pozitie, instalate si fixate conform secventei de lucru. Integritatea vizuala a componentelor a fost urmarita in timpul manipularii."
+            },
+            {
+              "title": "Inspectii finale",
+              "description": "Randurile executate au fost parcurse pentru verificarea alinierii si prinderilor. Remedierile au fost centralizate si inchise inainte de receptia mecanica."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/pontinia/pontinia-02.webp",
+              "alt": "Pontinia, Italia - fotografie 2 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/pontinia/representative-02.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 2",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/pontinia/representative-03.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/pontinia/representative-04.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/pontinia/representative-05.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/pontinia/representative-06.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/pontinia/representative-07.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/pontinia/representative-08.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/pontinia/representative-09.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/pontinia/representative-10.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "sole-italy",
+          "order": 14,
+          "enabled": true,
+          "category": "Montaj mecanic",
+          "title": "Sole, Italia",
+          "image": "/projects/portfolio-2026/sole/sole-01.webp",
+          "alt": "Proiectul fotovoltaic Sole, Italia",
+          "projectDate": "2024",
+          "projectCategory": "Instalatii mecanice",
+          "location": "Tuscania, Lazio, Italia",
+          "capacity": "33.80 MW",
+          "capacityKw": "33,800 kW",
+          "capacityNote": "Puterea totala a proiectului",
+          "projectStatus": "Finalizat",
+          "client": "Circet S.p.A.",
+          "projectManager": "Valentin Cotoi",
+          "about": "Proiect mecanic de 33.80 MW realizat la Tuscania, in regiunea Lazio.",
+          "description": "Executia a inclus pilotii, structurile de sustinere si montarea modulelor fotovoltaice.",
+          "scope": [
+            {
+              "title": "Batere piloti",
+              "description": "Echipele au pozitionat si instalat pilotii pe baza trasarii din teren. Verificarile de pozitie au permis trecerea ordonata catre montajul structurilor."
+            },
+            {
+              "title": "Montaj structural",
+              "description": "Structurile metalice au fost asamblate, aliniate si fixate pe randurile pregatite. Ansamblurile au fost controlate mecanic inainte de montarea modulelor."
+            },
+            {
+              "title": "Instalarea modulelor",
+              "description": "Modulele fotovoltaice au fost montate succesiv, cu atentie la manipulare si la uniformitatea randurilor. Zonele terminate au fost pastrate libere pentru inspectie."
+            },
+            {
+              "title": "Controlul calitatii",
+              "description": "Inspectiile au urmarit completitudinea montajului, fixarile si integritatea vizuala. Echipele au inchis observatiile inainte de predarea pachetului mecanic."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/sole/sole-01.webp",
+              "alt": "Sole, Italia - fotografie 1 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/sole/representative-02.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 2",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sole/representative-03.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sole/representative-04.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sole/representative-05.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sole/representative-06.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sole/representative-07.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sole/representative-08.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sole/representative-09.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sole/representative-10.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "celeste-italy",
+          "order": 15,
+          "enabled": true,
+          "category": "Montaj mecanic",
+          "title": "Celeste, Italia",
+          "image": "/projects/portfolio-2026/celeste/celeste-01.webp",
+          "alt": "Proiectul fotovoltaic Celeste, Italia",
+          "projectDate": "2024",
+          "projectCategory": "Instalatii mecanice",
+          "location": "Viterbo, Lazio, Italia",
+          "capacity": "23.90 MW",
+          "capacityKw": "23,900 kW",
+          "capacityNote": "Puterea totala a proiectului",
+          "projectStatus": "Finalizat",
+          "client": "Circet S.p.A.",
+          "projectManager": "Valentin Cotoi",
+          "about": "Parc fotovoltaic de 23.90 MW livrat la Viterbo impreuna cu Circet S.p.A.",
+          "description": "Lucrarile mecanice au acoperit baterea pilotilor, structurile si modulele fotovoltaice.",
+          "scope": [
+            {
+              "title": "Trasare si pilotaj",
+              "description": "Randurile au fost materializate in teren, iar pilotii au fost instalati pe fronturile aprobate. Echipele au verificat pozitia elementelor pentru a limita ajustarile ulterioare."
+            },
+            {
+              "title": "Structuri de sustinere",
+              "description": "Componentele metalice au fost asamblate si aliniate in succesiunea stabilita. Fixarile au fost controlate inainte ca randurile sa fie preluate pentru module."
+            },
+            {
+              "title": "Module fotovoltaice",
+              "description": "Panourile au fost transportate la pozitie si montate pe structurile finalizate. Inspectia vizuala a insotit lucrul pentru identificarea rapida a oricarei probleme."
+            },
+            {
+              "title": "Inchiderea lucrarilor",
+              "description": "Sectoarele executate au fost verificate, curatate si pregatite pentru receptie. Elementele ramase si observatiile de calitate au fost rezolvate etapizat."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/celeste/celeste-01.webp",
+              "alt": "Celeste, Italia - fotografie 1 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/celeste/celeste-02.webp",
+              "alt": "Celeste, Italia - fotografie 2 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/celeste/representative-03.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/celeste/representative-04.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/celeste/representative-05.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/celeste/representative-06.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/celeste/representative-07.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/celeste/representative-08.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/celeste/representative-09.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/celeste/representative-10.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "bombardia-palencia-spain",
+          "order": 16,
+          "enabled": true,
+          "category": "Montaj mecanic",
+          "title": "Bombardia - Palencia, Spania",
+          "image": "/projects/portfolio-2026/bombardia/bombardia-01.webp",
+          "alt": "Proiectul fotovoltaic Bombardia - Palencia, Spania",
+          "projectDate": "2024",
+          "projectCategory": "Constructie parc fotovoltaic",
+          "location": "Palencia, Spania",
+          "capacity": "22.25 MW",
+          "capacityKw": "22,250 kW",
+          "capacityNote": "Puterea totala a proiectului",
+          "projectStatus": "Finalizat",
+          "client": "Lantania",
+          "projectManager": "",
+          "about": "Proiect fotovoltaic de 22.25 MW executat in provincia Palencia.",
+          "description": "Echipele Greentech au montat structurile de sustinere si modulele pe amplasamentul Bombardia.",
+          "scope": [
+            {
+              "title": "Pregatirea sectoarelor",
+              "description": "Materialele au fost repartizate pe zone, iar accesul a fost organizat pentru echipele de montaj. Fronturile au fost deschise progresiv pentru a mentine controlul asupra executiei."
+            },
+            {
+              "title": "Asamblarea structurilor",
+              "description": "Structurile de sustinere au fost montate si aliniate pe randurile disponibile. Controlul prinderilor a precedat instalarea modulelor fotovoltaice."
+            },
+            {
+              "title": "Montarea modulelor",
+              "description": "Modulele au fost manipulate, pozitionate si fixate pe ansamblurile receptionate. Echipele au urmarit o executie uniforma si protejarea suprafetelor active."
+            },
+            {
+              "title": "Receptie si remedieri",
+              "description": "Inspectiile finale au identificat punctele care necesitau ajustari sau completari. Acestea au fost inchise inainte de predarea zonelor executate."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/bombardia/bombardia-02.webp",
+              "alt": "Bombardia - Palencia, Spania - fotografie 2 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/bombardia/bombardia-03.webp",
+              "alt": "Bombardia - Palencia, Spania - fotografie 3 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/bombardia/representative-03.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/bombardia/representative-04.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/bombardia/representative-05.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/bombardia/representative-06.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/bombardia/representative-07.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/bombardia/representative-08.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/bombardia/representative-09.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/bombardia/representative-10.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "maas-catania-italy",
+          "order": 17,
+          "enabled": true,
+          "category": "Civil si mecanic",
+          "title": "MAAS - Catania, Italia",
+          "image": "/projects/portfolio-2026/catania/catania-01.webp",
+          "alt": "Proiectul fotovoltaic MAAS - Catania, Italia",
+          "projectDate": "2024",
+          "projectCategory": "Lucrari civile si mecanice",
+          "location": "Catania, Sicilia, Italia",
+          "capacity": "22.20 MW",
+          "capacityKw": "22,200 kW",
+          "capacityNote": "Puterea totala a proiectului",
+          "projectStatus": "Finalizat",
+          "client": "Circet S.p.A.",
+          "projectManager": "",
+          "about": "Proiect de 22.20 MW livrat la Catania, cu lucrari civile si mecanice executate de Greentech.",
+          "description": "Pachetul a inclus mobilizarea, logistica, terasamentele, pilotii, structurile si modulele fotovoltaice.",
+          "scope": [
+            {
+              "title": "Lucrari civile si logistica",
+              "description": "Mobilizarea a inclus organizarea santierului, circulatia utilajelor si pregatirea zonelor de lucru. Terasamentele si logistica materialelor au fost coordonate cu etapele mecanice."
+            },
+            {
+              "title": "Trasare si instalare piloti",
+              "description": "Pozitiile structurilor au fost transpuse in teren, apoi pilotii au fost instalati pe fronturile pregatite. Verificarile intermediare au sustinut continuitatea montajului."
+            },
+            {
+              "title": "Structuri si module",
+              "description": "Elementele metalice au fost asamblate si aliniate, urmate de montarea modulelor fotovoltaice. Echipele au lucrat pe sectoare pentru a pastra un flux controlat."
+            },
+            {
+              "title": "Control si predare",
+              "description": "Etapele civile si mecanice au fost inspectate pe masura finalizarii. Observatiile au fost urmarite pana la inchidere, iar zonele conforme au fost predate documentat."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/catania/catania-01.webp",
+              "alt": "MAAS - Catania, Italia - fotografie 1 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/catania/catania-02.webp",
+              "alt": "MAAS - Catania, Italia - fotografie 2 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/catania/catania-03.webp",
+              "alt": "MAAS - Catania, Italia - fotografie 3 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/catania/representative-04.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/catania/representative-05.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/catania/representative-06.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/catania/representative-07.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/catania/representative-08.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/catania/representative-09.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/catania/representative-10.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "it003-piombino-italy",
+          "order": 18,
+          "enabled": true,
+          "category": "Montaj mecanic",
+          "title": "IT003 Piombino, Italia",
+          "image": "/projects/portfolio-2026/piombino/piombino-01.webp",
+          "alt": "Proiectul fotovoltaic IT003 Piombino, Italia",
+          "projectDate": "2025",
+          "projectCategory": "Instalatii mecanice",
+          "location": "Piombino, Toscana, Italia",
+          "capacity": "22 MW",
+          "capacityKw": "22,000 kW",
+          "capacityNote": "Puterea totala a proiectului",
+          "projectStatus": "Finalizat",
+          "client": "Solarig",
+          "projectManager": "Mario Aurelian Sasu",
+          "about": "Proiect fotovoltaic de 22 MW realizat la Piombino pentru Solarig.",
+          "description": "Executia mecanica a inclus pilotii, structurile si modulele, cu verificari stricte de calitate.",
+          "scope": [
+            {
+              "title": "Pozitionare si piloti",
+              "description": "Trasarea a stabilit reperele randurilor, iar pilotii au fost instalati conform succesiunii de executie. Pozitia lor a fost verificata inainte de montarea elementelor metalice."
+            },
+            {
+              "title": "Structuri metalice",
+              "description": "Subansamblurile au fost distribuite, asamblate si aliniate pe teren. Controlul fixarilor a permis predarea etapizata catre echipele de module."
+            },
+            {
+              "title": "Module fotovoltaice",
+              "description": "Modulele au fost instalate pe randurile receptionate mecanic, cu verificarea starii la manipulare. Montajul a fost organizat pentru a pastra accesul liber intre fronturi."
+            },
+            {
+              "title": "Asigurarea calitatii",
+              "description": "Echipele au documentat progresul si au verificat alinierea, fixarile si completitudinea lucrarilor. Punctele identificate au fost corectate inainte de predare."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/piombino/piombino-01.webp",
+              "alt": "IT003 Piombino, Italia - fotografie 1 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/piombino/piombino-02.webp",
+              "alt": "IT003 Piombino, Italia - fotografie 2 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/piombino/representative-03.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/piombino/representative-04.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/piombino/representative-05.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/piombino/representative-06.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/piombino/representative-07.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/piombino/representative-08.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/piombino/representative-09.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/piombino/representative-10.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "rinnovabili-italy",
+          "order": 19,
+          "enabled": true,
+          "category": "Montaj mecanic",
+          "title": "Rinnovabili, Italia",
+          "image": "/projects/portfolio-2026/rinnovabili/rinnovabili-01.webp",
+          "alt": "Proiectul fotovoltaic Rinnovabili, Italia",
+          "projectDate": "2024",
+          "projectCategory": "Instalatii mecanice",
+          "location": "Montalto di Castro, Lazio, Italia",
+          "capacity": "21.50 MW",
+          "capacityKw": "21,500 kW",
+          "capacityNote": "Puterea totala a proiectului",
+          "projectStatus": "Finalizat",
+          "client": "Circet S.p.A.",
+          "projectManager": "Valentin Cotoi",
+          "about": "Proiect mecanic de 21.50 MW realizat la Montalto di Castro.",
+          "description": "Lucrarile au fost predate pregatite pentru etapa electrica dupa instalarea pilotilor, structurilor si modulelor.",
+          "scope": [
+            {
+              "title": "Instalare piloti",
+              "description": "Pilotii au fost instalati dupa reperele stabilite in teren, pe masura eliberarii fronturilor. Verificarile de pozitie au pregatit randurile pentru structurile de sustinere."
+            },
+            {
+              "title": "Asamblare si aliniere",
+              "description": "Structurile au fost montate si ajustate pentru obtinerea unei geometrii uniforme. Fixarile au fost verificate inainte de transferul zonei catre etapa urmatoare."
+            },
+            {
+              "title": "Montaj fotovoltaic",
+              "description": "Modulele au fost distribuite si instalate pe structurile finalizate, cu inspectie vizuala permanenta. Randurile au fost inchise progresiv pentru a evita lucrarile ramase dispersate."
+            },
+            {
+              "title": "Pregatire pentru etapa electrica",
+              "description": "Dupa controlul mecanic, zonele au fost curatate si predate pentru continuarea instalatiilor. Observatiile de executie au fost remediate inainte de eliberarea fronturilor."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/rinnovabili/rinnovabili-02.webp",
+              "alt": "Rinnovabili, Italia - fotografie 2 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/rinnovabili/representative-02.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 2",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/rinnovabili/representative-03.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/rinnovabili/representative-04.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/rinnovabili/representative-05.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/rinnovabili/representative-06.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/rinnovabili/representative-07.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/rinnovabili/representative-08.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/rinnovabili/representative-09.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/rinnovabili/representative-10.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "volta-italy",
+          "order": 20,
+          "enabled": true,
+          "category": "Montaj mecanic",
+          "title": "Volta, Italia",
+          "image": "/projects/portfolio-2026/volta/volta-01.webp",
+          "alt": "Proiectul fotovoltaic Volta, Italia",
+          "projectDate": "2024",
+          "projectCategory": "Instalatii mecanice",
+          "location": "Lazio, Italia",
+          "capacity": "21.50 MW",
+          "capacityKw": "21,500 kW",
+          "capacityNote": "Puterea totala a proiectului",
+          "projectStatus": "Finalizat",
+          "client": "Circet S.p.A.",
+          "projectManager": "Valentin Cotoi",
+          "about": "Proiect fotovoltaic de 21.50 MW livrat in regiunea Lazio.",
+          "description": "Greentech a executat instalarea pilotilor, asamblarea structurilor si montarea modulelor.",
+          "scope": [
+            {
+              "title": "Trasarea randurilor",
+              "description": "Echipele au verificat reperele de teren si au organizat succesiunea fronturilor. Accesul utilajelor si distributia componentelor au fost corelate cu etapa de pilotaj."
+            },
+            {
+              "title": "Piloti si structuri",
+              "description": "Pilotii au fost instalati, apoi structurile metalice au fost asamblate si aliniate. Controlul mecanic intermediar a redus ajustarile in timpul montajului modulelor."
+            },
+            {
+              "title": "Instalarea panourilor",
+              "description": "Modulele fotovoltaice au fost montate pe zone receptionate, cu manipulare controlata si verificarea prinderilor. Lucrul etapizat a mentinut clar progresul fiecarui rand."
+            },
+            {
+              "title": "Inspectie de inchidere",
+              "description": "Ultima parcurgere a urmarit completitudinea, alinierea si starea vizuala a componentelor. Remedierile au fost executate inainte de predarea mecanica."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/volta/volta-01.webp",
+              "alt": "Volta, Italia - fotografie 1 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/volta/volta-02.webp",
+              "alt": "Volta, Italia - fotografie 2 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/volta/volta-03.webp",
+              "alt": "Volta, Italia - fotografie 3 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/volta/representative-04.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/volta/representative-05.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/volta/representative-06.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/volta/representative-07.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/volta/representative-08.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/volta/representative-09.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/volta/representative-10.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "porto-torres-italy",
+          "order": 21,
+          "enabled": true,
+          "category": "Montaj mecanic",
+          "title": "Porto Torres, Italia",
+          "image": "/projects/portfolio-2026/porto-torres/porto-torres-01.webp",
+          "alt": "Proiectul fotovoltaic Porto Torres, Italia",
+          "projectDate": "2023",
+          "projectCategory": "Constructie parc fotovoltaic",
+          "location": "Porto Torres, Sardinia, Italia",
+          "capacity": "19.47 MW",
+          "capacityKw": "19,470 kW",
+          "capacityNote": "Puterea totala a proiectului",
+          "projectStatus": "Finalizat",
+          "client": "",
+          "projectManager": "",
+          "about": "Proiect fotovoltaic de 19.47 MW realizat la Porto Torres, in Sardinia.",
+          "description": "Echipele Greentech au asamblat structurile si au montat modulele fotovoltaice.",
+          "scope": [
+            {
+              "title": "Pregatirea zonelor",
+              "description": "Fronturile de lucru au fost organizate pentru distributia structurilor si modulelor. Materialele au fost pozitionate astfel incat montajul sa avanseze fara blocarea accesului."
+            },
+            {
+              "title": "Structuri de sustinere",
+              "description": "Ansamblurile metalice au fost montate, aliniate si verificate pe fiecare rand. Zonele conforme au fost predate succesiv pentru instalarea modulelor."
+            },
+            {
+              "title": "Module fotovoltaice",
+              "description": "Panourile au fost instalate si fixate pe structurile pregatite, cu control vizual in timpul manipularii. Echipele au urmarit uniformitatea si completitudinea randurilor."
+            },
+            {
+              "title": "Control si receptie",
+              "description": "Inspectia finala a acoperit fixarile, alinierea si elementele ramase de completat. Observatiile au fost inchise inainte de predarea pachetului mecanic."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/porto-torres/porto-torres-01.webp",
+              "alt": "Porto Torres, Italia - fotografie 1 din santier"
+            },
+            {
+              "src": "/projects/portfolio-2026/porto-torres/representative-02.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 2",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/porto-torres/representative-03.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/porto-torres/representative-04.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/porto-torres/representative-05.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/porto-torres/representative-06.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/porto-torres/representative-07.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/porto-torres/representative-08.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/porto-torres/representative-09.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/porto-torres/representative-10.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
+        },
+        {
+          "id": "sabaudia-italy",
+          "order": 22,
+          "enabled": true,
+          "category": "Montaj mecanic",
+          "title": "Sabaudia, Italia",
+          "image": "/projects/portfolio-2026/sabaudia/sabaudia-01.webp",
+          "alt": "Proiectul fotovoltaic Sabaudia, Italia",
+          "projectDate": "2024",
+          "projectCategory": "Constructie parc fotovoltaic",
+          "location": "Sabaudia, Italia",
+          "capacity": "10 MW",
+          "capacityKw": "10,000 kW",
+          "capacityNote": "Puterea totala a proiectului",
+          "projectStatus": "Finalizat",
+          "client": "",
+          "projectManager": "",
+          "about": "Proiect fotovoltaic de 10 MW finalizat la Sabaudia.",
+          "description": "Pachetul Greentech a inclus structurile de sustinere si instalarea modulelor fotovoltaice.",
+          "scope": [
+            {
+              "title": "Organizarea executiei",
+              "description": "Structurile si modulele au fost pregatite pe sectoare, in ordinea montajului. Fronturile au fost mentinute clare pentru o circulatie sigura si un progres usor de urmarit."
+            },
+            {
+              "title": "Montaj structural",
+              "description": "Elementele de sustinere au fost asamblate si aliniate conform configuratiei parcului. Verificarile mecanice au precedat instalarea panourilor."
+            },
+            {
+              "title": "Instalarea modulelor",
+              "description": "Modulele fotovoltaice au fost pozitionate, fixate si inspectate dupa montaj. Echipele au inchis complet fiecare sector inainte de mutarea pe urmatorul front."
+            },
+            {
+              "title": "Finalizare si predare",
+              "description": "Lucrarile au fost controlate pentru completitudine, aliniere si integritate vizuala. Punctele ramase au fost remediate inaintea receptiei mecanice."
+            }
+          ],
+          "gallery": [
+            {
+              "src": "/projects/portfolio-2026/sabaudia/representative-01.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 1",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sabaudia/representative-02.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 2",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sabaudia/representative-03.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 3",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sabaudia/representative-04.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 4",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sabaudia/representative-05.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 5",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sabaudia/representative-06.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 6",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sabaudia/representative-07.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 7",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sabaudia/representative-08.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 8",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sabaudia/representative-09.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 9",
+              "representative": true
+            },
+            {
+              "src": "/projects/portfolio-2026/sabaudia/representative-10.webp",
+              "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 10",
+              "representative": true
+            }
+          ],
+          "sourceUrl": ""
         }
       ]
     },
@@ -1148,64 +2837,1264 @@
     "blog": {
       "posts": [
         {
-          "slug": "inside-butimanu-300mw",
+          "slug": "project-journal-corbii-mari-romania",
           "status": "published",
-          "id": "inside-butimanu-300mw",
+          "id": "project-journal-corbii-mari-romania",
           "order": 1,
           "enabled": true,
           "featured": true,
-          "category": "Actualizare din santier",
-          "date": "2025-08-28",
-          "dateLabel": "28 august 2025",
+          "pinned": false,
+          "category": "Jurnal de santier",
+          "date": "2026-08-18",
+          "dateLabel": "18 august 2026",
           "readTime": "3 minute",
-          "title": "Butimanu: coordonarea lucrarilor pe un santier de 300 MW",
-          "excerpt": "Montajul electric si mecanic la scara mare cere planificare zilnica, trasee clare si coordonare intre echipe.",
-          "image": "/projects/butimanu/butimanu-02.jpg",
-          "alt": "Lucrari in santierul fotovoltaic Butimanu",
-          "intro": "La Butimanu, echipele Greentech Professionals participa la lucrarile electrice si mecanice pentru un parc fotovoltaic de 300 MW.",
+          "title": "Corbii Mari: cum se pastreaza ritmul pe un proiect de 274 MW",
+          "excerpt": "Pe un santier mare, progresul nu vine dintr-o singura operatiune spectaculoasa, ci din sute de predari mici facute la timp.",
+          "image": "/projects/portfolio-2026/corbii-mari/corbii-mari-01.webp",
+          "alt": "Corbii Mari, Romania - fotografie 1 din santier",
+          "intro": "La Corbii Mari, lucrarile mecanice si electrice se desfasoara pe fronturi succesive. Dimensiunea proiectului cere disciplina in planificare, mai ales atunci cand vremea si accesul in teren schimba ordinea stabilita cu o zi inainte.",
           "sections": [
             {
-              "title": "Lucrari coordonate pe un amplasament extins",
+              "title": "Planul de dimineata trebuie sa functioneze si in teren",
               "paragraphs": [
-                "Peste 200 de profesionisti au fost implicati in proiect, alaturi de o echipa de management dedicata coordonarii activitatilor din santier.",
-                "Planificarea zilnica sincronizeaza fronturile de lucru electrice si mecanice si reduce blocajele dintre etape."
+                "O zi buna incepe cu fronturi clare: unde intra utilajele, ce materiale ajung in zona si cine preia lucrarea dupa instalarea pilotilor. Pe hartie, succesiunea pare simpla. In santier, ea trebuie ajustata fara sa incurce echipele care lucreaza deja.",
+                "La o mobilizare care poate ajunge la 300 de oameni, o schimbare mica se propaga repede. Coordonatorii urmaresc accesul, stocurile si zonele receptionate, astfel incat montajul mecanic si cablarea sa nu isi blocheze reciproc traseele."
               ]
             },
             {
-              "title": "De la structuri la instalatia electrica",
+              "title": "Iarna pune ordine in lucrurile importante",
               "paragraphs": [
-                "Lucrarile includ montajul structurilor si modulelor, pozarea cablurilor si executia instalatiilor electrice.",
-                "Fiecare zona este verificata inainte de predare, iar progresul este urmarit impreuna cu echipele implicate in proiect."
+                "Lucrul in sezonul rece obliga echipa sa fie mai atenta la teren, manipulare si timpii reali dintre operatiuni. Nu toate zonele pot fi tratate la fel, iar decizia corecta este uneori sa muti frontul, nu sa fortezi executia.",
+                "Pilotii, structurile si modulele avanseaza numai dupa verificarea etapei anterioare. Aceasta rutina poate parea lenta la nivelul unui singur rand, dar evita remedieri costisitoare atunci cand proiectul se masoara in sute de megawati."
+              ]
+            },
+            {
+              "title": "Predarea zilnica tine proiectul sub control",
+              "paragraphs": [
+                "La finalul schimbului, progresul util inseamna zone complete, nu doar multe operatiuni incepute. Echipele inchid punctele deschise, noteaza neconformitatile si pregatesc frontul pentru ziua urmatoare.",
+                "Corbii Mari este, in primul rand, un exercitiu de coordonare. Tehnologia este cunoscuta; diferenta o face felul in care oamenii, utilajele si materialele ajung in acelasi loc, in ordinea potrivita."
               ]
             }
           ],
           "highlights": [
             {
-              "value": "300 MW",
-              "label": "Capacitatea parcului fotovoltaic"
+              "value": "274 MW",
+              "label": "Capacitatea proiectului"
             },
             {
-              "value": "200+",
-              "label": "Profesionisti implicati in santier"
+              "value": "300",
+              "label": "Varf de mobilizare in santier"
             },
             {
-              "value": "Butimanu",
+              "value": "2026",
+              "label": "Proiect in derulare"
+            }
+          ],
+          "relatedProjectId": "corbii-mari-romania",
+          "sourceUrl": ""
+        },
+        {
+          "slug": "project-journal-burgos-spain",
+          "status": "published",
+          "id": "project-journal-burgos-spain",
+          "order": 2,
+          "enabled": true,
+          "featured": false,
+          "pinned": false,
+          "category": "Executie europeana",
+          "date": "2026-08-14",
+          "dateLabel": "14 august 2026",
+          "readTime": "3 minute",
+          "title": "Burgos: un proiect de 220 MW construit pe fronturi bine delimitate",
+          "excerpt": "Cand mecanicul si electricul avanseaza impreuna, ordinea din santier devine la fel de importanta ca viteza de montaj.",
+          "image": "/projects/portfolio-2026/burgos/burgos-01.webp",
+          "alt": "Burgos, Spania - fotografie 1 din santier",
+          "intro": "Proiectul din Burgos reuneste pilotaj, structuri tracker, module si instalatii electrice intr-un singur program de executie. Pentru echipa Greentech, miza este ca fiecare zona sa ajunga completa la urmatoarea disciplina.",
+          "sections": [
+            {
+              "title": "Un front deschis trebuie sa aiba un proprietar",
+              "paragraphs": [
+                "Pe amplasamente extinse, zonele neterminate se transforma repede in obstacole. De aceea, fiecare front are o succesiune clara: trasare, piloti, ansamblare, reglaj, module si apoi lucrarile electrice.",
+                "Materialele sunt distribuite in functie de progresul real, nu doar de planul saptamanii. Asta reduce mutarile inutile si lasa drumurile interioare libere pentru utilaje si aprovizionare."
+              ]
+            },
+            {
+              "title": "Trackerul cere precizie inainte sa poarte module",
+              "paragraphs": [
+                "La o structura cu urmarire, o abatere mica se poate transmite pe lungimea randului. Echipele verifica alinierea si miscarea ansamblului inainte ca modulele sa fie montate si greutatea sistemului sa creasca.",
+                "Reglajele facute la momentul potrivit sunt mai simple si mai sigure. Dupa incarcare, accesul la unele componente devine mai dificil, iar o corectie minora poate consuma mult mai mult timp."
+              ]
+            },
+            {
+              "title": "Cablarea urmeaza un santier deja ordonat",
+              "paragraphs": [
+                "Traseele DC si AC au nevoie de spatiu, repere si zone mecanice receptionate. Cablurile nu sunt doar pozate; ele trebuie protejate, ordonate si lasate intr-o configuratie care poate fi verificata usor.",
+                "La Burgos, progresul se vede in predari curate. O zona finalizata mecanic si electric poate intra in testare fara ca echipa sa revina de mai multe ori pentru lucruri marunte ramase in urma."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "220 MW",
+              "label": "Putere instalata"
+            },
+            {
+              "value": "Solaria",
+              "label": "Clientul proiectului"
+            },
+            {
+              "value": "Burgos",
+              "label": "Castilla y Leon, Spania"
+            }
+          ],
+          "relatedProjectId": "burgos-spain",
+          "sourceUrl": ""
+        },
+        {
+          "slug": "project-journal-valter-maracineanu-romania",
+          "status": "published",
+          "id": "project-journal-valter-maracineanu-romania",
+          "order": 3,
+          "enabled": true,
+          "featured": false,
+          "pinned": false,
+          "category": "Montaj mecanic",
+          "date": "2026-08-10",
+          "dateLabel": "10 august 2026",
+          "readTime": "3 minute",
+          "title": "Valter Maracineanu: repetitia bine controlata pe 178 MW",
+          "excerpt": "Intr-un parc fotovoltaic, aceeasi operatie se repeta de mii de ori. Calitatea vine din felul in care ramane constanta.",
+          "image": "/projects/portfolio-2026/valter-maracineanu/valter-maracineanu-01.webp",
+          "alt": "Valter Maracineanu, Romania - fotografie 1 din santier",
+          "intro": "La Iepuresti, echipele Greentech monteaza structurile de sustinere si modulele unui proiect de 178 MW. Este un pachet mecanic in care logistica si verificarile scurte fac diferenta dintre ritm si graba.",
+          "sections": [
+            {
+              "title": "Materialul potrivit, la randul potrivit",
+              "paragraphs": [
+                "O buna parte din eficienta se decide inainte ca o cheie sa fie folosita. Componentele trebuie sortate, transportate si asezate aproape de locul montajului, fara sa incarce inutil frontul.",
+                "Cand distributia este facuta corect, echipa lucreaza continuu. Cand lipseste o piesa sau un palet ajunge in alta zona, ritmul se rupe si problema se multiplica pe fiecare rand care urmeaza."
+              ]
+            },
+            {
+              "title": "Structura se verifica inainte de panou",
+              "paragraphs": [
+                "Alinierea, prinderile si geometria ansamblului sunt controlate cat timp accesul este bun. Modulele nu ar trebui sa ascunda o problema care putea fi rezolvata simplu cu cateva minute mai devreme.",
+                "Aceasta disciplina protejeaza si modulele. O structura pregatita corect inseamna mai putina fortare la montaj si un rand care se inchide uniform, fara improvizatii."
+              ]
+            },
+            {
+              "title": "Calitatea se vede la ultima parcurgere",
+              "paragraphs": [
+                "Dupa montaj, randurile sunt parcurse din nou. Echipa cauta elemente lipsa, prinderi neuniforme, urme de manipulare si orice detaliu care poate deveni o observatie la receptie.",
+                "La aceasta scara, controlul nu este o etapa separata de productie. Este parte din montaj, repetata in fiecare zona pana cand frontul poate fi predat fara resturi."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "178 MW",
+              "label": "Capacitatea totala"
+            },
+            {
+              "value": "Iepuresti",
               "label": "Amplasamentul proiectului"
+            },
+            {
+              "value": "Mecanic",
+              "label": "Structuri si module"
+            }
+          ],
+          "relatedProjectId": "valter-maracineanu-romania",
+          "sourceUrl": ""
+        },
+        {
+          "slug": "inside-butimanu-300mw",
+          "status": "published",
+          "id": "inside-butimanu-300mw",
+          "order": 4,
+          "enabled": true,
+          "featured": false,
+          "pinned": false,
+          "category": "Jurnal de santier",
+          "date": "2026-08-06",
+          "dateLabel": "6 august 2026",
+          "readTime": "3 minute",
+          "title": "Butimanu: ce inseamna coordonarea zilnica pe 297 MW",
+          "excerpt": "Pana la 300 de profesionisti, lucrari mecanice si electrice si un program care se recalculeaza in fiecare dimineata.",
+          "image": "/projects/portfolio-2026/butimanu/butimanu-01.webp",
+          "alt": "Butimanu, Romania - fotografie 1 din santier",
+          "intro": "Butimanu este unul dintre acele santiere unde scara se intelege abia din teren. Randurile se pierd in distanta, iar fiecare decizie de logistica trebuie gandita cu cateva etape inainte.",
+          "sections": [
+            {
+              "title": "Santierul se castiga dimineata",
+              "paragraphs": [
+                "Sedinta scurta de inceput stabileste mai mult decat tintele zilei. Sunt discutate accesul utilajelor, livrarile, zonele receptionate si punctele care pot bloca echipa urmatoare.",
+                "La un varf de mobilizare de aproximativ 300 de oameni, informatia trebuie sa ajunga repede la sefi de echipa. Un front mutat la timp poate salva ore; unul anuntat tarziu poate lasa materiale si oameni in locul gresit."
+              ]
+            },
+            {
+              "title": "Mecanicul pregateste terenul pentru electric",
+              "paragraphs": [
+                "Pilotii, structurile si modulele dau forma parcului, dar predarea lor influenteaza direct cablarea. Traseele trebuie sa ramana accesibile, componentele protejate, iar randurile sa fie inchise intr-o ordine usor de urmarit.",
+                "Echipele electrice preiau zone care au trecut deja prin controlul mecanic. Cablarea DC si AC, conexiunile si verificarile pot astfel sa avanseze fara intoarceri repetate in acelasi sector."
+              ]
+            },
+            {
+              "title": "Progresul real inseamna lucrari inchise",
+              "paragraphs": [
+                "Numarul de operatiuni incepute spune putin daca raman puncte deschise in urma. La Butimanu, progresul este urmarit prin zone complete, verificate si pregatite pentru testare.",
+                "Este o regula simpla, dar importanta: pleci dintr-un front doar dupa ce stii cine il preia si ce mai ramane de facut. Asa se pastreaza controlul pe un proiect de 297 MW."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "297 MW",
+              "label": "Capacitatea proiectului"
+            },
+            {
+              "value": "300",
+              "label": "Profesionisti la varf de mobilizare"
+            },
+            {
+              "value": "AJ Brand",
+              "label": "Clientul proiectului"
             }
           ],
           "relatedProjectId": "butimanu-romania",
-          "primaryAction": {
-            "type": "proiect",
-            "label": "Vezi proiectul Butimanu"
-          },
-          "sourceUrl": "https://greentechpro.ro/",
-          "pinned": true
+          "sourceUrl": ""
+        },
+        {
+          "slug": "project-journal-pfv-guillena-spain",
+          "status": "published",
+          "id": "project-journal-pfv-guillena-spain",
+          "order": 5,
+          "enabled": true,
+          "featured": false,
+          "pinned": false,
+          "category": "Studiu de proiect",
+          "date": "2026-07-29",
+          "dateLabel": "29 iulie 2026",
+          "readTime": "3 minute",
+          "title": "Guillena 400 & 220: doua amplasamente, un singur ritm de lucru",
+          "excerpt": "Doua parcuri de 110 MW si 115 MW au cerut o planificare comuna, dar decizii adaptate fiecarui teren.",
+          "image": "/projects/portfolio-2026/guillena/guillena-01.webp",
+          "alt": "PFV Guillena 400 & 220, Spania - fotografie 1 din santier",
+          "intro": "Programul Guillena a reunit doua amplasamente din provincia Sevilla si peste 120 de profesionisti. Lucrarile au acoperit pilotajul, trackerele, modulele, cablarea DC si AC si pregatirea pentru pornire.",
+          "sections": [
+            {
+              "title": "Planul comun nu anuleaza diferentele dintre santiere",
+              "paragraphs": [
+                "Cele doua amplasamente au impartit resurse, echipe si aceeasi tinta de livrare. Totusi, fiecare a avut propriul ritm de acces, distributie si receptie a fronturilor.",
+                "Coordonarea a insemnat sa muti resursele fara sa creezi o lipsa in celalalt santier. Deciziile au fost luate pe progres masurat, nu pe impresia ca o zona pare aproape gata."
+              ]
+            },
+            {
+              "title": "Trackerul leaga mai multe meserii",
+              "paragraphs": [
+                "Instalarea unui sistem tracker trece prin pilotaj, asamblare, aliniere, reglaj si montarea modulelor. Fiecare echipa lasa in urma conditia de pornire pentru urmatoarea.",
+                "Daca reglajul mecanic este amanat, problema ajunge in montajul modulelor. Daca randul este receptionat corect, echipa electrica poate lucra cu trasee clare si acces previzibil."
+              ]
+            },
+            {
+              "title": "Ultimii metri pana la punerea in functiune",
+              "paragraphs": [
+                "Cablarea si conexiunile sunt urmate de verificari, identificari si inchiderea observatiilor. Este o etapa in care ordinea documentelor trebuie sa reflecte exact ordinea din teren.",
+                "Guillena a aratat ca doua santiere pot functiona ca un singur program doar atunci cand fiecare isi pastreaza evidentele si responsabilitatile foarte clare."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "225 MW",
+              "label": "Capacitate cumulata"
+            },
+            {
+              "value": "120+",
+              "label": "Profesionisti implicati"
+            },
+            {
+              "value": "2",
+              "label": "Amplasamente coordonate"
+            }
+          ],
+          "relatedProjectId": "pfv-guillena-spain",
+          "sourceUrl": ""
+        },
+        {
+          "slug": "project-journal-ottana-italy",
+          "status": "published",
+          "id": "project-journal-ottana-italy",
+          "order": 6,
+          "enabled": true,
+          "featured": false,
+          "pinned": false,
+          "category": "Din arhiva de proiect",
+          "date": "2026-07-22",
+          "dateLabel": "22 iulie 2026",
+          "readTime": "3 minute",
+          "title": "Ottana: cum se inchide corect un pachet mecanic de 89,13 MW",
+          "excerpt": "Un proiect mecanic nu se termina la ultimul modul montat, ci la ultimul punct verificat si predat.",
+          "image": "/projects/portfolio-2026/ottana/ottana-01.webp",
+          "alt": "Ottana, Italia - fotografie 1 din santier",
+          "intro": "La Ottana, in Sardinia, Greentech a executat pilotii, structurile si modulele unui parc de 89,13 MW. Lucrarea a fost livrata impreuna cu Circet S.p.A., cu accent pe finalizarea mecanica a fiecarui sector.",
+          "sections": [
+            {
+              "title": "Pilotajul stabileste calitatea randului",
+              "paragraphs": [
+                "Pozitia pilotilor influenteaza tot ce urmeaza. Verificarile facute imediat dupa instalare sunt mai valoroase decat ajustarile tarzii, cand structura este deja asamblata.",
+                "Echipele au urmarit cotele si alinierea pe masura avansului. Astfel, montajul metalic a preluat fronturi pregatite, nu probleme amanate."
+              ]
+            },
+            {
+              "title": "Structura trebuie sa ajunga stabila la echipa de module",
+              "paragraphs": [
+                "Subansamblurile au fost distribuite si montate intr-o ordine care a pastrat accesul intre randuri. Fixarile si geometria au fost controlate inainte de incarcarea cu module.",
+                "Aceasta verificare intermediara scurteaza receptia si protejeaza panourile de forte sau pozitii neprevazute in timpul montajului."
+              ]
+            },
+            {
+              "title": "Mechanical completion, fara resturi ascunse",
+              "paragraphs": [
+                "Ultima parcurgere a unui sector cauta lucrurile mici: o prindere incompleta, un element ramas, o aliniere care merita corectata. Pe zeci de megawati, aceste detalii se pot aduna repede.",
+                "La Ottana, predarea a urmat inchiderea observatiilor, nu doar terminarea productiei. Pentru echipa urmatoare, aceasta diferenta inseamna un front curat si previzibil."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "89,13 MW",
+              "label": "Capacitatea parcului"
+            },
+            {
+              "value": "Sardinia",
+              "label": "Regiunea proiectului"
+            },
+            {
+              "value": "Mecanic",
+              "label": "Piloti, structuri si module"
+            }
+          ],
+          "relatedProjectId": "ottana-italy",
+          "sourceUrl": ""
+        },
+        {
+          "slug": "project-journal-codigoro-italy",
+          "status": "published",
+          "id": "project-journal-codigoro-italy",
+          "order": 7,
+          "enabled": true,
+          "featured": false,
+          "pinned": false,
+          "category": "Montaj mecanic",
+          "date": "2026-07-15",
+          "dateLabel": "15 iulie 2026",
+          "readTime": "3 minute",
+          "title": "Codigoro: logistica din spatele unui montaj de 77,30 MW",
+          "excerpt": "Cand componentele ajung in ordinea potrivita, echipa poate monta continuu si lasa in urma randuri complete.",
+          "image": "/projects/portfolio-2026/codigoro/codigoro-01.webp",
+          "alt": "Codigoro, Italia - fotografie 1 din santier",
+          "intro": "Proiectul Codigoro a avut un pachet concentrat pe structurile de sustinere si modulele fotovoltaice. La 77,30 MW, logistica materialelor a fost parte din executie, nu o activitate auxiliara.",
+          "sections": [
+            {
+              "title": "Depozitul din santier nu trebuie sa devina labirint",
+              "paragraphs": [
+                "Materialele au fost impartite pe zone si secvente de montaj. O eticheta clara si un traseu liber economisesc mai mult timp decat pare, mai ales cand aceeasi componenta este cautata de mai multe echipe.",
+                "Supraaglomerarea frontului produce miscari suplimentare si riscuri de deteriorare. La Codigoro, distributia a urmat progresul real al randurilor."
+              ]
+            },
+            {
+              "title": "Alinierea nu se corecteaza cu modulul in mana",
+              "paragraphs": [
+                "Structurile au fost verificate inainte de montarea panourilor. Echipa a urmarit pozitia, fixarile si continuitatea randului cat timp toate punctele erau usor accesibile.",
+                "Cand aceasta etapa este tratata serios, montajul modulelor devine previzibil. Panoul ajunge la pozitie, este fixat si randul poate fi inchis fara opriri pentru ajustari tarzii."
+              ]
+            },
+            {
+              "title": "O receptie buna incepe in timpul montajului",
+              "paragraphs": [
+                "Controlul calitatii nu a fost lasat pentru finalul proiectului. Observatiile au fost transmise si rezolvate pe sectoare, cat echipa si materialele erau inca aproape.",
+                "Aceasta abordare a pastrat lista finala scurta si a facut predarea mecanica mai clara pentru toate partile implicate."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "77,30 MW",
+              "label": "Puterea proiectului"
+            },
+            {
+              "value": "CAF Italia",
+              "label": "Partener de proiect"
+            },
+            {
+              "value": "2024",
+              "label": "Anul executiei"
+            }
+          ],
+          "relatedProjectId": "codigoro-italy",
+          "sourceUrl": ""
+        },
+        {
+          "slug": "project-journal-sunkingdom-giurgiu-romania",
+          "status": "published",
+          "id": "project-journal-sunkingdom-giurgiu-romania",
+          "order": 8,
+          "enabled": true,
+          "featured": false,
+          "pinned": false,
+          "category": "Tehnic, din santier",
+          "date": "2026-07-08",
+          "dateLabel": "8 iulie 2026",
+          "readTime": "3 minute",
+          "title": "Giurgiu: ce verificam la un sistem tracker pe o singura axa",
+          "excerpt": "Un tracker bun nu inseamna doar componente montate, ci un rand care se misca uniform si ramane usor de intretinut.",
+          "image": "/projects/portfolio-2026/giurgiu/giurgiu-01.webp",
+          "alt": "Sunkingdom - Giurgiu, Romania - fotografie 1 din santier",
+          "intro": "La proiectul Sunkingdom din Giurgiu, pachetul mecanic a inclus structuri tracker, reglaje, module si inspectii. Cei 74,33 MW au adus in prim-plan precizia repetata pe fiecare rand.",
+          "sections": [
+            {
+              "title": "Miscarea se pregateste din montaj",
+              "paragraphs": [
+                "Componentele unui tracker sunt legate intre ele pe lungimea randului. O pozitie gresita sau o prindere fortata poate influenta miscarea mai departe decat punctul in care apare.",
+                "De aceea, echipa verifica alinierea in etape. Este mai usor sa corectezi un ansamblu partial decat un rand incarcat complet cu module."
+              ]
+            },
+            {
+              "title": "Calibrarea nu este o formalitate",
+              "paragraphs": [
+                "Reglajele urmaresc cursa libera, pozitia elementelor si absenta interferentelor. Un sistem care se misca trebuie verificat dinamic, nu doar privit dintr-un singur unghi.",
+                "Rezultatul cautat este repetabilitatea. Fiecare rand trebuie sa raspunda la fel, fara diferente care sa solicite inutil mecanismele."
+              ]
+            },
+            {
+              "title": "Modulele vin dupa receptia mecanica",
+              "paragraphs": [
+                "Panourile adauga greutate si reduc accesul la unele prinderi. Montajul lor incepe numai dupa ce structura este pregatita si punctele de control au fost inchise.",
+                "La Giurgiu, inspectiile pe zone au ajutat echipa sa predea randuri functionale, nu doar randuri care aratau finalizate."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "74,33 MW",
+              "label": "Capacitatea instalata"
+            },
+            {
+              "value": "1 axa",
+              "label": "Tipul structurii tracker"
+            },
+            {
+              "value": "Giurgiu",
+              "label": "Amplasamentul proiectului"
+            }
+          ],
+          "relatedProjectId": "sunkingdom-giurgiu-romania",
+          "sourceUrl": ""
+        },
+        {
+          "slug": "project-journal-pielesti-robanesti-craiova-romania",
+          "status": "published",
+          "id": "project-journal-pielesti-robanesti-craiova-romania",
+          "order": 9,
+          "enabled": true,
+          "featured": false,
+          "pinned": false,
+          "category": "Poveste de santier",
+          "date": "2026-07-01",
+          "dateLabel": "1 iulie 2026",
+          "readTime": "3 minute",
+          "title": "Pielesti si Robanesti: doua parcuri lucrate in aceeasi iarna",
+          "excerpt": "Peste 100 de oameni, doua amplasamente alaturate si un program mecanic care a trebuit adaptat zilnic terenului.",
+          "image": "/projects/portfolio-2026/craiova/craiova-01.webp",
+          "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 1 din santier",
+          "intro": "Cele doua parcuri din judetul Dolj au fost tratate ca un singur program de 59,89 MW. Pilotii, structurile fixe si modulele au avansat in conditii de iarna, cu echipe mutate intre fronturi dupa situatia reala din teren.",
+          "sections": [
+            {
+              "title": "Doua amplasamente inseamna doua viteze",
+              "paragraphs": [
+                "Chiar daca santierele sunt apropiate, accesul si starea fronturilor nu evolueaza identic. Intr-o zona poate intra utilajul de pilotaj, in timp ce alta este potrivita pentru structuri sau module.",
+                "Planificarea comuna a permis mutarea echipelor acolo unde puteau produce fara sa forteze terenul. Astfel, vremea a schimbat ordinea lucrarilor, nu tinta finala."
+              ]
+            },
+            {
+              "title": "Iarna cere fronturi mai scurte",
+              "paragraphs": [
+                "In conditii dificile, este mai sigur sa inchizi complet o zona mai mica decat sa deschizi multe randuri care raman vulnerabile. Materialele, utilajele si oamenii sunt mai usor de coordonat.",
+                "Echipele au urmarit succesiunea piloti, structuri si module pe sectoare care puteau fi receptionate rapid. Aceasta disciplina a redus lucrarile ramase dispersate."
+              ]
+            },
+            {
+              "title": "Finalizarea mecanica pune ordine in urma echipei",
+              "paragraphs": [
+                "Fiecare sector a fost verificat pentru aliniere, prinderi si completitudine. Observatiile au fost rezolvate inainte ca echipa sa isi mute definitiv resursele.",
+                "Pielesti si Robanesti au confirmat un lucru simplu: flexibilitatea functioneaza numai atunci cand progresul este masurat clar si predarile sunt consemnate."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "59,89 MW",
+              "label": "Capacitate cumulata"
+            },
+            {
+              "value": "100+",
+              "label": "Oameni implicati"
+            },
+            {
+              "value": "2",
+              "label": "Parcuri coordonate"
+            }
+          ],
+          "relatedProjectId": "pielesti-robanesti-craiova-romania",
+          "sourceUrl": ""
+        },
+        {
+          "slug": "project-journal-anguillara-italy",
+          "status": "published",
+          "id": "project-journal-anguillara-italy",
+          "order": 10,
+          "enabled": true,
+          "featured": false,
+          "pinned": false,
+          "category": "Din arhiva de proiect",
+          "date": "2026-06-24",
+          "dateLabel": "24 iunie 2026",
+          "readTime": "3 minute",
+          "title": "Anguillara: de ce conteaza randurile complet inchise",
+          "excerpt": "Pe 51,22 MW de structuri si module, lucrarile mici lasate in urma pot deveni cea mai lunga parte a receptiei.",
+          "image": "/projects/portfolio-2026/anguillara/anguillara-01.webp",
+          "alt": "Anguillara, Italia - fotografie 1 din santier",
+          "intro": "La Anguillara, Greentech a executat montajul structurilor si al modulelor. Proiectul arata bine valoarea unei metode simple: fiecare sector este terminat si controlat inainte ca echipa sa mute frontul.",
+          "sections": [
+            {
+              "title": "Ordinea materialelor dicteaza ordinea montajului",
+              "paragraphs": [
+                "Structurile si modulele au fost repartizate pe zone, evitand stocurile imprastiate printre randuri. Echipa a avut astfel acces la componentele necesare fara cautari si transporturi suplimentare.",
+                "Un front curat este si mai usor de verificat. Lipsurile se vad repede, iar materialele ramase nu se confunda cu lucrari deja executate."
+              ]
+            },
+            {
+              "title": "Repetitia trebuie sa ramana precisa",
+              "paragraphs": [
+                "Aceeasi operatie se repeta de multe ori, dar terenul si tolerantele nu sunt identice pe fiecare rand. Montatorii verifica pozitia si prinderile, nu lucreaza doar dupa memorie.",
+                "La module, manipularea conteaza la fel de mult ca fixarea. Un ritm bun nu presupune gesturi grabite, ci un traseu de lucru care elimina miscarile inutile."
+              ]
+            },
+            {
+              "title": "Lista de remedieri se tine scurta in fiecare zi",
+              "paragraphs": [
+                "Observatiile au fost inchise pe masura aparitiei, cat accesul si materialele erau disponibile. Amanarea lor pana la final ar fi insemnat intoarceri costisitoare prin tot parcul.",
+                "Rezultatul a fost o predare mecanica mai previzibila si o imagine clara asupra lucrarilor realmente finalizate."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "51,22 MW",
+              "label": "Capacitatea proiectului"
+            },
+            {
+              "value": "Italia",
+              "label": "Piata de executie"
+            },
+            {
+              "value": "Mecanic",
+              "label": "Structuri si module"
+            }
+          ],
+          "relatedProjectId": "anguillara-italy",
+          "sourceUrl": ""
+        },
+        {
+          "slug": "project-journal-marconi-italy",
+          "status": "published",
+          "id": "project-journal-marconi-italy",
+          "order": 11,
+          "enabled": true,
+          "featured": false,
+          "pinned": false,
+          "category": "Studiu de proiect",
+          "date": "2026-06-17",
+          "dateLabel": "17 iunie 2026",
+          "readTime": "3 minute",
+          "title": "Marconi: un pachet mecanic predat pas cu pas",
+          "excerpt": "Pilotii, structurile si modulele au fost urmarite ca un singur flux, nu ca trei lucrari separate.",
+          "image": "/projects/portfolio-2026/marconi/marconi-01.webp",
+          "alt": "Marconi, Italia - fotografie 1 din santier",
+          "intro": "Proiectul Marconi din Montalto di Castro a avut o capacitate de 49,52 MW. Greentech a lucrat alaturi de Circet S.p.A. la intregul lant mecanic, de la pilotaj pana la mechanical completion.",
+          "sections": [
+            {
+              "title": "Pilotul nu este doar inceputul randului",
+              "paragraphs": [
+                "Pozitia lui stabileste cat de usor se va monta structura si cat de multe ajustari vor fi necesare. Verificarea imediata pastreaza problema acolo unde poate fi rezolvata cel mai simplu.",
+                "Echipa a urmarit fronturile de pilotaj impreuna cu disponibilitatea componentelor metalice. Astfel, randurile pregatite au intrat rapid in asamblare."
+              ]
+            },
+            {
+              "title": "Montajul modulelor incepe cu o receptie",
+              "paragraphs": [
+                "Inaintea panourilor, structura este controlata pentru pozitie si fixari. Aceasta pauza scurta intre echipe evita ca o neconformitate sa fie acoperita si descoperita mai tarziu.",
+                "Modulele au fost apoi distribuite in ritmul randurilor eliberate, fara stocuri inutile in fata montatorilor."
+              ]
+            },
+            {
+              "title": "Mechanical completion inseamna o zona pe care te poti baza",
+              "paragraphs": [
+                "La inchidere, echipa a parcurs lucrarile cu o alta privire decat in productie. Nu mai conteaza cate piese au fost montate intr-o zi, ci daca sectorul este complet si documentat.",
+                "Aceasta predare ofera urmatoarei discipline un punct de pornire sigur si reduce discutiile despre responsabilitatea lucrarilor ramase."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "49,52 MW",
+              "label": "Capacitatea proiectului"
+            },
+            {
+              "value": "Lazio",
+              "label": "Regiunea proiectului"
+            },
+            {
+              "value": "Circet",
+              "label": "Partener de executie"
+            }
+          ],
+          "relatedProjectId": "marconi-italy",
+          "sourceUrl": ""
+        },
+        {
+          "slug": "project-journal-sandalia-cagliari-italy",
+          "status": "published",
+          "id": "project-journal-sandalia-cagliari-italy",
+          "order": 12,
+          "enabled": true,
+          "featured": false,
+          "pinned": false,
+          "category": "Montaj mecanic",
+          "date": "2026-06-10",
+          "dateLabel": "10 iunie 2026",
+          "readTime": "3 minute",
+          "title": "Sandalia: fluxul simplu care tine 45,40 MW in miscare",
+          "excerpt": "Materiale distribuite corect, structuri receptionate si module montate fara intoarceri inutile.",
+          "image": "/projects/portfolio-2026/sandalia/sandalia-01.webp",
+          "alt": "Sandalia - Cagliari, Italia - fotografie 1 din santier",
+          "intro": "In zona Cagliari, proiectul Sandalia a concentrat munca Greentech pe structuri si module. La aceasta scara, eficienta nu a venit din scurtaturi, ci dintr-un flux usor de inteles de fiecare echipa.",
+          "sections": [
+            {
+              "title": "Mai putine miscari, mai mult montaj",
+              "paragraphs": [
+                "Componentele au fost aduse aproape de zona de utilizare, dar fara sa ocupe traseele de acces. Echipa a avut materialul la indemana si suficient spatiu pentru manipulare.",
+                "Aceasta organizare reduce oboseala si riscul de deteriorare. Intr-un proiect repetitiv, cateva minute economisite la fiecare rand devin zile la final."
+              ]
+            },
+            {
+              "title": "Structura predata clar",
+              "paragraphs": [
+                "Randurile au fost aliniate si controlate inainte de sosirea modulelor. Montatorii au stiut astfel unde pot incepe si ce zone raman in reglaj.",
+                "Separarea vizibila dintre fronturile pregatite si cele in lucru a prevenit amestecarea responsabilitatilor si a materialelor."
+              ]
+            },
+            {
+              "title": "Ultimul control protejeaza munca intregii echipe",
+              "paragraphs": [
+                "Dupa montaj, panourile si prinderile au fost verificate din nou. Inspectia vizuala cauta urme de manipulare, elemente lipsa si diferente intre randuri.",
+                "La Sandalia, inchiderea pe sectoare a pastrat receptia aproape de productie si a limitat volumul remedierilor finale."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "45,40 MW",
+              "label": "Capacitatea proiectului"
+            },
+            {
+              "value": "Cagliari",
+              "label": "Zona de executie"
+            },
+            {
+              "value": "2023",
+              "label": "Anul proiectului"
+            }
+          ],
+          "relatedProjectId": "sandalia-cagliari-italy",
+          "sourceUrl": ""
+        },
+        {
+          "slug": "project-journal-pontinia-italy",
+          "status": "published",
+          "id": "project-journal-pontinia-italy",
+          "order": 13,
+          "enabled": true,
+          "featured": false,
+          "pinned": false,
+          "category": "Din teren",
+          "date": "2026-06-03",
+          "dateLabel": "3 iunie 2026",
+          "readTime": "3 minute",
+          "title": "Pontinia: un santier mecanic citit pe sectoare",
+          "excerpt": "Cand fiecare zona are o stare clara, echipa stie unde poate monta, unde trebuie sa verifice si unde nu trebuie sa intre.",
+          "image": "/projects/portfolio-2026/pontinia/pontinia-02.webp",
+          "alt": "Pontinia, Italia - fotografie 2 din santier",
+          "intro": "Pontinia este un proiect de 35,60 MW in care Greentech a montat structurile si modulele fotovoltaice. Organizarea pe sectoare a facut progresul vizibil si usor de predat.",
+          "sections": [
+            {
+              "title": "Un sector are nevoie de o stare, nu de o impresie",
+              "paragraphs": [
+                "Pregatit, in lucru, in control sau predat: aceste diferente trebuie sa fie cunoscute de toti cei care intra in zona. Altfel, doua echipe pot lucra pe aceeasi problema sau pot presupune ca a rezolvat-o cealalta.",
+                "La Pontinia, fronturile au fost deschise progresiv si marcate prin predari scurte intre coordonatori."
+              ]
+            },
+            {
+              "title": "Structura si modulul se trateaza ca acelasi lant",
+              "paragraphs": [
+                "Montajul metalic a fost urmat indeaproape de verificare si de echipa de module. Distanta mica dintre etape a redus timpul in care un rand ramanea deschis.",
+                "In acelasi timp, controlul nu a fost sarit. O structura nereceptionata nu a devenit front de module doar pentru ca materialul era deja aproape."
+              ]
+            },
+            {
+              "title": "Remedierea facuta la timp este parte din productie",
+              "paragraphs": [
+                "Observatiile apar in orice santier. Diferenta o face viteza cu care sunt clarificate si persoana care isi asuma inchiderea lor.",
+                "Prin verificari regulate, Pontinia a evitat acumularea unor liste lungi la final si a pastrat progresul mecanic usor de urmarit."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "35,60 MW",
+              "label": "Puterea proiectului"
+            },
+            {
+              "value": "Pontinia",
+              "label": "Amplasament in Italia"
+            },
+            {
+              "value": "2 etape",
+              "label": "Structuri si module"
+            }
+          ],
+          "relatedProjectId": "pontinia-italy",
+          "sourceUrl": ""
+        },
+        {
+          "slug": "project-journal-sole-italy",
+          "status": "published",
+          "id": "project-journal-sole-italy",
+          "order": 14,
+          "enabled": true,
+          "featured": false,
+          "pinned": false,
+          "category": "Studiu de proiect",
+          "date": "2026-05-27",
+          "dateLabel": "27 mai 2026",
+          "readTime": "3 minute",
+          "title": "Sole: de la primul pilot la ultimul modul",
+          "excerpt": "Pe 33,80 MW, continuitatea dintre echipe a fost mai importanta decat recordul unei singure zile.",
+          "image": "/projects/portfolio-2026/sole/sole-01.webp",
+          "alt": "Sole, Italia - fotografie 1 din santier",
+          "intro": "La Tuscania, proiectul Sole a inclus pilotaj, structuri si module. Greentech si Circet S.p.A. au urmarit pachetul mecanic ca un flux continuu, cu verificari intre etape.",
+          "sections": [
+            {
+              "title": "Pilotajul deschide frontul, dar nu il preda automat",
+              "paragraphs": [
+                "Dupa instalare, pozitia pilotilor a fost verificata inainte de intrarea structuristilor. Aceasta receptie scurta a separat clar lucrarile executate de cele pregatite pentru corectie.",
+                "Un rand acceptat corect ofera montajului metalic un inceput previzibil si reduce ajustarile improvizate."
+              ]
+            },
+            {
+              "title": "Echipele se urmaresc, nu se asteapta",
+              "paragraphs": [
+                "Structurile au avansat suficient de aproape de echipa de module pentru a pastra ritmul, dar cu spatiu pentru control. Distanta dintre fronturi a fost reglata dupa productia reala.",
+                "Cand una dintre etape incetinea, resursele erau mutate catre zonele pregatite, fara sa fie deschise randuri doar pentru a arata progres."
+              ]
+            },
+            {
+              "title": "Finalul proiectului incepe devreme",
+              "paragraphs": [
+                "Listele de observatii au fost lucrate pe parcurs, nu pastrate pentru ultimele zile. Echipele au revenit in sectoare cat accesul era simplu si materialele disponibile.",
+                "La Sole, aceasta rutina a transformat mechanical completion intr-o confirmare a muncii facute, nu intr-o etapa lunga de recuperare."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "33,80 MW",
+              "label": "Capacitatea proiectului"
+            },
+            {
+              "value": "Tuscania",
+              "label": "Locatia executiei"
+            },
+            {
+              "value": "Circet",
+              "label": "Partener de proiect"
+            }
+          ],
+          "relatedProjectId": "sole-italy",
+          "sourceUrl": ""
+        },
+        {
+          "slug": "project-journal-celeste-italy",
+          "status": "published",
+          "id": "project-journal-celeste-italy",
+          "order": 15,
+          "enabled": true,
+          "featured": false,
+          "pinned": false,
+          "category": "Din arhiva de proiect",
+          "date": "2026-05-20",
+          "dateLabel": "20 mai 2026",
+          "readTime": "3 minute",
+          "title": "Celeste: un proiect compact, aceeasi disciplina de executie",
+          "excerpt": "La 23,90 MW, fronturile sunt mai apropiate, iar o decizie gresita se simte mai repede in intreaga echipa.",
+          "image": "/projects/portfolio-2026/celeste/celeste-01.webp",
+          "alt": "Celeste, Italia - fotografie 1 din santier",
+          "intro": "Celeste, proiect realizat la Viterbo impreuna cu Circet S.p.A., a inclus pilotii, structurile si modulele. Dimensiunea mai compacta a santierului a cerut o coordonare atenta a spatiului si materialelor.",
+          "sections": [
+            {
+              "title": "Spatiul mic nu iarta depozitarea la intamplare",
+              "paragraphs": [
+                "Materialele au fost livrate si distribuite in ritmul montajului. Stocurile prea mari in front ar fi redus accesul utilajelor si ar fi complicat manipularea modulelor.",
+                "Coordonarea livrarilor a pastrat zonele de lucru functionale si a facut lipsurile mai usor de identificat."
+              ]
+            },
+            {
+              "title": "Trei etape, aceeasi masura a progresului",
+              "paragraphs": [
+                "Pilotii, structurile si modulele au fost urmarite prin sectoare receptionate. O etapa nu era considerata terminata doar pentru ca echipa se mutase mai departe.",
+                "Aceasta definitie comuna a progresului a redus diferentele dintre rapoartele din teren si situatia vazuta la inspectie."
+              ]
+            },
+            {
+              "title": "Predarea se pregateste odata cu montajul",
+              "paragraphs": [
+                "Fotografiile, verificarile si observatiile au insotit executia. La final, echipa a avut o imagine clara asupra zonelor inchise si a punctelor care mai necesitau atentie.",
+                "Celeste a fost un proiect compact, dar metoda a ramas aceeasi ca pe santierele mari: lucrezi, verifici si predai in aceeasi secventa."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "23,90 MW",
+              "label": "Capacitate instalata"
+            },
+            {
+              "value": "Viterbo",
+              "label": "Amplasamentul proiectului"
+            },
+            {
+              "value": "2024",
+              "label": "Anul finalizarii"
+            }
+          ],
+          "relatedProjectId": "celeste-italy",
+          "sourceUrl": ""
+        },
+        {
+          "slug": "project-journal-bombardia-palencia-spain",
+          "status": "published",
+          "id": "project-journal-bombardia-palencia-spain",
+          "order": 16,
+          "enabled": true,
+          "featured": false,
+          "pinned": false,
+          "category": "Executie europeana",
+          "date": "2026-05-13",
+          "dateLabel": "13 mai 2026",
+          "readTime": "3 minute",
+          "title": "Bombardia: montaj mecanic in camp deschis la Palencia",
+          "excerpt": "Structurile si modulele au avansat pe sectoare, cu logistica gandita pentru distantele reale din amplasament.",
+          "image": "/projects/portfolio-2026/bombardia/bombardia-02.webp",
+          "alt": "Bombardia - Palencia, Spania - fotografie 2 din santier",
+          "intro": "Proiectul Bombardia din provincia Palencia are 22,25 MW si a fost executat pentru Lantania. Pachetul Greentech a urmarit montajul structurilor si al modulelor pana la predarea mecanica.",
+          "sections": [
+            {
+              "title": "Distanta schimba timpul unei operatiuni simple",
+              "paragraphs": [
+                "Pe un amplasament deschis, transportul componentelor pana la rand poate consuma mai mult decat montajul lor. Planul de distributie a tinut cont de acces si de ordinea reala a fronturilor.",
+                "Materialele au fost apropiate de echipe fara sa blocheze traseele. Astfel, utilajele au putut continua aprovizionarea in timp ce montajul avansa."
+              ]
+            },
+            {
+              "title": "Structura trebuie sa fie previzibila pentru montatori",
+              "paragraphs": [
+                "Randurile au fost verificate inainte de instalarea modulelor. Diferentele de aliniere sau prindere au fost corectate cat accesul la structura era complet.",
+                "Pentru echipa de panouri, un front receptionat inseamna un ritm constant si mai putine opriri pentru clarificari."
+              ]
+            },
+            {
+              "title": "O predare curata lasa santierul usor de citit",
+              "paragraphs": [
+                "Dupa montaj, sectoarele au fost inspectate si eliberate de ambalaje si componente ramase. Ordinea fizica ajuta inspectia la fel de mult ca lista de verificare.",
+                "La Bombardia, zonele terminate au putut fi identificate repede, iar observatiile au ramas legate de un loc si de o responsabilitate clara."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "22,25 MW",
+              "label": "Capacitatea proiectului"
+            },
+            {
+              "value": "Lantania",
+              "label": "Clientul proiectului"
+            },
+            {
+              "value": "Palencia",
+              "label": "Provincia de executie"
+            }
+          ],
+          "relatedProjectId": "bombardia-palencia-spain",
+          "sourceUrl": ""
+        },
+        {
+          "slug": "project-journal-maas-catania-italy",
+          "status": "published",
+          "id": "project-journal-maas-catania-italy",
+          "order": 17,
+          "enabled": true,
+          "featured": false,
+          "pinned": false,
+          "category": "Civil si mecanic",
+          "date": "2026-05-06",
+          "dateLabel": "6 mai 2026",
+          "readTime": "3 minute",
+          "title": "MAAS Catania: cand lucrarile civile pregatesc ritmul mecanic",
+          "excerpt": "Terasamentele, logistica si utilajele proprii au creat fronturile pe care au urmat pilotii, structurile si modulele.",
+          "image": "/projects/portfolio-2026/catania/catania-01.webp",
+          "alt": "MAAS - Catania, Italia - fotografie 1 din santier",
+          "intro": "Proiectul MAAS din Catania a avut 22,20 MW si un pachet mai larg decat montajul fotovoltaic. Greentech a coordonat lucrari civile, mobilizare si executie mecanica in acelasi santier.",
+          "sections": [
+            {
+              "title": "Un front mecanic bun incepe cu terenul potrivit",
+              "paragraphs": [
+                "Accesul utilajelor, nivelarea si organizarea zonelor de stocare influenteaza direct pilotajul. O problema civila amanata reapare mai tarziu sub forma unei opriri mecanice.",
+                "La Catania, utilajele proprii au permis ajustarea rapida a prioritatilor si pregatirea zonelor in ordinea ceruta de montaj."
+              ]
+            },
+            {
+              "title": "Logistica leaga lucrari foarte diferite",
+              "paragraphs": [
+                "Pamantul excavat, pilotii, structurile si modulele folosesc aceleasi drumuri interioare, dar nu in acelasi moment. Planul de circulatie a fost schimbat pe masura ce santierul capata forma.",
+                "Coordonarea a urmarit sa nu mute o problema dintr-o disciplina in alta. O zona predata mecanicului trebuia sa ramana accesibila si pentru controalele ulterioare."
+              ]
+            },
+            {
+              "title": "Predarea dintre civil si mecanic trebuie vazuta in teren",
+              "paragraphs": [
+                "Documentele sunt necesare, dar o parcurgere comuna clarifica pantele, accesul si limitele exacte ale frontului. Echipele au stabilit pe loc ce este gata si ce necesita interventie.",
+                "MAAS Catania a functionat bine atunci cand disciplinele nu au lucrat izolat, ci au tratat fiecare predare ca pe o parte reala a executiei."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "22,20 MW",
+              "label": "Capacitatea proiectului"
+            },
+            {
+              "value": "Civil + mecanic",
+              "label": "Pachetul Greentech"
+            },
+            {
+              "value": "Catania",
+              "label": "Sicilia, Italia"
+            }
+          ],
+          "relatedProjectId": "maas-catania-italy",
+          "sourceUrl": ""
+        },
+        {
+          "slug": "project-journal-it003-piombino-italy",
+          "status": "published",
+          "id": "project-journal-it003-piombino-italy",
+          "order": 18,
+          "enabled": true,
+          "featured": false,
+          "pinned": false,
+          "category": "Controlul calitatii",
+          "date": "2026-04-29",
+          "dateLabel": "29 aprilie 2026",
+          "readTime": "3 minute",
+          "title": "Piombino IT003: verificari scurte, facute la momentul potrivit",
+          "excerpt": "Pe un proiect de 22 MW, controlul integrat in productie a redus intoarcerile si a pastrat fronturile clare.",
+          "image": "/projects/portfolio-2026/piombino/piombino-01.webp",
+          "alt": "IT003 Piombino, Italia - fotografie 1 din santier",
+          "intro": "La Piombino, Greentech a executat pentru Solarig pilotii, structurile si modulele. Proiectul a pus accent pe verificari intermediare si pe inchiderea observatiilor in zona in care au aparut.",
+          "sections": [
+            {
+              "title": "Controlul dupa pilotaj protejeaza restul lucrarii",
+              "paragraphs": [
+                "Cotele si pozitia pilotilor au fost verificate inainte de asamblarea structurii. O abatere observata aici poate fi corectata fara demontari si fara sa implice alte echipe.",
+                "Masuratorile au fost legate de sectoare clare, astfel incat montajul metalic sa stie exact ce front poate prelua."
+              ]
+            },
+            {
+              "title": "Fotografia tehnica trebuie sa explice, nu doar sa arate",
+              "paragraphs": [
+                "Imaginile de control au fost facute cu reper si context, astfel incat punctul verificat sa poata fi identificat ulterior. O fotografie frumoasa, dar fara pozitie, ajuta putin la inchiderea unei observatii.",
+                "Evidenta clara a redus discutiile si a permis coordonatorilor sa urmareasca progresul fara sa revina fizic la fiecare rand."
+              ]
+            },
+            {
+              "title": "Calitatea buna nu incetineste echipa",
+              "paragraphs": [
+                "Verificarile au fost scurte si repetate, integrate intre operatiuni. Echipa nu a asteptat o inspectie mare la final pentru a afla ce trebuia corectat.",
+                "La IT003 Piombino, acest ritm a pastrat productia constanta si a lasat o lista finala mai usor de inchis."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "22 MW",
+              "label": "Capacitatea proiectului"
+            },
+            {
+              "value": "Solarig",
+              "label": "Clientul proiectului"
+            },
+            {
+              "value": "Piombino",
+              "label": "Toscana, Italia"
+            }
+          ],
+          "relatedProjectId": "it003-piombino-italy",
+          "sourceUrl": ""
+        },
+        {
+          "slug": "project-journal-rinnovabili-italy",
+          "status": "published",
+          "id": "project-journal-rinnovabili-italy",
+          "order": 19,
+          "enabled": true,
+          "featured": false,
+          "pinned": false,
+          "category": "Predare mecanica",
+          "date": "2026-04-22",
+          "dateLabel": "22 aprilie 2026",
+          "readTime": "3 minute",
+          "title": "Rinnovabili: cum pregatesti corect frontul pentru electric",
+          "excerpt": "Un pachet mecanic bun lasa in urma randuri complete, acces liber si informatii pe care urmatoarea echipa le poate folosi.",
+          "image": "/projects/portfolio-2026/rinnovabili/rinnovabili-02.webp",
+          "alt": "Rinnovabili, Italia - fotografie 2 din santier",
+          "intro": "La Montalto di Castro, proiectul Rinnovabili de 21,50 MW a inclus pilotii, structurile si modulele. Obiectivul practic a fost o predare clara catre etapa electrica.",
+          "sections": [
+            {
+              "title": "Predarea nu incepe in ultima zi",
+              "paragraphs": [
+                "Accesul, ordinea materialelor si traseele viitoare au fost luate in calcul inca din montajul mecanic. O structura completa, dar inconjurata de resturi si stocuri, nu este un front pregatit.",
+                "Echipele au eliberat si verificat sectoarele pe masura avansului, astfel incat electricienii sa poata intra fara reorganizari majore."
+              ]
+            },
+            {
+              "title": "Lucrarile ascunse trebuie documentate la timp",
+              "paragraphs": [
+                "Unele puncte devin greu accesibile dupa montarea modulelor. Verificarea si fotografierea lor au fost facute inainte ca randul sa fie inchis complet.",
+                "Aceasta informatie a insotit sectorul si a oferit un raspuns rapid atunci cand au aparut intrebari la receptie."
+              ]
+            },
+            {
+              "title": "Un front bun reduce timpul pierdut intre echipe",
+              "paragraphs": [
+                "La predare, responsabilitatile au fost separate clar: ce este terminat, ce este acceptat si ce observatii mai sunt deschise. Fara aceasta distinctie, lucrarile pot ramane intre discipline.",
+                "Rinnovabili a ajuns la etapa electrica cu un pachet mecanic usor de citit si de preluat."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "21,50 MW",
+              "label": "Capacitatea proiectului"
+            },
+            {
+              "value": "Montalto",
+              "label": "Locatia executiei"
+            },
+            {
+              "value": "Pregatit",
+              "label": "Pentru etapa electrica"
+            }
+          ],
+          "relatedProjectId": "rinnovabili-italy",
+          "sourceUrl": ""
+        },
+        {
+          "slug": "project-journal-volta-italy",
+          "status": "published",
+          "id": "project-journal-volta-italy",
+          "order": 20,
+          "enabled": true,
+          "featured": false,
+          "pinned": false,
+          "category": "Oameni si executie",
+          "date": "2026-04-15",
+          "dateLabel": "15 aprilie 2026",
+          "readTime": "3 minute",
+          "title": "Volta: aceeasi tinta, roluri foarte clare in teren",
+          "excerpt": "Pe un santier mecanic de 21,50 MW, comunicarea buna se vede in randurile pe care echipele le predau una alteia.",
+          "image": "/projects/portfolio-2026/volta/volta-01.webp",
+          "alt": "Volta, Italia - fotografie 1 din santier",
+          "intro": "Proiectul Volta din Lazio a fost realizat impreuna cu Circet S.p.A. si a acoperit pilotajul, structurile si modulele. Dincolo de productie, proiectul a cerut responsabilitati usor de inteles la nivelul fiecarei echipe.",
+          "sections": [
+            {
+              "title": "Fiecare echipa trebuie sa stie unde se termina rolul ei",
+              "paragraphs": [
+                "Pilotajul preda o pozitie verificata, structurile predau un rand aliniat, iar montajul modulelor preda un ansamblu complet. Cand aceste limite sunt neclare, observatiile circula fara proprietar.",
+                "La Volta, predarile scurte dintre sefi de echipa au mentinut responsabilitatea aproape de locul in care se executa lucrarea."
+              ]
+            },
+            {
+              "title": "Ritmul comun este mai important decat varful individual",
+              "paragraphs": [
+                "O echipa poate avansa foarte repede si totusi sa lase urmatoarea etapa fara front. Productia a fost urmarita ca lant, nu ca rezultate separate.",
+                "Cand structurile acumulau avans suficient, resursele erau echilibrate pentru module sau pentru inchiderea observatiilor."
+              ]
+            },
+            {
+              "title": "Santierul ordonat simplifica discutiile",
+              "paragraphs": [
+                "Zonele curate, materialele identificate si marcarea fronturilor au facut progresul vizibil. Echipa a putut verifica starea unei zone fara sa reconstruiasca istoricul din discutii.",
+                "Aceasta claritate a ajutat proiectul Volta sa pastreze un ritm constant pana la finalizarea mecanica."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "21,50 MW",
+              "label": "Puterea proiectului"
+            },
+            {
+              "value": "Lazio",
+              "label": "Regiunea de executie"
+            },
+            {
+              "value": "3",
+              "label": "Etape mecanice coordonate"
+            }
+          ],
+          "relatedProjectId": "volta-italy",
+          "sourceUrl": ""
+        },
+        {
+          "slug": "project-journal-porto-torres-italy",
+          "status": "published",
+          "id": "project-journal-porto-torres-italy",
+          "order": 21,
+          "enabled": true,
+          "featured": false,
+          "pinned": false,
+          "category": "Din arhiva de proiect",
+          "date": "2026-04-08",
+          "dateLabel": "8 aprilie 2026",
+          "readTime": "3 minute",
+          "title": "Porto Torres: un pachet mecanic de 19,47 MW fara pasi sariti",
+          "excerpt": "Structurile si modulele au fost montate pe sectoare scurte, verificate si eliberate complet.",
+          "image": "/projects/portfolio-2026/porto-torres/porto-torres-01.webp",
+          "alt": "Porto Torres, Italia - fotografie 1 din santier",
+          "intro": "La Porto Torres, in Sardinia, Greentech a livrat montajul structurilor si al modulelor pentru un proiect de 19,47 MW. Lucrarea a mizat pe o succesiune simpla si bine respectata.",
+          "sections": [
+            {
+              "title": "Frontul pregatit are material si acces",
+              "paragraphs": [
+                "Inainte de montaj, echipa a verificat nu doar existenta componentelor, ci si traseul prin care acestea ajung la rand. Un front fara acces real ramane doar o intentie in program.",
+                "Materialele au fost distribuite in loturi potrivite pentru sectoarele deschise, evitand stocarea in exces."
+              ]
+            },
+            {
+              "title": "Montajul se opreste pentru control, nu pentru confuzie",
+              "paragraphs": [
+                "Pauzele dintre structura si modul au avut un scop clar: verificarea alinierii si a prinderilor. Echipa a stiut cine inspecteaza si ce conditii trebuie indeplinite.",
+                "Aceasta rutina a eliminat opririle neplanificate, cele in care montatorii asteapta o decizie sau cauta persoana responsabila."
+              ]
+            },
+            {
+              "title": "Lucrarile mici se inchid in aceeasi zona",
+              "paragraphs": [
+                "Elementele ramase, ambalajele si observatiile au fost rezolvate inainte de mutarea frontului. Intoarcerea dupa saptamani ar fi costat mai mult decat remedierea imediata.",
+                "Porto Torres a ramas un proiect usor de urmarit tocmai pentru ca echipa nu a lasat in urma multe exceptii."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "19,47 MW",
+              "label": "Capacitatea proiectului"
+            },
+            {
+              "value": "Sardinia",
+              "label": "Insula de executie"
+            },
+            {
+              "value": "2023",
+              "label": "Anul proiectului"
+            }
+          ],
+          "relatedProjectId": "porto-torres-italy",
+          "sourceUrl": ""
+        },
+        {
+          "slug": "project-journal-sabaudia-italy",
+          "status": "published",
+          "id": "project-journal-sabaudia-italy",
+          "order": 22,
+          "enabled": true,
+          "featured": false,
+          "pinned": false,
+          "category": "Proiect finalizat",
+          "date": "2026-04-01",
+          "dateLabel": "1 aprilie 2026",
+          "readTime": "3 minute",
+          "title": "Sabaudia: 10 MW si o lectie despre finalizarea completa",
+          "excerpt": "Un proiect mai mic face vizibila imediat diferenta dintre aproape gata si cu adevarat predat.",
+          "image": "/projects/portfolio-2026/sabaudia/representative-01.webp",
+          "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 1",
+          "intro": "Sabaudia este proiectul de 10 MW din portofoliu, cu structuri si module executate de Greentech. Scara mai mica nu a schimbat cerintele de montaj si receptie.",
+          "sections": [
+            {
+              "title": "Pe un santier compact, echipele se intalnesc mai des",
+              "paragraphs": [
+                "Fronturile sunt apropiate, iar materialele si oamenii folosesc aceleasi trasee. Coordonarea zilnica a stabilit ordinea zonelor si a prevenit aglomerarea inutila.",
+                "Avantajul a fost comunicarea directa. O problema putea fi vazuta si clarificata repede, fara sa traverseze mai multe niveluri de raportare."
+              ]
+            },
+            {
+              "title": "Aproape gata nu este o stare de predare",
+              "paragraphs": [
+                "Un rand cu o singura piesa lipsa ramane un rand deschis. Echipa a urmarit completitudinea pe sectoare, nu doar procentul general al proiectului.",
+                "Aceasta atentie a evitat ca ultimele zile sa fie consumate de cautarea multor lucruri marunte raspandite in santier."
+              ]
+            },
+            {
+              "title": "Metoda ramane aceeasi, indiferent de MW",
+              "paragraphs": [
+                "Structura este verificata, modulele sunt montate si inspectia inchide lucrarea. Fiecare pas are un responsabil si un rezultat usor de recunoscut.",
+                "Sabaudia confirma ca disciplina de executie nu tine de marimea proiectului. Ea este modul in care echipa lucreaza atunci cand nimeni nu isi permite sa lase detaliile pentru mai tarziu."
+              ]
+            }
+          ],
+          "highlights": [
+            {
+              "value": "10 MW",
+              "label": "Capacitatea proiectului"
+            },
+            {
+              "value": "Sabaudia",
+              "label": "Lazio, Italia"
+            },
+            {
+              "value": "Finalizat",
+              "label": "Statusul lucrarilor"
+            }
+          ],
+          "relatedProjectId": "sabaudia-italy",
+          "sourceUrl": ""
         },
         {
           "slug": "careers-build-what-comes-next",
           "status": "published",
           "id": "careers-build-what-comes-next",
-          "order": 2,
+          "order": 23,
           "enabled": true,
           "featured": false,
           "pinned": false,
@@ -1261,7 +4150,7 @@
           "slug": "politehnica-visits-butimanu",
           "status": "published",
           "id": "politehnica-visits-butimanu",
-          "order": 3,
+          "order": 24,
           "enabled": true,
           "featured": false,
           "category": "Oameni si educatie",
@@ -1312,7 +4201,7 @@
         }
       ]
     },
-    "updatedAt": "2026-08-18T10:28:22.394Z",
+    "updatedAt": "2026-08-19T09:55:13.737Z",
     "footer": {
       "links": [
         {

@@ -5,6 +5,7 @@ import {
 
 const IMAGE_URL_PATTERN = /\.(?:avif|gif|jpe?g|png|svg|webp)(?:[?#].*)?$/i;
 const VIDEO_URL_PATTERN = /\.(?:mp4|webm)(?:[?#].*)?$/i;
+const DEFERRED_MEDIA_KEYS = new Set(["gallery"]);
 
 const STATIC_CRITICAL_IMAGES = [
   "/original/logo-preloader-480.webp",
@@ -26,7 +27,9 @@ function collectMediaUrls(value, output = new Set()) {
   }
 
   if (value && typeof value === "object") {
-    Object.values(value).forEach((item) => collectMediaUrls(item, output));
+    Object.entries(value).forEach(([key, item]) => {
+      if (!DEFERRED_MEDIA_KEYS.has(key)) collectMediaUrls(item, output);
+    });
   }
 
   return output;
