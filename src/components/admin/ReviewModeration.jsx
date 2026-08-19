@@ -21,7 +21,6 @@ import {
 
 const FILTERS = [
   ["pending", "Pending"],
-  ["demo", "Demo"],
   ["approved", "Approved"],
   ["rejected", "Rejected"],
   ["all", "All"],
@@ -79,7 +78,6 @@ export default function ReviewModeration({ onNotify }) {
 
   const counts = useMemo(() => ({
     pending: reviews.filter((review) => review.status === "pending").length,
-    demo: reviews.filter((review) => review.demo === true).length,
     approved: reviews.filter((review) => review.status === "approved").length,
     rejected: reviews.filter((review) => review.status === "rejected").length,
     all: reviews.length,
@@ -88,9 +86,7 @@ export default function ReviewModeration({ onNotify }) {
   const visibleReviews = useMemo(() => (
     filter === "all"
       ? reviews
-      : filter === "demo"
-        ? reviews.filter((review) => review.demo === true)
-        : reviews.filter((review) => review.status === filter)
+      : reviews.filter((review) => review.status === filter)
   ), [filter, reviews]);
 
   const changeStatus = async (review, status) => {
@@ -218,14 +214,7 @@ export default function ReviewModeration({ onNotify }) {
                       {initials(review.author)}
                     </span>
                     <div>
-                      <strong>
-                        <span>{review.author}</span>
-                        {review.demo === true && (
-                          <Badge className="admin-review-demo-badge" variant="secondary">
-                            Demo template
-                          </Badge>
-                        )}
-                      </strong>
+                      <strong>{review.author}</strong>
                       <a href={`mailto:${review.email}`}>
                         <Mail aria-hidden="true" />
                         {review.email}
@@ -254,7 +243,7 @@ export default function ReviewModeration({ onNotify }) {
                   <blockquote>{review.quote}</blockquote>
 
                   <footer className="admin-review-item-actions">
-                    {review.status !== "approved" && review.demo !== true && (
+                    {review.status !== "approved" && (
                       <Button type="button" size="sm" disabled={busy} onClick={() => changeStatus(review, "approved")}>
                         {busy ? <Loader2 className="admin-spin" aria-hidden="true" /> : <Check aria-hidden="true" />}
                         Approve &amp; publish
@@ -297,7 +286,6 @@ export default function ReviewModeration({ onNotify }) {
 
 function MessageForEmptyFilter({ filter }) {
   if (filter === "pending") return <span>No reviews are waiting for approval.</span>;
-  if (filter === "demo") return <span>No demo review templates.</span>;
   if (filter === "approved") return <span>No browser reviews have been published yet.</span>;
   if (filter === "rejected") return <span>No rejected reviews.</span>;
   return <span>No customer reviews have been submitted yet.</span>;
