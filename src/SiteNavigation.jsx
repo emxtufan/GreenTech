@@ -343,6 +343,10 @@ function SiteNavigation({ visible, backToIntro, entered }) {
         <div className="site-nav-actions">
           <LanguageSelector />
 
+          <a className="site-nav-presentation" href="/presentation">
+            <span>Presentation EN</span>
+          </a>
+
           <a className="site-nav-apply" href={APPLY_HASH} onClick={apply}>
             <span>{uiText("apply", locale)}</span>
           </a>
@@ -381,6 +385,11 @@ function SiteNavigation({ visible, backToIntro, entered }) {
         </nav>
 
         <LanguageSelector mobile />
+
+        <a className="site-nav-sheet-presentation" href="/presentation">
+          <span>Presentation EN</span>
+          <ArrowUpRight size={17} strokeWidth={1.9} aria-hidden="true" />
+        </a>
 
         <a className="site-nav-sheet-apply" href={APPLY_HASH} onClick={apply}>
           <span>{uiText("applyRole", locale)}</span>

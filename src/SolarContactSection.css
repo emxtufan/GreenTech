@@ -500,6 +500,28 @@
   object-fit: contain;
 }
 
+.solar-contact-presentation {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 20px;
+  padding: 11px 14px;
+  border: 1px solid rgb(139 188 63 / 58%);
+  border-radius: 999px;
+  color: #dce9d8;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.solar-contact-presentation:hover,
+.solar-contact-presentation:focus-visible {
+  background: rgb(139 188 63 / 16%);
+  color: #a8db5d;
+}
+
 .solar-contact-footer-contact {
   display: flex;
   margin-top: 26px;

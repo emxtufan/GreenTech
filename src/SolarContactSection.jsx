@@ -538,6 +538,10 @@ function SolarContactSection({
                   decoding="async"
                 />
               </div>
+              <a className="solar-contact-presentation" href="/presentation">
+                <span>Presentation EN</span>
+                <ArrowUpRight size={15} strokeWidth={1.9} aria-hidden="true" />
+              </a>
             </div>
 
             <div className="solar-contact-footer-groups">

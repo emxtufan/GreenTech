@@ -91,6 +91,7 @@ if (production) {
   app.get("/", sendPage("index.html"));
   app.get("/admin", sendPage("admin.html"));
   app.get("/admin/", sendPage("admin.html"));
+  app.get(["/presentation", "/presentation/"], sendPage("../Greentech-EN.html"));
 } else {
   const { createServer: createViteServer } = await import("vite");
   vite = await createViteServer({
@@ -113,6 +114,7 @@ if (production) {
   app.get("/", renderPage("index.html"));
   app.get("/admin", renderPage("admin.html"));
   app.get("/admin/", renderPage("admin.html"));
+  app.get(["/presentation", "/presentation/"], renderPage("Greentech-EN.html"));
   app.use(vite.middlewares);
 }
 
