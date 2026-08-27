@@ -8,7 +8,7 @@ import React, {
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowLeft, ArrowRight, X } from "lucide-react";
 import useSection from "./hooks/useSection.js";
-import { collectProjectImages } from "./lib/projectImages.js";
+import { collectProjectImageGroups } from "./lib/projectImages.js";
 import "./AllPhotosPage.css";
 
 const gallerySpring = {
@@ -22,14 +22,27 @@ const GALLERY_CLUSTER_SIZE = 6;
 
 function AllPhotosPage({ projects = [], photos = [], onClose }) {
   const pageRef = useRef(null);
+  const resultsRef = useRef(null);
   const backButtonRef = useRef(null);
   const closeButtonRef = useRef(null);
   const imageButtonsRef = useRef([]);
+  const [activeProjectId, setActiveProjectId] = useState("all");
   const [selectedIndex, setSelectedIndex] = useState(null);
-  const images = useMemo(
-    () => collectProjectImages(projects, photos),
+  const imageGroups = useMemo(
+    () => collectProjectImageGroups(projects, photos),
     [photos, projects],
   );
+  const allImages = useMemo(
+    () => imageGroups.flatMap((group) => group.images),
+    [imageGroups],
+  );
+  const activeGroup = useMemo(
+    () => imageGroups.find((group) => group.id === activeProjectId) || null,
+    [activeProjectId, imageGroups],
+  );
+  const images = activeProjectId === "all" || !activeGroup
+    ? allImages
+    : activeGroup.images;
   const imageClusters = useMemo(() => {
     const clusters = [];
 
@@ -53,9 +66,21 @@ function AllPhotosPage({ projects = [], photos = [], onClose }) {
     previous: text("galleryPreviousLabel"),
     next: text("galleryNextLabel"),
     empty: text("galleryEmptyMessage"),
+    filter: text("galleryFilterLabel", "Filtreaza dupa proiect"),
+    allProjects: text("galleryAllProjectsLabel", "Toate proiectele"),
   };
   const selectedImage = selectedIndex === null ? null : images[selectedIndex];
   const title = text("title");
+
+  const changeProjectFilter = useCallback((projectId) => {
+    setSelectedIndex(null);
+    setActiveProjectId(projectId);
+    imageButtonsRef.current = [];
+
+    window.requestAnimationFrame(() => {
+      resultsRef.current?.scrollIntoView({ block: "start" });
+    });
+  }, []);
 
   const closeImage = useCallback(() => {
     const previousIndex = selectedIndex;
@@ -167,48 +192,102 @@ function AllPhotosPage({ projects = [], photos = [], onClose }) {
 
         {images.length > 0 ? (
           <section
-            className="photos-index-grid"
-            aria-label={`${images.length} ${copy.imageCount}`}
+            className="photos-index-browser"
+            aria-label={copy.filter}
           >
-            {imageClusters.map((cluster, clusterIndex) => (
-              <div
-                className={`photos-index-cluster ${clusterIndex % 2 === 1 ? "is-reversed" : ""}`}
-                data-count={cluster.length}
-                key={cluster.map(({ image }) => image.id).join("-")}
-              >
-                {cluster.map(({ image, index }, slotIndex) => (
-                  <motion.button
-                    className={`photos-index-tile is-slot-${slotIndex + 1}`}
-                    ref={(node) => { imageButtonsRef.current[index] = node; }}
+            <aside className="photos-index-filter">
+              <div className="photos-index-filter-select">
+                <label htmlFor="photos-project-filter">{copy.filter}</label>
+                <select
+                  id="photos-project-filter"
+                  value={activeProjectId}
+                  onChange={(event) => changeProjectFilter(event.target.value)}
+                >
+                  <option value="all">{copy.allProjects} ({allImages.length})</option>
+                  {imageGroups.map((group) => (
+                    <option value={group.id} key={group.id}>
+                      {group.title} ({group.images.length})
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="photos-index-filter-menu">
+                <span>{copy.filter}</span>
+                <nav aria-label={copy.filter}>
+                  <button
+                    className={activeProjectId === "all" ? "is-active" : ""}
                     type="button"
-                    key={image.id}
-                    onClick={() => setSelectedIndex(index)}
-                    whileHover={{ y: -3 }}
-                    whileTap={{ scale: 0.985 }}
-                    transition={gallerySpring}
-                    aria-label={`${image.projectTitle}${image.location ? `, ${image.location}` : ""}`}
+                    aria-pressed={activeProjectId === "all"}
+                    onClick={() => changeProjectFilter("all")}
                   >
-                    <motion.img
-                      layoutId={`photo-${image.id}`}
-                      src={image.src}
-                      alt={image.alt}
-                      loading={index < 6 ? "eager" : "lazy"}
-                      fetchPriority={index === 0 ? "high" : "auto"}
-                      decoding="async"
-                      draggable={false}
-                      transition={gallerySpring}
-                    />
-                    <span className="photos-index-tile-shade" aria-hidden="true" />
-                    <span className="photos-index-tile-copy">
-                      <strong>{image.projectTitle}</strong>
-                      {(image.caption || image.location) && (
-                        <small>{image.caption || image.location}</small>
-                      )}
-                    </span>
-                  </motion.button>
+                    <span>{copy.allProjects}</span>
+                    <b>{String(allImages.length).padStart(2, "0")}</b>
+                  </button>
+                  {imageGroups.map((group) => (
+                    <button
+                      className={activeProjectId === group.id ? "is-active" : ""}
+                      type="button"
+                      aria-pressed={activeProjectId === group.id}
+                      key={group.id}
+                      onClick={() => changeProjectFilter(group.id)}
+                    >
+                      <span>{group.title}</span>
+                      <b>{String(group.images.length).padStart(2, "0")}</b>
+                    </button>
+                  ))}
+                </nav>
+              </div>
+            </aside>
+
+            <div className="photos-index-results" ref={resultsRef}>
+              <header className="photos-index-results-header">
+                <h2>{activeGroup?.title || copy.allProjects}</h2>
+                <span>{String(images.length).padStart(2, "0")} {copy.imageCount}</span>
+              </header>
+
+              <div className="photos-index-grid">
+                {imageClusters.map((cluster, clusterIndex) => (
+                  <div
+                    className={`photos-index-cluster ${clusterIndex % 2 === 1 ? "is-reversed" : ""}`}
+                    data-count={cluster.length}
+                    key={cluster.map(({ image }) => image.id).join("-")}
+                  >
+                    {cluster.map(({ image, index }, slotIndex) => (
+                      <motion.button
+                        className={`photos-index-tile is-slot-${slotIndex + 1}`}
+                        ref={(node) => { imageButtonsRef.current[index] = node; }}
+                        type="button"
+                        key={image.id}
+                        onClick={() => setSelectedIndex(index)}
+                        whileHover={{ y: -3 }}
+                        whileTap={{ scale: 0.985 }}
+                        transition={gallerySpring}
+                        aria-label={`${image.projectTitle}${image.location ? `, ${image.location}` : ""}`}
+                      >
+                        <motion.img
+                          layoutId={`photo-${image.id}`}
+                          src={image.src}
+                          alt={image.alt}
+                          loading={index < 6 ? "eager" : "lazy"}
+                          fetchPriority={index === 0 ? "high" : "auto"}
+                          decoding="async"
+                          draggable={false}
+                          transition={gallerySpring}
+                        />
+                        <span className="photos-index-tile-shade" aria-hidden="true" />
+                        <span className="photos-index-tile-copy">
+                          <strong>{image.projectTitle}</strong>
+                          {(image.caption || image.location) && (
+                            <small>{image.caption || image.location}</small>
+                          )}
+                        </span>
+                      </motion.button>
+                    ))}
+                  </div>
                 ))}
               </div>
-            ))}
+            </div>
           </section>
         ) : (
           <p className="photos-index-empty">{copy.empty}</p>

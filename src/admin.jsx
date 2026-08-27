@@ -201,7 +201,7 @@ const COLLECTIONS = {
     bulkTitleKey: "title",
     bulkAltKey: "alt",
     heading: "Photo gallery",
-    description: "Independent photographs displayed in the homepage corridor and the complete photo archive.",
+    description: "Photographs displayed in the homepage corridor and grouped by project in the complete archive.",
     singular: "photograph",
     titleField: "title",
     fields: [
@@ -219,6 +219,7 @@ const COLLECTIONS = {
         label: "Related project",
         type: "select",
         optionsSource: "projects",
+        hint: "Controls the project group used in the public photo archive. Leave empty for the general Greentech group.",
       },
     ],
   },
