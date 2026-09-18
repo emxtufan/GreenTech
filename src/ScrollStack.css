@@ -24,14 +24,6 @@
   transform-origin: top center;
 }
 
-.scroll-stack-card::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 4px;
-  background: #8bbc3f;
-}
-
 .scroll-stack-card > * {
   position: relative;
   z-index: 1;

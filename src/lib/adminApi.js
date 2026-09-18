@@ -31,6 +31,11 @@ export const logout = () =>
 export const getContent = () =>
   fetch("/api/admin/content", { headers: { Accept: "application/json" } }).then(json);
 
+export const getAnalytics = (days = 30) =>
+  fetch(`/api/admin/analytics?days=${encodeURIComponent(days)}`, {
+    headers: { Accept: "application/json" },
+  }).then(json);
+
 export const saveContent = (content) =>
   fetch("/api/admin/content", {
     method: "PUT",
@@ -90,12 +95,24 @@ export const deleteCareerApplication = (id) =>
     method: "DELETE",
   }).then(json);
 
+// Session-wide switch for server-side image optimisation (WebP). On by
+// default; the admin top bar can turn it off for a specific upload.
+let optimiseUploads = true;
+export const setUploadOptimisation = (enabled) => {
+  optimiseUploads = Boolean(enabled);
+};
+export const isUploadOptimisationEnabled = () => optimiseUploads;
+
 /**
  * Posts the File as a raw body. Returns `{ url }` — the only thing that is ever
  * written into the content document.
  */
 export const uploadAsset = (file, category = "misc", { onProgress, signal } = {}) => {
-  const query = new URLSearchParams({ filename: file.name, category });
+  const query = new URLSearchParams({
+    filename: file.name,
+    category,
+    optimize: optimiseUploads ? "1" : "0",
+  });
 
   return new Promise((resolve, reject) => {
     // Fetch does not expose browser upload progress, so this request uses XHR.
@@ -279,7 +296,7 @@ export const uploadImage = async (file, category = "misc") => {
 
   return {
     ...result,
-    optimised: prepared !== file,
+    optimised: prepared !== file || Boolean(result.optimised),
     originalBytes: file.size,
     uploadedBytes: prepared.size,
   };

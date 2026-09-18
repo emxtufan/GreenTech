@@ -33,21 +33,3 @@
   isolation: isolate;
 }
 
-.construction-services-canvas-mount {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  pointer-events: none;
-  will-change: opacity;
-}
-
-.construction-services-canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.construction-services-canvas-mount.load-error {
-  display: none;
-}

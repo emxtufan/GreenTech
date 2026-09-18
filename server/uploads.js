@@ -2,10 +2,18 @@ import { writeFile, mkdir } from "node:fs/promises";
 import { randomBytes } from "node:crypto";
 import path from "node:path";
 import { UPLOADS_DIR } from "./storagePaths.js";
+import {
+  OPTIMIZED_EXTENSION,
+  OPTIMIZED_MIME,
+  isOptimizableExtension,
+  optimizeImage,
+} from "./imageOptimizer.js";
 
 export { UPLOADS_DIR };
 export const MAX_UPLOAD_BYTES = 128 * 1024 * 1024;
-const MAX_IMAGE_UPLOAD_BYTES = 8 * 1024 * 1024;
+// Images are re-encoded on the way in, so the limit only bounds what the
+// optimiser has to chew through, not what lands on disk.
+const MAX_IMAGE_UPLOAD_BYTES = 24 * 1024 * 1024;
 
 // Buckets mirror the content groups so uploads stay browsable on disk.
 const CATEGORIES = new Set(["gallery", "blog", "sections", "video", "misc"]);
@@ -88,10 +96,18 @@ export class UploadError extends Error {
 }
 
 /**
- * @returns {Promise<{ url: string, bytes: number, mime: string }>}
+ * @param {object} options
+ * @param {boolean} [options.optimize=true]
+ *   Re-encode JPEG/PNG/WebP images as capped-size WebP before writing.
+ * @returns {Promise<{ url: string, bytes: number, mime: string, optimised: boolean, originalBytes: number }>}
  *   Only the public URL is ever handed back for storage in the content file.
  */
-export async function saveUpload({ buffer, originalName, category = "misc" }) {
+export async function saveUpload({
+  buffer,
+  originalName,
+  category = "misc",
+  optimize = true,
+}) {
   if (!Buffer.isBuffer(buffer) || buffer.length === 0) {
     throw new UploadError("No file data received.");
   }
@@ -125,7 +141,27 @@ export async function saveUpload({ buffer, originalName, category = "misc" }) {
     throw new UploadError("Videos can only be uploaded from the Company Video section.");
   }
 
-  const filename = `${safeStem(originalName)}-${randomBytes(6).toString("hex")}.${format.extension}`;
+  let output = buffer;
+  let { extension, mime } = format;
+  let optimised = false;
+
+  if (optimize && format.kind === "image" && isOptimizableExtension(format.extension)) {
+    let result;
+    try {
+      result = await optimizeImage(buffer);
+    } catch (error) {
+      throw new UploadError(`The image could not be optimised: ${error.message}`, 422);
+    }
+
+    if (result) {
+      output = result.buffer;
+      extension = OPTIMIZED_EXTENSION;
+      mime = OPTIMIZED_MIME;
+      optimised = true;
+    }
+  }
+
+  const filename = `${safeStem(originalName)}-${randomBytes(6).toString("hex")}.${extension}`;
   const directory = path.join(UPLOADS_DIR, bucket);
   const destination = path.join(directory, filename);
 
@@ -136,11 +172,13 @@ export async function saveUpload({ buffer, originalName, category = "misc" }) {
   }
 
   await mkdir(directory, { recursive: true });
-  await writeFile(destination, buffer, { flag: "wx" });
+  await writeFile(destination, output, { flag: "wx" });
 
   return {
     url: `/uploads/${bucket}/${filename}`,
-    bytes: buffer.length,
-    mime: format.mime,
+    bytes: output.length,
+    mime,
+    optimised,
+    originalBytes: buffer.length,
   };
 }

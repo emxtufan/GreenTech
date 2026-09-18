@@ -1,0 +1,54 @@
+:root {
+  --side-tab-size: 48px;
+}
+
+.side-tabs {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  z-index: 13;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-50%);
+  box-shadow: 0 10px 30px rgb(0 0 0 / 35%);
+}
+
+.side-tab {
+  display: grid;
+  width: var(--side-tab-size);
+  height: var(--side-tab-size);
+  place-items: center;
+  color: #ffffff;
+  text-decoration: none;
+  transition: filter 0.2s ease;
+}
+
+.side-tab:hover,
+.side-tab:focus-visible {
+  filter: brightness(1.12);
+  outline: none;
+}
+
+.side-tab-facebook {
+  background: #1877f2;
+}
+
+.side-tab-instagram {
+  background: linear-gradient(45deg, #f58529, #dd2a7b 55%, #8134af);
+}
+
+.side-tab-linkedin {
+  background: #0a66c2;
+}
+
+@media screen and (max-width: 700px) {
+  :root {
+    --side-tab-size: 42px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .side-tab {
+    transition: none;
+  }
+}

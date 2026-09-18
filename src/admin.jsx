@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import {
   ArrowUpRight,
   BadgeCheck,
+  BarChart3,
   Briefcase,
   Building2,
   Check,
@@ -27,6 +28,7 @@ import {
   Save,
   Search,
   ServerCog,
+  Share2,
   ShieldCheck,
   Sparkles,
   Upload,
@@ -60,6 +62,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import CollectionEditor from "@/components/admin/CollectionEditor.jsx";
+import AnalyticsDashboard from "@/components/admin/AnalyticsDashboard.jsx";
 import ApplicationInbox from "@/components/admin/ApplicationInbox.jsx";
 import InquiryInbox from "@/components/admin/InquiryInbox.jsx";
 import ReviewModeration from "@/components/admin/ReviewModeration.jsx";
@@ -69,11 +72,19 @@ import {
   logout as requestLogout,
   getContent,
   saveContent,
+  setUploadOptimisation,
   uploadAsset,
 } from "@/lib/adminApi.js";
 import "./admin.css";
 
-const GROUP_ORDER = ["Experience", "Company", "Services", "Content"];
+const GROUP_ORDER = ["Dashboard", "Experience", "Company", "Services", "Content"];
+
+// Not a content section: a virtual sidebar entry that opens the visit stats.
+const DASHBOARD_ENTRY = Object.freeze({
+  id: "dashboard",
+  group: "Dashboard",
+  name: "Vizite pe site",
+});
 
 const GROUP_ALIASES = {
   experience: "Experience",
@@ -515,10 +526,13 @@ const sectionIcons = {
   contact: Mail,
   footer: PanelTop,
   "photo-gallery": Image,
+  "social-bar": Share2,
+  dashboard: BarChart3,
 };
 
 function getSectionFromUrl(sections) {
   const requestedSection = new URLSearchParams(window.location.search).get("section");
+  if (requestedSection === DASHBOARD_ENTRY.id) return requestedSection;
   return sections.some((section) => section.id === requestedSection)
     ? requestedSection
     : sections[0]?.id ?? null;
@@ -1149,6 +1163,7 @@ function AdminApp() {
   const [selectedId, setSelectedId] = useState(null);
   const [saveState, setSaveState] = useState("idle");
   const [notice, setNotice] = useState(null);
+  const [optimiseUploads, setOptimiseUploads] = useState(true);
 
   useEffect(() => {
     getSession()
@@ -1223,6 +1238,7 @@ function AdminApp() {
     setSaveState("idle");
   };
 
+  const dashboardOpen = selectedId === DASHBOARD_ENTRY.id;
   const selectedIndex = sections.findIndex((section) => section.id === selectedId);
   const selectedSection = sections[selectedIndex] ?? sections[0];
   const collection = COLLECTIONS[selectedSection?.id];
@@ -1303,8 +1319,8 @@ function AdminApp() {
       }}
     >
       <AppSidebar
-        sections={sections}
-        selectedId={selectedSection?.id}
+        sections={[DASHBOARD_ENTRY, ...sections]}
+        selectedId={dashboardOpen ? DASHBOARD_ENTRY.id : selectedSection?.id}
         onSelect={selectSection}
         onLogout={signOut}
       />
@@ -1316,6 +1332,19 @@ function AdminApp() {
             <span>Website sections</span>
           </div>
           <div className="admin-topbar-end">
+            <label className="admin-upload-optimise" htmlFor="optimise-uploads">
+              <Switch
+                id="optimise-uploads"
+                checked={optimiseUploads}
+                onCheckedChange={(checked) => {
+                  setOptimiseUploads(checked);
+                  setUploadOptimisation(checked);
+                }}
+              />
+              <span title="Uploaded photos are resized to max 1600px and saved as WebP">
+                Optimise uploads (WebP)
+              </span>
+            </label>
             <span className="admin-server-status">
               <i aria-hidden="true" />
               {dirty ? "Unpublished changes" : "All changes published"}
@@ -1329,6 +1358,9 @@ function AdminApp() {
           </div>
         </header>
 
+        {dashboardOpen ? (
+          <AnalyticsDashboard onNotify={setNotice} />
+        ) : (
         <SectionEditor
           section={selectedSection}
           index={selectedIndex}
@@ -1364,6 +1396,42 @@ function AdminApp() {
             <>
               <Separator />
               <ApplicationInbox onNotify={setNotice} />
+            </>
+          )}
+          {selectedSection?.id === "social-bar" && (
+            <>
+              <Separator />
+              <section className="admin-form-section" aria-labelledby="social-bar-title">
+                <div className="admin-form-heading">
+                  <div>
+                    <h2 id="social-bar-title">Social icons</h2>
+                    <p>
+                      Links behind the fixed icons on the right edge of the homepage.
+                      Leave a field empty to hide that icon; use the "Visible on homepage"
+                      switch above to hide the whole bar.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="admin-field-grid">
+                  {[
+                    { key: "facebookUrl", label: "Facebook URL", placeholder: "https://www.facebook.com/..." },
+                    { key: "instagramUrl", label: "Instagram URL", placeholder: "https://www.instagram.com/..." },
+                    { key: "linkedinUrl", label: "LinkedIn URL", placeholder: "https://www.linkedin.com/company/..." },
+                  ].map((field) => (
+                    <div className="admin-field admin-field-wide" key={field.key}>
+                      <Label htmlFor={`social-bar-${field.key}`}>{field.label}</Label>
+                      <Input
+                        id={`social-bar-${field.key}`}
+                        type="url"
+                        value={selectedSection[field.key] ?? ""}
+                        placeholder={field.placeholder}
+                        onChange={(event) => updateField(field.key, event.target.value)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </section>
             </>
           )}
           {collection?.metaFields && (
@@ -1416,6 +1484,7 @@ function AdminApp() {
             </>
           )}
         </SectionEditor>
+        )}
 
         <Toast notice={notice} onDismiss={() => setNotice(null)} />
       </SidebarInset>

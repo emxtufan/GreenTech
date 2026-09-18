@@ -2,35 +2,72 @@ import {
   preloadPageGLTFs,
   subscribePageModelProgress,
 } from "./threeAssetCache.js";
+import { collectProjectImages } from "./projectImages.js";
+import {
+  selectBlogPosts,
+  selectClientLogos,
+  selectGalleryItems,
+  selectPhotoGalleryItems,
+  selectTestimonials,
+} from "./siteContent.js";
 
 const IMAGE_URL_PATTERN = /\.(?:avif|gif|jpe?g|png|svg|webp)(?:[?#].*)?$/i;
-const VIDEO_URL_PATTERN = /\.(?:mp4|webm)(?:[?#].*)?$/i;
-const DEFERRED_MEDIA_KEYS = new Set(["gallery"]);
+
+// Everything the homepage paints, so the site arrives fully loaded and fast
+// scrolling never meets an empty frame. Mirrors what each section renders:
+const HOMEPAGE_BLOG_POSTS = 4; // BlogSection HOMEPAGE_POST_LIMIT
+const HOMEPAGE_PROJECT_CARDS = 6; // HorizontalParallaxGallery: 5 featured + archive cover
+const PHOTO_STREAM_MOBILE_QUERY = 767; // PhotoGallerySection uses useIsMobile()
 
 const STATIC_CRITICAL_IMAGES = [
   "/original/logo-preloader-480.webp",
   "/original/logo-nav-480.webp",
   "/original/LOGO-BUN-Transparent.png.webp",
+  "/original/logo-alb.png.webp",
   "/original/footer-certifications.webp",
+  "/gallery/solar-safety.webp",
 ];
 
-function collectMediaUrls(value, output = new Set()) {
-  if (typeof value === "string") {
-    const url = value.trim();
-    if (IMAGE_URL_PATTERN.test(url) || VIDEO_URL_PATTERN.test(url)) output.add(url);
-    return output;
-  }
+function addImageUrl(output, value) {
+  if (typeof value !== "string") return;
+  const url = value.trim();
+  if (IMAGE_URL_PATTERN.test(url)) output.add(url);
+}
 
-  if (Array.isArray(value)) {
-    value.forEach((item) => collectMediaUrls(item, output));
-    return output;
-  }
+// The photo stream shows `cards` images per rail on two rails, the second rail
+// offset by half the pool, exactly as PhotoGallerySection lays them out.
+function collectPhotoStreamUrls(content, output) {
+  const images = collectProjectImages(
+    selectGalleryItems(content),
+    selectPhotoGalleryItems(content),
+  );
+  if (!images.length) return;
 
-  if (value && typeof value === "object") {
-    Object.entries(value).forEach(([key, item]) => {
-      if (!DEFERRED_MEDIA_KEYS.has(key)) collectMediaUrls(item, output);
-    });
-  }
+  const mobile = window.innerWidth <= PHOTO_STREAM_MOBILE_QUERY;
+  const cards = mobile
+    ? Math.min(6, Math.max(4, images.length))
+    : Math.min(12, Math.max(9, images.length));
+  [0, Math.ceil(images.length / 2)].forEach((offset) => {
+    for (let index = 0; index < cards; index += 1) {
+      addImageUrl(output, images[(index + offset) % images.length]?.src);
+    }
+  });
+}
+
+export function collectHomepageMediaUrls(content) {
+  const output = new Set(STATIC_CRITICAL_IMAGES);
+
+  selectGalleryItems(content)
+    .slice(0, HOMEPAGE_PROJECT_CARDS)
+    .forEach((item) => addImageUrl(output, item.image));
+  collectPhotoStreamUrls(content, output);
+  selectClientLogos(content)
+    .forEach((logo) => addImageUrl(output, logo.image ?? logo.src));
+  selectTestimonials(content)
+    .forEach((testimonial) => addImageUrl(output, testimonial.image));
+  selectBlogPosts(content)
+    .slice(0, HOMEPAGE_BLOG_POSTS)
+    .forEach((post) => addImageUrl(output, post.image));
 
   return output;
 }
@@ -54,43 +91,9 @@ function preloadImage(url) {
   });
 }
 
-function preloadVideo(url) {
-  return new Promise((resolve) => {
-    const video = document.createElement("video");
-    let settled = false;
-
-    const finish = (loaded) => {
-      if (settled) return;
-      settled = true;
-      video.removeEventListener("loadeddata", handleLoaded);
-      video.removeEventListener("error", handleError);
-      video.removeAttribute("src");
-      video.load();
-      resolve({ url, loaded });
-    };
-    const handleLoaded = () => finish(true);
-    const handleError = () => finish(false);
-
-    video.preload = "auto";
-    video.muted = true;
-    video.playsInline = true;
-    video.addEventListener("loadeddata", handleLoaded, { once: true });
-    video.addEventListener("error", handleError, { once: true });
-    video.src = url;
-    video.load();
-  });
-}
-
-export async function preloadPageAssets(
-  content,
-  onProgress = () => {},
-  { deferHeavyAssets = false } = {},
-) {
-  const mediaUrls = deferHeavyAssets ? new Set() : collectMediaUrls(content);
-  STATIC_CRITICAL_IMAGES.forEach((url) => mediaUrls.add(url));
-
-  const media = [...mediaUrls];
-  let modelProgress = deferHeavyAssets ? 100 : 0;
+export async function preloadPageAssets(content, onProgress = () => {}) {
+  const media = [...collectHomepageMediaUrls(content)];
+  let modelProgress = 0;
   let completedMedia = 0;
   let fontsReady = false;
 
@@ -103,18 +106,14 @@ export async function preloadPageAssets(
     onProgress(Math.min(100, Math.round(progress)));
   };
 
-  const unsubscribe = deferHeavyAssets
-    ? () => {}
-    : subscribePageModelProgress((progress) => {
-      modelProgress = progress;
-      emit();
-    });
+  const unsubscribe = subscribePageModelProgress((progress) => {
+    modelProgress = progress;
+    emit();
+  });
 
   const mediaPromise = Promise.all(
     media.map(async (url) => {
-      const result = VIDEO_URL_PATTERN.test(url)
-        ? await preloadVideo(url)
-        : await preloadImage(url);
+      const result = await preloadImage(url);
       completedMedia += 1;
       emit();
       return result;
@@ -128,7 +127,7 @@ export async function preloadPageAssets(
 
   try {
     const [models, mediaResults] = await Promise.all([
-      deferHeavyAssets ? Promise.resolve([]) : preloadPageGLTFs(),
+      preloadPageGLTFs(),
       mediaPromise,
       fontsPromise,
     ]);

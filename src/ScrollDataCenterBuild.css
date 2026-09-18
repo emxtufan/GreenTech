@@ -33,21 +33,3 @@
   isolation: isolate;
 }
 
-.data-center-canvas-mount {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  pointer-events: none;
-  will-change: opacity;
-}
-
-.data-center-canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.data-center-canvas-mount.load-error {
-  display: none;
-}

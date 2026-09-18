@@ -1,40 +1,30 @@
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { clone as cloneSkeleton } from "three/examples/jsm/utils/SkeletonUtils.js";
-import { shouldConserveWebGLMemory } from "./devicePerformance.js";
+import { isMobileDevice, shouldConserveWebGLMemory } from "./devicePerformance.js";
 
-export const PAGE_GLTF_ASSETS = [
-  {
-    key: "wind-turbine",
-    url: "/3d/animated_wind_turbine.glb",
-    bytes: 1_272_620,
-  },
-  {
-    key: "solar-assembly",
-    url: "/3d/futuristic_solar_power_module%20(1).glb",
-    bytes: 29_636_996,
-  },
-  {
-    key: "electrical-inspection",
-    url: "/3d/factory__electrical__box_12_mb.glb",
-    bytes: 15_009_052,
-  },
-  {
-    key: "construction-services",
-    url: "/3d/construction.glb",
-    bytes: 6_763_712,
-  },
-  {
-    key: "data-center",
-    url: "/3d/data_center_workspace_2.glb",
-    bytes: 124_688,
-  },
+// Phones get the same turbine with 256px WebP textures and Draco geometry
+// (44 KB instead of 1.27 MB); it sits blurred behind the copy, so nothing
+// finer would be visible anyway.
+const WIND_TURBINE_ASSET = isMobileDevice()
+  ? { key: "wind-turbine", url: "/3d/animated_wind_turbine_mobile.glb", bytes: 44_368 }
+  : { key: "wind-turbine", url: "/3d/animated_wind_turbine.glb", bytes: 1_272_620 };
+
+export const WIND_TURBINE_MODEL_URL = WIND_TURBINE_ASSET.url;
+
+// The service sections draw SVG illustrations on every device, so the only
+// page models left are the turbine and, on desktop, the contact sun.
+const DESKTOP_ONLY_GLTF_ASSETS = [
   {
     key: "solar-contact",
     url: "/3d/space_sun.glb",
     bytes: 1_534_068,
   },
 ];
+
+export const PAGE_GLTF_ASSETS = isMobileDevice()
+  ? [WIND_TURBINE_ASSET]
+  : [WIND_TURBINE_ASSET, ...DESKTOP_ONLY_GLTF_ASSETS];
 
 const assetByUrl = new Map(PAGE_GLTF_ASSETS.map((asset) => [asset.url, asset]));
 const sourceCache = new Map();

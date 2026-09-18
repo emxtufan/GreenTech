@@ -422,7 +422,7 @@ function CompanyProofSection({ active, beforeFootprint = null }) {
             <img
               src="/gallery/solar-safety.webp"
               alt={qualityText("imageAlt", "Echipament de protectie asezat pe module fotovoltaice")}
-              loading="lazy"
+              loading="eager"
               decoding="async"
             />
             <figcaption>{qualityText("imageCaption", "Siguranta incepe inaintea lucrarilor.")}</figcaption>
@@ -533,7 +533,7 @@ function CompanyProofSection({ active, beforeFootprint = null }) {
                       aria-hidden="true"
                     >
                       {testimonial.image ? (
-                        <img src={testimonial.image} alt="" loading="lazy" decoding="async" />
+                        <img src={testimonial.image} alt="" loading="eager" decoding="async" />
                       ) : (
                         <span>{testimonial.avatarText || getReviewInitials(testimonial.author)}</span>
                       )}

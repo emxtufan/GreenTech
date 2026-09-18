@@ -471,8 +471,9 @@ function PostExperienceSections({
   const photoGalleryItems = selectPhotoGalleryItems(siteContent);
   const preparedModelsRef = useRef(new Set());
 
-  const handleModelPrepared = useCallback((key, success) => {
-    if (!success) return;
+  // A model that failed still counts as settled: its section hides the canvas
+  // and the rest of the page must not wait for it.
+  const handleModelPrepared = useCallback((key) => {
     if (preparedModelsRef.current.has(key)) return;
     preparedModelsRef.current.add(key);
     onPreparationProgress?.(
@@ -512,26 +513,10 @@ function PostExperienceSections({
           />
         )}
       />
-      <ScrollSolarAssembly
-        active={entered}
-        prepare={prepare3d}
-        onPrepared={handleModelPrepared}
-      />
-      <ScrollElectricalInspection
-        active={entered}
-        prepare={prepare3d}
-        onPrepared={handleModelPrepared}
-      />
-      <ScrollConstructionServices
-        active={entered}
-        prepare={prepare3d}
-        onPrepared={handleModelPrepared}
-      />
-      <ScrollDataCenterBuild
-        active={entered}
-        prepare={prepare3d}
-        onPrepared={handleModelPrepared}
-      />
+      <ScrollSolarAssembly active={entered} onPrepared={handleModelPrepared} />
+      <ScrollElectricalInspection active={entered} onPrepared={handleModelPrepared} />
+      <ScrollConstructionServices active={entered} onPrepared={handleModelPrepared} />
+      <ScrollDataCenterBuild active={entered} onPrepared={handleModelPrepared} />
       <BlogSection active={entered} onPostOpen={onOpenPost} />
       <FaqSection active={entered} />
       <SolarContactSection

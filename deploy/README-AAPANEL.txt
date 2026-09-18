@@ -27,12 +27,15 @@ DEPLOY DIN GIT
 Buildul se face local si dist/ se trimite in Git. Pe server:
 
   cd /var/www/greentech
-  git fetch origin main
-  git pull --ff-only origin main
-  npm ci --omit=dev
-  pm2 restart GreenTech --update-env
+  bash deploy/update.sh
 
-Nu rula npm run build pe server.
+Scriptul face git pull --ff-only, npm ci --omit=dev si pm2 restart, fara sa
+atinga storage/ (bazele de date JSON, traducerile si uploadurile live sunt
+ignorate de Git). Nu rula npm run build pe server.
+
+Pozele incarcate din admin inainte de optimizarea WebP se convertesc o data:
+
+  npm run optimize:images -- --live
 
 CLOUDFLARE
 

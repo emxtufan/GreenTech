@@ -307,7 +307,8 @@ button:disabled {
 
 .cards {
   position: absolute;
-  right: calc(34 / var(--gfs) * 1rem);
+  /* Clear the fixed side tabs on the right edge. */
+  right: calc(34 / var(--gfs) * 1rem + var(--side-tab-size, 0px));
   bottom: var(--browser-controls-inset);
   width: calc(502 / var(--gfs) * 1rem);
   max-height: calc(var(--visual-viewport-height) - 130 / var(--gfs) * 1rem);
@@ -426,178 +427,11 @@ button:disabled {
   border-color: var(--text);
 }
 
-.intro {
-  position: fixed;
-  inset: 0;
-  z-index: 4;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-}
-
-.intro.hidden {
-  opacity: 0;
-}
-
-.intro-content {
-  position: absolute;
-  left: calc(34 / var(--gfs) * 1rem);
-  bottom: calc(96 / var(--gfs) * 1rem);
-  width: min(760px, calc(100vw - 68 / var(--gfs) * 1rem));
-}
-
-.intro-title {
-  margin: 0;
-  font-size: 64px;
-  line-height: 0.98;
-  font-weight: 700;
-  letter-spacing: 0;
-  text-wrap: balance;
-  overflow-wrap: break-word;
-}
-
-.intro-copy {
-  max-width: 580px;
-  margin: 20px 0 0;
-  font-size: 18px;
-  line-height: 1.4;
-  opacity: 0.72;
-  text-wrap: pretty;
-}
-
-.intro-cta {
-  position: relative;
-  display: inline-flex;
-  margin-top: 34px;
-  height: 60px;
-  align-items: center;
-  gap: 18px;
-  padding: 0 8px 0 28px;
-  border: 0;
-  border-radius: 999px;
-  appearance: none;
-  -webkit-appearance: none;
-  background: #8bbc3f;
-  color: #061006;
-  font: inherit;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: 0;
-  white-space: nowrap;
-  cursor: pointer;
-  pointer-events: auto;
-  box-shadow: 0 12px 30px rgb(0 0 0 / 22%);
-  transition:
-    background-color 0.22s ease,
-    box-shadow 0.28s ease,
-    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* Soft halo that grows on hover, kept behind the pill. */
-.intro-cta::before {
-  content: "";
-  position: absolute;
-  inset: -6px;
-  z-index: -1;
-  border-radius: inherit;
-  background: rgb(139 188 63 / 26%);
-  opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.intro-cta:hover:not(:disabled),
-.intro-cta:focus-visible:not(:disabled) {
-  background: #9ccb4e;
-  box-shadow: 0 18px 38px rgb(0 0 0 / 28%);
-  transform: translateY(-2px);
-}
-
-.intro-cta:hover:not(:disabled)::before,
-.intro-cta:focus-visible:not(:disabled)::before {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.intro-cta:active:not(:disabled) {
-  transform: none;
-}
-
-.intro-cta:focus-visible {
-  outline: 2px solid #061006;
-  outline-offset: 3px;
-}
-
-.intro-cta:disabled {
-  background: rgb(139 188 63 / 42%);
-  box-shadow: none;
-  cursor: progress;
-}
-
-.intro-cta-arrow {
-  display: grid;
-  width: 44px;
-  height: 44px;
-  flex: 0 0 auto;
-  place-items: center;
-  border-radius: 50%;
-  background: #061006;
-  color: #8bbc3f;
-  font-size: 19px;
-  line-height: 1;
-  transition:
-    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-    background-color 0.22s ease;
-}
-
-.intro-cta:hover:not(:disabled) .intro-cta-arrow {
-  transform: translateX(3px);
-}
-
-@media screen and (max-width: 700px) {
-  .intro-cta {
-    display: flex;
-    width: 100%;
-    height: 56px;
-    margin-top: 26px;
-    justify-content: space-between;
-    padding: 0 7px 0 22px;
-    font-size: 15px;
-  }
-
-  .intro-cta-arrow {
-    width: 42px;
-    height: 42px;
-    font-size: 18px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .intro-cta,
-  .intro-cta::before,
-  .intro-cta-arrow {
-    transition: none;
-  }
-}
-
 .post-experience-sections {
   position: relative;
   z-index: 12;
   background: #000000;
   isolation: isolate;
-}
-
-/* During a touch gesture that starts inside the 3D hero, stop native Safari
-   momentum at the first content section. The controller removes this class as
-   soon as the gesture settles, so reverse scrolling remains completely free. */
-html.hero-exit-snap-active {
-  scroll-snap-type: y proximity;
-}
-
-html.hero-exit-snap-active #company {
-  scroll-margin-top: 0;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 .post-experience-sections.preparing {
@@ -631,15 +465,6 @@ html.hero-exit-snap-active #company {
 
 .final-section.visible {
   display: block;
-}
-
-.final-section::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  z-index: 2;
-  height: 6px;
-  background: #8bbc3f;
 }
 
 .final-section.visible::after {
@@ -967,7 +792,7 @@ html.hero-exit-snap-active #company {
   position: absolute;
   top: 28px;
   right: 30px;
-  color: rgb(245 247 239 / 34%);
+  color: rgb(193 240 50 / 5%);
   font-family: "Fira Sans", Arial, Helvetica, sans-serif;
   font-size: 78px;
   line-height: 0.8;
@@ -1096,15 +921,6 @@ html.hero-exit-snap-active #company {
 }
 
 @media screen and (max-width: 900px) and (min-width: 481px) {
-  .intro-content {
-    left: calc(28 / var(--gfs) * 1rem);
-    width: calc(100vw - 56 / var(--gfs) * 1rem);
-  }
-
-  .intro-title {
-    font-size: 52px;
-  }
-
   .final-section-inner {
     padding: 88px 28px 24px;
   }
@@ -1281,25 +1097,6 @@ html.hero-exit-snap-active #company {
     touch-action: manipulation;
   }
 
-  .intro-content {
-    left: calc(20 / var(--gfs) * 1rem);
-    right: calc(20 / var(--gfs) * 1rem);
-    bottom: calc(96 / var(--gfs) * 1rem);
-    width: auto;
-  }
-
-  .intro-title {
-    font-size: 42px;
-    line-height: 1;
-  }
-
-  .intro-copy {
-    max-width: 340px;
-    margin-top: 14px;
-    font-size: 16px;
-    line-height: 1.4;
-  }
-
   .final-section-inner {
     padding: 72px 18px 16px;
   }
@@ -1440,9 +1237,9 @@ html.hero-exit-snap-active #company {
   }
 
   .project-stack-number {
-    top: 20px;
-    right: 18px;
-    font-size: 52px;
+    top: 1px;
+    right: -10px;
+    font-size: 130px;
   }
 
   .project-stack-card h3 {
@@ -1460,10 +1257,6 @@ html.hero-exit-snap-active #company {
 }
 
 @media screen and (max-width: 360px) {
-  .intro-title {
-    font-size: 36px;
-  }
-
   .final-section-intro h1 {
     font-size: 31px;
   }

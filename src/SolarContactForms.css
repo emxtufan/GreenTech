@@ -420,6 +420,12 @@
 }
 
 @media screen and (max-width: 700px) {
+  /* The sun spacer is gone on phones, so give the forms their own room
+     below the intro copy. */
+  .contact-forms {
+    padding-top: 40px;
+  }
+
   .contact-forms-trigger {
     padding: 18px 48px 18px 18px;
   }

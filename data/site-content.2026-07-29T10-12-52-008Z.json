@@ -389,7 +389,7 @@
         "enabled": true,
         "category": "Electrical & Mechanical Installation",
         "title": "Butimanu, Romania",
-        "image": "/projects/butimanu/butimanu-01.jpg",
+        "image": "/projects/butimanu/butimanu-01.webp",
         "alt": "Construction work at the Butimanu photovoltaic project",
         "projectDate": "June, 2025",
         "projectCategory": "Electrical and mechanical installation",
@@ -415,15 +415,15 @@
         ],
         "gallery": [
           {
-            "src": "/projects/butimanu/butimanu-01.jpg",
+            "src": "/projects/butimanu/butimanu-01.webp",
             "alt": "Construction equipment and mounting structures at Butimanu"
           },
           {
-            "src": "/projects/butimanu/butimanu-02.jpg",
+            "src": "/projects/butimanu/butimanu-02.webp",
             "alt": "Official site photograph from the Butimanu photovoltaic project"
           },
           {
-            "src": "/projects/butimanu/butimanu-03.jpg",
+            "src": "/projects/butimanu/butimanu-03.webp",
             "alt": "GreenTech Professionals team activity at the Butimanu site"
           }
         ],
@@ -435,7 +435,7 @@
         "enabled": true,
         "category": "Electrical & Mechanical Installation",
         "title": "Piombino, Italy",
-        "image": "/projects/piombino/piombino-01.jpg",
+        "image": "/projects/piombino/piombino-01.webp",
         "alt": "Photovoltaic panels at the Piombino project",
         "projectDate": "February, 2025",
         "projectCategory": "Electrical and mechanical installation",
@@ -461,11 +461,11 @@
         ],
         "gallery": [
           {
-            "src": "/projects/piombino/piombino-01.jpg",
+            "src": "/projects/piombino/piombino-01.webp",
             "alt": "Photovoltaic panels at the Piombino project"
           },
           {
-            "src": "/projects/piombino/piombino-02.jpg",
+            "src": "/projects/piombino/piombino-02.webp",
             "alt": "Official site photograph from the Piombino photovoltaic project"
           },
           {
@@ -481,7 +481,7 @@
         "enabled": true,
         "category": "Electrical & Mechanical Installation",
         "title": "Giurgiu, Romania",
-        "image": "/projects/giurgiu/giurgiu-01.jpg",
+        "image": "/projects/giurgiu/giurgiu-01.webp",
         "alt": "Photovoltaic panels at the Giurgiu project",
         "projectDate": "January, 2025",
         "projectCategory": "Electrical and mechanical installation",
@@ -507,11 +507,11 @@
         ],
         "gallery": [
           {
-            "src": "/projects/giurgiu/giurgiu-01.jpg",
+            "src": "/projects/giurgiu/giurgiu-01.webp",
             "alt": "Rows of photovoltaic panels at the Giurgiu project"
           },
           {
-            "src": "/projects/giurgiu/giurgiu-02.jpg",
+            "src": "/projects/giurgiu/giurgiu-02.webp",
             "alt": "Official site photograph from the Giurgiu photovoltaic project"
           }
         ],
@@ -523,7 +523,7 @@
         "enabled": true,
         "category": "Photovoltaic Park",
         "title": "Craiova, Romania",
-        "image": "/projects/craiova/craiova-01.jpg",
+        "image": "/projects/craiova/craiova-01.webp",
         "alt": "Aerial view of the Craiova photovoltaic project",
         "projectDate": "January, 2025",
         "projectCategory": "Photovoltaic park",
@@ -549,7 +549,7 @@
         ],
         "gallery": [
           {
-            "src": "/projects/craiova/craiova-01.jpg",
+            "src": "/projects/craiova/craiova-01.webp",
             "alt": "Aerial view of the Craiova photovoltaic project"
           },
           {
@@ -661,7 +661,7 @@
         "enabled": true,
         "title": "TEST",
         "category": "Photovoltaic Park",
-        "image": "/uploads/gallery/screenshot-2026-07-22-104047-6629afc1c64d.png",
+        "image": "/uploads/gallery/screenshot-2026-07-22-104047-6629afc1c64d.webp",
         "alt": "Aerial view of the Cagliari photovoltaic project",
         "projectDate": "20 martie 2030",
         "projectCategory": "",
@@ -687,12 +687,12 @@
         "gallery": [
           {
             "id": "00eefb5b-dff9-4c85-a4df-c03f41ca5f5c",
-            "src": "/uploads/gallery/screenshot-2026-07-22-150320-5e73f95bfb02.png",
+            "src": "/uploads/gallery/screenshot-2026-07-22-150320-5e73f95bfb02.webp",
             "alt": ""
           },
           {
             "id": "cf678b28-399b-4e81-8292-fa0d5e9377e2",
-            "src": "/uploads/gallery/screenshot-2026-07-23-162248-3c72f61ca5b0.png",
+            "src": "/uploads/gallery/screenshot-2026-07-23-162248-3c72f61ca5b0.webp",
             "alt": ""
           }
         ]
@@ -835,7 +835,7 @@
         "id": "lantania",
         "order": 5,
         "enabled": true,
-        "image": "/clients/lantania.jpg",
+        "image": "/clients/lantania.webp",
         "alt": "Lantania",
         "title": "Lantania",
         "href": "https://www.lantania.com/en/sustainability/"
@@ -853,7 +853,7 @@
         "id": "solarig",
         "order": 7,
         "enabled": true,
-        "image": "/clients/solarig.png",
+        "image": "/clients/solarig.webp",
         "alt": "Solarig",
         "title": "Solarig",
         "href": "https://solarig.com/en/home-en/"
@@ -937,7 +937,7 @@
         "author": "M. A.",
         "role": "Customer testimonial",
         "quote": "We are very satisfied with the professionalism of the GreenTech Professionals team. We warmly recommend them to anyone who has a photovoltaic megaproject to complete, as they are reliable partners.",
-        "image": "/projects/butimanu/butimanu-02.jpg",
+        "image": "/projects/butimanu/butimanu-02.webp",
         "imagePosition": "31% 42%",
         "rating": 5,
         "verified": true,
@@ -950,7 +950,7 @@
         "author": "A. C.",
         "role": "Customer testimonial",
         "quote": "Respecting the deadlines and the quality of the works are the most important assets when you collaborate with a photovoltaic services company. I recommend GreenTech Professionals SRL!",
-        "image": "/projects/butimanu/butimanu-03.jpg",
+        "image": "/projects/butimanu/butimanu-03.webp",
         "imagePosition": "43% 36%",
         "rating": 5,
         "verified": true,
@@ -986,7 +986,7 @@
         "readTime": "3 min read",
         "title": "Inside the 300 MW Butimanu development",
         "excerpt": "A closer look at the people, planning and field coordination behind one of Romania's largest photovoltaic developments.",
-        "image": "/projects/butimanu/butimanu-02.jpg",
+        "image": "/projects/butimanu/butimanu-02.webp",
         "alt": "Field operations at the Butimanu photovoltaic development",
         "intro": "GreenTech Professionals is contributing electrical and mechanical installation capability to the 300 MW photovoltaic development in Butimanu, Romania.",
         "sections": [
@@ -1096,7 +1096,7 @@
         "readTime": "2 min read",
         "title": "Politehnica students visit the Butimanu site",
         "excerpt": "A technical site visit connected the next generation of engineers with active photovoltaic construction.",
-        "image": "/projects/butimanu/butimanu-03.jpg",
+        "image": "/projects/butimanu/butimanu-03.webp",
         "alt": "GreenTech Professionals team activity at the Butimanu site",
         "intro": "Students from Politehnica University visited the Butimanu solar park for a practical view of photovoltaic construction and field delivery.",
         "sections": [
@@ -1148,7 +1148,7 @@
         "date": "2026-07-29",
         "dateLabel": "29 July 2026",
         "readTime": "3 min read",
-        "image": "/projects/butimanu/butimanu-02.jpg",
+        "image": "/projects/butimanu/butimanu-02.webp",
         "alt": "Photovoltaic construction work at the Butimanu project",
         "excerpt": "A complete Field Journal example showing how a project story is structured from introduction to technical highlights.",
         "intro": "This published test entry demonstrates the complete article format available for GreenTech Professionals field stories, company updates and technical news.",

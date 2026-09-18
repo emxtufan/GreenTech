@@ -42,6 +42,10 @@ const app = express();
 let vite = null;
 
 app.disable("x-powered-by");
+// Nginx proxies from the same machine, so the loopback hop is trusted and
+// `request.ip` becomes the real visitor address (rate limits and analytics
+// would otherwise see every visitor as 127.0.0.1).
+app.set("trust proxy", "loopback");
 app.use(compression({ threshold: 1024 }));
 
 app.use("/api", createApiRouter());

@@ -43,10 +43,12 @@ Desktop.ini
 *.bak
 ~$*
 
-# Website content is intentionally versioned, including storage/data,
-# translations, JSON backups, local databases and public admin uploads.
-# Keep submitted binary documents private even when the JSON databases are
-# committed, because this directory can contain CVs, invoices or identity data.
+# Live databases. storage/ (or the DATA_DIR / UPLOADS_DIR / TRANSLATIONS_DIR
+# configured in .env) is written by the admin panel and by form submissions on
+# the server; it must never be overwritten by a git pull. The versioned seeds
+# in data/ and public/uploads/ are only read when a live file does not exist.
+/storage/
+# Submitted binary documents can contain CVs, invoices or identity data.
 data/applications/
 
 # Local Lighthouse exports

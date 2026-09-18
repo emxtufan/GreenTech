@@ -5,7 +5,6 @@ import {
   SCROLL_HEIGHT,
   SCROLL_SEGMENT,
 } from "./experienceConfig.js";
-import SectionActionModal, { useSectionAction } from "./SectionAction.jsx";
 import useExperienceScrollController from "./useExperienceScrollController.js";
 import {
   selectBlogPosts,
@@ -15,10 +14,12 @@ import {
 } from "./lib/siteContent.js";
 import useSiteContent from "./hooks/useSiteContent.js";
 import useSection from "./hooks/useSection.js";
-import { shouldConserveWebGLMemory } from "./lib/devicePerformance.js";
 import { uiText, useLocale } from "./lib/i18n.js";
+import { resolveAnchorScrollTop } from "./scrollMotion.js";
+import { trackVisit } from "./lib/visitTracker.js";
 import "./styles.css";
 import SiteNavigation from "./SiteNavigation.jsx";
+import SideTabs from "./SideTabs.jsx";
 
 const BlurText = lazy(() => import("./BlurText.jsx"));
 const PostExperienceSections = lazy(() => import("./PostExperienceSections.jsx"));
@@ -29,6 +30,9 @@ const AllPhotosPage = lazy(() => import("./AllPhotosPage.jsx"));
 
 // Which hero cards render the graph treatment — a UI behaviour, not content.
 const graphSections = new Set([0, 1, 4, 5]);
+
+// Time between the preloader starting to fade and the hero's cloud reveal.
+const AUTO_ENTER_DELAY = 600;
 
 const heroSurfaces = [
   "#fff8e8",
@@ -116,7 +120,6 @@ function LogoMark() {
   );
 }
 
-
 function useScrollAwareNavigation(enabled) {
   const [visible, setVisible] = useState(true);
   const lastScrollY = useRef(0);
@@ -162,9 +165,16 @@ function useScrollAwareNavigation(enabled) {
   return visible;
 }
 
-function Navigation({ backToIntro, entered }) {
+function Navigation({ backToIntro, entered, onEnterAndNavigate }) {
   const visible = useScrollAwareNavigation(entered);
-  return <SiteNavigation visible={visible} backToIntro={backToIntro} entered={entered} />;
+  return (
+    <SiteNavigation
+      visible={visible}
+      backToIntro={backToIntro}
+      entered={entered}
+      onEnterAndNavigate={onEnterAndNavigate}
+    />
+  );
 }
 
 function HeroScrollCue({ active, entered }) {
@@ -280,42 +290,6 @@ function Card({ active, entered }) {
   );
 }
 
-function Intro({ entered, ready, enter }) {
-  const text = useSection("intro-hero");
-  const introAction = useSectionAction("intro-hero", {
-    label: "Incepeti explorarea",
-    mode: "builtin",
-  });
-
-  return (
-    <section className={`intro ${entered ? "hidden" : ""}`} id="introUi">
-      <div className="intro-content">
-        <h1 className="intro-title">
-          {text("title", "Greentech Professionals")}
-        </h1>
-        <p className="intro-copy">
-          {text(
-            "description",
-            "Executie electrica, mecanica si civila pentru proiecte energetice in Romania si Europa.",
-          )}
-        </p>
-        {introAction.visible && (
-          <button
-            className="intro-cta"
-            type="button"
-            onClick={(event) => introAction.activate(event, enter)}
-            disabled={introAction.mode === "builtin" && !ready}
-          >
-            <span>{introAction.label}</span>
-            <span className="intro-cta-arrow" aria-hidden="true">{"\u2192"}</span>
-          </button>
-        )}
-      </div>
-      <SectionActionModal {...introAction.modalProps} />
-    </section>
-  );
-}
-
 function Preloader({ loaded, ready }) {
   const locale = useLocale();
   const progress = Math.min(100, Math.max(0, Math.round(loaded)));
@@ -364,15 +338,12 @@ function App({
   onOpenPost,
   routeOpen,
 }) {
-  const [progressiveAssets] = useState(() => shouldConserveWebGLMemory());
   const [loaded, setLoaded] = useState(0);
   const [heroProgress, setHeroProgress] = useState(0);
   const [heroReady, setHeroReady] = useState(false);
   const [pageAssetProgress, setPageAssetProgress] = useState(0);
   const [pageAssetsReady, setPageAssetsReady] = useState(false);
-  const [postPreparationProgress, setPostPreparationProgress] = useState(
-    () => (progressiveAssets ? 100 : 0),
-  );
+  const [postPreparationProgress, setPostPreparationProgress] = useState(0);
   const [entered, setEntered] = useState(false);
   const [active, setActive] = useState(0);
   const [dark, setDark] = useState(false);
@@ -408,7 +379,6 @@ function App({
           if (cancelled) return;
           setPageAssetProgress((current) => Math.max(current, progress));
         },
-        { deferHeavyAssets: progressiveAssets },
       ))
       .then(() => {
         if (cancelled) return;
@@ -417,12 +387,17 @@ function App({
       })
       .catch((error) => {
         console.error("Unable to preload every page asset", error);
+        if (cancelled) return;
+        // Whatever failed will fall back in its own section; do not hold
+        // the whole site behind it.
+        setPageAssetProgress(100);
+        setPageAssetsReady(true);
       });
 
     return () => {
       cancelled = true;
     };
-  }, [progressiveAssets, siteContent]);
+  }, [siteContent]);
 
   useEffect(() => {
     const aggregate = Math.min(
@@ -474,21 +449,81 @@ function App({
     root.style.setProperty("--hero-surface", heroSurface);
   }, [active, dark]);
 
-  const prepareForHeroNavigation = useExperienceScrollController({
+  useExperienceScrollController({
     entered,
     routeOpen,
     sceneRef,
     experienceRef,
   });
 
-  const enter = useCallback(() => {
-    experienceRef.current?.enter();
-  }, [experienceRef]);
+  // No "start exploring" step: once everything is loaded the clouds part on
+  // their own. The delay lets the preloader fade first so the animation is
+  // actually seen.
+  const autoEnteredRef = useRef(false);
+  useEffect(() => {
+    if (!ready || autoEnteredRef.current) return undefined;
+    autoEnteredRef.current = true;
+    const timer = window.setTimeout(
+      () => experienceRef.current?.enter(),
+      AUTO_ENTER_DELAY,
+    );
+    return () => window.clearTimeout(timer);
+  }, [experienceRef, ready]);
 
-  const backToIntro = useCallback(() => {
-    prepareForHeroNavigation();
-    experienceRef.current?.returnToIntro();
-  }, [experienceRef, prepareForHeroNavigation]);
+  // A menu link used from the intro: enter the experience, then scroll to the
+  // requested section once it has a place in the layout.
+  const pendingSectionRef = useRef(null);
+  const enterAndNavigate = useCallback((href) => {
+    pendingSectionRef.current = href;
+    if (ready) experienceRef.current?.enter();
+  }, [experienceRef, ready]);
+
+  useEffect(() => {
+    if (ready && !entered && pendingSectionRef.current) experienceRef.current?.enter();
+  }, [entered, experienceRef, ready]);
+
+  useEffect(() => {
+    if (!entered || !pendingSectionRef.current) return undefined;
+
+    const href = pendingSectionRef.current;
+    pendingSectionRef.current = null;
+    let secondFrame = 0;
+    // Two frames: the sections leave their fixed "preparing" state in this
+    // commit and the scroll controller mounts alongside; let both settle.
+    const firstFrame = window.requestAnimationFrame(() => {
+      secondFrame = window.requestAnimationFrame(() => {
+        const target = document.querySelector(href);
+        if (!target) return;
+        if (typeof window.__scrollToSection === "function") {
+          window.__scrollToSection(target);
+          return;
+        }
+        const anchorTop = resolveAnchorScrollTop(target);
+        if (anchorTop !== null) {
+          window.scrollTo({ top: anchorTop, behavior: "smooth" });
+          return;
+        }
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    return () => {
+      window.cancelAnimationFrame(firstFrame);
+      window.cancelAnimationFrame(secondFrame);
+    };
+  }, [entered]);
+
+  // The brand button returns to the first scene rather than to an intro
+  // screen, since there is no longer one to return to.
+  const backToStart = useCallback(() => {
+    const scene = sceneRef.current;
+    if (!scene) return;
+    if (typeof window.__scrollToSection === "function") {
+      window.__scrollToSection(scene);
+      return;
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   const handlePostPreparationProgress = useCallback((progress) => {
     setPostPreparationProgress((current) => Math.max(current, progress));
@@ -516,8 +551,14 @@ function App({
           style={{ height: entered ? `${SCROLL_HEIGHT}px` : 0 }}
         />
       </div>
-      <Navigation backToIntro={backToIntro} entered={entered} />
-      <Intro entered={entered} ready={ready} enter={enter} />
+      {/* Before the navigation on purpose: at the same z-index the mobile
+          menu sheet (later in the DOM) must cover the tabs. */}
+      <SideTabs />
+      <Navigation
+        backToIntro={backToStart}
+        entered={entered}
+        onEnterAndNavigate={enterAndNavigate}
+      />
       <Preloader loaded={loaded} ready={ready} />
       <div
         ref={postExperienceRef}
@@ -526,7 +567,7 @@ function App({
         <Suspense fallback={<div className="post-experience-loading" aria-hidden="true" />}>
           <PostExperienceSections
             entered={entered}
-            prepare3d={!progressiveAssets}
+            prepare3d
             onPreparationProgress={handlePostPreparationProgress}
             onOpenProject={onOpenProject}
             onShowAllProjects={onShowAllProjects}
@@ -593,6 +634,10 @@ function Root() {
   const routedPhotos = selectPhotoGalleryItems(routeContent);
   const routedBlogPosts = selectBlogPosts(routeContent);
   const [routeState, setRouteState] = useState(getSiteRouteFromUrl);
+
+  useEffect(() => {
+    trackVisit();
+  }, []);
   const {
     projectId,
     postId,

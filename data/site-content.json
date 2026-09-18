@@ -446,6 +446,23 @@
       "summary": "3 link groups",
       "source": "src/SolarContactSection.jsx / footer",
       "visible": true
+    },
+    {
+      "id": "social-bar",
+      "group": "Continut",
+      "name": "Bara sociala (dreapta)",
+      "eyebrow": "",
+      "title": "",
+      "description": "",
+      "action": "",
+      "actionMode": "builtin",
+      "format": "Fixed icon bar",
+      "summary": "Facebook, Instagram, LinkedIn",
+      "source": "src/SideTabs.jsx",
+      "visible": true,
+      "facebookUrl": "https://www.facebook.com/greentechprofessionals",
+      "instagramUrl": "",
+      "linkedinUrl": "https://ro.linkedin.com/company/greentech-professionals"
     }
   ],
   "footprintCountries": {
@@ -584,7 +601,7 @@
         "enabled": true,
         "category": "Electric si mecanic",
         "title": "Butimanu, Romania",
-        "image": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-001.jpg",
+        "image": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-001.webp",
         "alt": "Proiectul fotovoltaic Butimanu, Romania",
         "projectDate": "2025",
         "projectCategory": "Instalatii electrice si mecanice",
@@ -617,163 +634,163 @@
         ],
         "gallery": [
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-001.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-001.webp",
             "alt": "Butimanu, Romania - fotografie 1 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-002.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-002.webp",
             "alt": "Butimanu, Romania - fotografie 2 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-003.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-003.webp",
             "alt": "Butimanu, Romania - fotografie 3 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-004.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-004.webp",
             "alt": "Butimanu, Romania - fotografie 4 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-005.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-005.webp",
             "alt": "Butimanu, Romania - fotografie 5 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-006.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-006.webp",
             "alt": "Butimanu, Romania - fotografie 6 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-007.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-007.webp",
             "alt": "Butimanu, Romania - fotografie 7 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-008.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-008.webp",
             "alt": "Butimanu, Romania - fotografie 8 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-009.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-009.webp",
             "alt": "Butimanu, Romania - fotografie 9 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-010.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-010.webp",
             "alt": "Butimanu, Romania - fotografie 10 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-011.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-011.webp",
             "alt": "Butimanu, Romania - fotografie 11 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-012.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-012.webp",
             "alt": "Butimanu, Romania - fotografie 12 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-013.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-013.webp",
             "alt": "Butimanu, Romania - fotografie 13 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-014.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-014.webp",
             "alt": "Butimanu, Romania - fotografie 14 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-015.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-015.webp",
             "alt": "Butimanu, Romania - fotografie 15 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-016.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-016.webp",
             "alt": "Butimanu, Romania - fotografie 16 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-017.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-017.webp",
             "alt": "Butimanu, Romania - fotografie 17 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-018.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-018.webp",
             "alt": "Butimanu, Romania - fotografie 18 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-019.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-019.webp",
             "alt": "Butimanu, Romania - fotografie 19 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-020.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-020.webp",
             "alt": "Butimanu, Romania - fotografie 20 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-021.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-021.webp",
             "alt": "Butimanu, Romania - fotografie 21 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-022.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-022.webp",
             "alt": "Butimanu, Romania - fotografie 22 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-023.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-023.webp",
             "alt": "Butimanu, Romania - fotografie 23 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-024.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-024.webp",
             "alt": "Butimanu, Romania - fotografie 24 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-025.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-025.webp",
             "alt": "Butimanu, Romania - fotografie 25 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-026.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-026.webp",
             "alt": "Butimanu, Romania - fotografie 26 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-027.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-027.webp",
             "alt": "Butimanu, Romania - fotografie 27 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-028.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-028.webp",
             "alt": "Butimanu, Romania - fotografie 28 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-029.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-029.webp",
             "alt": "Butimanu, Romania - fotografie 29 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-030.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-030.webp",
             "alt": "Butimanu, Romania - fotografie 30 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-031.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-031.webp",
             "alt": "Butimanu, Romania - fotografie 31 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-032.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-032.webp",
             "alt": "Butimanu, Romania - fotografie 32 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-033.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-033.webp",
             "alt": "Butimanu, Romania - fotografie 33 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-034.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-034.webp",
             "alt": "Butimanu, Romania - fotografie 34 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-035.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-035.webp",
             "alt": "Butimanu, Romania - fotografie 35 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-036.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-036.webp",
             "alt": "Butimanu, Romania - fotografie 36 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-037.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-037.webp",
             "alt": "Butimanu, Romania - fotografie 37 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-038.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-038.webp",
             "alt": "Butimanu, Romania - fotografie 38 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-039.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-039.webp",
             "alt": "Butimanu, Romania - fotografie 39 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-040.jpg",
+            "src": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-040.webp",
             "alt": "Butimanu, Romania - fotografie 40 din santier"
           }
         ],
@@ -785,7 +802,7 @@
         "enabled": true,
         "category": "Electric si mecanic",
         "title": "Corbii Mari, Romania",
-        "image": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-001.jpg",
+        "image": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-001.webp",
         "alt": "Proiectul fotovoltaic Corbii Mari, Romania",
         "projectDate": "2026",
         "projectCategory": "Instalatii electrice si mecanice",
@@ -818,83 +835,83 @@
         ],
         "gallery": [
           {
-            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-001.jpg",
+            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-001.webp",
             "alt": "Corbii Mari, Romania - fotografie 1 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-002.jpg",
+            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-002.webp",
             "alt": "Corbii Mari, Romania - fotografie 2 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-003.jpg",
+            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-003.webp",
             "alt": "Corbii Mari, Romania - fotografie 3 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-004.jpg",
+            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-004.webp",
             "alt": "Corbii Mari, Romania - fotografie 4 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-005.jpg",
+            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-005.webp",
             "alt": "Corbii Mari, Romania - fotografie 5 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-006.jpg",
+            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-006.webp",
             "alt": "Corbii Mari, Romania - fotografie 6 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-007.jpg",
+            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-007.webp",
             "alt": "Corbii Mari, Romania - fotografie 7 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-008.jpg",
+            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-008.webp",
             "alt": "Corbii Mari, Romania - fotografie 8 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-009.jpg",
+            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-009.webp",
             "alt": "Corbii Mari, Romania - fotografie 9 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-010.jpg",
+            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-010.webp",
             "alt": "Corbii Mari, Romania - fotografie 10 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-011.jpg",
+            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-011.webp",
             "alt": "Corbii Mari, Romania - fotografie 11 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-012.jpg",
+            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-012.webp",
             "alt": "Corbii Mari, Romania - fotografie 12 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-013.jpg",
+            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-013.webp",
             "alt": "Corbii Mari, Romania - fotografie 13 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-014.jpg",
+            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-014.webp",
             "alt": "Corbii Mari, Romania - fotografie 14 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-015.jpg",
+            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-015.webp",
             "alt": "Corbii Mari, Romania - fotografie 15 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-016.jpg",
+            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-016.webp",
             "alt": "Corbii Mari, Romania - fotografie 16 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-017.jpg",
+            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-017.webp",
             "alt": "Corbii Mari, Romania - fotografie 17 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-018.jpg",
+            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-018.webp",
             "alt": "Corbii Mari, Romania - fotografie 18 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-019.jpg",
+            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-019.webp",
             "alt": "Corbii Mari, Romania - fotografie 19 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-020.jpg",
+            "src": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-020.webp",
             "alt": "Corbii Mari, Romania - fotografie 20 din santier"
           }
         ],
@@ -906,7 +923,7 @@
         "enabled": true,
         "category": "Electric si mecanic",
         "title": "PFV Guillena 400 & 220, Spania",
-        "image": "/projects/portfolio-2026/pfv-guillena-spain/pfv-guillena-spain-001.jpg",
+        "image": "/projects/portfolio-2026/pfv-guillena-spain/pfv-guillena-spain-001.webp",
         "alt": "Proiectul fotovoltaic PFV Guillena 400 & 220, Spania",
         "projectDate": "2025",
         "projectCategory": "Instalatii electrice si mecanice",
@@ -939,17 +956,17 @@
         ],
         "gallery": [
           {
-            "src": "/projects/portfolio-2026/pfv-guillena-spain/pfv-guillena-spain-001.jpg",
+            "src": "/projects/portfolio-2026/pfv-guillena-spain/pfv-guillena-spain-001.webp",
             "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa pentru PFV Guillena 400 & 220, Spania, cadrul 1",
             "representative": true
           },
           {
-            "src": "/projects/portfolio-2026/pfv-guillena-spain/pfv-guillena-spain-002.jpg",
+            "src": "/projects/portfolio-2026/pfv-guillena-spain/pfv-guillena-spain-002.webp",
             "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa pentru PFV Guillena 400 & 220, Spania, cadrul 2",
             "representative": true
           },
           {
-            "src": "/projects/portfolio-2026/pfv-guillena-spain/pfv-guillena-spain-003.jpg",
+            "src": "/projects/portfolio-2026/pfv-guillena-spain/pfv-guillena-spain-003.webp",
             "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa pentru PFV Guillena 400 & 220, Spania, cadrul 3",
             "representative": true
           }
@@ -962,7 +979,7 @@
         "enabled": true,
         "category": "Electric si mecanic",
         "title": "Burgos, Spania",
-        "image": "/projects/portfolio-2026/burgos-spain/burgos-spain-001.jpg",
+        "image": "/projects/portfolio-2026/burgos-spain/burgos-spain-001.webp",
         "alt": "Proiectul fotovoltaic Burgos, Spania",
         "projectDate": "2026",
         "projectCategory": "Instalatii electrice si mecanice",
@@ -995,31 +1012,31 @@
         ],
         "gallery": [
           {
-            "src": "/projects/portfolio-2026/burgos-spain/burgos-spain-001.jpg",
+            "src": "/projects/portfolio-2026/burgos-spain/burgos-spain-001.webp",
             "alt": "Burgos, Spania - fotografie 1 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/burgos-spain/burgos-spain-002.jpg",
+            "src": "/projects/portfolio-2026/burgos-spain/burgos-spain-002.webp",
             "alt": "Burgos, Spania - fotografie 2 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/burgos-spain/burgos-spain-003.jpg",
+            "src": "/projects/portfolio-2026/burgos-spain/burgos-spain-003.webp",
             "alt": "Burgos, Spania - fotografie 3 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/burgos-spain/burgos-spain-004.jpg",
+            "src": "/projects/portfolio-2026/burgos-spain/burgos-spain-004.webp",
             "alt": "Burgos, Spania - fotografie 4 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/burgos-spain/burgos-spain-005.jpg",
+            "src": "/projects/portfolio-2026/burgos-spain/burgos-spain-005.webp",
             "alt": "Burgos, Spania - fotografie 5 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/burgos-spain/burgos-spain-006.jpg",
+            "src": "/projects/portfolio-2026/burgos-spain/burgos-spain-006.webp",
             "alt": "Burgos, Spania - fotografie 6 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/burgos-spain/burgos-spain-007.jpg",
+            "src": "/projects/portfolio-2026/burgos-spain/burgos-spain-007.webp",
             "alt": "Burgos, Spania - fotografie 7 din santier"
           }
         ],
@@ -1031,7 +1048,7 @@
         "enabled": true,
         "category": "Montaj mecanic",
         "title": "Valter Maracineanu, Romania",
-        "image": "/projects/portfolio-2026/valter-maracineanu-romania/valter-maracineanu-romania-001.jpg",
+        "image": "/projects/portfolio-2026/valter-maracineanu-romania/valter-maracineanu-romania-001.webp",
         "alt": "Proiectul fotovoltaic Valter Maracineanu, Romania",
         "projectDate": "2026",
         "projectCategory": "Constructie parc fotovoltaic",
@@ -1064,43 +1081,43 @@
         ],
         "gallery": [
           {
-            "src": "/projects/portfolio-2026/valter-maracineanu-romania/valter-maracineanu-romania-001.jpg",
+            "src": "/projects/portfolio-2026/valter-maracineanu-romania/valter-maracineanu-romania-001.webp",
             "alt": "Valter Maracineanu, Romania - fotografie 1 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/valter-maracineanu-romania/valter-maracineanu-romania-002.jpg",
+            "src": "/projects/portfolio-2026/valter-maracineanu-romania/valter-maracineanu-romania-002.webp",
             "alt": "Valter Maracineanu, Romania - fotografie 2 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/valter-maracineanu-romania/valter-maracineanu-romania-003.jpg",
+            "src": "/projects/portfolio-2026/valter-maracineanu-romania/valter-maracineanu-romania-003.webp",
             "alt": "Valter Maracineanu, Romania - fotografie 3 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/valter-maracineanu-romania/valter-maracineanu-romania-004.jpg",
+            "src": "/projects/portfolio-2026/valter-maracineanu-romania/valter-maracineanu-romania-004.webp",
             "alt": "Valter Maracineanu, Romania - fotografie 4 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/valter-maracineanu-romania/valter-maracineanu-romania-005.jpg",
+            "src": "/projects/portfolio-2026/valter-maracineanu-romania/valter-maracineanu-romania-005.webp",
             "alt": "Valter Maracineanu, Romania - fotografie 5 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/valter-maracineanu-romania/valter-maracineanu-romania-006.jpg",
+            "src": "/projects/portfolio-2026/valter-maracineanu-romania/valter-maracineanu-romania-006.webp",
             "alt": "Valter Maracineanu, Romania - fotografie 6 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/valter-maracineanu-romania/valter-maracineanu-romania-007.jpg",
+            "src": "/projects/portfolio-2026/valter-maracineanu-romania/valter-maracineanu-romania-007.webp",
             "alt": "Valter Maracineanu, Romania - fotografie 7 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/valter-maracineanu-romania/valter-maracineanu-romania-008.jpg",
+            "src": "/projects/portfolio-2026/valter-maracineanu-romania/valter-maracineanu-romania-008.webp",
             "alt": "Valter Maracineanu, Romania - fotografie 8 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/valter-maracineanu-romania/valter-maracineanu-romania-009.jpg",
+            "src": "/projects/portfolio-2026/valter-maracineanu-romania/valter-maracineanu-romania-009.webp",
             "alt": "Valter Maracineanu, Romania - fotografie 9 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/valter-maracineanu-romania/valter-maracineanu-romania-010.jpg",
+            "src": "/projects/portfolio-2026/valter-maracineanu-romania/valter-maracineanu-romania-010.webp",
             "alt": "Valter Maracineanu, Romania - fotografie 10 din santier"
           }
         ],
@@ -1112,7 +1129,7 @@
         "enabled": true,
         "category": "Montaj mecanic",
         "title": "Ottana, Italia",
-        "image": "/projects/portfolio-2026/ottana-italy/ottana-italy-001.jpg",
+        "image": "/projects/portfolio-2026/ottana-italy/ottana-italy-001.webp",
         "alt": "Proiectul fotovoltaic Ottana, Italia",
         "projectDate": "2025",
         "projectCategory": "Instalatii mecanice",
@@ -1145,17 +1162,17 @@
         ],
         "gallery": [
           {
-            "src": "/projects/portfolio-2026/ottana-italy/ottana-italy-001.jpg",
+            "src": "/projects/portfolio-2026/ottana-italy/ottana-italy-001.webp",
             "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa pentru Ottana, Italia, cadrul 1",
             "representative": true
           },
           {
-            "src": "/projects/portfolio-2026/ottana-italy/ottana-italy-002.jpg",
+            "src": "/projects/portfolio-2026/ottana-italy/ottana-italy-002.webp",
             "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa pentru Ottana, Italia, cadrul 2",
             "representative": true
           },
           {
-            "src": "/projects/portfolio-2026/ottana-italy/ottana-italy-003.jpg",
+            "src": "/projects/portfolio-2026/ottana-italy/ottana-italy-003.webp",
             "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa pentru Ottana, Italia, cadrul 3",
             "representative": true
           }
@@ -1168,7 +1185,7 @@
         "enabled": true,
         "category": "Montaj mecanic",
         "title": "Codigoro, Italia",
-        "image": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-001.jpg",
+        "image": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-001.webp",
         "alt": "Proiectul fotovoltaic Codigoro, Italia",
         "projectDate": "2024",
         "projectCategory": "Constructie parc fotovoltaic",
@@ -1201,75 +1218,75 @@
         ],
         "gallery": [
           {
-            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-001.jpg",
+            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-001.webp",
             "alt": "Codigoro, Italia - fotografie 1 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-002.jpg",
+            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-002.webp",
             "alt": "Codigoro, Italia - fotografie 2 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-003.jpg",
+            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-003.webp",
             "alt": "Codigoro, Italia - fotografie 3 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-004.jpg",
+            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-004.webp",
             "alt": "Codigoro, Italia - fotografie 4 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-005.jpg",
+            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-005.webp",
             "alt": "Codigoro, Italia - fotografie 5 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-006.jpg",
+            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-006.webp",
             "alt": "Codigoro, Italia - fotografie 6 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-007.jpg",
+            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-007.webp",
             "alt": "Codigoro, Italia - fotografie 7 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-008.jpg",
+            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-008.webp",
             "alt": "Codigoro, Italia - fotografie 8 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-009.jpg",
+            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-009.webp",
             "alt": "Codigoro, Italia - fotografie 9 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-010.jpg",
+            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-010.webp",
             "alt": "Codigoro, Italia - fotografie 10 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-011.jpg",
+            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-011.webp",
             "alt": "Codigoro, Italia - fotografie 11 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-012.jpg",
+            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-012.webp",
             "alt": "Codigoro, Italia - fotografie 12 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-013.jpg",
+            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-013.webp",
             "alt": "Codigoro, Italia - fotografie 13 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-014.jpg",
+            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-014.webp",
             "alt": "Codigoro, Italia - fotografie 14 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-015.jpg",
+            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-015.webp",
             "alt": "Codigoro, Italia - fotografie 15 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-016.jpg",
+            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-016.webp",
             "alt": "Codigoro, Italia - fotografie 16 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-017.jpg",
+            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-017.webp",
             "alt": "Codigoro, Italia - fotografie 17 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-018.jpg",
+            "src": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-018.webp",
             "alt": "Codigoro, Italia - fotografie 18 din santier"
           }
         ],
@@ -1281,7 +1298,7 @@
         "enabled": true,
         "category": "Montaj mecanic",
         "title": "Sunkingdom - Giurgiu, Romania",
-        "image": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-001.jpg",
+        "image": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-001.webp",
         "alt": "Proiectul fotovoltaic Sunkingdom - Giurgiu, Romania",
         "projectDate": "2024",
         "projectCategory": "Instalatii mecanice",
@@ -1314,103 +1331,103 @@
         ],
         "gallery": [
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-001.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-001.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 1 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-002.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-002.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 2 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-003.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-003.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 3 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-004.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-004.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 4 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-005.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-005.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 5 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-006.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-006.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 6 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-007.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-007.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 7 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-008.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-008.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 8 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-009.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-009.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 9 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-010.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-010.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 10 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-011.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-011.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 11 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-012.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-012.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 12 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-013.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-013.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 13 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-014.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-014.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 14 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-015.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-015.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 15 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-016.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-016.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 16 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-017.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-017.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 17 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-018.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-018.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 18 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-019.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-019.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 19 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-020.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-020.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 20 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-021.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-021.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 21 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-022.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-022.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 22 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-023.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-023.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 23 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-024.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-024.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 24 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-025.jpg",
+            "src": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-025.webp",
             "alt": "Sunkingdom - Giurgiu, Romania - fotografie 25 din santier"
           }
         ],
@@ -1422,7 +1439,7 @@
         "enabled": true,
         "category": "Montaj mecanic",
         "title": "Pielesti & Robanesti - Craiova, Romania",
-        "image": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-001.jpg",
+        "image": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-001.webp",
         "alt": "Proiectul fotovoltaic Pielesti & Robanesti - Craiova, Romania",
         "projectDate": "2024",
         "projectCategory": "Instalatii mecanice",
@@ -1455,111 +1472,111 @@
         ],
         "gallery": [
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-001.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-001.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 1 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-002.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-002.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 2 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-003.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-003.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 3 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-004.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-004.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 4 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-005.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-005.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 5 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-006.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-006.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 6 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-007.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-007.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 7 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-008.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-008.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 8 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-009.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-009.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 9 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-010.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-010.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 10 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-011.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-011.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 11 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-012.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-012.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 12 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-013.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-013.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 13 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-014.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-014.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 14 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-015.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-015.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 15 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-016.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-016.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 16 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-017.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-017.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 17 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-018.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-018.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 18 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-019.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-019.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 19 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-020.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-020.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 20 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-021.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-021.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 21 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-022.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-022.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 22 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-023.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-023.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 23 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-024.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-024.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 24 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-025.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-025.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 25 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-026.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-026.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 26 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-027.jpg",
+            "src": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-027.webp",
             "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 27 din santier"
           }
         ],
@@ -1571,7 +1588,7 @@
         "enabled": true,
         "category": "Montaj mecanic",
         "title": "Anguillara, Italia",
-        "image": "/projects/portfolio-2026/anguillara-italy/anguillara-italy-001.jpg",
+        "image": "/projects/portfolio-2026/anguillara-italy/anguillara-italy-001.webp",
         "alt": "Proiectul fotovoltaic Anguillara, Italia",
         "projectDate": "2023",
         "projectCategory": "Constructie parc fotovoltaic",
@@ -1604,23 +1621,23 @@
         ],
         "gallery": [
           {
-            "src": "/projects/portfolio-2026/anguillara-italy/anguillara-italy-001.jpg",
+            "src": "/projects/portfolio-2026/anguillara-italy/anguillara-italy-001.webp",
             "alt": "Anguillara, Italia - fotografie 1 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/anguillara-italy/anguillara-italy-002.jpg",
+            "src": "/projects/portfolio-2026/anguillara-italy/anguillara-italy-002.webp",
             "alt": "Anguillara, Italia - fotografie 2 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/anguillara-italy/anguillara-italy-003.jpg",
+            "src": "/projects/portfolio-2026/anguillara-italy/anguillara-italy-003.webp",
             "alt": "Anguillara, Italia - fotografie 3 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/anguillara-italy/anguillara-italy-004.jpg",
+            "src": "/projects/portfolio-2026/anguillara-italy/anguillara-italy-004.webp",
             "alt": "Anguillara, Italia - fotografie 4 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/anguillara-italy/anguillara-italy-005.jpg",
+            "src": "/projects/portfolio-2026/anguillara-italy/anguillara-italy-005.webp",
             "alt": "Anguillara, Italia - fotografie 5 din santier"
           }
         ],
@@ -1632,7 +1649,7 @@
         "enabled": true,
         "category": "Montaj mecanic",
         "title": "Marconi, Italia",
-        "image": "/projects/portfolio-2026/marconi-italy/marconi-italy-001.jpg",
+        "image": "/projects/portfolio-2026/marconi-italy/marconi-italy-001.webp",
         "alt": "Proiectul fotovoltaic Marconi, Italia",
         "projectDate": "2024",
         "projectCategory": "Instalatii mecanice",
@@ -1665,11 +1682,11 @@
         ],
         "gallery": [
           {
-            "src": "/projects/portfolio-2026/marconi-italy/marconi-italy-001.jpg",
+            "src": "/projects/portfolio-2026/marconi-italy/marconi-italy-001.webp",
             "alt": "Marconi, Italia - fotografie 1 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/marconi-italy/marconi-italy-002.jpg",
+            "src": "/projects/portfolio-2026/marconi-italy/marconi-italy-002.webp",
             "alt": "Marconi, Italia - fotografie 2 din santier"
           }
         ],
@@ -1681,7 +1698,7 @@
         "enabled": true,
         "category": "Montaj mecanic",
         "title": "Sandalia - Cagliari, Italia",
-        "image": "/projects/portfolio-2026/sandalia-cagliari-italy/sandalia-cagliari-italy-001.jpg",
+        "image": "/projects/portfolio-2026/sandalia-cagliari-italy/sandalia-cagliari-italy-001.webp",
         "alt": "Proiectul fotovoltaic Sandalia - Cagliari, Italia",
         "projectDate": "2023",
         "projectCategory": "Constructie parc fotovoltaic",
@@ -1714,17 +1731,17 @@
         ],
         "gallery": [
           {
-            "src": "/projects/portfolio-2026/sandalia-cagliari-italy/sandalia-cagliari-italy-001.jpg",
+            "src": "/projects/portfolio-2026/sandalia-cagliari-italy/sandalia-cagliari-italy-001.webp",
             "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa pentru Sandalia - Cagliari, Italia, cadrul 1",
             "representative": true
           },
           {
-            "src": "/projects/portfolio-2026/sandalia-cagliari-italy/sandalia-cagliari-italy-002.jpg",
+            "src": "/projects/portfolio-2026/sandalia-cagliari-italy/sandalia-cagliari-italy-002.webp",
             "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa pentru Sandalia - Cagliari, Italia, cadrul 2",
             "representative": true
           },
           {
-            "src": "/projects/portfolio-2026/sandalia-cagliari-italy/sandalia-cagliari-italy-003.jpg",
+            "src": "/projects/portfolio-2026/sandalia-cagliari-italy/sandalia-cagliari-italy-003.webp",
             "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa pentru Sandalia - Cagliari, Italia, cadrul 3",
             "representative": true
           }
@@ -1737,7 +1754,7 @@
         "enabled": true,
         "category": "Montaj mecanic",
         "title": "Pontinia, Italia",
-        "image": "/projects/portfolio-2026/pontinia-italy/pontinia-italy-001.jpg",
+        "image": "/projects/portfolio-2026/pontinia-italy/pontinia-italy-001.webp",
         "alt": "Proiectul fotovoltaic Pontinia, Italia",
         "projectDate": "2023",
         "projectCategory": "Constructie parc fotovoltaic",
@@ -1770,7 +1787,7 @@
         ],
         "gallery": [
           {
-            "src": "/projects/portfolio-2026/pontinia-italy/pontinia-italy-001.jpg",
+            "src": "/projects/portfolio-2026/pontinia-italy/pontinia-italy-001.webp",
             "alt": "Pontinia, Italia - fotografie 1 din santier"
           }
         ],
@@ -1782,7 +1799,7 @@
         "enabled": true,
         "category": "Montaj mecanic",
         "title": "Sole, Italia",
-        "image": "/projects/portfolio-2026/sole-italy/sole-italy-001.jpg",
+        "image": "/projects/portfolio-2026/sole-italy/sole-italy-001.webp",
         "alt": "Proiectul fotovoltaic Sole, Italia",
         "projectDate": "2024",
         "projectCategory": "Instalatii mecanice",
@@ -1815,7 +1832,7 @@
         ],
         "gallery": [
           {
-            "src": "/projects/portfolio-2026/sole-italy/sole-italy-001.jpg",
+            "src": "/projects/portfolio-2026/sole-italy/sole-italy-001.webp",
             "alt": "Sole, Italia - fotografie 1 din santier"
           }
         ],
@@ -1827,7 +1844,7 @@
         "enabled": true,
         "category": "Montaj mecanic",
         "title": "Celeste, Italia",
-        "image": "/projects/portfolio-2026/celeste-italy/celeste-italy-001.jpg",
+        "image": "/projects/portfolio-2026/celeste-italy/celeste-italy-001.webp",
         "alt": "Proiectul fotovoltaic Celeste, Italia",
         "projectDate": "2024",
         "projectCategory": "Instalatii mecanice",
@@ -1860,17 +1877,17 @@
         ],
         "gallery": [
           {
-            "src": "/projects/portfolio-2026/celeste-italy/celeste-italy-001.jpg",
+            "src": "/projects/portfolio-2026/celeste-italy/celeste-italy-001.webp",
             "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa pentru Celeste, Italia, cadrul 1",
             "representative": true
           },
           {
-            "src": "/projects/portfolio-2026/celeste-italy/celeste-italy-002.jpg",
+            "src": "/projects/portfolio-2026/celeste-italy/celeste-italy-002.webp",
             "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa pentru Celeste, Italia, cadrul 2",
             "representative": true
           },
           {
-            "src": "/projects/portfolio-2026/celeste-italy/celeste-italy-003.jpg",
+            "src": "/projects/portfolio-2026/celeste-italy/celeste-italy-003.webp",
             "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa pentru Celeste, Italia, cadrul 3",
             "representative": true
           }
@@ -1883,7 +1900,7 @@
         "enabled": true,
         "category": "Montaj mecanic",
         "title": "Bombardia - Palencia, Spania",
-        "image": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-001.jpg",
+        "image": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-001.webp",
         "alt": "Proiectul fotovoltaic Bombardia - Palencia, Spania",
         "projectDate": "2024",
         "projectCategory": "Constructie parc fotovoltaic",
@@ -1916,227 +1933,227 @@
         ],
         "gallery": [
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-001.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-001.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 1 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-002.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-002.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 2 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-003.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-003.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 3 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-004.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-004.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 4 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-005.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-005.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 5 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-006.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-006.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 6 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-007.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-007.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 7 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-008.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-008.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 8 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-009.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-009.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 9 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-010.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-010.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 10 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-011.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-011.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 11 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-012.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-012.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 12 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-013.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-013.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 13 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-014.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-014.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 14 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-015.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-015.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 15 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-016.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-016.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 16 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-017.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-017.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 17 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-018.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-018.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 18 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-019.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-019.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 19 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-020.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-020.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 20 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-021.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-021.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 21 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-022.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-022.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 22 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-023.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-023.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 23 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-024.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-024.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 24 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-025.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-025.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 25 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-026.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-026.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 26 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-027.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-027.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 27 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-028.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-028.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 28 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-029.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-029.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 29 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-030.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-030.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 30 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-031.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-031.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 31 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-032.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-032.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 32 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-033.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-033.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 33 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-034.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-034.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 34 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-035.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-035.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 35 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-036.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-036.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 36 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-037.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-037.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 37 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-038.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-038.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 38 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-039.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-039.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 39 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-040.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-040.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 40 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-041.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-041.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 41 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-042.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-042.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 42 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-043.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-043.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 43 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-044.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-044.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 44 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-045.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-045.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 45 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-046.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-046.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 46 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-047.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-047.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 47 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-048.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-048.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 48 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-049.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-049.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 49 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-050.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-050.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 50 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-051.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-051.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 51 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-052.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-052.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 52 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-053.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-053.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 53 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-054.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-054.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 54 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-055.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-055.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 55 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-056.jpg",
+            "src": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-056.webp",
             "alt": "Bombardia - Palencia, Spania - fotografie 56 din santier"
           }
         ],
@@ -2148,7 +2165,7 @@
         "enabled": true,
         "category": "Civil si mecanic",
         "title": "MAAS - Catania, Italia",
-        "image": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-001.jpg",
+        "image": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-001.webp",
         "alt": "Proiectul fotovoltaic MAAS - Catania, Italia",
         "projectDate": "2024",
         "projectCategory": "Lucrari civile si mecanice",
@@ -2181,331 +2198,331 @@
         ],
         "gallery": [
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-001.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-001.webp",
             "alt": "MAAS - Catania, Italia - fotografie 1 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-002.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-002.webp",
             "alt": "MAAS - Catania, Italia - fotografie 2 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-003.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-003.webp",
             "alt": "MAAS - Catania, Italia - fotografie 3 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-004.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-004.webp",
             "alt": "MAAS - Catania, Italia - fotografie 4 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-005.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-005.webp",
             "alt": "MAAS - Catania, Italia - fotografie 5 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-006.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-006.webp",
             "alt": "MAAS - Catania, Italia - fotografie 6 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-007.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-007.webp",
             "alt": "MAAS - Catania, Italia - fotografie 7 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-008.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-008.webp",
             "alt": "MAAS - Catania, Italia - fotografie 8 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-009.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-009.webp",
             "alt": "MAAS - Catania, Italia - fotografie 9 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-010.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-010.webp",
             "alt": "MAAS - Catania, Italia - fotografie 10 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-011.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-011.webp",
             "alt": "MAAS - Catania, Italia - fotografie 11 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-012.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-012.webp",
             "alt": "MAAS - Catania, Italia - fotografie 12 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-013.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-013.webp",
             "alt": "MAAS - Catania, Italia - fotografie 13 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-014.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-014.webp",
             "alt": "MAAS - Catania, Italia - fotografie 14 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-015.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-015.webp",
             "alt": "MAAS - Catania, Italia - fotografie 15 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-016.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-016.webp",
             "alt": "MAAS - Catania, Italia - fotografie 16 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-017.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-017.webp",
             "alt": "MAAS - Catania, Italia - fotografie 17 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-018.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-018.webp",
             "alt": "MAAS - Catania, Italia - fotografie 18 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-019.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-019.webp",
             "alt": "MAAS - Catania, Italia - fotografie 19 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-020.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-020.webp",
             "alt": "MAAS - Catania, Italia - fotografie 20 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-021.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-021.webp",
             "alt": "MAAS - Catania, Italia - fotografie 21 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-022.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-022.webp",
             "alt": "MAAS - Catania, Italia - fotografie 22 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-023.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-023.webp",
             "alt": "MAAS - Catania, Italia - fotografie 23 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-024.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-024.webp",
             "alt": "MAAS - Catania, Italia - fotografie 24 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-025.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-025.webp",
             "alt": "MAAS - Catania, Italia - fotografie 25 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-026.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-026.webp",
             "alt": "MAAS - Catania, Italia - fotografie 26 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-027.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-027.webp",
             "alt": "MAAS - Catania, Italia - fotografie 27 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-028.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-028.webp",
             "alt": "MAAS - Catania, Italia - fotografie 28 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-029.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-029.webp",
             "alt": "MAAS - Catania, Italia - fotografie 29 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-030.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-030.webp",
             "alt": "MAAS - Catania, Italia - fotografie 30 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-031.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-031.webp",
             "alt": "MAAS - Catania, Italia - fotografie 31 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-032.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-032.webp",
             "alt": "MAAS - Catania, Italia - fotografie 32 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-033.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-033.webp",
             "alt": "MAAS - Catania, Italia - fotografie 33 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-034.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-034.webp",
             "alt": "MAAS - Catania, Italia - fotografie 34 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-035.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-035.webp",
             "alt": "MAAS - Catania, Italia - fotografie 35 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-036.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-036.webp",
             "alt": "MAAS - Catania, Italia - fotografie 36 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-037.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-037.webp",
             "alt": "MAAS - Catania, Italia - fotografie 37 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-038.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-038.webp",
             "alt": "MAAS - Catania, Italia - fotografie 38 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-039.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-039.webp",
             "alt": "MAAS - Catania, Italia - fotografie 39 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-040.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-040.webp",
             "alt": "MAAS - Catania, Italia - fotografie 40 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-041.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-041.webp",
             "alt": "MAAS - Catania, Italia - fotografie 41 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-042.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-042.webp",
             "alt": "MAAS - Catania, Italia - fotografie 42 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-043.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-043.webp",
             "alt": "MAAS - Catania, Italia - fotografie 43 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-044.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-044.webp",
             "alt": "MAAS - Catania, Italia - fotografie 44 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-045.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-045.webp",
             "alt": "MAAS - Catania, Italia - fotografie 45 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-046.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-046.webp",
             "alt": "MAAS - Catania, Italia - fotografie 46 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-047.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-047.webp",
             "alt": "MAAS - Catania, Italia - fotografie 47 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-048.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-048.webp",
             "alt": "MAAS - Catania, Italia - fotografie 48 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-049.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-049.webp",
             "alt": "MAAS - Catania, Italia - fotografie 49 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-050.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-050.webp",
             "alt": "MAAS - Catania, Italia - fotografie 50 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-051.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-051.webp",
             "alt": "MAAS - Catania, Italia - fotografie 51 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-052.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-052.webp",
             "alt": "MAAS - Catania, Italia - fotografie 52 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-053.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-053.webp",
             "alt": "MAAS - Catania, Italia - fotografie 53 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-054.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-054.webp",
             "alt": "MAAS - Catania, Italia - fotografie 54 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-055.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-055.webp",
             "alt": "MAAS - Catania, Italia - fotografie 55 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-056.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-056.webp",
             "alt": "MAAS - Catania, Italia - fotografie 56 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-057.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-057.webp",
             "alt": "MAAS - Catania, Italia - fotografie 57 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-058.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-058.webp",
             "alt": "MAAS - Catania, Italia - fotografie 58 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-059.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-059.webp",
             "alt": "MAAS - Catania, Italia - fotografie 59 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-060.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-060.webp",
             "alt": "MAAS - Catania, Italia - fotografie 60 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-061.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-061.webp",
             "alt": "MAAS - Catania, Italia - fotografie 61 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-062.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-062.webp",
             "alt": "MAAS - Catania, Italia - fotografie 62 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-063.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-063.webp",
             "alt": "MAAS - Catania, Italia - fotografie 63 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-064.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-064.webp",
             "alt": "MAAS - Catania, Italia - fotografie 64 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-065.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-065.webp",
             "alt": "MAAS - Catania, Italia - fotografie 65 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-066.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-066.webp",
             "alt": "MAAS - Catania, Italia - fotografie 66 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-067.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-067.webp",
             "alt": "MAAS - Catania, Italia - fotografie 67 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-068.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-068.webp",
             "alt": "MAAS - Catania, Italia - fotografie 68 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-069.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-069.webp",
             "alt": "MAAS - Catania, Italia - fotografie 69 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-070.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-070.webp",
             "alt": "MAAS - Catania, Italia - fotografie 70 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-071.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-071.webp",
             "alt": "MAAS - Catania, Italia - fotografie 71 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-072.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-072.webp",
             "alt": "MAAS - Catania, Italia - fotografie 72 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-073.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-073.webp",
             "alt": "MAAS - Catania, Italia - fotografie 73 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-074.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-074.webp",
             "alt": "MAAS - Catania, Italia - fotografie 74 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-075.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-075.webp",
             "alt": "MAAS - Catania, Italia - fotografie 75 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-076.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-076.webp",
             "alt": "MAAS - Catania, Italia - fotografie 76 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-077.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-077.webp",
             "alt": "MAAS - Catania, Italia - fotografie 77 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-078.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-078.webp",
             "alt": "MAAS - Catania, Italia - fotografie 78 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-079.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-079.webp",
             "alt": "MAAS - Catania, Italia - fotografie 79 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-080.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-080.webp",
             "alt": "MAAS - Catania, Italia - fotografie 80 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-081.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-081.webp",
             "alt": "MAAS - Catania, Italia - fotografie 81 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-082.jpg",
+            "src": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-082.webp",
             "alt": "MAAS - Catania, Italia - fotografie 82 din santier"
           }
         ],
@@ -2517,7 +2534,7 @@
         "enabled": true,
         "category": "Montaj mecanic",
         "title": "IT003 Piombino, Italia",
-        "image": "/projects/portfolio-2026/it003-piombino-italy/it003-piombino-italy-001.jpg",
+        "image": "/projects/portfolio-2026/it003-piombino-italy/it003-piombino-italy-001.webp",
         "alt": "Proiectul fotovoltaic IT003 Piombino, Italia",
         "projectDate": "2025",
         "projectCategory": "Instalatii mecanice",
@@ -2550,17 +2567,17 @@
         ],
         "gallery": [
           {
-            "src": "/projects/portfolio-2026/it003-piombino-italy/it003-piombino-italy-001.jpg",
+            "src": "/projects/portfolio-2026/it003-piombino-italy/it003-piombino-italy-001.webp",
             "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa pentru IT003 Piombino, Italia, cadrul 1",
             "representative": true
           },
           {
-            "src": "/projects/portfolio-2026/it003-piombino-italy/it003-piombino-italy-002.jpg",
+            "src": "/projects/portfolio-2026/it003-piombino-italy/it003-piombino-italy-002.webp",
             "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa pentru IT003 Piombino, Italia, cadrul 2",
             "representative": true
           },
           {
-            "src": "/projects/portfolio-2026/it003-piombino-italy/it003-piombino-italy-003.jpg",
+            "src": "/projects/portfolio-2026/it003-piombino-italy/it003-piombino-italy-003.webp",
             "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa pentru IT003 Piombino, Italia, cadrul 3",
             "representative": true
           }
@@ -2573,7 +2590,7 @@
         "enabled": true,
         "category": "Montaj mecanic",
         "title": "Rinnovabili, Italia",
-        "image": "/projects/portfolio-2026/rinnovabili-italy/rinnovabili-italy-001.jpg",
+        "image": "/projects/portfolio-2026/rinnovabili-italy/rinnovabili-italy-001.webp",
         "alt": "Proiectul fotovoltaic Rinnovabili, Italia",
         "projectDate": "2024",
         "projectCategory": "Instalatii mecanice",
@@ -2606,17 +2623,17 @@
         ],
         "gallery": [
           {
-            "src": "/projects/portfolio-2026/rinnovabili-italy/rinnovabili-italy-001.jpg",
+            "src": "/projects/portfolio-2026/rinnovabili-italy/rinnovabili-italy-001.webp",
             "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa pentru Rinnovabili, Italia, cadrul 1",
             "representative": true
           },
           {
-            "src": "/projects/portfolio-2026/rinnovabili-italy/rinnovabili-italy-002.jpg",
+            "src": "/projects/portfolio-2026/rinnovabili-italy/rinnovabili-italy-002.webp",
             "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa pentru Rinnovabili, Italia, cadrul 2",
             "representative": true
           },
           {
-            "src": "/projects/portfolio-2026/rinnovabili-italy/rinnovabili-italy-003.jpg",
+            "src": "/projects/portfolio-2026/rinnovabili-italy/rinnovabili-italy-003.webp",
             "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa pentru Rinnovabili, Italia, cadrul 3",
             "representative": true
           }
@@ -2629,7 +2646,7 @@
         "enabled": true,
         "category": "Montaj mecanic",
         "title": "Volta, Italia",
-        "image": "/projects/portfolio-2026/volta-italy/volta-italy-001.jpg",
+        "image": "/projects/portfolio-2026/volta-italy/volta-italy-001.webp",
         "alt": "Proiectul fotovoltaic Volta, Italia",
         "projectDate": "2024",
         "projectCategory": "Instalatii mecanice",
@@ -2662,19 +2679,19 @@
         ],
         "gallery": [
           {
-            "src": "/projects/portfolio-2026/volta-italy/volta-italy-001.jpg",
+            "src": "/projects/portfolio-2026/volta-italy/volta-italy-001.webp",
             "alt": "Volta, Italia - fotografie 1 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/volta-italy/volta-italy-002.jpg",
+            "src": "/projects/portfolio-2026/volta-italy/volta-italy-002.webp",
             "alt": "Volta, Italia - fotografie 2 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/volta-italy/volta-italy-003.jpg",
+            "src": "/projects/portfolio-2026/volta-italy/volta-italy-003.webp",
             "alt": "Volta, Italia - fotografie 3 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/volta-italy/volta-italy-004.jpg",
+            "src": "/projects/portfolio-2026/volta-italy/volta-italy-004.webp",
             "alt": "Volta, Italia - fotografie 4 din santier"
           }
         ],
@@ -2686,7 +2703,7 @@
         "enabled": true,
         "category": "Montaj mecanic",
         "title": "Porto Torres, Italia",
-        "image": "/projects/portfolio-2026/porto-torres-italy/porto-torres-italy-001.jpg",
+        "image": "/projects/portfolio-2026/porto-torres-italy/porto-torres-italy-001.webp",
         "alt": "Proiectul fotovoltaic Porto Torres, Italia",
         "projectDate": "2023",
         "projectCategory": "Constructie parc fotovoltaic",
@@ -2719,39 +2736,39 @@
         ],
         "gallery": [
           {
-            "src": "/projects/portfolio-2026/porto-torres-italy/porto-torres-italy-001.jpg",
+            "src": "/projects/portfolio-2026/porto-torres-italy/porto-torres-italy-001.webp",
             "alt": "Porto Torres, Italia - fotografie 1 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/porto-torres-italy/porto-torres-italy-002.jpg",
+            "src": "/projects/portfolio-2026/porto-torres-italy/porto-torres-italy-002.webp",
             "alt": "Porto Torres, Italia - fotografie 2 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/porto-torres-italy/porto-torres-italy-003.jpg",
+            "src": "/projects/portfolio-2026/porto-torres-italy/porto-torres-italy-003.webp",
             "alt": "Porto Torres, Italia - fotografie 3 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/porto-torres-italy/porto-torres-italy-004.jpg",
+            "src": "/projects/portfolio-2026/porto-torres-italy/porto-torres-italy-004.webp",
             "alt": "Porto Torres, Italia - fotografie 4 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/porto-torres-italy/porto-torres-italy-005.jpg",
+            "src": "/projects/portfolio-2026/porto-torres-italy/porto-torres-italy-005.webp",
             "alt": "Porto Torres, Italia - fotografie 5 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/porto-torres-italy/porto-torres-italy-006.jpg",
+            "src": "/projects/portfolio-2026/porto-torres-italy/porto-torres-italy-006.webp",
             "alt": "Porto Torres, Italia - fotografie 6 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/porto-torres-italy/porto-torres-italy-007.jpg",
+            "src": "/projects/portfolio-2026/porto-torres-italy/porto-torres-italy-007.webp",
             "alt": "Porto Torres, Italia - fotografie 7 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/porto-torres-italy/porto-torres-italy-008.jpg",
+            "src": "/projects/portfolio-2026/porto-torres-italy/porto-torres-italy-008.webp",
             "alt": "Porto Torres, Italia - fotografie 8 din santier"
           },
           {
-            "src": "/projects/portfolio-2026/porto-torres-italy/porto-torres-italy-009.jpg",
+            "src": "/projects/portfolio-2026/porto-torres-italy/porto-torres-italy-009.webp",
             "alt": "Porto Torres, Italia - fotografie 9 din santier"
           }
         ],
@@ -2763,7 +2780,7 @@
         "enabled": true,
         "category": "Montaj mecanic",
         "title": "Sabaudia, Italia",
-        "image": "/projects/portfolio-2026/sabaudia-italy/sabaudia-italy-001.jpg",
+        "image": "/projects/portfolio-2026/sabaudia-italy/sabaudia-italy-001.webp",
         "alt": "Proiectul fotovoltaic Sabaudia, Italia",
         "projectDate": "2024",
         "projectCategory": "Constructie parc fotovoltaic",
@@ -2796,7 +2813,7 @@
         ],
         "gallery": [
           {
-            "src": "/projects/portfolio-2026/sabaudia-italy/sabaudia-italy-001.jpg",
+            "src": "/projects/portfolio-2026/sabaudia-italy/sabaudia-italy-001.webp",
             "alt": "Sabaudia, Italia - fotografie 1 din santier"
           }
         ],
@@ -2813,7 +2830,7 @@
         "uploadedAt": "2026-08-18T08:36:23.505Z",
         "originalName": "IMG_2078.jpg",
         "title": "Montajul structurii fotovoltaice",
-        "src": "/uploads/gallery/img-2078-7d37e2e8c598.jpg",
+        "src": "/uploads/gallery/img-2078-7d37e2e8c598.webp",
         "alt": "Tehnician Greentech la montajul structurii fotovoltaice",
         "caption": "Fixarea si verificarea elementelor structurii de montaj.",
         "projectId": ""
@@ -2968,7 +2985,7 @@
         "id": "lantania",
         "order": 5,
         "enabled": true,
-        "image": "/clients/lantania.jpg",
+        "image": "/clients/lantania.webp",
         "alt": "Lantania",
         "title": "Lantania",
         "href": "https://www.lantania.com/en/sustainability/"
@@ -2986,7 +3003,7 @@
         "id": "solarig",
         "order": 7,
         "enabled": true,
-        "image": "/clients/solarig.png",
+        "image": "/clients/solarig.webp",
         "alt": "Solarig",
         "title": "Solarig",
         "href": "https://solarig.com/en/home-en/"
@@ -3064,7 +3081,7 @@
         "author": "M. A.",
         "role": "Recenzie client",
         "quote": "Suntem foarte multumiti de profesionalismul echipei Greentech Professionals. Ii recomandam cu caldura tuturor celor care au de realizat un megaproiect fotovoltaic, deoarece sunt parteneri de incredere.",
-        "image": "/projects/butimanu/butimanu-02.jpg",
+        "image": "/projects/butimanu/butimanu-02.webp",
         "imagePosition": "31% 42%",
         "rating": 5,
         "verified": true,
@@ -3077,7 +3094,7 @@
         "author": "A. C.",
         "role": "Recenzie client",
         "quote": "Respectarea termenelor limita si a calitatii lucrarilor sunt cele mai importante atuuri atunci cand colaborati cu o companie de servicii fotovoltaice. Recomand Greentech Professionals SRL!",
-        "image": "/projects/butimanu/butimanu-03.jpg",
+        "image": "/projects/butimanu/butimanu-03.webp",
         "imagePosition": "43% 36%",
         "rating": 5,
         "verified": true,
@@ -3114,7 +3131,7 @@
         "readTime": "3 minute",
         "title": "Corbii Mari: cum se pastreaza ritmul pe un proiect de 274 MW",
         "excerpt": "Pe un santier mare, progresul nu vine dintr-o singura operatiune spectaculoasa, ci din sute de predari mici facute la timp.",
-        "image": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-001.jpg",
+        "image": "/projects/portfolio-2026/corbii-mari-romania/corbii-mari-romania-001.webp",
         "alt": "Corbii Mari, Romania - fotografie 1 din santier",
         "intro": "La Corbii Mari, lucrarile mecanice si electrice se desfasoara pe fronturi succesive. Dimensiunea proiectului cere disciplina in planificare, mai ales atunci cand vremea si accesul in teren schimba ordinea stabilita cu o zi inainte.",
         "sections": [
@@ -3171,7 +3188,7 @@
         "readTime": "3 minute",
         "title": "Burgos: un proiect de 220 MW construit pe fronturi bine delimitate",
         "excerpt": "Cand mecanicul si electricul avanseaza impreuna, ordinea din santier devine la fel de importanta ca viteza de montaj.",
-        "image": "/projects/portfolio-2026/burgos-spain/burgos-spain-001.jpg",
+        "image": "/projects/portfolio-2026/burgos-spain/burgos-spain-001.webp",
         "alt": "Burgos, Spania - fotografie 1 din santier",
         "intro": "Proiectul din Burgos reuneste pilotaj, structuri tracker, module si instalatii electrice intr-un singur program de executie. Pentru echipa Greentech, miza este ca fiecare zona sa ajunga completa la urmatoarea disciplina.",
         "sections": [
@@ -3228,7 +3245,7 @@
         "readTime": "3 minute",
         "title": "Valter Maracineanu: repetitia bine controlata pe 178 MW",
         "excerpt": "Intr-un parc fotovoltaic, aceeasi operatie se repeta de mii de ori. Calitatea vine din felul in care ramane constanta.",
-        "image": "/projects/portfolio-2026/valter-maracineanu-romania/valter-maracineanu-romania-001.jpg",
+        "image": "/projects/portfolio-2026/valter-maracineanu-romania/valter-maracineanu-romania-001.webp",
         "alt": "Valter Maracineanu, Romania - fotografie 1 din santier",
         "intro": "La Iepuresti, echipele Greentech monteaza structurile de sustinere si modulele unui proiect de 178 MW. Este un pachet mecanic in care logistica si verificarile scurte fac diferenta dintre ritm si graba.",
         "sections": [
@@ -3285,7 +3302,7 @@
         "readTime": "3 minute",
         "title": "Butimanu: ce inseamna coordonarea zilnica pe 297 MW",
         "excerpt": "Pana la 300 de profesionisti, lucrari mecanice si electrice si un program care se recalculeaza in fiecare dimineata.",
-        "image": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-001.jpg",
+        "image": "/projects/portfolio-2026/butimanu-romania/butimanu-romania-001.webp",
         "alt": "Butimanu, Romania - fotografie 1 din santier",
         "intro": "Butimanu este unul dintre acele santiere unde scara se intelege abia din teren. Randurile se pierd in distanta, iar fiecare decizie de logistica trebuie gandita cu cateva etape inainte.",
         "sections": [
@@ -3342,7 +3359,7 @@
         "readTime": "3 minute",
         "title": "Guillena 400 & 220: doua amplasamente, un singur ritm de lucru",
         "excerpt": "Doua parcuri de 110 MW si 115 MW au cerut o planificare comuna, dar decizii adaptate fiecarui teren.",
-        "image": "/projects/portfolio-2026/pfv-guillena-spain/pfv-guillena-spain-001.jpg",
+        "image": "/projects/portfolio-2026/pfv-guillena-spain/pfv-guillena-spain-001.webp",
         "alt": "PFV Guillena 400 & 220, Spania - fotografie 1 din santier",
         "intro": "Programul Guillena a reunit doua amplasamente din provincia Sevilla si peste 120 de profesionisti. Lucrarile au acoperit pilotajul, trackerele, modulele, cablarea DC si AC si pregatirea pentru pornire.",
         "sections": [
@@ -3399,7 +3416,7 @@
         "readTime": "3 minute",
         "title": "Ottana: cum se inchide corect un pachet mecanic de 89,13 MW",
         "excerpt": "Un proiect mecanic nu se termina la ultimul modul montat, ci la ultimul punct verificat si predat.",
-        "image": "/projects/portfolio-2026/ottana-italy/ottana-italy-001.jpg",
+        "image": "/projects/portfolio-2026/ottana-italy/ottana-italy-001.webp",
         "alt": "Ottana, Italia - fotografie 1 din santier",
         "intro": "La Ottana, in Sardinia, Greentech a executat pilotii, structurile si modulele unui parc de 89,13 MW. Lucrarea a fost livrata impreuna cu Circet S.p.A., cu accent pe finalizarea mecanica a fiecarui sector.",
         "sections": [
@@ -3456,7 +3473,7 @@
         "readTime": "3 minute",
         "title": "Codigoro: logistica din spatele unui montaj de 77,30 MW",
         "excerpt": "Cand componentele ajung in ordinea potrivita, echipa poate monta continuu si lasa in urma randuri complete.",
-        "image": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-001.jpg",
+        "image": "/projects/portfolio-2026/codigoro-italy/codigoro-italy-001.webp",
         "alt": "Codigoro, Italia - fotografie 1 din santier",
         "intro": "Proiectul Codigoro a avut un pachet concentrat pe structurile de sustinere si modulele fotovoltaice. La 77,30 MW, logistica materialelor a fost parte din executie, nu o activitate auxiliara.",
         "sections": [
@@ -3513,7 +3530,7 @@
         "readTime": "3 minute",
         "title": "Giurgiu: ce verificam la un sistem tracker pe o singura axa",
         "excerpt": "Un tracker bun nu inseamna doar componente montate, ci un rand care se misca uniform si ramane usor de intretinut.",
-        "image": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-001.jpg",
+        "image": "/projects/portfolio-2026/sunkingdom-giurgiu-romania/sunkingdom-giurgiu-romania-001.webp",
         "alt": "Sunkingdom - Giurgiu, Romania - fotografie 1 din santier",
         "intro": "La proiectul Sunkingdom din Giurgiu, pachetul mecanic a inclus structuri tracker, reglaje, module si inspectii. Cei 74,33 MW au adus in prim-plan precizia repetata pe fiecare rand.",
         "sections": [
@@ -3570,7 +3587,7 @@
         "readTime": "3 minute",
         "title": "Pielesti si Robanesti: doua parcuri lucrate in aceeasi iarna",
         "excerpt": "Peste 100 de oameni, doua amplasamente alaturate si un program mecanic care a trebuit adaptat zilnic terenului.",
-        "image": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-001.jpg",
+        "image": "/projects/portfolio-2026/pielesti-robanesti-craiova-romania/pielesti-robanesti-craiova-romania-001.webp",
         "alt": "Pielesti & Robanesti - Craiova, Romania - fotografie 1 din santier",
         "intro": "Cele doua parcuri din judetul Dolj au fost tratate ca un singur program de 59,89 MW. Pilotii, structurile fixe si modulele au avansat in conditii de iarna, cu echipe mutate intre fronturi dupa situatia reala din teren.",
         "sections": [
@@ -3627,7 +3644,7 @@
         "readTime": "3 minute",
         "title": "Anguillara: de ce conteaza randurile complet inchise",
         "excerpt": "Pe 51,22 MW de structuri si module, lucrarile mici lasate in urma pot deveni cea mai lunga parte a receptiei.",
-        "image": "/projects/portfolio-2026/anguillara-italy/anguillara-italy-001.jpg",
+        "image": "/projects/portfolio-2026/anguillara-italy/anguillara-italy-001.webp",
         "alt": "Anguillara, Italia - fotografie 1 din santier",
         "intro": "La Anguillara, Greentech a executat montajul structurilor si al modulelor. Proiectul arata bine valoarea unei metode simple: fiecare sector este terminat si controlat inainte ca echipa sa mute frontul.",
         "sections": [
@@ -3684,7 +3701,7 @@
         "readTime": "3 minute",
         "title": "Marconi: un pachet mecanic predat pas cu pas",
         "excerpt": "Pilotii, structurile si modulele au fost urmarite ca un singur flux, nu ca trei lucrari separate.",
-        "image": "/projects/portfolio-2026/marconi-italy/marconi-italy-001.jpg",
+        "image": "/projects/portfolio-2026/marconi-italy/marconi-italy-001.webp",
         "alt": "Marconi, Italia - fotografie 1 din santier",
         "intro": "Proiectul Marconi din Montalto di Castro a avut o capacitate de 49,52 MW. Greentech a lucrat alaturi de Circet S.p.A. la intregul lant mecanic, de la pilotaj pana la mechanical completion.",
         "sections": [
@@ -3741,7 +3758,7 @@
         "readTime": "3 minute",
         "title": "Sandalia: fluxul simplu care tine 45,40 MW in miscare",
         "excerpt": "Materiale distribuite corect, structuri receptionate si module montate fara intoarceri inutile.",
-        "image": "/projects/portfolio-2026/sandalia-cagliari-italy/sandalia-cagliari-italy-001.jpg",
+        "image": "/projects/portfolio-2026/sandalia-cagliari-italy/sandalia-cagliari-italy-001.webp",
         "alt": "Sandalia - Cagliari, Italia - fotografie 1 din santier",
         "intro": "In zona Cagliari, proiectul Sandalia a concentrat munca Greentech pe structuri si module. La aceasta scara, eficienta nu a venit din scurtaturi, ci dintr-un flux usor de inteles de fiecare echipa.",
         "sections": [
@@ -3798,7 +3815,7 @@
         "readTime": "3 minute",
         "title": "Pontinia: un santier mecanic citit pe sectoare",
         "excerpt": "Cand fiecare zona are o stare clara, echipa stie unde poate monta, unde trebuie sa verifice si unde nu trebuie sa intre.",
-        "image": "/projects/portfolio-2026/pontinia-italy/pontinia-italy-001.jpg",
+        "image": "/projects/portfolio-2026/pontinia-italy/pontinia-italy-001.webp",
         "alt": "Pontinia, Italia - fotografie 2 din santier",
         "intro": "Pontinia este un proiect de 35,60 MW in care Greentech a montat structurile si modulele fotovoltaice. Organizarea pe sectoare a facut progresul vizibil si usor de predat.",
         "sections": [
@@ -3855,7 +3872,7 @@
         "readTime": "3 minute",
         "title": "Sole: de la primul pilot la ultimul modul",
         "excerpt": "Pe 33,80 MW, continuitatea dintre echipe a fost mai importanta decat recordul unei singure zile.",
-        "image": "/projects/portfolio-2026/sole-italy/sole-italy-001.jpg",
+        "image": "/projects/portfolio-2026/sole-italy/sole-italy-001.webp",
         "alt": "Sole, Italia - fotografie 1 din santier",
         "intro": "La Tuscania, proiectul Sole a inclus pilotaj, structuri si module. Greentech si Circet S.p.A. au urmarit pachetul mecanic ca un flux continuu, cu verificari intre etape.",
         "sections": [
@@ -3912,7 +3929,7 @@
         "readTime": "3 minute",
         "title": "Celeste: un proiect compact, aceeasi disciplina de executie",
         "excerpt": "La 23,90 MW, fronturile sunt mai apropiate, iar o decizie gresita se simte mai repede in intreaga echipa.",
-        "image": "/projects/portfolio-2026/celeste-italy/celeste-italy-001.jpg",
+        "image": "/projects/portfolio-2026/celeste-italy/celeste-italy-001.webp",
         "alt": "Celeste, Italia - fotografie 1 din santier",
         "intro": "Celeste, proiect realizat la Viterbo impreuna cu Circet S.p.A., a inclus pilotii, structurile si modulele. Dimensiunea mai compacta a santierului a cerut o coordonare atenta a spatiului si materialelor.",
         "sections": [
@@ -3969,7 +3986,7 @@
         "readTime": "3 minute",
         "title": "Bombardia: montaj mecanic in camp deschis la Palencia",
         "excerpt": "Structurile si modulele au avansat pe sectoare, cu logistica gandita pentru distantele reale din amplasament.",
-        "image": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-001.jpg",
+        "image": "/projects/portfolio-2026/bombardia-palencia-spain/bombardia-palencia-spain-001.webp",
         "alt": "Bombardia - Palencia, Spania - fotografie 2 din santier",
         "intro": "Proiectul Bombardia din provincia Palencia are 22,25 MW si a fost executat pentru Lantania. Pachetul Greentech a urmarit montajul structurilor si al modulelor pana la predarea mecanica.",
         "sections": [
@@ -4026,7 +4043,7 @@
         "readTime": "3 minute",
         "title": "MAAS Catania: cand lucrarile civile pregatesc ritmul mecanic",
         "excerpt": "Terasamentele, logistica si utilajele proprii au creat fronturile pe care au urmat pilotii, structurile si modulele.",
-        "image": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-001.jpg",
+        "image": "/projects/portfolio-2026/maas-catania-italy/maas-catania-italy-001.webp",
         "alt": "MAAS - Catania, Italia - fotografie 1 din santier",
         "intro": "Proiectul MAAS din Catania a avut 22,20 MW si un pachet mai larg decat montajul fotovoltaic. Greentech a coordonat lucrari civile, mobilizare si executie mecanica in acelasi santier.",
         "sections": [
@@ -4083,7 +4100,7 @@
         "readTime": "3 minute",
         "title": "Piombino IT003: verificari scurte, facute la momentul potrivit",
         "excerpt": "Pe un proiect de 22 MW, controlul integrat in productie a redus intoarcerile si a pastrat fronturile clare.",
-        "image": "/projects/portfolio-2026/it003-piombino-italy/it003-piombino-italy-001.jpg",
+        "image": "/projects/portfolio-2026/it003-piombino-italy/it003-piombino-italy-001.webp",
         "alt": "IT003 Piombino, Italia - fotografie 1 din santier",
         "intro": "La Piombino, Greentech a executat pentru Solarig pilotii, structurile si modulele. Proiectul a pus accent pe verificari intermediare si pe inchiderea observatiilor in zona in care au aparut.",
         "sections": [
@@ -4140,7 +4157,7 @@
         "readTime": "3 minute",
         "title": "Rinnovabili: cum pregatesti corect frontul pentru electric",
         "excerpt": "Un pachet mecanic bun lasa in urma randuri complete, acces liber si informatii pe care urmatoarea echipa le poate folosi.",
-        "image": "/projects/portfolio-2026/rinnovabili-italy/rinnovabili-italy-001.jpg",
+        "image": "/projects/portfolio-2026/rinnovabili-italy/rinnovabili-italy-001.webp",
         "alt": "Rinnovabili, Italia - fotografie 2 din santier",
         "intro": "La Montalto di Castro, proiectul Rinnovabili de 21,50 MW a inclus pilotii, structurile si modulele. Obiectivul practic a fost o predare clara catre etapa electrica.",
         "sections": [
@@ -4197,7 +4214,7 @@
         "readTime": "3 minute",
         "title": "Volta: aceeasi tinta, roluri foarte clare in teren",
         "excerpt": "Pe un santier mecanic de 21,50 MW, comunicarea buna se vede in randurile pe care echipele le predau una alteia.",
-        "image": "/projects/portfolio-2026/volta-italy/volta-italy-001.jpg",
+        "image": "/projects/portfolio-2026/volta-italy/volta-italy-001.webp",
         "alt": "Volta, Italia - fotografie 1 din santier",
         "intro": "Proiectul Volta din Lazio a fost realizat impreuna cu Circet S.p.A. si a acoperit pilotajul, structurile si modulele. Dincolo de productie, proiectul a cerut responsabilitati usor de inteles la nivelul fiecarei echipe.",
         "sections": [
@@ -4254,7 +4271,7 @@
         "readTime": "3 minute",
         "title": "Porto Torres: un pachet mecanic de 19,47 MW fara pasi sariti",
         "excerpt": "Structurile si modulele au fost montate pe sectoare scurte, verificate si eliberate complet.",
-        "image": "/projects/portfolio-2026/porto-torres-italy/porto-torres-italy-001.jpg",
+        "image": "/projects/portfolio-2026/porto-torres-italy/porto-torres-italy-001.webp",
         "alt": "Porto Torres, Italia - fotografie 1 din santier",
         "intro": "La Porto Torres, in Sardinia, Greentech a livrat montajul structurilor si al modulelor pentru un proiect de 19,47 MW. Lucrarea a mizat pe o succesiune simpla si bine respectata.",
         "sections": [
@@ -4311,7 +4328,7 @@
         "readTime": "3 minute",
         "title": "Sabaudia: 10 MW si o lectie despre finalizarea completa",
         "excerpt": "Un proiect mai mic face vizibila imediat diferenta dintre aproape gata si cu adevarat predat.",
-        "image": "/projects/portfolio-2026/sabaudia-italy/sabaudia-italy-001.jpg",
+        "image": "/projects/portfolio-2026/sabaudia-italy/sabaudia-italy-001.webp",
         "alt": "Lucrari fotovoltaice Greentech - imagine reprezentativa 1",
         "intro": "Sabaudia este proiectul de 10 MW din portofoliu, cu structuri si module executate de Greentech. Scara mai mica nu a schimbat cerintele de montaj si receptie.",
         "sections": [
@@ -4423,7 +4440,7 @@
         "readTime": "2 minute",
         "title": "Studentii de la Politehnica au vizitat santierul din Butimanu",
         "excerpt": "Vizita tehnica le-a oferit studentilor o imagine directa asupra lucrarilor dintr-un parc fotovoltaic de mare capacitate.",
-        "image": "/projects/butimanu/butimanu-03.jpg",
+        "image": "/projects/butimanu/butimanu-03.webp",
         "alt": "Studenti si membri ai echipei Greentech in santierul din Butimanu",
         "intro": "Studentii Universitatii Politehnica au vizitat parcul fotovoltaic Butimanu pentru a urmari etapele de montaj si organizarea lucrarilor din santier.",
         "sections": [

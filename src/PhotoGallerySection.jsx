@@ -114,7 +114,7 @@ function ImageCorridor({ images, cards = 10, speed = 21, axis = 54 }) {
                   <img
                     src={image.src}
                     alt=""
-                    loading="lazy"
+                    loading="eager"
                     decoding="async"
                     draggable={false}
                   />

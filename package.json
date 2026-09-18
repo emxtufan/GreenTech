@@ -10,6 +10,7 @@
     "preview": "vite preview --host 127.0.0.1",
     "start": "node --env-file-if-exists=.env server.js --production",
     "migrate:content": "node scripts/migrate-content.mjs",
+    "optimize:images": "node --env-file-if-exists=.env scripts/optimize-images.mjs",
     "promote:romanian-content": "node scripts/promote-romanian-content.mjs"
   },
   "dependencies": {
@@ -28,6 +29,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.7.0",
+    "sharp": "^0.34.5",
     "tailwind-merge": "^3.6.0",
     "three": "0.153.0",
     "topojson-client": "^3.1.0",

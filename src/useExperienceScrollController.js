@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
-import { usesNativeTouchScroll } from "./scrollMotion.js";
+import { resolveAnchorScrollTop, usesNativeTouchScroll } from "./scrollMotion.js";
+import installHeroSectionSnap from "./heroSectionSnap.js";
 
 const LENIS_DURATION = 1.05;
 const LENIS_WHEEL_MULTIPLIER = 0.9;
@@ -36,7 +37,6 @@ export default function useExperienceScrollController({
     const touchScroll = usesNativeTouchScroll();
     const nativeScroll = touchScroll || reducedMotion;
     const previousScrollRestoration = window.history.scrollRestoration;
-    const root = document.documentElement;
     let routeIsOpen = routeOpenRef.current;
     let bodyIsLocked = bodyHasScrollLock();
     let returningToIntro = false;
@@ -47,9 +47,7 @@ export default function useExperienceScrollController({
     let pendingScrollTarget = null;
     let restoringScroll = false;
     let lenis = null;
-    let heroExitSnapActive = false;
-    let heroExitTouchEnded = false;
-    let heroExitReleaseTimer = 0;
+    let uninstallHeroSectionSnap = null;
 
     window.history.scrollRestoration = "manual";
 
@@ -85,32 +83,17 @@ export default function useExperienceScrollController({
       restoringScroll = false;
     };
 
-    const clearHeroExitRelease = () => {
-      window.clearTimeout(heroExitReleaseTimer);
-      heroExitReleaseTimer = 0;
-    };
-
-    const releaseHeroExitSnap = () => {
-      clearHeroExitRelease();
-      heroExitSnapActive = false;
-      heroExitTouchEnded = false;
-      root.classList.remove("hero-exit-snap-active");
-    };
-
-    const scheduleHeroExitRelease = () => {
-      clearHeroExitRelease();
-      heroExitReleaseTimer = window.setTimeout(releaseHeroExitSnap, 280);
-    };
-
     const scrollToSection = (target) => {
       if (!target?.isConnected) return;
 
-      // Anchor navigation is intentional and must not be intercepted by the
-      // one-way touch stop at the end of the 3D hero.
-      releaseHeroExitSnap();
-
+      const anchorTop = resolveAnchorScrollTop(target);
       if (lenis) {
-        lenis.scrollTo(target, { immediate: false, lock: false });
+        lenis.scrollTo(anchorTop ?? target, { immediate: false, lock: false });
+        return;
+      }
+
+      if (anchorTop !== null) {
+        window.scrollTo({ top: anchorTop, behavior: reducedMotion ? "auto" : "smooth" });
         return;
       }
 
@@ -191,38 +174,15 @@ export default function useExperienceScrollController({
     });
     sceneObserver.observe(scene);
 
+    // Free scrolling needs several gestures per hero scene. Turn each swipe,
+    // wheel notch or trackpad flick into a full scene step instead.
     const companySection = document.getElementById("company");
-    const handleHeroExitTouchStart = () => {
-      clearHeroExitRelease();
-      heroExitTouchEnded = false;
-
-      if (!companySection?.isConnected) {
-        releaseHeroExitSnap();
-        return;
-      }
-
-      const companyTop = window.scrollY + companySection.getBoundingClientRect().top;
-      heroExitSnapActive = window.scrollY < companyTop - 2;
-      root.classList.toggle("hero-exit-snap-active", heroExitSnapActive);
-    };
-    const handleHeroExitTouchEnd = () => {
-      if (!heroExitSnapActive) return;
-      heroExitTouchEnded = true;
-      scheduleHeroExitRelease();
-    };
-    const handleHeroExitScroll = () => {
-      if (heroExitSnapActive && heroExitTouchEnded) scheduleHeroExitRelease();
-    };
-    const handleHeroExitScrollEnd = () => {
-      if (heroExitSnapActive && heroExitTouchEnded) releaseHeroExitSnap();
-    };
-
-    if (touchScroll && companySection) {
-      window.addEventListener("touchstart", handleHeroExitTouchStart, { passive: true });
-      window.addEventListener("touchend", handleHeroExitTouchEnd, { passive: true });
-      window.addEventListener("touchcancel", handleHeroExitTouchEnd, { passive: true });
-      window.addEventListener("scroll", handleHeroExitScroll, { passive: true });
-      window.addEventListener("scrollend", handleHeroExitScrollEnd, { passive: true });
+    if (companySection) {
+      uninstallHeroSectionSnap = installHeroSectionSnap({
+        companySection,
+        isSuspended: () => isSuspended() || restoringScroll,
+        getLenis: () => lenis,
+      });
     }
 
     const handleResize = () => lenis?.resize();
@@ -249,7 +209,6 @@ export default function useExperienceScrollController({
 
     controllerRef.current = {
       prepareForHeroNavigation() {
-        releaseHeroExitSnap();
         returningToIntro = true;
         suspendScroll(false);
         destroyLenis();
@@ -298,16 +257,12 @@ export default function useExperienceScrollController({
       cancelRestore();
       sceneObserver.disconnect();
       bodyLockObserver.disconnect();
-      window.removeEventListener("touchstart", handleHeroExitTouchStart);
-      window.removeEventListener("touchend", handleHeroExitTouchEnd);
-      window.removeEventListener("touchcancel", handleHeroExitTouchEnd);
-      window.removeEventListener("scroll", handleHeroExitScroll);
-      window.removeEventListener("scrollend", handleHeroExitScrollEnd);
+      uninstallHeroSectionSnap?.();
+      uninstallHeroSectionSnap = null;
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("pageshow", handlePageShow);
       delete window.__scrollToSection;
       pendingScrollTarget = null;
-      releaseHeroExitSnap();
       destroyLenis();
       window.history.scrollRestoration = previousScrollRestoration;
       scene.classList.remove("experience-rendering-paused");

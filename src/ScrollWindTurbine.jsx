@@ -2,12 +2,12 @@ import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 import useNearViewport from "./hooks/useNearViewport.js";
 import {
+  WIND_TURBINE_MODEL_URL,
   cloneCachedGLTF,
   disposeGLTFInstance,
 } from "./lib/threeAssetCache.js";
 import "./ScrollWindTurbine.css";
 
-const MODEL_URL = "/3d/animated_wind_turbine.glb";
 const INWARD_Z_ROTATION = 0.9;
 const STAGE_Y_MOBILE = [-0.8, 0.65, 0.4];
 const STAGE_Y_DESKTOP = [-0.45, 0.45, 0.45];
@@ -305,7 +305,7 @@ function ScrollWindTurbine({ active, prepare = false, onPrepared }) {
       },
     };
 
-    cloneCachedGLTF(MODEL_URL)
+    cloneCachedGLTF(WIND_TURBINE_MODEL_URL)
       .then((gltf) => {
         if (disposed) {
           disposeGLTFInstance(gltf.scene);

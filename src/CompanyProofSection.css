@@ -8,9 +8,20 @@
   display: none;
   width: 100%;
   overflow: clip;
-  border-top: 6px solid var(--proof-green);
   background: #050706;
   color: var(--proof-ink);
+}
+
+/* Soft black fade at the top instead of a hard rule, so the previous section
+   blends into this one. */
+.company-proof-section::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 3;
+  height: clamp(90px, 14vh, 180px);
+  background: linear-gradient(180deg, #000000 0%, rgb(0 0 0 / 0%) 100%);
+  pointer-events: none;
 }
 
 .company-proof-section.is-active {
@@ -571,7 +582,6 @@
   gap: clamp(24px, 4vw, 38px);
   margin: 0;
   border: 1px solid rgb(199 213 208 / 17%);
-  border-top: 2px solid rgb(139 188 63 / 74%);
   border-radius: 6px;
   background:
     linear-gradient(115deg, rgb(139 188 63 / 7%), transparent 34%),
@@ -896,16 +906,6 @@
   box-shadow: 0 28px 90px rgb(0 0 0 / 55%);
   color: #f2f5ef;
   animation: company-review-dialog-in 320ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
-}
-
-.company-review-dialog::before {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 3px;
-  background: #8bbc3f;
-  content: "";
 }
 
 .company-review-close {

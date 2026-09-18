@@ -1631,7 +1631,7 @@ export class EnpowerExperience {
     const nextIndex = clamp(
       0,
       availableSceneCount - 1,
-      Math.floor(this.scrollY / 16500 / 0.245),
+      Math.floor(this.scrollY / SCROLL_SEGMENT),
     );
     if (nextIndex !== this.currentIndex) {
       this.currentIndex = nextIndex;
@@ -1717,7 +1717,9 @@ export class EnpowerExperience {
     const section = clamp(0, SCENE_COUNT - 1, index);
     if (!this.entered) this.enter();
     const scroll = { value: window.scrollY };
-    const target = section * 4000;
+    // Scene N starts at N * SCROLL_SEGMENT; the +1 keeps the eased scroll value
+    // past the boundary so `loop()` resolves the right scene.
+    const target = section === 0 ? 0 : section * SCROLL_SEGMENT + 1;
     gsap.to(scroll, {
       duration: Math.max(0.3, Math.abs(window.scrollY - target) / 15000),
       value: target,

@@ -6,6 +6,7 @@ import SectionActionModal, { useSectionAction } from "./SectionAction.jsx";
 import useNearViewport from "./hooks/useNearViewport.js";
 import useSection from "./hooks/useSection.js";
 import useSiteContent from "./hooks/useSiteContent.js";
+import { isMobileDevice } from "./lib/devicePerformance.js";
 import {
   cloneCachedGLTF,
   disposeGLTFInstance,
@@ -93,14 +94,20 @@ function SolarContactSection({
   const sectionRef = useRef(null);
   const mountRef = useRef(null);
   const runtimeRef = useRef(null);
-  const nearViewport = useNearViewport(sectionRef, active);
-  const webglActive = prepare || nearViewport;
+  // Phones skip the sun entirely: no GLB, no WebGL context, no spacer for it.
+  const [mobile] = useState(isMobileDevice);
+  const nearViewport = useNearViewport(sectionRef, active && !mobile);
+  const webglActive = !mobile && (prepare || nearViewport);
   const [legalModal, setLegalModal] = useState(null);
   const legalTriggerRef = useRef(null);
 
   useEffect(() => {
     runtimeRef.current?.setActive(active);
   }, [active]);
+
+  useEffect(() => {
+    if (mobile) onPrepared?.("solar-contact", true);
+  }, [mobile, onPrepared]);
 
   const openLegal = (key, event) => {
     legalTriggerRef.current = event.currentTarget;
@@ -464,11 +471,13 @@ function SolarContactSection({
       ref={sectionRef}
       aria-labelledby="solar-contact-title"
     >
-      <div
-        className="solar-contact-canvas-mount"
-        ref={mountRef}
-        aria-hidden="true"
-      />
+      {!mobile && (
+        <div
+          className="solar-contact-canvas-mount"
+          ref={mountRef}
+          aria-hidden="true"
+        />
+      )}
 
       <div className="solar-contact-inner">
         <header className="solar-contact-intro">
@@ -491,7 +500,9 @@ function SolarContactSection({
           </p>
         </header>
 
-        <div className="solar-contact-visual-space" aria-hidden="true" />
+        {!mobile && (
+          <div className="solar-contact-visual-space" aria-hidden="true" />
+        )}
 
         <SolarContactForms openLegal={openLegal} contactAction={contactAction} />
 
@@ -534,7 +545,7 @@ function SolarContactSection({
                   alt="Atestat ANRE si certificari ISO 9001, ISO 14001 si IQNet"
                   width="300"
                   height="69"
-                  loading="lazy"
+                  loading="eager"
                   decoding="async"
                 />
               </div>

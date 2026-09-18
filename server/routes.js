@@ -13,6 +13,11 @@ import {
   MAX_CV_BYTES,
 } from "./applicationRepository.js";
 import { saveUpload, UploadError, MAX_UPLOAD_BYTES } from "./uploads.js";
+import {
+  analyticsRepository,
+  isBotUserAgent,
+  normaliseVisit,
+} from "./analyticsRepository.js";
 import { geocodePlace, GeocodingError } from "./geocoding.js";
 import {
   localiseContent,
@@ -35,6 +40,25 @@ const reviewRateBuckets = new Map();
 const INQUIRY_RATE_WINDOW_MS = 60 * 60 * 1000;
 const INQUIRY_RATE_LIMIT = 6;
 const inquiryRateBuckets = new Map();
+const VISIT_RATE_WINDOW_MS = 10 * 60 * 1000;
+const VISIT_RATE_LIMIT = 20;
+const visitRateBuckets = new Map();
+
+// Generic sliding-window limiter shared by the visit beacon.
+function consumeRateLimit(buckets, key, limit, windowMs) {
+  const now = Date.now();
+  const recent = (buckets.get(key) || []).filter((timestamp) => now - timestamp < windowMs);
+  if (recent.length >= limit) return false;
+  recent.push(now);
+  buckets.set(key, recent);
+
+  if (buckets.size > 2000) {
+    for (const [bucketKey, timestamps] of buckets) {
+      if (!timestamps.some((timestamp) => now - timestamp < windowMs)) buckets.delete(bucketKey);
+    }
+  }
+  return true;
+}
 
 async function getPublicContent() {
   const [content, reviews] = await Promise.all([
@@ -249,6 +273,45 @@ export function createApiRouter() {
   );
 
   // ---- session -----------------------------------------------------------
+
+  // Visit beacon from the public site: one hit per browser session. Bots and
+  // link-preview crawlers are ignored; the client body is tiny and untrusted.
+  router.post(
+    "/visits",
+    express.text({ type: ["text/plain", "application/json"], limit: "4kb" }),
+    async (request, response) => {
+      // Always answer 204: analytics must never surface errors to visitors.
+      response.status(204).end();
+
+      try {
+        if (isBotUserAgent(request.get("user-agent"))) return;
+        const key = request.ip || request.socket.remoteAddress || "unknown";
+        if (!consumeRateLimit(visitRateBuckets, key, VISIT_RATE_LIMIT, VISIT_RATE_WINDOW_MS)) return;
+
+        let payload = {};
+        try {
+          payload = JSON.parse(String(request.body || "{}"));
+        } catch {
+          return;
+        }
+        if (!payload || typeof payload !== "object") return;
+
+        await analyticsRepository.record(
+          normaliseVisit(payload, { referrerHeader: request.get("referer") || "" }),
+        );
+      } catch (error) {
+        console.error("[Analytics] Unable to record a visit:", error);
+      }
+    },
+  );
+
+  router.get("/admin/analytics", requireAdmin, async (request, response, next) => {
+    try {
+      response.json(await analyticsRepository.summary({ days: request.query.days }));
+    } catch (error) {
+      next(error);
+    }
+  });
 
   router.post("/admin/login", express.json({ limit: "8kb" }), (request, response) => {
     if (!verifyPassword(request.body?.password)) {
@@ -474,6 +537,8 @@ export function createApiRouter() {
           buffer: request.body,
           originalName: request.query.filename,
           category: request.query.category,
+          // Admin sends `optimize=0` when the toggle is off; default is on.
+          optimize: request.query.optimize !== "0",
         });
 
         response.json({ success: true, ...result });

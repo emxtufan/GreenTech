@@ -195,6 +195,12 @@ export function validateContent(content) {
       validateVideoPath(item.videoUrl, `${label}.videoUrl`, issues);
     }
 
+    if (item.id === SOCIAL_BAR_SECTION.id) {
+      SOCIAL_BAR_URL_KEYS.forEach((key) => {
+        validateActionUrl(item[key], `${label}.${key}`, issues);
+      });
+    }
+
     validateSectionAction(item, label, issues);
   });
 
@@ -357,13 +363,40 @@ export function validateContent(content) {
 }
 
 /** Fills in the groups the site expects so a partial file cannot crash a render. */
+// The fixed social icon bar on the right edge of the home page. It lives in
+// `sections` so the admin gets the usual "Visible on homepage" switch, and is
+// appended to content saved before it existed.
+export const SOCIAL_BAR_SECTION = Object.freeze({
+  id: "social-bar",
+  group: "Continut",
+  name: "Bara sociala (dreapta)",
+  eyebrow: "",
+  title: "",
+  description: "",
+  action: "",
+  actionMode: "builtin",
+  format: "Fixed icon bar",
+  summary: "Facebook, Instagram, LinkedIn",
+  source: "src/SideTabs.jsx",
+  visible: true,
+  facebookUrl: "https://www.facebook.com/greentechprofessionals",
+  instagramUrl: "",
+  linkedinUrl: "https://ro.linkedin.com/company/greentech-professionals",
+});
+export const SOCIAL_BAR_URL_KEYS = ["facebookUrl", "instagramUrl", "linkedinUrl"];
+
+function withSocialBarSection(sections) {
+  if (sections.some((section) => section?.id === SOCIAL_BAR_SECTION.id)) return sections;
+  return [...sections, { ...SOCIAL_BAR_SECTION }];
+}
+
 export function withDefaults(content) {
   const source = isPlainObject(content) ? content : {};
 
   return {
     version: CONTENT_VERSION,
     ...source,
-    sections: Array.isArray(source.sections) ? source.sections : [],
+    sections: withSocialBarSection(Array.isArray(source.sections) ? source.sections : []),
     processCards: { items: [], ...(source.processCards || {}) },
     horizontalGallery: { items: [], ...(source.horizontalGallery || {}) },
     photoGallery: { items: [], ...(source.photoGallery || {}) },

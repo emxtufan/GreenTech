@@ -7,6 +7,7 @@ import {
   useLocale,
 } from "./lib/i18n.js";
 import "./SiteNavigation.css";
+import { resolveAnchorScrollTop } from "./scrollMotion.js";
 
 // Hash the Apply control navigates to. SolarContactForms listens for it and
 // opens the career panel, so the button, the footer and a shared link all
@@ -231,7 +232,7 @@ function ServicesMenu({ item, onNavigate }) {
   );
 }
 
-function SiteNavigation({ visible, backToIntro, entered }) {
+function SiteNavigation({ visible, backToIntro, entered, onEnterAndNavigate }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const burgerRef = useRef(null);
   const locale = useLocale();
@@ -279,6 +280,14 @@ function SiteNavigation({ visible, backToIntro, entered }) {
     event.preventDefault();
     setMenuOpen(false);
 
+    // Before the visitor enters the experience the page sections are not in
+    // the document flow yet, so there is nothing to scroll to. Enter first;
+    // the home page scrolls to the section once the layout exists.
+    if (!entered && typeof onEnterAndNavigate === "function") {
+      onEnterAndNavigate(href);
+      return;
+    }
+
     // Lenis owns the scroller once the experience is running; fall back to the
     // native behaviour on pages where it is not mounted.
     if (typeof window.__scrollToSection === "function") {
@@ -286,12 +295,16 @@ function SiteNavigation({ visible, backToIntro, entered }) {
       return;
     }
 
-    target.scrollIntoView({
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ? "auto"
-        : "smooth",
-      block: "start",
-    });
+    const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ? "auto"
+      : "smooth";
+    const anchorTop = resolveAnchorScrollTop(target);
+    if (anchorTop !== null) {
+      window.scrollTo({ top: anchorTop, behavior });
+      return;
+    }
+
+    target.scrollIntoView({ behavior, block: "start" });
   };
 
   const apply = (event) => {

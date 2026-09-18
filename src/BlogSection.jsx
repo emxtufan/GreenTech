@@ -59,7 +59,7 @@ function PostImage({ post }) {
     <img
       src={post.image}
       alt={post.alt || ""}
-      loading="lazy"
+      loading="eager"
       decoding="async"
     />
   );

@@ -129,9 +129,15 @@ storage/uploads
 storage/translations
 ```
 
-Acest repository contine in prezent si snapshoturi versionate din `storage/`.
-Din acest motiv, modificarile facute din admin pe server pot aparea in
-`git status` si pot bloca un `git pull`.
+`storage/` este ignorat de Git (`.gitignore`), deci modificarile facute din
+admin pe server nu mai apar in `git status` si nu mai pot bloca un `git pull`.
+Seedurile versionate din `data/` si `public/uploads/` sunt citite doar cand un
+fisier live nu exista inca.
+
+Pentru deploy foloseste `bash deploy/update.sh`: la prima rulare dupa aceasta
+schimbare, checkoutul de pe server inca are copiile vechi din `storage/`
+(posibil editate din admin); scriptul le arhiveaza in `/root/`, face pull si le
+pune la loc identic.
 
 ### Varianta recomandata
 
@@ -325,33 +331,42 @@ exporturi temporare, CV-uri sau documente private.
 
 ```bash
 cd /var/www/greentech
-git status -sb
-git fetch origin main
-git pull --ff-only origin main
-npm ci --omit=dev
-pm2 restart GreenTech --update-env
+bash deploy/update.sh
 ```
+
+Scriptul face `git pull --ff-only`, `npm ci --omit=dev` si `pm2 restart`,
+pastrand `storage/` neatins (vezi sectiunea 3).
 
 Nu rula `npm run build` pe server. Express serveste buildul versionat din
 `dist/`.
 
-### Daca `git pull` este blocat de `storage/`
+### Optimizarea imaginilor (WebP)
 
-Mai intai creeaza un backup, apoi pastreaza temporar modificarile live:
+Pozele incarcate din admin sunt convertite automat pe server (`sharp`):
+orientarea EXIF este aplicata, latura lunga este limitata la 1600 px si
+fisierul este salvat ca WebP (calitate 78). Comutatorul "Optimise uploads
+(WebP)" din bara de sus a adminului dezactiveaza conversia pentru sesiunea
+curenta, daca vrei sa pastrezi un original. GIF-urile si videoclipurile nu sunt
+modificate.
+
+Pentru pozele existente, o singura comanda face acelasi lucru in bloc,
+rescrie URL-urile in toate fisierele de continut (seeduri, date live,
+traduceri) si sterge originalele. Este idempotenta: a doua rulare nu mai
+gaseste nimic de facut.
 
 ```bash
-cd /var/www/greentech
-tar -czf "/root/greentech-storage-$(date +%Y%m%d-%H%M%S).tar.gz" storage
-git stash push -m "runtime inainte de deploy" -- storage
-git pull --ff-only origin main
-git restore --source='stash@{0}' --worktree -- storage
-git stash drop 'stash@{0}'
-npm ci --omit=dev
-pm2 restart GreenTech --update-env
+# local: public/ + data/ + storage/, apoi reconstruieste dist/
+npm run optimize:images
+
+# pe server: doar UPLOADS_DIR, DATA_DIR si TRANSLATIONS_DIR din .env
+npm run optimize:images -- --live
+
+# doar raport, fara modificari
+npm run optimize:images -- --dry-run
 ```
 
-Aceasta procedura pastreaza versiunea live din admin. Dupa migrarea directoarelor
-runtime in `/var/lib/greentech`, acest conflict nu ar mai trebui sa apara.
+Nu rula varianta fara `--live` pe server: ar modifica fisiere versionate din
+`public/` si `data/` si ar bloca urmatorul `git pull`.
 
 Verifica revizia si fisierele servite:
 

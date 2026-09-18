@@ -272,7 +272,7 @@ function HorizontalParallaxGallery({
                   className="horizontal-gallery-image"
                   src={item.image}
                   alt={item.alt}
-                  loading={index < 2 ? "eager" : "lazy"}
+                  loading="eager"
                   draggable="false"
                 />
                 <figcaption className="horizontal-gallery-caption">
@@ -303,7 +303,7 @@ function HorizontalParallaxGallery({
                   className="horizontal-gallery-image"
                   src={archiveImage}
                   alt=""
-                  loading="lazy"
+                  loading="eager"
                   draggable="false"
                   aria-hidden="true"
                 />
